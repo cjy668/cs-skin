@@ -161,6 +161,12 @@ details[open] summary::before{content:'▾ '}
 .formula{font-size:12px;color:var(--dim);line-height:2;margin-top:8px}
 .formula code{background:var(--field);padding:2px 6px;border-radius:6px;color:#9ad9e8}
 .tagline{font-size:12px;color:var(--dim);text-align:center;padding:6px 0 0}
+/* 同步方式切换 */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--field);border:1.5px solid var(--line);border-radius:13px;padding:5px}
+.seg button{-webkit-appearance:none;appearance:none;border:0;background:transparent;color:var(--muted);font-size:13.5px;font-weight:700;font-family:inherit;
+  height:40px;border-radius:9px;cursor:pointer;transition:background .15s,color .15s}
+.seg button.on{background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#03141c}
+.hint code{background:var(--field);padding:1px 5px;border-radius:5px;color:#9ad9e8;font-size:11.5px}
 @keyframes flash{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}100%{box-shadow:0 0 0 14px rgba(34,211,238,0)}}
 .flash{animation:flash .6s ease-out}
 </style>
@@ -343,7 +349,13 @@ details[open] summary::before{content:'▾ '}
 
     <div class="card">
       <div class="card-title">云同步 <span class="r" id="sync-status">未配置</span></div>
-      <label class="field"><span class="lbl">同步码 <span class="q">手机和电脑填一样的</span></span>
+
+      <div class="seg" id="sy-be">
+        <button type="button" data-be="github" class="on">GitHub 私有仓库</button>
+        <button type="button" data-be="supabase">Supabase</button>
+      </div>
+
+      <label class="field" style="margin-top:10px"><span class="lbl">同步码 <span class="q">手机和电脑填一样的</span></span>
         <span class="ipt"><input id="sy-code" type="text" autocomplete="off" placeholder="如 laowang-2026"></span>
       </label>
       <div class="row2">
@@ -357,17 +369,36 @@ details[open] summary::before{content:'▾ '}
       <p class="hint" id="sync-tip">同一个同步码 = 同一份数据。数据加密后才上传，同步码就是密码，忘了打不开。</p>
 
       <div id="sync-setup" hidden style="margin-top:12px;border-top:1px dashed var(--line);padding-top:12px">
-        <label class="field"><span class="lbl">Supabase Project URL</span>
-          <span class="ipt sm"><input id="sy-url" type="text" autocomplete="off" placeholder="https://xxxxxxxx.supabase.co"></span>
-        </label>
-        <label class="field" style="margin-top:8px"><span class="lbl">publishable / anon key</span>
-          <span class="ipt sm"><input id="sy-key" type="text" autocomplete="off" placeholder="sb_publishable_... 或 eyJhbGciOi..."></span>
-        </label>
-        <div class="row2" style="margin-top:10px">
-          <button class="btn sm" id="sy-sql" type="button">复制建表 SQL</button>
-          <button class="btn sm" id="sy-clearcfg" type="button">清除连接</button>
+        <!-- GitHub 后端 -->
+        <div id="sy-gh">
+          <label class="field"><span class="lbl">GitHub 用户名 / 组织</span>
+            <span class="ipt sm"><input id="sy-ghowner" type="text" autocomplete="off" placeholder="如 cjy668"></span>
+          </label>
+          <label class="field" style="margin-top:8px"><span class="lbl">私有仓库名</span>
+            <span class="ipt sm"><input id="sy-ghrepo" type="text" autocomplete="off" placeholder="如 cs-skin-data"></span>
+          </label>
+          <label class="field" style="margin-top:8px"><span class="lbl">访问 Token <span class="q">github_pat_ 开头</span></span>
+            <span class="ipt sm"><input id="sy-ghtoken" type="password" autocomplete="off" placeholder="github_pat_..."></span>
+          </label>
+          <p class="hint">① 先建一个 <b>Private</b> 仓库，<b>务必勾选 Add a README file</b>（空仓库没法写入）。<br>
+            ② 头像 → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token：Repository access 只选这个仓库，Permissions → Repository permissions → <b>Contents: Read and write</b>。<br>
+            ③ Token 只存在本机浏览器，不上传、不写进备份文件。建议有效期设 90 天后重新生成一次。</p>
         </div>
-        <p class="hint">这两个值在 Supabase 控制台 <b>Project Settings → API</b> 里；它们本来就是给浏览器用的公开值（千万别填 service_role key）。填好后先去 SQL Editor 执行一次建表 SQL。</p>
+
+        <!-- Supabase 后端 -->
+        <div id="sy-sb" hidden>
+          <label class="field"><span class="lbl">Supabase Project URL</span>
+            <span class="ipt sm"><input id="sy-url" type="text" autocomplete="off" placeholder="https://xxxxxxxx.supabase.co"></span>
+          </label>
+          <label class="field" style="margin-top:8px"><span class="lbl">publishable / anon key</span>
+            <span class="ipt sm"><input id="sy-key" type="text" autocomplete="off" placeholder="sb_publishable_... 或 eyJhbGciOi..."></span>
+          </label>
+          <div class="row2" style="margin-top:10px">
+            <button class="btn sm" id="sy-sql" type="button">复制建表 SQL</button>
+            <button class="btn sm" id="sy-clearcfg" type="button">清除连接</button>
+          </div>
+          <p class="hint">⚠️ 实测：<b>国内很多网络会针对性阻断 <code>*.supabase.co</code></b>（DNS 能解析但 TLS 被重置），如果你的网络打不开就换 GitHub 后端。两个值在 Project Settings → <b>API Keys</b>，或项目页顶部 <b>Connect</b> 按钮里；它们本来就是公开值（<b>千万别填 secret / service_role key</b>）。</p>
+        </div>
       </div>
     </div>
 
@@ -398,7 +429,7 @@ details[open] summary::before{content:'▾ '}
       </ul>
     </div>
 
-    <p class="tagline">全部数据只存在你自己的手机上 · 无账号 · 无上传</p>
+    <p class="tagline">v2.2 · 数据只存在你自己的设备上 · 上传前加密 · 无账号</p>
   </section>
 
 </main>
@@ -561,7 +592,9 @@ const DEFAULT_STATE = {
   revPos:   { price: '700', pos: '15', gain: '20' },
   revTarget:{ target: '2654.4', price: '700', gain: '20' },
   holdings: [],
-  sync: { url: '', key: '', code: '', deviceId: '', lastSyncAt: 0, lastLocalUpdatedAt: 0, lastRemoteUpdatedAt: 0 }
+  sync: { backend: 'github', url: '', key: '', code: '', deviceId: '',
+          ghOwner: '', ghRepo: '', ghToken: '', ghBranch: 'main', ghSha: '',
+          lastSyncAt: 0, lastLocalUpdatedAt: 0, lastRemoteUpdatedAt: 0 }
 };
 const clone = o => JSON.parse(JSON.stringify(o));
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -706,8 +739,15 @@ const Sync = (function(){
   function ready(){ return !!subtle; }
 
   function api(cfg){ return String(cfg.url || '').trim().replace(/\/+$/, ''); }
+  /* 密钥有两种形态，认证头不一样：
+     · 新版 publishable key（sb_publishable_...）不是 JWT，官方要求只放 apikey 头；
+       若同时放 Authorization: Bearer 会被判成非法 JWT 而失败
+     · 旧版 anon key 是 JWT（eyJ 开头），需要 apikey + Authorization 两个头 */
   function hdr(cfg){
-    return { apikey: cfg.key, Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json' };
+    const k = String(cfg.key || '').trim();
+    const h = { apikey: k, 'Content-Type': 'application/json' };
+    if (k.indexOf('eyJ') === 0) h.Authorization = 'Bearer ' + k;
+    return h;
   }
   function errText(status, body){
     if (status === 404) return '云端表不存在：请先在 Supabase → SQL Editor 执行建表 SQL';
@@ -732,13 +772,69 @@ const Sync = (function(){
     if (!r.ok) throw new Error(errText(r.status, await safeText(r)));
     return true;
   }
-  return { ready, encrypt, decrypt, roomId, pull, push };
+
+  /* ---- GitHub 私有仓库后端（Contents API）----
+     · CORS 已实测支持（预检 204 + Allow-Origin: * + 允许 PUT/Authorization）
+     · 用文件 sha 做乐观锁：另一台设备先写了，我这边的 PUT 会 409，从而不会静默覆盖 */
+  function ghBase(s){
+    return 'https://api.github.com/repos/' + encodeURIComponent(String(s.ghOwner).trim()) +
+           '/' + encodeURIComponent(String(s.ghRepo).trim()) + '/contents/';
+  }
+  function ghHdr(s){
+    return { Authorization: 'Bearer ' + String(s.ghToken).trim(), Accept: 'application/vnd.github+json',
+             'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' };
+  }
+  function ghErr(status, body){
+    if (status === 401) return 'Token 无效或已过期（HTTP 401）';
+    if (status === 403) return 'Token 权限不够（需要该仓库 Contents: Read and write）或已触发限流';
+    if (status === 404) return '找不到仓库或 Token 没勾选这个仓库（检查用户名 / 仓库名 / Repository access）';
+    if (status === 422) return '仓库是空的写不进去：请在 GitHub 上给这个仓库创建任意一个文件（建仓库时勾 Add a README file）';
+    return 'HTTP ' + status + '：' + String(body || '').slice(0, 140);
+  }
+  function strToB64(str){
+    const u = enc.encode(str); let s = '';
+    for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]);
+    return btoa(s);
+  }
+  function b64ToStr(b64){
+    const bin = atob(String(b64).replace(/[\r\n\s]/g, ''));
+    const u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    return dec.decode(u);
+  }
+  async function ghPull(s, path){
+    const r = await fetch(ghBase(s) + path + '?ref=' + encodeURIComponent(s.ghBranch || 'main'), { headers: ghHdr(s) });
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error(ghErr(r.status, await safeText(r)));
+    const j = await r.json();
+    if (!j || !j.content) return null;
+    let file = null;
+    try { file = JSON.parse(b64ToStr(j.content)); } catch (e) { throw new Error('云端的同步文件不是合法 JSON（可能被手工改过）'); }
+    return { sha: j.sha, file: file };
+  }
+  async function ghPush(s, path, obj, sha){
+    const body = { message: 'cs-skin sync ' + new Date().toISOString(), content: strToB64(JSON.stringify(obj)) };
+    if (sha) body.sha = sha;
+    if (s.ghBranch) body.branch = s.ghBranch;
+    const r = await fetch(ghBase(s) + path, { method: 'PUT', headers: ghHdr(s), body: JSON.stringify(body) });
+    if (r.status === 409 || r.status === 422 && sha) throw new Error('云端刚刚被另一台设备改过（文件版本冲突），请再点一次「立即同步」');
+    if (!r.ok) throw new Error(ghErr(r.status, await safeText(r)));
+    const j = await r.json();
+    return { sha: (j && j.content && j.content.sha) || '' };
+  }
+  return { ready, encrypt, decrypt, roomId, pull, push, ghPull, ghPush, ghErr };
 })();
 
 /* ---- 同步引擎 ---- */
 let syncing = false, autoSyncTimer = null;
-function syncCfg(){ const s = state.sync; return { url: s.url, key: s.key, code: s.code }; }
-function syncConfigured(){ const c = syncCfg(); return !!(c.url && c.key && c.code); }
+function syncCfg(){ const s = state.sync; return { backend: s.backend || 'github', url: s.url, key: s.key, code: s.code }; }
+function syncConfigured(){
+  const s = state.sync;
+  if (!s.code) return false;
+  if ((s.backend || 'github') === 'supabase') return !!(s.url && s.key);
+  return !!(s.ghOwner && s.ghRepo && s.ghToken);
+}
+function ghPathOf(id){ return 'rooms/' + id + '.json'; }
 function secureCtx(){
   const loc = location || {};
   const secure = (typeof window !== 'undefined' && window.isSecureContext) ||
@@ -756,10 +852,34 @@ function finishSync(msg, cls){
 function syncError(msg){ setSyncStatus('同步失败', 'neg'); showBanner('云同步失败：' + msg); }
 function syncRender(){ syncInputs(); renderHoldings(); recalcAll(); }
 
+/* 拉取云端：两个后端统一返回 { payload } 或 null */
+async function remotePull(id){
+  const s = state.sync;
+  if ((s.backend || 'github') === 'supabase'){
+    const r = await Sync.pull({ url: s.url, key: s.key }, id);
+    return r ? { payload: r.payload } : null;
+  }
+  const g = await Sync.ghPull(s, ghPathOf(id));
+  if (!g) { s.ghSha = ''; return null; }
+  s.ghSha = g.sha || '';
+  return { payload: g.file && g.file.payload };
+}
+/* 推送云端 */
+async function remotePush(id, payload){
+  const s = state.sync;
+  if ((s.backend || 'github') === 'supabase'){
+    await Sync.push({ url: s.url, key: s.key }, id, payload, s.deviceId);
+    return;
+  }
+  const res = await Sync.ghPush(s, ghPathOf(id),
+    { v: 1, updatedAt: Calc.toNum(state.updatedAt), device: s.deviceId, payload: payload }, s.ghSha);
+  if (res && res.sha) s.ghSha = res.sha;
+}
+
 async function syncNow(mode){
   if (syncing) return;
   const cfg = syncCfg();
-  if (!cfg.url || !cfg.key || !cfg.code){ setSyncStatus('未配置', 'muted'); return; }
+  if (!syncConfigured()){ setSyncStatus('未配置', 'muted'); return; }
   if (!secureCtx()){
     setSyncStatus('需 https 打开', 'warn');
     $('sync-tip').innerHTML = '⚠️ 浏览器只在 <b>https://</b>（或 localhost）下提供加密接口，所以云同步要在部署后的正式网址上用。当前地址：' + location.origin;
@@ -770,10 +890,10 @@ async function syncNow(mode){
   try {
     const s = state.sync;
     const me = await Sync.encrypt(cfg.code, dataOf(state));
-    const remote = await Sync.pull(cfg, me.id);
+    const remote = await remotePull(me.id);
 
     if (!remote){
-      await Sync.push(cfg, me.id, me.payload, s.deviceId);
+      await remotePush(me.id, me.payload);
       s.lastSyncAt = Date.now();
       s.lastRemoteUpdatedAt = Calc.toNum(state.updatedAt);
       finishSync('云端已创建 ✔');
@@ -803,7 +923,7 @@ async function syncNow(mode){
       return;
     }
     if (action === 'push'){
-      await Sync.push(cfg, me.id, me.payload, s.deviceId);
+      await remotePush(me.id, me.payload);
       s.lastSyncAt = Date.now(); s.lastRemoteUpdatedAt = lu;
       finishSync(mode === 'push' ? '已用本机覆盖云端 ✔' : '已上传本机改动 ✔');
       return;
@@ -872,7 +992,8 @@ function normalize(raw){
     }));
   }
   if (raw.sync && typeof raw.sync === 'object'){
-    ['url','key','code','deviceId','lastSyncAt','lastLocalUpdatedAt','lastRemoteUpdatedAt'].forEach(k => {
+    ['backend','url','key','code','deviceId','ghOwner','ghRepo','ghToken','ghBranch','ghSha',
+     'lastSyncAt','lastLocalUpdatedAt','lastRemoteUpdatedAt'].forEach(k => {
       if (raw.sync[k] !== undefined && raw.sync[k] !== null) out.sync[k] = raw.sync[k];
     });
   }
@@ -1281,14 +1402,16 @@ function renderStatus(){
 
   const tip = $('sync-tip');
   if (tip){
+    const be = (state.sync.backend || 'github') === 'supabase' ? 'Supabase' : 'GitHub 私有仓库';
     if (!syncConfigured()){
-      tip.innerHTML = '同一个同步码 = 同一份数据。数据加密后才上传，<b>同步码就是密码，忘了打不开</b>。先在「连接设置」里填 Supabase 的两个值和建表 SQL，手机和电脑填同一个同步码即可互通。';
+      tip.innerHTML = '同一个同步码 = 同一份数据。数据加密后才上传，<b>同步码就是密码，忘了打不开</b>。当前方式：<b>' + be +
+        '</b>，点「连接设置」填好再同步。';
     } else if (!secureCtx()){
       tip.innerHTML = '⚠️ 云同步需要 <b>https://</b> 网址（浏览器只在安全上下文提供加密接口）。当前：' + esc(location.origin) + '，请先部署到云端再用。';
     } else {
-      tip.innerHTML = '同步码：<b>' + esc(state.sync.code) + '</b>　最后同步：' +
+      tip.innerHTML = '方式：<b>' + be + '</b>　同步码：<b>' + esc(state.sync.code) + '</b>　最后同步：' +
         (state.sync.lastSyncAt ? fullTime(state.sync.lastSyncAt) : '还没同步过') +
-        '<br>本机设备号：' + esc(String(state.sync.deviceId).slice(0, 6)) + '（云端只存房间号哈希 + 密文，看不到明文）';
+        '<br>本机设备号：' + esc(String(state.sync.deviceId).slice(0, 6)) + '（云端只有房间号哈希 + 密文，看不到明文）';
     }
   }
 }
@@ -1517,6 +1640,33 @@ async function init(){
   bindSyncField('sy-code', 'code', true);
   bindSyncField('sy-url', 'url', false);
   bindSyncField('sy-key', 'key', false);
+  bindSyncField('sy-ghowner', 'ghOwner', false);
+  bindSyncField('sy-ghrepo', 'ghRepo', false);
+  bindSyncField('sy-ghtoken', 'ghToken', false);
+
+  /* 后端切换 */
+  function paintBackend(){
+    const be = state.sync.backend || 'github';
+    Array.prototype.forEach.call($('sy-be').querySelectorAll('button'), function(b){
+      b.classList.toggle('on', b.dataset.be === be);
+    });
+    $('sy-gh').hidden = (be !== 'github');
+    $('sy-sb').hidden = (be !== 'supabase');
+    setSyncStatus(syncConfigured() ? (state.sync.lastSyncAt ? '已同步 ' + hhmmss(state.sync.lastSyncAt) : '待同步') : '未配置',
+                  syncConfigured() ? 'pos' : 'muted');
+    renderStatus();
+  }
+  Array.prototype.forEach.call($('sy-be').querySelectorAll('button'), function(b){
+    b.addEventListener('click', function(){
+      state.sync.backend = b.dataset.be;
+      state.sync.ghSha = '';
+      state.sync.lastLocalUpdatedAt = 0;
+      state.sync.lastRemoteUpdatedAt = 0;
+      paintBackend();
+      saveSoon();
+    });
+  });
+  paintBackend();
 
   $('sy-now').addEventListener('click', function(){ syncNow('auto'); });
   $('sy-push').addEventListener('click', function(){
@@ -1541,11 +1691,13 @@ async function init(){
     }
   });
   $('sy-clearcfg').addEventListener('click', function(){
-    if (!confirm('清除连接设置和同步码？（云端数据不会被删除）')) return;
-    state.sync.url = ''; state.sync.key = ''; state.sync.code = '';
+    if (!confirm('清除连接设置和同步码？（云端文件不会被删除）')) return;
+    ['url','key','ghOwner','ghRepo','ghToken','ghSha'].forEach(k => { state.sync[k] = ''; });
+    state.sync.code = '';
     state.sync.lastSyncAt = 0; state.sync.lastLocalUpdatedAt = 0; state.sync.lastRemoteUpdatedAt = 0;
-    $('sy-url').value = ''; $('sy-key').value = ''; $('sy-code').value = '';
+    ['sy-url','sy-key','sy-ghowner','sy-ghrepo','sy-ghtoken','sy-code'].forEach(function(id){ const el = $(id); if (el) el.value = ''; });
     setSyncStatus('未配置', 'muted');
+    renderStatus();
     saveSoon();
   });
 
