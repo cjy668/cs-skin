@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e13">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CS仓位">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
+<title>CS 饰品仓位管理</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" href="./icon-192.png">
+<style>
+/* =====================================================================
+   CS 饰品仓位管理 · 手机优先 / 深色 / 自动保存
+   ===================================================================== */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0e13; --card:#121a23; --card2:#17212c; --line:#233042; --field:#0d141c;
+  --text:#e9f0f7; --muted:#8b9db2; --dim:#5d6f83;
+  --green:#2fd07a; --red:#ff6b6b; --yellow:#ffc531; --cyan:#22d3ee; --blue:#4b9dff;
+  --r:16px; --gap:10px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+}
+html,body{margin:0;padding:0;background:var(--bg)}
+body{
+  color:var(--text);font-size:15px;line-height:1.5;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%;overscroll-behavior-y:none;
+  background-image:radial-gradient(900px 420px at 50% -160px,#15212e 0%,rgba(10,14,19,0) 70%);
+  background-repeat:no-repeat;background-attachment:fixed;
+}
+input,button,select,textarea{font-family:inherit}
+.num,.v,.s-v,.big{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ---------------- 顶部固定栏 ---------------- */
+.appbar{position:sticky;top:0;z-index:60;background:rgba(10,14,19,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
+.appbar-in{display:flex;align-items:center;gap:8px;padding:8px 14px 6px;max-width:680px;margin:0 auto}
+.brand{font-size:14.5px;font-weight:700;letter-spacing:.3px;flex:1 1 auto;display:flex;align-items:center;gap:7px}
+.brand i{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#22d3ee,#4b9dff);display:inline-block}
+.save{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(47,208,122,.8);flex:0 0 auto}
+.dot.saving{background:var(--yellow);box-shadow:0 0 8px rgba(255,197,49,.8)}
+.dot.error{background:var(--red);box-shadow:0 0 8px rgba(255,107,107,.8)}
+.summary{max-width:680px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(35,48,66,.6)}
+.s-item{padding:7px 10px 9px;text-align:center;position:relative}
+.s-item+.s-item::before{content:'';position:absolute;left:0;top:16%;height:68%;width:1px;background:var(--line)}
+.s-k{font-size:11px;color:var(--muted);margin-bottom:2px}
+.s-v{font-size:16px;font-weight:800;letter-spacing:-.2px}
+
+/* ---------------- 布局 ---------------- */
+main{max-width:680px;margin:0 auto;padding:12px 12px calc(96px + var(--safe-b))}
+section{scroll-margin-top:132px}
+.sec-head{display:flex;align-items:center;gap:9px;margin:20px 2px 10px}
+.sec-head:first-child{margin-top:6px}
+.sec-head .n{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#04141a;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.sec-head h2{font-size:16px;margin:0;font-weight:700}
+.sec-head .t{margin-left:auto;font-size:11.5px;color:var(--dim)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:var(--gap)}
+.card.tight{padding:12px}
+.card-title{font-size:13px;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.card-title .r{margin-left:auto;font-size:11.5px;color:var(--dim)}
+
+/* ---------------- 表单 ---------------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.lbl{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.lbl .q{font-size:10px;background:var(--card2);border:1px solid var(--line);color:var(--dim);border-radius:5px;padding:0 4px;line-height:14px}
+.ipt{display:flex;align-items:center;gap:4px;background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:0 11px;height:50px;transition:border-color .15s,box-shadow .15s}
+.ipt:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.13)}
+.ipt input{flex:1 1 auto;width:100%;min-width:0;background:transparent;border:0;outline:none;color:var(--text);font-size:17px;font-weight:700;height:100%;font-variant-numeric:tabular-nums}
+.ipt input::placeholder{color:#4a5a6c;font-weight:500;font-size:14px}
+.ipt .u{flex:0 0 auto;color:var(--dim);font-size:12px}
+.ipt.sm{height:46px;padding:0 9px}
+.ipt.sm input{font-size:16px}
+input[type=date]{color-scheme:dark}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+
+/* ---------------- 按钮 ---------------- */
+.btn{-webkit-appearance:none;appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:50px;padding:0 16px;border-radius:13px;border:1.5px solid var(--line);background:var(--card2);color:var(--text);
+  font-size:16px;font-weight:700;cursor:pointer;transition:transform .08s,filter .15s;touch-action:manipulation;width:100%}
+.btn:active{transform:scale(.985);filter:brightness(1.15)}
+.btn.pri{background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#03141c;border-color:transparent}
+.btn.danger{color:var(--red);border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.08)}
+.btn.ghost{background:transparent}
+.btn.sm{min-height:42px;font-size:14px;border-radius:11px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.row2 .btn{width:100%}
+
+/* ---------------- 结果 ---------------- */
+.res{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.stat{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:10px 11px;min-width:0}
+.stat .k{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+.stat .v{font-size:19px;font-weight:800;letter-spacing:-.3px;word-break:break-word}
+.stat.wide{grid-column:1/-1}
+.stat.hero{grid-column:1/-1;background:linear-gradient(135deg,rgba(34,211,238,.13),rgba(75,157,255,.07));border-color:rgba(34,211,238,.32)}
+.stat.hero .v{font-size:26px}
+.pos{color:var(--green)}.neg{color:var(--red)}.warn{color:var(--yellow)}.muted{color:var(--muted)}
+
+/* ---------------- 提示条 ---------------- */
+/* 注意：这里必须是 block —— 用 flex 会把消息里的 <b> 变成独立 flex 项，文字被拆栏错位 */
+.alert{display:block;padding:11px 12px;border-radius:12px;font-size:13.5px;line-height:1.65;margin-top:9px;border:1px solid transparent}
+.alert b{color:#fff;font-weight:700}
+.alert.danger{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.4);color:#ffc9c9}
+.alert.warn{background:rgba(255,197,49,.1);border-color:rgba(255,197,49,.36);color:#ffe7a3}
+.alert.note{background:rgba(75,157,255,.1);border-color:rgba(75,157,255,.34);color:#c6e0ff}
+.alert.ok{background:rgba(47,208,122,.1);border-color:rgba(47,208,122,.34);color:#b3f2cf}
+
+/* ---------------- 持仓卡 ---------------- */
+.hold{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;position:relative}
+.hold-top{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.hold-top .ipt{flex:1 1 auto;height:46px}
+.del{width:44px;height:44px;flex:0 0 auto;border-radius:12px;border:1.5px solid rgba(255,107,107,.32);background:rgba(255,107,107,.09);color:var(--red);font-size:19px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.del:active{transform:scale(.94)}
+.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.mini .m{min-width:0}
+.mini .m .k{font-size:10.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .m .v{font-size:14.5px;font-weight:800}
+.empty{text-align:center;padding:22px 12px;color:var(--muted);font-size:13.5px}
+.empty .big2{font-size:15px;color:var(--text);font-weight:700;margin-bottom:6px}
+
+/* ---------------- 表格 ---------------- */
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:8px 4px;text-align:right;font-size:13px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl thead th{color:var(--muted);font-weight:600;font-size:11.5px}
+.tbl tbody tr:last-child td{border-bottom:0}
+
+/* ---------------- 底部导航 ---------------- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(10,14,19,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
+.nav-in{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:56px;text-decoration:none;color:var(--dim);font-size:10.5px;font-weight:600;transition:color .15s}
+.nav a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav a.on{color:var(--cyan)}
+
+/* ---------------- 其它 ---------------- */
+.hint{color:var(--dim);font-size:11.5px;margin:7px 0 0;line-height:1.6}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv:last-child{border-bottom:0}
+.kv .k2{color:var(--muted);flex:0 0 auto}
+.kv .v2{text-align:right;word-break:break-all;font-weight:600}
+.banner{background:rgba(255,107,107,.13);border-bottom:1px solid rgba(255,107,107,.4);color:#ffc9c9;font-size:12.5px;padding:9px 14px;text-align:center}
+.risks{margin:0;padding-left:17px;color:#c3d2e2;font-size:13px;line-height:1.7}
+.risks li{margin:6px 0}
+.risks b{color:#fff}
+details{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
+summary{cursor:pointer;color:var(--muted);font-size:13px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▸ '}
+details[open] summary::before{content:'▾ '}
+.formula{font-size:12px;color:var(--dim);line-height:2;margin-top:8px}
+.formula code{background:var(--field);padding:2px 6px;border-radius:6px;color:#9ad9e8}
+.tagline{font-size:12px;color:var(--dim);text-align:center;padding:6px 0 0}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}100%{box-shadow:0 0 0 14px rgba(34,211,238,0)}}
+.flash{animation:flash .6s ease-out}
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner" hidden></div>
+
+<!-- ================= 顶部：品牌 + 保存状态 + 总览 ================= -->
+<header class="appbar">
+  <div class="appbar-in">
+    <div class="brand"><i></i>CS 饰品仓位管理</div>
+    <div class="save"><span class="dot" id="save-dot"></span><span id="save-text">已保存</span></div>
+  </div>
+  <div class="summary">
+    <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
+    <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
+    <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= ① 概览 / 参数 ================= -->
+  <section id="sec-home">
+    <div class="sec-head"><div class="n">1</div><h2>我的资金</h2><div class="t">改完全自动算</div></div>
+
+    <div class="card">
+      <div class="grid2">
+        <label class="field" style="grid-column:1/-1"><span class="lbl">总资产（现金 + 饰品市值）</span>
+          <span class="ipt"><input id="set-total" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
+        </label>
+        <label class="field"><span class="lbl">综合成本率 <span class="q">手续费+滑点</span></span>
+          <span class="ipt"><input id="set-cost" type="number" inputmode="decimal" step="any" min="0" max="99" placeholder="0"><i class="u">%</i></span>
+        </label>
+        <label class="field"><span class="lbl">总仓位上限</span>
+          <span class="ipt"><input id="set-maxTotal" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
+        </label>
+        <label class="field"><span class="lbl">单品种上限</span>
+          <span class="ipt"><input id="set-maxItem" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
+        </label>
+        <div class="field"><span class="lbl">卖出到手比例</span>
+          <span class="ipt" style="border-style:dashed"><input value="" id="set-netfactor" readonly tabindex="-1" style="font-weight:700"></span>
+        </div>
+      </div>
+      <p class="hint" id="note-cost">—</p>
+      <div class="res">
+        <div class="stat"><div class="k">已用资金</div><div class="v" id="ov-invest">—</div></div>
+        <div class="stat"><div class="k">已用仓位</div><div class="v" id="ov-pos">—</div></div>
+        <div class="stat"><div class="k">剩余现金</div><div class="v" id="ov-cash">—</div></div>
+        <div class="stat"><div class="k">还能买（总仓位额度）</div><div class="v" id="ov-capTotal">—</div></div>
+      </div>
+      <p class="hint" id="note-cap">—</p>
+    </div>
+  </section>
+
+  <!-- ================= ② 计算器 ================= -->
+  <section id="sec-calc">
+    <div class="sec-head"><div class="n">2</div><h2>单品种计算器</h2><div class="t">输入即算</div></div>
+
+    <div class="card">
+      <div class="grid2">
+        <label class="field" style="grid-column:1/-1"><span class="lbl">饰品名称</span>
+          <span class="ipt"><input id="c-name" type="text" autocomplete="off" placeholder="如 AK-47 | 红线（略有磨损）"></span>
+        </label>
+        <label class="field"><span class="lbl">单价</span>
+          <span class="ipt"><input id="c-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
+        </label>
+        <label class="field"><span class="lbl">买入把数</span>
+          <span class="ipt"><input id="c-qty" type="number" inputmode="numeric" step="1" min="0" placeholder="0"><i class="u">把</i></span>
+        </label>
+        <label class="field"><span class="lbl">预期涨幅</span>
+          <span class="ipt"><input id="c-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span>
+        </label>
+        <label class="field"><span class="lbl">目标净收益率 <span class="q">可留空</span></span>
+          <span class="ipt"><input id="c-targetNet" type="number" inputmode="decimal" step="any" placeholder="留空"><i class="u">%</i></span>
+        </label>
+      </div>
+
+      <div class="res" id="c-res">
+        <div class="stat hero"><div class="k">总净收益</div><div class="v" id="c-profit">—</div></div>
+        <div class="stat "><div class="k">最终总资产</div><div class="v" id="c-final">—</div></div>
+        <div class="stat"><div class="k">净收益率</div><div class="v" id="c-netrate">—</div></div>
+        <div class="stat"><div class="k">实际投入</div><div class="v" id="c-invest">—</div></div>
+        <div class="stat"><div class="k">仓位占比</div><div class="v" id="c-pos">—</div></div>
+        <div class="stat"><div class="k">每把净赚</div><div class="v" id="c-perpiece">—</div></div>
+        <div class="stat"><div class="k">剩余现金</div><div class="v" id="c-cash">—</div></div>
+        <div class="stat"><div class="k">回本卖出价</div><div class="v" id="c-breakeven">—</div></div>
+        <div class="stat"><div class="k">目标止盈价</div><div class="v" id="c-tp">—</div></div>
+      </div>
+      <div id="c-warn"></div>
+      <details>
+        <summary>计算明细与公式</summary>
+        <div class="res" style="margin-top:8px">
+          <div class="stat"><div class="k">卖出总额</div><div class="v" id="c-sell">—</div></div>
+          <div class="stat"><div class="k">净到手</div><div class="v" id="c-net">—</div></div>
+        </div>
+        <div class="formula">
+          <div><code>净收益率 = (1+涨幅)×(1−成本率) − 1</code></div>
+          <div><code>净收益 = 实际投入 × 净收益率</code></div>
+          <div><code>回本卖出价 = 单价 ÷ (1−成本率)</code></div>
+          <div><code>目标止盈价 = 单价 ×(1+目标净收益率)÷(1−成本率)</code></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="sec-head"><div class="n">3</div><h2>反推：该买多少把</h2><div class="t">两种算法</div></div>
+
+    <div class="card">
+      <div class="card-title">按仓位反推 <span class="r">先定仓位，再定把数</span></div>
+      <div class="grid3">
+        <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="p-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+        <label class="field"><span class="lbl">想占仓位</span><span class="ipt sm"><input id="p-pos" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">%</i></span></label>
+        <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="p-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
+      </div>
+      <div class="res">
+        <div class="stat hero"><div class="k">建议买入把数</div><div class="v" id="r-qty">—</div></div>
+        <div class="stat"><div class="k">实际投入</div><div class="v" id="r-invest">—</div></div>
+        <div class="stat"><div class="k">实际仓位</div><div class="v" id="r-pos">—</div></div>
+        <div class="stat"><div class="k">预计总净收益</div><div class="v" id="r-profit">—</div></div>
+      </div>
+      <div id="r-warn"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">按目标收益反推 <span class="r">想赚多少，需要多少把</span></div>
+      <div class="grid3">
+        <label class="field"><span class="lbl">目标净收益</span><span class="ipt sm"><input id="t-target" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+        <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="t-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+        <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="t-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
+      </div>
+      <div class="res">
+        <div class="stat hero"><div class="k">需要买</div><div class="v" id="g-qty">—</div></div>
+        <div class="stat"><div class="k">每把净赚</div><div class="v" id="g-perpiece">—</div></div>
+        <div class="stat"><div class="k">需要投入</div><div class="v" id="g-invest">—</div></div>
+        <div class="stat"><div class="k">占总资产仓位</div><div class="v" id="g-pos">—</div></div>
+      </div>
+      <div id="g-warn"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">涨幅情景表 <span class="r">跟随上面「单价 / 把数」</span></div>
+      <table class="tbl">
+        <thead><tr><th>涨幅</th><th>净收益</th><th>净收益率</th><th>最终总资产</th></tr></thead>
+        <tbody id="sc-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= ③ 持仓 ================= -->
+  <section id="sec-hold">
+    <div class="sec-head"><div class="n">4</div><h2>我的持仓</h2><div class="t" id="hold-count">0 个品种</div></div>
+
+    <div id="h-list"></div>
+
+    <button class="btn pri" id="h-add" type="button">＋ 添加品种</button>
+
+    <div class="card" style="margin-top:10px">
+      <div class="card-title">组合汇总</div>
+      <div class="res" style="margin-top:0">
+        <div class="stat hero"><div class="k">浮动盈亏（按现价）</div><div class="v" id="h-pnl">—</div></div>
+        <div class="stat"><div class="k">当前市值</div><div class="v" id="h-value">—</div></div>
+        <div class="stat"><div class="k">总投入</div><div class="v" id="h-invest">—</div></div>
+        <div class="stat"><div class="k">总仓位</div><div class="v" id="h-pos">—</div></div>
+        <div class="stat"><div class="k">预期净收益</div><div class="v" id="h-profit">—</div></div>
+        <div class="stat wide"><div class="k">剩余现金</div><div class="v" id="h-cash">—</div></div>
+        <div class="stat wide"><div class="k">全部卖出后的总资产</div><div class="v" id="h-final">—</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">风险检查 <span class="r">自动刷新</span></div>
+      <div id="h-risk"></div>
+    </div>
+  </section>
+
+  <!-- ================= ④ 设置 ================= -->
+  <section id="sec-more">
+    <div class="sec-head"><div class="n">5</div><h2>数据与设置</h2><div class="t">自动保存</div></div>
+
+    <div class="card">
+      <div class="card-title">云同步 <span class="r" id="sync-status">未配置</span></div>
+      <label class="field"><span class="lbl">同步码 <span class="q">手机和电脑填一样的</span></span>
+        <span class="ipt"><input id="sy-code" type="text" autocomplete="off" placeholder="如 laowang-2026"></span>
+      </label>
+      <div class="row2">
+        <button class="btn sm pri" id="sy-now" type="button">立即同步</button>
+        <button class="btn sm" id="sy-pull" type="button">用云端覆盖本机</button>
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <button class="btn sm ghost" id="sy-push" type="button">用本机覆盖云端</button>
+        <button class="btn sm ghost" id="sy-setup" type="button">连接设置</button>
+      </div>
+      <p class="hint" id="sync-tip">同一个同步码 = 同一份数据。数据加密后才上传，同步码就是密码，忘了打不开。</p>
+
+      <div id="sync-setup" hidden style="margin-top:12px;border-top:1px dashed var(--line);padding-top:12px">
+        <label class="field"><span class="lbl">Supabase Project URL</span>
+          <span class="ipt sm"><input id="sy-url" type="text" autocomplete="off" placeholder="https://xxxxxxxx.supabase.co"></span>
+        </label>
+        <label class="field" style="margin-top:8px"><span class="lbl">publishable / anon key</span>
+          <span class="ipt sm"><input id="sy-key" type="text" autocomplete="off" placeholder="sb_publishable_... 或 eyJhbGciOi..."></span>
+        </label>
+        <div class="row2" style="margin-top:10px">
+          <button class="btn sm" id="sy-sql" type="button">复制建表 SQL</button>
+          <button class="btn sm" id="sy-clearcfg" type="button">清除连接</button>
+        </div>
+        <p class="hint">这两个值在 Supabase 控制台 <b>Project Settings → API</b> 里；它们本来就是给浏览器用的公开值（千万别填 service_role key）。填好后先去 SQL Editor 执行一次建表 SQL。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">数据保存状态</div>
+      <div class="kv"><span class="k2">保存位置</span><span class="v2" id="st-where">—</span></div>
+      <div class="kv"><span class="k2">最后保存</span><span class="v2" id="st-updated">—</span></div>
+      <div class="kv"><span class="k2">数据量</span><span class="v2" id="st-size">—</span></div>
+      <div class="kv"><span class="k2">网页来源</span><span class="v2" id="st-origin">—</span></div>
+      <p class="hint" id="st-tip">—</p>
+      <div class="row2">
+        <button class="btn sm" id="btn-export-json" type="button">导出备份(.json)</button>
+        <button class="btn sm" id="btn-export-csv" type="button">导出表格(.csv)</button>
+        <button class="btn sm ghost" id="btn-import" type="button">导入备份</button>
+        <button class="btn sm danger" id="btn-reset" type="button">全部重置</button>
+      </div>
+      <input type="file" id="file-import" accept=".json,application/json" hidden>
+      <p class="hint">换手机、换网址、清理浏览器数据前，先点「导出备份」，到新设备再「导入备份」。这是唯一 100% 不丢数据的方法。</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">风险提示</div>
+      <ul class="risks">
+        <li><b>7 天 CD：</b>市场/交易买入的饰品 7 天内不能再卖出，资金被锁死，务必留够现金。</li>
+        <li><b>不要满仓、不要借钱、不要配资：</b>CD 期内无法止损，杠杆会放大回撤。</li>
+        <li><b>流动性：</b>日成交量低的饰品，出货会被滑点吃掉利润，甚至砸盘卖不掉。</li>
+        <li><b>计算器只是工具，不构成投资建议。</b></li>
+      </ul>
+    </div>
+
+    <p class="tagline">全部数据只存在你自己的手机上 · 无账号 · 无上传</p>
+  </section>
+
+</main>
+
+<!-- ================= 底部导航 ================= -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#sec-home" data-sec="sec-home" class="on">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>资金</span></a>
+    <a href="#sec-calc" data-sec="sec-calc">
+      <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7h8M8 12h3M8 16h3M15 12v4"/></svg><span>计算</span></a>
+    <a href="#sec-hold" data-sec="sec-hold">
+      <svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span>持仓</span></a>
+    <a href="#sec-more" data-sec="sec-more">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.7-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 4.6a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 11a2 2 0 1 1 0 4Z"/></svg><span>设置</span></a>
+  </div>
+</nav>
+
+<script id="app-script">
+/* =====================================================================
+   1) 计算核心（纯函数，不碰 DOM，可单独测试）
+   ===================================================================== */
+const Calc = {
+  toNum(v){
+    if (typeof v === 'number') return Number.isFinite(v) ? v : 0;
+    if (v === null || v === undefined) return 0;
+    const s = String(v).replace(/[,\s，¥￥%]/g, '');
+    if (s === '' || s === '-' || s === '.' || s === '-.') return 0;
+    const n = parseFloat(s);
+    return Number.isFinite(n) ? n : 0;
+  },
+  round2(v){ if (!Number.isFinite(v)) return v; const s = v < 0 ? -1 : 1; return s * Math.round(Math.abs(v) * 100) / 100; },
+  netFactor(costPct){ return 1 - this.toNum(costPct) / 100; },                 // 1 - 综合成本率
+  netRate(gainPct, costPct){ return (1 + this.toNum(gainPct) / 100) * this.netFactor(costPct) - 1; },
+  breakEvenPrice(price, costPct){ const f = this.netFactor(costPct); return f > 0 ? this.toNum(price) / f : Infinity; },
+  takeProfitPrice(price, netRatePct, costPct){ const f = this.netFactor(costPct); return f <= 0 ? Infinity : this.toNum(price) * (1 + this.toNum(netRatePct) / 100) / f; },
+
+  /* 单品种 */
+  single(o){
+    const total = this.toNum(o.total), price = this.toNum(o.price), qty = this.toNum(o.qty);
+    const gainPct = this.toNum(o.gain), costPct = this.toNum(o.cost);
+    const invest = price * qty;
+    const sellGross = invest * (1 + gainPct / 100);
+    const netReceived = sellGross * this.netFactor(costPct);
+    const netProfit = netReceived - invest;
+    const rate = invest > 0 ? netProfit / invest : this.netRate(gainPct, costPct);
+    return {
+      total, price, qty, gainPct, costPct, invest,
+      position: total > 0 ? invest / total : 0,
+      cashLeft: total - invest,
+      sellGross, netReceived, netProfit, netRate: rate,
+      finalAssets: total + netProfit,
+      perPiece: qty > 0 ? netProfit / qty : 0,
+      breakEven: this.breakEvenPrice(price, costPct)
+    };
+  },
+  /* 按仓位反推 */
+  byPosition(o){
+    const total = this.toNum(o.total), price = this.toNum(o.price);
+    const budget = total * this.toNum(o.pos) / 100;
+    const qty = price > 0 ? Math.max(0, Math.floor(budget / price + 1e-9)) : 0;
+    const invest = price * qty;
+    const rate = this.netRate(o.gain, o.cost);
+    return { budget, qty, invest, position: total > 0 ? invest / total : 0, netRate: rate, netProfit: invest * rate };
+  },
+  /* 按目标收益反推 */
+  byTarget(o){
+    const total = this.toNum(o.total), price = this.toNum(o.price), target = this.toNum(o.target);
+    const rate = this.netRate(o.gain, o.cost);
+    const perPiece = price * rate;
+    let qty = 0;
+    if (perPiece > 0 && target > 0){
+      const raw = target / perPiece;
+      const eps = Math.max(1e-9, Math.abs(raw) * 1e-12);
+      qty = Math.ceil(raw - eps);
+    }
+    const invest = price * qty;
+    return { netRate: rate, perPiece, qty, invest, position: total > 0 ? invest / total : 0,
+             netProfit: invest * rate, feasible: perPiece > 0 };
+  },
+  /* 情景 */
+  GRID: [-20, -10, 0, 10, 20, 30, 50],
+  scenarios(o){
+    const total = this.toNum(o.total), costPct = this.toNum(o.cost);
+    const invest = this.toNum(o.price) * this.toNum(o.qty);
+    return this.GRID.map(g => {
+      const rate = this.netRate(g, costPct);
+      const netProfit = invest * rate;
+      return { gainPct: g, invest, netRate: rate, netProfit, finalAssets: total + netProfit };
+    });
+  },
+  /* 单个持仓 */
+  holding(h, o){
+    const total = this.toNum(o.total), costPct = this.toNum(o.cost);
+    const buy = this.toNum(h.buy), qty = this.toNum(h.qty);
+    const now = this.toNum(h.now), gainPct = this.toNum(h.gain), vol = this.toNum(h.vol);
+    const invest = buy * qty;
+    const hasNow = this.toNum(h.now) > 0;
+    const value = now * qty;                                  // 现价市值（毛）
+    const netSell = value * this.netFactor(costPct);           // 现价卖出净到手
+    const pnl = hasNow ? netSell - invest : 0;                 // 浮动盈亏
+    const pnlRate = hasNow && invest > 0 ? pnl / invest : 0;
+    const expRate = this.netRate(gainPct, costPct);
+    const expProfit = invest * expRate;                        // 按预期涨幅的净收益
+    return {
+      name: h.name || '', buy, qty, now, gainPct, vol, invest, hasNow, value, netSell, pnl, pnlRate,
+      position: total > 0 ? invest / total : 0,
+      expRate, expProfit,
+      breakEven: this.breakEvenPrice(buy, costPct),
+      needVol: qty * 5,
+      illiquid: vol > 0 && qty > 0 && vol < qty * 5,
+      cdLeft: this.cdLeft(h.date)
+    };
+  },
+  /* 7 天 CD 剩余天数 */
+  cdLeft(dateStr, today){
+    if (!dateStr) return null;
+    const d = new Date(String(dateStr) + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    const t = today ? new Date(today) : new Date();
+    const t0 = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+    const days = Math.floor((t0 - d) / 86400000);
+    return Math.max(0, 7 - days);
+  },
+  /* 组合 */
+  portfolio(rows, o){
+    const list = (rows || []).map(h => this.holding(h, o));
+    let invest = 0, profit = 0, value = 0, pnl = 0, anyNow = false;
+    list.forEach(r => {
+      invest += r.invest; profit += r.expProfit;
+      if (r.hasNow){ anyNow = true; value += r.value; pnl += r.pnl; }
+      else { value += r.invest; }
+    });
+    const total = this.toNum(o.total);
+    return {
+      list, totalInvest: invest, totalProfit: profit, totalValue: value, totalPnl: pnl, anyNow,
+      totalPosition: total > 0 ? invest / total : 0,
+      pnlRate: anyNow && invest > 0 ? pnl / invest : 0,
+      finalAssets: total + profit,
+      cashLeft: total - invest
+    };
+  }
+};
+
+/* ===== DOM-START ===== */
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const LS_KEY = 'cs_skin_app_v2';
+const DB_NAME = 'cs-skin-app', DB_STORE = 'kv';
+
+/* =====================================================================
+   2) 默认数据
+   ===================================================================== */
+const DEFAULT_STATE = {
+  v: 2,
+  updatedAt: 0,
+  settings: { total: '57554', cost: '3.5', maxTotal: '70', maxItem: '15' },
+  single:   { name: 'AK-47 | 红线（略有磨损）', price: '700', qty: '24', gain: '20', targetNet: '' },
+  revPos:   { price: '700', pos: '15', gain: '20' },
+  revTarget:{ target: '2654.4', price: '700', gain: '20' },
+  holdings: [],
+  sync: { url: '', key: '', code: '', deviceId: '', lastSyncAt: 0, lastLocalUpdatedAt: 0, lastRemoteUpdatedAt: 0 }
+};
+const clone = o => JSON.parse(JSON.stringify(o));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+/* =====================================================================
+   3) 存储层：localStorage（同步）+ IndexedDB（冗余备份）
+   ===================================================================== */
+const Store = (function(){
+  let idb = null, idbReady = false;
+  let lsOK = true;
+
+  function openIDB(){
+    return new Promise(resolve => {
+      if (typeof indexedDB === 'undefined') return resolve(null);
+      let rq;
+      try { rq = indexedDB.open(DB_NAME, 1); } catch (e) { return resolve(null); }
+      rq.onupgradeneeded = () => { const db = rq.result; if (!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE); };
+      rq.onsuccess = () => resolve(rq.result);
+      rq.onerror = () => resolve(null);
+      rq.onblocked = () => resolve(null);
+      setTimeout(() => resolve(rq.result || null), 3000);
+    });
+  }
+  function idbWrite(db, key, val){
+    return new Promise(resolve => {
+      try {
+        const tx = db.transaction(DB_STORE, 'readwrite');
+        tx.objectStore(DB_STORE).put(val, key);
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+        tx.onabort = () => resolve(false);
+      } catch (e) { resolve(false); }
+    });
+  }
+  function idbRead(db, key){
+    return new Promise(resolve => {
+      try {
+        const tx = db.transaction(DB_STORE, 'readonly');
+        const rq = tx.objectStore(DB_STORE).get(key);
+        rq.onsuccess = () => resolve(rq.result === undefined ? null : rq.result);
+        rq.onerror = () => resolve(null);
+      } catch (e) { resolve(null); }
+    });
+  }
+
+  function lsRead(){
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return null;
+      const o = JSON.parse(raw);
+      return (o && typeof o === 'object') ? o : null;
+    } catch (e) { return null; }
+  }
+  function lsWrite(state){
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); return true; }
+    catch (e) { lsOK = false; return false; }
+  }
+  function lsClear(){ try { localStorage.removeItem(LS_KEY); } catch (e) {} }
+
+  async function init(){
+    idb = await openIDB();
+    idbReady = !!idb;
+    return idbReady;
+  }
+  async function readBackup(){
+    if (!idb) return null;
+    return await idbRead(idb, 'state');
+  }
+  async function writeBackup(state){
+    if (!idb) return false;
+    return await idbWrite(idb, 'state', state);
+  }
+  async function writeSnapshot(state){       // 每次保存留一份时间戳快照（最多 8 份）
+    if (!idb) return;
+    try {
+      const snaps = (await idbRead(idb, 'snapshots')) || [];
+      snaps.unshift({ at: Date.now(), state: state });
+      await idbWrite(idb, 'snapshots', snaps.slice(0, 8));
+    } catch (e) {}
+  }
+  async function readSnapshots(){ if (!idb) return []; return (await idbRead(idb, 'snapshots')) || []; }
+
+  return { init, lsRead, lsWrite, lsClear, readBackup, writeBackup, writeSnapshot, readSnapshots,
+           get lsOK(){ return lsOK; }, get idbReady(){ return idbReady; }, set lsOK(v){ lsOK = v; } };
+})();
+
+/* =====================================================================
+   3.5) 云同步：同步码 → 房间号(SHA-256) + 密钥(PBKDF2) + AES-GCM 加密 → Supabase
+   设计要点：
+   · 云端只存「房间号的哈希 + 密文」，数据库被拖走也解不开（同步码就是密码）
+   · 连接配置（URL / key）只留本机，不上传、不写进备份文件
+   · 冲突不自动覆盖：两边都改过就停下来让你选
+   ===================================================================== */
+const Sync = (function(){
+  const enc = new TextEncoder(), dec = new TextDecoder();
+  const subtle = (typeof crypto !== 'undefined' && crypto.subtle) ? crypto.subtle : null;
+  const ITER = 120000;
+
+  function toB64(buf){
+    const b = new Uint8Array(buf); let s = '';
+    for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+    return btoa(s);
+  }
+  function fromB64(str){
+    const bin = atob(str), u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    return u;
+  }
+  function toHex(buf){
+    const b = new Uint8Array(buf); let s = '';
+    for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, '0');
+    return s;
+  }
+  function fromHex(h){
+    const u = new Uint8Array(h.length / 2);
+    for (let i = 0; i < u.length; i++) u[i] = parseInt(h.substr(i * 2, 2), 16);
+    return u;
+  }
+  async function roomId(code){
+    return toHex(await subtle.digest('SHA-256', enc.encode('cs-skin-room:v1:' + code)));
+  }
+  async function keyOf(code){
+    const id = await roomId(code);
+    const base = await subtle.importKey('raw', enc.encode(code), 'PBKDF2', false, ['deriveKey']);
+    return subtle.deriveKey({ name: 'PBKDF2', salt: fromHex(id), iterations: ITER, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  }
+  async function encrypt(code, obj){
+    const id = await roomId(code);
+    const key = await keyOf(code);
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, enc.encode(JSON.stringify(obj)));
+    return { id: id, payload: toB64(iv) + '.' + toB64(ct) };
+  }
+  async function decrypt(code, payload){
+    const key = await keyOf(code);
+    const parts = String(payload || '').split('.');
+    if (parts.length !== 2) throw new Error('密文格式不对');
+    const pt = await subtle.decrypt({ name: 'AES-GCM', iv: fromB64(parts[0]) }, key, fromB64(parts[1]));
+    return JSON.parse(dec.decode(pt));
+  }
+  function ready(){ return !!subtle; }
+
+  function api(cfg){ return String(cfg.url || '').trim().replace(/\/+$/, ''); }
+  function hdr(cfg){
+    return { apikey: cfg.key, Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json' };
+  }
+  function errText(status, body){
+    if (status === 404) return '云端表不存在：请先在 Supabase → SQL Editor 执行建表 SQL';
+    if (status === 401 || status === 403) return '密钥不对或权限不足（HTTP ' + status + '）';
+    return 'HTTP ' + status + '：' + String(body || '').slice(0, 120);
+  }
+  async function safeText(r){ try { return await r.text(); } catch (e) { return ''; } }
+
+  async function pull(cfg, id){
+    const r = await fetch(api(cfg) + '/rest/v1/rooms?code=eq.' + encodeURIComponent(id) + '&select=payload,updated_at&limit=1',
+      { headers: hdr(cfg) });
+    if (!r.ok) throw new Error(errText(r.status, await safeText(r)));
+    const arr = await r.json();
+    return (Array.isArray(arr) && arr.length) ? arr[0] : null;
+  }
+  async function push(cfg, id, payload, device){
+    const r = await fetch(api(cfg) + '/rest/v1/rooms', {
+      method: 'POST',
+      headers: Object.assign(hdr(cfg), { Prefer: 'resolution=merge-duplicates,return=minimal' }),
+      body: JSON.stringify([{ code: id, payload: payload, device: String(device || '').slice(0, 40), updated_at: new Date().toISOString() }])
+    });
+    if (!r.ok) throw new Error(errText(r.status, await safeText(r)));
+    return true;
+  }
+  return { ready, encrypt, decrypt, roomId, pull, push };
+})();
+
+/* ---- 同步引擎 ---- */
+let syncing = false, autoSyncTimer = null;
+function syncCfg(){ const s = state.sync; return { url: s.url, key: s.key, code: s.code }; }
+function syncConfigured(){ const c = syncCfg(); return !!(c.url && c.key && c.code); }
+function secureCtx(){
+  const loc = location || {};
+  const secure = (typeof window !== 'undefined' && window.isSecureContext) ||
+    loc.protocol === 'https:' || loc.hostname === 'localhost' || loc.hostname === '127.0.0.1';
+  return !!secure && Sync.ready();
+}
+function setSyncStatus(txt, cls){ setText('sync-status', txt, cls || 'muted'); }
+function finishSync(msg, cls){
+  const s = state.sync;
+  s.lastLocalUpdatedAt = Calc.toNum(state.updatedAt);
+  saveSoon();
+  setSyncStatus(msg, cls || 'pos');
+  renderStatus();
+}
+function syncError(msg){ setSyncStatus('同步失败', 'neg'); showBanner('云同步失败：' + msg); }
+function syncRender(){ syncInputs(); renderHoldings(); recalcAll(); }
+
+async function syncNow(mode){
+  if (syncing) return;
+  const cfg = syncCfg();
+  if (!cfg.url || !cfg.key || !cfg.code){ setSyncStatus('未配置', 'muted'); return; }
+  if (!secureCtx()){
+    setSyncStatus('需 https 打开', 'warn');
+    $('sync-tip').innerHTML = '⚠️ 浏览器只在 <b>https://</b>（或 localhost）下提供加密接口，所以云同步要在部署后的正式网址上用。当前地址：' + location.origin;
+    return;
+  }
+  syncing = true;
+  setText('sync-status', mode === 'push' ? '上传中…' : (mode === 'pull' ? '下载中…' : '同步中…'), 'warn');
+  try {
+    const s = state.sync;
+    const me = await Sync.encrypt(cfg.code, dataOf(state));
+    const remote = await Sync.pull(cfg, me.id);
+
+    if (!remote){
+      await Sync.push(cfg, me.id, me.payload, s.deviceId);
+      s.lastSyncAt = Date.now();
+      s.lastRemoteUpdatedAt = Calc.toNum(state.updatedAt);
+      finishSync('云端已创建 ✔');
+      return;
+    }
+    let rd;
+    try { rd = await Sync.decrypt(cfg.code, remote.payload); }
+    catch (e) { throw new Error('同步码不对：云端数据解不开（检查两台设备的同步码是否一致）'); }
+
+    const lu = Calc.toNum(state.updatedAt), ru = Calc.toNum(rd.updatedAt);
+    const localChanged = lu !== Calc.toNum(s.lastLocalUpdatedAt);
+    const remoteChanged = ru !== Calc.toNum(s.lastRemoteUpdatedAt);
+
+    let action = mode;                                  // 'push' | 'pull' | 'auto'
+    if (action === 'auto'){
+      if (lu === ru) action = 'same';
+      else if (ru > lu && !localChanged) action = 'pull';
+      else if (lu > ru && !remoteChanged) action = 'push';
+      else action = 'conflict';
+    }
+
+    if (action === 'pull'){
+      applyData(state, rd);
+      s.lastSyncAt = Date.now(); s.lastRemoteUpdatedAt = ru;
+      syncRender();
+      finishSync(mode === 'pull' ? '已用云端覆盖本机 ✔' : '已拉取云端改动 ✔');
+      return;
+    }
+    if (action === 'push'){
+      await Sync.push(cfg, me.id, me.payload, s.deviceId);
+      s.lastSyncAt = Date.now(); s.lastRemoteUpdatedAt = lu;
+      finishSync(mode === 'push' ? '已用本机覆盖云端 ✔' : '已上传本机改动 ✔');
+      return;
+    }
+    if (action === 'same'){
+      s.lastSyncAt = Date.now();
+      finishSync('已是最新 ✔');
+      return;
+    }
+    throw new Error('两边都有改动，不敢自动覆盖。请点「用云端覆盖本机」或「用本机覆盖云端」选一个');
+  } catch (err){
+    syncError(err && err.message ? err.message : '未知错误');
+  } finally {
+    syncing = false;
+  }
+}
+function scheduleAutoSync(){
+  if (!syncConfigured()) return;
+  clearTimeout(autoSyncTimer);
+  autoSyncTimer = setTimeout(function(){
+    if (Calc.toNum(state.updatedAt) !== Calc.toNum(state.sync.lastLocalUpdatedAt)) syncNow('auto');
+  }, 8000);
+}
+function syncSQL(){
+  return [
+    'create table if not exists public.rooms (',
+    '  code text primary key,',
+    '  payload text not null,',
+    '  device text,',
+    '  updated_at timestamptz not null default now()',
+    ');',
+    'alter table public.rooms enable row level security;',
+    'drop policy if exists rooms_read on public.rooms;',
+    'drop policy if exists rooms_insert on public.rooms;',
+    'drop policy if exists rooms_update on public.rooms;',
+    'create policy rooms_read   on public.rooms for select to anon using (true);',
+    'create policy rooms_insert on public.rooms for insert to anon with check (true);',
+    'create policy rooms_update on public.rooms for update to anon using (true) with check (true);'
+  ].join('\n');
+}
+
+/* =====================================================================
+   4) 状态与保存
+   ===================================================================== */
+function normalize(raw){
+  const base = clone(DEFAULT_STATE);
+  base.sync.deviceId = (raw && raw.sync && raw.sync.deviceId) ? raw.sync.deviceId : uid();
+  if (!raw || typeof raw !== 'object') return base;
+  const out = clone(base);
+  out.updatedAt = Calc.toNum(raw.updatedAt);
+  ['settings','single','revPos','revTarget'].forEach(k => {
+    if (raw[k] && typeof raw[k] === 'object') Object.keys(out[k]).forEach(kk => {
+      if (raw[k][kk] !== undefined && raw[k][kk] !== null) out[k][kk] = raw[k][kk];
+    });
+  });
+  if (Array.isArray(raw.holdings)){
+    out.holdings = raw.holdings.filter(h => h && typeof h === 'object').slice(0, 100).map(h => ({
+      id: h.id || uid(),
+      name: String(h.name == null ? '' : h.name).slice(0, 80),
+      buy: h.buy == null ? '' : h.buy,
+      qty: h.qty == null ? '' : h.qty,
+      now: h.now == null ? '' : h.now,
+      gain: h.gain == null ? '' : h.gain,
+      vol: h.vol == null ? '' : h.vol,
+      date: h.date == null ? '' : h.date
+    }));
+  }
+  if (raw.sync && typeof raw.sync === 'object'){
+    ['url','key','code','deviceId','lastSyncAt','lastLocalUpdatedAt','lastRemoteUpdatedAt'].forEach(k => {
+      if (raw.sync[k] !== undefined && raw.sync[k] !== null) out.sync[k] = raw.sync[k];
+    });
+  }
+  if (!out.sync.deviceId) out.sync.deviceId = uid();
+  return out;
+}
+/* 参与同步/导出的只有「数据」，连接配置永远留在本机，不上传不外带 */
+function dataOf(s){
+  return { v: s.v, updatedAt: s.updatedAt, settings: s.settings, single: s.single,
+           revPos: s.revPos, revTarget: s.revTarget, holdings: s.holdings };
+}
+function applyData(s, d){
+  if (!d || typeof d !== 'object') return s;
+  s.updatedAt = Calc.toNum(d.updatedAt);
+  ['settings','single','revPos','revTarget'].forEach(k => { if (d[k] && typeof d[k] === 'object') s[k] = d[k]; });
+  if (Array.isArray(d.holdings)) s.holdings = d.holdings;
+  return s;
+}
+
+let state = normalize(Store.lsRead());
+let loadSource = 'localStorage';
+let saveTimer = null, lastSaved = 0;
+
+function markSaveStatus(kind, text){
+  const dot = $('save-dot'), t = $('save-text');
+  if (dot) dot.className = 'dot' + (kind ? ' ' + kind : '');
+  if (t) t.textContent = text;
+}
+/* 只有「数据」变了才更新 updatedAt；同步元数据的变化不算数据变更（否则会无限触发同步） */
+function touch(){ state.updatedAt = Date.now(); }
+function saveNow(snapshot){
+  clearTimeout(saveTimer); saveTimer = null;
+  const lsOK = Store.lsWrite(state);
+  Store.writeBackup(state);
+  if (snapshot) Store.writeSnapshot(state);
+  lastSaved = Date.now();
+  if (lsOK){
+    markSaveStatus('', '已保存 ' + hhmmss(lastSaved));
+    $('banner').hidden = true;
+  } else {
+    markSaveStatus('saving', '保存受限');
+    showBanner('浏览器禁止本地保存（可能是无痕模式或 file:// 打开）。请立刻点「设置 → 导出备份」，或改用 https:// 网址打开。');
+  }
+  renderStatus();
+}
+function saveSoon(){
+  markSaveStatus('saving', '保存中…');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){ saveNow(); scheduleAutoSync(); }, 300);
+}
+
+function showBanner(msg){ const b = $('banner'); b.textContent = msg; b.hidden = false; }
+
+/* =====================================================================
+   5) 格式化
+   ===================================================================== */
+function fmtNum(v, d){
+  d = (d === undefined) ? 2 : d;
+  if (!Number.isFinite(v)) return '—';
+  return Number(v).toLocaleString('zh-CN', { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+function money(v, sign){
+  if (!Number.isFinite(v)) return '—';
+  const r = Calc.round2(v);
+  const s = r > 0 ? (sign ? '+' : '') : (r < 0 ? '-' : '');
+  return s + '¥' + fmtNum(Math.abs(r));
+}
+function money0(v, sign){                       // 大额省略小数
+  if (!Number.isFinite(v)) return '—';
+  const r = Math.round(v);
+  const s = r > 0 ? (sign ? '+' : '') : (r < 0 ? '-' : '');
+  return s + '¥' + fmtNum(Math.abs(r), 0);
+}
+function pct(ratio, sign){
+  if (!Number.isFinite(ratio)) return '—';
+  const p = ratio * 100;
+  const s = p > 0 ? (sign ? '+' : '') : (p < 0 ? '-' : '');
+  return s + Math.abs(p).toFixed(2) + '%';
+}
+function pctNum(v, sign){
+  if (!Number.isFinite(v)) return '—';
+  const s = v > 0 ? (sign ? '+' : '') : (v < 0 ? '-' : '');
+  return s + Math.abs(v).toFixed(2) + '%';
+}
+function signInt(v){ return (v > 0 ? '+' : '') + v + '%'; }
+function cls(v){ return v > 0 ? 'pos' : (v < 0 ? 'neg' : ''); }
+function two(n){ return String(n).padStart(2, '0'); }
+function hhmmss(ts){ const d = new Date(ts); return two(d.getHours()) + ':' + two(d.getMinutes()) + ':' + two(d.getSeconds()); }
+function fullTime(ts){
+  if (!ts) return '—';
+  const d = new Date(ts);
+  return d.getFullYear() + '-' + two(d.getMonth() + 1) + '-' + two(d.getDate()) + ' ' + hhmmss(ts);
+}
+function setText(id, txt, colorCls){
+  const el = $(id); if (!el) return;
+  el.textContent = txt;
+  el.classList.remove('pos','neg','warn','muted');
+  if (colorCls) colorCls.split(' ').forEach(c => c && el.classList.add(c));
+}
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function alerts(list){ return list.map(x => '<div class="alert ' + x[0] + '">' + x[1] + '</div>').join(''); }
+
+/* =====================================================================
+   6) 输入绑定
+   ===================================================================== */
+const BIND = [
+  ['set-total','settings.total'], ['set-cost','settings.cost'],
+  ['set-maxTotal','settings.maxTotal'], ['set-maxItem','settings.maxItem'],
+  ['c-name','single.name'], ['c-price','single.price'], ['c-qty','single.qty'],
+  ['c-gain','single.gain'], ['c-targetNet','single.targetNet'],
+  ['p-price','revPos.price'], ['p-pos','revPos.pos'], ['p-gain','revPos.gain'],
+  ['t-target','revTarget.target'], ['t-price','revTarget.price'], ['t-gain','revTarget.gain']
+];
+const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
+function setPath(o, p, v){ const ks = p.split('.'); const last = ks.pop(); let t = o; ks.forEach(k => { t = t[k]; }); t[last] = v; }
+
+function initBindings(){
+  BIND.forEach(function(pair){
+    const el = $(pair[0]); if (!el) return;
+    const v = getPath(state, pair[1]);
+    el.value = (v === undefined || v === null) ? '' : v;
+    const on = function(){ setPath(state, pair[1], el.value); touch(); recalcAll(); saveSoon(); };
+    el.addEventListener('input', on);
+    el.addEventListener('change', on);
+  });
+}
+function syncInputs(){
+  BIND.forEach(function(pair){
+    const el = $(pair[0]); if (!el) return;
+    const v = getPath(state, pair[1]);
+    el.value = (v === undefined || v === null) ? '' : v;
+  });
+}
+
+/* =====================================================================
+   7) 持仓渲染
+   ===================================================================== */
+function holdHTML(h, i){
+  return '<div class="hold" data-id="' + h.id + '" data-i="' + i + '">' +
+    '<div class="hold-top">' +
+      '<span class="ipt"><input class="f-name" type="text" autocomplete="off" placeholder="饰品名称" value="' + esc(h.name || '') + '"></span>' +
+      '<button class="del" type="button" aria-label="删除">×</button>' +
+    '</div>' +
+    '<div class="grid3">' +
+      '<label class="field"><span class="lbl">买入价</span><span class="ipt sm"><input class="f-buy" type="number" inputmode="decimal" step="any" min="0" placeholder="0" value="' + esc(h.buy) + '"><i class="u">元</i></span></label>' +
+      '<label class="field"><span class="lbl">把数</span><span class="ipt sm"><input class="f-qty" type="number" inputmode="numeric" step="1" min="0" placeholder="0" value="' + esc(h.qty) + '"><i class="u">把</i></span></label>' +
+      '<label class="field"><span class="lbl">现价</span><span class="ipt sm"><input class="f-now" type="number" inputmode="decimal" step="any" min="0" placeholder="填了算盈亏" value="' + esc(h.now) + '"><i class="u">元</i></span></label>' +
+    '</div>' +
+    '<div class="grid2" style="margin-top:8px">' +
+      '<label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input class="f-gain" type="number" inputmode="decimal" step="any" placeholder="0" value="' + esc(h.gain) + '"><i class="u">%</i></span></label>' +
+      '<label class="field"><span class="lbl">日成交量</span><span class="ipt sm"><input class="f-vol" type="number" inputmode="numeric" step="1" min="0" placeholder="0" value="' + esc(h.vol) + '"><i class="u">把/日</i></span></label>' +
+    '</div>' +
+    '<label class="field" style="margin-top:8px"><span class="lbl">买入日期 <span class="q">用于算 7 天 CD</span></span>' +
+      '<span class="ipt sm"><input class="f-date" type="date" value="' + esc(h.date) + '"></span></label>' +
+    '<div class="mini">' +
+      '<div class="m"><div class="k">投入 / 仓位</div><div class="v o-invest">—</div></div>' +
+      '<div class="m"><div class="k">浮动盈亏</div><div class="v o-pnl">—</div></div>' +
+      '<div class="m"><div class="k">预期净收益</div><div class="v o-profit">—</div></div>' +
+    '</div>' +
+    '<div class="mini" style="border-top:0;padding-top:0;margin-top:6px">' +
+      '<div class="m"><div class="k">回本卖出价</div><div class="v o-be">—</div></div>' +
+      '<div class="m"><div class="k">现价市值</div><div class="v o-value">—</div></div>' +
+      '<div class="m"><div class="k">7天CD</div><div class="v o-cd">—</div></div>' +
+    '</div>' +
+  '</div>';
+}
+function renderHoldings(){
+  const box = $('h-list');
+  if (!state.holdings.length){
+    box.innerHTML = '<div class="card"><div class="empty">' +
+      '<div class="big2">还没有持仓</div>' +
+      '点下面的「＋ 添加品种」记一笔，<br>或者先看看示例数据长什么样。' +
+      '<div class="row2" style="margin-top:14px">' +
+        '<button class="btn sm ghost" id="h-demo" type="button">载入示例</button>' +
+        '<button class="btn sm pri" id="h-add2" type="button">＋ 添加品种</button>' +
+      '</div></div></div>';
+    const d = $('h-demo'), a = $('h-add2');
+    if (d) d.addEventListener('click', loadDemo);
+    if (a) a.addEventListener('click', function(){ addHolding(true); });
+  } else {
+    box.innerHTML = state.holdings.map(holdHTML).join('');
+  }
+  $('hold-count').textContent = state.holdings.length + ' 个品种';
+  recalcHoldings();
+}
+
+/* =====================================================================
+   8) 各块计算
+   ===================================================================== */
+function P(){
+  return {
+    total: Calc.toNum(state.settings.total),
+    cost: Calc.toNum(state.settings.cost),
+    maxTotal: Calc.toNum(state.settings.maxTotal),
+    maxItem: Calc.toNum(state.settings.maxItem)
+  };
+}
+
+function recalcSettings(){
+  const p = P();
+  const f = 1 - p.cost / 100;
+  const nf = $('set-netfactor');
+  if (nf) nf.value = (f * 100).toFixed(2) + '%';
+  setText('note-cost', '成本率 ' + fmtNum(p.cost, 2) + '% = 手续费 + 滑点；卖出 100 元只能到手 ' + fmtNum(f * 100, 2) + ' 元。');
+  setText('note-cap', '总仓位上限 ' + fmtNum(p.maxTotal, 2) + '% ≈ ' + money0(p.total * p.maxTotal / 100) +
+    '　单品种上限 ' + fmtNum(p.maxItem, 2) + '% ≈ ' + money0(p.total * p.maxItem / 100));
+}
+
+function recalcSingle(){
+  const p = P(), s = state.single;
+  const r = Calc.single({ total: p.total, cost: p.cost, price: s.price, qty: s.qty, gain: s.gain });
+
+  setText('c-invest', money(r.invest));
+  setText('c-pos', p.total > 0 ? pct(r.position) : '—',
+    p.total > 0 ? (r.position * 100 > p.maxTotal ? 'neg' : (r.position * 100 > p.maxItem ? 'warn' : '')) : '');
+  setText('c-cash', money(r.cashLeft), r.cashLeft < 0 ? 'neg' : '');
+  setText('c-perpiece', r.qty > 0 ? money(r.perPiece, true) : '—', r.qty > 0 ? cls(r.netProfit) : 'muted');
+  setText('c-profit', money(r.netProfit, true), cls(r.netProfit));
+  setText('c-netrate', pct(r.netRate, true), cls(r.netProfit));
+  setText('c-final', money(r.finalAssets));
+  setText('c-breakeven', r.price > 0 ? money(r.breakEven) : '—');
+  setText('c-sell', money(r.sellGross));
+  setText('c-net', money(r.netReceived));
+
+  const raw = String(s.targetNet == null ? '' : s.targetNet).trim();
+  const auto = (raw === '');
+  const targetNetPct = auto ? r.netRate * 100 : Calc.toNum(s.targetNet);
+  const tp = Calc.takeProfitPrice(r.price, targetNetPct, p.cost);
+  setText('c-tp', r.price > 0 && Number.isFinite(tp) ? money(tp) : '—');
+
+  const w = [];
+  const posPct = r.position * 100;
+  if (r.invest > 0 && r.cashLeft < -1e-9){
+    w.push(['danger', '⚠️ 投入 <b>' + money(r.invest) + '</b> 超过总资产 <b>' + money(p.total) + '</b>，相当于加杠杆（严禁）。']);
+  }
+  if (r.invest > 0 && posPct > p.maxTotal + 1e-9){
+    w.push(['danger', '🔴 仓位 <b>' + pct(r.position) + '</b> 超过总仓位上限 <b>' + fmtNum(p.maxTotal, 2) + '%</b>，超出 ' + (posPct - p.maxTotal).toFixed(2) + ' 个百分点。']);
+  } else if (r.invest > 0 && posPct > p.maxItem + 1e-9){
+    const cap = Calc.toNum(s.price) > 0 ? Math.floor(p.total * p.maxItem / 100 / Calc.toNum(s.price)) : 0;
+    w.push(['warn', '🟡 单品种仓位 <b>' + pct(r.position) + '</b> 超过上限 <b>' + fmtNum(p.maxItem, 2) + '%</b>，最多买 ' + cap + ' 把。']);
+  }
+  if (r.invest > 0 && r.netProfit < 0){
+    w.push(['warn', '🟡 这个涨幅扣掉成本是亏的（' + money(r.netProfit, true) + '）；回本要卖到 <b>' + money(r.breakEven) + '</b>。']);
+  }
+  $('c-warn').innerHTML = alerts(w);
+}
+
+function recalcRevPos(){
+  const p = P(), v = state.revPos;
+  const r = Calc.byPosition({ total: p.total, cost: p.cost, price: v.price, pos: v.pos, gain: v.gain });
+  setText('r-qty', r.qty + ' 把', r.qty > 0 ? 'pos' : 'warn');
+  setText('r-invest', money(r.invest));
+  setText('r-pos', pct(r.position), r.position * 100 > p.maxItem ? 'warn' : '');
+  setText('r-profit', money(r.netProfit, true), cls(r.netProfit));
+
+  const w = [];
+  if (Calc.toNum(v.price) <= 0){
+    w.push(['note', 'ℹ️ 填上单价就能算出建议把数。']);
+  } else if (r.qty <= 0){
+    w.push(['warn', '🟡 这个仓位的钱（' + money(r.budget) + '）买不起 1 把（单价 ' + money(Calc.toNum(v.price)) + '），提高仓位或换便宜的饰品。']);
+  } else if (r.position * 100 > p.maxTotal + 1e-9){
+    w.push(['danger', '🔴 实际仓位 <b>' + pct(r.position) + '</b> 超过总仓位上限 <b>' + fmtNum(p.maxTotal, 2) + '%</b>。']);
+  } else if (r.position * 100 > p.maxItem + 1e-9){
+    w.push(['warn', '🟡 实际仓位 <b>' + pct(r.position) + '</b> 超过单品种上限 <b>' + fmtNum(p.maxItem, 2) + '%</b>。']);
+  } else {
+    w.push(['ok', '✅ 买 <b>' + r.qty + ' 把</b>，投入 ' + money(r.invest) + '，仓位 ' + pct(r.position) + '，在风险线内。']);
+  }
+  $('r-warn').innerHTML = alerts(w);
+}
+
+function recalcRevTarget(){
+  const p = P(), v = state.revTarget;
+  const r = Calc.byTarget({ total: p.total, cost: p.cost, price: v.price, gain: v.gain, target: v.target });
+  const over = r.position * 100 > p.maxTotal + 1e-9;
+
+  setText('g-qty', r.feasible ? r.qty + ' 把' : '—', r.feasible ? (over ? 'neg' : 'pos') : 'neg');
+  setText('g-perpiece', r.feasible ? money(r.perPiece, true) : '—', r.feasible ? cls(r.netProfit) : 'neg');
+  setText('g-invest', r.feasible ? money(r.invest) : '—', over ? 'neg' : '');
+  setText('g-pos', r.feasible ? pct(r.position) : '—', over ? 'neg' : '');
+
+  const w = [];
+  if (!r.feasible){
+    w.push(['danger', '🔴 <b>每把净赚 ≤ 0</b>：涨幅 ' + pctNum(Calc.toNum(v.gain)) + ' 扣掉成本率 ' + fmtNum(p.cost, 2) + '% 后不赚钱，买多少把都达不到目标。']);
+  } else if (over){
+    w.push(['danger', '🔴 <b>资金不足或目标过高</b>：要投入 <b>' + money(r.invest) + '</b>（占 ' + pct(r.position) + '），超过总仓位上限 ' + fmtNum(p.maxTotal, 2) + '% ≈ ' + money0(p.total * p.maxTotal / 100) + '。']);
+  } else if (r.qty <= 0){
+    w.push(['note', 'ℹ️ 填一个大于 0 的目标金额。']);
+  } else {
+    w.push(['ok', '✅ 需要 <b>' + r.qty + ' 把</b>，投入 ' + money(r.invest) + '，仓位 ' + pct(r.position) + '。']);
+  }
+  $('g-warn').innerHTML = alerts(w);
+}
+
+function recalcScenarios(){
+  const p = P(), s = state.single;
+  const rows = Calc.scenarios({ total: p.total, cost: p.cost, price: s.price, qty: s.qty });
+  $('sc-body').innerHTML = rows.map(function(x){
+    const c = cls(x.netProfit);
+    return '<tr><td class="' + c + '">' + signInt(x.gainPct) + '</td>' +
+      '<td class="' + c + '">' + money(x.netProfit, true) + '</td>' +
+      '<td class="' + c + '">' + pct(x.netRate, true) + '</td>' +
+      '<td>' + money(x.finalAssets) + '</td></tr>';
+  }).join('');
+}
+
+function recalcHoldings(){
+  const p = P();
+  const res = Calc.portfolio(state.holdings, { total: p.total, cost: p.cost });
+
+  res.list.forEach(function(r, i){
+    const row = document.querySelector('.hold[data-i="' + i + '"]');
+    if (!row) return;
+    const inv = row.querySelector('.o-invest');
+    if (inv) inv.innerHTML = money(r.invest) + '<span style="font-size:11px;color:var(--dim)"> ' + pct(r.position) + '</span>';
+    const pnl = row.querySelector('.o-pnl');
+    if (pnl){
+      if (r.hasNow){ pnl.textContent = money(r.pnl, true) + ' ' + pct(r.pnlRate, true); pnl.className = 'v o-pnl ' + cls(r.pnl); }
+      else { pnl.textContent = '填现价'; pnl.className = 'v o-pnl muted'; }
+    }
+    const pf = row.querySelector('.o-profit');
+    if (pf){ pf.textContent = money(r.expProfit, true); pf.className = 'v o-profit ' + cls(r.expProfit); }
+    const be = row.querySelector('.o-be'); if (be) be.textContent = money(r.breakEven);
+    const va = row.querySelector('.o-value'); if (va) va.textContent = r.hasNow ? money(r.value) : '—';
+    const cd = row.querySelector('.o-cd');
+    if (cd){
+      if (r.cdLeft === null){ cd.textContent = '—'; cd.className = 'v o-cd muted'; }
+      else if (r.cdLeft > 0){ cd.textContent = '剩 ' + r.cdLeft + ' 天'; cd.className = 'v o-cd warn'; }
+      else { cd.textContent = '已解锁'; cd.className = 'v o-cd pos'; }
+    }
+  });
+
+  $('hold-count').textContent = state.holdings.length + ' 个品种';
+
+  if (!state.holdings.length){
+    setText('h-pnl', '—'); setText('h-value', '—'); setText('h-invest', '—');
+    setText('h-pos', '—'); setText('h-profit', '—'); setText('h-cash', money(p.total));
+    setText('h-final', money(p.total));
+  } else {
+    setText('h-invest', money(res.totalInvest));
+    setText('h-pos', pct(res.totalPosition), res.totalPosition * 100 > p.maxTotal ? 'neg' : '');
+    setText('h-value', money(res.totalValue));
+    setText('h-pnl', res.anyNow ? money(res.totalPnl, true) + ' ' + pct(res.pnlRate, true) : '填现价', res.anyNow ? cls(res.totalPnl) : 'muted');
+    setText('h-profit', money(res.totalProfit, true), cls(res.totalProfit));
+    setText('h-cash', money(res.cashLeft), res.cashLeft < 0 ? 'neg' : '');
+    setText('h-final', money(res.finalAssets));
+  }
+
+  /* 风险检查 */
+  const w = [];
+  if (!state.holdings.length){
+    w.push(['note', 'ℹ️ 还没有持仓。添加后这里会自动检查仓位、流动性、CD。']);
+  } else {
+    if (res.totalPosition * 100 > p.maxTotal + 1e-9){
+      w.push(['danger', '🔴 <b>总仓位 ' + pct(res.totalPosition) + ' 超过上限 ' + fmtNum(p.maxTotal, 2) + '%</b>，超出 ' + (res.totalPosition * 100 - p.maxTotal).toFixed(2) + ' 个百分点，建议减到 ' + money0(p.total * p.maxTotal / 100) + ' 以内。']);
+    }
+    if (res.cashLeft < -1e-9){
+      w.push(['danger', '🔴 <b>总投入 ' + money(res.totalInvest) + ' 超过总资产</b>，属于借钱/配资式满仓。']);
+    }
+    res.list.forEach(function(r, i){
+      const nm = r.name || ('第 ' + (i + 1) + ' 个');
+      if (r.position * 100 > p.maxItem + 1e-9){
+        w.push(['warn', '🟡 <b>「' + esc(nm) + '」仓位 ' + pct(r.position) + ' 超过单品种上限 ' + fmtNum(p.maxItem, 2) + '%</b>，最多 ' + (r.buy > 0 ? Math.floor(p.total * p.maxItem / 100 / r.buy) : 0) + ' 把。']);
+      }
+      if (r.illiquid){
+        w.push(['warn', '🟡 <b>「' + esc(nm) + '」流动性差：</b>日成交 ' + fmtNum(r.vol, 0) + ' 把 &lt; 把数×5 = ' + fmtNum(r.needVol, 0) + ' 把，出货容易被滑点吃掉利润。']);
+      }
+      if (r.cdLeft !== null && r.cdLeft > 0){
+        w.push(['note', 'ℹ️ <b>「' + esc(nm) + '」还在 7 天 CD 内，剩 ' + r.cdLeft + ' 天</b>，现在卖不掉，别把它算进可用资金。']);
+      }
+    });
+    if (!w.length){
+      w.push(['ok', '✅ 没发现风险：总仓位 ' + pct(res.totalPosition) + ' ≤ ' + fmtNum(p.maxTotal, 2) + '%，单品种 ≤ ' + fmtNum(p.maxItem, 2) + '%，流动性正常。']);
+    }
+  }
+  $('h-risk').innerHTML = alerts(w);
+  recalcHeader();
+}
+
+function recalcHeader(){
+  const p = P();
+  const res = Calc.portfolio(state.holdings, { total: p.total, cost: p.cost });
+  setText('sum-total', money0(p.total));
+  setText('sum-pos', state.holdings.length ? pct(res.totalPosition) : '0.00%',
+    res.totalPosition * 100 > p.maxTotal ? 'neg' : (res.totalPosition * 100 > p.maxItem ? 'warn' : ''));
+  setText('sum-pnl', res.anyNow ? money0(res.totalPnl, true) : '—', res.anyNow ? cls(res.totalPnl) : 'muted');
+
+  setText('ov-invest', money0(res.totalInvest));
+  setText('ov-pos', pct(res.totalPosition), res.totalPosition * 100 > p.maxTotal ? 'neg' : '');
+  setText('ov-cash', money0(res.cashLeft), res.cashLeft < 0 ? 'neg' : '');
+  const room = p.total * p.maxTotal / 100 - res.totalInvest;
+  setText('ov-capTotal', money0(room), room < 0 ? 'neg' : '');
+}
+
+function renderStatus(){
+  const p = P();
+  const where = (Store.lsOK ? '浏览器本地存储' : '不可用') + (Store.idbReady ? ' + IndexedDB 备份' : '');
+  setText('st-where', where);
+  setText('st-updated', state.updatedAt ? fullTime(state.updatedAt) : '尚未修改');
+  let bytes = 0;
+  try { bytes = new Blob([JSON.stringify(state)]).size; } catch (e) { bytes = JSON.stringify(state).length; }
+  setText('st-size', (bytes / 1024).toFixed(1) + ' KB · ' + state.holdings.length + ' 个品种');
+  setText('st-origin', location.origin === 'null' ? ('file:// （不受支持，建议用 https 打开）') : location.origin);
+  setText('st-tip', Store.lsOK
+    ? '每次输入都会自动保存，关掉浏览器再打开会自动恢复，不需要任何按钮。'
+    : '⚠️ 当前浏览器不允许本地保存（无痕模式或 file:// 打开）。请用 https:// 网址打开，或先导出备份。');
+
+  const tip = $('sync-tip');
+  if (tip){
+    if (!syncConfigured()){
+      tip.innerHTML = '同一个同步码 = 同一份数据。数据加密后才上传，<b>同步码就是密码，忘了打不开</b>。先在「连接设置」里填 Supabase 的两个值和建表 SQL，手机和电脑填同一个同步码即可互通。';
+    } else if (!secureCtx()){
+      tip.innerHTML = '⚠️ 云同步需要 <b>https://</b> 网址（浏览器只在安全上下文提供加密接口）。当前：' + esc(location.origin) + '，请先部署到云端再用。';
+    } else {
+      tip.innerHTML = '同步码：<b>' + esc(state.sync.code) + '</b>　最后同步：' +
+        (state.sync.lastSyncAt ? fullTime(state.sync.lastSyncAt) : '还没同步过') +
+        '<br>本机设备号：' + esc(String(state.sync.deviceId).slice(0, 6)) + '（云端只存房间号哈希 + 密文，看不到明文）';
+    }
+  }
+}
+
+function recalcAll(){
+  recalcSettings();
+  recalcSingle();
+  recalcRevPos();
+  recalcRevTarget();
+  recalcScenarios();
+  recalcHoldings();
+  renderStatus();
+}
+
+/* =====================================================================
+   9) 持仓增删 / 示例
+   ===================================================================== */
+function addHolding(focus){
+  state.holdings.push({ id: uid(), name: '', buy: '', qty: '', now: '', gain: '', vol: '', date: '' });
+  touch();
+  renderHoldings();
+  recalcAll();
+  saveSoon();
+  if (focus !== false){
+    const rows = document.querySelectorAll('.hold');
+    const last = rows[rows.length - 1];
+    if (last){
+      const inp = last.querySelector('.f-name');
+      if (inp) inp.focus();
+      last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+function loadDemo(){
+  if (state.holdings.length && !confirm('会用示例数据覆盖当前持仓，继续？')) return;
+  const today = new Date();
+  const d1 = new Date(today.getTime() - 2 * 86400000), d2 = new Date(today.getTime() - 12 * 86400000);
+  const iso = d => d.getFullYear() + '-' + two(d.getMonth() + 1) + '-' + two(d.getDate());
+  state.holdings = [
+    { id: uid(), name: 'AK-47 | 红线（略有磨损）', buy: '700', qty: '24', now: '760', gain: '20', vol: '30', date: iso(d1) },
+    { id: uid(), name: 'AWP | 二西莫夫（久经沙场）', buy: '1200', qty: '6', now: '1150', gain: '15', vol: '40', date: iso(d2) }
+  ];
+  touch();
+  renderHoldings(); recalcAll(); saveSoon();
+}
+
+/* =====================================================================
+   10) 导入导出 / 重置
+   ===================================================================== */
+function download(name, text, mime){
+  const blob = new Blob([text], { type: mime || 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+function stamp(){
+  const d = new Date();
+  return d.getFullYear() + two(d.getMonth() + 1) + two(d.getDate()) + '_' + two(d.getHours()) + two(d.getMinutes());
+}
+function exportJSON(){
+  saveNow(true);
+  const out = { app: 'cs-skin-app', exportedAt: new Date().toISOString(), data: dataOf(state) };
+  download('CS仓位备份_' + stamp() + '.json', JSON.stringify(out, null, 2), 'application/json;charset=utf-8');
+  showBanner('备份已导出（不含云同步密钥）。换设备时用「导入备份」恢复。');
+  setTimeout(() => { $('banner').hidden = true; }, 5000);
+}
+function csvCell(v){ return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+function exportCSV(){
+  const p = P();
+  const res = Calc.portfolio(state.holdings, { total: p.total, cost: p.cost });
+  const L = [], row = a => L.push(a.map(csvCell).join(','));
+  row(['CS饰品仓位管理', '导出时间：' + new Date().toLocaleString('zh-CN')]);
+  row(['总资产(元)', p.total, '综合成本率(%)', p.cost, '总仓位上限(%)', p.maxTotal, '单品种上限(%)', p.maxItem]);
+  L.push('');
+  row(['饰品名称','买入价(元)','把数','现价(元)','预期涨幅(%)','日成交量(把/日)','买入日期','投入(元)','仓位(%)','浮动盈亏(元)','浮动收益率(%)','预期净收益(元)','回本卖出价(元)','7天CD']);
+  res.list.forEach(r => row([r.name, r.buy, r.qty, r.now, r.gainPct, r.vol, r.date || '',
+    Calc.round2(r.invest), (r.position * 100).toFixed(2),
+    r.hasNow ? Calc.round2(r.pnl) : '', r.hasNow ? (r.pnlRate * 100).toFixed(2) : '',
+    Calc.round2(r.expProfit), Calc.round2(r.breakEven),
+    r.cdLeft === null ? '' : (r.cdLeft > 0 ? ('剩' + r.cdLeft + '天') : '已解锁')]));
+  L.push('');
+  row(['组合合计','','','','','','', Calc.round2(res.totalInvest), (res.totalPosition * 100).toFixed(2), Calc.round2(res.totalPnl), (res.pnlRate * 100).toFixed(2), Calc.round2(res.totalProfit), '', '']);
+  row(['当前市值(元)', Calc.round2(res.totalValue)]);
+  row(['全部卖出后总资产(元)', Calc.round2(res.finalAssets)]);
+  row(['剩余现金(元)', Calc.round2(res.cashLeft)]);
+  L.push('');
+  row(['涨幅(%)','净收益(元)','净收益率(%)','最终总资产(元)']);
+  Calc.scenarios({ total: p.total, cost: p.cost, price: state.single.price, qty: state.single.qty }).forEach(x =>
+    row([x.gainPct, Calc.round2(x.netProfit), (x.netRate * 100).toFixed(2), Calc.round2(x.finalAssets)]));
+  download('CS持仓_' + stamp() + '.csv', '\uFEFF' + L.join('\r\n'), 'text/csv;charset=utf-8');
+}
+function importJSON(file){
+  const fr = new FileReader();
+  fr.onload = function(){
+    try {
+      const obj = JSON.parse(String(fr.result));
+      const data = obj && obj.data ? obj.data : obj;      // 兼容旧版直接导出 state 的备份
+      applyData(state, normalize(data));
+      touch();
+      syncInputs(); renderHoldings(); recalcAll(); saveNow(true);
+      showBanner('导入成功：' + state.holdings.length + ' 个品种已恢复。');
+      setTimeout(() => { $('banner').hidden = true; }, 5000);
+    } catch (e) {
+      showBanner('导入失败：文件不是合法的备份 JSON。');
+    }
+  };
+  fr.readAsText(file, 'utf-8');
+}
+function resetAll(){
+  if (!confirm('清空所有数据并恢复默认？此操作不可撤销（可先导出备份）。')) return;
+  const keepSync = clone(state.sync);
+  Store.lsClear();
+  state = clone(DEFAULT_STATE);
+  state.sync = keepSync;
+  touch();
+  syncInputs(); renderHoldings(); recalcAll(); saveNow(true);
+}
+
+/* =====================================================================
+   11) 导航高亮
+   ===================================================================== */
+function initNav(){
+  const links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  links.forEach(a => a.addEventListener('click', function(e){
+    e.preventDefault();
+    const el = $(a.dataset.sec);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    links.forEach(x => x.classList.remove('on'));
+    a.classList.add('on');
+  }));
+  if (typeof IntersectionObserver === 'function'){
+    const obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        const id = en.target.id;
+        links.forEach(x => x.classList.toggle('on', x.dataset.sec === id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    ['sec-home','sec-calc','sec-hold','sec-more'].forEach(id => { const el = $(id); if (el) obs.observe(el); });
+  }
+}
+
+/* =====================================================================
+   12) 初始化
+   ===================================================================== */
+async function init(){
+  /* 先用 localStorage 的数据立刻渲染，再异步比对 IndexedDB 备份 */
+  initBindings();
+  renderHoldings();
+  recalcAll();
+  markSaveStatus('', state.updatedAt ? '已保存 ' + hhmmss(state.updatedAt) : '自动保存已开启');
+
+  const hasIDB = await Store.init();
+  if (hasIDB){
+    const backup = await Store.readBackup();
+    if (backup){
+      const b = normalize(backup);
+      if (b.updatedAt > (state.updatedAt || 0) && (b.holdings.length || !state.holdings.length)){
+        state = b;
+        syncInputs(); renderHoldings(); recalcAll();
+        showBanner('已从浏览器数据库恢复上次的数据。');
+        setTimeout(() => { $('banner').hidden = true; }, 4000);
+      }
+    }
+    if (!Store.lsOK){
+      const snaps = await Store.readSnapshots();
+      if (snaps.length && snaps[0].state){ state = normalize(snaps[0].state); syncInputs(); renderHoldings(); recalcAll(); }
+    }
+  }
+  renderStatus();
+
+  if (!Store.lsOK && !Store.idbReady){
+    showBanner('⚠️ 这个浏览器不允许保存数据（无痕模式或 file:// 打开）。请用 https:// 网址打开，并先导出备份。');
+  }
+
+  /* 持仓区事件（委托，避免重建丢焦点） */
+  $('h-list').addEventListener('input', function(e){
+    const row = e.target.closest('.hold'); if (!row) return;
+    const i = Number(row.dataset.i);
+    const map = { 'f-name':'name','f-buy':'buy','f-qty':'qty','f-now':'now','f-gain':'gain','f-vol':'vol','f-date':'date' };
+    const key = Object.keys(map).find(k => e.target.classList.contains(k));
+    if (!key || !state.holdings[i]) return;
+    state.holdings[i][map[key]] = e.target.value;
+    touch();
+    recalcHoldings();
+    saveSoon();
+  });
+  $('h-list').addEventListener('change', function(e){
+    if (e.target.classList.contains('f-date')) e.target.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  $('h-list').addEventListener('click', function(e){
+    const btn = e.target.closest('.del'); if (!btn) return;
+    const row = btn.closest('.hold');
+    const i = Number(row.dataset.i);
+    const nm = (state.holdings[i] && state.holdings[i].name) || ('第 ' + (i + 1) + ' 个品种');
+    if (!confirm('删除「' + nm + '」？')) return;
+    state.holdings.splice(i, 1);
+    touch();
+    renderHoldings(); recalcAll(); saveNow(true);
+  });
+
+  $('h-add').addEventListener('click', function(){ addHolding(true); });
+  $('btn-export-json').addEventListener('click', exportJSON);
+  $('btn-export-csv').addEventListener('click', exportCSV);
+  $('btn-import').addEventListener('click', function(){ $('file-import').click(); });
+  $('file-import').addEventListener('change', function(e){
+    const f = e.target.files && e.target.files[0];
+    if (f) importJSON(f);
+    e.target.value = '';
+  });
+  $('btn-reset').addEventListener('click', resetAll);
+
+  /* ---- 云同步 UI ---- */
+  function bindSyncField(id, key, isCode){
+    const el = $(id);
+    if (!el) return;
+    el.value = state.sync[key] || '';
+    el.addEventListener('input', function(){
+      state.sync[key] = el.value.trim();
+      if (isCode && state.sync[key]) setSyncStatus('待同步', 'warn');
+      saveSoon();
+    });
+  }
+  bindSyncField('sy-code', 'code', true);
+  bindSyncField('sy-url', 'url', false);
+  bindSyncField('sy-key', 'key', false);
+
+  $('sy-now').addEventListener('click', function(){ syncNow('auto'); });
+  $('sy-push').addEventListener('click', function(){
+    if (!syncConfigured()) return showBanner('先填同步码和连接设置。');
+    if (confirm('用本机数据覆盖云端？（另一台设备上的改动会丢失）')) syncNow('push');
+  });
+  $('sy-pull').addEventListener('click', function(){
+    if (!syncConfigured()) return showBanner('先填同步码和连接设置。');
+    if (confirm('用云端数据覆盖本机？（本机未同步的改动会丢失）')) syncNow('pull');
+  });
+  $('sy-setup').addEventListener('click', function(){
+    const box = $('sync-setup');
+    box.hidden = !box.hidden;
+  });
+  $('sy-sql').addEventListener('click', function(){
+    const txt = syncSQL();
+    const done = function(){ showBanner('建表 SQL 已复制，去 Supabase → SQL Editor 粘贴执行。'); setTimeout(function(){ $('banner').hidden = true; }, 5000); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ window.prompt('复制下面的 SQL：', txt); });
+    } else {
+      window.prompt('复制下面的 SQL：', txt);
+    }
+  });
+  $('sy-clearcfg').addEventListener('click', function(){
+    if (!confirm('清除连接设置和同步码？（云端数据不会被删除）')) return;
+    state.sync.url = ''; state.sync.key = ''; state.sync.code = '';
+    state.sync.lastSyncAt = 0; state.sync.lastLocalUpdatedAt = 0; state.sync.lastRemoteUpdatedAt = 0;
+    $('sy-url').value = ''; $('sy-key').value = ''; $('sy-code').value = '';
+    setSyncStatus('未配置', 'muted');
+    saveSoon();
+  });
+
+  initNav();
+
+  /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) { saveNow(); return; }
+    /* 回到前台：顺手同步一次（也顺便给 Supabase 免费项目保活，避免 7 天不活跃被暂停） */
+    if (syncConfigured() && Date.now() - Calc.toNum(state.sync.lastSyncAt) > 30000) syncNow('auto');
+  });
+  window.addEventListener('pagehide', function(){ saveNow(); });
+  window.addEventListener('beforeunload', function(){ saveNow(); });
+
+  /* 同一个浏览器开多个标签页时互相同步（storage 事件只在其他标签页触发） */
+  window.addEventListener('storage', function(e){
+    if (!e || e.key !== LS_KEY || !e.newValue) return;
+    try {
+      const o = normalize(JSON.parse(e.newValue));
+      if ((o.updatedAt || 0) > (state.updatedAt || 0)){
+        state = o;
+        syncInputs(); renderHoldings(); recalcAll();
+        showBanner('已同步另一个标签页的修改。');
+        setTimeout(function(){ $('banner').hidden = true; }, 3000);
+      }
+    } catch (err) {}
+  });
+
+  /* Service Worker（仅 https / localhost 生效，本地文件打开会自动跳过） */
+  if ('serviceWorker' in navigator && location.protocol === 'https:'){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  }
+
+  /* 云同步：状态显示 + 打开时自动同步一次（同时给 Supabase 免费项目保活） */
+  if (syncConfigured()){
+    setSyncStatus(state.sync.lastSyncAt ? ('已同步 ' + hhmmss(state.sync.lastSyncAt)) : '待同步', state.sync.lastSyncAt ? 'pos' : 'warn');
+    setTimeout(function(){ syncNow('auto'); }, 1500);
+  } else {
+    setSyncStatus('未配置', 'muted');
+  }
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
+
+})();
+</script>
+</body>
+</html>
