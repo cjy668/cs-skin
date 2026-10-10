@@ -121,6 +121,28 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .hold-top .ipt{flex:1 1 auto;height:46px}
 .del{width:44px;height:44px;flex:0 0 auto;border-radius:12px;border:1.5px solid rgba(255,107,107,.32);background:rgba(255,107,107,.09);color:var(--red);font-size:19px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .del:active{transform:scale(.94)}
+/* 行情匹配行 */
+.pick-row{display:flex;align-items:center;gap:8px;margin:-2px 0 10px}
+.pick-row .btn{width:auto;flex:0 0 auto;min-height:34px;font-size:12.5px;padding:0 11px;border-radius:9px}
+.tag2{flex:1 1 auto;min-width:0;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:var(--field);border:1px solid var(--line);border-radius:8px;padding:4px 8px}
+.tag2.off{color:var(--dim);border-style:dashed}
+/* 底部选择面板 */
+.sheet{position:fixed;inset:0;z-index:120;display:flex;align-items:flex-end}
+.sheet[hidden]{display:none}
+.sheet-mask{position:absolute;inset:0;background:rgba(0,0,0,.62)}
+.sheet-body{position:relative;width:100%;max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+  border-radius:18px 18px 0 0;padding:12px 12px calc(12px + var(--safe-b));max-height:80vh;display:flex;flex-direction:column;gap:10px}
+.sheet-head{display:flex;gap:8px;align-items:center}
+.sheet-head .ipt{flex:1 1 auto;height:46px}
+.sheet-head .btn{width:auto;flex:0 0 auto;min-height:46px;padding:0 14px}
+.sheet-list{overflow-y:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line)}
+.sheet-item{display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.sheet-item:active{background:var(--card2)}
+.sheet-item .nm{flex:1 1 auto;min-width:0;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet-item .pr{flex:0 0 auto;font-size:14px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.sheet-item .qt{flex:0 0 auto;font-size:11px;color:var(--dim);width:64px;text-align:right}
+.sheet-hint{padding:14px 4px;color:var(--muted);font-size:13px;text-align:center}
 .mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .mini .m{min-width:0}
 .mini .m .k{font-size:10.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -192,6 +214,17 @@ details[open] summary::before{content:'▾ '}
 
   <!-- ================= ① 概览 / 参数 ================= -->
   <section id="sec-home">
+    <div class="card">
+      <div class="card-title">今日大盘 · 异动 <span class="r" id="mk-market-time">—</span></div>
+      <div class="res" style="margin-top:0">
+        <div class="stat"><div class="k">饰品指数</div><div class="v" id="mk-index">—</div></div>
+        <div class="stat"><div class="k">贪婪指数</div><div class="v" id="mk-greedy">—</div></div>
+        <div class="stat wide"><div class="k">市场宽度（涨 / 跌 家数）</div><div class="v" id="mk-breadth">—</div></div>
+      </div>
+      <div id="mk-types"></div>
+      <div id="mk-alt"></div>
+    </div>
+
     <div class="sec-head"><div class="n">1</div><h2>我的资金</h2><div class="t">改完全自动算</div></div>
 
     <div class="card">
@@ -348,6 +381,18 @@ details[open] summary::before{content:'▾ '}
     <div class="sec-head"><div class="n">5</div><h2>数据与设置</h2><div class="t">自动保存</div></div>
 
     <div class="card">
+      <div class="card-title">实时行情 <span class="r" id="mk-status">未加载</span></div>
+      <label class="field"><span class="lbl">行情源地址 <span class="q">同源 market.json</span></span>
+        <span class="ipt sm"><input id="set-marketUrl" type="text" autocomplete="off" placeholder="./market.json"></span>
+      </label>
+      <div class="row2">
+        <button class="btn sm pri" id="mk-load" type="button">更新行情</button>
+        <button class="btn sm" id="mk-refresh" type="button">刷新全部现价</button>
+      </div>
+      <p class="hint" id="mk-tip">行情文件由电脑上的采集脚本生成（Skinport + CSFloat 官方公开接口），手机只读取价格，不上传任何数据。</p>
+    </div>
+
+    <div class="card">
       <div class="card-title">云同步 <span class="r" id="sync-status">未配置</span></div>
 
       <div class="seg" id="sy-be">
@@ -433,6 +478,18 @@ details[open] summary::before{content:'▾ '}
   </section>
 
 </main>
+
+<!-- ================= 行情选择面板 ================= -->
+<div class="sheet" id="pick-sheet" hidden>
+  <div class="sheet-mask" id="pick-mask"></div>
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <span class="ipt"><input id="pick-q" type="search" autocomplete="off" placeholder="搜英文名，如 AK-47 | Redline"></span>
+      <button class="btn sm ghost" id="pick-close" type="button">关闭</button>
+    </div>
+    <div class="sheet-list" id="pick-list"></div>
+  </div>
+</div>
 
 <!-- ================= 底部导航 ================= -->
 <nav class="nav">
@@ -587,7 +644,8 @@ const DB_NAME = 'cs-skin-app', DB_STORE = 'kv';
 const DEFAULT_STATE = {
   v: 2,
   updatedAt: 0,
-  settings: { total: '57554', cost: '3.5', maxTotal: '70', maxItem: '15' },
+  settings: { total: '57554', cost: '3.5', maxTotal: '70', maxItem: '15',
+              marketUrl: './market.json', marketTime: '', marketCount: 0 },
   single:   { name: 'AK-47 | 红线（略有磨损）', price: '700', qty: '24', gain: '20', targetNet: '' },
   revPos:   { price: '700', pos: '15', gain: '20' },
   revTarget:{ target: '2654.4', price: '700', gain: '20' },
@@ -988,7 +1046,8 @@ function normalize(raw){
       now: h.now == null ? '' : h.now,
       gain: h.gain == null ? '' : h.gain,
       vol: h.vol == null ? '' : h.vol,
-      date: h.date == null ? '' : h.date
+      date: h.date == null ? '' : h.date,
+      hash: h.hash == null ? '' : String(h.hash).slice(0, 120)   // 行情库里的 market_hash_name，用于自动填现价
     }));
   }
   if (raw.sync && typeof raw.sync === 'object'){
@@ -1137,6 +1196,10 @@ function holdHTML(h, i){
       '<span class="ipt"><input class="f-name" type="text" autocomplete="off" placeholder="饰品名称" value="' + esc(h.name || '') + '"></span>' +
       '<button class="del" type="button" aria-label="删除">×</button>' +
     '</div>' +
+    '<div class="pick-row">' +
+      '<button class="btn tiny f-pick" type="button">🔍 选择品种</button>' +
+      '<span class="tag2' + (h.hash ? '' : ' off') + '">' + (h.hash ? esc(h.hash) : '未匹配行情库') + '</span>' +
+    '</div>' +
     '<div class="grid3">' +
       '<label class="field"><span class="lbl">买入价</span><span class="ipt sm"><input class="f-buy" type="number" inputmode="decimal" step="any" min="0" placeholder="0" value="' + esc(h.buy) + '"><i class="u">元</i></span></label>' +
       '<label class="field"><span class="lbl">把数</span><span class="ipt sm"><input class="f-qty" type="number" inputmode="numeric" step="1" min="0" placeholder="0" value="' + esc(h.qty) + '"><i class="u">把</i></span></label>' +
@@ -1157,6 +1220,9 @@ function holdHTML(h, i){
       '<div class="m"><div class="k">回本卖出价</div><div class="v o-be">—</div></div>' +
       '<div class="m"><div class="k">现价市值</div><div class="v o-value">—</div></div>' +
       '<div class="m"><div class="k">7天CD</div><div class="v o-cd">—</div></div>' +
+    '</div>' +
+    '<div class="mini" style="border-top:0;padding-top:0;margin-top:6px">' +
+      '<div class="m" style="grid-column:1/-1"><div class="k">三平台价 / 在售量（BUFF · 悠悠 · Steam）</div><div class="v o-plat" style="font-size:12.5px">—</div></div>' +
     '</div>' +
   '</div>';
 }
@@ -1317,6 +1383,15 @@ function recalcHoldings(){
     if (pf){ pf.textContent = money(r.expProfit, true); pf.className = 'v o-profit ' + cls(r.expProfit); }
     const be = row.querySelector('.o-be'); if (be) be.textContent = money(r.breakEven);
     const va = row.querySelector('.o-value'); if (va) va.textContent = r.hasNow ? money(r.value) : '—';
+    const pl = row.querySelector('.o-plat');
+    if (pl){
+      const key = (state.holdings[i] || {}).hash;
+      const info = key && marketData && marketData.prices ? mInfo(marketData.prices[key]) : null;
+      if (info && (info.buff || info.yyyp || info.steam)){
+        const f = p => (p && p[0] > 0) ? (money(p[0]) + '/' + Number(p[1] || 0).toLocaleString('zh-CN')) : '—';
+        pl.textContent = f(info.buff) + '  ·  ' + f(info.yyyp) + '  ·  ' + f(info.steam);
+      } else pl.textContent = '未匹配行情库（点上方「🔍 选择品种」）';
+    }
     const cd = row.querySelector('.o-cd');
     if (cd){
       if (r.cdLeft === null){ cd.textContent = '—'; cd.className = 'v o-cd muted'; }
@@ -1557,6 +1632,216 @@ function initNav(){
 }
 
 /* =====================================================================
+   11.5) 实时行情：读取电脑端采集脚本生成的 market.json，自动填现价
+   数据来源：Skinport（公开 API，含成交量）+ CSFloat（官方 API，日线成交）
+   只读：App 只下载价格，不上传任何东西；匹配靠 market_hash_name
+   ===================================================================== */
+let marketData = null, pickIndex = -1;
+
+function marketKeys(){ return marketData && marketData.prices ? Object.keys(marketData.prices) : []; }
+/* 兼容两种行情格式：
+   新版（csqaq）= {cn, gid, buff:[价,量], yyyp:[价,量], steam:[价,量]}
+   旧版（Skinport）= [价, 在售量]  */
+function mInfo(v){
+  if (!v) return null;
+  if (Array.isArray(v)) return { cn: '', buff: null, yyyp: [v[0], v[1]], steam: null };
+  return v;
+}
+/* 主用价：优先国内平台（能实际成交的地方），悠悠 > BUFF > Steam */
+function mPrice(v){
+  const i = mInfo(v); if (!i) return null;
+  if (i.yyyp && i.yyyp[0] > 0) return i.yyyp[0];
+  if (i.buff && i.buff[0] > 0) return i.buff[0];
+  if (i.steam && i.steam[0] > 0) return i.steam[0];
+  return null;
+}
+function mQty(v){
+  const i = mInfo(v); if (!i) return null;
+  if (i.yyyp && i.yyyp[1]) return i.yyyp[1];
+  if (i.buff && i.buff[1]) return i.buff[1];
+  if (i.steam && i.steam[1]) return i.steam[1];
+  return null;
+}
+function renderMarketOverview(){
+  const m = marketData && marketData.market;
+  const set = (id, txt, cls) => setText(id, txt, cls);
+  if (!m){
+    set('mk-index', '—'); set('mk-greedy', '—'); set('mk-breadth', '—');
+    $('mk-types').innerHTML = ''; $('mk-alt').innerHTML = '';
+    return;
+  }
+  set('mk-index', (m.index != null ? m.index : '—') + (m.indexChg != null ? '  ' + (m.indexChg > 0 ? '+' : '') + m.indexChg + '%' : ''),
+      m.indexChg > 0 ? 'pos' : (m.indexChg < 0 ? 'neg' : ''));
+  set('mk-greedy', m.greedy || '—', /high|高/.test(String(m.greedy)) ? 'warn' : '');
+  if (m.breadth){
+    const up = m.breadth.up1 || 0, dn = m.breadth.down1 || 0;
+    set('mk-breadth', up + ' 涨 / ' + dn + ' 跌' + (m.breadth.up30 != null ? ('　(30日 ' + m.breadth.up30 + '/' + m.breadth.down30 + ')') : ''),
+        dn > up * 2 ? 'neg' : (up > dn ? 'pos' : ''));
+  }
+  setText('mk-market-time', m.indexAt ? String(m.indexAt).slice(5, 16) : '—', 'muted');
+  /* 品类涨跌（板块轮动用） */
+  if (m.types && m.types.length){
+    const top = m.types.slice(0, 4), bot = m.types.slice(-4).reverse();
+    $('mk-types').innerHTML =
+      '<p class="hint" style="margin-top:10px"><b>板块 7 日</b>　强：' +
+      top.map(t => esc(t.name) + ' <span class="' + (t.d7 > 0 ? 'pos' : 'neg') + '">' + (t.d7 > 0 ? '+' : '') + t.d7 + '%</span>').join('　') +
+      '<br>弱：' + bot.map(t => esc(t.name) + ' <span class="neg">' + t.d7 + '%</span>').join('　') + '</p>';
+  }
+  /* 异动榜（吸筹信号源） */
+  const alt = (marketData.alteration || []).slice(0, 8);
+  if (alt.length){
+    $('mk-alt').innerHTML = '<p class="hint" style="margin-top:10px"><b>异动榜</b>（求购↑ / 在售↓ = 有人在收货）</p>' +
+      alt.map(a => {
+        const key = String(a.key || '').replace('buff_', '').replace('_num', '');
+        const label = key === 'buy' ? '求购' : (key === 'sell' ? '在售' : key);
+        /* 多空方向要按指标区分：求购增加是看涨，在售减少也是看涨 */
+        const bullish = (key === 'buy') ? (a.to > a.from) : (key === 'sell' ? (a.to < a.from) : (a.to > a.from));
+        const delta = a.to - a.from;
+        return '<div class="kv"><span class="k2" style="max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
+          esc(String(a.name).slice(0, 20)) + '</span>' +
+          '<span class="v2 ' + (bullish ? 'pos' : 'neg') + '" style="white-space:nowrap">' + label + ' ' + a.from + ' → ' + a.to +
+          ' (' + (delta > 0 ? '+' : '') + delta + ')　' + (a.price == null ? '' : money(a.price)) + '</span></div>';
+      }).join('');
+  } else $('mk-alt').innerHTML = '';
+}
+function renderMarketStatus(){
+  const n = marketData ? marketKeys().length : 0;
+  setText('mk-status', marketData ? ('已载入 ' + n.toLocaleString('zh-CN') + ' 件') : '未加载', marketData ? 'pos' : 'muted');
+  const tip = $('mk-tip');
+  if (tip){
+    tip.innerHTML = marketData
+      ? '数据源：<b>' + esc(marketData.source || '未知') + '</b>　更新时间：<b>' + esc(marketData.updatedAtText || '未知') + '</b>　饰品数：<b>' + n.toLocaleString('zh-CN') + '</b>' +
+        (marketData.counts && marketData.counts.types ? ('　品类：<b>' + marketData.counts.types + '</b>') : '') +
+        '<br>搜索时用<b>英文名</b>（如 Redline / Asiimov / Fade），价格优先取国内平台（悠悠 → BUFF → Steam）。'
+      : '行情文件由电脑上的采集脚本生成（csqaq 官方 API：BUFF / 悠悠 / Steam）。把 <b>market.json</b> 放到与本页同一目录，或填入其他地址。';
+  }
+  renderMarketOverview();
+}
+async function loadMarket(manual){
+  const url = String(state.settings.marketUrl || './market.json').trim();
+  setText('mk-status', '拉取中…', 'warn');
+  try {
+    const r = await fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + '_=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if (!j || !j.prices || typeof j.prices !== 'object') throw new Error('不是行情文件格式');
+    marketData = j;
+    state.settings.marketTime = j.updatedAtText || '';
+    state.settings.marketCount = marketKeys().length;
+    saveSoon(); renderMarketStatus();
+    if (manual){
+      showBanner('行情已更新：' + marketKeys().length.toLocaleString('zh-CN') + ' 件（' + (j.updatedAtText || '') + '）');
+      setTimeout(function(){ $('banner').hidden = true; }, 4000);
+    }
+    return true;
+  } catch (e) {
+    setText('mk-status', '未加载', 'muted');
+    if (manual){      /* 自动加载失败不打扰用户（新用户还没跑采集脚本是正常的） */
+      showBanner('行情加载失败：' + (e && e.message ? e.message : e) + '（检查行情源地址，或先在电脑上跑一次 collect.cjs）');
+      setTimeout(function(){ $('banner').hidden = true; }, 6000);
+    }
+    return false;
+  }
+}
+function searchMarket(q, limit){
+  if (!marketData) return [];
+  const s = String(q || '').trim().toLowerCase();
+  if (s.length < 2) return [];
+  const keys = marketKeys();
+  const hits = [];
+  for (let i = 0; i < keys.length; i++){
+    const k = keys[i];
+    let p = k.toLowerCase().indexOf(s);
+    if (p < 0){
+      const cn = (mInfo(marketData.prices[k]) || {}).cn || '';   // 也支持中文名搜索
+      if (cn && cn.toLowerCase().indexOf(s) >= 0) p = 50;
+    }
+    if (p >= 0){
+      hits.push({ name: k, cn: (mInfo(marketData.prices[k]) || {}).cn || '',
+        price: mPrice(marketData.prices[k]), qty: mQty(marketData.prices[k]) || 0, pos: p });
+      if (hits.length >= 4000) break;
+    }
+  }
+  /* 排序：在售量大的优先（流动性），同量级按匹配位置 */
+  hits.sort(function(a, b){
+    if (b.qty !== a.qty) return b.qty - a.qty;
+    return a.pos - b.pos;
+  });
+  return hits.slice(0, limit);
+}
+function renderPickList(q){
+  const box = $('pick-list');
+  if (!marketData){ box.innerHTML = '<div class="sheet-hint">还没加载行情，先点「更新行情」</div>'; return; }
+  if (String(q || '').trim().length < 2){ box.innerHTML = '<div class="sheet-hint">输入至少 2 个字符（英文名或中文名）<br>例：Redline / 红线 / Asiimov / Fade</div>'; return; }
+  const rows = searchMarket(q, 40);
+  if (!rows.length){ box.innerHTML = '<div class="sheet-hint">没找到匹配的饰品</div>'; return; }
+  box.innerHTML = rows.map(function(r){
+    return '<div class="sheet-item" data-name="' + esc(r.name) + '">' +
+      '<span class="nm">' + esc(r.name) + (r.cn ? ('<br><span style="color:var(--dim);font-size:11.5px">' + esc(r.cn) + '</span>') : '') + '</span>' +
+      '<span class="pr">' + (r.price == null ? '—' : money(r.price)) + '</span>' +
+      '<span class="qt">在售 ' + (r.qty == null ? '-' : Number(r.qty).toLocaleString('zh-CN')) + '</span></div>';
+  }).join('');
+}
+function openPicker(i){
+  pickIndex = i;
+  const sheet = $('pick-sheet');
+  sheet.hidden = false;
+  const q = $('pick-q');
+  q.value = (state.holdings[i] && state.holdings[i].hash) || '';
+  renderPickList(q.value);
+  setTimeout(function(){ try { q.focus(); } catch (e) {} }, 50);
+}
+function closePicker(){ $('pick-sheet').hidden = true; pickIndex = -1; }
+function applyPick(hash){
+  const i = pickIndex;
+  if (i < 0 || !state.holdings[i]) return;
+  const price = mPrice(marketData && marketData.prices[hash]);
+  if (price != null) state.holdings[i].now = String(price);
+  state.holdings[i].hash = hash;
+  if (!state.holdings[i].name){
+    const cn = (mInfo(marketData.prices[hash]) || {}).cn;
+    state.holdings[i].name = cn || hash;
+  }
+  touch(); renderHoldings(); recalcAll(); saveNow(true);
+  closePicker();
+  showBanner('已匹配：' + hash + (price != null ? ('　国内现价 ' + money(price)) : ''));
+  setTimeout(function(){ $('banner').hidden = true; }, 3500);
+}
+function refreshAllPrices(){
+  if (!marketData){ showBanner('还没加载行情，先点「更新行情」。'); return 0; }
+  let n = 0, miss = 0;
+  state.holdings.forEach(function(h){
+    const key = h.hash || h.name;
+    const price = mPrice(marketData.prices[key]);
+    if (price != null && price > 0){ h.now = String(price); n++; }
+    else if (h.qty) miss++;
+  });
+  if (n){ touch(); renderHoldings(); recalcAll(); saveNow(true); }
+  showBanner(n ? ('已更新 ' + n + ' 个品种的现价' + (miss ? ('，另有 ' + miss + ' 个未匹配行情（点「选择品种」配对）') : '')) : '没有可更新的品种：先在持仓卡里点「🔍 选择品种」配对');
+  setTimeout(function(){ $('banner').hidden = true; }, 4500);
+  return n;
+}
+function initMarket(){
+  const el = $('set-marketUrl');
+  if (el){
+    el.value = state.settings.marketUrl || './market.json';
+    el.addEventListener('input', function(){ state.settings.marketUrl = el.value.trim(); saveSoon(); });
+  }
+  $('mk-load').addEventListener('click', function(){ loadMarket(true); });
+  $('mk-refresh').addEventListener('click', refreshAllPrices);
+  $('pick-close').addEventListener('click', closePicker);
+  $('pick-mask').addEventListener('click', closePicker);
+  $('pick-q').addEventListener('input', function(e){ renderPickList(e.target.value); });
+  $('pick-list').addEventListener('click', function(e){
+    const it = e.target.closest('.sheet-item');
+    if (it && it.dataset.name) applyPick(it.dataset.name);
+  });
+  renderMarketStatus();
+  /* 打开 App 时自动拉一次行情（失败不打扰用户） */
+  if (String(state.settings.marketUrl || '').trim()) loadMarket(false);
+}
+
+/* =====================================================================
    12) 初始化
    ===================================================================== */
 async function init(){
@@ -1605,6 +1890,12 @@ async function init(){
     if (e.target.classList.contains('f-date')) e.target.dispatchEvent(new Event('input', { bubbles: true }));
   });
   $('h-list').addEventListener('click', function(e){
+    const pick = e.target.closest('.f-pick');
+    if (pick){
+      const row = pick.closest('.hold');
+      if (row) openPicker(Number(row.dataset.i));
+      return;
+    }
     const btn = e.target.closest('.del'); if (!btn) return;
     const row = btn.closest('.hold');
     const i = Number(row.dataset.i);
@@ -1702,6 +1993,7 @@ async function init(){
   });
 
   initNav();
+  initMarket();
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
