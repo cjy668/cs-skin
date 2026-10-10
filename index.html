@@ -16,14 +16,17 @@
 <link rel="icon" href="./icon-192.png">
 <style>
 /* =====================================================================
-   CS 饰品仓位管理 · 手机优先 / 深色 / 自动保存
+   CS 饰品量化 · 多页签应用
+   手机(<900px)：底部 5 页签 + 单列卡片
+   电脑(≥900px)：左侧 240px 固定边栏 + 右侧多列网格
+   纯 CSS 媒体查询，无任何外部框架 / CDN，离线可用
    ===================================================================== */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#0a0e13; --card:#121a23; --card2:#17212c; --line:#233042; --field:#0d141c;
   --text:#e9f0f7; --muted:#8b9db2; --dim:#5d6f83;
   --green:#2fd07a; --red:#ff6b6b; --yellow:#ffc531; --cyan:#22d3ee; --blue:#4b9dff;
-  --r:16px; --gap:10px;
+  --r:16px; --gap:10px; --sidew:240px;
   --safe-b:env(safe-area-inset-bottom,0px);
   --safe-t:env(safe-area-inset-top,0px);
 }
@@ -43,36 +46,58 @@ input,button,select,textarea{font-family:inherit}
 .appbar-in{display:flex;align-items:center;gap:8px;padding:8px 14px 6px;max-width:680px;margin:0 auto}
 .brand{font-size:14.5px;font-weight:700;letter-spacing:.3px;flex:1 1 auto;display:flex;align-items:center;gap:7px}
 .brand i{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#22d3ee,#4b9dff);display:inline-block}
-.save{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.save{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);white-space:nowrap}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(47,208,122,.8);flex:0 0 auto}
 .dot.saving{background:var(--yellow);box-shadow:0 0 8px rgba(255,197,49,.8)}
 .dot.error{background:var(--red);box-shadow:0 0 8px rgba(255,107,107,.8)}
 .summary{max-width:680px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(35,48,66,.6)}
-.s-item{padding:7px 10px 9px;text-align:center;position:relative}
+.s-item{padding:8px 10px 10px;text-align:center;position:relative;min-width:0}
 .s-item+.s-item::before{content:'';position:absolute;left:0;top:16%;height:68%;width:1px;background:var(--line)}
-.s-k{font-size:11px;color:var(--muted);margin-bottom:2px}
-.s-v{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.s-k{font-size:12px;color:var(--muted);margin-bottom:3px}
+.s-v{font-size:18px;font-weight:800;letter-spacing:-.3px;word-break:break-word}
+.crumbbar{display:none}
 
-/* ---------------- 布局 ---------------- */
+/* ---------------- 布局骨架 ---------------- */
+.app{min-height:100vh}
+.main-col{min-width:0}
 main{max-width:680px;margin:0 auto;padding:12px 12px calc(96px + var(--safe-b))}
-section{scroll-margin-top:132px}
-.sec-head{display:flex;align-items:center;gap:9px;margin:20px 2px 10px}
-.sec-head:first-child{margin-top:6px}
-.sec-head .n{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#04141a;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-.sec-head h2{font-size:16px;margin:0;font-weight:700}
-.sec-head .t{margin-left:auto;font-size:11.5px;color:var(--dim)}
 
+/* ---------------- 侧边栏（电脑） ---------------- */
+.side{display:none}
+.side-brand{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;padding:2px 6px 14px;letter-spacing:.2px}
+.side-brand i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#22d3ee,#4b9dff);display:inline-block;flex:0 0 auto}
+.side-nav{display:flex;flex-direction:column;gap:4px;flex:1 1 auto;overflow-y:auto;min-height:0}
+.side-nav a{display:grid;grid-template-columns:18px 1fr;grid-template-rows:auto auto;column-gap:9px;align-items:center;
+  padding:9px 11px;border-radius:12px;text-decoration:none;color:var(--muted);border:1px solid transparent;transition:background .15s,color .15s}
+.side-nav a svg{grid-row:1/3;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.side-nav a span{font-size:14px;font-weight:700;color:var(--text);line-height:1.25}
+.side-nav a em{font-style:normal;font-size:11.5px;color:var(--dim);line-height:1.3;grid-column:2}
+.side-nav a.on{background:rgba(34,211,238,.11);border-color:rgba(34,211,238,.34);color:var(--cyan)}
+.side-nav a.on span{color:var(--cyan)}
+.side-foot{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.side-k{font-size:11.5px;color:var(--dim)}
+.side-v{font-size:13.5px;font-weight:700;margin-top:3px}
+.side-v2{font-size:11.5px;color:var(--dim);margin-top:5px;line-height:1.6;overflow-wrap:anywhere}
+
+/* ---------------- 页 / 卡片网格 ---------------- */
+.page{display:none}
+.page.on{display:block}
+.page-title{display:flex;align-items:baseline;gap:8px;margin:2px 2px 10px;flex-wrap:wrap}
+.page-title h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.2px}
+.page-title span{font-size:12.5px;color:var(--dim)}
+.cards{display:block}
+.span2,.span-all{}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:var(--gap)}
 .card.tight{padding:12px}
-.card-title{font-size:13px;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:6px}
-.card-title .r{margin-left:auto;font-size:11.5px;color:var(--dim)}
+.card-title{font-size:13.5px;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.card-title .r{margin-left:auto;font-size:12px;color:var(--dim);font-weight:400;text-align:right}
 
 /* ---------------- 表单 ---------------- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
-.lbl{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.lbl .q{font-size:10px;background:var(--card2);border:1px solid var(--line);color:var(--dim);border-radius:5px;padding:0 4px;line-height:14px}
+.lbl{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.lbl .q{font-size:11px;background:var(--card2);border:1px solid var(--line);color:var(--dim);border-radius:5px;padding:0 4px;line-height:15px}
 .ipt{display:flex;align-items:center;gap:4px;background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:0 11px;height:50px;transition:border-color .15s,box-shadow .15s}
 .ipt:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.13)}
 .ipt input{flex:1 1 auto;width:100%;min-width:0;background:transparent;border:0;outline:none;color:var(--text);font-size:17px;font-weight:700;height:100%;font-variant-numeric:tabular-nums}
@@ -92,23 +117,25 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .btn.pri{background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#03141c;border-color:transparent}
 .btn.danger{color:var(--red);border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.08)}
 .btn.ghost{background:transparent}
-.btn.sm{min-height:42px;font-size:14px;border-radius:11px}
+.btn.sm{min-height:44px;font-size:14px;border-radius:11px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .row2 .btn{width:100%}
 
 /* ---------------- 结果 ---------------- */
 .res{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .stat{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:10px 11px;min-width:0}
-.stat .k{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+.stat .k{font-size:12.5px;color:var(--muted);margin-bottom:2px}
 .stat .v{font-size:19px;font-weight:800;letter-spacing:-.3px;word-break:break-word}
 .stat.wide{grid-column:1/-1}
 .stat.hero{grid-column:1/-1;background:linear-gradient(135deg,rgba(34,211,238,.13),rgba(75,157,255,.07));border-color:rgba(34,211,238,.32)}
-.stat.hero .v{font-size:26px}
+.stat.hero .v{font-size:22px}
+.stat .v em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:3px;overflow-wrap:anywhere}
+.tbl em.sub{display:block;font-style:normal;font-size:11px;color:var(--dim);font-weight:400;margin-top:3px;overflow-wrap:anywhere}
 .pos{color:var(--green)}.neg{color:var(--red)}.warn{color:var(--yellow)}.muted{color:var(--muted)}
 
 /* ---------------- 提示条 ---------------- */
 /* 注意：这里必须是 block —— 用 flex 会把消息里的 <b> 变成独立 flex 项，文字被拆栏错位 */
-.alert{display:block;padding:11px 12px;border-radius:12px;font-size:13.5px;line-height:1.65;margin-top:9px;border:1px solid transparent}
+.alert{display:block;padding:11px 12px;border-radius:12px;font-size:13.5px;line-height:1.65;margin-top:9px;border:1px solid transparent;overflow-wrap:anywhere}
 .alert b{color:#fff;font-weight:700}
 .alert.danger{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.4);color:#ffc9c9}
 .alert.warn{background:rgba(255,197,49,.1);border-color:rgba(255,197,49,.36);color:#ffe7a3}
@@ -123,9 +150,9 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .del:active{transform:scale(.94)}
 /* 行情匹配行 */
 .pick-row{display:flex;align-items:center;gap:8px;margin:-2px 0 10px}
-.pick-row .btn{width:auto;flex:0 0 auto;min-height:34px;font-size:12.5px;padding:0 11px;border-radius:9px}
-.tag2{flex:1 1 auto;min-width:0;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  background:var(--field);border:1px solid var(--line);border-radius:8px;padding:4px 8px}
+.pick-row .btn{width:auto;flex:0 0 auto;min-height:44px;font-size:13px;padding:0 12px;border-radius:11px}
+.tag2{flex:1 1 auto;min-width:0;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:var(--field);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
 .tag2.off{color:var(--dim);border-style:dashed}
 /* 底部选择面板 */
 .sheet{position:fixed;inset:0;z-index:120;display:flex;align-items:flex-end}
@@ -137,362 +164,613 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .sheet-head .ipt{flex:1 1 auto;height:46px}
 .sheet-head .btn{width:auto;flex:0 0 auto;min-height:46px;padding:0 14px}
 .sheet-list{overflow-y:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line)}
-.sheet-item{display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.sheet-item{display:flex;align-items:center;gap:10px;padding:11px 4px;min-height:48px;border-bottom:1px solid var(--line);cursor:pointer}
 .sheet-item:active{background:var(--card2)}
 .sheet-item .nm{flex:1 1 auto;min-width:0;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sheet-item .pr{flex:0 0 auto;font-size:14px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
-.sheet-item .qt{flex:0 0 auto;font-size:11px;color:var(--dim);width:64px;text-align:right}
+.sheet-item .qt{flex:0 0 auto;font-size:11.5px;color:var(--dim);width:68px;text-align:right}
 .sheet-hint{padding:14px 4px;color:var(--muted);font-size:13px;text-align:center}
 .mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .mini .m{min-width:0}
-.mini .m .k{font-size:10.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mini .m .v{font-size:14.5px;font-weight:800}
+.mini .m .k{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .m .v{font-size:15px;font-weight:800}
 .empty{text-align:center;padding:22px 12px;color:var(--muted);font-size:13.5px}
 .empty .big2{font-size:15px;color:var(--text);font-weight:700;margin-bottom:6px}
+.empty2{padding:16px 4px;color:var(--muted);font-size:13px;text-align:center;line-height:1.7}
+.skel{display:flex;align-items:center;gap:9px;padding:14px 4px;color:var(--muted);font-size:13px;line-height:1.6}
+.skel i{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex:0 0 auto;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.28;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+
+/* ---------------- 通用数据行（右对齐数值，可换行，绝不横向溢出） ---------------- */
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.row:last-child{border-bottom:0}
+.row .rn{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.row .rn em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);margin-top:2px}
+.row .rv{flex:0 1 auto;min-width:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:break-word}
+.row .rv em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:2px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 18px}
+.split-h{font-size:12.5px;font-weight:700;color:var(--muted);padding:2px 0 6px;margin-top:6px;border-bottom:1px solid var(--line)}
 
 /* ---------------- 表格 ---------------- */
 .tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .tbl th,.tbl td{padding:8px 4px;text-align:right;font-size:13px;border-bottom:1px solid var(--line);white-space:nowrap}
 .tbl th:first-child,.tbl td:first-child{text-align:left}
-.tbl thead th{color:var(--muted);font-weight:600;font-size:11.5px}
+.tbl thead th{color:var(--muted);font-weight:600;font-size:12px}
 .tbl tbody tr:last-child td{border-bottom:0}
+.tbl.fluid{table-layout:fixed}
+.tbl.fluid th,.tbl.fluid td{white-space:normal;overflow-wrap:anywhere;padding:8px 6px}
 
-/* ---------------- 底部导航 ---------------- */
+/* ---------------- 底部导航（手机） ---------------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(10,14,19,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
-.nav-in{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:56px;text-decoration:none;color:var(--dim);font-size:10.5px;font-weight:600;transition:color .15s}
-.nav a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav-in{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.nav a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:58px;
+  text-decoration:none;color:var(--dim);font-size:11px;font-weight:600;transition:color .15s}
+.nav a svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .nav a.on{color:var(--cyan)}
+.nav a.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;border-radius:0 0 3px 3px;background:var(--cyan)}
 
 /* ---------------- 其它 ---------------- */
-.hint{color:var(--dim);font-size:11.5px;margin:7px 0 0;line-height:1.6}
-.kv{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.hint{color:var(--dim);font-size:12.5px;margin:7px 0 0;line-height:1.65;overflow-wrap:anywhere}
+.hint b{color:var(--muted)}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:flex-start}
 .kv:last-child{border-bottom:0}
-.kv .k2{color:var(--muted);flex:0 0 auto}
-.kv .v2{text-align:right;word-break:break-all;font-weight:600}
+.kv .k2{color:var(--muted);flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.kv .v2{text-align:right;font-weight:600;flex:0 1 auto;min-width:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 .banner{background:rgba(255,107,107,.13);border-bottom:1px solid rgba(255,107,107,.4);color:#ffc9c9;font-size:12.5px;padding:9px 14px;text-align:center}
 .risks{margin:0;padding-left:17px;color:#c3d2e2;font-size:13px;line-height:1.7}
 .risks li{margin:6px 0}
 .risks b{color:#fff}
 details{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
-summary{cursor:pointer;color:var(--muted);font-size:13px;list-style:none}
+summary{cursor:pointer;color:var(--muted);font-size:13.5px;list-style:none;min-height:44px;display:flex;align-items:center;padding:6px 0}
 summary::-webkit-details-marker{display:none}
 summary::before{content:'▸ '}
 details[open] summary::before{content:'▾ '}
 .formula{font-size:12px;color:var(--dim);line-height:2;margin-top:8px}
 .formula code{background:var(--field);padding:2px 6px;border-radius:6px;color:#9ad9e8}
-.tagline{font-size:12px;color:var(--dim);text-align:center;padding:6px 0 0}
+.tagline{font-size:12px;color:var(--dim);text-align:center;padding:10px 0 0}
 /* 同步方式切换 */
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--field);border:1.5px solid var(--line);border-radius:13px;padding:5px}
 .seg button{-webkit-appearance:none;appearance:none;border:0;background:transparent;color:var(--muted);font-size:13.5px;font-weight:700;font-family:inherit;
-  height:40px;border-radius:9px;cursor:pointer;transition:background .15s,color .15s}
+  height:44px;border-radius:9px;cursor:pointer;transition:background .15s,color .15s}
 .seg button.on{background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#03141c}
 .hint code{background:var(--field);padding:1px 5px;border-radius:5px;color:#9ad9e8;font-size:11.5px}
 @keyframes flash{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}100%{box-shadow:0 0 0 14px rgba(34,211,238,0)}}
 .flash{animation:flash .6s ease-out}
+
+/* ---------------- 今日结论 ---------------- */
+.vd-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.vd-lv{font-size:21px;font-weight:800;letter-spacing:.5px}
+.vd-score{font-size:12.5px;color:var(--muted)}
+.vd-score b{font-size:15px;color:var(--text)}
+.vd-text{font-size:14.5px;line-height:1.7;margin:9px 0 0;overflow-wrap:anywhere}
+
+/* ---------------- 建议卡 / 机会卡 ---------------- */
+.adv-list{display:grid;grid-template-columns:1fr;gap:10px}
+.opp-list{display:grid;grid-template-columns:1fr;gap:var(--gap)}
+.adv,.opp{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.adv-top,.opp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.adv-name,.opp-name{flex:1 1 auto;min-width:0;font-size:14.5px;font-weight:800;line-height:1.4;overflow-wrap:anywhere}
+.adv-name em,.opp-name em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:2px;overflow-wrap:anywhere}
+.badge{flex:0 0 auto;font-size:12px;font-weight:800;border-radius:8px;padding:3px 8px;border:1px solid var(--line);white-space:nowrap}
+.b-hold{color:var(--cyan);border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.1)}
+.b-add{color:var(--green);border-color:rgba(47,208,122,.4);background:rgba(47,208,122,.1)}
+.b-cut{color:var(--yellow);border-color:rgba(255,197,49,.4);background:rgba(255,197,49,.1)}
+.b-out{color:var(--red);border-color:rgba(255,107,107,.4);background:rgba(255,107,107,.1)}
+.u-高{color:var(--red);border-color:rgba(255,107,107,.35)}
+.u-中{color:var(--yellow);border-color:rgba(255,197,49,.35)}
+.u-低{color:var(--dim)}
+.tier{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}
+.t-A{background:rgba(47,208,122,.16);color:var(--green);border:1px solid rgba(47,208,122,.45)}
+.t-B{background:rgba(34,211,238,.14);color:var(--cyan);border:1px solid rgba(34,211,238,.42)}
+.t-C{background:rgba(139,157,178,.14);color:var(--muted);border:1px solid var(--line)}
+.opp-meta,.adv-meta{font-size:12.5px;color:var(--muted);line-height:1.7;margin:0 0 8px;overflow-wrap:anywhere}
+.opp-meta b,.adv-meta b{color:var(--text)}
+.why{font-size:13px;line-height:1.7;margin:9px 0 0;color:#c3d2e2;overflow-wrap:anywhere}
+.why b{color:var(--cyan);margin-right:6px;font-size:12.5px}
+.why.plan b{color:var(--green)}
+
+/* ---------------- 电脑（≥900px）：左侧固定边栏 + 多列网格 ---------------- */
+@media (min-width:900px){
+  .side{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:var(--sidew);z-index:80;
+    background:linear-gradient(180deg,#101a25 0%,#0b1119 100%);border-right:1px solid var(--line);
+    padding:calc(16px + var(--safe-t)) 12px 14px}
+  .main-col{margin-left:var(--sidew)}
+  .nav{display:none}
+  .appbar{border-bottom:0}
+  .appbar-in{max-width:none;padding:10px 22px 7px}
+  .summary{max-width:none;padding:0 22px;border-top:0}
+  .s-item{padding:6px 14px 9px;text-align:left}
+  .s-item+.s-item::before{display:none}
+  .s-item:first-child{padding-left:0}
+  .s-k{font-size:12px}
+  .s-v{font-size:19px}
+  .crumbbar{display:flex;align-items:center;gap:12px;padding:8px 22px 9px;border-top:1px solid rgba(35,48,66,.55)}
+  .crumb{display:flex;align-items:baseline;gap:10px;min-width:0}
+  .crumb b{font-size:15.5px;font-weight:800;white-space:nowrap}
+  .crumb span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .crumb-time{margin-left:auto;font-size:12px;color:var(--dim);white-space:nowrap}
+  .crumb-time b{color:var(--muted);font-weight:600}
+  .page-title{display:none}
+  main{max-width:none;margin:0;padding:14px 22px 34px}
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+  .card{margin-bottom:0}
+  .span2{grid-column:span 2}
+  .span-all{grid-column:1/-1}
+  .adv-list,.opp-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .grid2{gap:12px}
+  .res{gap:10px}
+}
+@media (min-width:1340px){
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .span2{grid-column:span 2}
+  .adv-list,.opp-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1800px){
+  main{max-width:1560px;margin:0 auto}
+}
+
+/* ---------------- 手机字号下限：正文与标签一律 ≥13px ---------------- */
+@media (max-width:899px){
+  .s-k,.hint,.stat .k,.lbl,.lbl .q,.card-title .r,.opp-meta,.adv-meta,.tagline,.formula,
+  .ipt .u,.banner,.tbl th,.tbl em.sub,.mini .m .k,.row .rn em,.row .rv em,.stat .v em,
+  .tag2,.badge,.why b,.nav a,.sheet-item .qt,.sheet-hint,.save,.empty,.empty2,.skel,.risks,.tagline,
+  .page-title span,.vd-score,.split-h{font-size:13px}
+  .card-title{font-size:13.5px}
+  .sheet-item .qt{width:80px}
+  .nav a{gap:2px}
+  .mini .m .v{font-size:15.5px}
+}
 </style>
 </head>
 <body>
 
 <div class="banner" id="banner" hidden></div>
 
-<!-- ================= 顶部：品牌 + 保存状态 + 总览 ================= -->
-<header class="appbar">
-  <div class="appbar-in">
-    <div class="brand"><i></i>CS 饰品仓位管理</div>
-    <div class="save"><span class="dot" id="save-dot"></span><span id="save-text">已保存</span></div>
-  </div>
-  <div class="summary">
-    <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
-    <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
-    <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
-  </div>
-</header>
+<div class="app">
 
-<main>
-
-  <!-- ================= ① 概览 / 参数 ================= -->
-  <section id="sec-home">
-    <div class="card">
-      <div class="card-title">今日大盘 · 异动 <span class="r" id="mk-market-time">—</span></div>
-      <div class="res" style="margin-top:0">
-        <div class="stat"><div class="k">饰品指数</div><div class="v" id="mk-index">—</div></div>
-        <div class="stat"><div class="k">贪婪指数</div><div class="v" id="mk-greedy">—</div></div>
-        <div class="stat wide"><div class="k">市场宽度（涨 / 跌 家数）</div><div class="v" id="mk-breadth">—</div></div>
-      </div>
-      <div id="mk-types"></div>
-      <div id="mk-alt"></div>
+  <!-- ==================== 左侧边栏（电脑 ≥900px） ==================== -->
+  <aside class="side" id="side">
+    <div class="side-brand"><i></i><span>CS 饰品量化</span></div>
+    <nav class="side-nav" id="side-nav">
+      <a href="#" data-page="market" class="on">
+        <svg viewBox="0 0 24 24"><path d="M3 17.5 9.5 11l3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg>
+        <span>大盘</span><em>指数 · 宽度 · 今日结论</em></a>
+      <a href="#" data-page="inv">
+        <svg viewBox="0 0 24 24"><path d="M4 8.6 12 4.2l8 4.4v6.8L12 19.8 4 15.4z"/><path d="M4 8.6 12 13l8-4.4M12 13v6.8"/></svg>
+        <span>库存</span><em>真实持仓 · 逐项建议</em></a>
+      <a href="#" data-page="opp">
+        <svg viewBox="0 0 24 24"><path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>
+        <span>市场</span><em>可入场机会 · 操作方案</em></a>
+      <a href="#" data-page="sig">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l2.5-6.5L13 18.5 15.5 12H21"/></svg>
+        <span>信号</span><em>吸筹 · 价差 · 箱子 ROI</em></a>
+      <a href="#" data-page="me">
+        <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+        <span>我的</span><em>计算器 · 设置 · 云同步</em></a>
+    </nav>
+    <div class="side-foot">
+      <div class="side-k">数据更新时间</div>
+      <div class="side-v" id="data-time">—</div>
+      <div class="side-v2" id="data-time2">行情 / 信号 / 分析</div>
     </div>
+  </aside>
 
-    <div class="card" id="pf-card" hidden>
-      <div class="card-title">我的真实持仓 <span class="r" id="pf-time">—</span></div>
-      <div class="res" style="margin-top:0">
-        <div class="stat"><div class="k">市场价</div><div class="v" id="pf-value">—</div></div>
-        <div class="stat"><div class="k">买入成本</div><div class="v" id="pf-cost">—</div></div>
-        <div class="stat"><div class="k">浮动盈亏</div><div class="v" id="pf-pnl">—</div></div>
-        <div class="stat"><div class="k">件数 / 品种</div><div class="v" id="pf-count">—</div></div>
+  <div class="main-col">
+
+    <!-- ==================== 顶部：品牌 + 保存状态 + 总览 + 面包屑 ==================== -->
+    <header class="appbar">
+      <div class="appbar-in">
+        <div class="brand"><i></i>CS 饰品量化</div>
+        <div class="save"><span class="dot" id="save-dot"></span><span id="save-text">已保存</span></div>
       </div>
-      <div id="pf-fam"></div>
-      <div id="pf-move"></div>
-      <button class="btn ghost" id="pf-toggle" style="margin-top:10px">展开全部品种</button>
-      <div id="pf-all" hidden></div>
-      <p class="hint" id="pf-src" style="margin-top:8px"></p>
-    </div>
-
-    <div class="sec-head"><div class="n">1</div><h2>我的资金</h2><div class="t">改完全自动算</div></div>
-
-    <div class="card">
-      <div class="grid2">
-        <label class="field" style="grid-column:1/-1"><span class="lbl">总资产（现金 + 饰品市值）</span>
-          <span class="ipt"><input id="set-total" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
-        </label>
-        <label class="field"><span class="lbl">综合成本率 <span class="q">手续费+滑点</span></span>
-          <span class="ipt"><input id="set-cost" type="number" inputmode="decimal" step="any" min="0" max="99" placeholder="0"><i class="u">%</i></span>
-        </label>
-        <label class="field"><span class="lbl">总仓位上限</span>
-          <span class="ipt"><input id="set-maxTotal" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
-        </label>
-        <label class="field"><span class="lbl">单品种上限</span>
-          <span class="ipt"><input id="set-maxItem" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
-        </label>
-        <div class="field"><span class="lbl">卖出到手比例</span>
-          <span class="ipt" style="border-style:dashed"><input value="" id="set-netfactor" readonly tabindex="-1" style="font-weight:700"></span>
-        </div>
+      <div class="summary">
+        <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
+        <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
+        <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
       </div>
-      <p class="hint" id="note-cost">—</p>
-      <div class="res">
-        <div class="stat"><div class="k">已用资金</div><div class="v" id="ov-invest">—</div></div>
-        <div class="stat"><div class="k">已用仓位</div><div class="v" id="ov-pos">—</div></div>
-        <div class="stat"><div class="k">剩余现金</div><div class="v" id="ov-cash">—</div></div>
-        <div class="stat"><div class="k">还能买（总仓位额度）</div><div class="v" id="ov-capTotal">—</div></div>
+      <div class="crumbbar">
+        <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
+        <div class="crumb-time">数据更新 <b id="crumb-time">—</b></div>
       </div>
-      <p class="hint" id="note-cap">—</p>
-    </div>
-  </section>
+    </header>
 
-  <!-- ================= ② 计算器 ================= -->
-  <section id="sec-calc">
-    <div class="sec-head"><div class="n">2</div><h2>单品种计算器</h2><div class="t">输入即算</div></div>
+    <main>
 
-    <div class="card">
-      <div class="grid2">
-        <label class="field" style="grid-column:1/-1"><span class="lbl">饰品名称</span>
-          <span class="ipt"><input id="c-name" type="text" autocomplete="off" placeholder="如 AK-47 | 红线（略有磨损）"></span>
-        </label>
-        <label class="field"><span class="lbl">单价</span>
-          <span class="ipt"><input id="c-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
-        </label>
-        <label class="field"><span class="lbl">买入把数</span>
-          <span class="ipt"><input id="c-qty" type="number" inputmode="numeric" step="1" min="0" placeholder="0"><i class="u">把</i></span>
-        </label>
-        <label class="field"><span class="lbl">预期涨幅</span>
-          <span class="ipt"><input id="c-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span>
-        </label>
-        <label class="field"><span class="lbl">目标净收益率 <span class="q">可留空</span></span>
-          <span class="ipt"><input id="c-targetNet" type="number" inputmode="decimal" step="any" placeholder="留空"><i class="u">%</i></span>
-        </label>
-      </div>
+      <!-- ============================================================
+           ① 大盘（首页）
+           ============================================================ -->
+      <section class="page on" id="sec-home" data-page="market">
+        <div class="page-title"><h1>大盘</h1><span>饰品指数 · 市场宽度 · 今日结论</span></div>
+        <div class="cards">
 
-      <div class="res" id="c-res">
-        <div class="stat hero"><div class="k">总净收益</div><div class="v" id="c-profit">—</div></div>
-        <div class="stat "><div class="k">最终总资产</div><div class="v" id="c-final">—</div></div>
-        <div class="stat"><div class="k">净收益率</div><div class="v" id="c-netrate">—</div></div>
-        <div class="stat"><div class="k">实际投入</div><div class="v" id="c-invest">—</div></div>
-        <div class="stat"><div class="k">仓位占比</div><div class="v" id="c-pos">—</div></div>
-        <div class="stat"><div class="k">每把净赚</div><div class="v" id="c-perpiece">—</div></div>
-        <div class="stat"><div class="k">剩余现金</div><div class="v" id="c-cash">—</div></div>
-        <div class="stat"><div class="k">回本卖出价</div><div class="v" id="c-breakeven">—</div></div>
-        <div class="stat"><div class="k">目标止盈价</div><div class="v" id="c-tp">—</div></div>
-      </div>
-      <div id="c-warn"></div>
-      <details>
-        <summary>计算明细与公式</summary>
-        <div class="res" style="margin-top:8px">
-          <div class="stat"><div class="k">卖出总额</div><div class="v" id="c-sell">—</div></div>
-          <div class="stat"><div class="k">净到手</div><div class="v" id="c-net">—</div></div>
-        </div>
-        <div class="formula">
-          <div><code>净收益率 = (1+涨幅)×(1−成本率) − 1</code></div>
-          <div><code>净收益 = 实际投入 × 净收益率</code></div>
-          <div><code>回本卖出价 = 单价 ÷ (1−成本率)</code></div>
-          <div><code>目标止盈价 = 单价 ×(1+目标净收益率)÷(1−成本率)</code></div>
-        </div>
-      </details>
-    </div>
-
-    <div class="sec-head"><div class="n">3</div><h2>反推：该买多少把</h2><div class="t">两种算法</div></div>
-
-    <div class="card">
-      <div class="card-title">按仓位反推 <span class="r">先定仓位，再定把数</span></div>
-      <div class="grid3">
-        <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="p-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
-        <label class="field"><span class="lbl">想占仓位</span><span class="ipt sm"><input id="p-pos" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">%</i></span></label>
-        <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="p-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
-      </div>
-      <div class="res">
-        <div class="stat hero"><div class="k">建议买入把数</div><div class="v" id="r-qty">—</div></div>
-        <div class="stat"><div class="k">实际投入</div><div class="v" id="r-invest">—</div></div>
-        <div class="stat"><div class="k">实际仓位</div><div class="v" id="r-pos">—</div></div>
-        <div class="stat"><div class="k">预计总净收益</div><div class="v" id="r-profit">—</div></div>
-      </div>
-      <div id="r-warn"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">按目标收益反推 <span class="r">想赚多少，需要多少把</span></div>
-      <div class="grid3">
-        <label class="field"><span class="lbl">目标净收益</span><span class="ipt sm"><input id="t-target" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
-        <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="t-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
-        <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="t-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
-      </div>
-      <div class="res">
-        <div class="stat hero"><div class="k">需要买</div><div class="v" id="g-qty">—</div></div>
-        <div class="stat"><div class="k">每把净赚</div><div class="v" id="g-perpiece">—</div></div>
-        <div class="stat"><div class="k">需要投入</div><div class="v" id="g-invest">—</div></div>
-        <div class="stat"><div class="k">占总资产仓位</div><div class="v" id="g-pos">—</div></div>
-      </div>
-      <div id="g-warn"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">涨幅情景表 <span class="r">跟随上面「单价 / 把数」</span></div>
-      <table class="tbl">
-        <thead><tr><th>涨幅</th><th>净收益</th><th>净收益率</th><th>最终总资产</th></tr></thead>
-        <tbody id="sc-body"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ================= ③ 持仓 ================= -->
-  <section id="sec-hold">
-    <div class="sec-head"><div class="n">4</div><h2>我的持仓</h2><div class="t" id="hold-count">0 个品种</div></div>
-
-    <div id="h-list"></div>
-
-    <button class="btn pri" id="h-add" type="button">＋ 添加品种</button>
-
-    <div class="card" style="margin-top:10px">
-      <div class="card-title">组合汇总</div>
-      <div class="res" style="margin-top:0">
-        <div class="stat hero"><div class="k">浮动盈亏（按现价）</div><div class="v" id="h-pnl">—</div></div>
-        <div class="stat"><div class="k">当前市值</div><div class="v" id="h-value">—</div></div>
-        <div class="stat"><div class="k">总投入</div><div class="v" id="h-invest">—</div></div>
-        <div class="stat"><div class="k">总仓位</div><div class="v" id="h-pos">—</div></div>
-        <div class="stat"><div class="k">预期净收益</div><div class="v" id="h-profit">—</div></div>
-        <div class="stat wide"><div class="k">剩余现金</div><div class="v" id="h-cash">—</div></div>
-        <div class="stat wide"><div class="k">全部卖出后的总资产</div><div class="v" id="h-final">—</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">风险检查 <span class="r">自动刷新</span></div>
-      <div id="h-risk"></div>
-    </div>
-  </section>
-
-  <!-- ================= ④ 设置 ================= -->
-  <section id="sec-more">
-    <div class="sec-head"><div class="n">5</div><h2>数据与设置</h2><div class="t">自动保存</div></div>
-
-    <div class="card">
-      <div class="card-title">实时行情 <span class="r" id="mk-status">未加载</span></div>
-      <label class="field"><span class="lbl">行情源地址 <span class="q">同源 market.json</span></span>
-        <span class="ipt sm"><input id="set-marketUrl" type="text" autocomplete="off" placeholder="./market.json"></span>
-      </label>
-      <div class="row2">
-        <button class="btn sm pri" id="mk-load" type="button">更新行情</button>
-        <button class="btn sm" id="mk-refresh" type="button">刷新全部现价</button>
-      </div>
-      <p class="hint" id="mk-tip">行情文件由电脑上的采集脚本生成（Skinport + CSFloat 官方公开接口），手机只读取价格，不上传任何数据。</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title">云同步 <span class="r" id="sync-status">未配置</span></div>
-
-      <div class="seg" id="sy-be">
-        <button type="button" data-be="github" class="on">GitHub 私有仓库</button>
-        <button type="button" data-be="supabase">Supabase</button>
-      </div>
-
-      <label class="field" style="margin-top:10px"><span class="lbl">同步码 <span class="q">手机和电脑填一样的</span></span>
-        <span class="ipt"><input id="sy-code" type="text" autocomplete="off" placeholder="如 laowang-2026"></span>
-      </label>
-      <div class="row2">
-        <button class="btn sm pri" id="sy-now" type="button">立即同步</button>
-        <button class="btn sm" id="sy-pull" type="button">用云端覆盖本机</button>
-      </div>
-      <div class="row2" style="margin-top:8px">
-        <button class="btn sm ghost" id="sy-push" type="button">用本机覆盖云端</button>
-        <button class="btn sm ghost" id="sy-setup" type="button">连接设置</button>
-      </div>
-      <p class="hint" id="sync-tip">同一个同步码 = 同一份数据。数据加密后才上传，同步码就是密码，忘了打不开。</p>
-
-      <div id="sync-setup" hidden style="margin-top:12px;border-top:1px dashed var(--line);padding-top:12px">
-        <!-- GitHub 后端 -->
-        <div id="sy-gh">
-          <label class="field"><span class="lbl">GitHub 用户名 / 组织</span>
-            <span class="ipt sm"><input id="sy-ghowner" type="text" autocomplete="off" placeholder="如 cjy668"></span>
-          </label>
-          <label class="field" style="margin-top:8px"><span class="lbl">私有仓库名</span>
-            <span class="ipt sm"><input id="sy-ghrepo" type="text" autocomplete="off" placeholder="如 cs-skin-data"></span>
-          </label>
-          <label class="field" style="margin-top:8px"><span class="lbl">访问 Token <span class="q">github_pat_ 开头</span></span>
-            <span class="ipt sm"><input id="sy-ghtoken" type="password" autocomplete="off" placeholder="github_pat_..."></span>
-          </label>
-          <p class="hint">① 先建一个 <b>Private</b> 仓库，<b>务必勾选 Add a README file</b>（空仓库没法写入）。<br>
-            ② 头像 → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token：Repository access 只选这个仓库，Permissions → Repository permissions → <b>Contents: Read and write</b>。<br>
-            ③ Token 只存在本机浏览器，不上传、不写进备份文件。建议有效期设 90 天后重新生成一次。</p>
-        </div>
-
-        <!-- Supabase 后端 -->
-        <div id="sy-sb" hidden>
-          <label class="field"><span class="lbl">Supabase Project URL</span>
-            <span class="ipt sm"><input id="sy-url" type="text" autocomplete="off" placeholder="https://xxxxxxxx.supabase.co"></span>
-          </label>
-          <label class="field" style="margin-top:8px"><span class="lbl">publishable / anon key</span>
-            <span class="ipt sm"><input id="sy-key" type="text" autocomplete="off" placeholder="sb_publishable_... 或 eyJhbGciOi..."></span>
-          </label>
-          <div class="row2" style="margin-top:10px">
-            <button class="btn sm" id="sy-sql" type="button">复制建表 SQL</button>
-            <button class="btn sm" id="sy-clearcfg" type="button">清除连接</button>
+          <div class="card">
+            <div class="card-title">今日大盘 <span class="r" id="mk-market-time">—</span></div>
+            <div class="res" style="margin-top:0">
+              <div class="stat"><div class="k">饰品指数</div><div class="v" id="mk-index">—</div></div>
+              <div class="stat"><div class="k">贪婪指数</div><div class="v" id="mk-greedy">—</div></div>
+              <div class="stat wide"><div class="k">市场宽度（涨 / 跌 家数）</div><div class="v" id="mk-breadth">—</div></div>
+              <div class="stat wide"><div class="k">在线人数</div><div class="v" id="mk-online" style="font-size:15px">—</div></div>
+            </div>
           </div>
-          <p class="hint">⚠️ 实测：<b>国内很多网络会针对性阻断 <code>*.supabase.co</code></b>（DNS 能解析但 TLS 被重置），如果你的网络打不开就换 GitHub 后端。两个值在 Project Settings → <b>API Keys</b>，或项目页顶部 <b>Connect</b> 按钮里；它们本来就是公开值（<b>千万别填 secret / service_role key</b>）。</p>
+
+          <div class="card">
+            <div class="card-title">今日结论 <span class="r" id="vd-time">分析生成中…</span></div>
+            <div id="vd-box"><div class="skel"><i></i>今日结论生成中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">板块 7 日强弱榜 <span class="r">板块轮动</span></div>
+            <div id="mk-types"><div class="skel"><i></i>板块数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">异动榜 <span class="r">求购↑ / 在售↓ = 有人在收货</span></div>
+            <div id="mk-alt"><div class="skel"><i></i>异动数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">大户收货动态 <span class="r" id="mk-whale-time">—</span></div>
+            <div id="mk-whales"><div class="skel"><i></i>大户数据加载中…</div></div>
+          </div>
+
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="card">
-      <div class="card-title">数据保存状态</div>
-      <div class="kv"><span class="k2">保存位置</span><span class="v2" id="st-where">—</span></div>
-      <div class="kv"><span class="k2">最后保存</span><span class="v2" id="st-updated">—</span></div>
-      <div class="kv"><span class="k2">数据量</span><span class="v2" id="st-size">—</span></div>
-      <div class="kv"><span class="k2">网页来源</span><span class="v2" id="st-origin">—</span></div>
-      <p class="hint" id="st-tip">—</p>
-      <div class="row2">
-        <button class="btn sm" id="btn-export-json" type="button">导出备份(.json)</button>
-        <button class="btn sm" id="btn-export-csv" type="button">导出表格(.csv)</button>
-        <button class="btn sm ghost" id="btn-import" type="button">导入备份</button>
-        <button class="btn sm danger" id="btn-reset" type="button">全部重置</button>
-      </div>
-      <input type="file" id="file-import" accept=".json,application/json" hidden>
-      <p class="hint">换手机、换网址、清理浏览器数据前，先点「导出备份」，到新设备再「导入备份」。这是唯一 100% 不丢数据的方法。</p>
-    </div>
+      <!-- ============================================================
+           ② 库存（真实持仓 + 逐项建议 + 仓位台账）
+           ============================================================ -->
+      <section class="page" id="sec-hold" data-page="inv">
+        <div class="page-title"><h1>库存</h1><span>真实持仓 · 逐项建议 · 仓位台账</span></div>
+        <div class="cards">
 
-    <div class="card">
-      <div class="card-title">风险提示</div>
-      <ul class="risks">
-        <li><b>7 天 CD：</b>市场/交易买入的饰品 7 天内不能再卖出，资金被锁死，务必留够现金。</li>
-        <li><b>不要满仓、不要借钱、不要配资：</b>CD 期内无法止损，杠杆会放大回撤。</li>
-        <li><b>流动性：</b>日成交量低的饰品，出货会被滑点吃掉利润，甚至砸盘卖不掉。</li>
-        <li><b>计算器只是工具，不构成投资建议。</b></li>
-      </ul>
-    </div>
+          <div class="card span-all" id="pf-card" hidden>
+            <div class="card-title">我的真实持仓 <span class="r" id="pf-time">—</span></div>
+            <div class="res" style="margin-top:0">
+              <div class="stat"><div class="k">市场价</div><div class="v" id="pf-value">—</div></div>
+              <div class="stat"><div class="k">买入成本</div><div class="v" id="pf-cost">—</div></div>
+              <div class="stat"><div class="k">浮动盈亏</div><div class="v" id="pf-pnl">—</div></div>
+              <div class="stat"><div class="k">件数 / 品种</div><div class="v" id="pf-count">—</div></div>
+            </div>
+            <div id="pf-fam"></div>
+            <div id="pf-move"></div>
+            <button class="btn ghost" id="pf-toggle" style="margin-top:10px">展开全部品种</button>
+            <div id="pf-all" hidden></div>
+            <p class="hint" id="pf-src" style="margin-top:8px"></p>
+          </div>
 
-    <p class="tagline">v2.2 · 数据只存在你自己的设备上 · 上传前加密 · 无账号</p>
-  </section>
+          <div class="card span-all">
+            <div class="card-title">逐项建议 <span class="r" id="an-hold-time">分析生成中…</span></div>
+            <p class="hint" id="an-hold-crit"></p>
+            <div id="an-hold"><div class="skel"><i></i>逐项建议生成中…（analysis.json）</div></div>
+          </div>
 
-</main>
+          <div class="card span-all">
+            <div class="card-title">我的仓位台账 <span class="r" id="hold-count">0 个品种</span></div>
+            <p class="hint">手工记账：填买入价 / 把数 / 现价，自动算仓位、浮动盈亏、回本卖出价和 7 天 CD。</p>
+            <div id="h-list"></div>
+            <button class="btn pri" id="h-add" type="button">＋ 添加品种</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">组合汇总</div>
+            <div class="res" style="margin-top:0">
+              <div class="stat hero"><div class="k">浮动盈亏（按现价）</div><div class="v" id="h-pnl">—</div></div>
+              <div class="stat"><div class="k">当前市值</div><div class="v" id="h-value">—</div></div>
+              <div class="stat"><div class="k">总投入</div><div class="v" id="h-invest">—</div></div>
+              <div class="stat"><div class="k">总仓位</div><div class="v" id="h-pos">—</div></div>
+              <div class="stat"><div class="k">预期净收益</div><div class="v" id="h-profit">—</div></div>
+              <div class="stat wide"><div class="k">剩余现金</div><div class="v" id="h-cash">—</div></div>
+              <div class="stat wide"><div class="k">全部卖出后的总资产</div><div class="v" id="h-final">—</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">风险检查 <span class="r">自动刷新</span></div>
+            <div id="h-risk"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ③ 市场（可入场机会）
+           ============================================================ -->
+      <section class="page" id="page-opp" data-page="opp">
+        <div class="page-title"><h1>市场</h1><span>可入场机会 · 操作方案与预期收益</span></div>
+        <div class="cards">
+
+          <div class="card span-all">
+            <div class="card-title">筛选口径 <span class="r" id="op-time">分析生成中…</span></div>
+            <div class="res" style="margin-top:0">
+              <div class="stat"><div class="k">已扫描品种</div><div class="v" id="op-scan">—</div></div>
+              <div class="stat"><div class="k">通过筛选</div><div class="v" id="op-pass">—</div></div>
+              <div class="stat wide"><div class="k">可用实验资金</div><div class="v" id="op-budget">—</div></div>
+            </div>
+            <p class="hint" id="op-crit">—</p>
+            <p class="hint">硬约束：买入锁 7 天 CD，所以任何方案的时间窗都必须 &gt; 7 天；手续费按悠悠卖 0% + 提现 1% 计。</p>
+          </div>
+
+          <div id="op-list" class="span-all opp-list"><div class="card"><div class="skel"><i></i>机会列表生成中…（analysis.json）</div></div></div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ④ 信号（吸筹 / 异动 / 价差 / 箱子 / 大户）
+           ============================================================ -->
+      <section class="page" id="page-sig" data-page="sig">
+        <div class="page-title"><h1>信号</h1><span>吸筹 · 大户 · 跨平台价差 · 箱子 ROI</span></div>
+        <div class="cards">
+
+          <div class="card">
+            <div class="card-title">吸筹聚合 · 多户共识 <span class="r" id="sig-time">—</span></div>
+            <div id="sig-cons"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">吸筹聚合 · 单次快照 <span class="r" id="sig-acc-n">—</span></div>
+            <div id="sig-acc"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">看涨异动 <span class="r">求购增 / 在售减</span></div>
+            <div id="sig-bull"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">看跌异动 <span class="r">求购减 / 在售增</span></div>
+            <div id="sig-bear"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <div class="card span-all">
+            <div class="card-title">跨平台价差表 <span class="r" id="sig-spread-n">—</span></div>
+            <p class="hint">同一件饰品在 BUFF / 悠悠 的在售价差（按悠悠价算）。价差越大越有搬砖空间，但别忘了两边的卖出手续费。</p>
+            <div id="sig-spread"><div class="skel"><i></i>价差数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">箱子 ROI <span class="r">开箱期望</span></div>
+            <div id="sig-roi"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">大户名录 <span class="r" id="sig-whale-n">—</span></div>
+            <div id="sig-whales"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ⑤ 我的（计算器 + 设置）
+           ============================================================ -->
+      <section class="page" id="sec-more" data-page="me">
+        <div class="page-title"><h1>我的</h1><span>计算器 · 设置 · 云同步</span></div>
+
+        <div class="cards" id="sec-calc">
+
+          <div class="card span2">
+            <div class="card-title">我的资金 <span class="r">改完全自动算</span></div>
+            <div class="grid2">
+              <label class="field" style="grid-column:1/-1"><span class="lbl">总资产（现金 + 饰品市值）</span>
+                <span class="ipt"><input id="set-total" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
+              </label>
+              <label class="field"><span class="lbl">综合成本率 <span class="q">手续费+滑点</span></span>
+                <span class="ipt"><input id="set-cost" type="number" inputmode="decimal" step="any" min="0" max="99" placeholder="0"><i class="u">%</i></span>
+              </label>
+              <label class="field"><span class="lbl">总仓位上限</span>
+                <span class="ipt"><input id="set-maxTotal" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
+              </label>
+              <label class="field"><span class="lbl">单品种上限</span>
+                <span class="ipt"><input id="set-maxItem" type="number" inputmode="decimal" step="any" min="0" max="100" placeholder="0"><i class="u">%</i></span>
+              </label>
+              <div class="field"><span class="lbl">卖出到手比例</span>
+                <span class="ipt" style="border-style:dashed"><input value="" id="set-netfactor" readonly tabindex="-1" style="font-weight:700"></span>
+              </div>
+            </div>
+            <p class="hint" id="note-cost">—</p>
+            <div class="res">
+              <div class="stat"><div class="k">已用资金</div><div class="v" id="ov-invest">—</div></div>
+              <div class="stat"><div class="k">已用仓位</div><div class="v" id="ov-pos">—</div></div>
+              <div class="stat"><div class="k">剩余现金</div><div class="v" id="ov-cash">—</div></div>
+              <div class="stat"><div class="k">还能买（总仓位额度）</div><div class="v" id="ov-capTotal">—</div></div>
+            </div>
+            <p class="hint" id="note-cap">—</p>
+          </div>
+
+          <div class="card span2">
+            <div class="card-title">单品种计算器 <span class="r">输入即算</span></div>
+            <div class="grid2">
+              <label class="field" style="grid-column:1/-1"><span class="lbl">饰品名称</span>
+                <span class="ipt"><input id="c-name" type="text" autocomplete="off" placeholder="如 AK-47 | 红线（略有磨损）"></span>
+              </label>
+              <label class="field"><span class="lbl">单价</span>
+                <span class="ipt"><input id="c-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span>
+              </label>
+              <label class="field"><span class="lbl">买入把数</span>
+                <span class="ipt"><input id="c-qty" type="number" inputmode="numeric" step="1" min="0" placeholder="0"><i class="u">把</i></span>
+              </label>
+              <label class="field"><span class="lbl">预期涨幅</span>
+                <span class="ipt"><input id="c-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span>
+              </label>
+              <label class="field"><span class="lbl">目标净收益率 <span class="q">可留空</span></span>
+                <span class="ipt"><input id="c-targetNet" type="number" inputmode="decimal" step="any" placeholder="留空"><i class="u">%</i></span>
+              </label>
+            </div>
+
+            <div class="res" id="c-res">
+              <div class="stat hero"><div class="k">总净收益</div><div class="v" id="c-profit">—</div></div>
+              <div class="stat "><div class="k">最终总资产</div><div class="v" id="c-final">—</div></div>
+              <div class="stat"><div class="k">净收益率</div><div class="v" id="c-netrate">—</div></div>
+              <div class="stat"><div class="k">实际投入</div><div class="v" id="c-invest">—</div></div>
+              <div class="stat"><div class="k">仓位占比</div><div class="v" id="c-pos">—</div></div>
+              <div class="stat"><div class="k">每把净赚</div><div class="v" id="c-perpiece">—</div></div>
+              <div class="stat"><div class="k">剩余现金</div><div class="v" id="c-cash">—</div></div>
+              <div class="stat"><div class="k">回本卖出价</div><div class="v" id="c-breakeven">—</div></div>
+              <div class="stat"><div class="k">目标止盈价</div><div class="v" id="c-tp">—</div></div>
+            </div>
+            <div id="c-warn"></div>
+            <details>
+              <summary>计算明细与公式</summary>
+              <div class="res" style="margin-top:8px">
+                <div class="stat"><div class="k">卖出总额</div><div class="v" id="c-sell">—</div></div>
+                <div class="stat"><div class="k">净到手</div><div class="v" id="c-net">—</div></div>
+              </div>
+              <div class="formula">
+                <div><code>净收益率 = (1+涨幅)×(1−成本率) − 1</code></div>
+                <div><code>净收益 = 实际投入 × 净收益率</code></div>
+                <div><code>回本卖出价 = 单价 ÷ (1−成本率)</code></div>
+                <div><code>目标止盈价 = 单价 ×(1+目标净收益率)÷(1−成本率)</code></div>
+              </div>
+            </details>
+          </div>
+
+          <div class="card">
+            <div class="card-title">反推：按仓位该买多少把 <span class="r">先定仓位，再定把数</span></div>
+            <div class="grid3">
+              <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="p-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+              <label class="field"><span class="lbl">想占仓位</span><span class="ipt sm"><input id="p-pos" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">%</i></span></label>
+              <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="p-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
+            </div>
+            <div class="res">
+              <div class="stat hero"><div class="k">建议买入把数</div><div class="v" id="r-qty">—</div></div>
+              <div class="stat"><div class="k">实际投入</div><div class="v" id="r-invest">—</div></div>
+              <div class="stat"><div class="k">实际仓位</div><div class="v" id="r-pos">—</div></div>
+              <div class="stat"><div class="k">预计总净收益</div><div class="v" id="r-profit">—</div></div>
+            </div>
+            <div id="r-warn"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">反推：按目标收益需要多少把 <span class="r">想赚多少，需要多少把</span></div>
+            <div class="grid3">
+              <label class="field"><span class="lbl">目标净收益</span><span class="ipt sm"><input id="t-target" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+              <label class="field"><span class="lbl">单价</span><span class="ipt sm"><input id="t-price" type="number" inputmode="decimal" step="any" min="0" placeholder="0"><i class="u">元</i></span></label>
+              <label class="field"><span class="lbl">预期涨幅</span><span class="ipt sm"><input id="t-gain" type="number" inputmode="decimal" step="any" placeholder="0"><i class="u">%</i></span></label>
+            </div>
+            <div class="res">
+              <div class="stat hero"><div class="k">需要买</div><div class="v" id="g-qty">—</div></div>
+              <div class="stat"><div class="k">每把净赚</div><div class="v" id="g-perpiece">—</div></div>
+              <div class="stat"><div class="k">需要投入</div><div class="v" id="g-invest">—</div></div>
+              <div class="stat"><div class="k">占总资产仓位</div><div class="v" id="g-pos">—</div></div>
+            </div>
+            <div id="g-warn"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">涨幅情景表 <span class="r">跟随上面「单价 / 把数」</span></div>
+            <table class="tbl">
+              <thead><tr><th>涨幅</th><th>净收益</th><th>净收益率</th><th>最终总资产</th></tr></thead>
+              <tbody id="sc-body"></tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="cards" style="margin-top:12px">
+
+          <div class="card">
+            <div class="card-title">实时行情 <span class="r" id="mk-status">未加载</span></div>
+            <label class="field"><span class="lbl">行情源地址 <span class="q">同源 market.json</span></span>
+              <span class="ipt sm"><input id="set-marketUrl" type="text" autocomplete="off" placeholder="./market.json"></span>
+            </label>
+            <div class="row2">
+              <button class="btn sm pri" id="mk-load" type="button">更新行情</button>
+              <button class="btn sm" id="mk-refresh" type="button">刷新全部现价</button>
+            </div>
+            <p class="hint" id="mk-tip">行情文件由电脑上的采集脚本生成（csqaq 官方 API：BUFF / 悠悠 / Steam），手机只读取价格，不上传任何数据。</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">云同步 <span class="r" id="sync-status">未配置</span></div>
+
+            <div class="seg" id="sy-be">
+              <button type="button" data-be="github" class="on">GitHub 私有仓库</button>
+              <button type="button" data-be="supabase">Supabase</button>
+            </div>
+
+            <label class="field" style="margin-top:10px"><span class="lbl">同步码 <span class="q">手机和电脑填一样的</span></span>
+              <span class="ipt"><input id="sy-code" type="text" autocomplete="off" placeholder="如 laowang-2026"></span>
+            </label>
+            <div class="row2">
+              <button class="btn sm pri" id="sy-now" type="button">立即同步</button>
+              <button class="btn sm" id="sy-pull" type="button">用云端覆盖本机</button>
+            </div>
+            <div class="row2" style="margin-top:8px">
+              <button class="btn sm ghost" id="sy-push" type="button">用本机覆盖云端</button>
+              <button class="btn sm ghost" id="sy-setup" type="button">连接设置</button>
+            </div>
+            <p class="hint" id="sync-tip">同一个同步码 = 同一份数据。数据加密后才上传，同步码就是密码，忘了打不开。</p>
+
+            <div id="sync-setup" hidden style="margin-top:12px;border-top:1px dashed var(--line);padding-top:12px">
+              <!-- GitHub 后端 -->
+              <div id="sy-gh">
+                <label class="field"><span class="lbl">GitHub 用户名 / 组织</span>
+                  <span class="ipt sm"><input id="sy-ghowner" type="text" autocomplete="off" placeholder="如 cjy668"></span>
+                </label>
+                <label class="field" style="margin-top:8px"><span class="lbl">私有仓库名</span>
+                  <span class="ipt sm"><input id="sy-ghrepo" type="text" autocomplete="off" placeholder="如 cs-skin-data"></span>
+                </label>
+                <label class="field" style="margin-top:8px"><span class="lbl">访问 Token <span class="q">github_pat_ 开头</span></span>
+                  <span class="ipt sm"><input id="sy-ghtoken" type="password" autocomplete="off" placeholder="github_pat_..."></span>
+                </label>
+                <p class="hint">① 先建一个 <b>Private</b> 仓库，<b>务必勾选 Add a README file</b>（空仓库没法写入）。<br>
+                  ② 头像 → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token：Repository access 只选这个仓库，Permissions → Repository permissions → <b>Contents: Read and write</b>。<br>
+                  ③ Token 只存在本机浏览器，不上传、不写进备份文件。建议有效期设 90 天后重新生成一次。</p>
+              </div>
+
+              <!-- Supabase 后端 -->
+              <div id="sy-sb" hidden>
+                <label class="field"><span class="lbl">Supabase Project URL</span>
+                  <span class="ipt sm"><input id="sy-url" type="text" autocomplete="off" placeholder="https://xxxxxxxx.supabase.co"></span>
+                </label>
+                <label class="field" style="margin-top:8px"><span class="lbl">publishable / anon key</span>
+                  <span class="ipt sm"><input id="sy-key" type="text" autocomplete="off" placeholder="sb_publishable_... 或 eyJhbGciOi..."></span>
+                </label>
+                <div class="row2" style="margin-top:10px">
+                  <button class="btn sm" id="sy-sql" type="button">复制建表 SQL</button>
+                  <button class="btn sm" id="sy-clearcfg" type="button">清除连接</button>
+                </div>
+                <p class="hint">⚠️ 实测：<b>国内很多网络会针对性阻断 <code>*.supabase.co</code></b>（DNS 能解析但 TLS 被重置），如果你的网络打不开就换 GitHub 后端。两个值在 Project Settings → <b>API Keys</b>，或项目页顶部 <b>Connect</b> 按钮里；它们本来就是公开值（<b>千万别填 secret / service_role key</b>）。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">数据保存状态</div>
+            <div class="kv"><span class="k2">保存位置</span><span class="v2" id="st-where">—</span></div>
+            <div class="kv"><span class="k2">最后保存</span><span class="v2" id="st-updated">—</span></div>
+            <div class="kv"><span class="k2">数据量</span><span class="v2" id="st-size">—</span></div>
+            <div class="kv"><span class="k2">网页来源</span><span class="v2" id="st-origin">—</span></div>
+            <p class="hint" id="st-tip">—</p>
+            <div class="row2">
+              <button class="btn sm" id="btn-export-json" type="button">导出备份(.json)</button>
+              <button class="btn sm" id="btn-export-csv" type="button">导出表格(.csv)</button>
+              <button class="btn sm ghost" id="btn-import" type="button">导入备份</button>
+              <button class="btn sm danger" id="btn-reset" type="button">全部重置</button>
+            </div>
+            <input type="file" id="file-import" accept=".json,application/json" hidden>
+            <p class="hint">换手机、换网址、清理浏览器数据前，先点「导出备份」，到新设备再「导入备份」。这是唯一 100% 不丢数据的方法。</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">风险提示</div>
+            <ul class="risks">
+              <li><b>7 天 CD：</b>市场/交易买入的饰品 7 天内不能再卖出，资金被锁死，务必留够现金。</li>
+              <li><b>不要满仓、不要借钱、不要配资：</b>CD 期内无法止损，杠杆会放大回撤。</li>
+              <li><b>流动性：</b>日成交量低的饰品，出货会被滑点吃掉利润，甚至砸盘卖不掉。</li>
+              <li><b>计算器只是工具，不构成投资建议。</b></li>
+            </ul>
+            <p class="tagline">v3.0 · 多页签 · 数据只存在你自己的设备上 · 上传前加密 · 无账号</p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
 
 <!-- ================= 行情选择面板 ================= -->
 <div class="sheet" id="pick-sheet" hidden>
@@ -506,19 +784,22 @@ details[open] summary::before{content:'▾ '}
   </div>
 </div>
 
-<!-- ================= 底部导航 ================= -->
+<!-- ================= 底部导航（手机 <900px） ================= -->
 <nav class="nav">
   <div class="nav-in">
-    <a href="#sec-home" data-sec="sec-home" class="on">
-      <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>资金</span></a>
-    <a href="#sec-calc" data-sec="sec-calc">
-      <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7h8M8 12h3M8 16h3M15 12v4"/></svg><span>计算</span></a>
-    <a href="#sec-hold" data-sec="sec-hold">
-      <svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span>持仓</span></a>
-    <a href="#sec-more" data-sec="sec-more">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.7-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 4.6a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 11a2 2 0 1 1 0 4Z"/></svg><span>设置</span></a>
+    <a href="#" data-page="market" class="on">
+      <svg viewBox="0 0 24 24"><path d="M3 17.5 9.5 11l3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg><span>大盘</span></a>
+    <a href="#" data-page="inv">
+      <svg viewBox="0 0 24 24"><path d="M4 8.6 12 4.2l8 4.4v6.8L12 19.8 4 15.4z"/><path d="M4 8.6 12 13l8-4.4M12 13v6.8"/></svg><span>库存</span></a>
+    <a href="#" data-page="opp">
+      <svg viewBox="0 0 24 24"><path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg><span>市场</span></a>
+    <a href="#" data-page="sig">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l2.5-6.5L13 18.5 15.5 12H21"/></svg><span>信号</span></a>
+    <a href="#" data-page="me">
+      <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>我的</span></a>
   </div>
 </nav>
+
 
 <script id="app-script">
 /* =====================================================================
@@ -660,7 +941,7 @@ const DEFAULT_STATE = {
   v: 2,
   updatedAt: 0,
   settings: { total: '57554', cost: '3.5', maxTotal: '70', maxItem: '15',
-              marketUrl: './market.json', marketTime: '', marketCount: 0 },
+              marketUrl: './market.json', marketTime: '', marketCount: 0, tab: 'market' },
   single:   { name: 'AK-47 | 红线（略有磨损）', price: '700', qty: '24', gain: '20', targetNet: '' },
   revPos:   { price: '700', pos: '15', gain: '20' },
   revTarget:{ target: '2654.4', price: '700', gain: '20' },
@@ -1625,25 +1906,50 @@ function resetAll(){
 /* =====================================================================
    11) 导航高亮
    ===================================================================== */
-function initNav(){
-  const links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
-  links.forEach(a => a.addEventListener('click', function(e){
-    e.preventDefault();
-    const el = $(a.dataset.sec);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    links.forEach(x => x.classList.remove('on'));
-    a.classList.add('on');
-  }));
-  if (typeof IntersectionObserver === 'function'){
-    const obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (!en.isIntersecting) return;
-        const id = en.target.id;
-        links.forEach(x => x.classList.toggle('on', x.dataset.sec === id));
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    ['sec-home','sec-calc','sec-hold','sec-more'].forEach(id => { const el = $(id); if (el) obs.observe(el); });
+/* =====================================================================
+   11) 多页签导航：手机底部 5 个 tab / 电脑左侧边栏 —— 点击切换整页
+   ===================================================================== */
+const PAGES = [
+  { id: 'market', title: '大盘', sub: '饰品指数 · 市场宽度 · 今日结论' },
+  { id: 'inv',    title: '库存', sub: '真实持仓 · 逐项建议 · 仓位台账' },
+  { id: 'opp',    title: '市场', sub: '可入场机会 · 操作方案与预期收益' },
+  { id: 'sig',    title: '信号', sub: '吸筹 · 大户 · 跨平台价差 · 箱子 ROI' },
+  { id: 'me',     title: '我的', sub: '计算器 · 设置 · 云同步' }
+];
+function pageMeta(id){
+  for (let i = 0; i < PAGES.length; i++) if (PAGES[i].id === id) return PAGES[i];
+  return PAGES[0];
+}
+function showPage(id){
+  const meta = pageMeta(id), pid = meta.id;
+  const secs = document.querySelectorAll('.page');
+  for (let i = 0; i < secs.length; i++){
+    const s = secs[i];
+    s.classList.toggle('on', !!(s.dataset && s.dataset.page === pid));
   }
+  const links = document.querySelectorAll('.nav a, .side-nav a');
+  for (let i = 0; i < links.length; i++){
+    const a = links[i];
+    a.classList.toggle('on', !!(a.dataset && a.dataset.page === pid));
+  }
+  setText('crumb-title', meta.title);
+  setText('crumb-sub', meta.sub);
+}
+function setPage(id, save){
+  const pid = pageMeta(id).id;
+  showPage(pid);
+  if (save !== false){ state.settings.tab = pid; saveSoon(); }
+  try { window.scrollTo(0, 0); } catch (e) {}
+}
+function initNav(){
+  const links = document.querySelectorAll('.nav a, .side-nav a');
+  for (let i = 0; i < links.length; i++){
+    links[i].addEventListener('click', function(e){
+      if (e && e.preventDefault) e.preventDefault();
+      setPage(this.dataset ? this.dataset.page : '');
+    });
+  }
+  showPage((state.settings && state.settings.tab) || 'market');
 }
 
 /* =====================================================================
@@ -1740,8 +2046,10 @@ function renderMarketOverview(){
   const m = marketData && marketData.market;
   const set = (id, txt, cls) => setText(id, txt, cls);
   if (!m){
-    set('mk-index', '—'); set('mk-greedy', '—'); set('mk-breadth', '—');
-    $('mk-types').innerHTML = ''; $('mk-alt').innerHTML = '';
+    set('mk-index', '—'); set('mk-greedy', '—'); set('mk-breadth', '—'); set('mk-online', '—');
+    set('mk-market-time', '—', 'muted');
+    $('mk-types').innerHTML = emptyBox('行情未加载：到「我的 → 实时行情」点「更新行情」');
+    $('mk-alt').innerHTML = emptyBox('行情未加载，暂时没有异动榜');
     return;
   }
   set('mk-index', (m.index != null ? m.index : '—') + (m.indexChg != null ? '  ' + (m.indexChg > 0 ? '+' : '') + m.indexChg + '%' : ''),
@@ -1752,31 +2060,41 @@ function renderMarketOverview(){
     set('mk-breadth', up + ' 涨 / ' + dn + ' 跌' + (m.breadth.up30 != null ? ('　(30日 ' + m.breadth.up30 + '/' + m.breadth.down30 + ')') : ''),
         dn > up * 2 ? 'neg' : (up > dn ? 'pos' : ''));
   }
-  setText('mk-market-time', m.indexAt ? String(m.indexAt).slice(5, 16) : '—', 'muted');
-  /* 品类涨跌（板块轮动用） */
-  if (m.types && m.types.length){
-    const top = m.types.slice(0, 4), bot = m.types.slice(-4).reverse();
-    $('mk-types').innerHTML =
-      '<p class="hint" style="margin-top:10px"><b>板块 7 日</b>　强：' +
-      top.map(t => esc(t.name) + ' <span class="' + (t.d7 > 0 ? 'pos' : 'neg') + '">' + (t.d7 > 0 ? '+' : '') + t.d7 + '%</span>').join('　') +
-      '<br>弱：' + bot.map(t => esc(t.name) + ' <span class="neg">' + t.d7 + '%</span>').join('　') + '</p>';
-  }
-  /* 异动榜（吸筹信号源） */
-  const alt = (marketData.alteration || []).slice(0, 8);
+  set('mk-online', m.online == null ? '—' : Number(m.online).toLocaleString('zh-CN') + ' 人', '');
+  setText('mk-market-time', m.indexAt ? String(m.indexAt).slice(5, 16).replace('T', ' ') : '—', 'muted');
+
+  /* 板块 7 日强弱榜：全品类按 d7 排序，取最强 6 / 最弱 6 */
+  const ts = (m.types || []).slice();
+  if (ts.length){
+    ts.sort(function(a, b){ return Calc.toNum(b.d7) - Calc.toNum(a.d7); });
+    const row = function(t){
+      const d1 = Calc.toNum(t.d1), d7 = Calc.toNum(t.d7), d30 = Calc.toNum(t.d30);
+      return '<div class="row"><span class="rn">' + esc(String(t.name)) +
+        '<em>1 日 ' + pctNum(d1, true) + '　·　30 日 ' + pctNum(d30, true) + '</em></span>' +
+        '<span class="rv ' + (d7 > 0 ? 'pos' : (d7 < 0 ? 'neg' : 'muted')) + '">' + pctNum(d7, true) + '</span></div>';
+    };
+    $('mk-types').innerHTML = '<div class="split">' +
+      '<div><div class="split-h pos">强势 6 个板块（7 日）</div>' + ts.slice(0, 6).map(row).join('') + '</div>' +
+      '<div><div class="split-h neg">弱势 6 个板块（7 日）</div>' + ts.slice(-6).reverse().map(row).join('') + '</div>' +
+      '</div>';
+  } else $('mk-types').innerHTML = emptyBox('暂无板块数据');
+
+  /* 异动榜：求购↑ / 在售↓ = 有人在收货 */
+  const alt = marketData.alteration || [];
   if (alt.length){
-    $('mk-alt').innerHTML = '<p class="hint" style="margin-top:10px"><b>异动榜</b>（求购↑ / 在售↓ = 有人在收货）</p>' +
-      alt.map(a => {
-        const key = String(a.key || '').replace('buff_', '').replace('_num', '');
-        const label = key === 'buy' ? '求购' : (key === 'sell' ? '在售' : key);
-        /* 多空方向要按指标区分：求购增加是看涨，在售减少也是看涨 */
-        const bullish = (key === 'buy') ? (a.to > a.from) : (key === 'sell' ? (a.to < a.from) : (a.to > a.from));
-        const delta = a.to - a.from;
-        return '<div class="kv"><span class="k2" style="max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
-          esc(String(a.name).slice(0, 20)) + '</span>' +
-          '<span class="v2 ' + (bullish ? 'pos' : 'neg') + '" style="white-space:nowrap">' + label + ' ' + a.from + ' → ' + a.to +
-          ' (' + (delta > 0 ? '+' : '') + delta + ')　' + (a.price == null ? '' : money(a.price)) + '</span></div>';
-      }).join('');
-  } else $('mk-alt').innerHTML = '';
+    const arow = function(a){
+      const key = String(a.key || '').replace('buff_', '').replace('yyyp_', '').replace('_num', '');
+      const label = key === 'buy' ? '求购' : (key === 'sell' ? '在售' : (key === 'price' ? '售价' : key));
+      const bullish = (key === 'buy') ? (a.to > a.from) : (key === 'sell' ? (a.to < a.from) : (a.to > a.from));
+      const delta = Calc.toNum(a.to) - Calc.toNum(a.from);
+      return '<div class="row"><span class="rn">' + esc(String(a.name).slice(0, 28)) +
+        '<em>' + label + ' ' + fmtNum(Calc.toNum(a.from), 0) + ' → ' + fmtNum(Calc.toNum(a.to), 0) +
+        (a.price == null ? '' : '　现价 ' + money(Calc.toNum(a.price))) + '</em></span>' +
+        '<span class="rv ' + (bullish ? 'pos' : 'neg') + '">' + (delta > 0 ? '+' : '') + fmtNum(delta, 0) + '</span></div>';
+    };
+    $('mk-alt').innerHTML = alt.slice(0, 10).map(arow).join('') +
+      (alt.length > 10 ? '<details><summary>展开全部 ' + alt.length + ' 条异动</summary>' + alt.slice(10).map(arow).join('') + '</details>' : '');
+  } else $('mk-alt').innerHTML = emptyBox('暂无异动数据');
 }
 function renderMarketStatus(){
   const n = marketData ? marketKeys().length : 0;
@@ -1803,6 +2121,8 @@ async function loadMarket(manual){
     state.settings.marketTime = j.updatedAtText || '';
     state.settings.marketCount = marketKeys().length;
     saveSoon(); renderMarketStatus();
+    if (!signalsData && j.signals && typeof j.signals === 'object'){ signalsData = j.signals; signalsState = 'ok'; }
+    renderSignals(); renderWhales(); renderDataTime();
     if (manual){
       showBanner('行情已更新：' + marketKeys().length.toLocaleString('zh-CN') + ' 件（' + (j.updatedAtText || '') + '）');
       setTimeout(function(){ $('banner').hidden = true; }, 4000);
@@ -1915,6 +2235,306 @@ function initMarket(){
 
   /* 打开 App 时自动拉一次行情（失败不打扰用户） */
   if (String(state.settings.marketUrl || '').trim()) loadMarket(false);
+}
+
+/* =====================================================================
+   11.8) 新增数据源：signals.json / analysis.json
+   规矩：任何一份拉不到都静默降级，页面显示「加载中 / 未生成」而不是报错、白屏
+   ===================================================================== */
+let signalsData = null, analysisData = null;
+let signalsState = 'loading', analysisState = 'loading';        // loading | ok | fail
+
+async function fetchJSON(url){
+  try {
+    const sep = url.indexOf('?') < 0 ? '?' : '&';
+    const r = await fetch(url + sep + '_=' + Date.now(), { cache: 'no-store' });
+    if (!r || !r.ok) return null;
+    const j = await r.json();
+    return (j && typeof j === 'object') ? j : null;
+  } catch (e) { return null; }                                   // 断网 / 404 / 解析失败一律静默
+}
+function skelBox(txt){ return '<div class="skel"><i></i>' + txt + '</div>'; }
+function emptyBox(txt){ return '<div class="empty2">' + txt + '</div>'; }
+/* 契约：取不到的字段一律 null（不是 0）→ 显示「—」，绝不能把 null 当成 0 显示 */
+function isNil(v){ return v === null || v === undefined || v === ''; }
+function m2(v){ return isNil(v) ? '—' : money(Calc.toNum(v)); }
+function n2(v, d){ return isNil(v) ? '—' : fmtNum(Calc.toNum(v), d === undefined ? 0 : d); }
+function r2(v, sign){ return isNil(v) ? '—' : pct(Calc.toNum(v), sign); }
+function c2(v, sign){ return isNil(v) ? '—' : pctNum(Calc.toNum(v), sign); }
+function sigWait(){ return signalsState === 'fail'
+  ? emptyBox('signals.json 没取到（信号页暂时空着，其他页面不受影响）')
+  : skelBox('信号数据加载中…'); }
+function anaWait(){ return analysisState === 'fail'
+  ? emptyBox('analysis.json 还没生成，这里先留空（其他页面不受影响）')
+  : skelBox('分析生成中…'); }
+
+async function loadSignals(){
+  signalsData = await fetchJSON('./signals.json');
+  signalsState = signalsData ? 'ok' : 'fail';
+  if (!signalsData && marketData && marketData.signals && typeof marketData.signals === 'object'){
+    signalsData = marketData.signals; signalsState = 'ok';       // 兜底：market.json 里也合并了一份
+  }
+  renderSignals(); renderWhales(); renderDataTime();
+}
+async function loadAnalysis(){
+  analysisData = await fetchJSON('./analysis.json');
+  analysisState = analysisData ? 'ok' : 'fail';
+  renderVerdict(); renderAnalysisHoldings(); renderOpportunities(); renderDataTime();
+}
+function renderDataTime(){
+  const m = (marketData && marketData.updatedAtText) || '';
+  const s = (signalsData && signalsData.updatedAtText) || '';
+  const a = (analysisData && analysisData.updatedAtText) || '';
+  const main = m || a || s || '—';
+  setText('data-time', main);
+  setText('data-time2', '行情 ' + (m || '—') + '　信号 ' + (s || '—') + '　分析 ' + (a || '—'));
+  setText('crumb-time', main);
+}
+
+/* ---------- ① 大盘：今日结论（analysis.marketVerdict） ---------- */
+function renderVerdict(){
+  const box = $('vd-box'); if (!box) return;
+  const v = analysisData && analysisData.marketVerdict;
+  if (!v){
+    setText('vd-time', analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…', 'muted');
+    box.innerHTML = anaWait();
+    return;
+  }
+  setText('vd-time', analysisData.updatedAtText || '—', 'muted');
+  const lv = String(v.level == null ? '' : v.level);
+  const k = /涨/.test(lv) ? 'pos' : (/跌/.test(lv) ? 'neg' : 'warn');
+  const tone = k === 'neg' ? 'danger' : (k === 'pos' ? 'ok' : 'warn');
+  box.innerHTML =
+    '<div class="vd-top"><span class="vd-lv ' + k + '">' + esc(lv || '—') + '</span>' +
+    '<span class="vd-score">宽度得分 <b>' + (v.score == null ? '—' : fmtNum(Calc.toNum(v.score), 1)) + '</b> / 100</span></div>' +
+    '<p class="vd-text">' + esc(v.text || '—') + '</p>' +
+    '<div class="alert ' + tone + '"><b>该不该动手：</b>' + esc(v.advice || '—') + '</div>' +
+    (analysisData.source ? '<p class="hint">来源：' + esc(analysisData.source) + '</p>' : '');
+}
+
+/* ---------- ② 库存：analysis.holdings 逐项建议 ---------- */
+function actCls(a){
+  if (a === '加仓') return 'b-add';
+  if (a === '减仓') return 'b-cut';
+  if (a === '清仓') return 'b-out';
+  return 'b-hold';
+}
+function adviceHTML(h){
+  const num = Calc.toNum(h.num), pnl = Calc.toNum(h.pnl), rate = Calc.toNum(h.pnlRate);
+  const act = String(h.action == null ? '' : h.action), urg = String(h.urgency == null ? '' : h.urgency);
+  const s7 = Calc.toNum(h.sector7d);
+  const cls7 = h.sector7d == null ? 'muted' : (s7 > 0 ? 'pos' : 'neg');
+  return '<div class="adv">' +
+    '<div class="adv-top">' +
+      '<div class="adv-name">' + esc(h.name || '—') +
+        '<em>' + fmtNum(num, 0) + ' 把　·　' + esc(String(h.sector || '未分类')) + '　·　板块 7 日 ' +
+        (h.sector7d == null ? '—' : pctNum(s7, true)) + '</em></div>' +
+      (act ? '<span class="badge ' + actCls(act) + '">' + esc(act) + '</span>' : '') +
+      (urg ? '<span class="badge u-' + esc(urg) + '">紧急 ' + esc(urg) + '</span>' : '') +
+    '</div>' +
+    '<div class="res" style="margin-top:0">' +
+      '<div class="stat hero"><div class="k">浮动盈亏</div><div class="v ' + (pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : '')) + '">' +
+        money(pnl, true) + '　' + pct(rate, true) + '</div></div>' +
+      '<div class="stat"><div class="k">现价 / 成本价</div><div class="v" style="font-size:16px">' + money(Calc.toNum(h.mkt)) + ' / ' + money(Calc.toNum(h.cost)) + '</div></div>' +
+      '<div class="stat"><div class="k">目标卖出</div><div class="v pos" style="font-size:16px">' + (h.targetSell == null ? '—' : money(Calc.toNum(h.targetSell))) + '</div></div>' +
+      '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + (h.stopLoss == null ? '—' : money(Calc.toNum(h.stopLoss))) + '</div></div>' +
+    '</div>' +
+    '<div style="margin-top:8px">' +
+      '<div class="row"><span class="rn">市值 / 成本合计</span><span class="rv">' + m2(h.value) + '<em>投入 ' + m2(h.costTotal) + '</em></span></div>' +
+      '<div class="row"><span class="rn">在售 / 求购</span><span class="rv">' + n2(h.listed) + '<em>求购 ' + n2(h.buyNum) + '</em></span></div>' +
+      '<div class="row"><span class="rn">日成交 / 价差</span><span class="rv">' + (isNil(h.turnover) ? '—' : n2(h.turnover) + ' 件') + '<em>价差 ' + r2(h.spread, true) + '</em></span></div>' +
+      '<div class="row"><span class="rn">存世量 / 板块 7 日</span><span class="rv">' + n2(h.supply) + '<em class="' + cls7 + '">板块 ' + c2(h.sector7d, true) + '</em></span></div>' +
+    '</div>' +
+    (h.reason ? '<p class="why"><b>依据</b>' + esc(h.reason) + '</p>' : '') +
+    (h.plan ? '<p class="why plan"><b>操作</b>' + esc(h.plan) + '</p>' : '') +
+  '</div>';
+}
+function renderAnalysisHoldings(){
+  const box = $('an-hold'); if (!box) return;
+  const a = analysisData;
+  const list = (a && Array.isArray(a.holdings)) ? a.holdings : null;
+  setText('an-hold-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const crit = $('an-hold-crit');
+  if (crit) crit.innerHTML = (a && a.screening && a.screening.criteria) ? ('口径：' + esc(a.screening.criteria)) : '';
+  if (!list || !list.length){ box.innerHTML = anaWait(); return; }
+  /* 先按「紧急度 + 该不该动」排一遍，再只铺开前 8 个，其余折起来（44 个品种全铺开会很长） */
+  const uo = { '高': 0, '中': 1, '低': 2 }, ao = { '清仓': 0, '减仓': 1, '加仓': 2, '持有': 3 };
+  const sorted = list.slice().sort(function(x, y){
+    const ux = uo[x.urgency] === undefined ? 3 : uo[x.urgency], uy = uo[y.urgency] === undefined ? 3 : uo[y.urgency];
+    if (ux !== uy) return ux - uy;
+    const ax = ao[x.action] === undefined ? 9 : ao[x.action], ay = ao[y.action] === undefined ? 9 : ao[y.action];
+    if (ax !== ay) return ax - ay;
+    return Calc.toNum(x.pnl) - Calc.toNum(y.pnl);
+  });
+  const head = sorted.slice(0, 8), rest = sorted.slice(8);
+  box.innerHTML = '<div class="adv-list">' + head.map(adviceHTML).join('') + '</div>' +
+    (rest.length ? '<details style="margin-top:10px"><summary>展开其余 ' + rest.length + ' 个品种的建议</summary>' +
+      '<div class="adv-list" style="margin-top:10px">' + rest.map(adviceHTML).join('') + '</div></details>' : '');
+}
+
+/* ---------- ③ 市场：analysis.opportunities 可入场机会 ---------- */
+function oppHTML(o){
+  const tier = String(o.tier == null ? '-' : o.tier).toUpperCase().slice(0, 1);
+  const ret = Calc.toNum(o.expectedReturn);
+  const risk = String(o.risk == null ? '' : o.risk);
+  const rcls = risk === '低' ? 'pos' : (risk === '高' ? 'neg' : 'warn');
+  const s7 = Calc.toNum(o.sector7d);
+  return '<div class="opp">' +
+    '<div class="opp-top"><div class="opp-name">' + esc(o.cn || o.name || '—') +
+      (o.cn && o.name ? '<em>' + esc(o.name) + '</em>' : '') + '</div>' +
+      (tier === '-' ? '' : '<span class="tier t-' + esc(tier) + '">' + esc(tier) + '</span>') + '</div>' +
+    '<div class="opp-meta">评分 <b>' + (o.score == null ? '—' : fmtNum(Calc.toNum(o.score), 0)) + '</b>　风险 <b class="' + rcls + '">' + esc(risk || '—') + '</b>　持有 <b>' +
+      (o.holdingDays == null ? '—' : fmtNum(Calc.toNum(o.holdingDays), 0) + ' 天') + '</b>　板块 <b>' + esc(String(o.sector || '—')) + '</b> ' +
+      (o.sector7d == null ? '' : '<b class="' + (s7 > 0 ? 'pos' : 'neg') + '">' + pctNum(s7, true) + '</b>') + '</div>' +
+    '<div class="res" style="margin-top:0">' +
+      '<div class="stat hero"><div class="k">入场价 → 目标价</div><div class="v">' + m2(o.entry) + ' <span class="muted" style="font-size:15px">→</span> <span class="pos">' + m2(o.target) + '</span></div></div>' +
+      '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + m2(o.stop) + '</div></div>' +
+      '<div class="stat"><div class="k">预期收益</div><div class="v ' + (ret > 0 ? 'pos' : 'neg') + '" style="font-size:16px">' + r2(o.expectedReturn, true) + '</div></div>' +
+      '<div class="stat"><div class="k">建议资金</div><div class="v" style="font-size:16px">' + (isNil(o.capital) ? '—' : money0(Calc.toNum(o.capital))) + '</div></div>' +
+      '<div class="stat"><div class="k">现价</div><div class="v" style="font-size:16px">' + m2(o.price) + '</div></div>' +
+    '</div>' +
+    '<div style="margin-top:8px">' +
+      '<div class="row"><span class="rn">在售 / 求购</span><span class="rv">' + n2(o.listed) + '<em>求购 ' + n2(o.buyNum) + '</em></span></div>' +
+      '<div class="row"><span class="rn">日成交 / 存世量</span><span class="rv">' + (isNil(o.turnover) ? '—' : n2(o.turnover) + ' 件') + '<em>存世 ' + n2(o.supply) + '</em></span></div>' +
+      '<div class="row"><span class="rn">在售占比</span><span class="rv">' + r2(o.listedRatio) + '</span></div>' +
+    '</div>' +
+    (o.reason ? '<p class="why"><b>为什么</b>' + esc(o.reason) + '</p>' : '') +
+    (o.plan ? '<p class="why plan"><b>怎么做</b>' + esc(o.plan) + '</p>' : '') +
+  '</div>';
+}
+function renderOpportunities(){
+  const box = $('op-list'); if (!box) return;
+  const a = analysisData;
+  setText('op-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const sc = (a && a.screening) || null;
+  setText('op-scan', sc && sc.scanned != null ? fmtNum(Calc.toNum(sc.scanned), 0) : '—');
+  setText('op-pass', sc && sc.passed != null ? fmtNum(Calc.toNum(sc.passed), 0) : '—');
+  setText('op-budget', sc && sc.budget != null ? money0(Calc.toNum(sc.budget)) : '—');
+  const crit = $('op-crit');
+  if (crit) crit.innerHTML = (sc && sc.criteria) ? ('筛选说明：' + esc(sc.criteria)) : '还拿不到筛选口径。';
+  const list = (a && Array.isArray(a.opportunities)) ? a.opportunities : null;
+  if (!list || !list.length){
+    box.innerHTML = '<div class="card" style="grid-column:1/-1">' + anaWait() +
+      '<p class="hint">机会引擎还没产出标的。现在的市场状态是普跌，空仓等待本身就是一种操作。</p></div>';
+    return;
+  }
+  box.innerHTML = list.slice(0, 12).map(oppHTML).join('') +
+    (list.length > 12 ? '<div class="card" style="grid-column:1/-1"><details><summary>其余 ' + (list.length - 12) + ' 个机会</summary><div class="opp-list" style="margin-top:10px">' +
+      list.slice(12).map(oppHTML).join('') + '</div></details></div>' : '');
+}
+
+/* ---------- ④ 信号：吸筹 / 异动 / 价差 / 箱子 / 大户 ---------- */
+function accRow(x){
+  const wc = Calc.toNum(x.whaleCount), qty = Calc.toNum(x.qty);
+  const t = String(x.last || x.first || '').replace('T', ' ');
+  return '<div class="row"><span class="rn">' + esc(String(x.name || '—')) +
+    '<em>' + (wc > 1 ? (fmtNum(wc, 0) + ' 个大户同时收货　·　') : '') + '共计 ' + fmtNum(qty, 0) + ' 件' +
+    (t ? '　·　' + esc(t.slice(5, 16)) : '') + '</em></span>' +
+    '<span class="rv">' + money(Calc.toNum(x.price)) + '<em>合计 ' + money0(Calc.toNum(x.value)) + '</em></span></div>';
+}
+function altRow(x){
+  const key = String(x.key || '');
+  const isBuy = key.indexOf('buy') >= 0;
+  const label = isBuy ? '求购' : (key.indexOf('sell') >= 0 ? '在售' : (key || '指标'));
+  const d = Calc.toNum(x.delta);
+  const bull = (x.bullish === undefined || x.bullish === null) ? (d > 0) : !!x.bullish;
+  return '<div class="row"><span class="rn">' + esc(String(x.name || '—')) +
+    '<em>' + esc(label) + ' ' + fmtNum(Calc.toNum(x.from), 0) + ' → ' + fmtNum(Calc.toNum(x.to), 0) +
+    (x.buyPrice == null ? '' : '　均价 ' + money(Calc.toNum(x.buyPrice))) + '</em></span>' +
+    '<span class="rv ' + (bull ? 'pos' : 'neg') + '">' + (d > 0 ? '+' : '') + fmtNum(d, 0) +
+    '<em>' + money(Calc.toNum(x.price)) + '</em></span></div>';
+}
+function roiRow(x){
+  return '<div class="row"><span class="rn">' + esc(String(x.name || '—')) +
+    '<em>箱子售价 ' + money(Calc.toNum(x.price)) + '　·　在售 ' + fmtNum(Calc.toNum(x.num), 0) + '</em></span>' +
+    '<span class="rv ' + (Calc.toNum(x.roi) > 0 ? 'pos' : 'neg') + '">' + fmtNum(Calc.toNum(x.roi), 1) + '%' +
+    '<em>期望到手 ' + money(Calc.toNum(x.income)) + '</em></span></div>';
+}
+function whaleRow(x){
+  return '<div class="row"><span class="rn">' + esc(String(x.name || '—')) +
+    '<em>ID ' + esc(String(x.id == null ? '—' : x.id)) + '　·　' +
+    esc(String(x.tradedAt || '').replace('T', ' ').slice(0, 16)) + '</em></span>' +
+    '<span class="rv">' + fmtNum(Calc.toNum(x.amount), 0) + ' 件<em>' + money0(Calc.toNum(x.value)) + '</em></span></div>';
+}
+/* 列表卡片：前 limit 条直接铺开，其余折进 <details>，避免一屏几千行 */
+function listBox(el, list, emptyTxt, rowFn, limit){
+  if (!el) return;
+  if (!list){ el.innerHTML = sigWait(); return; }
+  if (!list.length){ el.innerHTML = emptyBox(emptyTxt); return; }
+  const fn = rowFn || accRow, n = limit || 20;
+  const rest = list.slice(n);
+  el.innerHTML = list.slice(0, n).map(fn).join('') +
+    (rest.length ? '<details><summary>展开其余 ' + rest.length + ' 条</summary>' + rest.map(fn).join('') + '</details>' : '');
+}
+function renderSignals(){
+  const s = signalsData;
+  setText('sig-time', s && s.updatedAtText ? s.updatedAtText : (signalsState === 'fail' ? '未加载' : '加载中…'), 'muted');
+  const cons = (s && Array.isArray(s.consensus)) ? s.consensus : null;
+  const acc = (s && Array.isArray(s.accumulation)) ? s.accumulation : null;
+  const bull = (s && Array.isArray(s.bullAlt)) ? s.bullAlt : null;
+  const bear = (s && Array.isArray(s.bearAlt)) ? s.bearAlt : null;
+  const roi = (s && Array.isArray(s.roiTop)) ? s.roiTop : null;
+
+  setText('sig-acc-n', acc ? ('共 ' + acc.length + ' 条') : '—', 'muted');
+  listBox($('sig-cons'), cons, '没有多个大户同时收货的品种（共识为空 = 空仓等待）', accRow, 10);
+  listBox($('sig-acc'), acc, '暂无吸筹快照', accRow, 10);
+  listBox($('sig-bull'), bull, '暂无看涨异动', altRow, 10);
+  listBox($('sig-bear'), bear, '暂无看跌异动', altRow, 10);
+  listBox($('sig-roi'), roi, '暂无箱子 ROI 数据', roiRow, 10);
+  renderSpread();
+}
+function renderSpread(){
+  const box = $('sig-spread'); if (!box) return;
+  if (!marketData || !marketData.prices){
+    setText('sig-spread-n', '—', 'muted');
+    box.innerHTML = emptyBox('行情未加载，算不了跨平台价差（到「我的 → 实时行情」点「更新行情」）');
+    return;
+  }
+  const keys = Object.keys(marketData.prices), out = [];
+  for (let i = 0; i < keys.length; i++){
+    const info = mInfo(marketData.prices[keys[i]]);
+    if (!info || !info.buff || !info.yyyp) continue;
+    const b = Calc.toNum(info.buff[0]), y = Calc.toNum(info.yyyp[0]);
+    const bn = Calc.toNum(info.buff[1]), yn = Calc.toNum(info.yyyp[1]);
+    if (b <= 0 || y <= 0) continue;
+    if (Math.min(bn, yn) < 30) continue;                       // 在售太少的价差不可信
+    out.push({ name: keys[i], cn: info.cn || '', b: b, y: y, bn: bn, yn: yn, sp: (b - y) / y });
+  }
+  out.sort(function(a, b){ return Math.abs(b.sp) - Math.abs(a.sp); });
+  const top = out.slice(0, 20);
+  setText('sig-spread-n', out.length ? ('可比 ' + out.length + ' 件 · 显示价差最大 20 件') : '—', 'muted');
+  if (!top.length){ box.innerHTML = emptyBox('没有可比较的跨平台价差'); return; }
+  box.innerHTML = '<table class="tbl fluid"><thead><tr><th>饰品</th><th>BUFF</th><th>悠悠</th><th>价差</th></tr></thead><tbody>' +
+    top.map(function(x){
+      const c = x.sp > 0 ? 'pos' : (x.sp < 0 ? 'neg' : '');
+      return '<tr><td>' + esc(x.cn || x.name) + '<em class="sub">' + esc(x.name) + '</em></td>' +
+        '<td>' + money(x.b) + '<em class="sub">在售 ' + fmtNum(x.bn, 0) + '</em></td>' +
+        '<td>' + money(x.y) + '<em class="sub">在售 ' + fmtNum(x.yn, 0) + '</em></td>' +
+        '<td class="' + c + '">' + pct(x.sp, true) + '</td></tr>';
+    }).join('') + '</tbody></table>';
+}
+function renderWhales(){
+  const s = signalsData;
+  const wh = (s && Array.isArray(s.whales)) ? s.whales : null;
+  setText('mk-whale-time', s && s.updatedAtText ? s.updatedAtText : '—', 'muted');
+  const brief = $('mk-whales');
+  if (brief){
+    if (!wh) brief.innerHTML = sigWait();
+    else if (!wh.length) brief.innerHTML = emptyBox('暂无大户动态');
+    else brief.innerHTML = wh.slice().sort(function(a, b){ return Calc.toNum(b.value) - Calc.toNum(a.value); })
+      .slice(0, 6).map(whaleRow).join('') + '<p class="hint">按持仓市值排序，完整名录见「信号」页。</p>';
+  }
+  setText('sig-whale-n', wh ? ('共 ' + wh.length + ' 位') : '—', 'muted');
+  const box = $('sig-whales');
+  if (box){
+    if (!wh) box.innerHTML = sigWait();
+    else if (!wh.length) box.innerHTML = emptyBox('暂无大户名录');
+    else {
+      const sorted = wh.slice().sort(function(a, b){ return Calc.toNum(b.value) - Calc.toNum(a.value); });
+      box.innerHTML = sorted.slice(0, 10).map(whaleRow).join('') +
+        (sorted.length > 10 ? '<details><summary>展开全部 ' + sorted.length + ' 位大户</summary>' + sorted.slice(10).map(whaleRow).join('') + '</details>' : '');
+    }
+  }
 }
 
 /* =====================================================================
@@ -2070,6 +2690,9 @@ async function init(){
 
   initNav();
   initMarket();
+  renderDataTime();
+  loadSignals();
+  loadAnalysis();
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
