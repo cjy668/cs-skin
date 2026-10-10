@@ -225,6 +225,21 @@ details[open] summary::before{content:'▾ '}
       <div id="mk-alt"></div>
     </div>
 
+    <div class="card" id="pf-card" hidden>
+      <div class="card-title">我的真实持仓 <span class="r" id="pf-time">—</span></div>
+      <div class="res" style="margin-top:0">
+        <div class="stat"><div class="k">市场价</div><div class="v" id="pf-value">—</div></div>
+        <div class="stat"><div class="k">买入成本</div><div class="v" id="pf-cost">—</div></div>
+        <div class="stat"><div class="k">浮动盈亏</div><div class="v" id="pf-pnl">—</div></div>
+        <div class="stat"><div class="k">件数 / 品种</div><div class="v" id="pf-count">—</div></div>
+      </div>
+      <div id="pf-fam"></div>
+      <div id="pf-move"></div>
+      <button class="btn ghost" id="pf-toggle" style="margin-top:10px">展开全部品种</button>
+      <div id="pf-all" hidden></div>
+      <p class="hint" id="pf-src" style="margin-top:8px"></p>
+    </div>
+
     <div class="sec-head"><div class="n">1</div><h2>我的资金</h2><div class="t">改完全自动算</div></div>
 
     <div class="card">
@@ -1638,6 +1653,65 @@ function initNav(){
    ===================================================================== */
 let marketData = null, pickIndex = -1;
 
+/* ---------- 我的真实持仓（来自手机截图识别的悠悠台账） ---------- */
+let pfData = null;
+async function loadPortfolio(){
+  try {
+    const r = await fetch('./portfolio.json?_=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if (!j || !j.summary) throw new Error('格式不对');
+    pfData = j; renderPortfolio();
+  } catch (e) { /* 没有台账文件就不显示这张卡，不打扰用户 */ }
+}
+function renderPortfolio(){
+  if (!pfData) return;
+  const s = pfData.summary;
+  $('pf-card').hidden = false;
+  setText('pf-value', money(s.value));
+  setText('pf-cost', money(s.cost));
+  const pnl = s.value - s.cost;
+  setText('pf-pnl', (pnl >= 0 ? '+' : '−') + money(Math.abs(pnl)).replace('¥', '¥') + '  ' + (pnl / s.cost * 100).toFixed(1) + '%', pnl >= 0 ? 'pos' : 'neg');
+  setText('pf-count', s.items + ' 件 / ' + s.kinds + ' 种');
+  setText('pf-time', pfData.updatedAtText || '—', 'muted');
+  /* 枪族集中度（用成本口径更真实） */
+  const fam = pfData.byFamilyCost || pfData.byFamily || {};
+  const costSum = Object.keys(fam).reduce(function (a, k) { return a + fam[k]; }, 0) || 1;
+  const fs = Object.keys(fam).map(function (k) { return { k: k, v: fam[k], p: fam[k] / costSum }; }).sort(function (a, b) { return b.v - a.v; });
+  $('pf-fam').innerHTML = '<p class="hint" style="margin-top:10px"><b>枪族集中度（按成本）</b>　' +
+    fs.map(function (x) {
+      const warn = x.p >= 0.40 ? ' ⛔' : (x.p >= 0.25 ? ' ⚠️' : '');
+      return esc(x.k) + ' <b>' + (x.p * 100).toFixed(1) + '%</b>' + warn;
+    }).join('　') + '</p>';
+  /* 最大的盈亏来源 */
+  const lose = (pfData.losers || []).slice(0, 5), win = (pfData.winners || []).slice(0, 3);
+  let h = '<p class="hint" style="margin-top:8px"><b>最大的坑</b><br>';
+  h += lose.map(function (x) { return '　' + esc(x.name.slice(0, 22)) + ' <span class="neg">' + money(x.pnl) + '</span>（' + (x.pnlRate * 100).toFixed(0) + '%）'; }).join('<br>');
+  if (win.length){
+    h += '<br><b>在赚的</b><br>' + win.map(function (x) { return '　' + esc(x.name.slice(0, 22)) + ' <span class="pos">+' + money(Math.abs(x.pnl)) + '</span>'; }).join('<br>');
+  }
+  h += '</p>';
+  $('pf-move').innerHTML = h;
+  /* 全部品种表 */
+  $('pf-all').innerHTML = '<div style="margin-top:10px">' + (pfData.top || []).map(function (x) {
+    const p = x.pnl == null ? '<span class="muted">无成本</span>' : ('<span class="' + (x.pnl >= 0 ? 'pos' : 'neg') + '">' + (x.pnl >= 0 ? '+' : '') + money(Math.abs(x.pnl)) + '</span>');
+    return '<div class="kv"><span class="k2" style="max-width:52%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
+      esc(x.name) + (x.num > 1 ? (' <b>×' + x.num + '</b>') : '') + '</span>' +
+      '<span class="v2" style="white-space:nowrap;font-size:12.5px">买 ' + (x.cost == null ? '—' : money(x.cost)) +
+      ' → 现 ' + money(x.mkt) + '　' + p + '</span></div>';
+  }).join('') + '</div>';
+  $('pf-src').innerHTML = '数据来源：' + esc(pfData.source || '') + '　（市场价合计与悠悠页头一致）';
+}
+function initPortfolio(){
+  const t = $('pf-toggle');
+  if (t) t.addEventListener('click', function () {
+    const box = $('pf-all');
+    box.hidden = !box.hidden;
+    t.textContent = box.hidden ? '展开全部品种' : '收起';
+  });
+  loadPortfolio();
+}
+
 function marketKeys(){ return marketData && marketData.prices ? Object.keys(marketData.prices) : []; }
 /* 兼容两种行情格式：
    新版（csqaq）= {cn, gid, buff:[价,量], yyyp:[价,量], steam:[价,量]}
@@ -1837,6 +1911,8 @@ function initMarket(){
     if (it && it.dataset.name) applyPick(it.dataset.name);
   });
   renderMarketStatus();
+  initPortfolio();
+
   /* 打开 App 时自动拉一次行情（失败不打扰用户） */
   if (String(state.settings.marketUrl || '').trim()) loadMarket(false);
 }
