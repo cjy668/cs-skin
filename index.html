@@ -270,6 +270,92 @@ details[open] summary::before{content:'▾ '}
 .why b{color:var(--cyan);margin-right:6px;font-size:12.5px}
 .why.plan b{color:var(--green)}
 
+/* ---------------- 实时状态标记（本机 / 云端 / 静态）+ 数据新鲜度 ---------------- */
+.live{display:flex;align-items:center;gap:5px;flex:0 0 auto;font-size:12px;color:var(--muted);white-space:nowrap}
+.lvdot{width:7px;height:7px;border-radius:50%;background:#4a5a6c;flex:0 0 auto}
+.lvdot.local{background:var(--green);box-shadow:0 0 8px rgba(47,208,122,.85)}
+.lvdot.cloud{background:var(--yellow);box-shadow:0 0 8px rgba(255,197,49,.85)}
+.lvdot.static{background:#4a5a6c}
+.lvtag{font-size:10.5px;font-weight:700;color:var(--green);background:rgba(47,208,122,.1);
+  border:1px solid rgba(47,208,122,.4);border-radius:5px;padding:0 4px;line-height:15px;white-space:nowrap}
+.fresh{display:flex;align-items:center;gap:7px;flex-wrap:wrap;max-width:680px;margin:0 auto;padding:4px 14px 7px;
+  border-top:1px solid rgba(35,48,66,.6);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+.fresh b{color:var(--muted);font-weight:700}
+.fresh .sep{color:#31435a}
+
+/* ---------------- 市场页 · 双轨分区（长期方案 / 短期苗头 / 条件单机会） ---------------- */
+.sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.sec-head h2{margin:0;font-size:17px;font-weight:800;letter-spacing:.2px}
+.sec-head .sec-sub{font-size:12.5px;color:var(--dim)}
+.sec-head .r{margin-left:auto;font-size:12px;color:var(--dim);font-weight:400;text-align:right}
+.sec-lt .sec-head h2{color:var(--cyan)}
+.sec-st .sec-head h2{color:var(--muted)}
+.sec-note{font-size:13px;line-height:1.7;color:#c3d2e2;margin:0;overflow-wrap:anywhere}
+.sec-note b{color:var(--cyan);margin-right:6px;font-size:12.5px}
+.lt-list,.st-list{display:grid;grid-template-columns:1fr;gap:var(--gap);margin-bottom:var(--gap)}
+/* 长期方案卡：视觉最重 */
+.lt{background:linear-gradient(180deg,rgba(34,211,238,.10),rgba(18,26,35,0) 140px),var(--card2);
+  border:1px solid rgba(34,211,238,.32);border-left:3px solid var(--cyan);border-radius:14px;padding:13px;min-width:0}
+.lt-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.lt-name{flex:1 1 auto;min-width:0;font-size:15.5px;font-weight:800;line-height:1.4;overflow-wrap:anywhere}
+.lt-name em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:2px;overflow-wrap:anywhere}
+.lt-thesis{margin:9px 0 0;padding:9px 11px;border-left:3px solid rgba(34,211,238,.5);background:rgba(34,211,238,.07);
+  border-radius:0 10px 10px 0;font-size:13.5px;line-height:1.72;color:#dceaf7;overflow-wrap:anywhere}
+.lt-thesis b{display:block;color:var(--cyan);font-size:12px;margin-bottom:3px;font-weight:700}
+.lt-story{font-size:13px;color:var(--muted);line-height:1.68;margin:8px 0 0;overflow-wrap:anywhere}
+.lt-story b{color:var(--dim);font-weight:700;margin-right:5px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.tags span{font-size:12px;background:var(--field);border:1px solid var(--line);border-radius:7px;padding:2px 7px;color:#a9bccf;overflow-wrap:anywhere}
+.lt-nums{margin-top:10px;padding:9px 10px;background:var(--field);border:1px solid var(--line);border-radius:11px;
+  font-size:13px;line-height:1.95;color:var(--muted);overflow-wrap:anywhere}
+.lt-nums b{color:var(--text);font-weight:800}
+.lt-nums .k{color:var(--dim)}
+.conf{margin-top:10px}
+.conf-top{display:flex;align-items:baseline;gap:7px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.conf-top b{font-size:17px;font-weight:800;color:var(--dim)}
+.conf-word{font-size:11.5px;color:var(--dim)}
+.conf-bar{height:8px;border-radius:5px;background:var(--field);border:1px solid var(--line);margin-top:5px;overflow:hidden}
+.conf-bar i{display:block;height:100%;border-radius:5px;background:#7b8ea3}
+.conf.mid .conf-bar i{background:var(--yellow)}
+.conf.mid .conf-top b{color:var(--yellow)}
+.conf.high .conf-bar i{background:var(--green)}
+.conf.high .conf-top b{color:var(--green)}
+.conf-note{font-size:12px;color:var(--dim);margin:6px 0 0;line-height:1.65;overflow-wrap:anywhere}
+.worst{margin-top:9px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.36);border-radius:11px;
+  padding:8px 10px;font-size:12.5px;line-height:1.65;color:#ffc9c9;overflow-wrap:anywhere}
+.worst b{display:block;color:#ff9b9b;font-size:11.5px;margin-bottom:2px}
+.exit{margin:8px 0 0;font-size:13px;line-height:1.7;color:#c3d2e2;overflow-wrap:anywhere}
+.exit b{color:var(--green);margin-right:6px;font-size:12.5px}
+.inv{margin-top:9px;background:rgba(255,197,49,.08);border:1px solid rgba(255,197,49,.34);border-radius:11px;padding:9px 10px}
+.inv h4{margin:0 0 6px;font-size:13px;color:var(--yellow);font-weight:800}
+.inv ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.7;color:#ffe0a3}
+.inv li{margin:5px 0;overflow-wrap:anywhere}
+/* 短期苗头卡：刻意做得比长期弱 */
+.st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0;opacity:.96}
+.st-top{display:flex;align-items:flex-start;gap:7px;margin-bottom:8px;flex-wrap:wrap}
+.st-name{flex:1 1 130px;min-width:0;font-size:14px;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
+.st-name em{display:block;font-style:normal;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:2px;overflow-wrap:anywhere}
+.badge2{flex:0 0 auto;font-size:11.5px;font-weight:800;border-radius:8px;padding:3px 8px;border:1px solid var(--line);
+  background:var(--field);color:var(--muted);white-space:nowrap}
+.badge2.hot{color:var(--cyan);border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.1)}
+.badge2.mid{color:var(--yellow);border-color:rgba(255,197,49,.36);background:rgba(255,197,49,.08)}
+.badge2.low{color:var(--dim)}
+.st-bar{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.st-bar .bar{flex:1 1 auto;height:6px;border-radius:4px;background:var(--field);border:1px solid var(--line);overflow:hidden;min-width:0}
+.st-bar .bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#ffc531,#ff9d3d)}
+.st-bar .n{flex:0 0 auto;font-size:12px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.ev{margin:8px 0 0;padding-left:16px;font-size:12.5px;line-height:1.7;color:#b9c9da}
+.ev li{margin:4px 0;overflow-wrap:anywhere}
+.st-price{font-size:13px;color:var(--muted);margin:0 0 2px}
+.st-price b{color:var(--text);font-weight:800}
+details.sec-more{margin-top:10px}
+/* 三个分区之间的快速跳转（手机上一页很长，给个锚点） */
+.jumpbar{display:flex;gap:6px;padding:8px}
+.jumpbar a{flex:1 1 0;min-width:0;text-align:center;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;
+  background:var(--field);border:1px solid var(--line);border-radius:10px;padding:9px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jumpbar a:active{background:var(--card2);color:var(--cyan)}
+.sec-lt,.sec-st,.sec-op{scroll-margin-top:140px}
+
 /* ---------------- 电脑（≥900px）：左侧固定边栏 + 多列网格 ---------------- */
 @media (min-width:900px){
   .side{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:var(--sidew);z-index:80;
@@ -280,6 +366,7 @@ details[open] summary::before{content:'▾ '}
   .appbar{border-bottom:0}
   .appbar-in{max-width:none;padding:10px 22px 7px}
   .summary{max-width:none;padding:0 22px;border-top:0}
+  .fresh{max-width:none;padding:4px 22px 8px;border-top:0}
   .s-item{padding:6px 14px 9px;text-align:left}
   .s-item+.s-item::before{display:none}
   .s-item:first-child{padding-left:0}
@@ -298,6 +385,8 @@ details[open] summary::before{content:'▾ '}
   .span2{grid-column:span 2}
   .span-all{grid-column:1/-1}
   .adv-list,.opp-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .lt-list,.st-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:0}
+  .jumpbar{max-width:520px}
   .grid2{gap:12px}
   .res{gap:10px}
 }
@@ -305,6 +394,7 @@ details[open] summary::before{content:'▾ '}
   .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
   .span2{grid-column:span 2}
   .adv-list,.opp-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lt-list,.st-list{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (min-width:1800px){
   main{max-width:1560px;margin:0 auto}
@@ -316,6 +406,9 @@ details[open] summary::before{content:'▾ '}
   .ipt .u,.banner,.tbl th,.tbl em.sub,.mini .m .k,.row .rn em,.row .rv em,.stat .v em,
   .tag2,.badge,.why b,.nav a,.sheet-item .qt,.sheet-hint,.save,.empty,.empty2,.skel,.risks,.tagline,
   .page-title span,.vd-score,.split-h{font-size:13px}
+  /* 双轨分区：手机上一律 ≥13px，保证「为什么长期成立 / 什么情况下我错了」能看清 */
+  .lt-story,.st-price,.exit,.lt-nums,.tags span,.conf-note,.inv ul,.worst,.badge2,.ev,
+  .sec-head .sec-sub,.fresh,.st-bar .n,.conf-word,.conf-top{font-size:13px}
   .card-title{font-size:13.5px}
   .sheet-item .qt{width:80px}
   .nav a{gap:2px}
@@ -362,12 +455,20 @@ details[open] summary::before{content:'▾ '}
     <header class="appbar">
       <div class="appbar-in">
         <div class="brand"><i></i>CS 饰品量化</div>
+        <div class="live" id="live-badge" title="实时价来源：本机 /api/live → 云端 live.json → 静态 market.json">
+          <span class="lvdot static" id="live-dot"></span><span id="live-text">静态数据</span>
+        </div>
         <div class="save"><span class="dot" id="save-dot"></span><span id="save-text">已保存</span></div>
       </div>
       <div class="summary">
         <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
         <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
         <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
+      </div>
+      <div class="fresh" id="fresh-bar">
+        <span>行情 <b>—</b></span><span class="sep">·</span>
+        <span>分析 <b>—</b></span><span class="sep">·</span>
+        <span>实时 <b>—</b></span>
       </div>
       <div class="crumbbar">
         <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
@@ -436,6 +537,7 @@ details[open] summary::before{content:'▾ '}
             <div id="pf-move"></div>
             <button class="btn ghost" id="pf-toggle" style="margin-top:10px">展开全部品种</button>
             <div id="pf-all" hidden></div>
+            <p class="hint" id="pf-live" hidden></p>
             <p class="hint" id="pf-src" style="margin-top:8px"></p>
           </div>
 
@@ -474,14 +576,36 @@ details[open] summary::before{content:'▾ '}
       </section>
 
       <!-- ============================================================
-           ③ 市场（可入场机会）
+           ③ 市场（双轨：长期方案 / 短期苗头 / 条件单机会）
            ============================================================ -->
       <section class="page" id="page-opp" data-page="opp">
-        <div class="page-title"><h1>市场</h1><span>可入场机会 · 操作方案与预期收益</span></div>
+        <div class="page-title"><h1>市场</h1><span>长期方案 · 短期苗头 · 条件单机会</span></div>
         <div class="cards">
 
-          <div class="card span-all">
-            <div class="card-title">筛选口径 <span class="r" id="op-time">分析生成中…</span></div>
+          <div class="card span-all jumpbar">
+            <a href="#sec-lt">① 长期方案</a><a href="#sec-st">② 短期苗头</a><a href="#sec-op">③ 条件单机会</a>
+          </div>
+
+          <!-- ---------- A. 长期方案：确定的、可实际打入的（视觉最重，放最前） ---------- -->
+          <div class="card span-all sec-lt" id="sec-lt">
+            <div class="sec-head"><h2>长期方案</h2><span class="sec-sub">能扛 7 天 CD · 有明确退出条件</span><span class="r" id="lt-time">分析生成中…</span></div>
+            <p class="sec-note" id="lt-note">—</p>
+            <div id="lt-summary"></div>
+            <div id="lt-extra"></div>
+          </div>
+          <div id="op-long" class="span-all lt-list"><div class="card"><div class="skel"><i></i>长期方案生成中…（analysis.json）</div></div></div>
+
+          <!-- ---------- B. 短期苗头：只做观察与预警（视觉弱化，放后面） ---------- -->
+          <div class="card span-all sec-st" id="sec-st">
+            <div class="sec-head"><h2>短期苗头</h2><span class="sec-sub">只是有苗头 · 不是买入建议</span><span class="r" id="st-time">分析生成中…</span></div>
+            <div class="alert warn" id="st-note">—</div>
+          </div>
+          <div id="op-short" class="span-all st-list"><div class="card"><div class="skel"><i></i>短期信号生成中…（analysis.json）</div></div></div>
+          <div id="st-summary" class="span-all" hidden></div>
+
+          <!-- ---------- C. 条件单机会：原有的 opportunities[]（一条都没删） ---------- -->
+          <div class="card span-all sec-op" id="sec-op">
+            <div class="sec-head"><h2>条件单机会</h2><span class="sec-sub">A / B / C 档 · 到价才挂单</span><span class="r" id="op-time">分析生成中…</span></div>
             <div class="res" style="margin-top:0">
               <div class="stat"><div class="k">已扫描品种</div><div class="v" id="op-scan">—</div></div>
               <div class="stat"><div class="k">通过筛选</div><div class="v" id="op-pass">—</div></div>
@@ -680,6 +804,7 @@ details[open] summary::before{content:'▾ '}
               <button class="btn sm" id="mk-refresh" type="button">刷新全部现价</button>
             </div>
             <p class="hint" id="mk-tip">行情文件由电脑上的采集脚本生成（csqaq 官方 API：BUFF / 悠悠 / Steam），手机只读取价格，不上传任何数据。</p>
+            <p class="hint" id="live-note">实时价：还没取（打开页面会自动试「本机 /api/live → 云端 live.json」）。</p>
           </div>
 
           <div class="card">
@@ -2007,6 +2132,30 @@ function renderPortfolio(){
       ' → 现 ' + money(x.mkt) + '　' + p + '</span></div>';
   }).join('') + '</div>';
   $('pf-src').innerHTML = '数据来源：' + esc(pfData.source || '') + '　（市场价合计与悠悠页头一致）';
+  renderPortfolioLive();
+}
+/* 用实时价估一遍真实持仓市值（拿不到实时价的品种仍用分析快照价，并说明覆盖了几个） */
+function renderPortfolioLive(){
+  const el = $('pf-live'); if (!el || !pfData) return;
+  const top = Array.isArray(pfData.top) ? pfData.top : [];
+  if (liveMode === 'static' || !top.length){ el.hidden = true; el.innerHTML = ''; return; }
+  let val = 0, hit = 0;
+  top.forEach(function(x){
+    const n = Calc.toNum(x.num);
+    const lp = livePrice(null, x.name);
+    if (lp != null) hit++;
+    val += n * (lp != null ? lp : Calc.toNum(x.mkt));
+  });
+  const s = pfData.summary || {};
+  const base = Calc.toNum(s.value), cost = Calc.toNum(s.cost);
+  const diff = val - base, pnl = val - cost;
+  el.hidden = false;
+  el.innerHTML = '<b>实时估算市值 ' + money(val) + '</b>　（比分析快照 ' + money(base) + ' ' +
+    (diff >= 0 ? '+' : '') + money(diff) + '，' + pct(base ? diff / base : 0, true) + '）' +
+    '<br>覆盖 <b>' + hit + ' / ' + top.length + '</b> 个品种的实时价' +
+    (hit < top.length ? ('（其余 ' + (top.length - hit) + ' 个仍用分析快照价）') : '') +
+    '　→ 浮动盈亏约 <b class="' + (pnl >= 0 ? 'pos' : 'neg') + '">' + money(pnl, true) + '</b>' +
+    '　·　' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + ' ' + esc((liveData && liveData.updatedAtText) || '');
 }
 function initPortfolio(){
   const t = $('pf-toggle');
@@ -2120,6 +2269,7 @@ async function loadMarket(manual){
     marketData = j;
     state.settings.marketTime = j.updatedAtText || '';
     state.settings.marketCount = marketKeys().length;
+    applyLiveToMarket();                                  /* 行情到了以后再叠一次实时价（不新增 key） */
     saveSoon(); renderMarketStatus();
     if (!signalsData && j.signals && typeof j.signals === 'object'){ signalsData = j.signals; signalsState = 'ok'; }
     renderSignals(); renderWhales(); renderDataTime();
@@ -2189,7 +2339,8 @@ function closePicker(){ $('pick-sheet').hidden = true; pickIndex = -1; }
 function applyPick(hash){
   const i = pickIndex;
   if (i < 0 || !state.holdings[i]) return;
-  const price = mPrice(marketData && marketData.prices[hash]);
+  const lp = livePrice(hash);                                  /* 有实时价就用实时价 */
+  const price = lp != null ? lp : mPrice(marketData && marketData.prices[hash]);
   if (price != null) state.holdings[i].now = String(price);
   state.holdings[i].hash = hash;
   if (!state.holdings[i].name){
@@ -2198,20 +2349,21 @@ function applyPick(hash){
   }
   touch(); renderHoldings(); recalcAll(); saveNow(true);
   closePicker();
-  showBanner('已匹配：' + hash + (price != null ? ('　国内现价 ' + money(price)) : ''));
+  showBanner('已匹配：' + hash + (price != null ? ('　' + (lp != null ? '实时价 ' : '国内现价 ') + money(price)) : ''));
   setTimeout(function(){ $('banner').hidden = true; }, 3500);
 }
 function refreshAllPrices(){
   if (!marketData){ showBanner('还没加载行情，先点「更新行情」。'); return 0; }
-  let n = 0, miss = 0;
+  let n = 0, miss = 0, live = 0;
   state.holdings.forEach(function(h){
     const key = h.hash || h.name;
-    const price = mPrice(marketData.prices[key]);
-    if (price != null && price > 0){ h.now = String(price); n++; }
+    const lp = livePrice(h.hash, h.name);                      /* 实时价优先，其次静态行情 */
+    const price = lp != null ? lp : mPrice(marketData.prices[key]);
+    if (price != null && price > 0){ h.now = String(price); n++; if (lp != null) live++; }
     else if (h.qty) miss++;
   });
   if (n){ touch(); renderHoldings(); recalcAll(); saveNow(true); }
-  showBanner(n ? ('已更新 ' + n + ' 个品种的现价' + (miss ? ('，另有 ' + miss + ' 个未匹配行情（点「选择品种」配对）') : '')) : '没有可更新的品种：先在持仓卡里点「🔍 选择品种」配对');
+  showBanner(n ? ('已更新 ' + n + ' 个品种的现价' + (live ? ('（其中 ' + live + ' 个是实时价）') : '') + (miss ? ('，另有 ' + miss + ' 个未匹配行情（点「选择品种」配对）') : '')) : '没有可更新的品种：先在持仓卡里点「🔍 选择品种」配对');
   setTimeout(function(){ $('banner').hidden = true; }, 4500);
   return n;
 }
@@ -2279,16 +2431,30 @@ async function loadSignals(){
 async function loadAnalysis(){
   analysisData = await fetchJSON('./analysis.json');
   analysisState = analysisData ? 'ok' : 'fail';
-  renderVerdict(); renderAnalysisHoldings(); renderOpportunities(); renderDataTime();
+  renderVerdict(); renderAnalysisHoldings(); renderLongTerm(); renderShortTerm();
+  renderOpportunities(); renderDataTime();
+}
+/* 数据新鲜度：行情 HH:MM · 分析 HH:MM · 实时 HH:MM（页头常驻，一眼知道数据有多新） */
+function hhmmOf(txt){
+  const m = txt ? String(txt).match(/(\d{1,2}):(\d{2})/) : null;
+  return m ? (two(Calc.toNum(m[1])) + ':' + m[2]) : '—';
 }
 function renderDataTime(){
   const m = (marketData && marketData.updatedAtText) || '';
   const s = (signalsData && signalsData.updatedAtText) || '';
   const a = (analysisData && analysisData.updatedAtText) || '';
+  const lv = liveMode === 'static' ? '' : ((liveData && liveData.updatedAtText) || '');
   const main = m || a || s || '—';
   setText('data-time', main);
-  setText('data-time2', '行情 ' + (m || '—') + '　信号 ' + (s || '—') + '　分析 ' + (a || '—'));
+  setText('data-time2', '行情 ' + (m || '—') + '　信号 ' + (s || '—') + '　分析 ' + (a || '—') +
+    '　实时 ' + (lv ? (lv + '（' + (liveMode === 'local' ? '本机' : '云端') + '）') : '未接入'));
   setText('crumb-time', main);
+  const fb = $('fresh-bar');
+  if (fb) fb.innerHTML =
+    '<span>行情 <b>' + hhmmOf(m) + '</b></span><span class="sep">·</span>' +
+    '<span>分析 <b>' + hhmmOf(a) + '</b></span><span class="sep">·</span>' +
+    '<span>实时 <b>' + (liveMode === 'static' ? '—' : hhmmOf(lv || '')) + '</b></span>';
+  renderLiveNote();
 }
 
 /* ---------- ① 大盘：今日结论（analysis.marketVerdict） ---------- */
@@ -2324,6 +2490,8 @@ function adviceHTML(h){
   const act = String(h.action == null ? '' : h.action), urg = String(h.urgency == null ? '' : h.urgency);
   const s7 = Calc.toNum(h.sector7d);
   const cls7 = h.sector7d == null ? 'muted' : (s7 > 0 ? 'pos' : 'neg');
+  const lp = livePrice(null, h.name);                      /* 实时价覆盖 analysis 里的静态现价 */
+  const nowTxt = lp != null ? money(lp) : money(Calc.toNum(h.mkt));
   return '<div class="adv">' +
     '<div class="adv-top">' +
       '<div class="adv-name">' + esc(h.name || '—') +
@@ -2335,7 +2503,8 @@ function adviceHTML(h){
     '<div class="res" style="margin-top:0">' +
       '<div class="stat hero"><div class="k">浮动盈亏</div><div class="v ' + (pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : '')) + '">' +
         money(pnl, true) + '　' + pct(rate, true) + '</div></div>' +
-      '<div class="stat"><div class="k">现价 / 成本价</div><div class="v" style="font-size:16px">' + money(Calc.toNum(h.mkt)) + ' / ' + money(Calc.toNum(h.cost)) + '</div></div>' +
+      '<div class="stat"><div class="k">现价' + (lp != null ? ' <span class="lvtag">实时</span>' : '') + ' / 成本价</div>' +
+        '<div class="v" style="font-size:16px">' + nowTxt + ' / ' + money(Calc.toNum(h.cost)) + '</div></div>' +
       '<div class="stat"><div class="k">目标卖出</div><div class="v pos" style="font-size:16px">' + (h.targetSell == null ? '—' : money(Calc.toNum(h.targetSell))) + '</div></div>' +
       '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + (h.stopLoss == null ? '—' : money(Calc.toNum(h.stopLoss))) + '</div></div>' +
     '</div>' +
@@ -2379,6 +2548,7 @@ function oppHTML(o){
   const risk = String(o.risk == null ? '' : o.risk);
   const rcls = risk === '低' ? 'pos' : (risk === '高' ? 'neg' : 'warn');
   const s7 = Calc.toNum(o.sector7d);
+  const lp = livePrice(o.hash, o.cn || o.name);            /* 实时价覆盖静态现价 */
   return '<div class="opp">' +
     '<div class="opp-top"><div class="opp-name">' + esc(o.cn || o.name || '—') +
       (o.cn && o.name ? '<em>' + esc(o.name) + '</em>' : '') + '</div>' +
@@ -2391,7 +2561,8 @@ function oppHTML(o){
       '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + m2(o.stop) + '</div></div>' +
       '<div class="stat"><div class="k">预期收益</div><div class="v ' + (ret > 0 ? 'pos' : 'neg') + '" style="font-size:16px">' + r2(o.expectedReturn, true) + '</div></div>' +
       '<div class="stat"><div class="k">建议资金</div><div class="v" style="font-size:16px">' + (isNil(o.capital) ? '—' : money0(Calc.toNum(o.capital))) + '</div></div>' +
-      '<div class="stat"><div class="k">现价</div><div class="v" style="font-size:16px">' + m2(o.price) + '</div></div>' +
+      '<div class="stat"><div class="k">现价' + (lp != null ? ' <span class="lvtag">实时</span>' : '') + '</div><div class="v" style="font-size:16px">' +
+        (lp != null ? money(lp) : m2(o.price)) + '</div></div>' +
     '</div>' +
     '<div style="margin-top:8px">' +
       '<div class="row"><span class="rn">在售 / 求购</span><span class="rv">' + n2(o.listed) + '<em>求购 ' + n2(o.buyNum) + '</em></span></div>' +
@@ -2535,6 +2706,312 @@ function renderWhales(){
         (sorted.length > 10 ? '<details><summary>展开全部 ' + sorted.length + ' 位大户</summary>' + sorted.slice(10).map(whaleRow).join('') + '</details>' : '');
     }
   }
+}
+
+/* =====================================================================
+   11.9) 实时价格：本机 /api/live（服务端缓存 60 秒）→ 云端 live.json → 静态 market.json
+   规矩：① 前端绝不携带任何 token（csqaq 也不允许浏览器跨域）
+        ② 三种模式都拿不到就老实显示「静态数据」，绝不假装实时
+        ③ 页面可见时每 60 秒重拉一次；页面隐藏不请求；上一次没回来就跳过
+   ===================================================================== */
+const LIVE_TTL = 60000;
+let liveData = null;                 // live.json / api/live 的原始 payload
+let liveMode = 'static';             // local（本机代理）| cloud（云端 live.json）| static
+let liveAt = 0;                      // 本机拿到数据的时刻
+let liveFetching = false, liveTimer = null;
+let liveByCn = {};                   // 中文名 → live item（analysis.holdings 只有中文名）
+
+function liveTimeText(){             // live 数据自身的时间（HH:MM:SS）
+  const t = liveData && liveData.updatedAtText;
+  const m = t ? String(t).match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/) : null;
+  if (m) return two(Calc.toNum(m[1])) + ':' + m[2] + (m[3] ? (':' + m[3]) : ':00');
+  return liveAt ? hhmmss(liveAt) : '';
+}
+/* 取实时项：优先英文 hash，其次中文名 */
+function liveInfo(hash, cn){
+  const items = (liveData && liveData.items && typeof liveData.items === 'object') ? liveData.items : null;
+  if (!items) return null;
+  if (hash && items[hash]) return items[hash];
+  if (cn && items[cn]) return items[cn];
+  if (cn && liveByCn[cn]) return liveByCn[cn];
+  return null;
+}
+/* 取实时价（主用价：悠悠 > BUFF > Steam，与 market.json 口径一致） */
+function livePrice(hash, cn){
+  const it = liveInfo(hash, cn);
+  if (!it) return null;
+  const p = mPrice(it);
+  return (p != null && p > 0) ? p : null;
+}
+/* market.json 里已有的品种：用实时价覆盖三平台价（不新增 key，避免搜索结果被改写） */
+function applyLiveToMarket(){
+  if (!marketData || !marketData.prices || !liveData || !liveData.items) return 0;
+  let n = 0;
+  Object.keys(liveData.items).forEach(function(k){
+    const it = liveData.items[k], cur = marketData.prices[k];
+    if (!it || !cur || Array.isArray(cur)) return;
+    marketData.prices[k] = { cn: cur.cn, gid: cur.gid,
+      buff: it.buff || cur.buff, yyyp: it.yyyp || cur.yyyp, steam: it.steam || cur.steam, live: 1 };
+    n++;
+  });
+  return n;
+}
+async function fetchLiveOnce(){
+  const a = await fetchJSON('./api/live');            // ① 本机 _serve.cjs 代理（csqaq 直连，60 秒缓存）
+  if (a && a.items && Object.keys(a.items).length) return { j: a, mode: 'local' };
+  const b = await fetchJSON('./live.json');           // ② 云端 live.json（fetchJSON 自带时间戳防缓存）
+  if (b && b.items && Object.keys(b.items).length) return { j: b, mode: 'cloud' };
+  return null;                                        // ③ 都失败 → 静态 market.json
+}
+function applyLive(j, mode){
+  liveData = j || null;
+  liveMode = (liveData && liveData.items) ? mode : 'static';
+  liveAt = Date.now();
+  liveByCn = {};
+  if (liveData && liveData.items){
+    Object.keys(liveData.items).forEach(function(k){
+      const it = liveData.items[k];
+      if (it && it.cn) liveByCn[it.cn] = it;
+    });
+  }
+  applyLiveToMarket();
+  renderLiveBadge(); renderDataTime(); renderSpread();
+  renderPortfolioLive();
+  renderAnalysisHoldings(); renderLongTerm(); renderShortTerm(); renderOpportunities();
+}
+async function refreshLive(){
+  if (liveFetching) return false;                      // 请求进行中 → 直接跳过，避免堆叠
+  liveFetching = true;
+  try {
+    const r = await fetchLiveOnce();
+    if (r) applyLive(r.j, r.mode);
+    else { liveMode = 'static'; liveData = null; liveAt = 0; renderLiveBadge(); renderDataTime(); }
+    return !!r;
+  } catch (e) {
+    return false;
+  } finally { liveFetching = false; }
+}
+function renderLiveBadge(){
+  const dot = $('live-dot'), txt = $('live-text');
+  const cls = liveMode === 'local' ? 'local' : (liveMode === 'cloud' ? 'cloud' : 'static');
+  if (dot) dot.className = 'lvdot ' + cls;
+  const label = liveMode === 'local' ? '实时' : (liveMode === 'cloud' ? '近实时' : '静态数据');
+  const t = liveMode === 'static' ? '' : liveTimeText();
+  if (txt) txt.textContent = t ? (label + ' ' + t) : label;
+}
+function liveCount(list, keyFn){
+  if (!Array.isArray(list)) return 0;
+  let n = 0;
+  list.forEach(function(x){ if (livePrice(keyFn(x), x.cn || x.name)) n++; });
+  return n;
+}
+function renderLiveNote(){
+  const el = $('live-note'); if (!el) return;
+  if (liveMode === 'static'){
+    el.innerHTML = '实时价：<b>没取到</b>，页面用的是 market.json 的静态价。' +
+      '本机跑着 <code>_serve.cjs</code> 时会自动走 <code>/api/live</code>（60 秒级），' +
+      '在外则读站点根目录的 <code>live.json</code>（3 分钟级快照）。前端不携带任何 token。';
+    return;
+  }
+  const items = (liveData && liveData.items) ? Object.keys(liveData.items).length : 0;
+  const ov = applyLiveToMarket();
+  const a = analysisData || {};
+  el.innerHTML = '实时价：<b>' + (liveMode === 'local' ? '本机 /api/live（csqaq 直连代理，服务端缓存 60 秒）' : '云端 live.json（定时脚本快照）') + '</b>' +
+    '　数据时间 <b>' + esc((liveData && liveData.updatedAtText) || '—') + '</b>' +
+    '　关注品种 <b>' + items + '</b>' +
+    (liveMode === 'local' ? '' : ('　来源 ' + esc((liveData && liveData.source) || '—'))) +
+    '<br>已覆盖行情文件 <b>' + ov + '</b> 件；命中持仓 <b>' + liveCount(a.holdings, function(x){ return null; }) + '</b> 个、' +
+    '长期方案 <b>' + liveCount((a.longTerm || {}).plans, function(x){ return x.hash; }) + '</b> 个、' +
+    '条件单机会 <b>' + liveCount(a.opportunities, function(x){ return x.hash; }) + '</b> 个（卡片上带「实时」标记的就是实时价）。' +
+    '　每 60 秒自动刷新一次（页面切到后台就不请求）。';
+}
+function startLiveTimer(){
+  if (liveTimer) return;
+  liveTimer = setInterval(function(){
+    if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return;  // 隐藏时不请求
+    if (liveFetching) return;                                                                            // 上一次没回来就跳过
+    refreshLive();
+  }, LIVE_TTL);
+}
+
+/* =====================================================================
+   11.10) 市场页双轨：长期方案（确定、可打入）/ 短期苗头（只观察、不构成建议）
+   数据契约见 cs-quant/ARCHITECTURE.md 6. analysis.json 双轨扩展 —— 字段名不改
+   ===================================================================== */
+function confGrade(c){
+  if (isNil(c)) return 'low';
+  const v = Calc.toNum(c);
+  if (v > 0.65) return 'high';
+  if (v >= 0.50) return 'mid';
+  return 'low';
+}
+function confWord(c){
+  const g = confGrade(c);
+  return g === 'high' ? '较高' : (g === 'mid' ? '中等（不是高把握）' : '偏低');
+}
+function arrOf(v){ return Array.isArray(v) ? v : []; }
+function valText(v){
+  if (v === null || v === undefined || v === '') return '—';
+  if (Array.isArray(v)) return v.map(valText).join(' ~ ');
+  if (typeof v === 'object') return Object.keys(v).map(function(k){ return k + ' ' + valText(v[k]); }).join('；');
+  if (typeof v === 'number') return String(v);
+  return String(v);
+}
+const LT_CRIT_LABEL = {
+  holdDaysMin: '最短持有（天）', holdDaysUsed: '实际持有（天）', supplyChg180Max: '存世 180 天增幅上限',
+  listedMin: '在售量下限', turnoverMin: '日成交下限', listedRatioMax: '在售/存世上限', priceBand: '价位区间（元）',
+  scoreMin: '评分下限', scoreFormula: '评分构成', relStrengthGate: '相对强度门槛', deDup: '同板块去重',
+  capitalRule: '资金规则', containersExcluded: '容器为何排除', holdDaysBasis: '持有期依据'
+};
+/* ---------- 长期方案卡 ---------- */
+function longHTML(p){
+  const conf = p.confidence, g = confGrade(conf);
+  const rng = (Array.isArray(p.entryRange) && p.entryRange.length === 2) ? p.entryRange : null;
+  const ev = arrOf(p.evidence), inv = arrOf(p.invalidators);
+  const risk = String(p.risk == null ? '' : p.risk);
+  const cb = p.confidenceBasis || {};
+  const lp = livePrice(p.hash, p.cn);
+  const riskCls = risk === '高' ? 'low' : (risk === '低' ? 'hot' : 'mid');
+  const barW = Math.max(3, Math.min(100, Calc.toNum(conf) * 100));
+  return '<div class="lt">' +
+    '<div class="lt-top"><div class="lt-name">' + esc(p.cn || p.name || '—') +
+      (p.cn && p.name && p.cn !== p.name ? '<em>' + esc(p.name) + '</em>' : '') + '</div>' +
+      '<span class="badge2 ' + riskCls + '">风险 ' + esc(risk || '—') + '</span></div>' +
+    (p.thesis ? '<p class="lt-thesis"><b>为什么长期成立</b>' + esc(p.thesis) + '</p>' : '') +
+    (p.supplyStory ? '<p class="lt-story"><b>供给端</b>' + esc(p.supplyStory) + '</p>' : '') +
+    (p.demandStory ? '<p class="lt-story"><b>需求端</b>' + esc(p.demandStory) + '</p>' : '') +
+    (ev.length ? '<div class="tags">' + ev.map(function(x){ return '<span>' + esc(x) + '</span>'; }).join('') + '</div>' : '') +
+    '<div class="lt-nums">' +
+      (lp != null ? '<span class="k">现价</span> <b>' + money(lp) + '</b> <span class="lvtag">实时</span>　' : '') +
+      '<span class="k">入场</span> <b>' + m2(p.entry) + '</b>' +
+      (rng ? '<span class="k">（' + m2(rng[0]) + '~' + m2(rng[1]) + '）</span>' : '') +
+      ' → <span class="k">目标</span> <b class="pos">' + m2(p.target) + '</b> <b class="pos">' + r2(p.expectedReturn, true) + '</b><br>' +
+      '<span class="k">止损</span> <b class="neg">' + m2(p.stop) + '</b>　' +
+      '<span class="k">持有</span> <b>' + (isNil(p.holdDays) ? '—' : fmtNum(Calc.toNum(p.holdDays), 0) + ' 天') + '</b>　' +
+      '<span class="k">每</span> <b>' + (isNil(p.reviewEveryDays) ? '—' : fmtNum(Calc.toNum(p.reviewEveryDays), 0)) + '</b> <span class="k">天复检</span>　' +
+      '<span class="k">建议</span> <b>' + (isNil(p.capital) ? '—' : money0(Calc.toNum(p.capital))) + '</b>' +
+      (isNil(p.positionPct) ? '' : ' <span class="k">（仓位 ' + pct(Calc.toNum(p.positionPct)) + '）</span>') +
+    '</div>' +
+    '<div class="conf ' + g + '">' +
+      '<div class="conf-top">把握度 <b>' + (isNil(conf) ? '—' : pct(Calc.toNum(conf))) + '</b>' +
+        '<span class="conf-word">' + confWord(conf) + '　（&lt;50% 灰 / 50~65% 黄 / &gt;65% 绿）</span></div>' +
+      '<div class="conf-bar"><i style="width:' + barW.toFixed(1) + '%"></i></div>' +
+      (cb.formula ? '<p class="conf-note">把握度算法：' + esc(cb.formula) + '</p>' : '') +
+      (cb.honesty ? '<p class="conf-note">' + esc(cb.honesty) + '</p>' : '') +
+    '</div>' +
+    (p.worstCase ? '<div class="worst"><b>最坏情况</b>' + esc(p.worstCase) + '</div>' : '') +
+    (p.exitRule ? '<p class="exit"><b>退出规则</b>' + esc(p.exitRule) + '</p>' : '') +
+    (p.entryRule ? '<p class="exit"><b>怎么下单</b>' + esc(p.entryRule) + '</p>' : '') +
+    (inv.length ? '<div class="inv"><h4>⚠️ 什么情况下我错了</h4><ul>' +
+      inv.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '') +
+  '</div>';
+}
+function ltExtraHTML(lt){
+  let h = '';
+  const cr = lt.criteria;
+  if (cr && typeof cr === 'object'){
+    const ks = Object.keys(cr).filter(function(k){ return cr[k] !== null && cr[k] !== undefined && cr[k] !== ''; });
+    if (ks.length){
+      h += '<details class="sec-more"><summary>长期方案的入选门槛（' + ks.length + ' 条）</summary>' +
+        ks.map(function(k){
+          return '<div class="row"><span class="rn">' + esc(LT_CRIT_LABEL[k] || k) + '</span>' +
+                 '<span class="rv" style="font-size:12.5px;font-weight:600">' + esc(valText(cr[k])) + '</span></div>';
+        }).join('') + '</details>';
+    }
+  }
+  const nm = arrOf(lt.nearMiss);
+  if (nm.length){
+    h += '<details class="sec-more"><summary>差一点入选的 ' + nm.length + ' 个（被门槛挡住，不是推荐）</summary>' +
+      nm.map(function(x){
+        return '<div class="row"><span class="rn">' + esc(x.cn || x.name || '—') +
+          '<em>' + esc(arrOf(x.blockedBy).join('；')) + '</em></span>' +
+          '<span class="rv">' + (x.score == null ? '—' : fmtNum(Calc.toNum(x.score), 0)) + ' 分</span></div>';
+      }).join('') + '</details>';
+  }
+  const dg = arrOf(lt.dataGaps);
+  if (dg.length){
+    h += '<details class="sec-more"><summary>这轮算长期方案时缺的数据（' + dg.length + ' 条）</summary>' +
+      '<ul class="risks">' + dg.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>';
+  }
+  return h;
+}
+function renderLongTerm(){
+  const box = $('op-long'); if (!box) return;
+  const a = analysisData, lt = (a && a.longTerm) ? a.longTerm : null;
+  setText('lt-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const note = $('lt-note');
+  if (note) note.innerHTML = (lt && lt._定位)
+    ? ('<b>这一区是什么</b>' + esc(lt._定位))
+    : '<b>这一区是什么</b>可实际打入的确定性方案：供给受限 + 需求刚性 + 能扛 7 天锁定 + 明确退出条件。';
+  const sum = $('lt-summary');
+  if (sum) sum.innerHTML = (lt && lt.summary) ? ('<p class="hint" style="margin-top:8px"><b>本轮结论</b>　' + esc(lt.summary) + '</p>') : '';
+  const ex = $('lt-extra');
+  if (ex) ex.innerHTML = lt ? ltExtraHTML(lt) : '';
+  const plans = (lt && Array.isArray(lt.plans)) ? lt.plans : null;
+  if (!plans || !plans.length){
+    box.innerHTML = '<div class="card">' +
+      (lt ? emptyBox('这一轮没有够格的长期方案（宁缺毋滥：不拿短期苗头冒充长期方案）')
+          : anaWait()) +
+      '<p class="hint">没有方案 = 现在不该动这笔钱。空仓等也是一种操作。</p></div>';
+    return;
+  }
+  box.innerHTML = plans.map(longHTML).join('');
+}
+/* ---------- 短期苗头卡（刻意做得比长期弱） ---------- */
+function signalHTML(s){
+  const st = String(s.signalType == null ? '信号' : s.signalType);
+  const lv = String(s.watchLevel == null ? '' : s.watchLevel);
+  const str = Calc.toNum(s.strength);
+  const ev = arrOf(s.evidence);
+  const bcls = /吸筹|扫货/.test(st) ? 'hot' : (/放量|异动/.test(st) ? 'mid' : 'low');
+  const lcls = lv === '重点' ? 'hot' : (lv === '一般' ? 'mid' : 'low');
+  const lp = livePrice(s.hash, s.cn);
+  const barW = Math.max(3, Math.min(100, str));
+  return '<div class="st">' +
+    '<div class="st-top"><div class="st-name">' + esc(s.cn || s.name || '—') +
+      (s.cn && s.name && s.cn !== s.name ? '<em>' + esc(s.name) + '</em>' : '') + '</div>' +
+      '<span class="badge2 ' + bcls + '">' + esc(st) + '</span>' +
+      (lv ? '<span class="badge2 ' + lcls + '">' + esc(lv) + '</span>' : '') + '</div>' +
+    '<div class="st-bar"><span class="bar"><i style="width:' + barW.toFixed(1) + '%"></i></span>' +
+      '<span class="n">强度 ' + (isNil(s.strength) ? '—' : fmtNum(str, 0)) + '</span></div>' +
+    ((lp != null || !isNil(s.price)) ? '<p class="st-price">现价 <b>' + (lp != null ? money(lp) : money(Calc.toNum(s.price))) + '</b>' +
+      (lp != null ? ' <span class="lvtag">实时</span>' : '') + '</p>' : '') +
+    (ev.length ? '<ul class="ev">' + ev.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') +
+    (s.note ? '<p class="why"><b>要等什么确认</b>' + esc(s.note) + '</p>' : '') +
+  '</div>';
+}
+function renderShortTerm(){
+  const box = $('op-short'); if (!box) return;
+  const a = analysisData, st = (a && a.shortTerm) ? a.shortTerm : null;
+  setText('st-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const note = $('st-note');
+  if (note) note.innerHTML = (st && st._定位)
+    ? ('<b>⚠️ 先说清楚：</b>' + esc(st._定位))
+    : '<b>⚠️ 先说清楚：</b>只做观察与预警，不构成买入建议（7 天 CD 让短线无法止损）';
+  const sum = $('st-summary');
+  const sigs = (st && Array.isArray(st.signals)) ? st.signals : null;
+  const gaps = arrOf(st && st.dataGaps);
+  const sca = (st && st.scanning) || null;
+  if (sum){
+    if (st && (st.summary || gaps.length || sca)){
+      sum.hidden = false;
+      sum.innerHTML = '<div class="card"><div class="card-title">本轮扫描说明 <span class="r">' +
+          (sca && sca.kept != null ? ('保留 ' + fmtNum(Calc.toNum(sca.kept), 0) + ' 条 / 门槛 ' + fmtNum(Calc.toNum(sca.threshold), 0)) : '短期轨') +
+        '</span></div>' +
+        (st.summary ? '<p class="sec-note">' + esc(st.summary) + '</p>' : '') +
+        (sca ? '<p class="hint">扫描：异动榜 ' + n2(sca.alterationRows) + ' 行 → 去重 ' + n2(sca.distinctNames) +
+          ' 个品种 → 候选 ' + n2(sca.candidates) + ' → 保留 ' + n2(sca.kept) + '（阈值 ' + n2(sca.threshold) + '）</p>' : '') +
+        (gaps.length ? '<details class="sec-more"><summary>这次没拿到的数据（' + gaps.length + ' 条）——为什么有些信号出不来</summary>' +
+          '<ul class="risks">' + gaps.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+        '<p class="hint">再次强调：这一区只用于观察与预警。7 天 CD 意味着看到苗头也来不及止损，所以不构成买入建议。</p>' +
+        '</div>';
+    } else sum.hidden = true;
+  }
+  if (!sigs || !sigs.length){
+    box.innerHTML = '<div class="card">' + (st ? emptyBox('这一轮没有值得记的苗头') : anaWait()) + '</div>';
+    return;
+  }
+  box.innerHTML = sigs.map(signalHTML).join('');
 }
 
 /* =====================================================================
@@ -2691,13 +3168,20 @@ async function init(){
   initNav();
   initMarket();
   renderDataTime();
+  renderLiveBadge();
   loadSignals();
   loadAnalysis();
+
+  /* 实时价：本机 /api/live → 云端 live.json → 静态；可见时每 60 秒重拉一次 */
+  refreshLive();
+  startLiveTimer();
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
     if (document.hidden) { saveNow(); return; }
-    /* 回到前台：顺手同步一次（也顺便给 Supabase 免费项目保活，避免 7 天不活跃被暂停） */
+    /* 回到前台：实时价超过 60 秒没更新就补一次（隐藏期间不发请求） */
+    if (Date.now() - liveAt > LIVE_TTL) refreshLive();
+    /* 顺手同步一次（也顺便给 Supabase 免费项目保活，避免 7 天不活跃被暂停） */
     if (syncConfigured() && Date.now() - Calc.toNum(state.sync.lastSyncAt) > 30000) syncNow('auto');
   });
   window.addEventListener('pagehide', function(){ saveNow(); });
