@@ -358,7 +358,90 @@ details.sec-more{margin-top:10px}
 .jumpbar a{flex:1 1 0;min-width:0;text-align:center;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;
   background:var(--field);border:1px solid var(--line);border-radius:10px;padding:9px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .jumpbar a:active{background:var(--card2);color:var(--cyan)}
-.sec-lt,.sec-st,.sec-op{scroll-margin-top:140px}
+.sec-lt,.sec-st,.sec-op,.sec-exec,.sec-ctl,.sec-rvs{scroll-margin-top:140px}
+
+/* ============ 口径标注 / 出租评估 / 执行时机 / 控盘测算（本次新增） ============
+   只用既有的颜色变量与排版习惯，不引外部资源、不改既有 class */
+/* 口径小标签：告诉用户这个数字是求购口径还是卖价口径，别混 */
+.basis{display:inline-block;font-size:10.5px;font-weight:800;line-height:1;padding:2px 5px;border-radius:5px;
+  border:1px solid var(--line);color:var(--dim);vertical-align:middle;white-space:nowrap}
+.basis.bid{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.basis.ask{color:var(--dim);background:var(--field)}
+/* 库存逐项卡：求购口径那一格 */
+.stat.hero2{background:rgba(47,208,122,.07);border-color:rgba(47,208,122,.28)}
+.stat.hero2 .v{color:var(--green)}
+.stat.hero2 .k{color:var(--green)}
+/* 出租评估块 */
+.lz{margin-top:9px;padding:9px 10px;border-radius:11px;background:var(--field);border:1px solid var(--line);min-width:0}
+.lz-head{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--muted);margin-bottom:5px;flex-wrap:wrap}
+.lz-head .r{margin-left:auto;font-size:11.5px;font-weight:400;color:var(--dim)}
+.lz-nums{font-size:12.5px;line-height:1.75;color:var(--muted);overflow-wrap:anywhere}
+.lz-nums b{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+.lz-note{font-size:12px;color:var(--dim);line-height:1.65;margin:5px 0 0;overflow-wrap:anywhere}
+/* 三选一建议标签：卖出 / 持有出租 / 持有 */
+.act3{display:inline-block;font-size:12.5px;font-weight:900;border-radius:8px;padding:3px 9px;border:1px solid var(--line);white-space:nowrap}
+.act3.a-sell{color:var(--red);border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
+.act3.a-rent{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.act3.a-keep{color:var(--cyan);border-color:rgba(34,211,238,.45);background:rgba(34,211,238,.12)}
+/* 双口径收益（长期方案卡） */
+.ret2{display:flex;flex-wrap:wrap;gap:10px;margin-top:9px}
+.ret2 .rc{flex:1 1 132px;min-width:0;padding:8px 10px;border-radius:11px;border:1px solid var(--line);background:var(--field)}
+.ret2 .rc .k{font-size:11.5px;color:var(--dim);margin-bottom:3px;display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.ret2 .rc .v{font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ret2 .rc.bid{flex:1 1 156px;background:rgba(47,208,122,.1);border-color:rgba(47,208,122,.4)}
+.ret2 .rc.bid .v{color:var(--green)}
+.ret2 .rc.ask .v{color:var(--muted);font-size:17px}
+.ret2 .rc.ask .k{color:var(--dim)}
+/* 机会卡：断层率告警 */
+.gapwarn{margin-top:8px;padding:7px 10px;border-radius:10px;font-size:12.5px;line-height:1.6;
+  background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.4);color:#ffc9c9;overflow-wrap:anywhere}
+.gapwarn b{color:var(--red)}
+.warnbadge{display:inline-block;font-size:11px;font-weight:900;color:var(--red);border:1px solid rgba(255,107,107,.45);
+  background:rgba(255,107,107,.12);border-radius:6px;padding:2px 5px;margin-left:5px;white-space:nowrap}
+/* 执行时机块 */
+.ex{margin-top:9px;padding:10px;border-radius:11px;background:var(--field);border:1px solid var(--line);min-width:0}
+.ex-top{display:flex;align-items:center;gap:7px;margin-bottom:7px;flex-wrap:wrap}
+.ex-name{flex:1 1 130px;min-width:0;font-size:13.5px;font-weight:800;overflow-wrap:anywhere}
+.ex-body{font-size:12.5px;line-height:1.75;color:var(--muted);overflow-wrap:anywhere}
+.ex-body b{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+.ex-steps{margin:6px 0 0;padding-left:17px;font-size:12.5px;line-height:1.8;color:var(--muted)}
+.ex-steps li{overflow-wrap:anywhere}
+/* 分档表（控盘测算）：手机上会横向压缩，所以刻意收窄列宽 + 允许换行，避免整页横向溢出。
+   width:100% + max-width:100% 是必须的：table-layout:fixed 只在表格有确定性宽度时才生效，
+   否则表格会按内容撑宽，把卡片一起顶出视口。 */
+.tiers{width:100%;max-width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.tiers th,.tiers td{padding:6px 3px;border-bottom:1px solid var(--line);text-align:right;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;line-height:1.45}
+.tiers th{color:var(--dim);font-weight:700;font-size:11px}
+.tiers th:first-child,.tiers td:first-child{text-align:left;width:19%;font-weight:800;color:var(--text);white-space:nowrap}
+.tiers td.bad{color:var(--red);font-weight:800}
+.tiers td.ok{color:var(--green);font-weight:800}
+.tiers tr:last-child td{border-bottom:0}
+.tiers-wrap{margin-top:4px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* 量化结论条 */
+.concl{margin-top:10px;padding:10px 11px;border-radius:11px;font-size:13px;line-height:1.7;
+  background:rgba(255,197,49,.1);border:1px solid rgba(255,197,49,.42);color:#ffe6a8;overflow-wrap:anywhere}
+.concl b{color:var(--yellow)}
+.concl.bad{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.42);color:#ffc9c9}
+.concl.bad b{color:var(--red)}
+/* 量化风险列表 */
+.qrisk{margin:10px 0 0;padding:0;list-style:none}
+.qrisk li{padding:8px 0;border-top:1px solid var(--line);font-size:12.5px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.qrisk li:first-child{border-top:0}
+.qrisk .qh{font-weight:800;color:var(--text)}
+.qrisk .qh .sev{display:inline-block;vertical-align:1px;font-size:11px;font-weight:900;border-radius:5px;padding:1px 5px;margin-right:6px;
+  color:var(--red);border:1px solid rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
+.qrisk .qq{display:block;margin-top:3px;color:var(--dim);font-size:12px}
+/* 右侧金额：标签与数字绑成一个不可断行单元（用 margin 代替空格），
+   手机上就不会出现「早卖多留 ¥22,991.0 / 2」把金额末位拆到下一行；
+   max-width:100% 保证它永远不会把卡片顶宽（整页横向溢出实测 0px） */
+.row .rv .nw{display:inline-block;white-space:nowrap;max-width:100%}
+.row .rv .nw .lb{display:inline-block;margin-right:4px}
+/* 出租 vs 卖出：一代手套对比的横向条 */
+.rvs-bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--field);border:1px solid var(--line);margin:7px 0 4px}
+.rvs-bar i{display:block;height:100%}
+.rvs-legend{font-size:11.5px;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap}
+.rvs-legend b{color:var(--text)}
 
 /* ---------------- 电脑（≥900px）：左侧固定边栏 + 多列网格 ---------------- */
 @media (min-width:900px){
@@ -391,6 +474,8 @@ details.sec-more{margin-top:10px}
   .adv-list,.opp-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .lt-list,.st-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:0}
   .jumpbar{max-width:520px}
+  /* 控盘测算 / 出租 vs 卖出：内容宽（分档表 + 长文本），哪怕在 3 列布局下也吃满整行 */
+  .sec-ctl,.sec-rvs{grid-column:1/-1}
   .grid2{gap:12px}
   .res{gap:10px}
 }
@@ -413,6 +498,12 @@ details.sec-more{margin-top:10px}
   /* 双轨分区：手机上一律 ≥13px，保证「为什么长期成立 / 什么情况下我错了」能看清 */
   .lt-story,.st-price,.exit,.lt-nums,.tags span,.conf-note,.inv ul,.worst,.badge2,.ev,
   .sec-head .sec-sub,.fresh,.st-bar .n,.conf-word,.conf-top{font-size:13px}
+  /* 本次新增区块：手机上字号同样抬到 13px 下限，保证口径标注与数字都看得清 */
+  .basis,.lz-nums,.lz-note,.ex-body,.ex-steps,.qrisk li,.qrisk .qq,.rvs-legend,.tiers th,.tiers td{font-size:13px}
+  .stat.hero2 .v,.ret2 .rc .v,.ret2 .rc.ask .v{font-size:17px}
+  /* 手套对比行：手机上左右并排会把「早卖多留 ¥22,991.02」挤到拆行，改成上下两行更清楚 */
+  #rvs-box .row{flex-direction:column;align-items:flex-start;gap:3px}
+  #rvs-box .row .rv{text-align:left}
   .card-title{font-size:13.5px}
   .sheet-item .qt{width:80px}
   .nav a{gap:2px}
@@ -526,8 +617,15 @@ details.sec-more{margin-top:10px}
            ② 库存（真实持仓 + 逐项建议 + 仓位台账）
            ============================================================ -->
       <section class="page" id="sec-hold" data-page="inv">
-        <div class="page-title"><h1>库存</h1><span>真实持仓 · 逐项建议 · 仓位台账</span></div>
+        <div class="page-title"><h1>库存</h1><span>真实持仓 · 减仓执行 · 逐项建议 · 仓位台账</span></div>
         <div class="cards">
+
+          <!-- ---------- 减仓执行：本轮该卖的品种怎么卖（执行时机分析；缺失则空态） ---------- -->
+          <div class="card span-all sec-exec" id="sec-exec">
+            <div class="sec-head"><h2>减仓执行</h2><span class="sec-sub">分批 · 挂单价位 · 等几天</span><span class="r" id="ex-time">分析生成中…</span></div>
+            <p class="sec-note" id="ex-note">—</p>
+            <div id="ex-list"></div>
+          </div>
 
           <div class="card span-all" id="pf-card" hidden>
             <div class="card-title">我的真实持仓 <span class="r" id="pf-time">—</span></div>
@@ -549,6 +647,14 @@ details.sec-more{margin-top:10px}
             <div class="card-title">逐项建议 <span class="r" id="an-hold-time">分析生成中…</span></div>
             <p class="hint" id="an-hold-crit"></p>
             <div id="an-hold"><div class="skel"><i></i>逐项建议生成中…（analysis.json）</div></div>
+          </div>
+
+          <!-- ---------- 出租评估（租赁实测 + 出租 vs 卖出：逐项结论） ---------- -->
+          <div class="card span-all sec-rvs" id="sec-rvs-hold">
+            <div class="sec-head"><h2>出租评估</h2><span class="sec-sub">净年化 · 月租金 · 该卖还是该租</span><span class="r" id="lz-time">分析生成中…</span></div>
+            <p class="sec-note" id="lz-note">—</p>
+            <div id="lz-sum"></div>
+            <div id="lz-list"></div>
           </div>
 
           <div class="card span-all">
@@ -594,6 +700,7 @@ details.sec-more{margin-top:10px}
           <div class="card span-all sec-lt" id="sec-lt">
             <div class="sec-head"><h2>长期方案</h2><span class="sec-sub">能扛 7 天 CD · 有明确退出条件</span><span class="r" id="lt-time">分析生成中…</span></div>
             <p class="sec-note" id="lt-note">—</p>
+            <p class="hint" id="lt-basis"></p>
             <div id="lt-summary"></div>
             <div id="lt-extra"></div>
           </div>
@@ -616,6 +723,7 @@ details.sec-more{margin-top:10px}
               <div class="stat wide"><div class="k">可用实验资金</div><div class="v" id="op-budget">—</div></div>
             </div>
             <p class="hint" id="op-crit">—</p>
+            <p class="hint" id="op-basis">—</p>
             <p class="hint">硬约束：买入锁 7 天 CD，所以任何方案的时间窗都必须 &gt; 7 天；手续费按悠悠卖 0% + 提现 1% 计。</p>
           </div>
 
@@ -665,6 +773,20 @@ details.sec-more{margin-top:10px}
           <div class="card">
             <div class="card-title">大户名录 <span class="r" id="sig-whale-n">—</span></div>
             <div id="sig-whales"><div class="skel"><i></i>信号数据加载中…</div></div>
+          </div>
+
+          <!-- ---------- 控盘测算：资金分档 + 资金不是瓶颈 + 量化风险 ---------- -->
+          <div class="card span-all sec-ctl" id="sec-ctl">
+            <div class="sec-head"><h2>控盘测算</h2><span class="sec-sub">多少钱能吃掉盘口 · 吃完能不能出来</span><span class="r" id="ctl-time">分析生成中…</span></div>
+            <p class="sec-note" id="ctl-note">—</p>
+            <div id="ctl-box"></div>
+          </div>
+
+          <!-- ---------- 出租 vs 卖出：一句话结论 + 临界点公式 + 一代手套对比 ---------- -->
+          <div class="card span-all sec-rvs" id="sec-rvs">
+            <div class="sec-head"><h2>出租 vs 卖出</h2><span class="sec-sub">租金能不能扛住跌幅</span><span class="r" id="rvs-time">分析生成中…</span></div>
+            <p class="sec-note" id="rvs-verdict">—</p>
+            <div id="rvs-box"></div>
           </div>
 
         </div>
@@ -2628,6 +2750,8 @@ function skelBox(txt){ return '<div class="skel"><i></i>' + txt + '</div>'; }
 function emptyBox(txt){ return '<div class="empty2">' + txt + '</div>'; }
 /* 契约：取不到的字段一律 null（不是 0）→ 显示「—」，绝不能把 null 当成 0 显示 */
 function isNil(v){ return v === null || v === undefined || v === ''; }
+/* 是否是「真的数字」（用来决定某个格子显不显示，避免把 null 当成 0） */
+function isNum(v){ return typeof v === 'number' && isFinite(v); }
 function m2(v){ return isNil(v) ? '—' : money(Calc.toNum(v)); }
 function n2(v, d){ return isNil(v) ? '—' : fmtNum(Calc.toNum(v), d === undefined ? 0 : d); }
 function r2(v, sign){ return isNil(v) ? '—' : pct(Calc.toNum(v), sign); }
@@ -2652,6 +2776,17 @@ async function loadAnalysis(){
   analysisState = analysisData ? 'ok' : 'fail';
   renderVerdict(); renderAnalysisHoldings(); renderLongTerm(); renderShortTerm();
   renderOpportunities(); renderDataTime();
+  /* 本次新增区块：执行时机 / 出租评估 / 控盘测算 / 出租 vs 卖出 */
+  renderExecutionTiming(); renderLeaseEval(); renderControlFeasibility(); renderRentVsSell();
+}
+/* 新分析产出的公共小工具（任何字段缺失都返回 '—'，不编数字） */
+function anaOf(key, sub){
+  const a = analysisData; if (!a || !a[key]) return null;
+  return (sub === undefined) ? a[key] : (a[key][sub] === undefined ? null : a[key][sub]);
+}
+function basisTag(which){
+  return which === 'bid' ? '<span class="basis bid">求购口径</span>'
+    : (which === 'ask' ? '<span class="basis ask">卖价口径</span>' : '');
 }
 /* 数据新鲜度：行情 HH:MM · 分析 HH:MM · 实时 HH:MM（页头常驻，一眼知道数据有多新） */
 function hhmmOf(txt){
@@ -2704,6 +2839,42 @@ function actCls(a){
   if (a === '清仓') return 'b-out';
   return 'b-hold';
 }
+function act3Cls(a){
+  if (a === '卖出') return 'a-sell';
+  if (a === '持有出租') return 'a-rent';
+  return 'a-keep';
+}
+/* 三选一建议标签用的是 .badge（沿用既有配色 class，不改既有 id/class） */
+function act3BadgeCls(a){
+  if (a === '卖出') return 'b-out';
+  if (a === '持有出租') return 'b-add';
+  return 'b-hold';
+}
+/* 出租评估块：净年化 / 月租金 / 三选一 bestAction（数据来自 rent-vs-sell + lease-analysis） */
+function leaseHTML(h){
+  const L = h.lease, R = h.actionVsLease;
+  if (!L && !R) return '';
+  const best = R && R.bestAction ? String(R.bestAction) : '';
+  const pay = L && L.paybackDays != null ? fmtNum(Calc.toNum(L.paybackDays), 0) + ' 天' : '—';
+  return '<div class="lz">' +
+    '<div class="lz-head">出租评估' + basisTag(null) +
+      '<span class="r">' + (L && L.verdict ? esc(String(L.verdict)) : '—') + '</span></div>' +
+    '<div class="lz-nums">' +
+      '净年化 <b>' + r2(L ? L.netAnnual : null, true) + '</b>' +
+      '　月租金 <b>' + m2(L ? L.monthlyIncome : null) + '</b>' +
+      '　年租金 <b>' + m2(L ? L.yearlyIncome : null) + '</b><br>' +
+      '在租单数 <b>' + n2(L ? L.leaseNum : null) + '</b>　回本天数 <b>' + pay + '</b>' +
+      (R && R.holdAndRentOneYear != null ? ('　持有出租一年 <b>' + money(Calc.toNum(R.holdAndRentOneYear)) + '</b>') : '') +
+      (R && R.sellNow != null ? ('　现在卖 <b>' + money(Calc.toNum(R.sellNow)) + '</b>') : '') +
+    '</div>' +
+    (best ? '<div style="margin-top:7px"><span class="act3 ' + act3Cls(best) + '">建议 ' + esc(best) + '</span>' +
+      (R && R.note ? '<p class="lz-note">' + esc(String(R.note)) + '</p>' : '') + '</div>'
+      : ((L && L.note) ? '<p class="lz-note">' + esc(String(L.note)) + '</p>' : '')) +
+    (R && R.holdAndRentOneYear != null && R.sellNow != null
+      ? '<p class="lz-note">「持有出租一年」= 现在的市值 × 折减后的价格外推 + 一年净租金（已扣 22% 抽成），' +
+        '和「现在卖」比的是<b>一年后谁留下的钱多</b>，不是租金绝对值。</p>' : '') +
+  '</div>';
+}
 function adviceHTML(h){
   const num = Calc.toNum(h.num), pnl = Calc.toNum(h.pnl), rate = Calc.toNum(h.pnlRate);
   const act = String(h.action == null ? '' : h.action), urg = String(h.urgency == null ? '' : h.urgency);
@@ -2711,17 +2882,24 @@ function adviceHTML(h){
   const cls7 = h.sector7d == null ? 'muted' : (s7 > 0 ? 'pos' : 'neg');
   const lp = livePrice(null, h.name);                      /* 实时价覆盖 analysis 里的静态现价 */
   const nowTxt = lp != null ? money(lp) : money(Calc.toNum(h.mkt));
+  /* 求购口径收益率（只有部分持仓有——来自求购价口径重算，没有就整格不显示，绝不编） */
+  const rb = (h.expectedReturnBid == null ? null : Calc.toNum(h.expectedReturnBid));
+  const best = (h.actionVsLease && h.actionVsLease.bestAction) ? String(h.actionVsLease.bestAction) : '';
   return '<div class="adv">' +
     '<div class="adv-top">' +
       '<div class="adv-name">' + esc(h.name || '—') +
         '<em>' + fmtNum(num, 0) + ' 把　·　' + esc(String(h.sector || '未分类')) + '　·　板块 7 日 ' +
         (h.sector7d == null ? '—' : pctNum(s7, true)) + '</em></div>' +
       (act ? '<span class="badge ' + actCls(act) + '">' + esc(act) + '</span>' : '') +
+      (best ? '<span class="badge ' + act3BadgeCls(best) + '">出租评估：' + esc(best) + '</span>' : '') +
       (urg ? '<span class="badge u-' + esc(urg) + '">紧急 ' + esc(urg) + '</span>' : '') +
     '</div>' +
     '<div class="res" style="margin-top:0">' +
       '<div class="stat hero"><div class="k">浮动盈亏</div><div class="v ' + (pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : '')) + '">' +
         money(pnl, true) + '　' + pct(rate, true) + '</div></div>' +
+      (rb == null ? '' :
+        '<div class="stat hero2"><div class="k">求购口径收益率 ' + basisTag('bid') + '</div>' +
+        '<div class="v">' + pct(rb, true) + '</div></div>') +
       '<div class="stat"><div class="k">现价' + (lp != null ? ' <span class="lvtag">实时</span>' : '') + ' / 成本价</div>' +
         '<div class="v" style="font-size:16px">' + nowTxt + ' / ' + money(Calc.toNum(h.cost)) + '</div></div>' +
       '<div class="stat"><div class="k">目标卖出</div><div class="v pos" style="font-size:16px">' + (h.targetSell == null ? '—' : money(Calc.toNum(h.targetSell))) + '</div></div>' +
@@ -2733,6 +2911,7 @@ function adviceHTML(h){
       '<div class="row"><span class="rn">日成交 / 价差</span><span class="rv">' + (isNil(h.turnover) ? '—' : n2(h.turnover) + ' 件') + '<em>价差 ' + r2(h.spread, true) + '</em></span></div>' +
       '<div class="row"><span class="rn">存世量 / 板块 7 日</span><span class="rv">' + n2(h.supply) + '<em class="' + cls7 + '">板块 ' + c2(h.sector7d, true) + '</em></span></div>' +
     '</div>' +
+    leaseHTML(h) +
     (h.reason ? '<p class="why"><b>依据</b>' + esc(h.reason) + '</p>' : '') +
     (h.plan ? '<p class="why plan"><b>操作</b>' + esc(h.plan) + '</p>' : '') +
   '</div>';
@@ -2761,33 +2940,50 @@ function renderAnalysisHoldings(){
 }
 
 /* ---------- ③ 市场：analysis.opportunities 可入场机会 ---------- */
+const DEPTH_GAP_WARN = 0.15;      /* 断层率 > 15% 高亮告警（口径见 analysis.basis.depthGap） */
 function oppHTML(o){
   const tier = String(o.tier == null ? '-' : o.tier).toUpperCase().slice(0, 1);
-  const ret = Calc.toNum(o.expectedReturn);
+  const ret = Calc.toNum(o.expectedReturn);                    /* 卖价口径（引擎原值） */
+  const retBid = (o.expectedReturnBid == null ? null : Calc.toNum(o.expectedReturnBid));   /* 求购口径 */
   const risk = String(o.risk == null ? '' : o.risk);
   const rcls = risk === '低' ? 'pos' : (risk === '高' ? 'neg' : 'warn');
   const s7 = Calc.toNum(o.sector7d);
   const lp = livePrice(o.hash, o.cn || o.name);            /* 实时价覆盖静态现价 */
+  const gap = (o.depthGap == null ? null : Calc.toNum(o.depthGap));
+  const gapWarn = gap != null && gap > DEPTH_GAP_WARN;
+  const liq = (o.exitLiquidity == null ? null : Calc.toNum(o.exitLiquidity));
   return '<div class="opp">' +
     '<div class="opp-top"><div class="opp-name">' + esc(o.cn || o.name || '—') +
       (o.cn && o.name ? '<em>' + esc(o.name) + '</em>' : '') + '</div>' +
       (tier === '-' ? '' : '<span class="tier t-' + esc(tier) + '">' + esc(tier) + '</span>') + '</div>' +
     '<div class="opp-meta">评分 <b>' + (o.score == null ? '—' : fmtNum(Calc.toNum(o.score), 0)) + '</b>　风险 <b class="' + rcls + '">' + esc(risk || '—') + '</b>　持有 <b>' +
       (o.holdingDays == null ? '—' : fmtNum(Calc.toNum(o.holdingDays), 0) + ' 天') + '</b>　板块 <b>' + esc(String(o.sector || '—')) + '</b> ' +
-      (o.sector7d == null ? '' : '<b class="' + (s7 > 0 ? 'pos' : 'neg') + '">' + pctNum(s7, true) + '</b>') + '</div>' +
+      (o.sector7d == null ? '' : '<b class="' + (s7 > 0 ? 'pos' : 'neg') + '">' + pctNum(s7, true) + '</b>') +
+      (o.tierOriginal && o.tier && String(o.tierOriginal) !== String(o.tier)
+        ? '<span class="warnbadge">断层降档 ' + esc(String(o.tierOriginal)) + '→' + esc(String(o.tier)) + '</span>' : '') + '</div>' +
     '<div class="res" style="margin-top:0">' +
       '<div class="stat hero"><div class="k">入场价 → 目标价</div><div class="v">' + m2(o.entry) + ' <span class="muted" style="font-size:15px">→</span> <span class="pos">' + m2(o.target) + '</span></div></div>' +
       '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + m2(o.stop) + '</div></div>' +
-      '<div class="stat"><div class="k">预期收益</div><div class="v ' + (ret > 0 ? 'pos' : 'neg') + '" style="font-size:16px">' + r2(o.expectedReturn, true) + '</div></div>' +
+      (retBid == null ? '' :
+        '<div class="stat hero2"><div class="k">预期收益 ' + basisTag('bid') + '</div>' +
+        '<div class="v">' + pct(retBid, true) + '</div></div>') +
+      '<div class="stat"><div class="k">预期收益 ' + basisTag('ask') + '</div>' +
+        '<div class="v ' + (ret > 0 ? 'pos' : 'neg') + '" style="font-size:16px">' + r2(o.expectedReturn, true) + '</div></div>' +
       '<div class="stat"><div class="k">建议资金</div><div class="v" style="font-size:16px">' + (isNil(o.capital) ? '—' : money0(Calc.toNum(o.capital))) + '</div></div>' +
       '<div class="stat"><div class="k">现价' + (lp != null ? ' <span class="lvtag">实时</span>' : '') + '</div><div class="v" style="font-size:16px">' +
         (lp != null ? money(lp) : m2(o.price)) + '</div></div>' +
     '</div>' +
     '<div style="margin-top:8px">' +
+      '<div class="row"><span class="rn">深度断层率' + (gapWarn ? '<em>卖一价与最高求购价的距离</em>' : '') + '</span><span class="rv ' + (gapWarn ? 'neg' : '') + '">' +
+        (gap == null ? '—' : pct(gap)) + (gapWarn ? ' ⚠' : '') + '<em>卖一 ' + m2(o.ask) + ' / 求购 ' + m2(o.bid) + '</em></span></div>' +
+      '<div class="row"><span class="rn">出场天数 / 动销比</span><span class="rv">' +
+        (liq == null ? '—' : fmtNum(liq, 2) + ' 天') + '<em>动销 ' + r2(o.turnoverRatio, true) + '</em></span></div>' +
       '<div class="row"><span class="rn">在售 / 求购</span><span class="rv">' + n2(o.listed) + '<em>求购 ' + n2(o.buyNum) + '</em></span></div>' +
       '<div class="row"><span class="rn">日成交 / 存世量</span><span class="rv">' + (isNil(o.turnover) ? '—' : n2(o.turnover) + ' 件') + '<em>存世 ' + n2(o.supply) + '</em></span></div>' +
       '<div class="row"><span class="rn">在售占比</span><span class="rv">' + r2(o.listedRatio) + '</span></div>' +
     '</div>' +
+    (gapWarn ? '<div class="gapwarn"><b>⚠ 深度断层告警：</b>断层率 ' + pct(gap) + ' &gt; 15%——卖一价与最高求购价差得远，' +
+      '「卖一价是画出来的、下方没有真实买盘」，按目标价挂单不一定有人接。</div>' : '') +
     (o.reason ? '<p class="why"><b>为什么</b>' + esc(o.reason) + '</p>' : '') +
     (o.plan ? '<p class="why plan"><b>怎么做</b>' + esc(o.plan) + '</p>' : '') +
   '</div>';
@@ -2802,6 +2998,17 @@ function renderOpportunities(){
   setText('op-budget', sc && sc.budget != null ? money0(Calc.toNum(sc.budget)) : '—');
   const crit = $('op-crit');
   if (crit) crit.innerHTML = (sc && sc.criteria) ? ('筛选说明：' + esc(sc.criteria)) : '还拿不到筛选口径。';
+  const ob = $('op-basis');
+  if (ob){
+    const bs = (a && a.basis) || {};
+    ob.innerHTML = '口径：<span class="basis bid">求购口径</span> 出场按目标价上的<b>求购价</b>成交（expectedReturnBid，更接近真实退出）；' +
+      '<span class="basis ask">卖价口径</span> 按卖一价成交（expectedReturn，引擎原值）。' +
+      (bs.diffNote ? esc(bs.diffNote) + '。' : '') +
+      (bs.depthGap ? esc(bs.depthGap) : '') +
+      (a && a.opportunitiesDelisted && a.opportunitiesDelisted.length
+        ? '　已剔除 ' + a.opportunitiesDelisted.length + ' 条（' + esc(a.opportunitiesDelisted.map(function(d){ return d.name; }).join('、')) + '）'
+        : '');
+  }
   const list = (a && Array.isArray(a.opportunities)) ? a.opportunities : null;
   if (!list || !list.length){
     box.innerHTML = '<div class="card" style="grid-column:1/-1">' + anaWait() +
@@ -3084,6 +3291,25 @@ const LT_CRIT_LABEL = {
   scoreMin: '评分下限', scoreFormula: '评分构成', relStrengthGate: '相对强度门槛', deDup: '同板块去重',
   capitalRule: '资金规则', containersExcluded: '容器为何排除', holdDaysBasis: '持有期依据'
 };
+/* 双口径收益率块：求购口径（更醒目） + 卖价口径（原口径，弱化） */
+function ret2HTML(p){
+  const ask = (p.expectedReturn == null ? null : Calc.toNum(p.expectedReturn));
+  const bid = (p.expectedReturnBid == null ? null : Calc.toNum(p.expectedReturnBid));
+  if (ask == null && bid == null) return '';
+  return '<div class="ret2">' +
+    (bid == null ? '' :
+      '<div class="rc bid"><div class="k">预期收益 ' + basisTag('bid') + ' <span class="muted">更接近真实退出</span></div>' +
+      '<div class="v">' + pct(bid, true) + '</div></div>') +
+    (ask == null ? '' :
+      '<div class="rc ask"><div class="k">预期收益 ' + basisTag('ask') + ' <span class="muted">原口径</span></div>' +
+      '<div class="v">' + pct(ask, true) + '</div></div>') +
+  '</div>' +
+  (bid != null && ask != null
+    ? '<p class="hint" style="margin-top:6px">求购口径比卖价口径 ' +
+      ((bid - ask) >= 0 ? '+' : '') + ((bid - ask) * 100).toFixed(2) + 'pp（' +
+      (p.returnBasisNote ? esc(String(p.returnBasisNote)) : '出场价从卖一价换成求购价') + '）</p>'
+    : '');
+}
 /* ---------- 长期方案卡 ---------- */
 function longHTML(p){
   const conf = p.confidence, g = confGrade(conf);
@@ -3113,6 +3339,7 @@ function longHTML(p){
       '<span class="k">建议</span> <b>' + (isNil(p.capital) ? '—' : money0(Calc.toNum(p.capital))) + '</b>' +
       (isNil(p.positionPct) ? '' : ' <span class="k">（仓位 ' + pct(Calc.toNum(p.positionPct)) + '）</span>') +
     '</div>' +
+    ret2HTML(p) +
     '<div class="conf ' + g + '">' +
       '<div class="conf-top">把握度 <b>' + (isNil(conf) ? '—' : pct(Calc.toNum(conf))) + '</b>' +
         '<span class="conf-word">' + confWord(conf) + '　（&lt;50% 灰 / 50~65% 黄 / &gt;65% 绿）</span></div>' +
@@ -3166,6 +3393,16 @@ function renderLongTerm(){
     : '<b>这一区是什么</b>可实际打入的确定性方案：供给受限 + 需求刚性 + 能扛 7 天锁定 + 明确退出条件。';
   const sum = $('lt-summary');
   if (sum) sum.innerHTML = (lt && lt.summary) ? ('<p class="hint" style="margin-top:8px"><b>本轮结论</b>　' + esc(lt.summary) + '</p>') : '';
+  const bsEl = $('lt-basis');
+  if (bsEl){
+    const bs = (a && a.basis) || {};
+    const plans = (lt && Array.isArray(lt.plans)) ? lt.plans : [];
+    const hasBid = plans.some(function(p){ return p.expectedReturnBid != null; });
+    bsEl.innerHTML = hasBid
+      ? ('口径：每张卡的收益率都给了两个口径——<span class="basis bid">求购口径</span> 出场按目标价上的<b>求购价</b>成交（更接近真实退出）；' +
+         '<span class="basis ask">卖价口径</span> 按卖一价成交（引擎原口径）。' + (bs.diffNote ? esc(bs.diffNote) + '。' : ''))
+      : '';
+  }
   const ex = $('lt-extra');
   if (ex) ex.innerHTML = lt ? ltExtraHTML(lt) : '';
   const plans = (lt && Array.isArray(lt.plans)) ? lt.plans : null;
@@ -3233,6 +3470,384 @@ function renderShortTerm(){
     return;
   }
   box.innerHTML = sigs.map(signalHTML).join('');
+}
+
+/* =====================================================================
+   11.9) 本次新增：执行时机 / 出租评估 / 控盘测算 / 出租 vs 卖出
+   规矩同一套：字段拿不到 → 显示空态说明，绝不报错、绝不编数字
+   ===================================================================== */
+
+/* ---------- ① 减仓执行（库存页顶部；executionTiming 可能还没生成） ---------- */
+/* 数据来自 data/execution-timing.json → analysis.executionTiming（build_analysis.cjs 归一化过）。
+   每项回答三件事：现在卖还是等（timing.recommend）→ 分几批（execution.batches/tranches）→
+   挂什么价、排多长的队（execution.prices/queueHint）。 */
+function recCls(rec){
+  const s = String(rec == null ? '' : rec);
+  if (/立即卖|马上卖|现在就卖/.test(s)) return 'b-out';
+  if (/分批|减仓/.test(s)) return 'b-cut';
+  if (/等|持有/.test(s)) return 'b-hold';
+  return 'b-hold';
+}
+function trancheTable(tr){
+  if (!Array.isArray(tr) || !tr.length) return '';
+  return '<div class="tiers-wrap"><table class="tiers"><thead><tr>' +
+    '<th>批次</th><th>比例</th><th>件数</th><th>挂单价</th><th>什么时候</th></tr></thead><tbody>' +
+    tr.map(function(t){
+      return '<tr><td>第 ' + n2(t.batch) + ' 批</td>' +
+        '<td>' + (t.pct == null ? '—' : pct(Calc.toNum(t.pct))) + '</td>' +
+        '<td>' + n2(t.pieces) + ' 件</td>' +
+        '<td class="ok">' + m2(t.price) + '</td>' +
+        '<td>' + esc(String(t.when == null ? '—' : t.when)) + '</td></tr>';
+    }).join('') + '</tbody></table></div>';
+}
+function execItemHTML(it){
+  if (it === null || typeof it !== 'object') return '<div class="ex"><div class="ex-body">' + esc(String(it)) + '</div></div>';
+  const rec = it.recommend == null ? '' : String(it.recommend);
+  const er = (it.expectedRate == null ? null : Calc.toNum(it.expectedRate));
+  const blockers = arrOf(it.waitBlockers);
+  const pr = it.prices || {};
+  return '<div class="ex">' +
+    '<div class="ex-top">' +
+      '<div class="ex-name">' + esc(it.name || '—') +
+        '<em>' + fmtNum(Calc.toNum(it.num), 0) + ' 件　市值 ' + m2(it.value) +
+        (it.decline && it.decline.d30 != null ? '　近 30 日 ' + r2(it.decline.d30, true) : '') + '</em></div>' +
+      (rec ? '<span class="badge ' + recCls(rec) + '">' + esc(rec) + '</span>' : '') +
+      (it.waitDays === 0 ? '<span class="badge b-out">等 0 天</span>'
+        : (it.waitDays != null ? '<span class="badge b-cut">等 ' + fmtNum(Calc.toNum(it.waitDays), 0) + ' 天</span>' : '')) +
+    '</div>' +
+    '<div class="lz-nums">' +
+      '分批 <b>' + (it.batches == null ? '—' : fmtNum(Calc.toNum(it.batches), 0) + ' 批') + '</b>' +
+      '　在售 <b>' + n2(it.listed) + '</b>' +
+      '　买卖价差 <b>' + r2(it.spread) + '</b>' +
+      '　求购单 <b>' + n2(it.bidNum) + '</b>（接得住 ' + m2(it.bidValueTotal) + '）' +
+      '　我的持仓只占在售 <b>' + r2(it.ratioOfListed) + '</b><br>' +
+      '快速挂 <b>' + m2(pr.fast) + '</b>　耐心挂 <b>' + m2(pr.patient) + '</b>　底价 <b>' + m2(pr.floor) + '</b>' +
+      '　价差缺口 <b>' + (it.depthGap == null ? '—' : pct(Calc.toNum(it.depthGap))) + '</b>' +
+      (er == null ? '' : '　「等」的期望差 <b class="' + (er >= 0 ? 'pos' : 'neg') + '">' + pct(er, true) + '</b>' +
+        (it.expectedDiff == null ? '' : '（' + money(Calc.toNum(it.expectedDiff), true) + '）')) +
+    '</div>' +
+    trancheTable(it.tranches) +
+    (it.queueHint ? '<p class="lz-note"><b>怎么挂</b>　' + esc(String(it.queueHint)) + '</p>' : '') +
+    (it.plan ? '<p class="lz-note"><b>执行方案</b>　' + esc(String(it.plan)) + '</p>' : '') +
+    (it.reason ? '<p class="lz-note"><b>为什么不等</b>　' + esc(String(it.reason)) + '</p>' : '') +
+    (blockers.length
+      ? '<details class="sec-more"><summary>为什么没等到「该等」的门槛（' + blockers.length + ' 条）</summary>' +
+        '<ul class="risks">' + blockers.map(function(x){ return '<li>' + esc(String(x)) + '</li>'; }).join('') + '</ul></details>'
+      : '') +
+    (it.confidence != null ? '<p class="lz-note">结论把握度 ' + pct(Calc.toNum(it.confidence)) +
+      (it.weightBasis ? '　（' + esc(String(it.weightBasis)) + '）' : '') + '</p>' : '') +
+    (it.cdNote ? '<p class="lz-note">⚠ ' + esc(String(it.cdNote)) + '</p>' : '') +
+  '</div>';
+}
+function renderExecutionTiming(){
+  const box = $('ex-list'); if (!box) return;
+  const a = analysisData, ex = (a && a.executionTiming) ? a.executionTiming : null;
+  setText('ex-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const note = $('ex-note');
+  if (note){
+    note.innerHTML = (!ex)
+      ? '<b>这一区是什么</b>按流动性排出「该卖的品种怎么卖」：分几批、挂在什么价位、等几天。——' +
+        '执行时机分析生成中，出来之前这里保持空态（不会用估算数字顶替）。'
+      : (ex.available
+          ? ('<b>这一区是什么</b>按流动性排出「该卖的品种怎么卖」：现在卖还是等、分几批、挂在什么价位。' +
+             (ex.verdict ? '<br><b>市场状态</b>' + esc(String(ex.verdict)) : ''))
+          : '<b>这一区是什么</b>按流动性排出「该卖的品种怎么卖」：分几批、挂在什么价位、等几天。<br>' +
+            '<b>当前状态</b>' + esc(ex.note || '执行时机分析生成中') + '，出来之前这里保持空态。');
+  }
+  const items = (ex && ex.available && Array.isArray(ex.items)) ? ex.items : [];
+  const sm = (ex && ex.summary) || {};
+  if (!items.length){
+    box.innerHTML = emptyBox(ex && ex.available
+      ? '执行时机分析这轮没有给出需要执行的品种。'
+      : '执行时机分析生成中——生成后这里会列出每个该卖的品种：分几批、挂单价位、等 N 天。');
+    return;
+  }
+  /* 汇总条：卖多少 / 分批多少 / 等多少 + 一句话结论 */
+  let h = '<div class="res" style="margin-top:0">' +
+    '<div class="stat hero"><div class="k">立即卖</div><div class="v">' + n2(sm.sellNow) + ' 个</div></div>' +
+    '<div class="stat"><div class="k">分批卖</div><div class="v">' + n2(sm.batch) + ' 个</div></div>' +
+    '<div class="stat"><div class="k">值得等</div><div class="v">' + n2(sm.wait) + ' 个</div></div>' +
+    '<div class="stat"><div class="k">「等」的期望差（中位）</div><div class="v neg">' + r2(sm.medianEdge, true) + '</div></div>' +
+    '<div class="stat wide"><div class="k">合计：等待在期望上少赚</div><div class="v neg">' +
+      m2(isNum(sm.totalExpectedDiff) ? Math.abs(sm.totalExpectedDiff) : null) + '</div></div>' +
+  '</div>';
+  if (sm.conclusion) h += '<div class="concl bad">' + esc(String(sm.conclusion)) + '</div>';
+  /* 该卖的排在前面 */
+  const order = { '立即卖': 0, '分批卖': 1 };
+  const sorted = items.slice().sort(function(x, y){
+    const ox = order[String(x.recommend)] === undefined ? 5 : order[String(x.recommend)];
+    const oy = order[String(y.recommend)] === undefined ? 5 : order[String(y.recommend)];
+    if (ox !== oy) return ox - oy;
+    return Calc.toNum(y.value) - Calc.toNum(x.value);
+  });
+  const head = sorted.slice(0, 3), rest = sorted.slice(3);
+  h += '<div class="adv-list" style="margin-top:10px">' + head.map(execItemHTML).join('') + '</div>';
+  if (rest.length){
+    h += '<details class="sec-more" style="margin-top:10px"><summary>展开其余 ' + rest.length + ' 个品种的执行方案</summary>' +
+      '<div class="adv-list" style="margin-top:10px">' + rest.map(execItemHTML).join('') + '</div></details>';
+  }
+  if (ex.rule) h += '<details class="sec-more"><summary>执行时机的判定规则（怎么算出「该不该等」）</summary>' +
+    '<p class="lz-note">' + esc(String(ex.rule)) + '</p></details>';
+  box.innerHTML = h;
+}
+
+/* ---------- ② 出租评估（库存页；逐项 lease 已在逐项建议卡里，这里给汇总 + Top） ---------- */
+function renderLeaseEval(){
+  const box = $('lz-list'); if (!box) return;
+  const a = analysisData;
+  const lm = (a && a.leaseModule) ? a.leaseModule : null;
+  const rv = (a && a.rentVsSell) ? a.rentVsSell : null;
+  const hs = (rv && Array.isArray(rv.holdings)) ? rv.holdings : [];
+  setText('lz-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const note = $('lz-note');
+  if (note){
+    const concl = (rv && rv.summary && rv.summary.conclusion) || (lm && lm.summary && lm.summary.note);
+    note.innerHTML = '<b>这一区是什么</b>把「卖出」和「挂出去收租」算成同一把尺子：租金能不能扛住跌幅。' +
+      (concl ? '<br><b>结论</b>' + esc(String(concl)) : '');
+  }
+  const sum = $('lz-sum');
+  if (sum){
+    const s = (lm && lm.summary) || {}, mr = (lm && lm.myHoldingsRentSummary) || {};
+    sum.innerHTML =
+      '<div class="res" style="margin-top:0">' +
+        '<div class="stat"><div class="k">全市场扫描品种</div><div class="v">' + n2(s.scanned) + '</div></div>' +
+        '<div class="stat"><div class="k">有租赁记录</div><div class="v">' + n2(s.withLease) + '</div></div>' +
+        '<div class="stat hero2"><div class="k">净年化中位 ' + basisTag('bid') + '</div><div class="v">' + r2(s.medianNetAnnual, true) + '</div></div>' +
+        '<div class="stat"><div class="k">净年化 P90</div><div class="v">' + r2(s.p90NetAnnual, true) + '</div></div>' +
+        '<div class="stat"><div class="k">回本天数中位</div><div class="v">' + (s.paybackMedianDays == null ? '—' : fmtNum(Calc.toNum(s.paybackMedianDays), 0) + ' 天') + '</div></div>' +
+        '<div class="stat"><div class="k">我的持仓可出租</div><div class="v">' + n2(mr.rentable) + ' / ' + n2(mr.kinds) + '</div></div>' +
+        '<div class="stat wide"><div class="k">持仓全部挂租一年约</div><div class="v">' + m2(mr.yearlyIfAllRented) + '</div></div>' +
+      '</div>' +
+      '<p class="hint" style="margin-top:8px">口径：净年化 = 官方 lease_annual ×（1 − 22% 平台抽成）；官方年化已含空置率，' +
+        '所以别再把「短租日租金 × 365」当成能拿到的年化。' + (lm && lm.degenFiltered ? ('已滤除 ' + lm.degenFiltered + ' 条单价过低导致的算术假象条目。') : '') + '</p>';
+  }
+  if (!hs.length){
+    box.innerHTML = emptyBox(rv ? '这轮没有可比较的出租标的。' : anaWait());
+    return;
+  }
+  const order = { '卖出': 0, '持有出租': 1, '持有': 2 };
+  const sorted = hs.slice().sort(function(x, y){
+    return (order[x.bestAction] === undefined ? 9 : order[x.bestAction]) - (order[y.bestAction] === undefined ? 9 : order[y.bestAction]);
+  });
+  const head = sorted.slice(0, 6), rest = sorted.slice(6);
+  const row = function(x){
+    return '<div class="row"><span class="rn">' + esc(x.name || '—') +
+      '<em>净年化 ' + r2(x.leaseNetAnnual, true) + '　现在卖 ' + m2(x.sellNow) + '　持有出租一年 ' + m2(x.holdAndRentOneYear) + '</em></span>' +
+      '<span class="rv"><span class="act3 ' + act3Cls(String(x.bestAction)) + '">' + esc(String(x.bestAction || '—')) + '</span></span></div>';
+  };
+  box.innerHTML = head.map(row).join('') +
+    (rest.length ? '<details class="sec-more"><summary>其余 ' + rest.length + ' 个持仓的出租评估</summary>' + rest.map(row).join('') + '</details>' : '');
+}
+
+/* ---------- ③ 控盘测算（信号页） ---------- */
+function renderControlFeasibility(){
+  const box = $('ctl-box'); if (!box) return;
+  const a = analysisData, cf = (a && a.controlFeasibility) ? a.controlFeasibility : null;
+  setText('ctl-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const note = $('ctl-note');
+  if (note){
+    note.innerHTML = '<b>这一区问的是什么</b>「拿多少钱能把这个品种的盘口吃掉、吃掉之后能不能出掉」。' +
+      '注意：<b>吃掉挂单 ≠ 控住流通盘</b>——在售量只占存世量的个位数百分比。';
+  }
+  if (!cf){
+    box.innerHTML = anaWait(); return;
+  }
+  const fc = cf.floatControl || {}, fcs = fc.summary || {};
+  const tiers = Array.isArray(cf.capitalTiers) ? cf.capitalTiers : [];
+  const sc = Array.isArray(fc.scenarios) ? fc.scenarios : [];
+  let h = '';
+
+  /* 一句话结论 */
+  if (cf.capitalIsNotBottleneck){
+    h += '<div class="concl"><b>资金不是瓶颈。</b>' + esc(String(cf.capitalIsNotBottleneck)) + '</div>';
+  } else if (fcs.verdict){
+    h += '<div class="concl">' + esc(String(fcs.verdict)) + '</div>';
+  }
+
+  /* 资金分档表（¥5万→¥500万） */
+  if (tiers.length){
+    h += '<div class="tiers-wrap"><table class="tiers"><thead><tr>' +
+      '<th>资金档</th><th>可吃≥50%在售</th><th>可整本吃光</th><th>30 天内清得掉</th></tr></thead><tbody>' +
+      tiers.map(function(t){
+        const zero = t.canAbsorbAllTradeable === 0 || t.canAbsorbAllTradeable == null;
+        return '<tr><td>' + esc(String(t.label || '')) + '</td>' +
+          '<td>' + n2(t.canAbsorbHalf) + '</td>' +
+          '<td>' + n2(t.canAbsorbAll) + '</td>' +
+          '<td class="' + (zero ? 'bad' : 'ok') + '">' + n2(t.canAbsorbAllTradeable) + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<p class="hint">「30 天内清得掉」= 整本吃光后还能在 30 天内卖出（按日成交量估）。' +
+        (tiers.every(function(t){ return t.canAbsorbAllTradeable === 0; })
+          ? '<b class="neg">所有资金档都是 0 个</b>：钱再多也买不到对手盘。' : '') + '</p>';
+    const t0 = tiers[0];
+    if (t0.exitFeasibility) h += '<p class="hint">' + esc(String(t0.exitFeasibility)) + '</p>';
+  }
+
+  /* 盘口测算（float-control）：预算 → 能吃多少、其中真能退出的有多少 */
+  if (sc.length){
+    h += '<div class="card-title" style="margin-top:14px">盘口实测：不同预算能吃下多少 <span class="r">国内悠悠+BUFF 真实盘口</span></div>' +
+      '<div class="tiers-wrap"><table class="tiers"><thead><tr>' +
+      '<th>预算</th><th>可吃≥50%在售</th><th>其中退出不困难</th></tr></thead><tbody>' +
+      sc.map(function(x){
+        return '<tr><td>' + esc(String(x.label || '').replace('预算 ', '')) + '</td>' +
+          '<td>' + n2(x.absorbableCount) + '</td>' +
+          '<td class="' + (x.realisticCount === 0 ? 'bad' : 'ok') + '">' + n2(x.realisticCount) + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      (fcs.verdict ? '<p class="hint">' + esc(String(fcs.verdict)) + '</p>' : '');
+  }
+
+  /* 出不来：退出困难桶 */
+  const eb = fc.exitBuckets20k;
+  if (eb){
+    h += '<div class="rows" style="margin-top:10px">' +
+      '<div class="row"><span class="rn">¥2 万吃半盘后出不来<em>日成交 0（无对手盘） + 清盘 > 30 天</em></span>' +
+        '<span class="rv neg">' + n2((Calc.toNum(eb.zeroVolume) + Calc.toNum(eb.over30Days))) + ' 个</span></div>' +
+      '<div class="row"><span class="rn">其中：日成交为 0</span><span class="rv">' + n2(eb.zeroVolume) + ' 个</span></div>' +
+      '<div class="row"><span class="rn">其中：清仓需要 &gt; 30 天</span><span class="rv">' + n2(eb.over30Days) + ' 个</span></div>' +
+      '<div class="row"><span class="rn">进出皆可（真能做）</span><span class="rv pos">' + n2(eb.tradable) + ' 个</span></div>' +
+      '<div class="row"><span class="rn">微盘品种数（可吃半盘）</span><span class="rv">' + n2(fcs.microCapCount) + ' 个</span></div>' +
+    '</div>';
+    if (isNum(eb.zeroVolume) && isNum(eb.over30Days) && (eb.zeroVolume + eb.over30Days) > 0){
+      const tot = Calc.toNum(fcs.microCapCount) || (eb.zeroVolume + eb.over30Days + Calc.toNum(eb.tradable));
+      h += '<div class="concl bad"><b>42% 出不来：</b>¥2 万吃掉一半挂单的 ' + n2(fcs.microCapCount) + ' 个微盘品种里，' +
+        n2(eb.zeroVolume + eb.over30Days) + ' 个（' + (tot ? ((eb.zeroVolume + eb.over30Days) / tot * 100).toFixed(0) + '%' : '—') +
+        '）日成交为 0 或清仓要 &gt; 30 天——<b>买得进、出不来</b>。</div>';
+    }
+  }
+
+  /* 口径纠正：旧口径低估了多少 */
+  const cmp = fc.ratioDomesticVsSkinport;
+  if (cmp && (isNum(cmp.qty) || isNum(cmp.halfCost))){
+    h += '<div class="rows" style="margin-top:10px">' +
+      '<div class="row"><span class="rn">国内 vs 旧（Skinport）口径：在售量倍数</span><span class="rv">' + (isNum(cmp.qty) ? cmp.qty.toFixed(2) + '×' : '—') + '</span></div>' +
+      '<div class="row"><span class="rn">国内 vs 旧口径：吃半盘成本倍数</span><span class="rv neg">' + (isNum(cmp.halfCost) ? cmp.halfCost.toFixed(2) + '×' : '—') + '</span></div>' +
+    '</div>' +
+    '<p class="hint">' + esc(String(cmp.note || '')) + '——用海外盘口估国内吸筹成本会严重低估。</p>';
+  }
+
+  /* 量化风险 2~3 条 */
+  const risks = Array.isArray(cf.risks) ? cf.risks.slice(0, 3) : [];
+  if (risks.length){
+    h += '<div class="card-title" style="margin-top:14px">量化风险 <span class="r">' + risks.length + ' 条</span></div>' +
+      '<ul class="qrisk">' + risks.map(function(r){
+        return '<li><span class="qh">' + (r.severity ? '<span class="sev">' + esc(String(r.severity)) + '</span>' : '') +
+          esc(String(r.name || '—')) + '</span>' +
+          (r.detail ? esc(String(r.detail)) : '') +
+          (r.quantified ? '<span class="qq">量化：' + esc(String(r.quantified)) + '</span>' : '') + '</li>';
+      }).join('') + '</ul>';
+  }
+
+  /* 疑似被控盘的品种（结论是「像」，不是「能跟着做」） */
+  const ci = Array.isArray(cf.controlledItems) ? cf.controlledItems : [];
+  if (ci.length){
+    h += '<div class="card-title" style="margin-top:14px">疑似被控盘的品种 <span class="r">' + ci.length + ' 个 · 只是「像」</span></div>' +
+      '<div class="concl bad"><b>看这个列表要小心：</b>它筛的是「在售持续下降 + 价格逆势上涨 + 板块背离」的品种，' +
+      '说明<b>有人在动</b>，不说明你能跟着赚——你买进去同样要面对 7 天 CD 和「拉高之后谁接」的问题。</div>' +
+      ci.slice(0, 6).map(function(x){
+        return '<div class="ex" style="margin-top:8px">' +
+          '<div class="ex-top"><div class="ex-name">' + esc(x.name || '—') +
+            '<em>' + m2(x.price) + '　在售 ' + n2(x.listedTotal) + ' 件 / 存世 ' + n2(x.supply) +
+            '（' + r2(x.listedRatio) + '）' + (x.sector ? '　板块 ' + esc(String(x.sector)) : '') + '</em></div>' +
+            (x.suspectLevel ? '<span class="badge b-out">' + esc(String(x.suspectLevel)) + '</span>' : '') +
+            (x.strength != null ? '<span class="badge b-cut">可疑度 ' + fmtNum(Calc.toNum(x.strength), 0) + '</span>' : '') + '</div>' +
+          (Array.isArray(x.signal) && x.signal.length
+            ? '<div class="tags">' + x.signal.map(function(t){ return '<span>' + esc(String(t)) + '</span>'; }).join('') + '</div>' : '') +
+          (Array.isArray(x.evidence) && x.evidence.length
+            ? '<ul class="ex-steps">' + x.evidence.map(function(e){ return '<li>' + esc(String(e)) + '</li>'; }).join('') + '</ul>' : '') +
+          (x.note ? '<p class="lz-note">' + esc(String(x.note)) + '</p>' : '') +
+        '</div>';
+      }).join('') +
+      (ci.length > 6
+        ? '<details class="sec-more"><summary>其余 ' + (ci.length - 6) + ' 个疑似被控盘的品种</summary>' +
+          ci.slice(6).map(function(x){
+            return '<div class="row"><span class="rn">' + esc(x.name || '—') +
+              '<em>可疑度 ' + (x.strength == null ? '—' : fmtNum(Calc.toNum(x.strength), 0)) + '　' +
+              esc(arrOf(x.signal).join(' / ')) + '</em></span>' +
+              '<span class="rv">' + m2(x.price) + '</span></div>';
+          }).join('') + '</details>'
+        : '');
+  }
+  h += '<p class="hint" style="margin-top:10px">来源：' + esc(String(fc.source || '控盘可行性测算')) +
+    (cf.updatedAtText ? '　' + esc(String(cf.updatedAtText)) : '') + '</p>';
+  box.innerHTML = h;
+}
+
+/* ---------- ④ 出租 vs 卖出（信号页） ---------- */
+function renderRentVsSell(){
+  const box = $('rvs-box'); if (!box) return;
+  const a = analysisData, rv = (a && a.rentVsSell) ? a.rentVsSell : null;
+  setText('rvs-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  const vd = $('rvs-verdict');
+  if (vd) vd.innerHTML = rv && rv.verdict ? esc(String(rv.verdict)) : '—';
+  if (!rv){
+    box.innerHTML = anaWait(); return;
+  }
+  const s = rv.summary || {}, hl = rv.glovesHeadline || null;
+  const gloves = Array.isArray(rv.gloves) ? rv.gloves : [];
+  let h = '';
+
+  /* 一句话结论 + 计数 */
+  if (s.sellWins != null || s.rentWins != null || s.tie != null){
+    const tot = (Calc.toNum(s.sellWins) + Calc.toNum(s.rentWins) + Calc.toNum(s.tie)) || 44;
+    const sw = Calc.toNum(s.sellWins), rw = Calc.toNum(s.rentWins), ti = Calc.toNum(s.tie);
+    h += '<div class="res" style="margin-top:0">' +
+      '<div class="stat hero2"><div class="k">该卖出的持仓</div><div class="v">' + n2(s.sellWins) + ' / ' + fmtNum(tot, 0) + '</div></div>' +
+      '<div class="stat"><div class="k">值得持有出租</div><div class="v">' + n2(s.rentWins) + '</div></div>' +
+      '<div class="stat"><div class="k">只持有（不租不卖）</div><div class="v">' + n2(s.tie) + '</div></div>' +
+      '<div class="stat"><div class="k">持仓近 180 天中位涨跌</div><div class="v neg">' + r2(s.medianPriceChange180, true) + '</div></div>' +
+      '<div class="stat"><div class="k">净年化租金中位</div><div class="v">' + r2(s.medianNetAnnual, true) + '</div></div>' +
+    '</div>' +
+    '<div class="rvs-bar"><i style="width:' + (sw / tot * 100).toFixed(1) + '%;background:var(--red)"></i>' +
+      '<i style="width:' + (rw / tot * 100).toFixed(1) + '%;background:var(--green)"></i>' +
+      '<i style="width:' + (ti / tot * 100).toFixed(1) + '%;background:var(--cyan)"></i></div>' +
+    '<div class="rvs-legend"><span>卖出 <b>' + sw + '</b></span><span>持有出租 <b>' + rw + '</b></span><span>只持有 <b>' + ti + '</b></span></div>';
+  }
+
+  /* 临界点公式 */
+  if (rv.breakEvenRule){
+    h += '<div class="card-title" style="margin-top:14px">临界点公式 <span class="r">什么时候出租才划算</span></div>' +
+      '<div class="concl">' + esc(String(rv.breakEvenRule)) + '</div>';
+  }
+
+  /* 一代手套 29/29 卖出全胜 */
+  if (hl && hl.total){
+    h += '<div class="card-title" style="margin-top:14px">一代手套对比 <span class="r">' +
+      hl.sellWins + ' / ' + hl.total + ' 卖出全胜</span></div>' +
+      '<div class="concl bad"><b>' + hl.sellWins + '/' + hl.total + ' 全部是「早卖」赢：</b>' +
+      '1 月卖出 vs 持有+出租至今，租金只覆盖了跌幅的极小一部分。租金不是收益，是补贴。</div>';
+    if (gloves.length){
+      const show = gloves.slice(0, 5);
+      h += show.map(function(g){
+        return '<div class="row"><span class="rn">' + esc(g.name || '—') +
+          '<em>1 月 ' + m2(g.janPrice) + ' → 现在 ' + m2(g.nowPrice) + '（' + r2(isNum(g.dropPct) ? g.dropPct / 100 : null, true) + '）' +
+          '　租金 ' + m2(g.rentIncomeIfHeld) + ' 仅覆盖跌幅 ' + r2(g.rentCoverageOfDrop) + '</em></span>' +
+          '<span class="rv money neg"><span class="nw"><span class="lb">早卖多留</span>' +
+            m2(isNum(g.sellVsRentDiff) ? Math.abs(g.sellVsRentDiff) : null) + '</span></span></div>';
+      }).join('') +
+      (gloves.length > show.length
+        ? '<details class="sec-more"><summary>其余 ' + (gloves.length - show.length) + ' 款手套的对比</summary>' +
+          gloves.slice(5).map(function(g){
+            return '<div class="row"><span class="rn">' + esc(g.name || '—') +
+              '<em>租金 ' + m2(g.rentIncomeIfHeld) + ' 覆盖跌幅 ' + r2(g.rentCoverageOfDrop) + '</em></span>' +
+              '<span class="rv money neg"><span class="nw"><span class="lb">早卖多留</span>' +
+                m2(isNum(g.sellVsRentDiff) ? Math.abs(g.sellVsRentDiff) : null) + '</span></span></div>';
+          }).join('') + '</details>'
+        : '');
+    }
+  }
+
+  /* 情景敏感性：跌多少才该卖 */
+  const rows = Array.isArray(rv.scenarios) ? rv.scenarios : [];
+  if (rows.length){
+    h += '<details class="sec-more"><summary>情景敏感性：假设年跌幅不同，44 个持仓该卖 / 该租 / 该持有各多少个</summary>' +
+      '<div class="tiers-wrap"><table class="tiers"><thead><tr><th>假设年跌幅</th><th>卖出</th><th>出租</th><th>持有</th></tr></thead><tbody>' +
+      rows.map(function(x){
+        return '<tr><td>' + r2(x.assumedAnnualDecline) + '</td><td>' + n2(x.sell) + '</td><td>' + n2(x.rent) + '</td><td>' + n2(x.hold) + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<p class="hint">假设跌幅越大，「卖出」越多、「出租」越少——出租扛不住跌，这是这批持仓的核心结论。</p></details>';
+  }
+
+  if (rv.note) h += '<p class="hint" style="margin-top:10px">' + esc(String(rv.note)) + '</p>';
+  box.innerHTML = h || emptyBox('出租 vs 卖出这轮没有可用结论。');
 }
 
 /* =====================================================================
