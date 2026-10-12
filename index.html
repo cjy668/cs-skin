@@ -286,6 +286,19 @@ details[open] summary::before{content:'▾ '}
   border-top:1px solid rgba(35,48,66,.6);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
 .fresh b{color:var(--muted);font-weight:700}
 .fresh .sep{color:#31435a}
+/* 数据冻结（降级沿用旧价）：橙色告警，醒目但不抢红色（红色留给真正的错误） */
+.fresh .fz{color:var(--yellow);font-weight:800;white-space:nowrap}
+.fresh .fz b{color:var(--yellow)}
+.fresh .fz .fzico{font-style:normal}
+.lvdot.frozen{background:var(--yellow);box-shadow:0 0 8px rgba(255,197,49,.85);animation:stalePulse 2s ease-in-out infinite}
+@keyframes stalePulse{0%,100%{opacity:1}50%{opacity:.35}}
+.live.frozen{color:var(--yellow)}
+.live.frozen #live-text{font-weight:800}
+.stalenote{margin-top:8px;padding:7px 10px;border-radius:10px;font-size:12.5px;line-height:1.7;
+  background:rgba(255,197,49,.1);border:1px solid rgba(255,197,49,.36);color:#ffe7a3;overflow-wrap:anywhere}
+.stalenote b{color:var(--yellow)}
+.stalenote .st-when{color:var(--dim);font-size:12px}
+.stalenote code{background:rgba(0,0,0,.25);border-radius:4px;padding:0 3px;font-size:12px}
 
 /* ---------------- 市场页 · 双轨分区（长期方案 / 短期苗头 / 条件单机会） ---------------- */
 .sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 8px}
@@ -640,6 +653,7 @@ details.sec-more{margin-top:10px}
             <button class="btn ghost" id="pf-toggle" style="margin-top:10px">展开全部品种</button>
             <div id="pf-all" hidden></div>
             <p class="hint" id="pf-live" hidden></p>
+            <p class="stalenote" id="pf-live-stale" hidden></p>
             <p class="hint" id="pf-src" style="margin-top:8px"></p>
           </div>
 
@@ -931,6 +945,7 @@ details.sec-more{margin-top:10px}
             </div>
             <p class="hint" id="mk-tip">行情库（<b>market.json</b>，3.5 MB / 全品类）<b>按需加载</b>：点「🔍 选择品种」或「刷新全部现价」时才下载一次，之后进 <b>IndexedDB</b> 缓存，同一会话不再重复下。<br>也可以先把采集脚本生成的 <b>market.json</b> 放到与本页同一目录，或在上面填其他地址。</p>
             <p class="hint" id="live-note">实时价：还没取（打开页面会自动试「本机 /api/live → 云端 live.json」）。</p>
+            <p class="stalenote" id="mk-live-stale" hidden></p>
           </div>
 
           <div class="card">
@@ -2444,13 +2459,28 @@ function renderPortfolioLive(){
   const s = pfData.summary || {};
   const base = Calc.toNum(s.value), cost = Calc.toNum(s.cost);
   const diff = val - base, pnl = val - cost;
+  const frozen = liveData && liveData.stale === true;
+  /* 冻结时价格是旧的：把「实测/实时」的说法降级，别让估值看起来像刚算出来的 */
+  const tag = frozen ? '（⚠️ 实时价已冻结，下面是旧价估算）' : '';
   el.hidden = false;
-  el.innerHTML = '<b>实时估算市值 ' + money(val) + '</b>　（比分析快照 ' + money(base) + ' ' +
+  el.innerHTML = '<b>实时估算市值 ' + money(val) + '</b>' + tag + '　（比分析快照 ' + money(base) + ' ' +
     (diff >= 0 ? '+' : '') + money(diff) + '，' + pct(base ? diff / base : 0, true) + '）' +
     '<br>覆盖 <b>' + hit + ' / ' + top.length + '</b> 个品种的实时价' +
     (hit < top.length ? ('（其余 ' + (top.length - hit) + ' 个仍用分析快照价）') : '') +
     '　→ 浮动盈亏约 <b class="' + (pnl >= 0 ? 'pos' : 'neg') + '">' + money(pnl, true) + '</b>' +
-    '　·　' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + ' ' + esc((liveData && liveData.updatedAtText) || '');
+    '　·　' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + ' ' + esc((liveData && liveData.updatedAtText) || '') +
+    (frozen ? ('　·　<span class="fz">' + esc(liveStaleText()) + '</span>') : '');
+  const sf = $('pf-live-stale');
+  if (sf){
+    if (!frozen){ sf.hidden = true; sf.innerHTML = ''; }
+    else {
+      sf.hidden = false;
+      sf.innerHTML = '<b>⚠️ 实时行情已冻结 ' + liveStaleMinutes() + ' 分钟</b>——持仓估值用的是最后一次成功的价，不是现价。' +
+        '<br>原因：' + esc(liveStaleReason()) +
+        '<br><span class="st-when">最后一次成功更新：' + esc(liveLastOkText()) + '　关注品种 ' +
+        ((liveData && liveData.items) ? Object.keys(liveData.items).length : 0) + ' 件　其他数据照常显示。</span>';
+    }
+  }
 }
 function initPortfolio(){
   const t = $('pf-toggle');
@@ -2788,7 +2818,65 @@ function basisTag(which){
   return which === 'bid' ? '<span class="basis bid">求购口径</span>'
     : (which === 'ask' ? '<span class="basis ask">卖价口径</span>' : '');
 }
-/* 数据新鲜度：行情 HH:MM · 分析 HH:MM · 实时 HH:MM（页头常驻，一眼知道数据有多新） */
+/* ===== 数据新鲜度：把「数据旧了」明说出来，不让用户自己盯时间戳 =====
+   live.json 里的字段（cs-quant/fast_refresh.cjs 降级时写入）：
+     stale:true / staleReason / staleSince / staleMinutes / lastSuccessAt
+   口径：stale=true 只表示「实时价不是刚取的」，其他数据（分析/持仓）照常显示，绝不把整页变成错误页。 */
+function fmtAge(ms){
+  const s = Math.max(0, Math.floor(Calc.toNum(ms) / 1000));
+  if (s < 60) return s + ' 秒';
+  const m = Math.floor(s / 60);
+  if (m < 60) return m + ' 分钟';
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + ' 小时' + (m % 60 ? (m % 60 + ' 分') : '');
+  return Math.floor(h / 24) + ' 天' + (h % 24 ? (h % 24 + ' 小时') : '');
+}
+/* live 数据上「精确到秒」的时间（比 hhmmOf 更适合告警文案） */
+function liveStampText(){
+  const t = (liveData && liveData.updatedAtText) || '';
+  const m = String(t).match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+  return m ? (two(Calc.toNum(m[1])) + ':' + m[2] + ':' + (m[3] || '00')) : String(t || '—');
+}
+/* 冻结时长（分钟）：优先用后端算好的 staleMinutes；没有就用 staleSince / lastSuccessAt 现算 */
+function liveStaleMinutes(){
+  if (!liveData || liveData.stale !== true) return 0;
+  const n = Calc.toNum(liveData.staleMinutes);
+  if (liveData.staleMinutes != null && n > 0) return Math.floor(n);
+  const base = liveData.staleSinceAt || liveData.staleSince || liveData.lastSuccessAt || '';
+  const t = typeof base === 'number' ? base : Date.parse(base);
+  if (Number.isFinite(t) && t > 0) return Math.max(0, Math.floor((Date.now() - t) / 60000));
+  return Math.max(0, Math.floor(Calc.toNum(liveData.ageMs) / 60000));
+}
+function liveStaleText(){ return '已冻结 ' + liveStaleMinutes() + ' 分钟'; }
+function liveStaleReason(){ return (liveData && liveData.staleReason) || '实时取价失败，正在沿用上一次的价格'; }
+function liveLastOkText(){
+  if (!liveData) return '—';
+  const ls = liveData.lastSuccessAt;
+  if (ls){ const t = Date.parse(ls); if (Number.isFinite(t)) return hhmmss(t); }
+  return liveStampText();
+}
+/* 分析/行情数据年龄：让「数据旧了」有个显式提示（不做硬门限，只如实报年龄） */
+function ageSuffix(text){
+  const t = Date.parse(String(text || '').replace(/\//g, '-'));
+  if (!Number.isFinite(t)) return '';
+  const ms = Date.now() - t;
+  if (ms < 10 * 60 * 1000) return '';
+  return '（' + fmtAge(ms) + '前）';
+}
+/* 更新「我的」页实时行情卡里的冻结提示 */
+function renderLiveStaleNote(){
+  const el = $('mk-live-stale'); if (!el) return;
+  if (!(liveData && liveData.stale === true)){ el.hidden = true; el.innerHTML = ''; return; }
+  const mins = liveStaleMinutes();
+  el.hidden = false;
+  el.innerHTML = '<b>⚠️ 实时行情已冻结 ' + mins + ' 分钟</b>（数据停止更新，页面显示的还是旧价）' +
+    '<br>原因：' + esc(liveStaleReason()) +
+    '<br><span class="st-when">最后一次成功更新：' + esc(liveLastOkText()) + '　冻结起点：' + esc(String(liveData.staleSince || '—').replace('T', ' ').replace(/\+.*$/, '')) +
+    '　来源：' + esc(liveData.source || '—') + '</span>' +
+    '<br><span class="st-when">其他数据（分析 / 持仓 / 信号）不受影响，照常显示；下一次快刷成功会自动恢复正常。</span>';
+}
+/* 数据新鲜度：行情 HH:MM · 分析 HH:MM · 实时 HH:MM（页头常驻，一眼知道数据有多新）
+   stale=true 时「实时」那格变成橙色告警「⚠️ 已冻结 N 分钟」，点一下看原因。 */
 function hhmmOf(txt){
   const m = txt ? String(txt).match(/(\d{1,2}):(\d{2})/) : null;
   return m ? (two(Calc.toNum(m[1])) + ':' + m[2]) : '—';
@@ -2798,17 +2886,40 @@ function renderDataTime(){
   const s = (signalsData && signalsData.updatedAtText) || '';
   const a = (analysisData && analysisData.updatedAtText) || '';
   const lv = liveMode === 'static' ? '' : ((liveData && liveData.updatedAtText) || '');
+  const frozen = !!(liveData && liveData.stale === true);
   const main = m || a || s || '—';
   setText('data-time', main);
   setText('data-time2', '行情 ' + (m || '—') + '　信号 ' + (s || '—') + '　分析 ' + (a || '—') +
-    '　实时 ' + (lv ? (lv + '（' + (liveMode === 'local' ? '本机' : '云端') + '）') : '未接入'));
+    '　实时 ' + (lv ? (lv + '（' + (liveMode === 'local' ? '本机' : '云端') + '）' + (frozen ? ('　⚠️ ' + liveStaleText()) : '')) : '未接入'));
   setText('crumb-time', main);
   const fb = $('fresh-bar');
   if (fb) fb.innerHTML =
     '<span>行情 <b>' + hhmmOf(m) + '</b></span><span class="sep">·</span>' +
-    '<span>分析 <b>' + hhmmOf(a) + '</b></span><span class="sep">·</span>' +
-    '<span>实时 <b>' + (liveMode === 'static' ? '—' : hhmmOf(lv || '')) + '</b></span>';
+    '<span>分析 <b>' + hhmmOf(a) + '</b>' + (ageSuffix(a) ? ('<i class="fz">' + esc(ageSuffix(a)) + '</i>') : '') + '</span><span class="sep">·</span>' +
+    (frozen
+      ? ('<span class="fz" id="fresh-live" data-stale-tip="1" title="' + esc('实时行情已冻结：' + liveStaleText() + '（' + liveStaleReason() + '）。最后一次成功更新 ' + liveLastOkText() + '。点一下看详情。') + '">' +
+         '<span class="fzico">⚠️</span> 实时 已冻结 <b>' + liveStaleMinutes() + '</b> 分钟</span>')
+      : ('<span>实时 <b>' + (liveMode === 'static' ? '—' : hhmmOf(lv || '')) + '</b></span>'));
   renderLiveNote();
+  renderLiveStaleNote();
+}
+/* 点一下看到原因：事件委托挂在 document 上（不在每次重绘时重建监听，也不依赖内联 style） */
+function initStaleTip(){
+  document.addEventListener('click', function(e){
+    const t = e && e.target;
+    if (!t) return;
+    const isFreshLive = (t.id === 'fresh-live') || (t.dataset && t.dataset.staleTip === '1');
+    const isLiveBadge = (t.id === 'live-badge');
+    if (!isFreshLive && !isLiveBadge) return;
+    const why = '实时行情已冻结' + (liveStaleMinutes() ? (' ' + liveStaleMinutes() + ' 分钟') : '') +
+      '　原因：' + liveStaleReason() +
+      '　最后一次成功更新：' + liveLastOkText() +
+      '　数据时间：' + ((liveData && liveData.updatedAtText) || '—') +
+      '　来源：' + ((liveData && liveData.source) || '—') +
+      '　→ 分析 / 持仓 / 信号等其他数据不受影响，下一次快刷取到新价会自动恢复。';
+    if (typeof showBanner === 'function') showBanner('⚠️ ' + why);
+    setTimeout(function(){ const b = $('banner'); if (b) b.hidden = true; }, 8000);
+  });
 }
 
 /* ---------- ① 大盘：今日结论（analysis.marketVerdict） ---------- */
@@ -3147,6 +3258,7 @@ let liveData = null;                 // live.json / api/live 的原始 payload
 let liveMode = 'static';             // local（本机代理）| cloud（云端 live.json）| static
 let liveAt = 0;                      // 本机拿到数据的时刻
 let liveFetching = false, liveTimer = null;
+let liveStaleBannerShown = false;    // 冻结横幅每次打开只提示一次，不反复打扰
 let liveByCn = {};                   // 中文名 → live item（analysis.holdings 只有中文名）
 
 function liveTimeText(){             // live 数据自身的时间（HH:MM:SS）
@@ -3192,6 +3304,7 @@ async function fetchLiveOnce(){
   return null;                                        // ③ 都失败 → 静态 market.json
 }
 function applyLive(j, mode){
+  const wasFrozen = !!(liveData && liveData.stale === true);
   liveData = j || null;
   liveMode = (liveData && liveData.items) ? mode : 'static';
   liveAt = Date.now();
@@ -3206,6 +3319,22 @@ function applyLive(j, mode){
   renderLiveBadge(); renderDataTime(); renderSpread();
   renderPortfolioLive();
   renderAnalysisHoldings(); renderLongTerm(); renderShortTerm(); renderOpportunities();
+  /* ④ 主动提示：数据冻结了就说出来，不等用户自己盯时间戳（每次打开只提示一次） */
+  const nowFrozen = !!(liveData && liveData.stale === true);
+  if (nowFrozen && !wasFrozen && !liveStaleBannerShown){
+    liveStaleBannerShown = true;
+    if (typeof showBanner === 'function'){
+      showBanner('⚠️ 实时行情已冻结 ' + liveStaleMinutes() + ' 分钟（' + liveStaleReason() + '）——页面里的实时价是旧的，分析/持仓数据照常。');
+      setTimeout(function(){ const b = $('banner'); if (b) b.hidden = true; }, 9000);
+    }
+  }
+  if (!nowFrozen && wasFrozen){
+    liveStaleBannerShown = false;                    // 恢复后再冻结，允许再次提示
+    if (typeof showBanner === 'function'){
+      showBanner('✅ 实时行情已恢复：' + ((liveData && liveData.updatedAtText) || ''));
+      setTimeout(function(){ const b = $('banner'); if (b) b.hidden = true; }, 5000);
+    }
+  }
 }
 async function refreshLive(){
   if (liveFetching) return false;                      // 请求进行中 → 直接跳过，避免堆叠
@@ -3220,12 +3349,22 @@ async function refreshLive(){
   } finally { liveFetching = false; }
 }
 function renderLiveBadge(){
-  const dot = $('live-dot'), txt = $('live-text');
+  const dot = $('live-dot'), txt = $('live-text'), box = $('live-badge');
+  const frozen = !!(liveMode !== 'static' && liveData && liveData.stale === true);
   const cls = liveMode === 'local' ? 'local' : (liveMode === 'cloud' ? 'cloud' : 'static');
-  if (dot) dot.className = 'lvdot ' + cls;
+  if (dot) dot.className = 'lvdot ' + (frozen ? 'frozen' : cls);
+  if (box){
+    if (frozen) box.classList.add('frozen'); else box.classList.remove('frozen');
+    box.title = frozen
+      ? ('实时行情已冻结：' + liveStaleText() + '　原因：' + liveStaleReason() + '　最后一次成功更新：' + liveLastOkText() +
+         '　（来源 ' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + '，点「我的」看详情）')
+      : '实时价来源：本机 /api/live → 云端 live.json → 静态 market.json';
+  }
   const label = liveMode === 'local' ? '实时' : (liveMode === 'cloud' ? '近实时' : '静态数据');
   const t = liveMode === 'static' ? '' : liveTimeText();
-  if (txt) txt.textContent = t ? (label + ' ' + t) : label;
+  if (txt) txt.textContent = frozen
+    ? ('⚠️ 已冻结 ' + liveStaleMinutes() + ' 分钟')
+    : (t ? (label + ' ' + t) : label);
 }
 function liveCount(list, keyFn){
   if (!Array.isArray(list)) return 0;
@@ -3244,14 +3383,19 @@ function renderLiveNote(){
   const items = (liveData && liveData.items) ? Object.keys(liveData.items).length : 0;
   const ov = applyLiveToMarket();
   const a = analysisData || {};
+  const frozen = liveData && liveData.stale === true;
   el.innerHTML = '实时价：<b>' + (liveMode === 'local' ? '本机 /api/live（csqaq 直连代理，服务端缓存 60 秒）' : '云端 live.json（定时脚本快照）') + '</b>' +
+    (frozen ? ('　<span class="fz">⚠️ ' + esc(liveStaleText()) + '</span>') : '') +
     '　数据时间 <b>' + esc((liveData && liveData.updatedAtText) || '—') + '</b>' +
+    (frozen ? ('（最后一次成功更新 <b>' + esc(liveLastOkText()) + '</b>，之后没能取到新价）') : '') +
     '　关注品种 <b>' + items + '</b>' +
     (liveMode === 'local' ? '' : ('　来源 ' + esc((liveData && liveData.source) || '—'))) +
+    (frozen ? ('<br>冻结原因：<b>' + esc(liveStaleReason()) + '</b>') : '') +
     '<br>已覆盖行情文件 <b>' + ov + '</b> 件；命中持仓 <b>' + liveCount(a.holdings, function(x){ return null; }) + '</b> 个、' +
     '长期方案 <b>' + liveCount((a.longTerm || {}).plans, function(x){ return x.hash; }) + '</b> 个、' +
     '条件单机会 <b>' + liveCount(a.opportunities, function(x){ return x.hash; }) + '</b> 个（卡片上带「实时」标记的就是实时价）。' +
-    '　每 60 秒自动刷新一次（页面切到后台就不请求）。';
+    (frozen ? '　⚠️ 冻结期间这些价格是旧的，别按它下手；分析 / 持仓数据本身不受影响。'
+            : '　每 60 秒自动刷新一次（页面切到后台就不请求）。');
 }
 function startLiveTimer(){
   if (liveTimer) return;
@@ -4003,6 +4147,7 @@ async function init(){
 
   initNav();
   initMarket();
+  initStaleTip();
   renderDataTime();
   renderLiveBadge();
   loadSignals();
