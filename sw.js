@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v4';
+const CACHE = 'cs-skin-app-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -14,8 +14,13 @@ const ASSETS = [
   './icon-192.png',
   './icon-512.png'
 ];
-/* 页面与实时数据：永远优先联网 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json/i;
+/* 页面与实时/每日数据：永远优先联网
+   ⚠️ 2026-10-13 修正：analysis.json / signals.json 必须在这里
+      它们每天更新 3 次、体积小（314 KB / 18 KB），放缓存优先会导致
+      手机上【永远停在旧版本】（用户实测：分析页数据停在 2 天 23 小时前，
+      而 live.json 是新的 —— 正是因为当时只有 live.json 在名单里）。
+      只有 market.json（3.5 MB，一天 3 次）才适合缓存优先。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
