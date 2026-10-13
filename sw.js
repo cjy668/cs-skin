@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v5';
+const CACHE = 'cs-skin-app-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -19,8 +19,11 @@ const ASSETS = [
       它们每天更新 3 次、体积小（314 KB / 18 KB），放缓存优先会导致
       手机上【永远停在旧版本】（用户实测：分析页数据停在 2 天 23 小时前，
       而 live.json 是新的 —— 正是因为当时只有 live.json 在名单里）。
-      只有 market.json（3.5 MB，一天 3 次）才适合缓存优先。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json/i;
+      只有 market.json（3.5 MB，一天 3 次）才适合缓存优先。
+   ⚠️ 2026-10-13 再修正：加了 market-pulse.json —— analysis.json 现在每 3 分钟被
+      cs-quant/fast_refresh.cjs 轻刷一次价格，脉搏文件同样是 3 分钟级；
+      放缓存优先同样会让「大盘」页停在旧数字。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
