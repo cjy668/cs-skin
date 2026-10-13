@@ -282,14 +282,31 @@ details[open] summary::before{content:'▾ '}
 .lvdot.static{background:#4a5a6c}
 .lvtag{font-size:10.5px;font-weight:700;color:var(--green);background:rgba(47,208,122,.1);
   border:1px solid rgba(47,208,122,.4);border-radius:5px;padding:0 4px;line-height:15px;white-space:nowrap}
+/* 「价格时间 / 结论时间」两个时间标签：钱用绿色（价格），建议用灰色（结论）——一眼分得清哪个会每 3 分钟动 */
+.lvtag.at{color:var(--muted);background:rgba(140,160,185,.10);border-color:rgba(140,160,185,.34)}
+.lvtag.fz2{color:var(--yellow);background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.45)}
 .fresh{display:flex;align-items:center;gap:7px;flex-wrap:wrap;max-width:680px;margin:0 auto;padding:4px 14px 7px;
   border-top:1px solid rgba(35,48,66,.6);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
 .fresh b{color:var(--muted);font-weight:700}
 .fresh .sep{color:#31435a}
+/* 窄屏（手机 390px）把新鲜度行排成 2×2 网格：每个格子 nowrap、不显示分隔点 →
+   绝不出现「某个时间被拆到两行」的错位；结论时间与价格时间仍然是并列的两个格子。 */
+@media (max-width:470px){
+  .fresh{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;padding:5px 14px 8px;font-size:12px}
+  .fresh>.sep{display:none}
+  .fresh>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 /* 数据冻结（降级沿用旧价）：橙色告警，醒目但不抢红色（红色留给真正的错误） */
 .fresh .fz{color:var(--yellow);font-weight:800;white-space:nowrap}
 .fresh .fz b{color:var(--yellow)}
 .fresh .fz .fzico{font-style:normal}
+/* 「结论 / 实时」这两个口径标签用中性色与绿色，不能借用告警的黄色（黄色只留给「已冻结」）；
+   类名 tconcl / tprice 刻意避开页面里已有的 .concl（卡片块）和 .live（顶栏徽标，display:flex） */
+.fresh .tagz{font-style:normal;font-weight:800;white-space:nowrap;font-size:10.5px;
+  border-radius:5px;padding:0 4px;line-height:15px;border:1px solid;margin:0 0 0 3px}
+.fresh .tagz.tconcl{color:var(--muted);background:rgba(140,160,185,.10);border-color:rgba(140,160,185,.30)}
+.fresh .tagz.tprice{color:var(--green);background:rgba(47,208,122,.10);border-color:rgba(47,208,122,.40)}
+.fresh .agez{font-style:normal;color:var(--dim);white-space:nowrap;margin-left:3px;font-size:11px}
 .lvdot.frozen{background:var(--yellow);box-shadow:0 0 8px rgba(255,197,49,.85);animation:stalePulse 2s ease-in-out infinite}
 @keyframes stalePulse{0%,100%{opacity:1}50%{opacity:.35}}
 .live.frozen{color:var(--yellow)}
@@ -575,8 +592,9 @@ details.sec-more{margin-top:10px}
       </div>
       <div class="fresh" id="fresh-bar">
         <span>行情 <b>—</b></span><span class="sep">·</span>
+        <span>信号 <b>—</b></span><span class="sep">·</span>
         <span>分析 <b>—</b></span><span class="sep">·</span>
-        <span>实时 <b>—</b></span>
+        <span>价格 <b>—</b></span>
       </div>
       <div class="crumbbar">
         <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
@@ -643,9 +661,9 @@ details.sec-more{margin-top:10px}
           <div class="card span-all" id="pf-card" hidden>
             <div class="card-title">我的真实持仓 <span class="r" id="pf-time">—</span></div>
             <div class="res" style="margin-top:0">
-              <div class="stat"><div class="k">市场价</div><div class="v" id="pf-value">—</div></div>
+              <div class="stat"><div class="k">市场价 <span id="pf-k-value"></span></div><div class="v" id="pf-value">—</div></div>
               <div class="stat"><div class="k">买入成本</div><div class="v" id="pf-cost">—</div></div>
-              <div class="stat"><div class="k">浮动盈亏</div><div class="v" id="pf-pnl">—</div></div>
+              <div class="stat"><div class="k">浮动盈亏 <span id="pf-k-pnl"></span></div><div class="v" id="pf-pnl">—</div></div>
               <div class="stat"><div class="k">件数 / 品种</div><div class="v" id="pf-count">—</div></div>
             </div>
             <div id="pf-fam"></div>
@@ -2414,7 +2432,7 @@ function renderPortfolio(){
   const pnl = s.value - s.cost;
   setText('pf-pnl', (pnl >= 0 ? '+' : '−') + money(Math.abs(pnl)).replace('¥', '¥') + '  ' + (pnl / s.cost * 100).toFixed(1) + '%', pnl >= 0 ? 'pos' : 'neg');
   setText('pf-count', s.items + ' 件 / ' + s.kinds + ' 种');
-  setText('pf-time', pfData.updatedAtText || '—', 'muted');
+  renderPortfolioTimes();
   /* 枪族集中度（用成本口径更真实） */
   const fam = pfData.byFamilyCost || pfData.byFamily || {};
   const costSum = Object.keys(fam).reduce(function (a, k) { return a + fam[k]; }, 0) || 1;
@@ -2441,11 +2459,28 @@ function renderPortfolio(){
       '<span class="v2" style="white-space:nowrap;font-size:12.5px">买 ' + (x.cost == null ? '—' : money(x.cost)) +
       ' → 现 ' + money(x.mkt) + '　' + p + '</span></div>';
   }).join('') + '</div>';
-  $('pf-src').innerHTML = '数据来源：' + esc(pfData.source || '') + '　（市场价合计与悠悠页头一致）';
+  $('pf-src').innerHTML = '数据来源：' + esc(pfData.source || '') + '　（市场价合计与悠悠页头一致）' +
+    (mdhmOf(pfData.ledgerPriceAsOf) ? ('　·　表中「现价」= 悠悠台账快照价（' + esc(mdhmOf(pfData.ledgerPriceAsOf)) + '），不是实时价；' +
+      '按实时价重算的市值 / 盈亏见下面「实时估算市值」。') : '');
   renderPortfolioLive();
 }
-/* 用实时价估一遍真实持仓市值（拿不到实时价的品种仍用分析快照价，并说明覆盖了几个） */
+/* 台账时间 vs 价格时间：这张卡里的「市场价 / 浮动盈亏」是悠悠截图台账口径（不是实时价），
+   按实时价重算的市值在下面「实时估算市值」那行 → 两个时间都写清楚，别让人以为台账价是刚取的。
+   ⚠️ 必须能被 renderPortfolioLive 重复调用：实时价是后到的（60 秒一次），
+      第一次渲染时 liveMode 还是 static，不能把「未接入」永久写死在卡片标题里。 */
+function renderPortfolioTimes(){
+  if (!pfData) return;
+  const ledgerAt = mdhmOf(pfData.ledgerPriceAsOf) || mdhmOf(pfData.updatedAtText) || '';
+  const pTxt = priceAsOfHHMM();
+  const ledgerTag = ledgerAt ? ('<span class="lvtag at">台账 ' + esc(ledgerAt) + '</span>') : '';
+  const kv = $('pf-k-value'); if (kv) kv.innerHTML = ledgerTag;
+  const kp = $('pf-k-pnl'); if (kp) kp.innerHTML = ledgerTag;
+  setText('pf-time', (ledgerAt ? ('台账价 ' + ledgerAt) : (pfData.updatedAtText || '—')) +
+    (pTxt && pTxt !== '—' ? ('　·　实时价 ' + pTxt + '（' + priceKindWord() + '）') : '　·　实时价未接入'), 'muted');
+}
+/* 用实时价估一遍真实持仓市值（拿不到实时价的品种仍用台账价，并说明覆盖了几个） */
 function renderPortfolioLive(){
+  renderPortfolioTimes();                     /* 实时价一到就刷新卡片上的两个时间 */
   const el = $('pf-live'); if (!el || !pfData) return;
   const top = Array.isArray(pfData.top) ? pfData.top : [];
   if (liveMode === 'static' || !top.length){ el.hidden = true; el.innerHTML = ''; return; }
@@ -2463,12 +2498,14 @@ function renderPortfolioLive(){
   /* 冻结时价格是旧的：把「实测/实时」的说法降级，别让估值看起来像刚算出来的 */
   const tag = frozen ? '（⚠️ 实时价已冻结，下面是旧价估算）' : '';
   el.hidden = false;
-  el.innerHTML = '<b>实时估算市值 ' + money(val) + '</b>' + tag + '　（比分析快照 ' + money(base) + ' ' +
+  el.innerHTML = '<b>实时估算市值 ' + money(val) + '</b>' + priceTagHTML() + tag + '　（比台账 ' + money(base) + ' ' +
     (diff >= 0 ? '+' : '') + money(diff) + '，' + pct(base ? diff / base : 0, true) + '）' +
     '<br>覆盖 <b>' + hit + ' / ' + top.length + '</b> 个品种的实时价' +
-    (hit < top.length ? ('（其余 ' + (top.length - hit) + ' 个仍用分析快照价）') : '') +
+    (hit < top.length ? ('（其余 ' + (top.length - hit) + ' 个仍用台账价）') : '') +
     '　→ 浮动盈亏约 <b class="' + (pnl >= 0 ? 'pos' : 'neg') + '">' + money(pnl, true) + '</b>' +
-    '　·　' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + ' ' + esc((liveData && liveData.updatedAtText) || '') +
+    '　·　价格时间 <b>' + esc((liveData && liveData.updatedAtText) || '—') + '</b>' +
+    '（' + (liveMode === 'local' ? '本机 /api/live' : '云端 live.json') + '）' +
+    '　·　台账时间 <b>' + esc(mdhmOf(pfData.ledgerPriceAsOf) || pfData.updatedAtText || '—') + '</b>' +
     (frozen ? ('　·　<span class="fz">' + esc(liveStaleText()) + '</span>') : '');
   const sf = $('pf-live-stale');
   if (sf){
@@ -2517,8 +2554,19 @@ function mQty(v){
   return null;
 }
 function renderMarketOverview(){
-  const m = marketData && marketData.market;
+  applyPulseToMarket();                                  /* 有脉搏就先覆盖头条数字（见 loadPulse） */
   const set = (id, txt, cls) => setText(id, txt, cls);
+  /* 大盘头条数据的来源：market.json 已载入就用它（脉搏已在上面覆盖过），
+     没有行情库但有脉搏（6KB）就单用脉搏 —— 「大盘」页不用等 3.5 MB 的行情库。
+     两样都没有才退回空态提示（与以前一样）。 */
+  const fromPulseOnly = !(marketData && marketData.market) && !!pulseData;
+  const m = (marketData && marketData.market) || (pulseData ? {
+    index: pulseData.index ? pulseData.index.value : null,
+    indexChg: pulseData.index ? pulseData.index.chg : null,
+    indexAt: pulseData.index ? pulseData.index.at : null,
+    greedy: pulseData.greedy, breadth: pulseData.breadth, online: pulseData.online,
+    types: pulseData.types || []
+  } : null);
   if (!m){
     set('mk-index', '—'); set('mk-greedy', '—'); set('mk-breadth', '—'); set('mk-online', '—');
     set('mk-market-time', '—', 'muted');
@@ -2535,7 +2583,20 @@ function renderMarketOverview(){
         dn > up * 2 ? 'neg' : (up > dn ? 'pos' : ''));
   }
   set('mk-online', m.online == null ? '—' : Number(m.online).toLocaleString('zh-CN') + ' 人', '');
-  setText('mk-market-time', m.indexAt ? String(m.indexAt).slice(5, 16).replace('T', ' ') : '—', 'muted');
+  /* 行情库自己的时间 + 大盘脉搏的时间：前者是 3.5MB 全量库的快照时间，后者是 3 分钟级的官方口径。
+     ⚠️ 行情库时间要用 marketData.updatedAtText：market 里的 indexAt 会被脉搏覆盖（那是指数的官方时间）。 */
+  const libAt = marketData ? hhmmOf(marketData.updatedAtText) : '';
+  const base = marketData && marketData.market
+    ? (libAt && libAt !== '—' ? ('行情库 ' + libAt) : '行情库 —')
+    : '行情库未载入';
+  setText('mk-market-time', fromPulseOnly
+    ? ('脉搏 ' + pulseStampText() + '　·　' + base)
+    : (pulseData ? (base + '　·　脉搏 ' + pulseStampText()) : base), 'muted');
+  const mkt = $('mk-market-time');
+  if (mkt) mkt.title = pulseData
+    ? ('大盘指数/贪婪指数/市场宽度/在线人数/板块涨跌 来自 market-pulse.json（' + (pulseData.source || '') + '，每 3 分钟更新）；'
+       + '「行情库」是 market.json 全量快照的时间，一天 3 次。')
+    : '数字来自 market.json（09:00 / 15:00 / 21:00 的快照）';
 
   /* 板块 7 日强弱榜：全品类按 d7 排序，取最强 6 / 最弱 6 */
   const ts = (m.types || []).slice();
@@ -2550,11 +2611,13 @@ function renderMarketOverview(){
     $('mk-types').innerHTML = '<div class="split">' +
       '<div><div class="split-h pos">强势 6 个板块（7 日）</div>' + ts.slice(0, 6).map(row).join('') + '</div>' +
       '<div><div class="split-h neg">弱势 6 个板块（7 日）</div>' + ts.slice(-6).reverse().map(row).join('') + '</div>' +
-      '</div>';
+      '</div>' + (fromPulseOnly
+        ? '<p class="hint">板块来自 market-pulse.json（' + esc(pulseStampText()) + '，每 3 分钟更新，官方口径）；' +
+          '行情库（3.5 MB）还没载入时也能看。</p>' : '');
   } else $('mk-types').innerHTML = emptyBox('暂无板块数据');
 
-  /* 异动榜：求购↑ / 在售↓ = 有人在收货 */
-  const alt = marketData.alteration || [];
+  /* 异动榜：求购↑ / 在售↓ = 有人在收货（这份在 market.json 里，脉搏只带 20 条，不覆盖） */
+  const alt = (marketData && marketData.alteration) || [];
   if (alt.length){
     const arow = function(a){
       const key = String(a.key || '').replace('buff_', '').replace('yyyp_', '').replace('_num', '');
@@ -2568,7 +2631,78 @@ function renderMarketOverview(){
     };
     $('mk-alt').innerHTML = alt.slice(0, 10).map(arow).join('') +
       (alt.length > 10 ? '<details><summary>展开全部 ' + alt.length + ' 条异动</summary>' + alt.slice(10).map(arow).join('') + '</details>' : '');
-  } else $('mk-alt').innerHTML = emptyBox('暂无异动数据');
+  } else $('mk-alt').innerHTML = emptyBox(marketData
+    ? '暂无异动数据'
+    : '行情库未加载：异动榜来自 market.json（3.5 MB，一天 3 次）；大盘指数/板块不受影响');
+}
+
+/* =====================================================================
+   大盘脉搏：market-pulse.json（cs-quant/fast_refresh.cjs 每 3 分钟 1 次 /api/v1/current_data）
+   —— market.json 是 09:00 / 15:00 / 21:00 的全量快照（3.5 MB），大盘指数/贪婪/宽度
+      到下一轮之前就旧了；脉搏文件只带指数/贪婪/宽度/在线/74 板块（≈6KB），
+      用来覆盖「大盘」页的头条数字，并把板块 7 日榜对齐到最新。
+   规矩：① 只覆盖 market.json 已有的字段，绝不新增假的行情；
+        ② 没有脉搏文件 / 解析失败 → 一切照旧用 market.json，不报错、不空态、不影响其他页；
+        ③ 只有「行情库已载入」时才叠加（没行情库时大盘页维持原来的空态提示）。
+   ===================================================================== */
+let pulseData = null;
+function applyPulseToMarket(){
+  if (!pulseData) return 0;
+  if (!marketData || !marketData.market) return 0;      // 没行情库就不造数据
+  const m = marketData.market, p = pulseData;
+  let n = 0;
+  if (p.index && isNum(p.index.value)){ m.index = p.index.value; n++; }
+  if (p.index && isNum(p.index.chg)) m.indexChg = p.index.chg;
+  if (p.index && p.index.at) m.indexAt = p.index.at;
+  if (p.greedy) m.greedy = p.greedy;
+  if (isNum(p.online)) m.online = p.online;
+  if (p.breadth){
+    m.breadth = Object.assign({}, m.breadth || {});
+    ['up1', 'down1', 'up30', 'down30', 'ratio'].forEach(function(k){
+      if (isNum(p.breadth[k])) m.breadth[k] = p.breadth[k];
+    });
+  }
+  if (Array.isArray(p.types) && Array.isArray(m.types)){
+    const by = {};
+    p.types.forEach(function(t){ if (t && t.name) by[t.name] = t; });
+    m.types.forEach(function(t){
+      const q = t && by[t.name];
+      if (!q) return;
+      if (isNum(q.d1)) t.d1 = q.d1;
+      if (isNum(q.d7)) t.d7 = q.d7;
+      if (isNum(q.d30)) t.d30 = q.d30;
+      if (!t.kind && q.kind) t.kind = q.kind;
+      n++;
+    });
+  }
+  return n;
+}
+async function loadPulse(){
+  try {
+    const j = await fetchJSON('./market-pulse.json');
+    if (!j || !j.index || !isNum(j.index.value)) return false;
+    pulseData = j;
+    pulseAt = Date.now();
+    applyPulseToMarket();
+    renderMarketOverview();
+    renderDataTime();
+    return true;
+  } catch (e) { return false; }        // 脉搏缺失：照旧用 market.json，静默
+}
+const PULSE_TTL = 180000;              // 3 分钟：与 cs-quant/fast_refresh.cjs 写脉搏的节奏一致
+let pulseAt = 0, pulseFetching = false;
+async function refreshPulseIfDue(){
+  if (pulseFetching) return false;
+  if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return false;
+  if (pulseAt && (Date.now() - pulseAt) < PULSE_TTL) return false;
+  pulseFetching = true;
+  try { return await loadPulse(); } catch (e) { return false; } finally { pulseFetching = false; }
+}
+function pulseStampText(){
+  if (!pulseData) return '';
+  const t = hhmmOf(pulseData.updatedAtText);
+  const up = pulseData.dataAt ? String(pulseData.dataAt).slice(11, 16) : '';
+  return t + (up ? ('（官方 ' + up + '）') : '');
 }
 function renderMarketStatus(){
   const n = marketData ? marketKeys().length : 0;
@@ -2804,10 +2938,38 @@ async function loadSignals(){
 async function loadAnalysis(){
   analysisData = await fetchJSON('./analysis.json');
   analysisState = analysisData ? 'ok' : 'fail';
+  analysisAt = Date.now();
+  rebuildLiveIndexes();                 /* analysis 里的 name↔hash 是实时价兜底匹配的关键 */
   renderVerdict(); renderAnalysisHoldings(); renderLongTerm(); renderShortTerm();
   renderOpportunities(); renderDataTime();
+  renderPortfolioLive();                /* 台账卡的「实时价时间」也要跟着更新 */
   /* 本次新增区块：执行时机 / 出租评估 / 控盘测算 / 出租 vs 卖出 */
   renderExecutionTiming(); renderLeaseEval(); renderControlFeasibility(); renderRentVsSell();
+}
+/* 页面开着不动时的兜底刷新：cs-quant/fast_refresh.cjs 每 3 分钟轻刷一次 analysis.json 的价格，
+   所以这里也按 3 分钟重取一遍（只在页面可见时），让「结论」和「价格」都跟得上后端。
+   取到就重渲染，取不到（断网/404）什么都不做，页面保持原样。 */
+const ANALYSIS_TTL = 180000;
+let analysisAt = 0, analysisFetching = false;
+async function refreshAnalysisIfDue(){
+  if (analysisFetching) return false;
+  if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return false;
+  if (analysisAt && (Date.now() - analysisAt) < ANALYSIS_TTL) return false;
+  analysisFetching = true;
+  try {
+    const j = await fetchJSON('./analysis.json');
+    if (!j || !Array.isArray(j.holdings)) return false;
+    const same = analysisData && analysisData.updatedAtText === j.updatedAtText &&
+      analysisData.pricesAsOf === j.pricesAsOf && (analysisData.holdings || []).length === j.holdings.length;
+    analysisAt = Date.now();
+    if (same) return false;
+    analysisData = j; analysisState = 'ok';
+    rebuildLiveIndexes();
+    renderVerdict(); renderAnalysisHoldings(); renderLongTerm(); renderShortTerm();
+    renderOpportunities(); renderExecutionTiming(); renderLeaseEval();
+    renderControlFeasibility(); renderRentVsSell(); renderDataTime(); renderPortfolioLive();
+    return true;
+  } catch (e) { return false; } finally { analysisFetching = false; }
 }
 /* 新分析产出的公共小工具（任何字段缺失都返回 '—'，不编数字） */
 function anaOf(key, sub){
@@ -2863,6 +3025,82 @@ function ageSuffix(text){
   if (ms < 10 * 60 * 1000) return '';
   return '（' + fmtAge(ms) + '前）';
 }
+/* 页头那一行窄（手机 390px 每格 176px）→ 年龄用紧凑写法，避免被省略号截断 */
+function ageSuffixShort(text){
+  const t = Date.parse(String(text || '').replace(/\//g, '-'));
+  if (!Number.isFinite(t)) return '';
+  const ms = Date.now() - t;
+  if (ms < 10 * 60 * 1000) return '';
+  const m = Math.floor(ms / 60000);
+  if (m < 60) return '（' + m + 'm前）';
+  const h = Math.floor(m / 60);
+  if (h < 24) return '（' + h + 'h' + (m % 60 ? ((m % 60) + 'm') : '') + '前）';
+  return '（' + Math.floor(h / 24) + 'd前）';
+}
+
+/* ===== 「结论时间」vs「价格时间」（用户要求：钱跟价格走，建议跟分析走）=================
+   背景：live.json 每 3 分钟刷新价格，analysis.json / signals.json 只在 09:00/15:00/21:00
+        由完整流水线重跑（daily.cmd 10 步 ≈15 分钟、csqaq 限流 1 请求/秒，不可能每 3 分钟重跑）。
+        所以 cs-quant/fast_refresh.cjs 每 3 分钟只轻刷 analysis.json 里的「价格派生字段」
+        （mkt/value/pnl/pnlRate/listed），并写上：
+          pricesAsOf       价格刷新时间（3 分钟级）
+          pricesSource     来源标记
+          analysisAsOf     完整分析（结论）的运行时间 = 原 updatedAtText（语义不变）
+          holdingsPatched  本轮更新了几件
+       前端据此把两个时间分开显示：钱 → 价格时间；action/reason/plan → 结论时间。
+         · analysisData 里没有 pricesAsOf（老文件 / 完整流水线刚跑完还没轻刷）时，
+           退回 live.json 的数据时间；live 也没有就显示「台账」而不是假装实时。
+   ================================================================================== */
+function analysisAsOfText(){                       /* 结论（建议）时间 */
+  const a = analysisData || {};
+  return String(a.analysisAsOf || a.updatedAtText || '');
+}
+function priceAsOfText(){                          /* 价格时间：优先 live.json（60 秒级），其次 analysis.pricesAsOf */
+  if (liveMode !== 'static' && liveData && liveData.updatedAtText) return String(liveData.updatedAtText);
+  const a = analysisData || {};
+  return String(a.pricesAsOf || '');
+}
+function priceAsOfHHMM(){ return hhmmOf(priceAsOfText()); }
+function priceFrozen(){                            /* 价格冻结：live 或 analysis 任一打了 stale 标记 */
+  return !!((liveData && liveData.stale === true) || (analysisData && analysisData.pricesStale === true));
+}
+function priceKindWord(){                          /* 价格口径：实时（3 分钟级）/ 近实时（云端快照）/ 台账（静态）*/
+  if (priceFrozen()) return '冻结';
+  return liveMode === 'local' ? '实时' : (liveMode === 'cloud' ? '快照' : '台账');
+}
+/* 钱的数字旁边的「价格 HH:MM」标签（不编：拿不到价格时间就不显示标签） */
+function priceTagHTML(){
+  const t = priceAsOfHHMM();
+  if (!t || t === '—') return '';
+  return '<span class="lvtag' + (priceFrozen() ? ' fz2' : '') + '">价格 ' + t + ' ' + priceKindWord() + '</span>';
+}
+/* 建议/结论（action · reason · plan · targetSell · stopLoss）旁边的「结论 HH:MM」标签 */
+function anaTagHTML(){
+  const t = hhmmOf(analysisAsOfText());
+  return (t && t !== '—') ? ('<span class="lvtag at">结论 ' + t + '</span>') : '';
+}
+/* 用实时价现算一件持仓的「钱」：页面开着不动时，后端可能又轻刷过一轮，
+   这里直接按手头的实时价重算，保证「现价」和「浮动盈亏/市值」永远是同一个价算出来的。
+   拿不到实时价 → 原样用 analysis.json（后端轻刷后的值，或台账值），绝不编。 */
+function liveMoneyOf(h){
+  h = h || {};
+  const num = Calc.toNum(h.num);
+  const costTotal = (h.costTotal == null ? null : Calc.toNum(h.costTotal));
+  const lp = livePrice(h.hash, h.name);
+  const base = { mkt: h.mkt, value: h.value, pnl: h.pnl, pnlRate: h.pnlRate, live: false };
+  if (lp == null || !(num > 0)) return base;
+  const value = Calc.round2(num * lp);
+  const pnl = (costTotal == null) ? h.pnl : Calc.round2(value - costTotal);
+  const pnlRate = (costTotal && costTotal > 0 && pnl != null) ? (pnl / costTotal) : h.pnlRate;
+  return { mkt: lp, value: value, pnl: pnl, pnlRate: pnlRate, live: true };
+}
+/* 紧凑时间：2026/10/10 09:52:51 → 10-10 09:52（窄屏用） */
+function mdhmOf(txt){
+  const s = String(txt || '');
+  const m = /^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})/.exec(s);
+  return m ? (two(Calc.toNum(m[2])) + '-' + two(Calc.toNum(m[3])) + ' ' + two(Calc.toNum(m[4])) + ':' + m[5]) : '';
+}
+
 /* 更新「我的」页实时行情卡里的冻结提示 */
 function renderLiveStaleNote(){
   const el = $('mk-live-stale'); if (!el) return;
@@ -2875,8 +3113,10 @@ function renderLiveStaleNote(){
     '　来源：' + esc(liveData.source || '—') + '</span>' +
     '<br><span class="st-when">其他数据（分析 / 持仓 / 信号）不受影响，照常显示；下一次快刷成功会自动恢复正常。</span>';
 }
-/* 数据新鲜度：行情 HH:MM · 分析 HH:MM · 实时 HH:MM（页头常驻，一眼知道数据有多新）
-   stale=true 时「实时」那格变成橙色告警「⚠️ 已冻结 N 分钟」，点一下看原因。 */
+/* 数据新鲜度：行情 HH:MM · 信号 HH:MM · 分析 HH:MM（结论）· 价格 HH:MM（实时）
+   —— 「分析」是完整流水线（结论）跑的时间，「价格」是 3 分钟级快刷取价的时间，两者必须分开看：
+      结论一天只变 3 次（09:00/15:00/21:00），价格每 3 分钟就变一次。
+   stale=true 时「价格」那格变成橙色告警「⚠️ 价格 已冻结 N 分钟」，点一下看原因。 */
 function hhmmOf(txt){
   const m = txt ? String(txt).match(/(\d{1,2}):(\d{2})/) : null;
   return m ? (two(Calc.toNum(m[1])) + ':' + m[2]) : '—';
@@ -2884,22 +3124,30 @@ function hhmmOf(txt){
 function renderDataTime(){
   const m = (marketData && marketData.updatedAtText) || '';
   const s = (signalsData && signalsData.updatedAtText) || '';
-  const a = (analysisData && analysisData.updatedAtText) || '';
-  const lv = liveMode === 'static' ? '' : ((liveData && liveData.updatedAtText) || '');
-  const frozen = !!(liveData && liveData.stale === true);
+  const a = analysisAsOfText();                       /* 结论时间（= analysis.updatedAtText） */
+  const p = priceAsOfText();                          /* 价格时间（live.json / analysis.pricesAsOf） */
+  const frozen = priceFrozen();
   const main = m || a || s || '—';
+  const patched = (analysisData && analysisData.holdingsPatched != null) ? Calc.toNum(analysisData.holdingsPatched) : null;
   setText('data-time', main);
-  setText('data-time2', '行情 ' + (m || '—') + '　信号 ' + (s || '—') + '　分析 ' + (a || '—') +
-    '　实时 ' + (lv ? (lv + '（' + (liveMode === 'local' ? '本机' : '云端') + '）' + (frozen ? ('　⚠️ ' + liveStaleText()) : '')) : '未接入'));
+  setText('data-time2',
+    '行情 ' + (m || '—') + '　信号 ' + (s || '—') +
+    '　分析 ' + (a || '—') + '（结论）' +
+    '　价格 ' + (p ? (p + '（' + priceKindWord() + (patched ? '·已刷 ' + patched + ' 件' : '') + '）') : '未接入'));
   setText('crumb-time', main);
   const fb = $('fresh-bar');
   if (fb) fb.innerHTML =
     '<span>行情 <b>' + hhmmOf(m) + '</b></span><span class="sep">·</span>' +
-    '<span>分析 <b>' + hhmmOf(a) + '</b>' + (ageSuffix(a) ? ('<i class="fz">' + esc(ageSuffix(a)) + '</i>') : '') + '</span><span class="sep">·</span>' +
+    '<span>信号 <b>' + hhmmOf(s) + '</b></span><span class="sep">·</span>' +
+    '<span>分析 <b>' + hhmmOf(a) + '</b><i class="tagz tconcl" title="完整分析（结论）的运行时间：一天 3 次，09:00 / 15:00 / 21:00；action · reason · plan · 目标价 · 止损都属于它">结论</i>' +
+      (ageSuffixShort(a) ? ('<i class="agez">' + esc(ageSuffixShort(a)) + '</i>') : '') + '</span><span class="sep">·</span>' +
     (frozen
-      ? ('<span class="fz" id="fresh-live" data-stale-tip="1" title="' + esc('实时行情已冻结：' + liveStaleText() + '（' + liveStaleReason() + '）。最后一次成功更新 ' + liveLastOkText() + '。点一下看详情。') + '">' +
-         '<span class="fzico">⚠️</span> 实时 已冻结 <b>' + liveStaleMinutes() + '</b> 分钟</span>')
-      : ('<span>实时 <b>' + (liveMode === 'static' ? '—' : hhmmOf(lv || '')) + '</b></span>'));
+      ? ('<span class="fz" id="fresh-live" data-stale-tip="1" title="' + esc('价格已冻结：' + liveStaleText() + '（' + liveStaleReason() + '）。最后一次成功取价 ' + liveLastOkText() + '。点一下看详情。') + '">' +
+         '<span class="fzico">⚠️</span> 价格 已冻结 <b>' + liveStaleMinutes() + '</b> 分钟</span>')
+      : ('<span>价格 <b>' + (p ? hhmmOf(p) : '—') + '</b>' +
+         '<i class="tagz ' + (liveMode === 'static' && !(analysisData && analysisData.pricesAsOf) ? 'tconcl' : 'tprice') + '" ' +
+         'title="价格由 cs-quant/fast_refresh.cjs 每 3 分钟轻刷一次（只动现价/市值/盈亏，结论不动）">' +
+         priceKindWord() + '</i></span>'));
   renderLiveNote();
   renderLiveStaleNote();
 }
@@ -2987,12 +3235,16 @@ function leaseHTML(h){
   '</div>';
 }
 function adviceHTML(h){
-  const num = Calc.toNum(h.num), pnl = Calc.toNum(h.pnl), rate = Calc.toNum(h.pnlRate);
+  /* 钱（现价/市值/浮动盈亏）按实时价现算：后端每 3 分钟轻刷 analysis.json，
+     页面停着不动时后端可能又刷了一轮 → 这里用 live.json（60 秒级）再算一遍，
+     保证「现价」和「浮动盈亏/市值」永远是同一个价算出来的。 */
+  const mny = liveMoneyOf(h);
+  const num = Calc.toNum(h.num), pnl = Calc.toNum(mny.pnl), rate = Calc.toNum(mny.pnlRate);
   const act = String(h.action == null ? '' : h.action), urg = String(h.urgency == null ? '' : h.urgency);
   const s7 = Calc.toNum(h.sector7d);
   const cls7 = h.sector7d == null ? 'muted' : (s7 > 0 ? 'pos' : 'neg');
-  const lp = livePrice(null, h.name);                      /* 实时价覆盖 analysis 里的静态现价 */
-  const nowTxt = lp != null ? money(lp) : money(Calc.toNum(h.mkt));
+  const lp = mny.live ? Calc.toNum(mny.mkt) : null;        /* 用的价是不是实时价（卡片上要标明） */
+  const nowTxt = money(Calc.toNum(mny.mkt));
   /* 求购口径收益率（只有部分持仓有——来自求购价口径重算，没有就整格不显示，绝不编） */
   const rb = (h.expectedReturnBid == null ? null : Calc.toNum(h.expectedReturnBid));
   const best = (h.actionVsLease && h.actionVsLease.bestAction) ? String(h.actionVsLease.bestAction) : '';
@@ -3006,32 +3258,38 @@ function adviceHTML(h){
       (urg ? '<span class="badge u-' + esc(urg) + '">紧急 ' + esc(urg) + '</span>' : '') +
     '</div>' +
     '<div class="res" style="margin-top:0">' +
-      '<div class="stat hero"><div class="k">浮动盈亏</div><div class="v ' + (pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : '')) + '">' +
+      '<div class="stat hero"><div class="k">浮动盈亏 ' + priceTagHTML() + '</div><div class="v ' + (pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : '')) + '">' +
         money(pnl, true) + '　' + pct(rate, true) + '</div></div>' +
       (rb == null ? '' :
         '<div class="stat hero2"><div class="k">求购口径收益率 ' + basisTag('bid') + '</div>' +
         '<div class="v">' + pct(rb, true) + '</div></div>') +
-      '<div class="stat"><div class="k">现价' + (lp != null ? ' <span class="lvtag">实时</span>' : '') + ' / 成本价</div>' +
+      '<div class="stat"><div class="k">现价' + (lp != null ? priceTagHTML() : '') + ' / 成本价</div>' +
         '<div class="v" style="font-size:16px">' + nowTxt + ' / ' + money(Calc.toNum(h.cost)) + '</div></div>' +
-      '<div class="stat"><div class="k">目标卖出</div><div class="v pos" style="font-size:16px">' + (h.targetSell == null ? '—' : money(Calc.toNum(h.targetSell))) + '</div></div>' +
-      '<div class="stat"><div class="k">止损</div><div class="v neg" style="font-size:16px">' + (h.stopLoss == null ? '—' : money(Calc.toNum(h.stopLoss))) + '</div></div>' +
+      '<div class="stat"><div class="k">目标卖出 ' + anaTagHTML() + '</div><div class="v pos" style="font-size:16px">' + (h.targetSell == null ? '—' : money(Calc.toNum(h.targetSell))) + '</div></div>' +
+      '<div class="stat"><div class="k">止损 ' + anaTagHTML() + '</div><div class="v neg" style="font-size:16px">' + (h.stopLoss == null ? '—' : money(Calc.toNum(h.stopLoss))) + '</div></div>' +
     '</div>' +
     '<div style="margin-top:8px">' +
-      '<div class="row"><span class="rn">市值 / 成本合计</span><span class="rv">' + m2(h.value) + '<em>投入 ' + m2(h.costTotal) + '</em></span></div>' +
+      '<div class="row"><span class="rn">市值 ' + priceTagHTML() + ' / 成本合计</span><span class="rv">' + m2(mny.value) + '<em>投入 ' + m2(h.costTotal) + '</em></span></div>' +
       '<div class="row"><span class="rn">在售 / 求购</span><span class="rv">' + n2(h.listed) + '<em>求购 ' + n2(h.buyNum) + '</em></span></div>' +
       '<div class="row"><span class="rn">日成交 / 价差</span><span class="rv">' + (isNil(h.turnover) ? '—' : n2(h.turnover) + ' 件') + '<em>价差 ' + r2(h.spread, true) + '</em></span></div>' +
       '<div class="row"><span class="rn">存世量 / 板块 7 日</span><span class="rv">' + n2(h.supply) + '<em class="' + cls7 + '">板块 ' + c2(h.sector7d, true) + '</em></span></div>' +
     '</div>' +
     leaseHTML(h) +
-    (h.reason ? '<p class="why"><b>依据</b>' + esc(h.reason) + '</p>' : '') +
-    (h.plan ? '<p class="why plan"><b>操作</b>' + esc(h.plan) + '</p>' : '') +
+    (h.reason ? '<p class="why"><b>依据</b>' + anaTagHTML() + esc(h.reason) + '</p>' : '') +
+    (h.plan ? '<p class="why plan"><b>操作</b>' + anaTagHTML() + esc(h.plan) + '</p>' : '') +
   '</div>';
 }
 function renderAnalysisHoldings(){
   const box = $('an-hold'); if (!box) return;
   const a = analysisData;
   const list = (a && Array.isArray(a.holdings)) ? a.holdings : null;
-  setText('an-hold-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  /* 卡片标题把两个时间都写出来：结论（一天 3 次）· 价格（3 分钟级） */
+  const patched = (a && a.holdingsPatched != null) ? Calc.toNum(a.holdingsPatched) : null;
+  const pTxt = priceAsOfHHMM();
+  setText('an-hold-time', a
+    ? ('结论 ' + hhmmOf(analysisAsOfText()) + '　·　价格 ' + (pTxt === '—' ? '—' : (pTxt + '（' + priceKindWord() + '）')) +
+       (patched != null ? ('　·　已刷 ' + patched + '/' + ((list || []).length || 0) + ' 件') : ''))
+    : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
   const crit = $('an-hold-crit');
   if (crit) crit.innerHTML = (a && a.screening && a.screening.criteria) ? ('口径：' + esc(a.screening.criteria)) : '';
   if (!list || !list.length){ box.innerHTML = anaWait(); return; }
@@ -3260,6 +3518,8 @@ let liveAt = 0;                      // 本机拿到数据的时刻
 let liveFetching = false, liveTimer = null;
 let liveStaleBannerShown = false;    // 冻结横幅每次打开只提示一次，不反复打扰
 let liveByCn = {};                   // 中文名 → live item（analysis.holdings 只有中文名）
+let liveByCnNorm = {};               // 归一化中文名（去空格/统一括号）→ live item
+let liveHashByCn = {};               // 台账中文名 → 英文 hash（来自 analysis.json，最可靠的一条兜底）
 
 function liveTimeText(){             // live 数据自身的时间（HH:MM:SS）
   const t = liveData && liveData.updatedAtText;
@@ -3267,14 +3527,46 @@ function liveTimeText(){             // live 数据自身的时间（HH:MM:SS）
   if (m) return two(Calc.toNum(m[1])) + ':' + m[2] + (m[3] ? (':' + m[3]) : ':00');
   return liveAt ? hhmmss(liveAt) : '';
 }
-/* 取实时项：优先英文 hash，其次中文名 */
+/* 取实时项：优先英文 hash，其次中文名（含归一化中文名、台账中文名 → hash 兜底）
+   为什么需要最后两条：台账（悠悠截图）里的中文名和 csqaq 的中文名常差一个空格或全半角括号
+   （「USP消音版 | 沙漠战术」vs「USP 消音版 | 沙漠战术」），只按字面匹配会漏 3 件持仓，
+   漏掉的那几件就会退回台账价 —— 用户看到的就是「同一个页面里有的数是实时的、有的是台账的」。 */
+function normCnKey(s){
+  return String(s == null ? '' : s)
+    .replace(/[（(]/g, '(').replace(/[）)]/g, ')')
+    .replace(/\s+/g, '')            /* 空格全去掉：中文名里的空格/全半角差异不该影响匹配 */
+    .trim().toLowerCase();
+}
 function liveInfo(hash, cn){
   const items = (liveData && liveData.items && typeof liveData.items === 'object') ? liveData.items : null;
   if (!items) return null;
   if (hash && items[hash]) return items[hash];
   if (cn && items[cn]) return items[cn];
   if (cn && liveByCn[cn]) return liveByCn[cn];
+  /* analysis.json 里 name↔hash 是权威映射（44 件持仓的英文 hash 都在那儿） */
+  const h = cn ? liveHashByCn[cn] : null;
+  if (h && items[h]) return items[h];
+  if (cn && liveByCnNorm[normCnKey(cn)]) return liveByCnNorm[normCnKey(cn)];
   return null;
+}
+/* 三张索引一起重建：live 侧两张（csqaq 中文名 → item）、analysis 侧一张（台账中文名 → hash） */
+function rebuildLiveIndexes(){
+  liveByCn = {}; liveByCnNorm = {}; liveHashByCn = {};
+  if (liveData && liveData.items){
+    Object.keys(liveData.items).forEach(function(k){
+      const it = liveData.items[k];
+      if (!it) return;
+      if (it.cn && !liveByCn[it.cn]) liveByCn[it.cn] = it;
+      const n = normCnKey(it.cn || k);
+      if (n && !liveByCnNorm[n]) liveByCnNorm[n] = it;
+    });
+  }
+  const a = analysisData || {};
+  const put = (name, hash) => { if (name && hash && !liveHashByCn[name]) liveHashByCn[name] = hash; };
+  (a.holdings || []).forEach(x => put(x && x.name, x && x.hash));
+  ((a.longTerm || {}).plans || []).forEach(x => put(x && (x.cn || x.name), x && x.hash));
+  (a.opportunities || []).forEach(x => put(x && (x.cn || x.name), x && x.hash));
+  ((a.shortTerm || {}).signals || []).forEach(x => put(x && (x.cn || x.name), x && x.hash));
 }
 /* 取实时价（主用价：悠悠 > BUFF > Steam，与 market.json 口径一致） */
 function livePrice(hash, cn){
@@ -3308,13 +3600,7 @@ function applyLive(j, mode){
   liveData = j || null;
   liveMode = (liveData && liveData.items) ? mode : 'static';
   liveAt = Date.now();
-  liveByCn = {};
-  if (liveData && liveData.items){
-    Object.keys(liveData.items).forEach(function(k){
-      const it = liveData.items[k];
-      if (it && it.cn) liveByCn[it.cn] = it;
-    });
-  }
+  rebuildLiveIndexes();
   applyLiveToMarket();
   renderLiveBadge(); renderDataTime(); renderSpread();
   renderPortfolioLive();
@@ -3384,17 +3670,20 @@ function renderLiveNote(){
   const ov = applyLiveToMarket();
   const a = analysisData || {};
   const frozen = liveData && liveData.stale === true;
+  const patched = (a.holdingsPatched != null) ? Calc.toNum(a.holdingsPatched) : null;
   el.innerHTML = '实时价：<b>' + (liveMode === 'local' ? '本机 /api/live（csqaq 直连代理，服务端缓存 60 秒）' : '云端 live.json（定时脚本快照）') + '</b>' +
     (frozen ? ('　<span class="fz">⚠️ ' + esc(liveStaleText()) + '</span>') : '') +
-    '　数据时间 <b>' + esc((liveData && liveData.updatedAtText) || '—') + '</b>' +
-    (frozen ? ('（最后一次成功更新 <b>' + esc(liveLastOkText()) + '</b>，之后没能取到新价）') : '') +
+    '　价格时间 <b>' + esc((liveData && liveData.updatedAtText) || '—') + '</b>' +
+    (frozen ? ('（最后一次成功取价 <b>' + esc(liveLastOkText()) + '</b>，之后没能取到新价）') : '') +
     '　关注品种 <b>' + items + '</b>' +
     (liveMode === 'local' ? '' : ('　来源 ' + esc((liveData && liveData.source) || '—'))) +
     (frozen ? ('<br>冻结原因：<b>' + esc(liveStaleReason()) + '</b>') : '') +
+    '<br><b>结论时间 ' + esc(analysisAsOfText() || '—') + '</b>（完整分析 09:00 / 15:00 / 21:00 跑，action · reason · plan · 目标价 · 止损都属于它，一天只变 3 次）' +
+    (patched != null ? ('；<b>价格时间 ' + esc(priceAsOfText() || '—') + '</b>（fast_refresh.cjs 每 3 分钟轻刷，本次已更新 ' + patched + '/' + ((a.holdings || []).length || 0) + ' 件的现价 / 市值 / 盈亏）') : '') +
     '<br>已覆盖行情文件 <b>' + ov + '</b> 件；命中持仓 <b>' + liveCount(a.holdings, function(x){ return null; }) + '</b> 个、' +
     '长期方案 <b>' + liveCount((a.longTerm || {}).plans, function(x){ return x.hash; }) + '</b> 个、' +
-    '条件单机会 <b>' + liveCount(a.opportunities, function(x){ return x.hash; }) + '</b> 个（卡片上带「实时」标记的就是实时价）。' +
-    (frozen ? '　⚠️ 冻结期间这些价格是旧的，别按它下手；分析 / 持仓数据本身不受影响。'
+    '条件单机会 <b>' + liveCount(a.opportunities, function(x){ return x.hash; }) + '</b> 个（卡片上带「价格 HH:MM」标签的数字就是按那一刻的价算的）。' +
+    (frozen ? '　⚠️ 冻结期间这些价格是旧的，别按它下手；结论（建议）本身不受影响。'
             : '　每 60 秒自动刷新一次（页面切到后台就不请求）。');
 }
 function startLiveTimer(){
@@ -3403,6 +3692,8 @@ function startLiveTimer(){
     if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return;  // 隐藏时不请求
     if (liveFetching) return;                                                                            // 上一次没回来就跳过
     refreshLive();
+    refreshAnalysisIfDue();   // 每 3 分钟再对一次 analysis.json（后端轻刷过的价格 + 新的结论）
+    refreshPulseIfDue();      // 每 3 分钟再取一次大盘脉搏（指数/贪婪/宽度/板块）
   }, LIVE_TTL);
 }
 
@@ -4162,6 +4453,8 @@ async function init(){
   /* 实时价：本机 /api/live → 云端 live.json → 静态；可见时每 60 秒重拉一次 */
   refreshLive();
   startLiveTimer();
+  /* 大盘脉搏（每 3 分钟一次的小文件）：拿到就覆盖「大盘」页的头条数字，拿不到就照旧 */
+  loadPulse();
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
