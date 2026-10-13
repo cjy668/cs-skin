@@ -3275,7 +3275,9 @@ function renderToolsRisk(b){
   h += '<tr><td><b>合计（' + tN(rp.cutKinds) + ' 项）</b></td><td><b>' + tN(rp.cutQty) + ' 件</b></td><td><b>' + tY(rp.proceeds, 0) + '</b></td><td class="neg"><b>' + tY(rp.realizedLoss, 0) + '</b></td></tr>';
   h += '</tbody></table>';
   h += '<div class="hl">减仓 ' + tN(rp.cutKinds) + ' 项后：年化波动 <b>' + tPct(v.portfolioAnnualVol) + ' → ' + tPct(pj.afterVol90) + '</b>，降幅 <b>' + tPct(rp.volReductionPct) + '</b>' +
-       '；前 5 集中度 ' + tPct(c.top5Weight) + ' → ' + tPct(pj.afterTop5Weight) + '；枪族 HHI ' + tPct(c.hhiByFamily) + ' → ' + tPct(pj.afterFamHHI || null) + '</div>';
+       '；前 5 集中度 ' + tPct(c.top5Weight) + ' → ' + tPct(pj.afterTop5Weight) +
+       (pj.familyHHI && isNum(pj.familyHHI.after) ? ('；枪族 HHI ' + tPct(pj.familyHHI.before) + ' → ' + tPct(pj.familyHHI.after)) : '') +
+       '；回笼现金 ' + tY(pj.cashRaisedAtAsk || pj.cashRaised, 0) + '（已扣 1% 提现费，其中本金 ' + tY(pj.afterValue, 0) + '）</div>';
   h += '<p class="tbx" style="margin-top:10px"><b>方案口径：</b>' + tMd(rp.criterion) + '<span class="tbx-s">' + tMd(rp.goal) + '</span></p>';
 
   if (sa.applicable){
