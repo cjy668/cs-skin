@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v7';
+const CACHE = 'cs-skin-app-v8';
 const ASSETS = [
   './',
   './index.html',
@@ -26,8 +26,18 @@ const ASSETS = [
    ⚠️ 2026-10-13 三修正：加了 tools.json（工具页：4 个 Node CLI 的静态快照，
       cs-quant/build_tools.cjs 每天随流水线重生成）。同一个坑：**不在 NET_FIRST
       名单里 = 手机上永远看到旧版本**，所以它必须在这里，不能只放进 ASSETS。
-      同时 CACHE 版本号 v6 → v7，让老客户端下次打开就换掉旧缓存。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json/i;
+      同时 CACHE 版本号 v6 → v7，让老客户端下次打开就换掉旧缓存。
+   ⚠️ 2026-10-14 四修正：工具页新增「查任意一件」（单品体检器手机版），加了两个文件，
+      都进 NET_FIRST：
+        · inspect-engine.js（38 KB，算分内核；与 cs-quant/inspect.cjs 等价）
+        · inspect-data.json（3.65 MB / gzip ≈ 1.28 MB，800 个品种的日线 + 截面快照）
+      为什么大文件也用联网优先，而不是「缓存优先 + 每日版本号」：
+      本文件的缓存分支用的是 caches.match(req, { ignoreSearch: true })，
+      **查询串会被忽略** → 靠 `?d=日期` 当版本号在这里根本不生效，会一直命中旧缓存。
+      而体检数据的口径（断层率 / 退出天数 / dataGaps）过期，比多下 1.28 MB 更糟。
+      缓解：页面侧只在用户点开「查任意一件」时才请求（懒加载），且同一次会话只下一次。
+      CACHE v7 → v8。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
