@@ -623,6 +623,129 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .nav a{font-size:10.5px}
   .nav a svg{width:18px;height:18px}
 }
+
+/* =====================================================================
+   工具页说明卡 + 「查任意一件」（2026-10-14 新增）
+   ⚠️ 全部用新前缀 tgd- / tq-，一个既有类名都不复用。
+      教训：上一版复用了既有 .basis（inline-block 徽标类），整页横向溢出到
+      2709~3072px。这里的每个容器都按「可换行 + min-width:0」写。
+   ===================================================================== */
+.tgd{background:linear-gradient(135deg,rgba(34,211,238,.10),rgba(75,157,255,.045));
+  border:1px solid rgba(34,211,238,.32);border-radius:var(--r);padding:14px;margin:0 0 var(--gap)}
+.tgd h2{font-size:16px;font-weight:800;margin:0 0 4px;letter-spacing:.2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tgd h2 span{font-size:11.5px;font-weight:700;color:var(--cyan);border:1px solid rgba(34,211,238,.4);
+  background:rgba(34,211,238,.1);border-radius:7px;padding:1px 6px}
+.tgd-lead{font-size:13px;line-height:1.75;color:#cddbe9;margin:0 0 10px;overflow-wrap:anywhere}
+.tgd-lead b{color:#fff}
+.tgd-lead code{background:rgba(0,0,0,.25);border-radius:5px;padding:1px 5px;color:#9ad9e8;font-size:11.5px;overflow-wrap:anywhere}
+.tgd-scripts{font-size:12.5px;color:#b6c6d8;margin:0 0 12px}
+.tgd-flow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.tgd-flow i{font-style:normal;font-size:11.5px;font-weight:700;color:#bcd0e4;background:var(--field);
+  border:1px solid var(--line);border-radius:8px;padding:3px 8px;white-space:nowrap}
+.tgd-flow u{text-decoration:none;color:var(--dim);font-size:11.5px;align-self:center}
+.tgd-items{display:block}
+.tgd-item{border:1px solid var(--line);border-radius:13px;background:var(--card2);padding:11px 12px;margin-bottom:8px}
+.tgd-item:last-child{margin-bottom:0}
+.tgd-t{font-size:14px;font-weight:800;margin:0 0 7px;display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.tgd-t em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--dim);min-width:0;overflow-wrap:anywhere}
+.tgd-t b{flex:0 0 auto;color:var(--cyan);font-size:11.5px;border:1px solid rgba(34,211,238,.4);
+  background:rgba(34,211,238,.1);border-radius:6px;padding:1px 5px}
+.tgd-q{font-size:12.5px;line-height:1.7;color:#c3d2e2;margin:0 0 4px;overflow-wrap:anywhere;
+  display:grid;grid-template-columns:52px minmax(0,1fr);gap:6px;align-items:start}
+.tgd-q:last-child{margin-bottom:0}
+.tgd-q b{font-size:11.5px;font-weight:800;color:var(--muted);white-space:nowrap;padding-top:1px}
+.tgd-q.read b{color:var(--cyan)}
+.tgd-q.good b{color:var(--green)}
+.tgd-q.bad b{color:var(--yellow)}
+.tgd-q.bad{color:#d8c9a8}
+.tgd-note{margin:11px 0 0;padding:10px 11px;border-radius:11px;border-left:3px solid rgba(140,160,185,.5);
+  background:rgba(140,160,185,.06);font-size:12.5px;line-height:1.75;color:#c3d2e2;overflow-wrap:anywhere}
+/* ⚠️ 标题行只给 .tgd-ttl / .tq-ttl 用 display:block。
+   早先写成 `.tgd-note b{display:block}`，结果正文里的**每一个** <b> 都变成独立块，
+   整段话被拆成一行一个词（手机截图里发现的）。 */
+.tgd-ttl,.tq-ttl{display:block;font-size:12px;margin-bottom:3px}
+.tgd-note .tgd-ttl{color:var(--muted)}
+.tgd-note.warn{border-left-color:var(--yellow);background:rgba(255,197,49,.06)}
+.tgd-note.warn .tgd-ttl{color:var(--yellow)}
+.tgd-note.info{border-left-color:var(--cyan);background:rgba(34,211,238,.06)}
+.tgd-note.info .tgd-ttl{color:var(--cyan)}
+.tgd-note code{background:rgba(0,0,0,.25);border-radius:5px;padding:1px 5px;color:#9ad9e8;font-size:11.5px}
+.tgd-note b{color:#fff}
+
+/* 「查任意一件」 */
+.tq-box{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.tq-ipt{flex:1 1 200px;min-width:0;display:flex;align-items:center;gap:6px;background:var(--field);
+  border:1.5px solid var(--line);border-radius:12px;padding:0 11px;height:50px;transition:border-color .15s,box-shadow .15s}
+.tq-ipt:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.13)}
+.tq-ipt input{flex:1 1 auto;width:100%;min-width:0;background:transparent;border:0;outline:none;color:var(--text);
+  font-size:16px;font-weight:700;height:100%}
+.tq-ipt input::placeholder{color:#4a5a6c;font-weight:500;font-size:13.5px}
+.tq-ipt .u{flex:0 0 auto;color:var(--dim);font-size:12px;cursor:pointer}
+.tq-btn{flex:0 0 auto;min-width:96px;height:50px;padding:0 14px;border-radius:12px;border:1.5px solid transparent;
+  background:linear-gradient(135deg,#22d3ee,#4b9dff);color:#03141c;font-size:14.5px;font-weight:800;cursor:pointer;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation}
+.tq-btn:active{filter:brightness(1.12)}
+.tq-btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+.tq-list{max-height:264px;overflow-y:auto;overflow-x:hidden;margin-top:8px;border:1px solid var(--line);
+  border-radius:12px;background:var(--field);-webkit-overflow-scrolling:touch}
+.tq-list[hidden]{display:none}
+.tq-li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;
+  padding:9px 11px;border-bottom:1px solid rgba(35,48,66,.7);cursor:pointer;min-width:0}
+.tq-li:last-child{border-bottom:0}
+.tq-li:hover,.tq-li.on{background:rgba(34,211,238,.09)}
+.tq-li .nm{font-size:13.5px;font-weight:700;min-width:0;overflow-wrap:anywhere}
+.tq-li .nm em{display:block;font-style:normal;font-size:11px;color:var(--dim);font-weight:400;overflow-wrap:anywhere}
+.tq-li .gd{font-size:11px;color:var(--dim);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tq-li .gd b{display:block;color:var(--muted);font-size:11.5px}
+.tq-more{padding:7px 11px;font-size:11.5px;color:var(--dim);text-align:center;background:rgba(140,160,185,.05)}
+.tq-prog{margin-top:10px}
+.tq-prog .bar{height:8px;border-radius:5px;background:var(--field);border:1px solid var(--line);overflow:hidden}
+.tq-prog .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#22d3ee,#4b9dff);transition:width .25s}
+.tq-prog p{font-size:12px;color:var(--muted);margin:7px 0 0;line-height:1.6}
+.tq-hero{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 0;padding:12px;
+  border-radius:13px;background:linear-gradient(135deg,rgba(34,211,238,.13),rgba(75,157,255,.06));
+  border:1px solid rgba(34,211,238,.3)}
+.tq-hero .g{flex:0 0 auto;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-size:26px;font-weight:900;letter-spacing:-1px;border:2px solid var(--line);background:var(--card2)}
+.tq-hero .g.a{color:var(--green);border-color:rgba(47,208,122,.5);background:rgba(47,208,122,.12)}
+.tq-hero .g.b{color:var(--cyan);border-color:rgba(34,211,238,.5);background:rgba(34,211,238,.12)}
+.tq-hero .g.c{color:var(--muted);border-color:var(--line);background:rgba(139,157,178,.12)}
+.tq-hero .g.d{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.12)}
+.tq-hero .sc{min-width:0;flex:1 1 150px}
+.tq-hero .sc .k{font-size:12px;color:var(--muted)}
+.tq-hero .sc .v{font-size:21px;font-weight:900;letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+.tq-hero .sc .v em{font-style:normal;font-size:12px;font-weight:600;color:var(--dim);margin-left:6px}
+.tq-hero .nm{width:100%;font-size:14.5px;font-weight:800;line-height:1.5;overflow-wrap:anywhere}
+.tq-hero .nm em{display:block;font-style:normal;font-size:11.5px;font-weight:400;color:var(--dim);margin-top:2px;overflow-wrap:anywhere}
+.tq-sec{font-size:13px;font-weight:800;color:var(--muted);margin:14px 0 8px;padding-top:11px;border-top:1px solid var(--line)}
+.tq-sec:first-child{margin-top:0;padding-top:0;border-top:0}
+.tq-sec em{font-style:normal;font-weight:400;font-size:11.5px;color:var(--dim);margin-left:6px}
+.tq-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
+.tq-kv .stat .v{font-size:16px}
+.tq-say{font-size:12.5px;line-height:1.72;color:#c3d2e2;margin:8px 0 0;padding:9px 11px;border-radius:11px;
+  background:rgba(140,160,185,.07);border:1px solid rgba(140,160,185,.2);overflow-wrap:anywhere}
+.tq-say b{color:var(--muted)}
+.tq-brk{display:block;margin:0;padding:0;list-style:none}
+.tq-brk li{font-size:12.5px;line-height:1.7;color:#c3d2e2;margin:0 0 5px;padding-left:13px;position:relative;overflow-wrap:anywhere}
+.tq-brk li::before{content:'·';position:absolute;left:3px;color:var(--cyan);font-weight:900}
+.tq-brk li.pos::before{content:'+';color:var(--green)}
+.tq-brk li.neg::before{content:'−';color:var(--red)}
+.tq-brk li.zero::before{content:'·';color:var(--dim)}
+.tq-brk li b{color:var(--text);font-variant-numeric:tabular-nums}
+.tq-warn{margin:10px 0 0;padding:10px 11px;border-radius:11px;border-left:3px solid var(--yellow);
+  background:rgba(255,197,49,.07);font-size:12.5px;line-height:1.72;color:#e6d6ae;overflow-wrap:anywhere}
+.tq-warn .tq-ttl{color:var(--yellow)}
+.tq-warn b{color:#fff}
+.tq-empty{margin-top:10px;padding:13px 12px;border-radius:12px;border:1px dashed var(--line);
+  background:var(--field);font-size:12.5px;line-height:1.75;color:var(--muted);overflow-wrap:anywhere}
+.tq-empty b{color:var(--text)}
+.tq-empty code{background:rgba(0,0,0,.3);border-radius:5px;padding:1px 5px;color:#9ad9e8;font-size:11.5px}
+@media (max-width:470px){
+  .tq-hero .g{width:50px;height:50px;font-size:23px;border-radius:14px}
+  .tq-kv{grid-template-columns:1fr 1fr}
+  .tq-ipt{flex:1 1 100%}
+  .tq-btn{flex:1 1 100%}
+}
 </style>
 </head>
 <body>
@@ -918,10 +1041,98 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
            页面不发送任何命令、不调用任何执行接口。
            ============================================================ -->
       <section class="page" id="sec-tools" data-page="tools">
-        <div class="page-title"><h1>工具</h1><span>策略验证 · 组合风控 · 持仓体检 · 断层率信号</span></div>
+        <div class="page-title"><h1>工具</h1><span>策略验证 · 组合风控 · 持仓体检 · 断层率信号 · 查任意一件</span></div>
+
+        <!-- ============================================================
+             工具页说明卡（常驻，不折叠）
+             用户原话：「这个页面有点看不懂，我需要一个说明」——所以这一卡
+             写在最上面，先说「这页是什么」，再逐区块说「怎么读 / 能帮你 /
+             不能帮你」，最后三条数字提示。文案只用大白话，不堆术语。
+             ============================================================ -->
+        <div class="tgd" id="tgd-card">
+          <h2>这一页怎么用 <span>先看这 1 分钟</span></h2>
+          <p class="tgd-lead">
+            这 4 个工具原本是<b>电脑上跑的 Node 脚本</b>。这里显示的，是它们<b>跑出来的结果</b>：
+            电脑上跑 → 导出 JSON → 这里只读展示，每天跟着流水线更新一次。
+            <b>本页不发任何命令、不做在线执行</b>；唯一的例外是下面「查任意一件」——
+            那是把体检器算分的那段逻辑搬到了浏览器里，<b>用你已经下载到手机上的日线当场算</b>，
+            同样不联网、不执行任何命令。
+          </p>
+          <div class="tgd-flow">
+            <i>① 电脑上跑 4 个脚本</i><u>→</u><i>② 导出 JSON</i><u>→</u><i>③ build_tools.cjs 聚合</i><u>→</u><i>④ 手机只读展示</i>
+          </div>
+          <p class="tgd-lead tgd-scripts">
+            这 4 个脚本分别是 <code>strategy_lab.cjs</code>（策略验证）· <code>portfolio_risk.cjs</code>（组合风控）·
+            <code>inspect.cjs</code>（单品体检）· <code>scan_washout.cjs</code>（断层率信号）。
+          </p>
+
+          <div class="tgd-items">
+            <div class="tgd-item" id="tgd-item-lab">
+              <div class="tgd-t">① 策略验证 <b>样本外检验</b><em>把每个「交易想法」拿去和随机日对照，能过的才留</em></div>
+              <div class="tgd-q read"><b>怎么读</b><span>看「样本外」和「对照」两列 —— <b>样本外 ≥ 对照才算有效</b>。「样本内」好看但「样本外」差 = 过拟合，是巧合不是规律。</span></div>
+              <div class="tgd-q good"><b>能帮你</b><span>让你不再相信一个「听起来很有道理、实际没用」的信号。9 个想法里有几个已经被杀掉了，名单就在下面。</span></div>
+              <div class="tgd-q bad"><b>不能帮你</b><span>不能预测价格。它只回答「这个规律在过去那段没被用来调参的时间里还成立吗」，不回答「明天涨不涨」。</span></div>
+            </div>
+
+            <div class="tgd-item" id="tgd-item-risk">
+              <div class="tgd-t">② 组合风控 <b>纯算术</b><em>算你的集中度、历史波动，以及「减哪几件能降多少波动」</em></div>
+              <div class="tgd-q read"><b>怎么读</b><span>两个关键数字：<b>volReductionPct</b>（按方案减仓后，组合历史年化波动降多少）和<b>枪族 HHI</b>（是不是把同一个赌注重复下了很多遍）。</span></div>
+              <div class="tgd-q good"><b>能帮你</b><span>告诉你减仓的代价与收益：能回款多少现金、会实现多少亏损、波动降几个百分点。</span></div>
+              <div class="tgd-q bad"><b>不能帮你</b><span>不预测涨跌。「降波动」和「降集中度」是两个不同目标 —— 页面给了两版方案，只能选一个当主目标，别混着看。</span></div>
+            </div>
+
+            <div class="tgd-item" id="tgd-item-inspect">
+              <div class="tgd-t">③ 持仓体检 <b>逐件打分</b><em>44 件一件一件打分（磨损 / 单价 / 断层率 / 退出天数 / 数据完整性）</em></div>
+              <div class="tgd-q read"><b>怎么读</b><span>看<b>等级</b>和<b>分数</b>：A 最该留、D 最该先处理。点开每一件能看到「这几分是怎么加出来的」，每一项都写了理由。</span></div>
+              <div class="tgd-q good"><b>能帮你</b><span>一眼看出 44 件里哪几件该先处理，不用自己一件件翻。</span></div>
+              <div class="tgd-q bad"><b>不能帮你</b><span>分数只包含<b>已验证</b>的条件（磨损段位 / 单价下限 / 断层率 / 退出天数 / 数据完整性）。「趋势修正」那部分是机械规则（现价 vs MA90、30 天跌幅），属于启发式，<b>没有做过样本外检验</b>。</span></div>
+            </div>
+
+            <div class="tgd-item" id="tgd-item-washout">
+              <div class="tgd-t">④ 断层率信号 <b>唯一过检</b><em>全项目唯一通过样本外检验的信号：断层率落在 12%~16%</em></div>
+              <div class="tgd-q read"><b>怎么读</b><span>看<b>「倍数」列</b>：现断层率 ÷ 它自己 365 天的中位数。<b>倍数 ≥ 2 才算真异常</b>（页面里标了「强信号」徽标）。</span></div>
+              <div class="tgd-q good"><b>能帮你</b><span>直接给你一批候选（当前快照里 <b id="tgd-washout-n">—</b> 个落在区间内，其中 <b id="tgd-washout-strong">—</b> 个是强信号），省掉自己扫全池。</span></div>
+              <div class="tgd-q bad"><b>不能帮你</b><span>它是<b>概率优势，不是保证</b>：样本外 prob30 只有 35.8%（对照 27.8%）。另外单价 &lt; ¥1 的品，断层率是分位舍入出来的假振幅，不能当盘口证据。</span></div>
+            </div>
+          </div>
+
+          <div class="tgd-note info"><b class="tgd-ttl">三个数字提示（很重要，别踩坑）</b>
+            1）<b>看时间</b>：每个区块都标了「结论时间」和「价格时间」——<b>价格是 3 分钟级刷新，结论是日更</b>，两者不同步是正常的。<br>
+            2）<b>已验证 / 未验证要分开看</b>：页面里凡是写着「未验证 / 已证伪 / 不计分」的东西（铺货墙、吸筹合成分、计分模型信号、倍数那列），都<b>不能和已验证的结论混着用</b>。<br>
+            3）<b>本页不构成投资建议</b>，也不预测价格；所有「target / 止损」都只写「历史上到过的位置」。
+          </div>
+        </div>
 
         <p class="tbx" id="tl-meta"><b>工具页是什么：</b>这 4 个工具都是电脑上的 Node 命令行程序（<code>strategy_lab.cjs</code> / <code>portfolio_risk.cjs</code> / <code>inspect.cjs</code> / <code>scan_washout.cjs</code>）。GitHub Pages 是纯静态页、没有执行环境，所以流程是：<b>电脑上跑工具 → 产出 JSON → 聚合器 build_tools.cjs 合成 tools.json → 这里只读展示</b>。本页不发任何命令、不做在线执行；每个数字都标了口径与时间。
           <span class="tbx-s" id="tl-meta2">快照加载中…</span></p>
+
+        <!-- ============================================================
+             ⑤ 查任意一件 —— 让「单品体检器」在手机上真的能用
+             现状痛点：inspect.cjs "某品名" 必须在电脑上跑，手机只能看 44 件
+             预计算结果。这里把体检器的算分逻辑（cs-skin-app/inspect-engine.js，
+             与 cs-quant/inspect.cjs 等价，同一份代码在 Node 里跑一致性测试）
+             搬到浏览器，配 800 个流动性最好品种的日线（inspect-data.json，
+             3.65 MB → gzip 1.28 MB），选中即算。
+             边界写死：不在 800 个里就明说不在覆盖范围，不假装能算。
+             ============================================================ -->
+        <div class="card span-all" id="tq-card">
+          <div class="card-title">查任意一件 <span class="r" id="tq-time">按需加载</span></div>
+          <p class="tbx" id="tq-intro">
+            <b>这是什么：</b>「单品体检器」的手机版。输入中文名 / 英文名 / gid，选中后<b>当场在浏览器里算完整体检</b>——
+            断层率（含 365 天中位 / p10 / p90）、价格变化（7/30/90/180 天）、在售与求购变化、
+            RSI / 布林带宽 / Z值 / 年化波动 / 最大回撤、<b>评分与等级</b>，以及这份数据缺了什么（dataGaps）。
+            <span class="tbx-s">算分公式与电脑端 <code>inspect.cjs</code> 完全等价（同一份引擎代码，已抽 20 个品逐一对齐）。
+              数据文件较大（原始 3.65 MB / gzip 约 1.28 MB），<b>只有你点开这个区块时才开始下载</b>，不拖慢首屏。</span>
+          </p>
+          <div class="tq-box">
+            <label class="tq-ipt"><input id="tq-input" type="search" autocomplete="off" enterkeyhint="search"
+              placeholder="输入品名或 gid，如 AK-47 | 深海复仇"><i class="u" id="tq-clear" hidden>清空</i></label>
+            <button class="tq-btn" id="tq-go" type="button">开始查</button>
+          </div>
+          <div class="tq-list" id="tq-list" hidden></div>
+          <div id="tq-prog"></div>
+          <div id="tq-box"></div>
+        </div>
 
         <div class="cards">
 
@@ -1211,6 +1422,11 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   </div>
 </nav>
 
+
+<!-- 单品体检器的浏览器端计算内核：与 cs-quant/inspect.cjs 等价，
+     Node 侧一致性测试（cs-quant/_test/_verify_inspect_parity.cjs）require 的是同一份文件。
+     加载失败不报错：工具页其余 4 个区块照常，「查任意一件」给明确的降级提示。 -->
+<script src="./inspect-engine.js"></script>
 
 <script id="app-script">
 /* =====================================================================
@@ -3147,6 +3363,12 @@ function renderTools(){
   renderToolsRisk(toolsData.portfolioRisk);
   renderToolsInspect(toolsData.inspect);
   renderToolsWashout(toolsData.washout);
+  /* 说明卡里的两个数字跟着快照走，别写死在 HTML 里 —— 否则流水线一更新就对不上了 */
+  const wo = toolsData.washout || {};
+  if (wo.available){
+    setText('tgd-washout-n', tN(wo.nowInCount));
+    setText('tgd-washout-strong', tN(wo.strongCount));
+  }
 }
 
 /* ---------------------------------------------------------------
@@ -3418,6 +3640,336 @@ function renderToolsWashout(b){
   h += tCavBlock('这个信号哪里还没验证', b.caveats);
   box.innerHTML = h;
 }
+
+/* =====================================================================
+   11.86) 查任意一件 —— 单品体检器的手机版（客户端当场算）
+   为什么要有：inspect.cjs "某品名" 原来必须在电脑上跑，手机上只能看 44 件
+   预计算结果 —— 也就是「工具在手机上不能用」。这里把体检器的算分逻辑搬到
+   浏览器（./inspect-engine.js，与 cs-quant/inspect.cjs 等价、Node 侧同一份
+   代码跑一致性测试），配 800 个流动性最好品种的日线（./inspect-data.json）。
+   三条纪律：
+     · 懒加载：不点开这个区块就不下载 inspect-data.json（3.65 MB / gzip 1.28 MB）
+     · 不假装：不在 800 个里就明说不在覆盖范围，并给出电脑端的命令
+     · 不编造：算不出的项一律「—」并写清为什么（dataGaps 原文照搬）
+   ===================================================================== */
+let tqDs = null, tqState = 'idle', tqErr = '', tqIdx = -1, tqHits = [], tqHitQuery = '';
+let tqTimer = null;
+/* 诊断读点：端到端测试用 DOM 属性观察加载走到哪一步，不往 window 上挂内部状态 */
+function tqStep(s){ try { const c = document.getElementById('tq-card'); if (c) c.setAttribute('data-tq-step', String(s)); } catch (e) {} }
+
+function tqEl(id){ return document.getElementById(id); }
+function tqEngine(){ return (typeof CsInspectEngine !== 'undefined' && CsInspectEngine) ? CsInspectEngine : null; }
+
+/* 下载进度提示：fetch + ReadableStream 能拿到字节数就显示百分比，拿不到就只显示阶段 */
+function tqProg(html){ const b = tqEl('tq-prog'); if (b) b.innerHTML = html || ''; }
+function tqProgressHtml(pct, got, total){
+  const txt = (pct === null)
+    ? '正在下载 inspect-data.json（约 1.3 MB 压缩后）…'
+    : ('正在下载 inspect-data.json　' + pct + '%　' + (got / 1048576).toFixed(1) + ' / ' + (total / 1048576).toFixed(1) + ' MB');
+  return '<div class="tq-prog"><div class="bar"><i style="width:' + (pct === null ? 12 : pct) + '%"></i></div><p>' + txt +
+    '<br>只在第一次点开时下载；这一次打开页面期间不会再下第二次。</p></div>';
+}
+async function tqLoad(force){
+  tqStep('enter');
+  if (tqDs && !force) return true;
+  if (tqState === 'loading') return false;
+  const E = tqEngine();
+  if (!E){
+    tqState = 'fail'; tqErr = 'inspect-engine.js 没加载成功（计算内核缺失）';
+    tqStep('no-engine'); tqProg(tqFailHtml()); return false;
+  }
+  tqState = 'loading'; tqErr = '';
+  tqStep('loading');
+  tqProg(tqProgressHtml(null, 0, 0));
+  let text = null;
+  try {
+    const url = './inspect-data.json?_=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r || !r.ok) throw new Error('HTTP ' + (r ? r.status : '?'));
+    const total = Number(r.headers.get('content-length') || 0);
+    if (r.body && typeof r.body.getReader === 'function' && total > 0){
+      const reader = r.body.getReader();
+      const chunks = []; let got = 0;
+      for (;;){
+        const s = await reader.read();
+        if (s.done) break;
+        chunks.push(s.value); got += s.value.length;
+        const pct = Math.max(2, Math.min(99, Math.round(got / total * 100)));
+        tqProg(tqProgressHtml(pct, got, total));
+      }
+      const buf = new Uint8Array(got); let off = 0;
+      chunks.forEach(c => { buf.set(c, off); off += c.length; });
+      text = new TextDecoder('utf-8').decode(buf);
+    } else {
+      text = await r.text();
+    }
+  } catch (e){
+    tqState = 'fail'; tqErr = (e && e.message) ? e.message : String(e);
+    tqProg(tqFailHtml()); return false;
+  }
+  tqProg('<div class="tq-prog"><p>下载完成，正在解析…</p></div>');
+  try {
+    const j = JSON.parse(text);
+    if (!j || !j.g || !j.s || !j.n) throw new Error('文件结构不对（缺少 g / s / n 数组）');
+    tqDs = j; tqState = 'ok';
+    const mt = (j.meta || {});
+    tStamp('tq-time', '数据 ' + tS(j.genAtText) + ' · 覆盖 ' + tN(j.g.length) + ' 个品种');
+    /* 给端到端测试一个稳定的读点（DOM 属性，不往 window 上挂内部状态） */
+    const card = tqEl('tq-card');
+    if (card){
+      card.setAttribute('data-tq-ready', '1');
+      card.setAttribute('data-tq-n', String(j.g.length));
+      card.setAttribute('data-tq-days', String(j.days));
+      card.setAttribute('data-tq-keep', String(j.keepDays));
+      card.setAttribute('data-tq-engine', (tqEngine() ? '1' : '0'));
+    }
+    tqProg('');
+    tqIntroNote(mt);
+    return true;
+  } catch (e){
+    tqState = 'fail'; tqErr = '解析失败：' + ((e && e.message) || e);
+    tqProg(tqFailHtml()); return false;
+  }
+}
+function tqFailHtml(){
+  return '<div class="tq-empty"><b>数据没取到，这个区块暂时算不了：</b>' + esc(tqErr || '未知原因') +
+    '<br>其余 4 个区块不受影响（它们读的是 tools.json，已经加载好了）。' +
+    '<div style="margin-top:9px"><button class="tq-btn" id="tq-retry" type="button">重试</button></div></div>';
+}
+function tqIntroNote(mt){
+  const el = tqEl('tq-intro'); if (!el || !mt) return;
+  el.innerHTML = '<b>这是什么：</b>「单品体检器」的手机版。输入中文名 / 英文名 / gid，选中后<b>当场在浏览器里算完整体检</b>——' +
+    '断层率（含 365 天中位 / p10 / p90）、价格变化、在售与求购变化、RSI / 布林带宽 / Z值 / 年化波动 / 最大回撤、' +
+    '<b>评分与等级</b>，以及这份数据缺了什么（dataGaps）。' +
+    '<span class="tbx-s">算分公式与电脑端 <code>inspect.cjs</code> 完全等价（同一份引擎代码，已抽 20 个品逐一对齐）。' +
+    '数据快照 ' + tS(mt.marketAt) + '（market.json）/' + tS(mt.absorbAt).slice(0, 10) + '（日线），覆盖流动性 Top' + tN((tqDs.g || []).length) + '；' +
+    '截面快照（成交量/平台覆盖）' + tN(mt.withInfoSnapshot) + '/' + tN((tqDs.g || []).length) + '，没有的那几件会明说「口径不全」。</span>';
+}
+
+/* ---- 搜索 ---- */
+function tqSearch(q){
+  const E = tqEngine(); if (!E || !tqDs) return [];
+  return E.search(tqDs, q, 80);
+}
+function tqRenderList(){
+  const box = tqEl('tq-list'); if (!box) return;
+  if (!tqDs || tqState !== 'ok' || !tqHits.length){ box.hidden = true; box.innerHTML = ''; return; }
+  let h = '';
+  tqHits.slice(0, 60).forEach(function(i){
+    const m = tqDs.m ? (tqDs.m[i] || []) : [];
+    const grade = (tqIdx === i) ? ' on' : '';
+    h += '<div class="tq-li' + grade + '" data-i="' + i + '">' +
+      '<div class="nm">' + esc(tqDs.n[i]) + '<em>' + esc(tqDs.h[i] || '') + '</em></div>' +
+      '<div class="gd">gid ' + esc(String(tqDs.g[i])) +
+      '<b>' + (m[7] ? tY(m[7], 2) : '—') + '</b></div></div>';
+  });
+  if (tqHits.length > 60) h += '<div class="tq-more">还有 ' + (tqHits.length - 60) + ' 个匹配，再输入几个字缩小范围</div>';
+  box.innerHTML = h; box.hidden = false;
+}
+
+/* ---- 计算 + 渲染 ---- */
+function tqRun(i){
+  const E = tqEngine(); if (!E || !tqDs) return;
+  tqIdx = i;
+  tqRenderList();
+  const box = tqEl('tq-box'); if (!box) return;
+  let r;
+  try { r = E.computeItem(tqDs, i, {}); }
+  catch (e){ box.innerHTML = '<div class="tq-empty"><b>这件算不出来：</b>' + esc((e && e.message) || e) + '</div>'; return; }
+  const sn = tqDs.n[i], num2 = tqDs.g[i];
+  const g = String(r.score.grade || '').toLowerCase();
+  let h = '';
+
+  h += '<div class="tq-hero">' +
+    '<div class="g ' + esc(g) + '">' + esc(r.score.grade || '—') + '</div>' +
+    '<div class="sc"><div class="k">体检总分（满分 100）</div><div class="v">' + tN(r.score.total, 2) +
+      '<em>等级 ' + esc(r.score.grade) + '　阈值 A≥' + tN(r.score.thresholds.A) + ' / B≥' + tN(r.score.thresholds.B) + ' / C≥' + tN(r.score.thresholds.C) + '</em></div></div>' +
+    '<div class="nm">' + esc(sn) + '<em>' + esc(tqDs.h[i] || '') + ' · gid ' + esc(String(num2)) +
+      '　现价 ' + (isNum(r.priceNow) ? tY(r.priceNow, 2) : '—') + '</em></div></div>';
+
+  /* 评分明细 */
+  h += '<div class="tq-sec">分数是怎么加出来的<em>与电脑端 inspect.cjs 的 breakdown 逐项一致</em></div>';
+  h += '<ul class="tq-brk">';
+  (r.score.breakdown || []).forEach(function(b){
+    const cls = b.v > 0 ? 'pos' : (b.v < 0 ? 'neg' : 'zero');
+    h += '<li class="' + cls + '">' + esc(b.k) + '　<b>' + (b.v > 0 ? '+' : '') + tN(b.v, 2) + '</b>' +
+      (b.why ? '　<span class="muted">' + esc(b.why) + '</span>' : '') + '</li>';
+  });
+  h += '</ul>';
+  h += '<p class="tq-say"><b>口径：</b>' + esc(r.score.note || '') + '</p>';
+
+  /* 断层率 */
+  h += '<div class="tq-sec">断层率（盘口松紧）<em>(卖一 − 买一) ÷ 卖一，小数口径</em></div>';
+  if (r.spread){
+    h += '<div class="tq-kv">' +
+      tStat('现断层率', tPct(r.spread.now, 2), '最新交易日 ' + tS(r.spread.asOf), 'warn') +
+      tStat('365 天中位', tPct(r.spread.median365, 2), '样本 ' + tN(r.spread.days) + ' 天') +
+      tStat('p10 / p90', tPct(r.spread.p10, 2) + ' / ' + tPct(r.spread.p90, 2)) +
+      tStat('卖一 / 买一', (isNum(r.spread.sellNow) ? tY(r.spread.sellNow, 2) : '—') + ' / ' + (isNum(r.spread.buyNow) ? tY(r.spread.buyNow, 2) : '—')) +
+      '</div>';
+    h += '<p class="tq-say"><b>怎么读：</b>' + esc(r.spreadVerdict) + '</p>';
+    h += '<p class="tq-say"><b>倍数（本页口径，未做样本外检验）：</b>' +
+      (isNum(r.spread.median365) && r.spread.median365 > 0 ? (tN(r.spread.now / r.spread.median365, 2) + '× 自身中位') : '—') +
+      '　全项目唯一通过样本外检验的信号是「断层率落在 12%~16%」这条<b>绝对阈值</b>，不是倍数。' +
+      (r.spread.now >= 0.12 && r.spread.now <= 0.16 ? '　当前 <b>落在 12%~16% 区间内</b>。' : '　当前<b>不在</b> 12%~16% 区间内。') + '</p>';
+  } else {
+    h += '<div class="tq-empty">这件算不出断层率（缺 sell_price 或 buy_price 日线），下面所有跟断层率有关的分数都是 0 —— 「算不出」不等于 0。</div>';
+  }
+
+  /* 价格变化 */
+  h += '<div class="tq-sec">价格变化<em>卖一价，按日期回找最近交易日</em></div>';
+  h += '<div class="tq-kv">' +
+    tStat('现价', isNum(r.price.now) ? tY(r.price.now, 2) : '—', '数据到 ' + tS(r.seriesAsOf)) +
+    tStat('7 天', tPct(r.price.d7), '', tC(r.price.d7)) +
+    tStat('30 天', tPct(r.price.d30), '', tC(r.price.d30)) +
+    tStat('90 天', tPct(r.price.d90), '', tC(r.price.d90)) +
+    tStat('180 天', tPct(r.price.d180), '', tC(r.price.d180)) +
+    tStat('365 天', tPct(r.price.d365), r.price.d365 === null ? '本地日线窗口 366 天，够不到就留空' : '', tC(r.price.d365)) +
+    tStat('1 年分位', tPct(r.price.pctile1y), '现价在近 1 年样本里的位置') +
+    tStat('距 1 年峰值', tPct(r.price.drawdownFromPeak), '', 'neg') +
+    '</div>';
+  if (r.price.monthly && r.price.monthly.length){
+    h += '<details class="sec-more"><summary>近 ' + r.price.monthly.length + ' 个月的开/收/涨跌</summary>' +
+      '<table class="tbl tools" style="margin-top:8px"><colgroup><col style="width:22%"><col style="width:20%"><col style="width:20%"><col style="width:19%"><col style="width:19%"></colgroup>' +
+      '<thead><tr><th>月份</th><th>首</th><th>末</th><th>涨跌</th><th>区间</th></tr></thead><tbody>' +
+      r.price.monthly.map(function(m){
+        return '<tr><td>' + esc(m.m) + '</td><td>' + tY(m.f, 2) + '</td><td>' + tY(m.l, 2) + '</td><td class="' + tC(m.chg) + '">' + tPct(m.chg) + '</td><td>' + tY(m.min, 2) + '~' + tY(m.max, 2) + '</td></tr>';
+      }).join('') + '</tbody></table></details>';
+  }
+
+  /* 在售 / 求购 */
+  const sd = r.supplyDemand || {};
+  h += '<div class="tq-sec">在售 / 求购<em>悠悠有品在售把数与求购单数</em></div>';
+  h += '<div class="tq-kv">' +
+    tStat('在售（现在）', isNum(sd.listed && sd.listed.now) ? tN(sd.listed.now) + ' 把' : '—', sd.listed && sd.listed.asOf ? '到 ' + tS(sd.listed.asOf) : '') +
+    tStat('30 天前在售', isNum(sd.listed && sd.listed.d30) ? tN(sd.listed.d30) + ' 把' : '—', '') +
+    tStat('30 天存量倾角', tPct(sd.slope30), '现 ÷ 30 天前 − 1', tC(sd.slope30)) +
+    tStat('90 天存量倾角', tPct(sd.slope90), '', tC(sd.slope90)) +
+    tStat('求购（现在）', isNum(sd.buy && sd.buy.now) ? tN(sd.buy.now) + ' 单' : '—', sd.buy && sd.buy.asOf ? '到 ' + tS(sd.buy.asOf) : '') +
+    tStat('求购 30 天变化', tPct(sd.buy && sd.buy.chg30), '', tC(sd.buy && sd.buy.chg30)) +
+    tStat('1 年分位（在售）', tPct(sd.listed && sd.listed.pctile), '越低=浮筹越薄') +
+    tStat('求购 / 在售', (isNum(sd.listed && sd.listed.now) && sd.listed.now && isNum(sd.buy && sd.buy.now)) ? (sd.buy.now / sd.listed.now).toFixed(3) : '—', '>1 偏紧，<0.3 买盘薄') +
+    '</div>';
+  h += '<p class="tq-say"><b>怎么读：</b>' + esc(sd.verdict || '—') + '</p>';
+
+  /* 指标 */
+  const ind = r.indicators || {};
+  h += '<div class="tq-sec">技术指标<em>与 lib_indicators.cjs 同公式（Wilder RSI / facet 20-2.0 布林）</em></div>';
+  h += '<div class="tq-kv">' +
+    tStat('RSI(14)', tN(ind.rsi14, 2), ind.rsi14 === null ? '' : (ind.rsi14 >= 70 ? '偏超买' : ind.rsi14 <= 30 ? '偏超卖' : '中性区')) +
+    tStat('布林带宽', tPct(ind.bollBandwidth), '窄=波动压缩（状态描述，不是信号）') +
+    tStat('Z 值(30)', tN(ind.zscore30, 2), '现价偏离 30 日均值几个标准差') +
+    tStat('年化波动(30)', tPct(ind.annualVol), '近 30 天日收益标准差 ×√365', 'warn') +
+    tStat('最大回撤', tPct(ind.maxDrawdown), '本页用 366 天窗口（电脑端是 2 年）', 'neg') +
+    tStat('MA7 / MA30 / MA90', (isNum(ind.ma7) ? tY(ind.ma7, 2) : '—') + ' / ' + (isNum(ind.ma30) ? tY(ind.ma30, 2) : '—') + ' / ' + (isNum(ind.ma90) ? tY(ind.ma90, 2) : '—'), '趋势修正就是拿现价和 MA90 比') +
+    '</div>';
+
+  /* 退出天数 */
+  h += '<div class="tq-sec">退出天数<em>清掉 50% 流通盘大约要几天</em></div>';
+  h += '<div class="tq-kv">' +
+    tStat('退出天数（口径新鲜才算）', isNum(r.exitForScore) ? tN(r.exitForScore, 1) + ' 天' : '—',
+      isNum(r.exitForScore) ? (r.exitForScore <= 7 ? '≤7 天，退出顺畅（+10 分）' : r.exitForScore <= 30 ? '≤30 天（+6 分）' : '>30 天，退出困难（0 分）') : '成交量口径不新鲜 → 本项不计分', isNum(r.exitForScore) ? '' : 'warn') +
+    tStat('参考值（不进评分）', isNum(r.exitDays) ? tN(r.exitDays, 1) + ' 天' : '—', r.exitBasis ? esc(r.exitBasis) : '') +
+    '</div>';
+
+  /* dataGaps / dataNotes */
+  const gaps = r.dataGaps || [], notes = r.dataNotes || [];
+  h += '<div class="tq-sec">这份数据缺了什么<em>dataGaps 原文 —— 每缺 1 项扣 2.5 分</em></div>';
+  if (gaps.length){
+    h += '<ul class="tq-brk">' + gaps.map(function(t){ return '<li>' + tMd(t) + '</li>'; }).join('') + '</ul>';
+  } else h += '<p class="tq-say">真数据齐全。</p>';
+  if (notes.length){
+    h += '<div class="tq-sec">口径说明<em>dataNotes —— 只是透明度，不扣分</em></div><ul class="tq-brk">' +
+      notes.map(function(t){ return '<li>' + tMd(t) + '</li>'; }).join('') + '</ul>';
+  }
+  if (!r.hasInfoSnapshot){
+    h += '<div class="tq-warn"><b class="tq-ttl">⚠️ 这一件的截面快照不全</b>' +
+      '本页只有 800 个品种里的 ' + tN((tqDs.meta || {}).withInfoSnapshot) + ' 个拿到了 csqaq info/good 截面（成交量 / 7 平台盘口 / 存世量日线）。' +
+      '这一件没拿到 —— 「退出天数」和「数据完整性」只能按「不可用」计。想要完整口径：在电脑上跑 ' +
+      '<code>node inspect.cjs "' + esc(sn) + '"</code>。</div>';
+  }
+  h += '<div class="tq-warn"><b class="tq-ttl">口径与边界（务必看一眼）</b>' +
+    '· 本页日线是<b>本地缓存</b>（最近 ' + tN(tqDs.keepDays) + ' 天），电脑端的 inspect.cjs 会现抓 730 天 —— ' +
+    '所以「1 年分位 / 最大回撤」在本页是 1 年口径，电脑端是 2 年，这两个数<b>不要求一致</b>；' +
+    '<b>评分、断层率、指标、dataGaps 是一致的</b>（已抽 20 个品逐一对齐）。<br>' +
+    '· 数据到 ' + tS(r.seriesAsOf) + '，不是打开页面的时间；价格另有 3 分钟级的实时刷新，在别的页签里。<br>' +
+    '· 评分只含已验证条件 + 一条启发式的趋势修正；<b>不含任何价格预测，不构成投资建议</b>。</div>';
+
+  box.innerHTML = h;
+}
+
+/* ---- 未命中 / 未加载 的空态 ---- */
+function tqNotFound(q){
+  const box = tqEl('tq-box'); if (!box) return;
+  box.innerHTML = '<div class="tq-empty">' +
+    '<b>「' + esc(q) + '」不在本页的预计算范围里。</b><br>' +
+    '本页只覆盖<b>流动性最好的 Top' + tN(tqDs ? tqDs.g.length : 800) + '</b>（按悠悠有品在售量排序），全市场有 2 万多个品种，' +
+    '剩下的没有日线数据，<b>在手机上是真的算不出来</b>（不是加载失败）。<br>' +
+    '想要它的完整体检，请在电脑上跑：<code>node inspect.cjs "' + esc(q) + '"</code>（在 cs-quant 目录下）—— ' +
+    '它会现抓 csqaq 的盘口与日线，待遇和这里一模一样。<br>' +
+    '也可以先试试更短的词，比如只打「AK-47」或「蝴蝶刀」看有哪些在覆盖范围里。</div>';
+}
+function tqIdle(){
+  const box = tqEl('tq-box'); if (!box) return;
+  box.innerHTML = '<div class="tq-empty">' +
+    '<b>还没选品种。</b>在上面输入中文名 / 英文名 / gid（例如 <code>深海复仇</code>、<code>Aquamarine</code>、<code>38</code>），' +
+    '从下拉里点一件，这里就会当场算出它的完整体检。<br>' +
+    '数据文件约 1.3 MB（压缩后），<b>只有你开始查的时候才下载</b>。</div>';
+}
+
+/* ---- 事件绑定 ---- */
+function tqBind(){
+  const inp = tqEl('tq-input'), go = tqEl('tq-go'), list = tqEl('tq-list'), clr = tqEl('tq-clear');
+  if (!inp || !go || !list) return;
+  const ensureThen = function(fn){
+    return function(){
+      if (tqDs){ fn(); return; }
+      if (tqState === 'loading') return;
+      tqLoad(false).then(function(ok){ if (ok) fn(); });
+    };
+  };
+  const doFilter = function(){
+    const q = String(inp.value || '').trim();
+    if (clr) clr.hidden = !q;
+    if (!tqDs){ list.hidden = true; return; }
+    if (!q){ tqHits = []; tqRenderList(); return; }
+    tqHits = tqSearch(q); tqHitQuery = q;
+    tqRenderList();
+  };
+  inp.addEventListener('input', function(){
+    if (tqTimer) clearTimeout(tqTimer);
+    /* 输入时如果数据还没来，就先把下载启起来（用户已经表达意图了） */
+    if (!tqDs && tqState !== 'loading') tqLoad(false);
+    tqTimer = setTimeout(doFilter, 90);
+  });
+  inp.addEventListener('focus', function(){ tqStep('focus'); if (!tqDs && tqState !== 'loading') tqLoad(false); });
+  inp.addEventListener('keydown', function(e){
+    if (e.key === 'Enter'){ e.preventDefault(); if (tqHits.length) tqRun(tqHits[0]); }
+  });
+  go.addEventListener('click', ensureThen(function(){
+    const q = String(inp.value || '').trim();
+    if (!q){ tqIdle(); list.hidden = true; return; }
+    const hits = tqSearch(q);
+    if (!hits.length){ tqNotFound(q); list.hidden = true; return; }
+    tqHits = hits; tqRenderList();
+    if (hits.length === 1) tqRun(hits[0]);
+    else { list.hidden = false; list.scrollIntoView({ block: 'nearest' }); }
+  }));
+  if (clr) clr.addEventListener('click', function(){
+    inp.value = ''; tqHits = []; tqRenderList(); list.hidden = true; tqIdle(); if (clr) clr.hidden = true; inp.focus();
+  });
+  list.addEventListener('click', function(e){
+    const row = e.target && e.target.closest ? e.target.closest('.tq-li') : null;
+    if (!row) return;
+    const i = Number(row.getAttribute('data-i'));
+    if (isFinite(i)){ list.hidden = true; if (inp) inp.blur(); tqRun(i); const b = tqEl('tq-box'); if (b && b.scrollIntoView) b.scrollIntoView({ block: 'nearest' }); }
+  });
+  /* 重试按钮是动态渲染的 → 事件委托到容器上 */
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.id === 'tq-retry'){ tqState = 'idle'; tqLoad(true); }
+  });
+}
+/* tqBind / tqIdle 放到 init() 里调用（与 loadTools 同批），这里只声明不执行 */
 
 /* 页面开着不动时的兜底刷新：cs-quant/fast_refresh.cjs 每 3 分钟轻刷一次 analysis.json 的价格，
    所以这里也按 3 分钟重取一遍（只在页面可见时），让「结论」和「价格」都跟得上后端。
@@ -4917,6 +5469,7 @@ async function init(){
   loadSignals();
   loadAnalysis();
   loadTools();                      /* 工具页：4 个 Node CLI 的静态快照 tools.json（拿不到只空该页） */
+  tqBind(); tqIdle();               /* 工具页「查任意一件」：只绑定 + 空态，不下载 inspect-data.json */
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
      全新打开时什么都不做，保持「未加载」，等用户点「选择品种 / 刷新全部现价」再下。 */
