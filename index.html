@@ -3606,10 +3606,16 @@ async function loadPatternTypes(){
 }
 
 function ptVerdictCls(v){ return v === '存活' ? 'pt-v-ok' : (v === '样本不足' ? 'pt-v-thin' : 'pt-v-kill'); }
+/* 图标与文字分开：图标由渲染处单独出一个 <i>，这里只回文字，避免出现「⚠️ ⚠️」双图标 */
 function ptVerdictText(v, verified){
-  if (v === '存活' && verified) return '✅ 已通过样本外检验';
-  if (v === '样本不足') return '❌ 样本不足（不作任何结论）';
-  return '⚠️ 未通过对照检验和随机日没有区别';
+  if (v === '存活' && verified) return '已通过样本外检验';
+  if (v === '样本不足') return '样本不足（不作任何结论）';
+  return '未通过对照检验：和随机日没有区别';
+}
+function ptVerdictIcon(v, verified){
+  if (v === '存活' && verified) return '✅';
+  if (v === '样本不足') return '❌';
+  return '⚠️';
 }
 function ptDirTag(t){
   if (t.direction === 'exit') return '<span class="pt-tag pt-exit">方向：卖出/回避提示</span>';
@@ -3652,15 +3658,23 @@ function renderPatternTypes(){
 
   let h = '';
   if (ptData.summary) h += '<p class="tbx" id="pt-summary">' + tMd(ptData.summary) + '</p>';
-  h += '<div class="hl ' + (ok.length ? 'g' : '') + '"><b>' + (ok.length ? ok.length + ' 个类型通过样本外对照检验' : '本轮没有类型通过样本外对照检验') + '</b>'
-    + '<span class="tbx-s">判据（预先定死）：样本外 vs 同标的随机对照，前向 90 天最高涨幅中位差 ≥ +2pp，且 prob30 差 ≥ +3pp，且件内 Spearman ρ &gt; 0.02。</span></div>';
+  if (!ok.length){
+    h += '<div class="hl"><b>本轮没有类型通过样本外对照检验</b>'
+      + '<span class="tbx-s">这不等于「这些手法不存在」，而是说：**在「价格 + 在售量 + 求购量」这三条日线序列上**，'
+      + '它们和同一只标的的随机非信号日在统计上分不出来。两种可能：① 确实没有可用的盘口前兆；'
+      + '② 本轮池子太小/阈值口径打了折扣。**两种情况下都不能拿它们当买入依据。**</span></div>';
+  } else {
+    h += '<div class="hl g"><b>' + ok.length + ' 个类型通过样本外对照检验</b>'
+      + '<span class="tbx-s">判据（预先定死）：样本外 vs 同标的随机对照，前向 90 天最高涨幅中位差 ≥ +2pp，且 prob30 差 ≥ +3pp，'
+      + '且件内 Spearman ρ(幅度) &gt; 0.02；或者方向口径（命中率差 ≥+3pp 且 件内 ρ(方向) &gt; 0.02）成立。</span></div>';
+  }
 
   /* 逐类型卡片 */
   types.forEach(function(t){
     const v = (t.validation || {}).verdict || '样本不足';
     const isOK = v === '存活' && t.validation && t.validation.verified;
     h += '<div class="pt-details card" style="padding:11px 12px;margin-top:10px">';
-    h += '<div class="pt-verdict ' + ptVerdictCls(v) + '"><i>' + (isOK ? '✅' : (v === '样本不足' ? '❌' : '⚠️')) + '</i>'
+    h += '<div class="pt-verdict ' + ptVerdictCls(v) + '"><i>' + ptVerdictIcon(v, t.validation && t.validation.verified) + '</i>'
       + esc(ptVerdictText(v, t.validation && t.validation.verified)) + '</div>';
     h += '<div class="card-title" style="margin:0 0 6px">' + esc(t.label || t.id) + ' ' + ptDirTag(t)
       + '<span class="r">命中 ' + n2(t.count) + ' 次' + (isNum(t.hitRate) ? '（占观测 ' + (t.hitRate * 100).toFixed(2) + '%）' : '') + '</span></div>';
