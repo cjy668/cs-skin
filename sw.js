@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v8';
+const CACHE = 'cs-skin-app-v9';
 const ASSETS = [
   './',
   './index.html',
@@ -36,8 +36,13 @@ const ASSETS = [
       **查询串会被忽略** → 靠 `?d=日期` 当版本号在这里根本不生效，会一直命中旧缓存。
       而体检数据的口径（断层率 / 退出天数 / dataGaps）过期，比多下 1.28 MB 更糟。
       缓解：页面侧只在用户点开「查任意一件」时才请求（懒加载），且同一次会话只下一次。
-      CACHE v7 → v8。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js/i;
+      CACHE v7 → v8。
+   ⚠️ 2026-10-15 五修正：加了 health.json（数据新鲜度徽标的数据源，
+      cs-quant/watchdog.cjs 每约 12 分钟重写一次）。
+      **同样必须进 NET_FIRST**：它是「哪些数据不新鲜」的报告本身，
+      要是它自己卡在缓存里，用户看到的报警状态就是过期的 ——
+      那正好又是事故 A 的同一种失败（提示器自己失效）。CACHE v8 → v9。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
