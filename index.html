@@ -870,6 +870,68 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .pt-tbl thead th{font-size:11px}
   .pt-num .v{font-size:15px}
 }
+/* =====================================================================
+   卖出警报（cs-quant/sell_alert.cjs → sell-alerts.json）
+   ⚠️ 类名一律用 sa- 前缀。本区块之前有 agent 复用既有类名（.basis 等）
+      导致整页横向溢出 2709px —— 所以这里先把全部既有类名 grep 过一遍，
+      确认 sa-* 零冲突（733 个既有类名里一个都没有）；并且
+      所有容器 min-width:0 + overflow-wrap:anywhere，表格 table-layout:fixed，
+      任何一列都不会把页面撑宽（手机 390px 下横向溢出必须为 0px）。
+   ===================================================================== */
+.sa-verdict{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:10px 12px;border-radius:12px;
+  font-size:13.5px;font-weight:800;border:1px solid rgba(47,208,122,.5);background:rgba(47,208,122,.12);
+  color:var(--green);overflow-wrap:anywhere;min-width:0}
+.sa-verdict i{font-style:normal;font-size:16px;flex:0 0 auto}
+.sa-verdict em{display:block;font-style:normal;font-weight:500;font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.6}
+.sa-verdict.sa-warn{border-color:rgba(255,197,49,.5);background:rgba(255,197,49,.12);color:var(--yellow)}
+.sa-verdict.sa-off{border-color:var(--line);background:rgba(139,157,178,.1);color:var(--muted)}
+.sa-nums{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-width:0}
+.sa-num{flex:1 1 84px;min-width:0;background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:7px 9px}
+.sa-num .k{font-size:11.5px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.sa-num .v{font-size:16px;font-weight:800;letter-spacing:-.2px;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.sa-num .v.sa-hot{color:var(--yellow)}
+.sa-num .v.sa-zero{color:var(--green)}
+.sa-sec{margin:13px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:13px;font-weight:800;
+  color:var(--muted);overflow-wrap:anywhere}
+.sa-tbl{width:100%;table-layout:fixed;border-collapse:collapse;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.sa-tbl th,.sa-tbl td{padding:7px 3px;border-bottom:1px solid var(--line);white-space:normal;
+  overflow-wrap:anywhere;word-break:break-word;text-align:right;font-size:12px;vertical-align:top}
+.sa-tbl th:first-child,.sa-tbl td:first-child{text-align:left}
+.sa-tbl thead th{color:var(--muted);font-weight:600;font-size:11.5px;line-height:1.35}
+.sa-tbl tbody tr:last-child td{border-bottom:0}
+.sa-tbl em{display:block;font-style:normal;font-size:10.5px;color:var(--dim);font-weight:400;margin-top:2px}
+.sa-tbl .sa-none{text-align:left;color:var(--dim);font-size:12px;padding:9px 3px}
+.sa-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.sa-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin:2px 4px 0 0;border:1px solid var(--line);color:var(--muted);background:rgba(139,157,178,.1)}
+.sa-badge.sa-b-hit{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
+.sa-badge.sa-b-ok{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.sa-badge.sa-b-out{color:var(--dim)}
+.sa-item{margin:9px 0 0;padding:9px 11px;border-radius:11px;background:rgba(255,197,49,.07);
+  border:1px solid rgba(255,197,49,.3);min-width:0}
+.sa-item.sa-lv2{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.35)}
+.sa-item .sa-h{font-size:13px;font-weight:800;overflow-wrap:anywhere;margin:0 0 5px}
+.sa-item .sa-act{font-size:12.5px;line-height:1.72;color:var(--text);overflow-wrap:anywhere}
+.sa-item .sa-act b{color:var(--yellow)}
+.sa-item.sa-lv2 .sa-act b{color:var(--red)}
+.sa-item .sa-stat{font-size:11.5px;line-height:1.65;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}
+.sa-item .sa-plan{font-size:11.5px;line-height:1.65;color:var(--cyan);margin-top:5px;overflow-wrap:anywhere}
+.sa-type{margin:11px 0 0;padding:10px 11px;border-radius:12px;background:var(--card2);
+  border:1px solid var(--line);min-width:0}
+.sa-type .sa-th{font-size:13.5px;font-weight:800;overflow-wrap:anywhere;margin:0 0 5px}
+.sa-type .sa-desc{font-size:12px;line-height:1.68;color:var(--muted);margin:0 0 7px;overflow-wrap:anywhere}
+.sa-type .sa-crit{font-size:11.5px;line-height:1.7;color:var(--cyan);overflow-wrap:anywhere;margin:0 0 7px}
+.sa-hold{margin:6px 0 0;font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.sa-hold b{color:var(--text)}
+.sa-note{font-size:11.5px;line-height:1.7;color:var(--dim);margin:9px 0 0;overflow-wrap:anywhere}
+@media (max-width:899px){
+  .sa-tbl th,.sa-tbl td{font-size:11.5px;padding:6px 2px}
+  .sa-tbl thead th{font-size:11px}
+  .sa-num .v{font-size:15px}
+  .sa-verdict{font-size:12.5px;padding:9px 10px}
+}
 </style>
 </head>
 <body>
@@ -1155,6 +1217,18 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div class="sec-head"><h2>出租 vs 卖出</h2><span class="sec-sub">租金能不能扛住跌幅</span><span class="r" id="rvs-time">分析生成中…</span></div>
             <p class="sec-note" id="rvs-verdict">—</p>
             <div id="rvs-box"></div>
+          </div>
+
+          <!-- ---------- 卖出警报：3 个已通过样本外对照检验的风险型做盘类型 ----------
+               数据源：cs-quant/sell_alert.cjs → sell-alerts.json（日更 + fast_refresh 3 分钟刷新）
+               纪律：只展示**通过样本外检验**的类型（派发背离 / 供给涌入 / 横盘派发）；
+                     没命中的一律如实写「未命中」，覆盖率不足的如实写「本地没有该品日线」，
+                     绝不把 null 当 0，也绝不把未通过检验的信号塞进来。 -->
+          <div class="card span-all sec-sa" id="sec-sa">
+            <div class="sec-head"><h2>卖出警报</h2><span class="sec-sub">高位减仓提示 · 3 个已通过样本外检验的风险型</span><span class="r" id="sa-time">加载中…</span></div>
+            <p class="sec-note" id="sa-meta">—</p>
+            <div class="sa-nums" id="sa-sum"></div>
+            <div id="sa-box"><div class="skel"><i></i>卖出警报数据加载中…（sell-alerts.json）</div></div>
           </div>
 
           <!-- ---------- 做盘类型：全站扫描 + 逐类型样本外对照检验 + 持仓机械止盈进度 ----------
@@ -2721,6 +2795,23 @@ function showPage(id){
   }
   setText('crumb-title', meta.title);
   setText('crumb-sub', meta.sub);
+  /* 「卖出警报」的数据（sell-alerts.json，约 80 KB）**等你真的切到「信号」页才下**：
+     和「没点过选择品种就不下 market.json」是同一条纪律 —— 首屏只做必须做的事。
+     为什么不能放启动时一起取：启动阶段并发多个 fetch 会和 /api/live 抢时序，
+     实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
+     把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
+  if (pid === 'sig') ensureSellAlerts();
+}
+/* 只下一次：来回切页签不会重复请求 */
+let saKick = false;
+function ensureSellAlerts(){
+  if (saKick) return; saKick = true;
+  loadSellAlerts();
+}
+/* 启动时用：只有「上次就停在信号页」才立刻下，其余情况一律等用户切过去 */
+function loadSellAlertsIfOpen(){
+  const tab = (state && state.settings && state.settings.tab) || 'market';
+  if (tab === 'sig') ensureSellAlerts();
 }
 function setPage(id, save){
   const pid = pageMeta(id).id;
@@ -3835,6 +3926,168 @@ function renderPatternPeriods(){
 function ptBind(){
   const d = $('pt-extra');
   if (d) d.addEventListener('toggle', function(){ if (d.open) ptLoadDetail(); });
+}
+
+/* =====================================================================
+   11.845) 卖出警报 —— sell-alerts.json（cs-quant/sell_alert.cjs 产出）
+
+   这是什么：cs-quant 在 845+ 标的 × 19.3 万行上做了完整五步对照检验
+   （同标的随机非信号日对照 + 样本外 60/40 + 件内分层 Spearman），
+   **只有 3 个类型**同时满足「样本外中位差 ≤ −2pp、prob30 差 ≤ −3pp、件内 ρ < −0.02」：
+     派发背离型 / 供给涌入型 / 横盘派发型
+   三个都是风险（卖出/回避）信号 —— 出现之后 90 天内明显比随机日更差。
+
+   三条硬纪律（写在代码里，不靠自觉）：
+     1) 只展示这 3 个**已通过样本外检验**的类型；其他类型一律不进本区块。
+     2) 没命中的持仓如实写「未命中卖出信号」；本地没有日线序列的如实写
+        「不在扫描覆盖内」—— 绝不把「没数据」写成「安全」。
+     3) 任何数字拿不到一律「—」，绝不把 null 当 0。
+
+   降级链：sell-alerts.json 拿不到 → 只空这一块，其他页签/区块照常。
+   ===================================================================== */
+let saData = null, saState = 'loading';
+
+async function loadSellAlerts(){
+  saData = await fetchJSON('./sell-alerts.json');
+  saState = saData ? 'ok' : 'fail';
+  renderSellAlerts();
+}
+function saPct(v, d){
+  if (!isNum(v)) return '—';
+  return (v > 0 ? '+' : '') + (v * 100).toFixed(d === undefined ? 1 : d) + '%';
+}
+/* 概率/命中率一律用百分数（不带正负号），与「变化量」区分开
+   ⚠️ 不能叫 pct()：页面里已经有一个 pct(ratio, sign)（第 2285 行），重名会把它覆盖掉 */
+function saPP(v, d){ return isNum(v) ? ((v > 0 ? '+' : '') + (v * 100).toFixed(d === undefined ? 1 : d) + 'pp') : '—'; }
+function saRate(v, d){ return isNum(v) ? (v * 100).toFixed(d === undefined ? 1 : d) + '%' : '—'; }
+function saCls(v){ return isNum(v) ? (v > 0 ? 'pos' : (v < 0 ? 'neg' : '')) : ''; }
+
+function renderSellAlerts(){
+  const box = $('sa-box'); if (!box) return;
+  if (saState === 'fail' || !saData){
+    setText('sa-time', '未生成');
+    setText('sa-meta', '—');
+    const sum = $('sa-sum'); if (sum) sum.innerHTML = '';
+    box.innerHTML = emptyBox('卖出警报数据（sell-alerts.json）还没生成 —— 在电脑上跑 node cs-quant/sell_alert.cjs。其他页面不受影响。');
+    return;
+  }
+  const V = saData.validation || {};
+  const S = saData.countsSummary || {};
+  setText('sa-time', (saData.updatedAtText || '—') + (saData.livePriceUsed ? '（实时价 ' + n2(saData.livePriceUsed) + ' 个）' : ''));
+
+  const nHit = (S.holdingsHit || 0) + (S.watchHit || 0);
+  setText('sa-meta', '扫描 ' + n2(saData.scanned) + ' 个标的最新一天 · 持仓 ' + n2(S.holdings) + ' 件 + 关注/断层率名单 ' + n2((S.watchlist || 0) + (S.washout40 || 0))
+    + ' 个 · ' + (saData.livePriceUsed ? ('价格已叠加 3 分钟级实时价（' + n2(saData.livePriceUsed) + ' 个）') : '纯日线口径（未叠加实时价）'));
+
+  const sum = $('sa-sum');
+  if (sum){
+    const totalHit = Object.keys(saData.counts || {}).reduce(function(a, k){ return a + (saData.counts[k] || 0); }, 0);
+    sum.innerHTML =
+      '<div class="sa-num"><div class="k">持仓命中</div><div class="v ' + ((S.holdingsHit || 0) > 0 ? 'sa-hot' : 'sa-zero') + '">' + n2(S.holdingsHit || 0) + ' / ' + n2(S.holdings || 0) + '</div></div>' +
+      '<div class="sa-num"><div class="k">关注/断层率命中</div><div class="v ' + ((S.watchHit || 0) > 0 ? 'sa-hot' : 'sa-zero') + '">' + n2(S.watchHit || 0) + '</div></div>' +
+      '<div class="sa-num"><div class="k">全池命中</div><div class="v">' + n2(totalHit) + '</div></div>' +
+      Object.keys(saData.counts || {}).map(function(id){
+        const t = arrOf(saData.types).filter(function(x){ return x.id === id; })[0] || {};
+        return '<div class="sa-num"><div class="k">' + esc(t.label || id) + '</div><div class="v">' + n2(saData.counts[id]) + '</div></div>';
+      }).join('');
+  }
+
+  let h = '';
+  /* 验证状态：必须最显眼（用户明确要求） */
+  h += '<div class="sa-verdict"><i>✅</i><span>' + esc(V.status || '✅ 已通过样本外检验')
+    + '<em>判据：' + esc(V.rule || '—') + '；对照：' + esc(V.control || '—') + '；' + esc(V.split || '') + '；前向：' + esc(V.forward || '') + '。样本 '
+    + n2(V.n) + ' 行 / ' + n2(V.items) + ' 标的。' + (V.exitNote ? ('　' + esc(V.exitNote) + '。') : '') + '</em></span></div>';
+
+  /* ① 持仓逐件判定 */
+  const hs = arrOf(saData.holdings);
+  const hitH = hs.filter(function(x){ return x.typeId; });
+  const missH = hs.filter(function(x){ return !x.typeId; });
+  h += '<div class="sa-sec">① 你的持仓 · 逐件判定（' + n2(hs.length) + ' 件）</div>';
+  if (!hs.length){
+    h += '<p class="sa-note">读不到 data/my-portfolio-app.json 的持仓，本区块跳过持仓判定。</p>';
+  } else if (!hitH.length){
+    h += '<div class="sa-verdict sa-off"><i>—</i><span>当前 0 件持仓命中卖出信号'
+      + '<em>这是「今天没有触发减仓纪律」，不是「持仓安全」——价格风险请看「工具 → 组合风控」。覆盖情况：'
+      + n2(missH.filter(function(x){ return x.covered; }).length) + ' 件已判定未命中，'
+      + n2(missH.filter(function(x){ return !x.covered; }).length) + ' 件本地没有日线序列（无法判定，已如实列出）。</em></span></div>';
+  } else {
+    h += '<div class="sa-verdict sa-warn"><i>⚠️</i><span>' + n2(hitH.length) + ' 件持仓命中卖出信号 —— 按下面的机械纪律减仓'
+      + '<em>数字来自三个类型的历史统计（样本外检验通过），不是预测。个体仍可能上涨，纪律的作用是「不把浮盈坐回去」。</em></span></div>';
+  }
+  hitH.forEach(function(x){
+    const lv2 = (x.batches != null && x.batches >= 1) ? ' sa-lv2' : '';
+    h += '<div class="sa-item' + lv2 + '"><div class="sa-h">' + esc(x.name) + ' <span class="sa-badge sa-b-hit">' + esc(x.typeLabel || '命中') + '</span>'
+      + (isNum(x.num) ? '<span class="sa-badge">持 ' + n2(x.num) + ' 件</span>' : '')
+      + (isNum(x.gainVsCost) ? '<span class="sa-badge ' + (x.gainVsCost > 0 ? 'sa-b-ok' : '') + '">浮盈 ' + saPct(x.gainVsCost) + '</span>' : '<span class="sa-badge">缺成本价</span>') + '</div>';
+    h += '<div class="sa-act"><b>推荐动作：</b>' + esc(x.action || '—') + '</div>';
+    if (x.exitStat) h += '<div class="sa-stat">' + esc(x.exitStat) + '</div>';
+    if (isNum(x.targetSell) || isNum(x.stopLoss)){
+      h += '<div class="sa-plan">参考价位（来自 analysis.json 的组合风控）：'
+        + (isNum(x.targetSell) ? '止盈挂单 ¥' + fmtNum(x.targetSell, 2) + '　' : '')
+        + (isNum(x.stopLoss) ? '止损 ¥' + fmtNum(x.stopLoss, 2) : '') + '</div>';
+    }
+    if (x.riskAction) h += '<div class="sa-plan">portfolio-risk.json 的减仓方案：' + esc(String(x.riskAction).slice(0, 220)) + '</div>';
+    h += '</div>';
+  });
+  if (missH.length){
+    h += '<div class="sa-scroll" style="margin-top:9px"><table class="sa-tbl"><colgroup><col style="width:50%"><col style="width:26%"><col style="width:24%"></colgroup>'
+      + '<thead><tr><th>未命中的持仓</th><th>价格 30 日</th><th>在售 30 日</th></tr></thead><tbody>';
+    missH.forEach(function(x){
+      const f = x.feats;
+      h += '<tr><td>' + esc(x.name) + (x.covered ? '' : '<em>本地没有该品日线序列 → 无法判定</em>') + '</td>'
+        + '<td class="' + saCls(f && f.pc30) + '">' + (f ? saPct(f.pc30) : '—') + '</td>'
+        + '<td class="' + saCls(f && f.nc30) + '">' + (f ? saPct(f.nc30) : '—') + '</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  /* ② 关注品 + 断层率 40 名单 */
+  const ws = arrOf(saData.watchlist);
+  const hitW = ws.filter(function(x){ return x.typeId; });
+  h += '<div class="sa-sec">② 关注品 ' + n2(S.watchlist || 0) + ' 个 + 断层率 40 个名单 · 命中卖出信号 ' + n2(hitW.length) + ' 个</div>';
+  if (!hitW.length){
+    h += '<p class="sa-note">名单里今天没有品命中这三个类型。名单里可能仍有「本地没有日线序列」的品（已在下面「覆盖不足」列出），它们的类型<strong>判不了</strong>，不是「安全」。</p>';
+  } else {
+    h += '<div class="sa-scroll"><table class="sa-tbl"><colgroup><col style="width:40%"><col style="width:22%"><col style="width:19%"><col style="width:19%"></colgroup>'
+      + '<thead><tr><th>品名</th><th>命中类型</th><th>在售 30 日</th><th>价格 30 日</th></tr></thead><tbody>';
+    hitW.forEach(function(x){
+      h += '<tr><td>' + esc(x.name) + '<em>' + (x.inWatchlist ? '关注品' : '断层率 40') + (x.spreadNow != null ? ' · 现断层率 ' + fmtNum(x.spreadNow, 2) + '%' : '') + '</em></td>'
+        + '<td><span class="sa-badge sa-b-hit">' + esc(x.typeLabel) + '</span></td>'
+        + '<td class="' + saCls(x.feats && x.feats.nc30) + '">' + (x.feats ? saPct(x.feats.nc30) : '—') + '</td>'
+        + '<td class="' + saCls(x.feats && x.feats.pc30) + '">' + (x.feats ? saPct(x.feats.pc30) : '—') + '</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  /* ③ 三个类型的判据与历史画像 */
+  h += '<div class="sa-sec">③ 三个类型的判据（全部当日可算，绝不用未来数据）</div>';
+  arrOf(saData.types).forEach(function(t){
+    const E = t.exitPlan || {};
+    const VR = t.verdict || {};
+    const full = t.verified === true;
+    /* 验证状态必须逐个类型如实标注：整块写「已通过」而某个类型其实没过，就是骗人 */
+    const vBadge = full
+      ? '<span class="sa-badge sa-b-ok">✅ 完整通过样本外检验</span>'
+      : '<span class="sa-badge sa-b-warn">⚠️ 部分通过（prob30 差 ' + esc(saPP(VR.prob30Edge)) + '，未达 −3pp）→ 现行口径「杀掉」</span>';
+    h += '<div class="sa-type"><div class="sa-th">' + esc(t.label || t.id) + ' <span class="sa-badge sa-b-hit">卖出/回避</span>'
+      + vBadge + '<span class="sa-badge">今日命中 ' + n2(t.count) + ' 个</span></div>'
+      + '<div class="sa-desc">' + esc(t.desc || '') + '</div>'
+      + (VR.note ? '<div class="sa-stat">检验详情：n=' + n2(VR.n) + '（' + n2(VR.nItems) + ' 标的）· 样本外增量 ' + esc(saPP(VR.edgeOos)) + ' · 件内 ρ ' + (isNum(VR.rho) ? VR.rho.toFixed(4) : '—') + '　' + esc(VR.note) + '</div>' : '')
+      + '<div class="sa-crit">历史画像：首次 +20% 中位 ' + (isNum(E.first20Days) ? E.first20Days + ' 天' : '未触及') + '（命中率 ' + saRate(E.hit20) + '）· +30% '
+      + (isNum(E.first30Days) ? E.first30Days + ' 天' : '未触及') + '（' + saRate(E.hit30) + '）· +50% ' + (isNum(E.first50Days) ? E.first50Days + ' 天' : '未触及') + '（' + saRate(E.hit50) + '）'
+      + '；到顶中位 ' + (isNum(E.peakDays) ? E.peakDays + ' 天' : '—') + '（到顶时中位涨幅 ' + saRate(E.peakRet) + '）；到顶后中位回落 ' + saRate(E.postPeakDrawdown)
+      + '；持有 30 天中位 ' + saRate(E.hold30dReturn) + '；持有 90 天中位 ' + saRate(E.hold90dReturn) + '</div>'
+      + '<div class="sa-plan">' + esc(E.rule || '') + '</div></div>';
+  });
+
+  /* ④ 覆盖不足：如实说，不假装全判过 */
+  const notCovered = hs.filter(function(x){ return !x.covered; }).concat(ws.filter(function(x){ return !x.covered; }));
+  if (notCovered.length){
+    h += '<div class="sa-sec">④ 覆盖不足（本地没有日线序列，类型判不了 —— 不是「安全」）</div>';
+    h += '<p class="sa-note">' + notCovered.map(function(x){ return esc(x.name); }).join(' · ') + '</p>';
+  }
+  h += '<p class="sa-note">' + tMd(saData.disclaimer || '') + '</p>';
+  box.innerHTML = h;
 }
 
 /* ---- 工具页的数字格式：拿不到一律「—」，绝不把 null 当 0 ---- */
@@ -6161,6 +6414,7 @@ async function init(){
   loadTools();                      /* 工具页：4 个 Node CLI 的静态快照 tools.json（拿不到只空该页） */
   loadPatternTypes();               /* 信号页「做盘类型」：pattern-types.json（拿不到只空这一块） */
   ptBind();                         /* 「不同时期的特点」点开才下 _types-detail.json */
+  loadSellAlertsIfOpen();           /* 信号页「卖出警报」：只在本次会话已经是信号页时才下（否则等切页签，见 showPage） */
   tqBind(); tqIdle();               /* 工具页「查任意一件」：只绑定 + 空态，不下载 inspect-data.json */
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
