@@ -746,6 +746,76 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .tq-ipt{flex:1 1 100%}
   .tq-btn{flex:1 1 100%}
 }
+
+/* =====================================================================
+   数据新鲜度徽标（health.json · cs-quant/watchdog.cjs 每 12 分钟写一次）
+   ---------------------------------------------------------------------
+   为什么要有它：本项目连续三次「优化引入的静默故障」都是**用户先发现的** ——
+   SW 缓存让 analysis.json 停在 2 天前、daily.cmd 步骤顺序让发布永不执行、
+   build_catalog 把 429 当未匹配。共同点是没有任何机制在页面上说实话。
+   这个徽标就是那句实话：线上哪个文件不新鲜、修没修好，一眼能看到。
+
+   ⚠️ 类名一律用 hwatch- 前缀（含子元素），**绝不复用既有类名** ——
+      上一个 agent 复用 .basis 导致整页横向溢出 2709px。
+      本文件已有 963 个类名，新加的必须能一眼看出是这个功能带来的。
+   ⚠️ 徽标是 position:fixed 的浮层，不参与文档流，因此不会改变任何既有布局宽度；
+      内部所有元素都给了 min-width:0 + overflow-wrap:anywhere，
+      长文件名（analysis.json#pricesAsOf）也不会把面板撑宽。
+   ===================================================================== */
+.hwatch-badge{position:fixed;left:12px;bottom:calc(70px + var(--safe-b));z-index:65;
+  display:inline-flex;align-items:center;gap:6px;max-width:calc(100vw - 24px);min-width:0;
+  padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;line-height:1.35;
+  cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;
+  border:1px solid var(--line);background:rgba(10,14,19,.9);color:var(--muted);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 6px 20px rgba(0,0,0,.42);transition:opacity .2s}
+/* 全好 → 只是一个不打扰人的小绿点 */
+.hwatch-badge.hwatch-ok{padding:0;width:13px;height:13px;border-radius:50%;
+  background:var(--green);border-color:rgba(47,208,122,.55);box-shadow:0 0 10px rgba(47,208,122,.65)}
+.hwatch-badge.hwatch-ok .hwatch-txt{display:none}
+.hwatch-badge.hwatch-warn{border-color:rgba(255,197,49,.5);background:rgba(255,197,49,.14);color:var(--yellow)}
+.hwatch-badge.hwatch-bad{border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.14);color:var(--red)}
+.hwatch-badge.hwatch-unknown{border-color:rgba(140,160,185,.4);color:var(--dim)}
+.hwatch-txt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 明细面板：点徽标展开，内容全部来自 health.json，页面不做二次判断 */
+.hwatch-panel{position:fixed;left:12px;right:12px;bottom:calc(126px + var(--safe-b));z-index:66;
+  max-height:min(62vh,460px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  background:rgba(18,26,35,.985);border:1px solid var(--line);border-radius:16px;
+  padding:13px 14px;box-shadow:0 16px 44px rgba(0,0,0,.6);font-size:12.5px;line-height:1.6}
+.hwatch-panel[hidden]{display:none}
+.hwatch-ph{display:flex;align-items:center;gap:8px;margin:0 0 8px;min-width:0}
+.hwatch-ph b{font-size:14px;font-weight:800;color:var(--text);flex:1 1 auto;min-width:0}
+.hwatch-x{flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--muted);
+  font-size:12px;font-weight:700;border-radius:9px;padding:3px 9px;cursor:pointer}
+.hwatch-sum{margin:0 0 9px;font-size:12.5px;line-height:1.62;color:#c3d2e2;overflow-wrap:anywhere}
+.hwatch-kv{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
+.hwatch-kv span{font-size:11.5px;color:var(--muted);background:rgba(140,160,185,.1);
+  border:1px solid rgba(140,160,185,.22);border-radius:8px;padding:2px 7px;min-width:0}
+.hwatch-list{margin:0;padding:0;list-style:none}
+.hwatch-row{padding:8px 0;border-top:1px solid rgba(35,48,66,.7);min-width:0}
+.hwatch-row:first-child{border-top:0}
+.hwatch-rh{display:flex;align-items:center;gap:7px;min-width:0}
+.hwatch-file{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;
+  font-weight:700;color:var(--text);min-width:0;overflow-wrap:anywhere}
+.hwatch-sev{flex:0 0 auto;font-size:10.5px;font-weight:900;border-radius:6px;padding:1px 6px;border:1px solid}
+.hwatch-sev.hi{color:var(--red);border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.1)}
+.hwatch-sev.mid{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.1)}
+.hwatch-sev.lo{color:var(--dim);border-color:rgba(140,160,185,.35);background:rgba(140,160,185,.1)}
+.hwatch-fix{flex:0 0 auto;margin-left:auto;font-size:10.5px;font-weight:900;border-radius:6px;padding:1px 6px;
+  color:var(--green);border:1px solid rgba(47,208,122,.45);background:rgba(47,208,122,.1)}
+.hwatch-meta{display:block;margin-top:3px;font-size:11.5px;color:var(--dim);overflow-wrap:anywhere}
+.hwatch-msg{margin:3px 0 0;font-size:12px;color:#c3d2e2;overflow-wrap:anywhere}
+.hwatch-msg.hwatch-hi{color:#ffc9c9}
+.hwatch-sug{color:var(--dim)}
+.hwatch-ft{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);overflow-wrap:anywhere}
+.hwatch-ft code{background:rgba(0,0,0,.32);border-radius:5px;padding:1px 5px;color:#9ad9e8;font-size:11px}
+/* 电脑端左侧有 240px 固定边栏 → 徽标跟着让开，别压在正文上 */
+@media (min-width:900px){
+  .hwatch-badge{left:calc(var(--sidew) + 18px);bottom:18px}
+  .hwatch-panel{left:calc(var(--sidew) + 18px);right:auto;width:430px;bottom:62px}
+}
 </style>
 </head>
 <body>
@@ -1426,6 +1496,17 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 <!-- 单品体检器的浏览器端计算内核：与 cs-quant/inspect.cjs 等价，
      Node 侧一致性测试（cs-quant/_test/_verify_inspect_parity.cjs）require 的是同一份文件。
      加载失败不报错：工具页其余 4 个区块照常，「查任意一件」给明确的降级提示。 -->
+<!-- ================= 数据新鲜度徽标（health.json） =================
+     由 cs-quant/watchdog.cjs 每 12 分钟写一次：逐文件对比「线上时间 vs 现在」和
+     「线上 vs 本地 deploy」，不新鲜就直接在页面上冒出来，点开看明细。
+     它只读 health.json，不自己做任何判断；health.json 拿不到 → 显示灰色「未接入」，
+     绝不影响其他任何页面（降级链不变）。 -->
+<div class="hwatch-badge hwatch-unknown" id="hwatch-badge" role="button" tabindex="0"
+     aria-label="数据新鲜度" title="数据新鲜度检查（cs-quant/watchdog.cjs）">
+  <span class="hwatch-txt" id="hwatch-txt">数据检查中…</span>
+</div>
+<div class="hwatch-panel" id="hwatch-panel" hidden></div>
+
 <script src="./inspect-engine.js"></script>
 
 <script id="app-script">
@@ -4195,6 +4276,164 @@ function initStaleTip(){
   });
 }
 
+/* =====================================================================
+   11.98) 数据新鲜度徽标（health.json）
+   ---------------------------------------------------------------------
+   背景：本项目连续三次静默故障都是用户先发现的 ——
+     ① SW 缓存让 analysis.json 在手机上停在 2 天前；
+     ② daily.cmd 步骤顺序让 [9/10] 发布永不执行（signals.json 两天没发）；
+     ③ build_catalog 把 nginx 429 当成「未匹配」。
+   共同点：页面上没有任何东西在说实话。这个徽标补上这一环。
+
+   分工（重要）：
+     · 判断「谁不新鲜」全在 cs-quant/watchdog.cjs，页面**只读 health.json**，
+       绝不自己拿时间戳重新算 —— 否则又会出现两处口径不一致的老毛病。
+     · health.json 拿不到 → 灰色「未接入」，不报错、不影响任何其他页面。
+     · 徽标是 fixed 浮层，不进文档流，不改变任何既有布局宽度。
+   ===================================================================== */
+let healthData = null, healthState = 'idle';       /* idle | ok | fail */
+const HEALTH_TTL = 5 * 60 * 1000;                  /* 页面开着不动时的兜底重拉间隔 */
+let healthAt = 0, healthTimer = 0;
+
+function healthSevWord(s){ return s === 'high' ? '高' : (s === 'medium' ? '中' : '低'); }
+function healthSevCls(s){ return s === 'high' ? 'hi' : (s === 'medium' ? 'mid' : 'lo'); }
+
+/* health.json 里的 checkedAt 是本机中文时间串；解析失败就按「未知」显示，不编 */
+function healthAgeText(txt){
+  const s = String(txt || '');
+  const m = /^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?/.exec(s);
+  if (!m) return '';
+  const t = new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +(m[6] || 0)).getTime();
+  const mins = Math.max(0, Math.round((Date.now() - t) / 60000));
+  if (mins < 1) return '刚刚';
+  if (mins < 60) return mins + ' 分钟前';
+  if (mins < 1440) return Math.round(mins / 60) + ' 小时前';
+  return Math.round(mins / 1440) + ' 天前';
+}
+
+function healthBadList(){
+  if (!healthData || !Array.isArray(healthData.checks)) return [];
+  return healthData.checks.filter(function(c){ return c && c.ok !== true; });
+}
+
+function renderHealthBadge(){
+  const el = $('hwatch-badge'), txt = $('hwatch-txt');
+  if (!el) return;
+  el.classList.remove('hwatch-ok', 'hwatch-warn', 'hwatch-bad', 'hwatch-unknown');
+  const bad = healthBadList();
+  if (healthState === 'fail' || !healthData){
+    el.classList.add('hwatch-unknown');
+    if (txt) txt.textContent = '数据检查未接入';
+    el.title = 'health.json 没取到（watchdog 还没跑过，或文件没发布）。其余功能不受影响。';
+    return;
+  }
+  const hi = bad.filter(function(c){ return c.severity === 'high'; }).length;
+  if (!bad.length){
+    el.classList.add('hwatch-ok');
+    if (txt) txt.textContent = '';
+    el.title = '全部 ' + (healthData.checks || []).length + ' 项数据新鲜（检查于 ' + healthAgeText(healthData.checkedAt) + '）';
+    return;
+  }
+  el.classList.add(hi ? 'hwatch-bad' : 'hwatch-warn');
+  if (txt) txt.textContent = '⚠️ ' + bad.length + ' 项数据不新鲜';
+  el.title = '有数据不新鲜，点开看明细（健康分 ' + (healthData.score == null ? '—' : healthData.score) + '/100）';
+}
+
+function renderHealthPanel(){
+  const p = $('hwatch-panel');
+  if (!p || p.hidden) return;
+  if (healthState === 'fail' || !healthData){
+    p.innerHTML =
+      '<div class="hwatch-ph"><b>数据新鲜度检查</b>' +
+      '<button class="hwatch-x" id="hwatch-close" type="button">关闭</button></div>' +
+      '<p class="hwatch-sum">health.json 没取到。<br>' +
+      '原因可能是：watchdog 还没跑过 / health.json 没发布 / 当前断网。' +
+      '这一项不影响其他任何页面。</p>' +
+      '<div class="hwatch-ft">在电脑上执行 <code>node cs-quant/watchdog.cjs</code> 即可生成并检查。</div>';
+    bindHealthClose();
+    return;
+  }
+  const h = healthData;
+  const bad = healthBadList();
+  const rows = (bad.length ? bad : (h.checks || [])).map(function(c){
+    const io = '线上 ' + (c.onlineAt || ('HTTP ' + (c.onlineHttp == null ? '—' : c.onlineHttp))) +
+      '　本地 ' + (c.localAt || '—') +
+      (c.ageHours == null ? '' : ('　年龄 ' + c.ageHours + 'h / 期望 ' + c.expectedHours + 'h'));
+    return '<li class="hwatch-row">' +
+      '<div class="hwatch-rh">' +
+        '<span class="hwatch-file">' + esc(c.file) + '</span>' +
+        '<span class="hwatch-sev ' + healthSevCls(c.severity) + '">' + healthSevWord(c.severity) + '</span>' +
+        (c.repaired ? '<span class="hwatch-fix">已自动修复</span>' : '') +
+      '</div>' +
+      '<span class="hwatch-meta">' + esc(io) + '</span>' +
+      (c.issue ? '<p class="hwatch-msg ' + (c.severity === 'high' ? 'hwatch-hi' : '') + '">' + esc(c.issue) + '</p>' : '') +
+      (c.repairNote ? '<p class="hwatch-msg hwatch-sug">' + esc(c.repairNote) + '</p>' : '') +
+      (c.recheck ? '<p class="hwatch-msg hwatch-sug">复检：' + esc(c.recheck) + '</p>' : '') +
+      '</li>';
+  }).join('');
+
+  /* 汇总区：先把「谁不新鲜」说清，再说安全阀这次做了什么（health.safety 是 watchdog 写的） */
+  const sf = h.safety || {};
+  p.innerHTML =
+    '<div class="hwatch-ph"><b>' + (h.ok ? '✅ 数据全部新鲜' : ('⚠️ ' + bad.length + ' 项数据不新鲜')) + '</b>' +
+    '<button class="hwatch-x" id="hwatch-close" type="button">关闭</button></div>' +
+    '<div class="hwatch-kv">' +
+      '<span>健康分 ' + (h.score == null ? '—' : h.score) + '/100</span>' +
+      '<span>检查于 ' + esc(healthAgeText(h.checkedAt) || h.checkedAt || '—') + '</span>' +
+      (sf.repairsThisRun ? ('<span>本次已修 ' + sf.repairsThisRun + ' 个</span>') : '') +
+      (sf.skippedByCooldown ? ('<span>冷却跳过 ' + sf.skippedByCooldown + '</span>') : '') +
+      (sf.skippedByCap ? ('<span>超上限只报警 ' + sf.skippedByCap + '</span>') : '') +
+    '</div>' +
+    '<p class="hwatch-sum">' + esc(h.summary || '（watchdog 没给 summary）') + '</p>' +
+    '<ul class="hwatch-list">' + rows + '</ul>' +
+    '<div class="hwatch-ft">检查者：<code>cs-quant/watchdog.cjs</code>（每约 12 分钟一次）。' +
+    (h.simulated ? '<br><b>⚠️ 本次是故障演练注入的结果（simulateNotes），不是真实故障。</b>' : '') +
+    '<br>自动修复只做「重新发布」和「轻量取价」；<code>analyze_*</code> / <code>build_catalog</code> / ' +
+    '<code>build_analysis</code> 这类重活一律只报警，不代跑。</div>';
+  bindHealthClose();
+}
+
+function bindHealthClose(){
+  const b = $('hwatch-close');
+  if (b && !b.__bound){
+    b.__bound = 1;
+    b.addEventListener('click', function(e){
+      if (e && e.preventDefault) e.preventDefault();
+      if (e && e.stopPropagation) e.stopPropagation();
+      const p = $('hwatch-panel'); if (p) p.hidden = true;
+    });
+  }
+}
+function toggleHealthPanel(){
+  const p = $('hwatch-panel');
+  if (!p) return;
+  p.hidden = !p.hidden;
+  if (!p.hidden){ renderHealthPanel(); p.scrollTop = 0; }
+}
+function initHealthBadge(){
+  const el = $('hwatch-badge');
+  if (!el) return;
+  const open = function(e){
+    if (e && e.preventDefault) e.preventDefault();
+    toggleHealthPanel();
+  };
+  el.addEventListener('click', open);
+  el.addEventListener('keydown', function(e){
+    if (e && (e.key === 'Enter' || e.key === ' ')) open(e);
+  });
+}
+async function loadHealth(){
+  const j = await fetchJSON('./health.json');
+  healthData = (j && j.v) ? j : null;
+  healthState = healthData ? 'ok' : 'fail';
+  healthAt = Date.now();
+  renderHealthBadge();
+  renderHealthPanel();
+}
+function refreshHealthIfDue(){
+  if (Date.now() - healthAt > HEALTH_TTL) loadHealth();
+}
+
 /* ---------- ① 大盘：今日结论（analysis.marketVerdict） ---------- */
 function renderVerdict(){
   const box = $('vd-box'); if (!box) return;
@@ -5464,6 +5703,8 @@ async function init(){
   initNav();
   initMarket();
   initStaleTip();
+  initHealthBadge();                /* 数据新鲜度徽标：读 health.json，拿不到就灰点，不影响其他页 */
+  loadHealth();
   renderDataTime();
   renderLiveBadge();
   loadSignals();
@@ -5488,6 +5729,7 @@ async function init(){
     if (document.hidden) { saveNow(); return; }
     /* 回到前台：实时价超过 60 秒没更新就补一次（隐藏期间不发请求） */
     if (Date.now() - liveAt > LIVE_TTL) refreshLive();
+    refreshHealthIfDue();           /* 数据新鲜度徽标：超过 5 分钟没对过就重拉一次 health.json */
     /* 顺手同步一次（也顺便给 Supabase 免费项目保活，避免 7 天不活跃被暂停） */
     if (syncConfigured() && Date.now() - Calc.toNum(state.sync.lastSyncAt) > 30000) syncNow('auto');
   });
