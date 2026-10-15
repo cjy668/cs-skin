@@ -4081,10 +4081,13 @@ function renderSellAlerts(){
   });
 
   /* ④ 覆盖不足：如实说，不假装全判过 */
-  const notCovered = hs.filter(function(x){ return !x.covered; }).concat(ws.filter(function(x){ return !x.covered; }));
+  const notCoveredAll = hs.filter(function(x){ return !x.covered; }).concat(ws.filter(function(x){ return !x.covered; }));
+  /* 同一个品可能同时在「持仓」和「关注名单」里 → 按名字去重，别让用户以为有两个品 */
+  const seenName = {}, notCovered = [];
+  notCoveredAll.forEach(function(x){ const k = String(x.name || ''); if (seenName[k]) return; seenName[k] = 1; notCovered.push(x); });
   if (notCovered.length){
     h += '<div class="sa-sec">④ 覆盖不足（本地没有日线序列，类型判不了 —— 不是「安全」）</div>';
-    h += '<p class="sa-note">' + notCovered.map(function(x){ return esc(x.name); }).join(' · ') + '</p>';
+    h += '<p class="sa-note">共 ' + n2(notCovered.length) + ' 个品：' + notCovered.map(function(x){ return esc(x.name); }).join(' · ') + '</p>';
   }
   h += '<p class="sa-note">' + tMd(saData.disclaimer || '') + '</p>';
   box.innerHTML = h;
