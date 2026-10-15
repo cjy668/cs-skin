@@ -3993,10 +3993,12 @@ function renderSellAlerts(){
   }
 
   let h = '';
-  /* 验证状态：必须最显眼（用户明确要求） */
-  h += '<div class="sa-verdict"><i>✅</i><span>' + esc(V.status || '✅ 已通过样本外检验')
-    + '<em>判据：' + esc(V.rule || '—') + '；对照：' + esc(V.control || '—') + '；' + esc(V.split || '') + '；前向：' + esc(V.forward || '') + '。样本 '
-    + n2(V.n) + ' 行 / ' + n2(V.items) + ' 标的。' + (V.exitNote ? ('　' + esc(V.exitNote) + '。') : '') + '</em></span></div>';
+  /* 验证状态：必须最显眼（用户明确要求）。图标只出一个 —— 文案里不再重复 ✅，避免「✅ ✅」 */
+  h += '<div class="sa-verdict"><i>✅</i><span>已通过样本外检验（' + n2(V.items) + ' 标的 × ' + n2(V.n) + ' 行）'
+    + '<em>判据：' + esc(V.rule || '—') + '；对照：' + esc(V.control || '—') + '；' + esc(V.split || '') + '；前向：' + esc(V.forward || '') + '。'
+    + (V.exitNote ? ('　' + esc(V.exitNote) + '。') : '') + '</em></span></div>';
+  /* 整块口径必须说清「不是全部 3 个都完整通过」—— 否则就是把部分通过的当有效信号展示 */
+  if (V.statusNote) h += '<p class="sa-note">' + tMd(V.statusNote) + '</p>';
 
   /* ① 持仓逐件判定 */
   const hs = arrOf(saData.holdings);
