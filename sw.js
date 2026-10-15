@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v9';
+const CACHE = 'cs-skin-app-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -41,8 +41,16 @@ const ASSETS = [
       cs-quant/watchdog.cjs 每约 12 分钟重写一次）。
       **同样必须进 NET_FIRST**：它是「哪些数据不新鲜」的报告本身，
       要是它自己卡在缓存里，用户看到的报警状态就是过期的 ——
-      那正好又是事故 A 的同一种失败（提示器自己失效）。CACHE v8 → v9。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json/i;
+      那正好又是事故 A 的同一种失败（提示器自己失效）。CACHE v8 → v9。
+   ⚠️ 2026-10-15 六修正：信号页新增「做盘类型」区块，数据源两个：
+        · pattern-types.json（核心结论：类型/检验/退出规律/当前命中）
+        · _types-detail.json（按需加载：逐件持仓跟踪 + 月度时期网格）
+      两个都进 NET_FIRST —— 理由是同一个：结论是日更的、每 3 分钟
+      fast_refresh 还可能刷新，放缓存优先手机上就永远停在旧结论。
+      另：_types-detail.json 体积较大（几百 KB），页面侧**只在用户点开
+      「不同时期的特点」时才请求**，所以放进 NET_FIRST 不会拖慢首屏。
+      CACHE v9 → v10。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
