@@ -909,6 +909,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .sa-badge.sa-b-hit{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
 .sa-badge.sa-b-ok{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
 .sa-badge.sa-b-out{color:var(--dim)}
+.sa-badge.sa-b-warn{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
 .sa-item{margin:9px 0 0;padding:9px 11px;border-radius:11px;background:rgba(255,197,49,.07);
   border:1px solid rgba(255,197,49,.3);min-width:0}
 .sa-item.sa-lv2{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.35)}
@@ -3993,11 +3994,20 @@ function renderSellAlerts(){
   }
 
   let h = '';
-  /* 验证状态：必须最显眼（用户明确要求）。图标只出一个 —— 文案里不再重复 ✅，避免「✅ ✅」 */
-  h += '<div class="sa-verdict"><i>✅</i><span>已通过样本外检验（' + n2(V.items) + ' 标的 × ' + n2(V.n) + ' 行）'
+  /* 验证状态：必须最显眼（用户明确要求）。图标只出一个 —— 文案里不再重复 ✅，避免「✅ ✅」。
+     ⚠️ 这里读的是**本文件自己的 validation 字段**，不是别的模块的口径：
+        同一个工作区里另一个 agent 的 classify_types.cjs 也会写 pattern-types.json
+        （它的一轮全量会把本区块的类型换成它自己的，2026-10-15 22:00 实测发生过一次）。
+        所以验收状态按文件里实际有几个 verified 实时算出来，绝不写死。 */
+  const typesAll = arrOf(saData.types);
+  const nVer = typesAll.filter(function(t){ return t.verified === true; }).length;
+  h += '<div class="sa-verdict"><i>✅</i><span>'
+    + (nVer === typesAll.length ? '全部 ' + n2(nVer) + ' 个类型已通过样本外检验'
+      : nVer + ' / ' + typesAll.length + ' 个类型已通过样本外检验')
+    + '（' + n2(V.items) + ' 标的 × ' + n2(V.n) + ' 行）'
     + '<em>判据：' + esc(V.rule || '—') + '；对照：' + esc(V.control || '—') + '；' + esc(V.split || '') + '；前向：' + esc(V.forward || '') + '。'
     + (V.exitNote ? ('　' + esc(V.exitNote) + '。') : '') + '</em></span></div>';
-  /* 整块口径必须说清「不是全部 3 个都完整通过」—— 否则就是把部分通过的当有效信号展示 */
+  /* 整块口径必须说清「不是全部类型都完整通过」—— 否则就是把部分通过的当有效信号展示 */
   if (V.statusNote) h += '<p class="sa-note">' + tMd(V.statusNote) + '</p>';
 
   /* ① 持仓逐件判定 */
@@ -4061,8 +4071,10 @@ function renderSellAlerts(){
     h += '</tbody></table></div>';
   }
 
-  /* ③ 三个类型的判据与历史画像 */
-  h += '<div class="sa-sec">③ 三个类型的判据（全部当日可算，绝不用未来数据）</div>';
+  /* ③ 类型的判据与历史画像。
+     每个类型**逐个**标注验证状态：完整通过 / 部分通过 / 未通过。
+     纪律：没有 verified=true 的类型绝不出现在「推荐动作」里，只在这里如实展示检验结论。 */
+  h += '<div class="sa-sec">③ 各类型的判据（全部当日可算，绝不用未来数据）</div>';
   arrOf(saData.types).forEach(function(t){
     const E = t.exitPlan || {};
     const VR = t.verdict || {};
@@ -4070,16 +4082,16 @@ function renderSellAlerts(){
     /* 验证状态必须逐个类型如实标注：整块写「已通过」而某个类型其实没过，就是骗人 */
     const vBadge = full
       ? '<span class="sa-badge sa-b-ok">✅ 完整通过样本外检验</span>'
-      : '<span class="sa-badge sa-b-warn">⚠️ 部分通过（prob30 差 ' + esc(saPP(VR.prob30Edge)) + '，未达 −3pp）→ 现行口径「杀掉」</span>';
+      : '<span class="sa-badge sa-b-warn">⚠️ 未通过（' + esc(saPP(VR.prob30Edge)) + ' / 中位 ' + esc(saPP(VR.edgeOos)) + '）→ 现行口径「' + esc(VR.verdict || '杀掉') + '」</span>';
     h += '<div class="sa-type"><div class="sa-th">' + esc(t.label || t.id) + ' <span class="sa-badge sa-b-hit">卖出/回避</span>'
       + vBadge + '<span class="sa-badge">今日命中 ' + n2(t.count) + ' 个</span></div>'
       + '<div class="sa-desc">' + esc(t.desc || '') + '</div>'
       + (VR.note ? '<div class="sa-stat">检验详情：n=' + n2(VR.n) + '（' + n2(VR.nItems) + ' 标的）· 样本外增量 ' + esc(saPP(VR.edgeOos)) + ' · 件内 ρ ' + (isNum(VR.rho) ? VR.rho.toFixed(4) : '—') + '　' + esc(VR.note) + '</div>' : '')
-      + '<div class="sa-crit">历史画像：首次 +20% 中位 ' + (isNum(E.first20Days) ? E.first20Days + ' 天' : '未触及') + '（命中率 ' + saRate(E.hit20) + '）· +30% '
-      + (isNum(E.first30Days) ? E.first30Days + ' 天' : '未触及') + '（' + saRate(E.hit30) + '）· +50% ' + (isNum(E.first50Days) ? E.first50Days + ' 天' : '未触及') + '（' + saRate(E.hit50) + '）'
-      + '；到顶中位 ' + (isNum(E.peakDays) ? E.peakDays + ' 天' : '—') + '（到顶时中位涨幅 ' + saRate(E.peakRet) + '）；到顶后中位回落 ' + saRate(E.postPeakDrawdown)
-      + '；持有 30 天中位 ' + saRate(E.hold30dReturn) + '；持有 90 天中位 ' + saRate(E.hold90dReturn) + '</div>'
-      + '<div class="sa-plan">' + esc(E.rule || '') + '</div></div>';
+      + (isNum(E.first20Days) ? ('<div class="sa-crit">历史画像：首次 +20% 中位 ' + E.first20Days + ' 天（命中率 ' + saRate(E.hit20) + '）· +30% '
+        + (isNum(E.first30Days) ? E.first30Days + ' 天' : '未触及') + '（' + saRate(E.hit30) + '）· +50% ' + (isNum(E.first50Days) ? E.first50Days + ' 天' : '未触及') + '（' + saRate(E.hit50) + '）'
+        + '；到顶中位 ' + (isNum(E.peakDays) ? E.peakDays + ' 天' : '—') + (isNum(E.peakRet) ? '（到顶时中位涨幅 ' + saRate(E.peakRet) + '）' : '') + '；到顶后中位回落 ' + saRate(E.postPeakDrawdown)
+        + '；持有 30 天中位 ' + saRate(E.hold30dReturn) + (isNum(E.hold90dReturn) ? '；持有 90 天中位 ' + saRate(E.hold90dReturn) : '') + '</div>') : '')
+      + (E.rule ? '<div class="sa-plan">' + esc(E.rule) + '</div>' : '') + '</div>';
   });
 
   /* ④ 覆盖不足：如实说，不假装全判过 */
