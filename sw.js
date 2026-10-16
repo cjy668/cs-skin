@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v12';
+const CACHE = 'cs-skin-app-v13';
 const ASSETS = [
   './',
   './index.html',
@@ -60,8 +60,19 @@ const ASSETS = [
         每条命中的痕迹与效应量 exp(DiD) + 容量约束 maxTradable + 44 件持仓逐件判定；
         日更全量 + fast_refresh 每 3 分钟轻刷实时价与卖出信号）。
       **同样必须进 NET_FIRST**：它是「今天谁在拉升前」的名单，卡在缓存里 =
-      用户拿着昨天的阶段做今天的决定 —— 同一个坑的第九次。CACHE v11 → v12。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json/i;
+      用户拿着昨天的阶段做今天的决定 —— 同一个坑的第九次。CACHE v11 → v12。
+   ⚠️ 2026-10-16 九修正：新增「做盘痕迹图谱」页 mani-atlas.html（全量 1,073 品的
+      逐品做盘痕迹：按武器箱分组、箱内按稀有度上下级排、点开看逐次拉升表 +
+      拉升前 30 天盘口快照 + 断层率 + 配对对照 + 故事线 + SVG 图）。
+      数据源三个，**都要进 NET_FIRST**（页签里没有它，但它是独立页面、会被直接打开）：
+        · mani-atlas.json    （索引：80 个箱子 / 1,073 品摘要，730 KB）
+        · mani-shard-*.json  （★ 懒加载分片：点开某个品才拉它那一片，120 片 × ≤9 品）
+        · mani-svg/<gid>.svg （点开才拉那张图）
+      为什么不能走"缓存优先"：这一页的数字全是日更的（清洗后的序列每天可能变），
+      卡在缓存里就是同一个坑的第十次。CACHE v12 → v13。
+      体积控制：首屏只加载 mani-atlas.json（730 KB）+ 什么都不拉；
+      分片与图都是用户点开那一行才请求，所以放进 NET_FIRST 不会拖慢首屏。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
