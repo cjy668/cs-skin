@@ -1,4 +1,4 @@
-﻿/* CS 饰品仓位管理 · Service Worker
+/* CS 饰品仓位管理 · Service Worker
    离线可用 + 更新必达：
      · 页面（html）→ 联网优先（network-first），打开就是最新；断网回退缓存
      · 实时数据（live.json / api）→ 联网优先，永远要最新价
@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v11';
+const CACHE = 'cs-skin-app-v12';
 const ASSETS = [
   './',
   './index.html',
@@ -54,8 +54,14 @@ const ASSETS = [
       （3 个已通过样本外对照检验的风险型做盘类型 + 44 件持仓逐件判定 +
         关注品/断层率名单；由 cs-quant/sell_alert.cjs 产出，日更 + fast_refresh 每 3 分钟重扫）。
       **必须进 NET_FIRST**：这是「该不该减仓」的提示，要是它卡在缓存里，
-      用户会拿着几小时前的警报做决策 —— 同一个坑的第八次。CACHE v10 → v11。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json/i;
+      用户会拿着几小时前的警报做决策 —— 同一个坑的第八次。CACHE v10 → v11。
+   ⚠️ 2026-10-16 八修正：信号页新增「监控清单」区块，数据源 watchlist-status.json
+      （cs-quant/monitor_watchlist.cjs 产出：1,073 个【已知会被反复做】的品的当前阶段 +
+        每条命中的痕迹与效应量 exp(DiD) + 容量约束 maxTradable + 44 件持仓逐件判定；
+        日更全量 + fast_refresh 每 3 分钟轻刷实时价与卖出信号）。
+      **同样必须进 NET_FIRST**：它是「今天谁在拉升前」的名单，卡在缓存里 =
+      用户拿着昨天的阶段做今天的决定 —— 同一个坑的第九次。CACHE v11 → v12。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
