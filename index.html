@@ -933,6 +933,90 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .sa-num .v{font-size:15px}
   .sa-verdict{font-size:12.5px;padding:9px 10px}
 }
+/* =====================================================================
+   监控清单（cs-quant/monitor_watchlist.cjs → watchlist-status.json）
+   ⚠️ 类名一律 wl- 前缀。加这个区块之前把全部 1,134 个 CSS token 与 428 个
+      既有 markup 类名 grep 过一遍：wl- / mwl- / mnt- 三个前缀零冲突
+      （本项目踩过复用 .basis 导致整页横向溢出 2709px）。
+      容器一律 min-width:0 + overflow-wrap:anywhere，表格 table-layout:fixed，
+      任何一列都不许把页面撑宽（手机 390px 下横向溢出必须 0px）。
+   ===================================================================== */
+.wl-cav{margin:0 0 11px;padding:11px 12px;border-radius:12px;font-size:12.5px;line-height:1.75;
+  border:1px solid rgba(255,107,107,.55);background:rgba(255,107,107,.13);color:var(--text);
+  overflow-wrap:anywhere;min-width:0}
+.wl-cav b{color:var(--red);display:block;font-size:13.5px;margin:0 0 5px}
+.wl-cav li b, .wl-cav .wl-note b, .wl-cav p b{display:inline;font-size:inherit;margin:0}
+.wl-cav i{font-style:normal;color:var(--red);font-weight:800}
+.wl-cav ol{margin:5px 0 0;padding-left:19px}
+.wl-cav li{margin:3px 0}
+.wl-nums{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-width:0}
+.wl-num{flex:1 1 88px;min-width:0;background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:7px 9px}
+.wl-num .k{font-size:11.5px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.wl-num .v{font-size:17px;font-weight:800;letter-spacing:-.2px;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wl-num .v.wl-pre{color:var(--green)}
+.wl-num .v.wl-hot{color:var(--yellow)}
+.wl-num .v.wl-dim{color:var(--muted)}
+.wl-sec{margin:13px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:13px;font-weight:800;
+  color:var(--muted);overflow-wrap:anywhere}
+.wl-item{margin:9px 0 0;padding:9px 11px;border-radius:11px;background:var(--card2);
+  border:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+.wl-item.wl-pre{border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.07)}
+.wl-item.wl-hot{border-color:rgba(255,197,49,.42);background:rgba(255,197,49,.07)}
+.wl-item.wl-tiny{border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.09)}
+.wl-item .wl-h{font-size:13.5px;font-weight:800;overflow-wrap:anywhere;margin:0 0 4px}
+.wl-item .wl-h em{display:block;font-style:normal;font-weight:500;font-size:11px;color:var(--dim);margin-top:2px}
+.wl-item .wl-meta{font-size:11.5px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wl-item .wl-meta em{display:block;font-style:normal;font-size:10.5px;color:var(--dim);margin-top:1px}
+.wl-item .wl-note{font-size:11.5px;line-height:1.7;color:var(--dim);margin:5px 0 0;overflow-wrap:anywhere}
+.wl-hits{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0;min-width:0}
+.wl-hit{font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px;border:1px solid var(--line);
+  color:var(--dim);background:rgba(139,157,178,.08);overflow-wrap:anywhere}
+.wl-hit.wl-on{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.wl-hit.wl-off{color:var(--dim)}
+.wl-hit.wl-na{color:var(--yellow);border-color:rgba(255,197,49,.4);background:rgba(255,197,49,.1)}
+.wl-hit em{font-style:normal;opacity:.78;font-weight:500}
+.wl-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin:2px 4px 0 0;border:1px solid var(--line);color:var(--muted);background:rgba(139,157,178,.1)}
+.wl-badge.wl-b-pre{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.wl-badge.wl-b-hot{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
+.wl-badge.wl-b-dead{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.13)}
+.wl-badge.wl-b-hold{color:var(--cyan);border-color:rgba(86,204,242,.45);background:rgba(86,204,242,.12)}
+.wl-tools{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0;min-width:0}
+.wl-input{flex:1 1 150px;min-width:0;background:var(--card2);border:1px solid var(--line);color:var(--text);
+  border-radius:10px;padding:7px 9px;font-size:12.5px;font-family:inherit}
+.wl-btn{flex:0 0 auto;background:var(--card2);border:1px solid var(--line);color:var(--text);
+  border-radius:10px;padding:7px 11px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.wl-btn:hover{border-color:var(--muted)}
+.wl-btn.wl-on{border-color:rgba(47,208,122,.5);color:var(--green);background:rgba(47,208,122,.12)}
+.wl-btn.wl-del{border-color:rgba(255,107,107,.45);color:var(--red)}
+.wl-tbl{width:100%;table-layout:fixed;border-collapse:collapse;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wl-tbl th,.wl-tbl td{padding:7px 3px;border-bottom:1px solid var(--line);white-space:normal;
+  overflow-wrap:anywhere;word-break:break-word;text-align:right;font-size:12px;vertical-align:top}
+.wl-tbl th:first-child,.wl-tbl td:first-child{text-align:left}
+.wl-tbl thead th{color:var(--muted);font-weight:600;font-size:11.5px;line-height:1.35}
+.wl-tbl tbody tr:last-child td{border-bottom:0}
+.wl-tbl em{display:block;font-style:normal;font-size:10.5px;color:var(--dim);font-weight:400;margin-top:2px}
+.wl-tbl .wl-pos{color:var(--green)}
+.wl-tbl .wl-neg{color:var(--red)}
+.wl-pos{color:var(--green)}
+.wl-neg{color:var(--red)}
+.wl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.wl-note{font-size:11.5px;line-height:1.7;color:var(--dim);margin:9px 0 0;overflow-wrap:anywhere}
+.wl-note code{font-size:11px}
+.wl-limit{margin:9px 0 0;font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.wl-limit b{color:var(--yellow)}
+.wl-search{margin:9px 0 0;min-width:0}
+.wl-more{margin:9px 0 0;font-size:12px}
+.wl-more summary{cursor:pointer;color:var(--cyan);font-weight:700}
+@media (max-width:899px){
+  .wl-tbl th,.wl-tbl td{font-size:11.5px;padding:6px 2px}
+  .wl-tbl thead th{font-size:11px}
+  .wl-num .v{font-size:15px}
+  .wl-cav{font-size:12px;padding:10px}
+}
 </style>
 </head>
 <body>
@@ -1145,9 +1229,28 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           <div id="op-short" class="span-all st-list"><div class="card"><div class="skel"><i></i>短期信号生成中…（analysis.json）</div></div></div>
           <div id="st-summary" class="span-all" hidden></div>
 
-          <!-- ---------- C. 条件单机会：原有的 opportunities[]（一条都没删） ---------- -->
+          <!-- ---------- C. 条件单机会：原有的 opportunities[]（一条都没删） ----------
+               ⚠️ 2026-10-16 加：本区块的**评分**来自计分模型，而计分模型已被对照检验证伪
+                 （高分样本前向 90 天 37.46% vs 同价位随机 38.20% —— 没有判别力；
+                  配对对照差中位 −0.95pp、胜率 45.6%）。
+               处理方式选 B：区块保留（用户的既有工作流），但顶部红色声明 + 逐卡标注「评分已证伪」，
+               绝不静默删代码，也绝不把已证伪的东西当推荐依据。
+               另外：所有「预期收益」都是**未扣交易成本**的毛额（费率见 cs-quant/trading_cost.cjs）。 -->
           <div class="card span-all sec-op" id="sec-op">
             <div class="sec-head"><h2>条件单机会</h2><span class="sec-sub">A / B / C 档 · 到价才挂单</span><span class="r" id="op-time">分析生成中…</span></div>
+            <div class="wl-cav">
+              <b>⚠️ 已证伪 · 本区「评分」不构成依据</b>
+              <i>仅供研究，不构成买入建议。</i>
+              <ol>
+                <li><b>计分模型已证伪</b>：高分标的样本前向 90 天命中率 <b>37.46%</b>，同价位随机 <b>38.20%</b> —— 比随机还低。</li>
+                <li>配对对照差中位 <b>−0.95pp</b>、胜率 <b>45.6%</b> → 无判别力（reports/计分模型报告.md）。</li>
+                <li>本区所有「预期收益」都是<b>未扣交易成本</b>的毛额：一次完整买卖要付来回路费 <b>1.00%（悠悠）~2.485%（BUFF）</b>，外加 7 天交易冷却。买入侧信号必须先跨过这道门槛才谈得上正收益。</li>
+              </ol>
+              <div class="wl-note" style="color:inherit;opacity:.9">
+                为什么还留着：这是用户既有的工作流，且卡片里的入场价 / 目标价 / 止损 / 出场天数 / 跨平台价差
+                本身是**可复核的盘口事实**（那些部分没有被我删掉）；被证伪的是「评分越高越该买」这个排序逻辑。
+              </div>
+            </div>
             <div class="res" style="margin-top:0">
               <div class="stat"><div class="k">已扫描品种</div><div class="v" id="op-scan">—</div></div>
               <div class="stat"><div class="k">通过筛选</div><div class="v" id="op-pass">—</div></div>
@@ -1155,7 +1258,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             </div>
             <p class="hint" id="op-crit">—</p>
             <p class="hint" id="op-basis">—</p>
-            <p class="hint">硬约束：买入锁 7 天 CD，所以任何方案的时间窗都必须 &gt; 7 天；手续费按悠悠卖 0% + 提现 1% 计。</p>
+            <p class="hint">硬约束：买入锁 7 天 CD，所以任何方案的时间窗都必须 &gt; 7 天；手续费口径以 <code>cs-quant/trading_cost.cjs</code> 为准 —— 悠悠 卖 0% + 提现 1% = 往返 <b>1.00%</b>；BUFF 卖 1.5% + 提现 1% = 往返 <b>2.485%</b>。下面所有「预期收益」都是<b>扣费前</b>的毛额。</p>
           </div>
 
           <div id="op-list" class="span-all opp-list"><div class="card"><div class="skel"><i></i>机会列表生成中…（analysis.json）</div></div></div>
@@ -1170,13 +1273,40 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
         <div class="page-title"><h1>信号</h1><span>吸筹 · 大户 · 跨平台价差 · 箱子 ROI</span></div>
         <div class="cards">
 
+          <!-- ---------- 🔴 已证伪标注（2026-10-16 加）：吸筹类判据三轮对照检验全部被证伪 ----------
+               处理方式选 B（保留证据链 + 显眼标注），不静默删代码：
+               区块仍在（它记录了大户成交流水这个原始事实），但顶部红色声明它不构成任何依据。
+               依据：reports/开发阶段评估报告.md §3「被对照检验杀掉的候选」——
+                 吸筹宽版 件内 ρ=−0.0481（同一只品内部反而更差）
+                 吸筹 27 组网格 存活 0/27
+                 吸筹 1,296 组全组合 置换仅 93 分位（<95 判为可能是噪声）
+               注意口径：本卡的数据源是 csqaq 成交流水（flows），
+               与被证伪的「吸筹合成分」不是同一条判据；但它同样**没有通过任何样本外对照检验**，
+               所以按同一纪律标注 —— 不许它进任何推荐。 -->
+          <div class="card span-all" id="sec-acc-dead">
+            <div class="wl-cav">
+              <b>🔴 已证伪 · 吸筹类判据（下面两张「吸筹聚合」卡属于这一类）</b>
+              <i>⚠️ 仅供研究，不构成任何依据，也不进任何推荐。</i>
+              <ol>
+                <li><b>吸筹宽版</b>：件内 ρ=<b>−0.0481</b> —— 同一只品内部，吸筹信号越强反而越差（方向是反的）。</li>
+                <li><b>吸筹 27 组参数网格</b>：存活 <b>0/27</b>。</li>
+                <li><b>吸筹 1,296 组全组合</b>：置换检验只有 <b>93 分位</b>（&lt;95 判为可能是噪声）。</li>
+              </ol>
+              <div class="wl-note" style="color:inherit;opacity:.9">
+                口径说明（不夸大也不含糊）：下面两张卡展示的是 <b>csqaq 成交流水里的「大户收货」</b>，
+                与被证伪的「吸筹合成分」<b>不是同一条判据</b>；但它同样没有通过任何样本外对照检验，
+                所以按同一条纪律处理 —— 保留数据、显眼标红、不进推荐。
+              </div>
+            </div>
+          </div>
+
           <div class="card">
-            <div class="card-title">吸筹聚合 · 多户共识 <span class="r" id="sig-time">—</span></div>
+            <div class="card-title">吸筹聚合 · 多户共识 <span class="r" id="sig-time">—</span><span class="wl-badge wl-b-dead">🔴 已证伪 · 仅供研究</span></div>
             <div id="sig-cons"><div class="skel"><i></i>信号数据加载中…</div></div>
           </div>
 
           <div class="card">
-            <div class="card-title">吸筹聚合 · 单次快照 <span class="r" id="sig-acc-n">—</span></div>
+            <div class="card-title">吸筹聚合 · 单次快照 <span class="r" id="sig-acc-n">—</span><span class="wl-badge wl-b-dead">🔴 已证伪 · 仅供研究</span></div>
             <div id="sig-acc"><div class="skel"><i></i>信号数据加载中…</div></div>
           </div>
 
@@ -1249,6 +1379,30 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             </details>
           </div>
 
+          <!-- ---------- 监控清单：1,073 个「已知会被反复做」的品的【当前阶段】 ----------
+               数据源：cs-quant/monitor_watchlist.cjs → watchlist-status.json
+                       （日更全量 + fast_refresh 每 3 分钟轻刷实时价/卖出信号）
+               为什么放「信号」页而不是新开第 7 个页签：
+                 ① 用户要求保留全部既有 id 与 6 页签；手机底部导航是 5 格布局，
+                    加第 7 页要动导航结构，收益只是「多一个入口」；
+                 ② 它本质就是信号（和卖出警报同层），放同页还能和卖出警报互相印证
+                    （同一只品：卖出警报说该走，监控清单说处于什么阶段）。
+               三条硬纪律（写在代码里，不靠自觉）：
+                 1) caveat 必须在卡片最上方、红色、不许折叠 —— 判据在用户名单上标定、
+                    时间外验证未做、未扣交易成本，这三条必须写在用户看得见的地方；
+                 2) 命中的痕迹必须逐条标出「效应量 exp(DiD)」与「对照阈值」，并标出
+                    哪一条当前算不出来（成交量序列冻结）—— 绝不把「算不出」写成「没命中」；
+                 3) 阶段是状态描述，不是买入建议。容量不足（本金 ¥39,000 / 单笔 ¥3,000）
+                    的品直接标红提示装不下。
+               降级链：watchlist-status.json 拿不到 → 只空这一块，其他页签/区块照常。 -->
+          <div class="card span-all sec-wl" id="sec-wl">
+            <div class="sec-head"><h2>监控清单</h2><span class="sec-sub">1,073 个已知会被反复做的品 · 现在处于哪个阶段</span><span class="r" id="wl-time">加载中…</span></div>
+            <p class="sec-note" id="wl-meta">—</p>
+            <div id="wl-cav"></div>
+            <div class="wl-nums" id="wl-nums"></div>
+            <div id="wl-box"><div class="skel"><i></i>监控清单加载中…（watchlist-status.json）</div></div>
+          </div>
+
         </div>
       </section>
 
@@ -1311,13 +1465,14 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
               <div class="tgd-q read"><b>怎么读</b><span>看<b>「倍数」列</b>：现断层率 ÷ 它自己 365 天的中位数。<b>倍数 ≥ 2 才算真异常</b>（页面里标了「强信号」徽标）。</span></div>
               <div class="tgd-q good"><b>能帮你</b><span>直接给你一批候选（当前快照里 <b id="tgd-washout-n">—</b> 个落在区间内，其中 <b id="tgd-washout-strong">—</b> 个是强信号），省掉自己扫全池。</span></div>
               <div class="tgd-q bad"><b>不能帮你</b><span>它是<b>概率优势，不是保证</b>：样本外 prob30 只有 35.8%（对照 27.8%）。另外单价 &lt; ¥1 的品，断层率是分位舍入出来的假振幅，不能当盘口证据。</span></div>
+              <div class="tgd-q bad" id="tgd-washout-premise"><b>🟠 前提别读错（2026-10-16 加）</b><span>它是<b>「收益信号」，不是「有人做盘」的证据</b> —— 断层率 12%~16% 说的是<b>盘口松</b>，和「有没有庄家」是两件事。而且它<b>就是滑点本身</b>：断层率 12% 的品，买入瞬间账面 −12%，<b>要涨 13.64% 才回本</b>（叠手续费：悠悠 14.78% / BUFF 16.53%）。它的样本外毛优势只有 +4.7pp（前向 90 天），扣掉 BUFF 2.485% 往返只剩 +2.2pp。<b>高断层率的品在盘口重新收紧之前，账面一定是亏的。</b></span></div>
             </div>
           </div>
 
           <div class="tgd-note info"><b class="tgd-ttl">三个数字提示（很重要，别踩坑）</b>
             1）<b>看时间</b>：每个区块都标了「结论时间」和「价格时间」——<b>价格是 3 分钟级刷新，结论是日更</b>，两者不同步是正常的。<br>
-            2）<b>已验证 / 未验证要分开看</b>：页面里凡是写着「未验证 / 已证伪 / 不计分」的东西（铺货墙、吸筹合成分、计分模型信号、倍数那列），都<b>不能和已验证的结论混着用</b>。<br>
-            3）<b>本页不构成投资建议</b>，也不预测价格；所有「target / 止损」都只写「历史上到过的位置」。
+            2）<b>已验证 / 未验证要分开看</b>：页面里凡是写着「未验证 / 已证伪 / 不计分」的东西（铺货墙、吸筹合成分、计分模型信号、倍数那列），都<b>不能和已验证的结论混着用</b>。这三样的证伪依据分别是：<b>铺货墙</b>——铺货日 +27.2% vs 随机日 +27.7%，件内 ρ=−0.0062；<b>吸筹合成分</b>——件内 ρ=−0.0481、27 组网格存活 0/27、1,296 组全组合置换仅 93 分位；<b>计分模型</b>——高分 37.46% vs 同价位随机 38.20%。<br>
+            3）<b>本页不构成投资建议</b>，也不预测价格；所有「target / 止损」都只写「历史上到过的位置」。<b>另外：本页所有收益率都是扣费前的毛额</b> —— 一次完整买卖的往返成本是 1.00%（悠悠）~2.485%（BUFF），见 <code>cs-quant/trading_cost.cjs</code>。
           </div>
         </div>
 
@@ -2801,7 +2956,7 @@ function showPage(id){
      为什么不能放启动时一起取：启动阶段并发多个 fetch 会和 /api/live 抢时序，
      实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
      把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
-  if (pid === 'sig') ensureSellAlerts();
+  if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -2812,7 +2967,7 @@ function ensureSellAlerts(){
 /* 启动时用：只有「上次就停在信号页」才立刻下，其余情况一律等用户切过去 */
 function loadSellAlertsIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
-  if (tab === 'sig') ensureSellAlerts();
+  if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); }
 }
 function setPage(id, save){
   const pid = pageMeta(id).id;
@@ -3751,8 +3906,12 @@ function renderPatternTypes(){
   let h = '';
   if (ptData.summary) h += '<p class="tbx" id="pt-summary">' + tMd(ptData.summary) + '</p>';
   if (!ok.length){
-    h += '<div class="hl"><b>本轮没有类型通过样本外对照检验</b>'
-      + '<span class="tbx-s">这不等于「这些手法不存在」，而是说：**在「价格 + 在售量 + 求购量」这三条日线序列上**，'
+    h += '<div class="hl"><b>🔴 本轮没有类型通过样本外对照检验 —— 全部已证伪</b>'
+      + '<span class="tbx-s">证伪依据（三条，逐条可复核）：① 早期 19 个候选类型 + 本轮 5 个类型，'
+      + '<b>没有一个</b>通过样本外对照检验；② 早期候选的置换检验只到 <b>93 分位</b>（&lt;95 判为可能是噪声）；'
+      + '③ 全部 5 个类型的<b>件内 ρ 均为负</b>（−0.0586 / −0.0847 / −0.1127 / −0.1142 / −0.1582）—— '
+      + '同一只品内部，信号越强反而越差，方向是反的。'
+      + '<br>这不等于「这些手法不存在」，而是说：**在「价格 + 在售量 + 求购量」这三条日线序列上**，'
       + '它们和同一只标的的随机非信号日在统计上分不出来。两种可能：① 确实没有可用的盘口前兆；'
       + '② 本轮池子太小/阈值口径打了折扣。**两种情况下都不能拿它们当买入依据。**</span></div>';
   } else {
@@ -4057,6 +4216,9 @@ function renderSellAlerts(){
   const ws = arrOf(saData.watchlist);
   const hitW = ws.filter(function(x){ return x.typeId; });
   h += '<div class="sa-sec">② 关注品 ' + n2(S.watchlist || 0) + ' 个 + 断层率 40 个名单 · 命中卖出信号 ' + n2(hitW.length) + ' 个</div>';
+  h += '<p class="sa-note"><span class="wl-badge wl-b-hot">🟠 断层率 40 名单：前提错</span>' +
+    '它是<b>收益信号</b>（断层率 12%~16% = 盘口松），<b>不是「有人做盘」的证据</b>。而且断层率就是滑点：' +
+    '断层率 12% 的品要涨 <b>13.64%</b> 才回本（叠费 14.78% / 16.53%）。放进这个名单只代表「该盯盘口」，不代表「有人在拉」。</p>';
   if (!hitW.length){
     h += '<p class="sa-note">名单里今天没有品命中这三个类型。名单里可能仍有「本地没有日线序列」的品（已在下面「覆盖不足」列出），它们的类型<strong>判不了</strong>，不是「安全」。</p>';
   } else {
@@ -4105,6 +4267,410 @@ function renderSellAlerts(){
   }
   h += '<p class="sa-note">' + tMd(saData.disclaimer || '') + '</p>';
   box.innerHTML = h;
+}
+
+/* =====================================================================
+   11.87) 监控清单 —— watchlist-status.json（只读展示 + 本地增删关注）
+
+   这是什么：cs-quant/monitor_watchlist.cjs 把用户人工确认的 **1,073 个「已知会被
+   反复做」的品**逐个判「现在处于哪个阶段」。架构依据是用户给的领域知识：
+     ❌ 旧问题：从全市场筛「哪些会被做」（预测，难，41.7% 无前置痕迹）
+     ✅ 新问题：盯住这 1,073 个已知会被做的品，判断它们现在处于什么阶段（状态判断）
+   判据只用**通过检验**的拉升前痕迹（断层率 d30 / 价格 d30 / 求购量 d30 / 在售量 d30 /
+   成交量 d15），阈值与方向一律取自 data/mani-trace-tests.json 的机器输出。
+
+   四条硬纪律（写在代码里，不靠自觉）：
+     1) ★ caveat 必须在卡片最上方、红色、不可折叠：判据在用户名单上标定、时间外验证未做、
+        未扣交易成本 —— 这三条是用户明确要求必须写明的，少一条都算违约。
+     2) 每条痕迹必须显示「当前值 / 对照阈值 / 效应量 exp(DiD) / 是否可用」；
+        算不出来的（成交量序列冻结在 2025-11）必须标「算不出」而不是「没命中」——绝不把 null 当 0。
+     3) 容量不足（本金 ¥39,000、单笔上限 ¥3,000）的品直接标红：信号再好也装不进去。
+     4) 用户手动增删标的用 **新 key** `cs_skin_watchlist_v1`，绝不动既有的 cs_skin_app_v2
+        （那个 key 里是持仓和设置，改它的结构会让老用户数据丢字段）。
+
+   降级链：watchlist-status.json 拿不到 → 只空这一块，其他页签/区块照常。
+   ===================================================================== */
+let wlData = null, wlState = 'loading';
+const WL_LS_KEY = 'cs_skin_watchlist_v1';       /* ★ 新 key，与 cs_skin_app_v2 完全隔离 */
+let wlLocal = { v: 1, added: [], removed: [], note: '' };
+let wlQ = '', wlStageFilter = '', wlOnlyAdded = false;
+
+function wlLoadLocal(){
+  try {
+    const raw = localStorage.getItem(WL_LS_KEY);
+    if (!raw) return;
+    const o = JSON.parse(raw);
+    if (!o || typeof o !== 'object') return;
+    wlLocal = {
+      v: 1,
+      added: Array.isArray(o.added) ? o.added.filter(function(x){ return x && (x.gid || x.name); }).slice(0, 500) : [],
+      removed: Array.isArray(o.removed) ? o.removed.map(String).slice(0, 2000) : [],
+      note: String(o.note || '').slice(0, 200)
+    };
+  } catch (e) {}
+}
+function wlSaveLocal(){
+  try { localStorage.setItem(WL_LS_KEY, JSON.stringify(wlLocal)); return true; }
+  catch (e) { showBanner('本地关注清单保存失败（浏览器存储不可用）：' + ((e && e.message) || e)); return false; }
+}
+async function loadWatchlist(){
+  wlData = await fetchJSON('./watchlist-status.json');
+  wlState = wlData ? 'ok' : 'fail';
+  wlLoadLocal();
+  renderWatchlist();
+}
+let wlKick = false;
+function ensureWatchlist(){ if (wlKick) return; wlKick = true; loadWatchlist(); }
+function loadWatchlistIfOpen(){
+  const tab = (state && state.settings && state.settings.tab) || 'market';
+  if (tab === 'sig') ensureWatchlist();
+}
+
+/* 阶段 → 徽标样式 */
+/* 本区块自己的百分比格式（1 位小数、带正负号）—— 不复用 pct()：那是 2 位小数，
+   而且它是别处的既有函数，改它会波及别的区块。 */
+function wlP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
+function wlStageCls(s){
+  if (s === '拉升前') return 'wl-b-pre';
+  if (s === '拉升中') return 'wl-b-hot';
+  if (s === '派发中') return 'wl-b-dead';
+  if (s === '回落中') return '';
+  return '';
+}
+function wlStageItemCls(s){
+  if (s === '拉升前') return 'wl-pre';
+  if (s === '派发中') return 'wl-hot';
+  return '';
+}
+/* 痕迹一格：命中 / 未命中 / 算不出（三态必须分开，不许把 null 当 0） */
+function wlHitChip(h){
+  const eff = isNum(h.effect) ? '效应 ' + h.effect.toFixed(3) + '×' : '效应 —';
+  if (h.unavailable){
+    return '<span class="wl-hit wl-na" title="' + esc(h.why || '算不出') + '">' + esc(h.trace) +
+      ' <em>算不出（' + esc(String(h.why || '').slice(0, 26)) + '）</em></span>';
+  }
+  const v = isNum(h.value) ? h.value.toFixed(3) : '—';
+  const th = isNum(h.threshold) ? h.threshold.toFixed(3) : '—';
+  const vs = isNum(h.vsControl) ? ((h.vsControl > 0 ? '+' : '') + h.vsControl.toFixed(3)) : '—';
+  return '<span class="wl-hit ' + (h.hit ? 'wl-on' : 'wl-off') + '" title="' +
+    esc(h.trace + '：当前 ' + v + '，对照阈值 ' + th + '（超过即命中），vs 对照 ' + vs + (isNum(h.permPct) ? '，置换 ' + h.permPct + ' 分位' : '')) + '">' +
+    (h.hit ? '✅ ' : '· ') + esc(h.trace) + ' <em>当前 ' + v + ' / 阈值 ' + th + '　' + eff + '</em></span>';
+}
+/* 用户本地增删：removed 存 gid 或名字；added 存 {gid,name} */
+function wlIsRemoved(it){
+  const g = String(it.gid == null ? '' : it.gid);
+  return wlLocal.removed.indexOf(g) >= 0 || wlLocal.removed.indexOf(String(it.name || '')) >= 0;
+}
+function wlAddTarget(){
+  const el = $('wl-input'); if (!el) return;
+  const raw = String(el.value || '').trim();
+  if (!raw) return;
+  const key = raw.replace(/\s+/g, ' ').toLowerCase();
+  const idx = arrOf(wlData && wlData.index).filter(function(x){
+    return String(x.name || '').toLowerCase().indexOf(key) >= 0 || String(x.gid) === raw;
+  })[0];
+  if (idx){
+    /* 在 1,073 个已确认名单里 → 用它的真实阶段；若之前被移除过，先从 removed 里放出来 */
+    wlLocal.removed = wlLocal.removed.filter(function(k){ return k !== String(idx.gid) && k !== String(idx.name); });
+    if (!wlLocal.added.some(function(x){ return String(x.gid) === String(idx.gid); })){
+      wlLocal.added.unshift({ gid: idx.gid, name: idx.name, stage: idx.stage, at: Date.now() });
+    }
+    showBanner('已加入关注：' + idx.name + '（阶段：' + idx.stage + '）');
+  } else {
+    /* 不在名单里 → 如实说：监控清单只覆盖这 1,073 个，别假装能判 */
+    wlLocal.added.unshift({ gid: null, name: raw, stage: null, at: Date.now() });
+    showBanner('已加入本地关注：' + raw + '。⚠️ 它不在 1,073 个已确认名单里 —— 监控清单的判据没在它上面标定过，所以不给阶段（不是「平静」）。');
+  }
+  el.value = '';
+  wlSaveLocal();
+  renderWatchlist();
+}
+function wlRemoveTarget(kind, key){
+  if (kind === 'added'){
+    wlLocal.added = wlLocal.added.filter(function(x){ return String(x.gid || x.name) !== String(key); });
+  } else {
+    if (wlLocal.removed.indexOf(String(key)) < 0) wlLocal.removed.push(String(key));
+  }
+  wlSaveLocal();
+  renderWatchlist();
+}
+function wlRestore(){
+  wlLocal.removed = [];
+  wlLocal.added = [];
+  wlSaveLocal();
+  renderWatchlist();
+  showBanner('已清空本地增删（回到监控清单的原始 1,073 个）。');
+}
+function wlResetSearch(){ wlQ = ''; wlStageFilter = ''; wlOnlyAdded = false; renderWatchlist(); }
+
+function wlItemHTML(it){
+  const tiny = isNum(it.maxTradable) && it.maxTradable < 3000;
+  const removed = wlIsRemoved(it);
+  let h = '<div class="wl-item ' + wlStageItemCls(it.stage) + (tiny ? ' wl-tiny' : '') + '">';
+  h += '<div class="wl-h">' + esc(it.name || '—') +
+    '<span class="wl-badge ' + wlStageCls(it.stage) + '">' + esc(it.stage) + ' · ' + n2(it.stageScore) + '/100</span>' +
+    (it.isHolding ? '<span class="wl-badge wl-b-hold">持仓中</span>' : '') +
+    (it.sellSignal ? '<span class="wl-badge wl-b-dead">卖出信号：' + esc(it.sellSignalType || '命中') + '</span>' : '') +
+    (tiny ? '<span class="wl-badge wl-b-dead">容量不足</span>' : '') +
+    (it.userTag ? '<span class="wl-badge wl-b-hot">用户批注：' + esc(it.userTag) + '</span>' : '') +
+    '<em>' + esc(it.caseName || '（无箱子归属）') + '　·　gid ' + n2(it.gid) +
+    (it.priceSource === 'live' ? '　·　现价含 3 分钟级实时价' : '') + '</em></div>';
+  h += '<div class="wl-meta">现价 ' + (isNum(it.price) ? '¥' + fmtNum(it.price, 2) : '—') +
+    '　在售 ' + n2(it.listed) + '　求购 ' + n2(it.buyNum) +
+    '　可交易 <b class="' + (tiny ? 'wl-neg' : 'wl-pos') + '">' + (isNum(it.maxTradable) ? '¥' + fmtNum(it.maxTradable, 0) : '—') + '</b>' +
+    (it.maxQty != null ? '<em>吃 30% 盘口 ≈ ' + n2(it.maxQty) + ' 件</em>' : '') +
+    '<br>距 180 日高点 ' + wlP1(it.fallFrom180High) +
+    '　距 21 日低点 ' + wlP1(it.riseFrom21Low) +
+    '　形态归类 ' + esc(it.type || '—') + '</div>';
+  h += '<div class="wl-hits">' + arrOf(it.hits).map(wlHitChip).join('') + '</div>';
+  if (it.typeNote) h += '<div class="wl-note">' + esc(it.typeNote) + '</div>';
+  if (it.note) h += '<div class="wl-note">' + esc(it.note) + '</div>';
+  h += '<div class="wl-tools">' +
+    (removed
+      ? '<button class="wl-btn wl-del" data-wl-unremove="' + esc(String(it.gid)) + '">取消隐藏</button>'
+      : '<button class="wl-btn" data-wl-remove="' + esc(String(it.gid)) + '">从我的清单移除</button>') +
+    '<button class="wl-btn" data-wl-star="' + esc(String(it.gid)) + '">加入关注</button>' +
+    '</div>';
+  h += '</div>';
+  return h;
+}
+
+function renderWatchlist(){
+  const box = $('wl-box'); if (!box) return;
+  if (wlState === 'fail' || !wlData){
+    setText('wl-time', '未生成');
+    setText('wl-meta', '—');
+    const cav = $('wl-cav');
+    if (cav) cav.innerHTML = '<div class="wl-cav"><b>🔴 这个区块的数据没取到</b>' +
+      '监控清单需要 watchlist-status.json（电脑上跑 <code>node cs-quant/monitor_watchlist.cjs</code> 产出）。' +
+      '在它到位之前，本区块<strong>不显示任何阶段判断</strong> —— 绝不用空数据假装「今天很平静」。其他页签不受影响。</div>';
+    box.innerHTML = emptyBox('watchlist-status.json 还没生成（或线上没发布）。其他页面/区块不受影响。');
+    const nums = $('wl-nums'); if (nums) nums.innerHTML = '';
+    return;
+  }
+  const sc = wlData.scope || {};
+  const st = wlData.stages || {};
+  const SD = wlData.stagesDetail || {};
+  const S = wlData.stagesDetail || {};
+  setText('wl-time', (wlData.updatedAtText || '—') + (wlData.fastRefresh ? '（3 分钟级轻刷 ' + (wlData.fastRefresh.at || '—') + '）' : ''));
+  setText('wl-meta', '清单 ' + n2(sc.watchlist) + ' 个品 · 有日线 ' + n2(sc.withSeries) + ' 个' +
+    (sc.noSeries ? ('（' + n2(sc.noSeries) + ' 个没有日线 → 判不了，已如实归入「数据不足」）') : '') +
+    ' · 持仓 ' + n2(sc.holding) + ' 件 · 行情时间 ' + (wlData.asOfMarket || '—') + ' · 序列到 ' + (wlData.asOfSeries || '—'));
+
+  /* ★ caveat 必须在最上面、红色、不折叠 —— 用户明确要求的三条 */
+  const cav = $('wl-cav');
+  if (cav){
+    const C = wlData.costModel || {};
+    cav.innerHTML = '<div class="wl-cav">' +
+      '<b>⚠️ 读之前必须知道的三件事（这三条不写清就不许看下面的数字）</b>' +
+      '<i>阶段判断只是状态描述，不构成任何买入依据。</i>' +
+      '<ol>' +
+      '<li><b>判据是在【用户自己给的名单】上标定的</b>：1,073 个品 × 4,986 段拉升。不是在全市场随机样本上标定的 —— 换成别的品不保证成立。</li>' +
+      '<li><b>时间外验证未做</b>：用 2023~2025 标定、2025~2026 验证这一步还没跑（成交量序列冻结在 2025-11，时间外验证只能用价格 / 在售 / 求购三条）。</li>' +
+      '<li><b>未扣交易成本</b>：这里所有数字都是毛额。一次完整买卖要付来往路费 <b>1.00%（悠悠）~2.485%（BUFF）</b>，外加 <b>7 天交易冷却</b>（买入后 7 天内卖不掉，冷却期 1σ 波动 3.25%）。</li>' +
+      '</ol>' +
+      (C.hurdle ? '<div class="wl-note" style="color:inherit;opacity:.92">成本口径（trading_cost.cjs）：' + esc(C.hurdle) +
+        '；资金最少被锁 ' + n2(C.lockDays) + ' 天（7 天冷却 > 出货中位 1 天）。</div>' : '') +
+      /* 数据文件里的 caveat 原文照收（不删一个字），但折起来 —— 上面那三条已经把它说全了，
+         重复展示两遍反而让人以为漏看。折叠不影响它在 DOM 里可被搜索/核验。 */
+      '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:12px;opacity:.85">数据文件里的 caveat 原文（watchlist-status.json 的 caveat 字段，未删改）</summary>' +
+      '<div class="wl-note" style="color:inherit;opacity:.92">' + esc(wlData.caveat || '') + '</div></details>' +
+      '</div>';
+  }
+
+  /* 阶段数量 */
+  const nums = $('wl-nums');
+  if (nums){
+    const order = arrOf(wlData.stageOrder).length ? wlData.stageOrder : ['拉升前', '拉升中', '派发中', '回落中', '平静', '数据不足'];
+    nums.innerHTML = order.map(function(k){
+      const cls = k === '拉升前' ? 'wl-pre' : (k === '派发中' ? 'wl-hot' : (k === '数据不足' ? 'wl-dim' : ''));
+      return '<div class="wl-num"><div class="k">' + esc(k) + '</div><div class="v ' + cls + '">' + n2(st[k] || 0) + '</div></div>';
+    }).join('') +
+      '<div class="wl-num"><div class="k">可交易 ≥¥3,000</div><div class="v ' + ((wlData.capacity && wlData.capacity.ok) ? '' : 'wl-dim') + '">' +
+      n2(wlData.capacity && wlData.capacity.ok) + '</div></div>';
+  }
+
+  let h = '';
+  /* 判据来源：把五条痕迹的效应量与可用性摊开写（用户要的「每条标注命中了哪几条已验证痕迹 + 效应量」） */
+  h += '<div class="wl-sec">① 判据来源：五条通过检验的拉升前痕迹（阈值取配对对照中位）</div>';
+  h += '<div class="wl-note">命中 = 该品的「最近 30 天该量 ÷ 自身 baseline 中位」高于配对对照中位（' +
+    '效应量 exp(DiD) 越大 = 病例组与对照组的差距越大 = 判据越强）。</div>';
+  h += '<div class="wl-scroll"><table class="wl-tbl"><colgroup><col style="width:34%"><col style="width:22%"><col style="width:22%"><col style="width:22%"></colgroup>' +
+    '<thead><tr><th>痕迹</th><th>效应量 exp(DiD)</th><th>对照阈值</th><th>现在可用？</th></tr></thead><tbody>';
+  arrOf(sc.traces).forEach(function(t){
+    h += '<tr><td>' + esc(t.label || t.key) + (t.verified ? '<em>✅ 已通过检验（置换 100 分位）</em>' : '<em>⚠️ 未通过</em>') + '</td>' +
+      '<td><b>' + (isNum(t.expDiD) ? t.expDiD.toFixed(3) + '×' : '—') + '</b></td>' +
+      '<td>' + (isNum(t.medCtrl) ? t.medCtrl.toFixed(3) : '—') + '</td>' +
+      '<td class="' + (t.usableNow ? 'wl-pos' : 'wl-neg') + '">' + (t.usableNow ? '可用' : '❌ 算不出（序列冻结）') + '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  const volT = arrOf(sc.traces).filter(function(t){ return !t.usableNow; })[0];
+  if (volT) h += '<div class="wl-limit"><b>⚠️ 实测：5 条里只有 4 条对「现在」可用。</b>' +
+    '「' + esc(volT.label || '') + '」在历史样本上成立（exp(DiD) ' + (isNum(volT.expDiD) ? volT.expDiD.toFixed(3) + '×' : '—') +
+    '），但 csqaq 的成交量序列（turnover_number）冻结在 2025-11，对今天的判断**整体失效** —— ' +
+    '本区块把它标成「算不出」而不是「没命中」。</div>';
+
+  /* ② 拉升前 —— 用户最想看的一档，单独列出 */
+  const pre = arrOf(wlData.signals).filter(function(x){ return x.stage === '拉升前' && !wlIsRemoved(x); });
+  h += '<div class="wl-sec">② ★ 拉升前（' + n2((SD['拉升前'] || {}).total || 0) + ' 个' +
+    (wlLocal.removed.length ? '，其中 ' + wlLocal.removed.length + ' 个被你隐藏' : '') + '）—— 这是这份清单的核心输出</div>';
+  if (!pre.length){
+    h += '<p class="wl-note">今天没有「命中 ≥3 条痕迹且价格还没启动」的品。这本身是一个结论：' +
+      '不需要为了有东西看而降低门槛。</p>';
+  } else {
+    h += pre.map(wlItemHTML).join('');
+  }
+
+  /* ③ 其他阶段（拉升中/派发中/回落中/平静/数据不足） */
+  const others = arrOf(wlData.signals).filter(function(x){
+    return x.stage !== '拉升前' && !wlIsRemoved(x) && !(wlStageFilter && x.stage !== wlStageFilter);
+  });
+  h += '<div class="wl-sec">③ 其他阶段（拉升中 · 派发中 · 回落中 · 平静 · 数据不足）</div>';
+  h += '<div class="wl-tools">' +
+    ['', '拉升中', '派发中', '回落中', '平静', '数据不足'].map(function(k){
+      return '<button class="wl-btn' + (wlStageFilter === k ? ' wl-on' : '') + '" data-wl-stage="' + esc(k) + '">' + (k || '全部') + '</button>';
+    }).join('') + '</div>';
+  arrOf(wlData.stageOrder).forEach(function(k){
+    if (k === '拉升前') return;
+    const d = SD[k] || {};
+    if (!d.total) return;
+    h += '<div class="wl-note"><b>' + esc(k) + '</b> 共 ' + n2(d.total) + ' 个' +
+      (d.listed && d.listed < d.total ? '（这里列 ' + n2(d.listed) + ' 个）' : '') +
+      (d.note ? '　·　' + esc(d.note) : '') + '</div>';
+  });
+  h += others.length ? others.map(wlItemHTML).join('')
+    : '<p class="wl-note">这一档今天没有列出的品（或都被你隐藏了）。全清单 1,073 个品的阶段见下面的「全部标的」。</p>';
+
+  /* ④ 持仓 44 件 */
+  const hold = arrOf(wlData.holdings);
+  h += '<div class="wl-sec">④ 我的持仓逐件判定（' + n2(hold.length) + ' 件）</div>';
+  if (!hold.length){
+    h += '<p class="wl-note">watchlist-status.json 里没有持仓记录（数据源是 sell-alerts.json，先跑 node cs-quant/sell_alert.cjs）。</p>';
+  } else {
+    h += '<div class="wl-scroll"><table class="wl-tbl"><colgroup><col style="width:40%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>' +
+      '<thead><tr><th>品名</th><th>阶段</th><th>卖出信号</th><th>浮动盈亏</th></tr></thead><tbody>';
+    hold.forEach(function(x){
+      h += '<tr><td>' + esc(x.name || '—') + '<em>gid ' + n2(x.gid) + (x.inWatchlist ? ' · 在监控清单内' : ' · 不在 1,073 名单里（判据没在它上面标定过）') + '</em></td>' +
+        '<td><span class="wl-badge ' + wlStageCls(x.stage) + '">' + esc(x.stage || '—') + '</span></td>' +
+        '<td class="' + (x.sellSignal ? 'wl-neg' : 'wl-pos') + '">' + (x.sellSignal ? esc(x.sellSignalType || '命中') : '未命中') + '</td>' +
+        '<td class="' + (isNum(x.gainVsCost) ? (x.gainVsCost > 0 ? 'wl-pos' : 'wl-neg') : '') + '">' +
+        (isNum(x.gainVsCost) ? wlP1(x.gainVsCost) : '—') + '</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  /* ⑤ 全部 1,073 个：搜索 + 阶段筛选 + 用户手动增删（localStorage 新 key） */
+  const idxAll = arrOf(wlData.index);
+  const myAdded = wlLocal.added;
+  h += '<div class="wl-sec">⑤ 全部标的（' + n2(idxAll.length) + ' 个）· 搜索 / 我的关注 / 手动增删</div>';
+  h += '<div class="wl-search"><div class="wl-tools">' +
+    '<input class="wl-input" id="wl-input" placeholder="输入品名或 gid 加入关注（例：Tec-9 | 蓝钛 或 6578）" />' +
+    '<button class="wl-btn" id="wl-add">加入关注</button>' +
+    '<button class="wl-btn" id="wl-reset">清空本地增删</button>' +
+    '</div></div>';
+  h += '<div class="wl-note">本地增删存在浏览器的 <code>' + WL_LS_KEY + '</code> 里（<b>新 key</b>，不动既有的 ' +
+    '<code>cs_skin_app_v2</code>）。「加入关注」的品如果在 1,073 个名单里，会显示它的<b>真实阶段</b>；' +
+    '不在名单里就只登记名字并如实说明<b>判不了</b> —— 绝不假装它「平静」。共手动加入 ' +
+    n2(myAdded.length) + ' 个，隐藏 ' + n2(wlLocal.removed.length) + ' 个。</div>';
+  if (myAdded.length){
+    h += '<div class="wl-note"><b>我关注的（本地）</b></div>';
+    myAdded.forEach(function(a){
+      const rec = idxAll.filter(function(x){ return String(x.gid) === String(a.gid); })[0];
+      h += '<div class="wl-item ' + (rec ? wlStageItemCls(rec.stage) : '') + '">' +
+        '<div class="wl-h">' + esc(a.name || rec && rec.name || '—') +
+        (rec ? '<span class="wl-badge ' + wlStageCls(rec.stage) + '">' + esc(rec.stage) + ' · ' + n2(rec.score) + '/100</span>' : '<span class="wl-badge wl-b-hot">不在 1,073 名单内 · 无阶段</span>') +
+        '<em>加入时间 ' + tS(new Date(a.at || Date.now()).toISOString()) + '</em></div>' +
+        (rec ? '<div class="wl-meta">可交易 ' + (isNum(rec.maxTradable) ? '¥' + fmtNum(rec.maxTradable, 0) : '—') + '</div>'
+             : '<div class="wl-note">⚠️ 监控清单的判据只在这 1,073 个已确认标的上标定过，所以这个品<b>不给阶段</b>（不是「平静」，是「没标定」）。</div>') +
+        '<div class="wl-tools"><button class="wl-btn wl-del" data-wl-unstar="' + esc(String(a.gid || a.name)) + '">从关注移除</button></div></div>';
+    });
+  }
+  const q = wlQ.trim().toLowerCase();
+  let list = idxAll;
+  if (q) list = list.filter(function(x){ return String(x.name || '').toLowerCase().indexOf(q) >= 0 || String(x.gid) === q; });
+  if (wlOnlyAdded) list = list.filter(function(x){ return myAdded.some(function(a){ return String(a.gid) === String(x.gid); }); });
+  const showN = 60;
+  h += '<div class="wl-scroll" style="margin-top:9px"><table class="wl-tbl"><colgroup><col style="width:46%"><col style="width:22%"><col style="width:16%"><col style="width:16%"></colgroup>' +
+    '<thead><tr><th>品名</th><th>阶段</th><th>得分</th><th>可交易</th></tr></thead><tbody>';
+  if (!list.length){
+    h += '<tr><td colspan="4" class="wl-note">没有匹配的品。搜索是本地过滤（1,073 个全在页面里），不联网。</td></tr>';
+  }
+  list.slice(0, showN).forEach(function(x){
+    h += '<tr><td>' + esc(x.name) + '<em>gid ' + n2(x.gid) + '</em></td>' +
+      '<td><span class="wl-badge ' + wlStageCls(x.stage) + '">' + esc(x.stage) + '</span></td>' +
+      '<td>' + n2(x.score) + '</td>' +
+      '<td class="' + (isNum(x.maxTradable) && x.maxTradable < 3000 ? 'wl-neg' : '') + '">' +
+      (isNum(x.maxTradable) ? '¥' + fmtNum(x.maxTradable, 0) : '—') + '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  if (list.length > showN) h += '<div class="wl-note">匹配 ' + n2(list.length) + ' 个，只显示前 ' + showN + ' 个（按清单原顺序）。缩小关键词即可看到其余的。</div>';
+
+  /* ⑥ 已证伪 / 前提错的东西一律不进这里的阶段判定 */
+  h += '<div class="wl-sec">⑥ 这个区块【不用】什么（写清楚，避免和已被证伪的东西混用）</div>';
+  h += '<div class="wl-note">' +
+    '① <b>不用「做盘类型」</b>（19 个早期候选 + 本轮 5 个全部未通过样本外检验，件内 ρ 均为负）；<br>' +
+    '② <b>不用「吸筹信号 / 吸筹合成分」</b>（件内 ρ=−0.0481、27 组网格存活 0/27、1,296 组全组合置换仅 93 分位）；<br>' +
+    '③ <b>不用「铺货墙」</b>（铺货日 +27.2% vs 随机日 +27.7%、件内 ρ=−0.0062）；<br>' +
+    '④ <b>不用「计分模型评分」</b>（高分 37.46% vs 同价位随机 38.20%）；<br>' +
+    '⑤ <b>不用「断层率 40 名单」当「有人做盘」的证据</b>（它是收益/滑点信号，前提不同）。<br>' +
+    '另外：本区块的「形态归类」列（七类）只作参考 —— 其中「在售量变薄」那条与机器输出方向相反，' +
+    '已在数据和代码里都标注了矛盾，需要 Lead 裁定后统一。</div>';
+  h += '<p class="wl-note">' + tMd(wlData.disclaimer || '') + '</p>';
+
+  box.innerHTML = h;
+  wlBind();
+}
+
+/* 事件绑定（每次重渲染后重新绑，避免闭包引用旧 DOM） */
+function wlBind(){
+  const add = $('wl-add'); if (add) add.onclick = wlAddTarget;
+  const inp = $('wl-input');
+  if (inp){
+    inp.onkeydown = function(e){ if (e && (e.key === 'Enter' || e.keyCode === 13)) wlAddTarget(); };
+    let timer = null;
+    inp.oninput = function(){
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function(){
+        wlQ = String(inp.value || '');
+        const el = $('wl-listq'); /* 搜索用同一个输入框：输入即过滤下面的 ⑤ 表 */
+        renderWatchlist();
+        const again = $('wl-input'); if (again){ again.value = wlQ; try { again.focus(); } catch (e) {} }
+      }, 420);
+    };
+  }
+  const rst = $('wl-reset'); if (rst) rst.onclick = function(){ if (confirm('清空本地的关注/隐藏记录？（监控清单本身的 1,073 个不受影响）')) wlRestore(); };
+  const box = $('wl-box'); if (!box) return;
+  box.querySelectorAll('[data-wl-remove]').forEach(function(el){
+    el.onclick = function(){ wlRemoveTarget('removed', el.getAttribute('data-wl-remove')); };
+  });
+  box.querySelectorAll('[data-wl-unremove]').forEach(function(el){
+    el.onclick = function(){
+      const k = el.getAttribute('data-wl-unremove');
+      wlLocal.removed = wlLocal.removed.filter(function(x){ return String(x) !== String(k); });
+      wlSaveLocal(); renderWatchlist();
+    };
+  });
+  box.querySelectorAll('[data-wl-star]').forEach(function(el){
+    el.onclick = function(){
+      const gid = el.getAttribute('data-wl-star');
+      const rec = arrOf(wlData && wlData.index).filter(function(x){ return String(x.gid) === String(gid); })[0];
+      if (rec && !wlLocal.added.some(function(x){ return String(x.gid) === String(gid); })){
+        wlLocal.added.unshift({ gid: rec.gid, name: rec.name, stage: rec.stage, at: Date.now() });
+        wlSaveLocal(); renderWatchlist();
+        showBanner('已加入关注：' + rec.name + '（阶段：' + rec.stage + '）');
+      }
+    };
+  });
+  box.querySelectorAll('[data-wl-unstar]').forEach(function(el){
+    el.onclick = function(){ wlRemoveTarget('added', el.getAttribute('data-wl-unstar')); };
+  });
+  box.querySelectorAll('[data-wl-stage]').forEach(function(el){
+    el.onclick = function(){
+      const k = el.getAttribute('data-wl-stage');
+      wlStageFilter = (wlStageFilter === k) ? '' : k;
+      renderWatchlist();
+    };
+  });
 }
 
 /* ---- 工具页的数字格式：拿不到一律「—」，绝不把 null 当 0 ---- */
@@ -4401,6 +4967,17 @@ function renderToolsWashout(b){
   if (!b || !b.available){ tStamp('wo-time', '未生成'); box.innerHTML = tGone(b, '断层率信号', 'node scan_washout.cjs'); return; }
   tStamp('wo-time', '扫描 ' + (b.updatedAtText || '—'));
   let h = '';
+  /* 🟠 前提错（2026-10-16 加）：这个信号被列在「已证伪区块」清单里，但真实情况是**前提读错了**，
+     不是统计不成立 —— 它确实通过了样本外检验，只是它说的是「收益/滑点」，不是「有人做盘」。
+     按 Option B：保留 + 显眼标注 + 写明依据，绝不进「有人做盘」的推论里。 */
+  h += '<div class="wl-cav" style="border-color:rgba(255,197,49,.55);background:rgba(255,197,49,.12)">' +
+    '<b style="color:var(--yellow)">🟠 前提错一次：它是【收益信号】，不是【有人做盘】的证据</b>' +
+    '<i style="color:var(--yellow)">口径纠正，不是删除。</i>' +
+    '<ol>' +
+    '<li>断层率 12%~16% 描述的是<b>盘口松紧</b>（买卖价差），和「有没有庄家在做」是两件事。把它当「有人做盘」的证据用，是<b>前提错</b>（reports/开发阶段评估报告.md 的证伪清单里给它标的是 🟠 前提错，不是 🔴 已证伪）。</li>' +
+    '<li><b>它就是滑点本身</b>：断层率 12% 的品，买入瞬间账面 −12%，<b>要涨 13.64% 才回本</b>；叠手续费后 14.78%（悠悠）/ 16.53%（BUFF）。</li>' +
+    '<li>它的样本外毛优势只有 <b>+4.7pp</b>（前向 90 天中位 +18.8% vs 对照 +14.1%），扣掉 BUFF 2.485% 往返只剩 <b>+2.2pp</b>（悠悠 +3.7pp）。<b>高断层率的品，在盘口重新收紧之前账面一定是亏的。</b></li>' +
+    '</ol></div>';
   h += '<p class="tbx"><b>规则：</b>' + tMd(b.rule) +
     '<span class="tbx-s">出处 ' + tS(b.source) + ' · 扫描时间 ' + tS(b.updatedAtText) + ' · 现价/在售取 market.json 快照 ' + tS(b.priceAsOfText) + '（两者都不是打开页面的时间）</span></p>';
   h += '<div class="hl g"><b>样本外验证</b>：' + tMd(b.validation) + '</div>';
@@ -5308,7 +5885,8 @@ function oppHTML(o){
     '<div class="opp-top"><div class="opp-name">' + esc(o.cn || o.name || '—') +
       (o.cn && o.name ? '<em>' + esc(o.name) + '</em>' : '') + '</div>' +
       (tier === '-' ? '' : '<span class="tier t-' + esc(tier) + '">' + esc(tier) + '</span>') + '</div>' +
-    '<div class="opp-meta">评分 <b>' + (o.score == null ? '—' : fmtNum(Calc.toNum(o.score), 0)) + '</b>　风险 <b class="' + rcls + '">' + esc(risk || '—') + '</b>　持有 <b>' +
+    '<div class="opp-meta">评分 <b>' + (o.score == null ? '—' : fmtNum(Calc.toNum(o.score), 0)) + '</b>' +
+      '<span class="wl-badge wl-b-dead">⚠️ 该评分已证伪</span>　风险 <b class="' + rcls + '">' + esc(risk || '—') + '</b>　持有 <b>' +
       (o.holdingDays == null ? '—' : fmtNum(Calc.toNum(o.holdingDays), 0) + ' 天') + '</b>　板块 <b>' + esc(String(o.sector || '—')) + '</b> ' +
       (o.sector7d == null ? '' : '<b class="' + (s7 > 0 ? 'pos' : 'neg') + '">' + pctNum(s7, true) + '</b>') +
       (o.tierOriginal && o.tier && String(o.tierOriginal) !== String(o.tier)
@@ -5336,9 +5914,28 @@ function oppHTML(o){
     '</div>' +
     (gapWarn ? '<div class="gapwarn"><b>⚠ 深度断层告警：</b>断层率 ' + pct(gap) + ' &gt; 15%——卖一价与最高求购价差得远，' +
       '「卖一价是画出来的、下方没有真实买盘」，按目标价挂单不一定有人接。</div>' : '') +
-    (o.reason ? '<p class="why"><b>为什么</b>' + esc(o.reason) + '</p>' : '') +
+    (o.reason ? '<p class="why"><b>为什么</b>' + wlMarkDeadSignals(esc(o.reason)) + '</p>' : '') +
     (o.plan ? '<p class="why plan"><b>怎么做</b>' + esc(o.plan) + '</p>' : '') +
   '</div>';
+}
+/* 2026-10-16 加：条件单机会的 reason 里如果引用了**已被证伪**的信号，就地标红。
+   为什么用「就地标注」而不是改引擎：① analysis.json 的结论机制是禁止改动的
+   （用户明确列出）；② 静默删代码会丢掉证据链。所以这里只做**展示层标注** —— 让用户
+   看到「这条推荐的理由里有一条已经被杀掉的判据」，而不是假装它不存在。 */
+const WL_DEAD_PATTERNS = [
+  { re: /吸筹信号命中|吸筹信号|吸筹合成分/g, why: '吸筹类判据已证伪（件内 ρ=−0.0481 / 27 组网格存活 0/27 / 置换仅 93 分位）' },
+  { re: /铺货墙|铺货信号/g, why: '铺货墙已证伪（铺货日 +27.2% vs 随机日 +27.7%，件内 ρ=−0.0062）' }
+];
+function wlMarkDeadSignals(escapedText){
+  let out = String(escapedText == null ? '' : escapedText);
+  let marked = 0;
+  WL_DEAD_PATTERNS.forEach(function(p){
+    out = out.replace(p.re, function(m){
+      marked++;
+      return m + '<span class="wl-badge wl-b-dead">⚠️ 这条判据已证伪，不计入依据：' + p.why + '</span>';
+    });
+  });
+  return out;
 }
 function renderOpportunities(){
   const box = $('op-list'); if (!box) return;
@@ -6432,6 +7029,8 @@ async function init(){
   loadPatternTypes();               /* 信号页「做盘类型」：pattern-types.json（拿不到只空这一块） */
   ptBind();                         /* 「不同时期的特点」点开才下 _types-detail.json */
   loadSellAlertsIfOpen();           /* 信号页「卖出警报」：只在本次会话已经是信号页时才下（否则等切页签，见 showPage） */
+  /* 监控清单（watchlist-status.json）同样懒加载：放在 loadSellAlertsIfOpen 里面一起触发，
+     它比 sell-alerts.json 大（约 450 KB），启动阶段绝不主动下。 */
   tqBind(); tqIdle();               /* 工具页「查任意一件」：只绑定 + 空态，不下载 inspect-data.json */
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
