@@ -653,7 +653,13 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .tgd-q{font-size:12.5px;line-height:1.7;color:#c3d2e2;margin:0 0 4px;overflow-wrap:anywhere;
   display:grid;grid-template-columns:52px minmax(0,1fr);gap:6px;align-items:start}
 .tgd-q:last-child{margin-bottom:0}
-.tgd-q b{font-size:11.5px;font-weight:800;color:var(--muted);white-space:nowrap;padding-top:1px}
+/* ⚠️ 2026-10-16 修正：原选择器是 `.tgd-q b`（后代），于是**正文 span 里的每一个 <b>**
+   也被套上 white-space:nowrap —— 长句（如「没有做过样本外检验」）整段不许折行，
+   实测把「④ 断层率信号」那张卡内部撑宽 12~24px（手机 390px 下可见）。
+   标签只可能是 .tgd-q 的**直接子元素**，所以改成子选择器 `>`：
+   标签照旧 nowrap（52px 列不会被折行破坏），正文里的 <b> 恢复正常折行。
+   这一改只影响折行、不改任何文字，也不影响页签结构。 */
+.tgd-q > b{font-size:11.5px;font-weight:800;color:var(--muted);white-space:nowrap;padding-top:1px}
 .tgd-q.read b{color:var(--cyan)}
 .tgd-q.good b{color:var(--green)}
 .tgd-q.bad b{color:var(--yellow)}
@@ -1465,7 +1471,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
               <div class="tgd-q read"><b>怎么读</b><span>看<b>「倍数」列</b>：现断层率 ÷ 它自己 365 天的中位数。<b>倍数 ≥ 2 才算真异常</b>（页面里标了「强信号」徽标）。</span></div>
               <div class="tgd-q good"><b>能帮你</b><span>直接给你一批候选（当前快照里 <b id="tgd-washout-n">—</b> 个落在区间内，其中 <b id="tgd-washout-strong">—</b> 个是强信号），省掉自己扫全池。</span></div>
               <div class="tgd-q bad"><b>不能帮你</b><span>它是<b>概率优势，不是保证</b>：样本外 prob30 只有 35.8%（对照 27.8%）。另外单价 &lt; ¥1 的品，断层率是分位舍入出来的假振幅，不能当盘口证据。</span></div>
-              <div class="tgd-q bad" id="tgd-washout-premise"><b>🟠 前提别读错（2026-10-16 加）</b><span>它是<b>「收益信号」，不是「有人做盘」的证据</b> —— 断层率 12%~16% 说的是<b>盘口松</b>，和「有没有庄家」是两件事。而且它<b>就是滑点本身</b>：断层率 12% 的品，买入瞬间账面 −12%，<b>要涨 13.64% 才回本</b>（叠手续费：悠悠 14.78% / BUFF 16.53%）。它的样本外毛优势只有 +4.7pp（前向 90 天），扣掉 BUFF 2.485% 往返只剩 +2.2pp。<b>高断层率的品在盘口重新收紧之前，账面一定是亏的。</b></span></div>
+              <div class="tgd-q bad" id="tgd-washout-premise"><b>🟠 前提错</b><span>（2026-10-16 加）它是<b>「收益信号」，不是「有人做盘」的证据</b> —— 断层率 12%~16% 说的是<b>盘口松</b>，和「有没有庄家」是两件事。而且它<b>就是滑点本身</b>：断层率 12% 的品，买入瞬间账面 −12%，<b>要涨 13.64% 才回本</b>（叠手续费：悠悠 14.78% / BUFF 16.53%）。它的样本外毛优势只有 +4.7pp（前向 90 天），扣掉 BUFF 2.485% 往返只剩 +2.2pp。<b>高断层率的品在盘口重新收紧之前，账面一定是亏的。</b></span></div>
             </div>
           </div>
 
@@ -4580,7 +4586,8 @@ function renderWatchlist(){
         '<div class="wl-h">' + esc(a.name || rec && rec.name || '—') +
         (rec ? '<span class="wl-badge ' + wlStageCls(rec.stage) + '">' + esc(rec.stage) + ' · ' + n2(rec.score) + '/100</span>' : '<span class="wl-badge wl-b-hot">不在 1,073 名单内 · 无阶段</span>') +
         '<em>加入时间 ' + tS(new Date(a.at || Date.now()).toISOString()) + '</em></div>' +
-        (rec ? '<div class="wl-meta">可交易 ' + (isNum(rec.maxTradable) ? '¥' + fmtNum(rec.maxTradable, 0) : '—') + '</div>'
+        (rec ? '<div class="wl-meta">可交易 ' + (isNum(rec.maxTradable) ? '¥' + fmtNum(rec.maxTradable, 0) : '—') +
+               (wlIsRemoved({ gid: a.gid, name: a.name }) ? '　<span class="wl-badge wl-b-hot">已从自动列表隐藏</span>（它还在关注里，但不出现在上面的阶段列表）' : '') + '</div>'
              : '<div class="wl-note">⚠️ 监控清单的判据只在这 1,073 个已确认标的上标定过，所以这个品<b>不给阶段</b>（不是「平静」，是「没标定」）。</div>') +
         '<div class="wl-tools"><button class="wl-btn wl-del" data-wl-unstar="' + esc(String(a.gid || a.name)) + '">从关注移除</button></div></div>';
     });
