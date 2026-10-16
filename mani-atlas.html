@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>做盘痕迹图谱 · 1,073 品</title>
+<meta name="theme-color" content="#0b1220">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#111a2b;--dim:#5b6774;--line:#e3e9f2;--blue:#2f6fed;--org:#ff9f43;--red:#e8453c;--grn:#12a15a;--yel:#f0b429}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;-webkit-text-size-adjust:100%}
+.mt-wrap{max-width:1180px;margin:0 auto;padding:14px 12px 80px;overflow-x:hidden}
+.mt-h1{font-size:19px;margin:6px 0 4px;line-height:1.35}
+.mt-sub{color:var(--dim);font-size:12.5px;margin:0 0 10px}
+.mt-cav{background:#fff8e6;border:1px solid #f2d999;border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:12.5px;color:#5b4a1a}
+.mt-cav b{color:#8a6a00}
+.mt-cav ul{margin:6px 0 0;padding-left:18px}
+.mt-cav li{margin:3px 0}
+.mt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px}
+.mt-inp{flex:1 1 180px;min-width:0;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:14px;background:#fff;color:var(--ink)}
+.mt-inp:focus{outline:2px solid #bcd2ff;border-color:#9dbcff}
+.mt-btn{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font-size:13px;cursor:pointer}
+.mt-btn:active{background:#eef3ff}
+.mt-stat{font-size:12.5px;color:var(--dim);margin:0 0 10px}
+.mt-g{border:1px solid var(--line);border-radius:11px;background:var(--card);margin:0 0 9px;overflow:hidden}
+.mt-gh{display:flex;align-items:center;gap:8px;padding:11px 12px;cursor:pointer;user-select:none}
+.mt-gh:active{background:#f7faff}
+.mt-caret{color:var(--dim);font-size:11px;width:12px;flex:0 0 12px}
+.mt-gname{font-weight:600;font-size:14px;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.mt-gmeta{font-size:11.5px;color:var(--dim);text-align:right;flex:0 0 auto}
+.mt-gbody{display:none;border-top:1px solid var(--line)}
+.mt-g.on .mt-gbody{display:block}
+.mt-rar{background:#f0f4fb;color:#43536b;font-size:11.5px;font-weight:600;padding:6px 12px;border-top:1px solid var(--line)}
+.mt-row{display:flex;gap:8px;align-items:center;padding:9px 12px;border-top:1px solid #f1f5fa;cursor:pointer}
+.mt-row:active{background:#f7faff}
+.mt-main{flex:1 1 auto;min-width:0}
+.mt-nm{font-size:13.5px;font-weight:600;overflow-wrap:anywhere}
+.mt-nm .mt-r{font-weight:400;color:var(--dim);font-size:11.5px}
+.mt-kv{font-size:11.5px;color:var(--dim);margin-top:2px;overflow-wrap:anywhere}
+.mt-kv b{color:var(--ink);font-weight:600}
+.mt-bdg{font-size:11px;padding:2px 7px;border-radius:20px;background:#eef3ff;color:#2b57b8;white-space:nowrap}
+.mt-bdg.mt-warn{background:#fff1e6;color:#a35400}
+.mt-bdg.mt-ok{background:#e8f7ee;color:#0d7a44}
+.mt-bdg.mt-none{background:#f0f2f5;color:#68727f}
+.mt-det{display:none;padding:0 12px 14px;border-top:1px dashed var(--line);background:#fcfdff}
+.mt-det.on{display:block}
+.mt-load{color:var(--dim);font-size:12.5px;padding:10px 0}
+.mt-fig{margin:10px 0;overflow-x:hidden}
+.mt-fig svg{width:100%;height:auto;display:block}
+.mt-sec{margin:12px 0 0}
+.mt-sech{font-size:13.5px;font-weight:700;margin:0 0 6px;padding-left:8px;border-left:3px solid var(--blue)}
+.mt-body{font-size:12.5px;overflow-wrap:anywhere}
+.mt-body p{margin:6px 0}
+.mt-body ul{margin:6px 0;padding-left:18px}
+.mt-body h3{font-size:13px;margin:10px 0 4px}
+.mt-body h4{font-size:12.5px;margin:9px 0 4px;color:#333f52}
+.mt-body blockquote{margin:6px 0;padding:6px 10px;background:#f7f9fd;border-left:3px solid #c9d8f5;color:#4a5768;font-size:12px}
+.mt-tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;border:1px solid var(--line);border-radius:8px;background:#fff}
+.mt-body table{border-collapse:collapse;width:100%;font-size:11.5px;min-width:0}
+.mt-body th,.mt-body td{border-bottom:1px solid #eef2f8;padding:5px 7px;text-align:left;white-space:nowrap}
+.mt-body th{background:#f4f7fd;font-weight:600;color:#3c4a60;position:sticky;top:0}
+.mt-body tr:last-child td{border-bottom:0}
+.mt-body td:first-child,.mt-body th:first-child{white-space:normal;min-width:76px}
+.mt-foot{color:var(--dim);font-size:11.5px;margin-top:20px;border-top:1px solid var(--line);padding-top:10px}
+.mt-err{color:var(--red);font-size:12.5px}
+@media (max-width:430px){
+  .mt-wrap{padding:10px 10px 70px}
+  .mt-h1{font-size:17px}
+  .mt-gmeta{font-size:11px}
+  .mt-body table{font-size:11px}
+}
+</style>
+</head>
+<body>
+<div class="mt-wrap">
+  <h1 class="mt-h1">做盘痕迹图谱 · 全量 1,073 品</h1>
+  <p class="mt-sub">按武器箱分组，箱内按稀有度（隐秘 → 保密 → 受限 → 军规级 → 工业级 → 消费级）上下级排。点一行展开它的完整做盘痕迹。</p>
+
+  <div class="mt-cav" id="mt-cav">
+    <b>⚠️ 先读这几条（每个数字都受它们约束）</b>
+    <ul>
+      <li><b>判据在用户名单上标定</b>：拉升阈值 60%（样本内 p75）与全部类型判据都来自这 1,073 品，<b>不是</b>全市场无偏样本 → 名单外命中率未知。</li>
+      <li><b>未做时间外验证</b>：本页是<b>同段历史描述</b>，没有 train/test 切分、没有样本外检验。</li>
+      <li><b>未扣交易成本</b>：所有涨幅/回撤都是<b>卖一盘口价</b>，没扣手续费/提现/价差/滑点。</li>
+      <li><b>价格分位一律相对自身全历史</b>；<code>mani-traces.json</code> 的 <code>pre.price</code> 用的是固定早期基线窗口，本页<b>不使用它</b>判断"是不是低价"。</li>
+      <li><b>铺货墙 / 吸筹合成分 / 计分模型信号均已证伪</b> → 本页只作历史事实陈列，<b>不计分、不作为入场理由</b>。</li>
+      <li><b>成交量口径冻结在 2025-11-27</b>（csqaq turnover 序列到此为止）→ 窗口外一律 null。</li>
+      <li id="mt-cav-clean">占位异常值清洗：加载中…</li>
+    </ul>
+  </div>
+
+  <div class="mt-bar">
+    <input class="mt-inp" id="mt-q" type="search" placeholder="搜箱子名 / 品名 / gid（如：千瓦、二西莫夫、9839）" autocomplete="off">
+    <button class="mt-btn" id="mt-clr" type="button">清空</button>
+  </div>
+  <div class="mt-stat" id="mt-stat">加载中…</div>
+  <div id="mt-list"></div>
+
+  <div class="mt-foot">
+    数据：<code>mani-atlas.json</code>（索引）+ <code>mani-shard-*.json</code>（点开才拉的分片）+ <code>mani-svg/*.svg</code>（点开才拉的图）。<br>
+    单品全文报告：<code>cs-quant/reports/单品做盘痕迹/&lt;品名&gt;.md</code>（1,073 份）。归纳：<code>cs-quant/reports/做盘痕迹-类型归纳-v2.md</code>。<br>
+    本页只描述历史上真实发生过什么，<b>不预测价格</b>，不构成任何买入依据。
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+var pct = function(x,d){ if(x==null||!isFinite(x)) return '—'; return (x*100).toFixed(d==null?1:d)+'%'; };
+var pctS = function(x,d){ if(x==null||!isFinite(x)) return '—'; return (x>=0?'+':'')+(x*100).toFixed(d==null?1:d)+'%'; };
+var num = function(x,d){ if(x==null||!isFinite(x)) return '—'; return Number(x).toFixed(d==null?2:d); };
+var int = function(x){ if(x==null||!isFinite(x)) return '—'; return Math.round(x).toLocaleString('en-US'); };
+var yuan = function(x,d){ if(x==null||!isFinite(x)) return '—'; return '¥'+Number(x).toFixed(d==null?2:d); };
+
+/* ---------------- markdown 渲染（只支持报告里实际用到的语法） ---------------- */
+function mdInline(s){
+  return esc(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+    .replace(/(^|[^*])\*([^*]+)\*/g, '$1<i>$2</i>')
+    .replace(/\\\|/g, '|');
+}
+/* 表格行按【未转义的竖线】切格，再逐格把 \| 还原成 | （品名里有竖线，如 "AK-47 | 二西莫夫"） */
+function splitRow(line){
+  var raw = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+  var cells = [], cur = '', i = 0;
+  while (i < raw.length){
+    if (raw[i] === '\\' && raw[i+1] === '|'){ cur += '\\|'; i += 2; continue; }
+    if (raw[i] === '|'){ cells.push(cur.replace(/\\\|/g, '|').trim()); cur = ''; i++; continue; }
+    cur += raw[i]; i++;
+  }
+  cells.push(cur.replace(/\\\|/g, '|').trim());
+  return cells;
+}
+function mdToHtml(md){
+  var lines = String(md||'').split('\n'), out = [], i = 0;
+  function isTbl(k){ return /^\s*\|/.test(lines[k]||''); }
+  while (i < lines.length){
+    var ln = lines[i];
+    if (/^\s*\|/.test(ln)){
+      var rows = [];
+      while (i < lines.length && /^\s*\|/.test(lines[i])){ rows.push(lines[i]); i++; }
+      var cells = rows.map(splitRow);
+      var head = cells[0], body = cells.slice(1).filter(function(c){ return !/^-+$/.test((c[0]||'').replace(/[\s:]/g,'')); });
+      var h = '<div class="mt-tblwrap"><table><thead><tr>' + head.map(function(c){ return '<th>'+mdInline(c)+'</th>'; }).join('') + '</tr></thead><tbody>';
+      h += body.map(function(c){ return '<tr>'+c.map(function(x){ return '<td>'+mdInline(x)+'</td>'; }).join('')+'</tr>'; }).join('');
+      out.push(h + '</tbody></table></div>');
+      continue;
+    }
+    if (/^####\s/.test(ln)){ out.push('<h4>'+mdInline(ln.replace(/^####\s*/,''))+'</h4>'); i++; continue; }
+    if (/^###\s/.test(ln)){ out.push('<h3>'+mdInline(ln.replace(/^###\s*/,''))+'</h3>'); i++; continue; }
+    if (/^>\s?/.test(ln)){
+      var q = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/,'')); i++; }
+      out.push('<blockquote>'+mdInline(q.join(' '))+'</blockquote>');
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(ln) || /^\s*\d+\.\s+/.test(ln)){
+      var ul = [], ord = /^\s*\d+\.\s+/.test(ln);
+      while (i < lines.length && (/^\s*[-*]\s+/.test(lines[i]) || /^\s*\d+\.\s+/.test(lines[i]))){
+        ul.push(lines[i].replace(/^\s*(?:[-*]|\d+\.)\s+/,'')); i++;
+      }
+      out.push('<'+(ord?'ol':'ul')+'>'+ul.map(function(x){ return '<li>'+mdInline(x)+'</li>'; }).join('')+'</'+(ord?'ol':'ul')+'>');
+      continue;
+    }
+    if (!ln.trim()){ i++; continue; }
+    var para = [];
+    while (i < lines.length && lines[i].trim() && !/^\s*[|>#]/.test(lines[i]) && !/^\s*[-*]\s+/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])){ para.push(lines[i]); i++; }
+    out.push('<p>'+mdInline(para.join(' '))+'</p>');
+  }
+  return out.join('');
+}
+
+/* ---------------- 状态 ---------------- */
+var AT = null, LIST = [], Q = '', shardCache = {}, openGid = null;
+var RAR_ORDER = ['隐秘','保密','受限','军规级','工业级','消费级','违禁','(无)'];
+
+function stageBadge(r){
+  var cls = 'mt-bdg';
+  if (!r.nPulls) cls += ' mt-none';
+  else if (r.nPulls >= 4) cls += ' mt-warn';
+  else cls += ' mt-ok';
+  return '<span class="'+cls+'">'+(r.nPulls? r.nPulls+' 次拉升' : '无拉升')+'</span>';
+}
+function rowHtml(r){
+  var last = r.lastPull;
+  return '<div class="mt-row" data-gid="'+r.gid+'">'
+    + '<div class="mt-main">'
+    +   '<div class="mt-nm">'+esc(r.name)+' <span class="mt-r">gid '+r.gid+' · '+esc(r.rarity)+'</span></div>'
+    +   '<div class="mt-kv">现价 <b>'+yuan(r.price)+'</b>'
+    +     (r.pctAllNow!=null? '（全历史 '+pct(r.pctAllNow,0)+' 分位）' : '')
+    +     ' · 在售 '+int(r.listed)+' · 求购 '+int(r.buyNum)
+    +     ' · 拉升 <b>'+r.nPulls+'</b> 次'
+    +   '</div>'
+    +   '<div class="mt-kv">'
+    +     (last? '最近一次 '+last.d0+' → '+last.d1+' <b>'+pctS(last.gain,0)+'</b>' : '全历史没有 ≥60% 的拉升')
+    +     ' · ' + esc(r.stage)
+    +   '</div>'
+    + '</div>'
+    + '<div>'+stageBadge(r)+'</div>'
+    + '</div>'
+    + '<div class="mt-det" id="mt-d-'+r.gid+'"></div>';
+}
+function groupHtml(g){
+  var rows = g.items;
+  var byRar = {};
+  rows.forEach(function(r){ (byRar[r.rarity] = byRar[r.rarity] || []).push(r); });
+  var keys = Object.keys(byRar).sort(function(a,b){ return RAR_ORDER.indexOf(a) - RAR_ORDER.indexOf(b); });
+  var inner = keys.map(function(k){
+    return '<div class="mt-rar">'+esc(k)+' · '+byRar[k].length+' 品</div>' + byRar[k].map(rowHtml).join('');
+  }).join('');
+  return '<div class="mt-g" data-c="'+esc(g.container)+'">'
+    + '<div class="mt-gh"><span class="mt-caret">▸</span><span class="mt-gname">'+esc(g.container)+'</span>'
+    + '<span class="mt-gmeta">'+g.n+' 品 · '+g.nPulls+' 段拉升'+(g.boxPrice!=null? '<br>箱子 '+yuan(g.boxPrice,0) : '')+'</span></div>'
+    + '<div class="mt-gbody">'+inner+'</div></div>';
+}
+function render(){
+  var q = Q.trim().toLowerCase();
+  var listEl = $('mt-list'), statEl = $('mt-stat');
+  if (!q){
+    listEl.innerHTML = AT.groups.map(groupHtml).join('');
+    statEl.textContent = '共 ' + AT.meta.nItems + ' 品 / ' + AT.meta.nGroups + ' 个箱子/收藏品 / ' + AT.meta.nPulls + ' 段拉升【点箱子展开，点品看详情】';
+  } else {
+    var nums = /^\d+$/.test(q);
+    var hits = LIST.filter(function(r){
+      if (nums) return String(r.gid) === q || String(r.gid).indexOf(q) === 0;
+      return (r.name||'').toLowerCase().indexOf(q) >= 0
+          || (r.container||'').toLowerCase().indexOf(q) >= 0
+          || (r.skinName||'').toLowerCase().indexOf(q) >= 0
+          || (r.weapon||'').toLowerCase().indexOf(q) >= 0;
+    });
+    statEl.textContent = '搜索「' + Q + '」命中 ' + hits.length + ' 品';
+    listEl.innerHTML = hits.length ? '<div class="mt-g on"><div class="mt-gh"><span class="mt-caret">▾</span><span class="mt-gname">搜索结果</span><span class="mt-gmeta">'+hits.length+' 品</span></div><div class="mt-gbody">'
+      + hits.map(function(r){ return '<div class="mt-rar">'+esc(r.container)+' · '+esc(r.rarity)+'</div>' + rowHtml(r); }).join('') + '</div></div>'
+      : '<div class="mt-g on"><div class="mt-gh"><span class="mt-caret">▾</span><span class="mt-gname">没有匹配的品</span></div><div class="mt-gbody"><div class="mt-row"><div class="mt-main"><div class="mt-kv">试试只输箱子名（如「千瓦」）、品名的一部分（如「二西莫夫」）或 gid。</div></div></div></div></div>';
+  }
+}
+function toggleGroup(gh){
+  var g = gh.parentNode;
+  g.classList.toggle('on');
+  gh.querySelector('.mt-caret').textContent = g.classList.contains('on') ? '▾' : '▸';
+}
+function detailHtml(it){
+  var r = it.row;
+  var h = '<div class="mt-fig">' + (it.svg ? '<img src="'+esc(it.svg)+'" alt="做盘痕迹图" loading="lazy" style="width:100%;height:auto;display:block">' : '<div class="mt-load">（这张图缺失）</div>') + '</div>';
+  h += '<div class="mt-sec"><div class="mt-sech">这一行怎么读</div><div class="mt-body"><p>'
+    + '<b>'+esc(r.name)+'</b>　gid <code>'+r.gid+'</code>　'+esc(r.container)+'　'+esc(r.rarity)
+    + (r.seriesFirst? '　历史 '+r.seriesFirst+' ~ '+r.seriesLast+'（'+r.priceN+' 个价格点）' : '')
+    + '</p><p>现价 <b>'+yuan(r.price)+'</b>'
+    + (r.pctAllNow!=null? '（自身全历史 '+pct(r.pctAllNow,1)+' 分位）' : '')
+    + '　在售 '+int(r.listed)+' 把　求购 '+int(r.buyNum)+' 单　存世 '+int(r.supply)
+    + '　拉升 <b>'+r.nPulls+'</b> 次　'+esc(r.stage)+'</p></div></div>';
+  h += it.sections.map(function(s){
+    if (s.n === 0) return '';
+    return '<div class="mt-sec"><div class="mt-sech">'+esc(s.title)+'</div><div class="mt-body">'+mdToHtml(s.body)+'</div></div>';
+  }).join('');
+  return h;
+}
+function openItem(row){
+  var gid = row.gid;
+  var boxes = document.querySelectorAll('.mt-det.on');
+  for (var i=0;i<boxes.length;i++) boxes[i].classList.remove('on');
+  var det = $('mt-d-'+gid);
+  if (!det) return;
+  if (openGid === gid){ openGid = null; return; }
+  openGid = gid;
+  det.classList.add('on');
+  if (det.dataset.done) return;
+  det.innerHTML = '<div class="mt-load">正在加载该品的完整做盘痕迹…</div>';
+  if (row.shard == null){ det.innerHTML = '<div class="mt-err">这一品没有详情分片（报告缺失）</div>'; return; }
+  var key = row.shard, url = 'mani-shard-' + String(key).padStart(3,'0') + '.json';
+  var got = shardCache[key] ? Promise.resolve(shardCache[key]) : fetch(url, {cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){ shardCache[key] = j; return j; });
+  got.then(function(j){
+    var it = (j.items||[]).filter(function(x){ return x.gid === gid; })[0];
+    if (!it){ det.innerHTML = '<div class="mt-err">分片里没有这一品（数据不一致）</div>'; return; }
+    det.innerHTML = detailHtml(it);
+    det.dataset.done = '1';
+  }).catch(function(e){
+    det.innerHTML = '<div class="mt-err">详情加载失败：'+esc(e.message)+'（联网后重试；分片文件：'+url+'）</div>';
+  });
+}
+document.addEventListener('click', function(ev){
+  var gh = ev.target.closest && ev.target.closest('.mt-gh');
+  if (gh && !/^搜索|^没有匹配/.test(gh.querySelector('.mt-gname').textContent)){ toggleGroup(gh); return; }
+  if (gh){ toggleGroup(gh); return; }
+  var rw = ev.target.closest && ev.target.closest('.mt-row');
+  if (rw){
+    var gid = Number(rw.getAttribute('data-gid'));
+    var r = LIST.filter(function(x){ return x.gid === gid; })[0];
+    if (r) openItem(r);
+  }
+});
+var t = null;
+$('mt-q').addEventListener('input', function(){ clearTimeout(t); var v = this.value; t = setTimeout(function(){ Q = v; render(); }, 120); });
+$('mt-clr').addEventListener('click', function(){ $('mt-q').value=''; Q=''; render(); $('mt-q').focus(); });
+
+/* ---------------- 启动 ---------------- */
+fetch('mani-atlas.json', {cache:'no-store'}).then(function(r){
+  if (!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}).then(function(j){
+  AT = j;
+  LIST = [];
+  j.groups.forEach(function(g){ g.items.forEach(function(r){ LIST.push(r); }); });
+  var st = j.meta.stats || {};
+  if (st.cleaning){
+    $('mt-cav-clean').innerHTML = '<b>占位异常值清洗</b>：' + st.cleaning.points + ' 个点 / ' + st.cleaning.items + ' 个品（判定 ' + st.cleaning.runs + ' 段）；清洗后仍有 ' + st.cleaning.residual + ' 个品的价格序列里存在"超自身中位 10 倍"的残余占位值 —— 如实列出，不假装不存在。';
+  }
+  render();
+}).catch(function(e){
+  $('mt-stat').innerHTML = '<span class="mt-err">索引加载失败：'+esc(e.message)+'</span>（需要 mani-atlas.json；本地请用 cs-skin-app 的静态服务打开）';
+});
+})();
+</script>
+</body>
+</html>
