@@ -8125,6 +8125,8 @@ const EXB_SORTS = [
   { k: 'batch', t: '批内强弱' },
   { k: 'name', t: '品名' }
 ];
+/* 不带正负号的百分比：配合"浮盈 +X% / 浮亏 X%"这种已经用文字标明方向的写法 */
+function exbPAbs(v){ return isNum(v) ? ((Math.abs(v) * 100).toFixed(2) + '%') : '—'; }
 function exbP2(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(2) + '%') : '—'; }
 function exbP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
 function exbM(v){ return isNum(v) ? money(v) : '—'; }
@@ -8256,7 +8258,7 @@ function renderExitBoard(){
       esc(t.name) + exbFormBadge(it.form && it.form.form, it.form && it.form.name) + '</p>' +
       '<p class="dsb-m">加权分 <b>' + t.score + '</b> / 100 · ' + exbStageBadge(t.stage || 'insufficient') +
       ' · 现价 ' + (isNum(it.priceNow) ? '¥' + it.priceNow.toFixed(2) : '—') +
-      ' · ' + (isNum(it.pnlRate) ? (it.pnlRate >= 0 ? '浮盈 ' : '浮亏 ') + exbP2(Math.abs(it.pnlRate)) : '无成本记录') +
+      ' · ' + (isNum(it.pnlRate) ? (it.pnlRate >= 0 ? '浮盈 +' : '浮亏 ') + exbPAbs(it.pnlRate) : '无成本记录') +
       ' · 占比 ' + (isNum(it.weight) ? (it.weight * 100).toFixed(2) + '%' : '—') + '</p>' +
       '<ul class="ex-why">' + why.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
       '<p class="dsb-m">动作区间：<b>' + esc((it.plan && it.plan.headline) || '—') + '</b></p>' +
