@@ -1,7 +1,7 @@
 {
  "v": 1,
- "updatedAt": 1792156049104,
- "updatedAtText": "2026/10/16 21:07:29",
+ "updatedAt": 1792199122166,
+ "updatedAtText": "2026/10/17 09:05:22",
  "source": "csqaq 官方 API 日线（platform=2）· 由 sell_alert.cjs 判定",
  "validation": {
   "status": "✅ 已通过样本外检验（845 标的 × 192,437 行）",
@@ -23,8 +23,8 @@
   "nc30_up": 0.1,
   "nc30_dispatch": 0.25
  },
- "livePriceAt": 1792155918649,
- "livePriceUsed": 57,
+ "livePriceAt": 1792199108442,
+ "livePriceUsed": 58,
  "scanned": 1978,
  "seriesRange": [
   {
@@ -91,7 +91,7 @@
  "counts": {
   "act_派发背离": 10,
   "state_供给涌入": 31,
-  "state_横盘增发": 39
+  "state_横盘增发": 38
  },
  "types": [
   {
@@ -703,7 +703,7 @@
    "kind": "risk",
    "direction": "exit",
    "desc": "在售量 30 日增 ≥10% 而价格 30 日横盘（±2%）—— 价格不动的掩护下筹码持续抛向市场。",
-   "count": 39,
+   "count": 38,
    "verdict": {
     "verdict": "存活",
     "verified": true,
@@ -1173,19 +1173,6 @@
      "exterior": "略有磨损"
     },
     {
-     "name": "M4A4 | 红色 DDPAT (崭新出厂)",
-     "gid": 13673,
-     "price": 804,
-     "priceFromLive": true,
-     "date": "2026-10-13",
-     "pc30": -0.0117,
-     "nc30": 0.1489,
-     "bc30": 0.3333,
-     "listed": 216,
-     "buyNum": 64,
-     "exterior": "崭新出厂"
-    },
-    {
      "name": "1620",
      "gid": 1620,
      "price": 0.25,
@@ -1249,8 +1236,8 @@
    "mkt": 2949,
    "value": 8847,
    "pnlRate": -0.20892315368458325,
-   "priceNow": 2649,
-   "gainVsCost": -0.2894,
+   "priceNow": 2666,
+   "gainVsCost": -0.2848,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1258,13 +1245,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1823,
+    "pc30": -0.177,
     "nc30": -0.1064,
     "bc30": -0.1744,
     "listed": 957,
     "buyNum": 71,
     "date": "2026-10-13",
-    "price": 2649
+    "price": 2666
    },
    "action": null,
    "batches": null,
@@ -1282,8 +1269,8 @@
    "mkt": 1968.88,
    "value": 3937.76,
    "pnlRate": -0.2757476549567776,
-   "priceNow": 1798,
-   "gainVsCost": -0.3386,
+   "priceNow": 1760,
+   "gainVsCost": -0.3526,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1291,13 +1278,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1809,
+    "pc30": -0.1982,
     "nc30": -0.2674,
     "bc30": -0.1884,
     "listed": 567,
     "buyNum": 56,
     "date": "2026-10-13",
-    "price": 1798
+    "price": 1760
    },
    "action": null,
    "batches": null,
@@ -1315,8 +1302,8 @@
    "mkt": 3887.5,
    "value": 3887.5,
    "pnlRate": -0.20953639690931272,
-   "priceNow": 3399.5,
-   "gainVsCost": -0.3088,
+   "priceNow": 3390,
+   "gainVsCost": -0.3107,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1324,13 +1311,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1605,
+    "pc30": -0.1629,
     "nc30": -0.0781,
     "bc30": -0.1639,
     "listed": 307,
     "buyNum": 51,
     "date": "2026-10-13",
-    "price": 3399.5
+    "price": 3390
    },
    "action": null,
    "batches": null,
@@ -1348,26 +1335,26 @@
    "mkt": 884.5,
    "value": 3538,
    "pnlRate": 0.09366306027820712,
-   "priceNow": 804,
-   "gainVsCost": -0.0059,
-   "typeId": "state_横盘增发",
-   "typeLabel": "横盘派发型",
-   "phase": "横盘派发型",
+   "priceNow": 775,
+   "gainVsCost": -0.0417,
+   "typeId": null,
+   "typeLabel": null,
+   "phase": "未命中卖出信号",
    "covered": true,
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0117,
+    "pc30": -0.0473,
     "nc30": 0.1489,
     "bc30": 0.3333,
     "listed": 216,
     "buyNum": 64,
     "date": "2026-10-13",
-    "price": 804
+    "price": 775
    },
-   "action": "浮盈 -0.6% → 本类型已出现：不加仓，挂 +20% 止盈单，反弹到成本上方先减 1/3",
-   "batches": 0,
-   "exitStat": "历史：首次 +20% 中位 20 天（35% 到过）、+30% 25 天（27%）、+50% 32 天（19%）；到顶中位 17 天，到顶后中位回落 -30.3%，持有 30 天中位 -4.4%。",
+   "action": null,
+   "batches": null,
+   "exitStat": null,
    "targetSell": 928.73,
    "stopLoss": 796.05,
    "riskAction": null,
@@ -1381,8 +1368,8 @@
    "mkt": 1566,
    "value": 3132,
    "pnlRate": -0.14717494894486044,
-   "priceNow": 1340,
-   "gainVsCost": -0.2703,
+   "priceNow": 1360,
+   "gainVsCost": -0.2594,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1390,13 +1377,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1064,
+    "pc30": -0.093,
     "nc30": 0.037,
     "bc30": -0.2128,
     "listed": 449,
     "buyNum": 37,
     "date": "2026-10-13",
-    "price": 1340
+    "price": 1360
    },
    "action": null,
    "batches": null,
@@ -1414,8 +1401,8 @@
    "mkt": 419.99,
    "value": 2939.9300000000003,
    "pnlRate": -0.054991787233085045,
-   "priceNow": 319.68,
-   "gainVsCost": -0.2807,
+   "priceNow": 314.18,
+   "gainVsCost": -0.2931,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1423,13 +1410,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2415,
+    "pc30": -0.2546,
     "nc30": 0.2096,
     "bc30": 0.3333,
     "listed": 202,
     "buyNum": 20,
     "date": "2026-10-13",
-    "price": 319.68
+    "price": 314.18
    },
    "action": null,
    "batches": null,
@@ -1447,8 +1434,8 @@
    "mkt": 687.99,
    "value": 2751.96,
    "pnlRate": -0.020306158775364885,
-   "priceNow": 627,
-   "gainVsCost": -0.1072,
+   "priceNow": 614.31,
+   "gainVsCost": -0.1252,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1456,13 +1443,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.045,
+    "pc30": 0.0238,
     "nc30": 0.9366,
     "bc30": 2.1176,
     "listed": 519,
     "buyNum": 53,
     "date": "2026-10-13",
-    "price": 627
+    "price": 614.31
    },
    "action": null,
    "batches": null,
@@ -1480,8 +1467,8 @@
    "mkt": 258.5,
    "value": 2068,
    "pnlRate": 0.0465587044534413,
-   "priceNow": 213.5,
-   "gainVsCost": -0.1356,
+   "priceNow": 212.5,
+   "gainVsCost": -0.1397,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1489,13 +1476,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2584,
+    "pc30": -0.2619,
     "nc30": -0.0182,
     "bc30": 0,
     "listed": 378,
     "buyNum": 38,
     "date": "2026-10-13",
-    "price": 213.5
+    "price": 212.5
    },
    "action": null,
    "batches": null,
@@ -1513,8 +1500,8 @@
    "mkt": 1244,
    "value": 1244,
    "pnlRate": -0.012698412698412698,
-   "priceNow": 1091,
-   "gainVsCost": -0.1341,
+   "priceNow": 1073.99,
+   "gainVsCost": -0.1476,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1522,13 +1509,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0216,
+    "pc30": -0.0368,
     "nc30": -0.056,
     "bc30": -0.2097,
     "listed": 388,
     "buyNum": 49,
     "date": "2026-10-13",
-    "price": 1091
+    "price": 1073.99
    },
    "action": null,
    "batches": null,
@@ -1546,8 +1533,8 @@
    "mkt": 621.5,
    "value": 1243,
    "pnlRate": -0.3696754563894523,
-   "priceNow": 765.5,
-   "gainVsCost": -0.2236,
+   "priceNow": 758.99,
+   "gainVsCost": -0.2302,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1555,13 +1542,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.101,
+    "pc30": -0.1086,
     "nc30": -0.0731,
     "bc30": 0.3023,
     "listed": 596,
     "buyNum": 56,
     "date": "2026-10-13",
-    "price": 765.5
+    "price": 758.99
    },
    "action": null,
    "batches": null,
@@ -1579,8 +1566,8 @@
    "mkt": 145.5,
    "value": 1164,
    "pnlRate": -0.2769827072152654,
-   "priceNow": 126.5,
-   "gainVsCost": -0.3714,
+   "priceNow": 125.99,
+   "gainVsCost": -0.3739,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1588,13 +1575,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2402,
+    "pc30": -0.2433,
     "nc30": -0.2393,
     "bc30": 0.2258,
     "listed": 531,
     "buyNum": 38,
     "date": "2026-10-13",
-    "price": 126.5
+    "price": 125.99
    },
    "action": null,
    "batches": null,
@@ -1612,8 +1599,8 @@
    "mkt": 80,
    "value": 800,
    "pnlRate": -0.0196078431372549,
-   "priceNow": 75,
-   "gainVsCost": -0.0809,
+   "priceNow": 74.9,
+   "gainVsCost": -0.0821,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1621,13 +1608,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3363,
+    "pc30": -0.3372,
     "nc30": 0.1033,
     "bc30": -0.5789,
     "listed": 630,
     "buyNum": 8,
     "date": "2026-10-13",
-    "price": 75
+    "price": 74.9
    },
    "action": null,
    "batches": null,
@@ -1645,8 +1632,8 @@
    "mkt": 648,
    "value": 648,
    "pnlRate": -0.2331360946745562,
-   "priceNow": 567.96,
-   "gainVsCost": -0.3279,
+   "priceNow": 567.35,
+   "gainVsCost": -0.3286,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1654,13 +1641,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1523,
+    "pc30": -0.1532,
     "nc30": 0.0812,
     "bc30": -0.2955,
     "listed": 213,
     "buyNum": 31,
     "date": "2026-10-13",
-    "price": 567.96
+    "price": 567.35
    },
    "action": null,
    "batches": null,
@@ -1711,8 +1698,8 @@
    "mkt": 2.33,
    "value": 608.13,
    "pnlRate": -0.36684782608695654,
-   "priceNow": 1.72,
-   "gainVsCost": -0.5326,
+   "priceNow": 1.65,
+   "gainVsCost": -0.5516,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1720,13 +1707,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4007,
+    "pc30": -0.4251,
     "nc30": 0.3328,
     "bc30": -0.4615,
     "listed": 765,
     "buyNum": 7,
     "date": "2026-10-13",
-    "price": 1.72
+    "price": 1.65
    },
    "action": null,
    "batches": null,
@@ -1744,8 +1731,8 @@
    "mkt": 269.88,
    "value": 269.88,
    "pnlRate": -0.03572959839931399,
-   "priceNow": 263.5,
-   "gainVsCost": -0.0585,
+   "priceNow": 262,
+   "gainVsCost": -0.0639,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1753,13 +1740,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0668,
+    "pc30": 0.0607,
     "nc30": -0.3604,
     "bc30": 0.6739,
     "listed": 639,
     "buyNum": 77,
     "date": "2026-10-13",
-    "price": 263.5
+    "price": 262
    },
    "action": null,
    "batches": null,
@@ -1777,8 +1764,8 @@
    "mkt": 4.6,
    "value": 229.99999999999997,
    "pnlRate": -0.6753705010585744,
-   "priceNow": 4.52,
-   "gainVsCost": -0.681,
+   "priceNow": 4.53,
+   "gainVsCost": -0.6803,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1786,13 +1773,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2429,
+    "pc30": -0.2412,
     "nc30": -0.1797,
     "bc30": 0.0435,
     "listed": 1187,
     "buyNum": 24,
     "date": "2026-10-13",
-    "price": 4.52
+    "price": 4.53
    },
    "action": null,
    "batches": null,
@@ -1810,8 +1797,8 @@
    "mkt": 3.98,
    "value": 202.98,
    "pnlRate": -0.002506265664160496,
-   "priceNow": 3.73,
-   "gainVsCost": -0.0652,
+   "priceNow": 3.7,
+   "gainVsCost": -0.0727,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1819,13 +1806,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1874,
+    "pc30": -0.1939,
     "nc30": 0.14,
     "bc30": 0,
     "listed": 114,
     "buyNum": 5,
     "date": "2026-10-13",
-    "price": 3.73
+    "price": 3.7
    },
    "action": null,
    "batches": null,
@@ -1868,8 +1855,8 @@
    "mkt": 11.98,
    "value": 155.74,
    "pnlRate": -0.34855899945622615,
-   "priceNow": 9.76,
-   "gainVsCost": -0.4693,
+   "priceNow": 8.87,
+   "gainVsCost": -0.5177,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1877,13 +1864,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4272,
+    "pc30": -0.4795,
     "nc30": -0.2424,
     "bc30": -0.3529,
     "listed": 300,
     "buyNum": 11,
     "date": "2026-10-13",
-    "price": 9.76
+    "price": 8.87
    },
    "action": null,
    "batches": null,
@@ -1901,8 +1888,8 @@
    "mkt": 8.69,
    "value": 139.04,
    "pnlRate": -0.06659505907626219,
-   "priceNow": 7.32,
-   "gainVsCost": -0.2137,
+   "priceNow": 7.26,
+   "gainVsCost": -0.2202,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1910,13 +1897,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1867,
+    "pc30": -0.1933,
     "nc30": 0.2254,
     "bc30": -0.55,
     "listed": 212,
     "buyNum": 9,
     "date": "2026-10-13",
-    "price": 7.32
+    "price": 7.26
    },
    "action": null,
    "batches": null,
@@ -1934,8 +1921,8 @@
    "mkt": 2.7,
    "value": 132.3,
    "pnlRate": -0.5741324921135645,
-   "priceNow": 2.83,
-   "gainVsCost": -0.5536,
+   "priceNow": 2.82,
+   "gainVsCost": -0.5552,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1943,13 +1930,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2572,
+    "pc30": -0.2598,
     "nc30": -0.0263,
     "bc30": 0.2222,
     "listed": 407,
     "buyNum": 11,
     "date": "2026-10-13",
-    "price": 2.83
+    "price": 2.82
    },
    "action": null,
    "batches": null,
@@ -1967,8 +1954,8 @@
    "mkt": 6.25,
    "value": 118.75,
    "pnlRate": -0.5314842578710645,
-   "priceNow": 5.63,
-   "gainVsCost": -0.578,
+   "priceNow": 5.45,
+   "gainVsCost": -0.5915,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1976,13 +1963,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3159,
+    "pc30": -0.3378,
     "nc30": -0.2402,
     "bc30": -0.1818,
     "listed": 832,
     "buyNum": 9,
     "date": "2026-10-13",
-    "price": 5.63
+    "price": 5.45
    },
    "action": null,
    "batches": null,
@@ -2000,8 +1987,8 @@
    "mkt": 54.4,
    "value": 108.8,
    "pnlRate": -0.7657696447793326,
-   "priceNow": 46.73,
-   "gainVsCost": -0.7988,
+   "priceNow": 46.59,
+   "gainVsCost": -0.7994,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2009,13 +1996,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.5029,
+    "pc30": -0.5044,
     "nc30": 0.2425,
     "bc30": -0.087,
     "listed": 579,
     "buyNum": 21,
     "date": "2026-10-13",
-    "price": 46.73
+    "price": 46.59
    },
    "action": null,
    "batches": null,
@@ -2033,8 +2020,8 @@
    "mkt": 2.99,
    "value": 104.65,
    "pnlRate": -0.528391167192429,
-   "priceNow": 2.67,
-   "gainVsCost": -0.5789,
+   "priceNow": 2.65,
+   "gainVsCost": -0.582,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2042,13 +2029,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3047,
+    "pc30": -0.3099,
     "nc30": -0.1012,
     "bc30": -0.2222,
     "listed": 293,
     "buyNum": 14,
     "date": "2026-10-13",
-    "price": 2.67
+    "price": 2.65
    },
    "action": null,
    "batches": null,
@@ -2066,8 +2053,8 @@
    "mkt": 7.35,
    "value": 102.89999999999999,
    "pnlRate": -0.19584245076586446,
-   "priceNow": 6.29,
-   "gainVsCost": -0.3118,
+   "priceNow": 6.19,
+   "gainVsCost": -0.3228,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2075,13 +2062,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0831,
+    "pc30": -0.0977,
     "nc30": 0.2037,
     "bc30": -0.2105,
     "listed": 195,
     "buyNum": 15,
     "date": "2026-10-13",
-    "price": 6.29
+    "price": 6.19
    },
    "action": null,
    "batches": null,
@@ -2099,8 +2086,8 @@
    "mkt": 7.27,
    "value": 101.78,
    "pnlRate": -0.4862190812720848,
-   "priceNow": 6.9,
-   "gainVsCost": -0.5124,
+   "priceNow": 6.87,
+   "gainVsCost": -0.5145,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2108,13 +2095,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1375,
+    "pc30": -0.1412,
     "nc30": 0.0281,
     "bc30": -0.1429,
     "listed": 1939,
     "buyNum": 18,
     "date": "2026-10-13",
-    "price": 6.9
+    "price": 6.87
    },
    "action": null,
    "batches": null,
@@ -2132,8 +2119,8 @@
    "mkt": 1.39,
    "value": 101.47,
    "pnlRate": -0.5335570469798657,
-   "priceNow": 1.28,
-   "gainVsCost": -0.5705,
+   "priceNow": 1.33,
+   "gainVsCost": -0.5537,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2141,13 +2128,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3402,
+    "pc30": -0.3144,
     "nc30": 0.0222,
     "bc30": -0.3333,
     "listed": 876,
     "buyNum": 10,
     "date": "2026-10-13",
-    "price": 1.28
+    "price": 1.33
    },
    "action": null,
    "batches": null,
@@ -2165,8 +2152,8 @@
    "mkt": 1.18,
    "value": 96.75999999999999,
    "pnlRate": -0.5021097046413503,
-   "priceNow": 1.19,
-   "gainVsCost": -0.4979,
+   "priceNow": 1.2,
+   "gainVsCost": -0.4937,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2174,13 +2161,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0439,
+    "pc30": 0.0526,
     "nc30": -0.2487,
     "bc30": -0.2222,
     "listed": 589,
     "buyNum": 7,
     "date": "2026-10-13",
-    "price": 1.19
+    "price": 1.2
    },
    "action": null,
    "batches": null,
@@ -2198,8 +2185,8 @@
    "mkt": 1.03,
    "value": 95.79,
    "pnlRate": -0.6053639846743295,
-   "priceNow": 1.03,
-   "gainVsCost": -0.6054,
+   "priceNow": 1.05,
+   "gainVsCost": -0.5977,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2207,13 +2194,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2847,
+    "pc30": -0.2708,
     "nc30": -0.2623,
     "bc30": -0.1818,
     "listed": 751,
     "buyNum": 9,
     "date": "2026-10-13",
-    "price": 1.03
+    "price": 1.05
    },
    "action": null,
    "batches": null,
@@ -2231,8 +2218,8 @@
    "mkt": 7.4,
    "value": 88.80000000000001,
    "pnlRate": -0.48788927335640125,
-   "priceNow": 7.36,
-   "gainVsCost": -0.4907,
+   "priceNow": 7.37,
+   "gainVsCost": -0.49,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2240,13 +2227,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1912,
+    "pc30": -0.1901,
     "nc30": 0.0619,
     "bc30": -0.1765,
     "listed": 343,
     "buyNum": 14,
     "date": "2026-10-13",
-    "price": 7.36
+    "price": 7.37
    },
    "action": null,
    "batches": null,
@@ -2264,8 +2251,8 @@
    "mkt": 3.66,
    "value": 76.86,
    "pnlRate": -0.4504504504504505,
-   "priceNow": 3.1,
-   "gainVsCost": -0.5345,
+   "priceNow": 3.08,
+   "gainVsCost": -0.5375,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2273,13 +2260,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2269,
+    "pc30": -0.2319,
     "nc30": 0.08,
     "bc30": 0.0769,
     "listed": 1013,
     "buyNum": 14,
     "date": "2026-10-13",
-    "price": 3.1
+    "price": 3.08
    },
    "action": null,
    "batches": null,
@@ -2297,8 +2284,8 @@
    "mkt": 2.63,
    "value": 76.27,
    "pnlRate": -0.4853228962818004,
-   "priceNow": 2.56,
-   "gainVsCost": -0.499,
+   "priceNow": 2.57,
+   "gainVsCost": -0.4971,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2306,13 +2293,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3535,
+    "pc30": -0.351,
     "nc30": 0.0714,
     "bc30": -0.4667,
     "listed": 180,
     "buyNum": 8,
     "date": "2026-10-13",
-    "price": 2.56
+    "price": 2.57
    },
    "action": null,
    "batches": null,
@@ -2330,8 +2317,8 @@
    "mkt": 14.4,
    "value": 72,
    "pnlRate": -0.08280254777070063,
-   "priceNow": 11.65,
-   "gainVsCost": -0.258,
+   "priceNow": 11.54,
+   "gainVsCost": -0.265,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2339,13 +2326,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0127,
+    "pc30": -0.022,
     "nc30": -0.0311,
     "bc30": -0.3333,
     "listed": 156,
     "buyNum": 8,
     "date": "2026-10-13",
-    "price": 11.65
+    "price": 11.54
    },
    "action": null,
    "batches": null,
@@ -2363,8 +2350,8 @@
    "mkt": 16.8,
    "value": 67.2,
    "pnlRate": -0.5613577023498694,
-   "priceNow": 15.9,
-   "gainVsCost": -0.5849,
+   "priceNow": 15.5,
+   "gainVsCost": -0.5953,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2372,13 +2359,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4968,
+    "pc30": -0.5095,
     "nc30": 0.4103,
     "bc30": -0.3226,
     "listed": 1014,
     "buyNum": 21,
     "date": "2026-10-11",
-    "price": 15.9
+    "price": 15.5
    },
    "action": null,
    "batches": null,
@@ -2396,8 +2383,8 @@
    "mkt": 4.3,
    "value": 47.3,
    "pnlRate": -0.7104377104377104,
-   "priceNow": 4.12,
-   "gainVsCost": -0.7226,
+   "priceNow": 4.1,
+   "gainVsCost": -0.7239,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2405,13 +2392,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2454,
+    "pc30": -0.2491,
     "nc30": 0.105,
     "bc30": -0.25,
     "listed": 1084,
     "buyNum": 15,
     "date": "2026-10-13",
-    "price": 4.12
+    "price": 4.1
    },
    "action": null,
    "batches": null,
@@ -2429,8 +2416,8 @@
    "mkt": 8.63,
    "value": 43.150000000000006,
    "pnlRate": -0.4769696969696969,
-   "priceNow": 6.77,
-   "gainVsCost": -0.5897,
+   "priceNow": 6.75,
+   "gainVsCost": -0.5909,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2438,13 +2425,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4092,
+    "pc30": -0.411,
     "nc30": 0.0966,
     "bc30": -0.0909,
     "listed": 454,
     "buyNum": 10,
     "date": "2026-10-13",
-    "price": 6.77
+    "price": 6.75
    },
    "action": null,
    "batches": null,
@@ -2462,8 +2449,8 @@
    "mkt": 4.3,
    "value": 25.799999999999997,
    "pnlRate": -0.5415778251599148,
-   "priceNow": 3.84,
-   "gainVsCost": -0.5906,
+   "priceNow": 3.82,
+   "gainVsCost": -0.5928,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2471,13 +2458,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4037,
+    "pc30": -0.4068,
     "nc30": 0.3893,
     "bc30": -0.25,
     "listed": 414,
     "buyNum": 12,
     "date": "2026-10-13",
-    "price": 3.84
+    "price": 3.82
    },
    "action": null,
    "batches": null,
@@ -2495,8 +2482,8 @@
    "mkt": 5.9,
    "value": 23.6,
    "pnlRate": -0.701417004048583,
-   "priceNow": 5.16,
-   "gainVsCost": -0.7389,
+   "priceNow": 5.68,
+   "gainVsCost": -0.7126,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2504,13 +2491,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2565,
+    "pc30": -0.1816,
     "nc30": -0.0725,
     "bc30": -0.3158,
     "listed": 1382,
     "buyNum": 13,
     "date": "2026-10-13",
-    "price": 5.16
+    "price": 5.68
    },
    "action": null,
    "batches": null,
@@ -2528,8 +2515,8 @@
    "mkt": 1.16,
    "value": 23.2,
    "pnlRate": -0.44230769230769235,
-   "priceNow": 1.29,
-   "gainVsCost": -0.3798,
+   "priceNow": 1.3,
+   "gainVsCost": -0.375,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2537,13 +2524,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2912,
+    "pc30": -0.2857,
     "nc30": 0.1169,
     "bc30": -0.3077,
     "listed": 1089,
     "buyNum": 9,
     "date": "2026-10-13",
-    "price": 1.29
+    "price": 1.3
    },
    "action": null,
    "batches": null,
@@ -2561,8 +2548,8 @@
    "mkt": 16.89,
    "value": 16.89,
    "pnlRate": -0.36264150943396223,
-   "priceNow": 16.09,
-   "gainVsCost": -0.3928,
+   "priceNow": 16.05,
+   "gainVsCost": -0.3943,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2570,13 +2557,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1236,
+    "pc30": -0.1258,
     "nc30": 0.001,
     "bc30": -0.1481,
     "listed": 1028,
     "buyNum": 23,
     "date": "2026-10-13",
-    "price": 16.09
+    "price": 16.05
    },
    "action": null,
    "batches": null,
@@ -2594,8 +2581,8 @@
    "mkt": 5.07,
    "value": 15.21,
    "pnlRate": -0.3194630872483222,
-   "priceNow": 3.71,
-   "gainVsCost": -0.502,
+   "priceNow": 3.68,
+   "gainVsCost": -0.506,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2603,13 +2590,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.498,
+    "pc30": -0.502,
     "nc30": -0.0775,
     "bc30": -0.2727,
     "listed": 262,
     "buyNum": 8,
     "date": "2026-10-13",
-    "price": 3.71
+    "price": 3.68
    },
    "action": null,
    "batches": null,
@@ -2687,7 +2674,6 @@
   }
  ],
  "holdingsHit": [
-  "M4A4 | 红色 DDPAT (崭新出厂)",
   "MP7 | 死亡骷髅 (略有磨损)"
  ],
  "watchlist": [
@@ -2700,10 +2686,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1823,
+    "pc30": -0.177,
     "nc30": -0.1064,
     "bc30": -0.1744,
-    "price": 2649
+    "price": 2666
    }
   },
   {
@@ -2715,10 +2701,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1809,
+    "pc30": -0.1982,
     "nc30": -0.2674,
     "bc30": -0.1884,
-    "price": 1798
+    "price": 1760
    }
   },
   {
@@ -2730,25 +2716,25 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1605,
+    "pc30": -0.1629,
     "nc30": -0.0781,
     "bc30": -0.1639,
-    "price": 3399.5
+    "price": 3390
    }
   },
   {
    "name": "M4A4 | 红色 DDPAT (崭新出厂)",
    "gid": 13673,
-   "typeId": "state_横盘增发",
-   "typeLabel": "横盘派发型",
+   "typeId": null,
+   "typeLabel": null,
    "inWatchlist": true,
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0117,
+    "pc30": -0.0473,
     "nc30": 0.1489,
     "bc30": 0.3333,
-    "price": 804
+    "price": 775
    }
   },
   {
@@ -2760,10 +2746,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1064,
+    "pc30": -0.093,
     "nc30": 0.037,
     "bc30": -0.2128,
-    "price": 1340
+    "price": 1360
    }
   },
   {
@@ -2775,10 +2761,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2415,
+    "pc30": -0.2546,
     "nc30": 0.2096,
     "bc30": 0.3333,
-    "price": 319.68
+    "price": 314.18
    }
   },
   {
@@ -2790,10 +2776,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.045,
+    "pc30": 0.0238,
     "nc30": 0.9366,
     "bc30": 2.1176,
-    "price": 627
+    "price": 614.31
    }
   },
   {
@@ -2805,10 +2791,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2584,
+    "pc30": -0.2619,
     "nc30": -0.0182,
     "bc30": 0,
-    "price": 213.5
+    "price": 212.5
    }
   },
   {
@@ -2820,10 +2806,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0216,
+    "pc30": -0.0368,
     "nc30": -0.056,
     "bc30": -0.2097,
-    "price": 1091
+    "price": 1073.99
    }
   },
   {
@@ -2835,10 +2821,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.101,
+    "pc30": -0.1086,
     "nc30": -0.0731,
     "bc30": 0.3023,
-    "price": 765.5
+    "price": 758.99
    }
   },
   {
@@ -2850,10 +2836,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2402,
+    "pc30": -0.2433,
     "nc30": -0.2393,
     "bc30": 0.2258,
-    "price": 126.5
+    "price": 125.99
    }
   },
   {
@@ -2865,10 +2851,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3363,
+    "pc30": -0.3372,
     "nc30": 0.1033,
     "bc30": -0.5789,
-    "price": 75
+    "price": 74.9
    }
   },
   {
@@ -2880,10 +2866,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1523,
+    "pc30": -0.1532,
     "nc30": 0.0812,
     "bc30": -0.2955,
-    "price": 567.96
+    "price": 567.35
    }
   },
   {
@@ -2910,10 +2896,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4007,
+    "pc30": -0.4251,
     "nc30": 0.3328,
     "bc30": -0.4615,
-    "price": 1.72
+    "price": 1.65
    }
   },
   {
@@ -2925,10 +2911,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0668,
+    "pc30": 0.0607,
     "nc30": -0.3604,
     "bc30": 0.6739,
-    "price": 263.5
+    "price": 262
    }
   },
   {
@@ -2940,10 +2926,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2429,
+    "pc30": -0.2412,
     "nc30": -0.1797,
     "bc30": 0.0435,
-    "price": 4.52
+    "price": 4.53
    }
   },
   {
@@ -2955,10 +2941,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1874,
+    "pc30": -0.1939,
     "nc30": 0.14,
     "bc30": 0,
-    "price": 3.73
+    "price": 3.7
    }
   },
   {
@@ -2970,10 +2956,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4052,
+    "pc30": -0.4082,
     "nc30": -0.0467,
     "bc30": -0.3871,
-    "price": 21.99
+    "price": 21.88
    }
   },
   {
@@ -2985,10 +2971,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4272,
+    "pc30": -0.4795,
     "nc30": -0.2424,
     "bc30": -0.3529,
-    "price": 9.76
+    "price": 8.87
    }
   },
   {
@@ -3000,10 +2986,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1867,
+    "pc30": -0.1933,
     "nc30": 0.2254,
     "bc30": -0.55,
-    "price": 7.32
+    "price": 7.26
    }
   },
   {
@@ -3015,10 +3001,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2572,
+    "pc30": -0.2598,
     "nc30": -0.0263,
     "bc30": 0.2222,
-    "price": 2.83
+    "price": 2.82
    }
   },
   {
@@ -3030,10 +3016,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3159,
+    "pc30": -0.3378,
     "nc30": -0.2402,
     "bc30": -0.1818,
-    "price": 5.63
+    "price": 5.45
    }
   },
   {
@@ -3045,10 +3031,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.5029,
+    "pc30": -0.5044,
     "nc30": 0.2425,
     "bc30": -0.087,
-    "price": 46.73
+    "price": 46.59
    }
   },
   {
@@ -3060,10 +3046,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3047,
+    "pc30": -0.3099,
     "nc30": -0.1012,
     "bc30": -0.2222,
-    "price": 2.67
+    "price": 2.65
    }
   },
   {
@@ -3075,10 +3061,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0831,
+    "pc30": -0.0977,
     "nc30": 0.2037,
     "bc30": -0.2105,
-    "price": 6.29
+    "price": 6.19
    }
   },
   {
@@ -3090,10 +3076,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1375,
+    "pc30": -0.1412,
     "nc30": 0.0281,
     "bc30": -0.1429,
-    "price": 6.9
+    "price": 6.87
    }
   },
   {
@@ -3105,10 +3091,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3402,
+    "pc30": -0.3144,
     "nc30": 0.0222,
     "bc30": -0.3333,
-    "price": 1.28
+    "price": 1.33
    }
   },
   {
@@ -3120,10 +3106,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0439,
+    "pc30": 0.0526,
     "nc30": -0.2487,
     "bc30": -0.2222,
-    "price": 1.19
+    "price": 1.2
    }
   },
   {
@@ -3135,10 +3121,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2847,
+    "pc30": -0.2708,
     "nc30": -0.2623,
     "bc30": -0.1818,
-    "price": 1.03
+    "price": 1.05
    }
   },
   {
@@ -3150,10 +3136,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1912,
+    "pc30": -0.1901,
     "nc30": 0.0619,
     "bc30": -0.1765,
-    "price": 7.36
+    "price": 7.37
    }
   },
   {
@@ -3165,10 +3151,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2269,
+    "pc30": -0.2319,
     "nc30": 0.08,
     "bc30": 0.0769,
-    "price": 3.1
+    "price": 3.08
    }
   },
   {
@@ -3180,10 +3166,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3535,
+    "pc30": -0.351,
     "nc30": 0.0714,
     "bc30": -0.4667,
-    "price": 2.56
+    "price": 2.57
    }
   },
   {
@@ -3195,10 +3181,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0127,
+    "pc30": -0.022,
     "nc30": -0.0311,
     "bc30": -0.3333,
-    "price": 11.65
+    "price": 11.54
    }
   },
   {
@@ -3210,10 +3196,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4968,
+    "pc30": -0.5095,
     "nc30": 0.4103,
     "bc30": -0.3226,
-    "price": 15.9
+    "price": 15.5
    }
   },
   {
@@ -3225,10 +3211,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2454,
+    "pc30": -0.2491,
     "nc30": 0.105,
     "bc30": -0.25,
-    "price": 4.12
+    "price": 4.1
    }
   },
   {
@@ -3240,10 +3226,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4092,
+    "pc30": -0.411,
     "nc30": 0.0966,
     "bc30": -0.0909,
-    "price": 6.77
+    "price": 6.75
    }
   },
   {
@@ -3255,10 +3241,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4037,
+    "pc30": -0.4068,
     "nc30": 0.3893,
     "bc30": -0.25,
-    "price": 3.84
+    "price": 3.82
    }
   },
   {
@@ -3270,10 +3256,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2565,
+    "pc30": -0.1816,
     "nc30": -0.0725,
     "bc30": -0.3158,
-    "price": 5.16
+    "price": 5.68
    }
   },
   {
@@ -3285,10 +3271,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2912,
+    "pc30": -0.2857,
     "nc30": 0.1169,
     "bc30": -0.3077,
-    "price": 1.29
+    "price": 1.3
    }
   },
   {
@@ -3300,10 +3286,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1236,
+    "pc30": -0.1258,
     "nc30": 0.001,
     "bc30": -0.1481,
-    "price": 16.09
+    "price": 16.05
    }
   },
   {
@@ -3315,10 +3301,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.498,
+    "pc30": -0.502,
     "nc30": -0.0775,
     "bc30": -0.2727,
-    "price": 3.71
+    "price": 3.68
    }
   },
   {
@@ -3352,6 +3338,21 @@
    }
   },
   {
+   "name": "USP 消音版 | 银装素裹 (略有磨损)",
+   "gid": 13548,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.3042,
+    "nc30": -0.0945,
+    "bc30": -0.2468,
+    "price": 426.5
+   }
+  },
+  {
    "name": "M4A4 | 龙王 (略有磨损)",
    "gid": 1386,
    "typeId": null,
@@ -3363,7 +3364,7 @@
     "pc30": -0.1879,
     "nc30": 0.0059,
     "bc30": -0.2581,
-    "price": 128.72
+    "price": 128.71
    }
   },
   {
@@ -3375,10 +3376,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1596,
+    "pc30": -0.1525,
     "nc30": -0.1175,
     "bc30": -0.2795,
-    "price": 59.5
+    "price": 60
    }
   },
   {
@@ -3390,10 +3391,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2173,
+    "pc30": -0.2176,
     "nc30": -0.0616,
     "bc30": 0.1818,
-    "price": 45
+    "price": 44.98
    }
   },
   {
@@ -3405,10 +3406,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1652,
+    "pc30": -0.1599,
     "nc30": -0.0543,
     "bc30": -0.1538,
-    "price": 32.79
+    "price": 33
    }
   },
   {
@@ -3420,10 +3421,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1224,
+    "pc30": -0.1232,
     "nc30": -0.0393,
     "bc30": 0.3,
-    "price": 45.45
+    "price": 45.41
    }
   },
   {
@@ -3435,10 +3436,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.122,
+    "pc30": -0.1328,
     "nc30": 0.0437,
     "bc30": 0.3125,
-    "price": 162
+    "price": 160
    }
   },
   {
@@ -3450,10 +3451,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0686,
+    "pc30": -0.0699,
     "nc30": -0.1457,
     "bc30": 0.0455,
-    "price": 70.6
+    "price": 70.5
    }
   },
   {
@@ -3480,10 +3481,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.196,
+    "pc30": -0.206,
     "nc30": -0.3106,
     "bc30": -0.3,
-    "price": 64.8
+    "price": 64
    }
   },
   {
@@ -3495,25 +3496,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0745,
+    "pc30": 0.0714,
     "nc30": 0.0207,
     "bc30": 0,
-    "price": 69.2
-   }
-  },
-  {
-   "name": "M4A4 | 杀意大名 (崭新出厂)",
-   "gid": 1319,
-   "typeId": null,
-   "typeLabel": null,
-   "inWatchlist": true,
-   "covered": true,
-   "uncoveredText": null,
-   "feats": {
-    "pc30": -0.2639,
-    "nc30": 0.0039,
-    "bc30": -0.5098,
-    "price": 43.8
+    "price": 69
    }
   },
   {
@@ -3525,25 +3511,40 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0917,
+    "pc30": -0.1136,
     "nc30": 0.0485,
     "bc30": 0.5714,
-    "price": 48.95
+    "price": 47.77
    }
   },
   {
-   "name": "AK-47 | 红线 (久经沙场)",
-   "gid": 135,
+   "name": "M4A1消音版 | 机械工业 (略有磨损)",
+   "gid": 1274,
    "typeId": null,
    "typeLabel": null,
    "inWatchlist": true,
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.059,
-    "nc30": 0.0335,
-    "bc30": -0.0313,
-    "price": 169.8
+    "pc30": -0.165,
+    "nc30": 0.004,
+    "bc30": -0.3478,
+    "price": 652.99
+   }
+  },
+  {
+   "name": "M4A4 | 杀意大名 (崭新出厂)",
+   "gid": 1319,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.2605,
+    "nc30": 0.0039,
+    "bc30": -0.5098,
+    "price": 44
    }
   },
   {
@@ -3897,10 +3898,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2847,
+    "pc30": -0.2708,
     "nc30": -0.2623,
     "bc30": -0.1818,
-    "price": 1.03
+    "price": 1.05
    }
   },
   {
@@ -4050,10 +4051,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.5029,
+    "pc30": -0.5044,
     "nc30": 0.2425,
     "bc30": -0.087,
-    "price": 46.73
+    "price": 46.59
    }
   },
   {
@@ -4228,15 +4229,14 @@
   }
  ],
  "watchHit": [
-  "M4A4 | 红色 DDPAT (崭新出厂)",
   "MP7 | 死亡骷髅 (略有磨损)"
  ],
  "countsSummary": {
   "holdings": 44,
-  "holdingsHit": 2,
-  "watchlist": 57,
+  "holdingsHit": 1,
+  "watchlist": 58,
   "washout40": 40,
-  "watchHit": 2
+  "watchHit": 1
  },
  "disclaimer": "这三个类型是**风险/回避**信号：出现后 90 天的中位表现明显差于随机日，但个体仍可能是上涨的（prob30 只是从更高降到更低）。本区块只做减仓/止盈提示，不构成买入依据，也不保证一定下跌。"
 }
