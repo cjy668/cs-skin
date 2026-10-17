@@ -1082,6 +1082,66 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   font-family:inherit;cursor:pointer}
 @media(min-width:560px){.dsb-stages{grid-template-columns:1fr 1fr}}
 
+/* =====================================================================
+   ★ 行情批次看板（cs-quant/rally_batches.cjs → rally-batches.json）
+   --------------------------------------------------------------------
+   用户的核心结构洞察（_用户洞察-行情批次才是分析单元.md）：
+     「cs 经常会有这样一波品开启一波行情类似的情况…k 线走势相似、开启时间接近，
+      可以归为同一波行情…中间就会有强盘和弱盘」
+     「如果每次能抓住这种行情类似的一波品，然后逐个分析，这样在任何时期应该都是可以赚钱的」
+   ★ 新前缀 rb-：已 grep 全站确认零占用（踩过的坑：复用 .basis 撑出 2709px）。
+     所有容器 min-width:0 + overflow-wrap:anywhere，390px 下横向溢出必须 0px。
+   ===================================================================== */
+.sec-rb{overflow:hidden}
+.rb-rule{margin:0 0 11px;padding:9px 12px;border-radius:11px;font-size:12px;line-height:1.7;
+  border:1px solid rgba(255,197,49,.42);background:rgba(255,197,49,.09);color:var(--text);
+  overflow-wrap:anywhere;min-width:0}
+.rb-rule b{color:var(--yellow)}
+.rb-nums{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-width:0}
+.rb-num{flex:1 1 78px;min-width:0;background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:7px 9px}
+.rb-num .k{font-size:11px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.rb-num .v{font-size:16px;font-weight:800;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.rb-sec{font-size:12.5px;font-weight:800;margin:14px 0 7px;padding-left:8px;
+  border-left:3px solid var(--yellow);overflow-wrap:anywhere}
+.rb-live{border:1px solid rgba(255,197,49,.55);background:rgba(255,197,49,.06);border-radius:12px;
+  padding:9px 11px;margin:0 0 9px;min-width:0;overflow-wrap:anywhere}
+.rb-live-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;font-size:13px;font-weight:800;min-width:0}
+.rb-live-h em{font-style:normal;font-size:11px;font-weight:600;color:var(--dim)}
+.rb-item{margin:8px 0 0;padding:9px 11px;border-radius:11px;background:var(--card2);
+  border:1px solid var(--line);min-width:0;overflow-wrap:anywhere;border-left-width:4px}
+.rb-item.rb-cur{border-left-color:var(--yellow)}
+.rb-item.rb-past{border-left-color:rgba(139,157,178,.55)}
+.rb-h{font-size:13px;font-weight:800;margin:0;overflow-wrap:anywhere;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px}
+.rb-h em{display:block;font-style:normal;font-weight:500;font-size:11px;color:var(--dim);margin-top:2px;overflow-wrap:anywhere}
+.rb-m{font-size:11.5px;line-height:1.7;color:var(--muted);margin:4px 0 0;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.rb-m b{color:var(--text)}
+.rb-tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid var(--line);white-space:nowrap}
+.rb-tag.rb-s{color:var(--green);border-color:rgba(47,208,122,.55);background:rgba(47,208,122,.14)}
+.rb-tag.rb-w{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.14)}
+.rb-tag.rb-n{color:var(--dim);border-color:rgba(139,157,178,.45);background:rgba(139,157,178,.10)}
+.rb-tag.rb-live{color:#1b2230;background:var(--yellow);border-color:var(--yellow)}
+.rb-chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0;min-width:0;max-width:100%}
+.rb-chip{font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px;border:1px solid var(--line);
+  color:var(--dim);background:rgba(139,157,178,.08);overflow-wrap:anywhere;max-width:100%}
+.rb-chip b{color:var(--text)}
+.rb-roll{display:flex;flex-direction:column;gap:3px;margin:6px 0 0;min-width:0}
+.rb-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px;font-size:11.5px;line-height:1.6;
+  color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.rb-row i{font-style:normal;font-size:10.5px;color:var(--dim);font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;white-space:nowrap}
+.rb-row span{min-width:0;overflow-wrap:anywhere}
+.rb-tools{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px;min-width:0;max-width:100%}
+.rb-ipt{flex:1 1 100%;width:100%;min-width:0;box-sizing:border-box;background:var(--card2);border:1px solid var(--line);
+  color:var(--text);border-radius:10px;padding:7px 9px;font-size:12.5px;font-family:inherit}
+.rb-more{display:block;width:100%;margin:10px 0 0;background:var(--card2);border:1px solid var(--line);
+  color:var(--text);border-radius:10px;padding:8px;font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer}
+.rb-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;margin-left:5px;
+  border:1px solid rgba(255,197,49,.55);background:rgba(255,197,49,.14);color:var(--yellow);white-space:nowrap}
+.rb-badge em{font-style:normal;opacity:.85;font-weight:600}
+
+
 /* ============================================================================
    ★ 2026-10-17 新增：「之后 60 日走势分布」三段区间条 + 拉升三形态徽标
    ----------------------------------------------------------------------------
@@ -1505,6 +1565,34 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
               <summary id="pt-extra-sum">不同时期的特点（月度网格 · 点开加载明细）</summary>
               <div id="pt-period"><p class="hint">点开上面这行才会下载 _types-detail.json（约 200~400 KB），不拖慢首屏。</p></div>
             </details>
+          </div>
+
+          <!-- ---------- ★ 行情批次看板（2026-10-17 新增） ----------
+               用户的核心结构洞察（_用户洞察-行情批次才是分析单元.md）：
+                 「cs 经常会有这样一波品开启一波行情类似的情况…往往在同一板块，
+                   不排除不同板块…k 线走势相似、开启时间接近，可以归为同一波行情…
+                   中间就会有强盘和弱盘」
+                 「如果每次能抓住这种行情类似的一波品，然后逐个分析，
+                   这样在任何时期应该都是可以赚钱的」
+               ★ 用户明确要【两个视角都要】：
+                 ① 批次视角（本区块）—— 波内看协同：共性、相互联系、互相印证
+                 ② 单品视角（下面的「监控清单」「做盘阶段看板」）—— 品内看个性
+                 两者不是二选一；本区块同时给出「每个品属于哪一批 + 批内强弱排名」。
+               数据源：cs-quant/rally_batches.cjs → rally-batches.json
+               算法：时间窗（W=45 天，扫 30/45/60/90 选的）× K 线形态相似组（medoid 聚类）
+                     —— 只用启动日 d0 聚类实测板块纯度只有 3%~33%，不可用，原因写在数据文件 method 里
+               纪律：批次是【协同关系的描述】，不是买入建议；批内强弱是同一批内部的相对分位，
+                     不是全市场排名。
+               降级链：rally-batches.json 拿不到 → 只空这一块，其他页签/区块照常。 -->
+          <div class="card span-all sec-rb" id="sec-rb">
+            <div class="sec-head"><h2>行情批次看板</h2><span class="sec-sub">一波品开启一波行情 · 波内看协同 · 批内分强弱</span><span class="r" id="rb-time">加载中…</span></div>
+            <p class="sec-note" id="rb-meta">—</p>
+            <div class="rb-rule" id="rb-rule">批次 = <b>开启时间接近</b> × <b>K 线走势相似</b> 的合取，不是「同一天开始涨」。批次与批内强弱都是状态描述，不构成买入依据。</div>
+            <div class="rb-nums" id="rb-nums"></div>
+            <div class="rb-tools" id="rb-tools">
+              <input id="rb-q" class="rb-ipt" type="search" placeholder="搜品名 / 箱子 / 批次 ID（如 B135）" autocomplete="off">
+            </div>
+            <div id="rb-box"><div class="skel"><i></i>批次数据加载中…（rally-batches.json）</div></div>
           </div>
 
           <!-- ---------- 监控清单：1,073 个「已知会被反复做」的品的【当前阶段】 ----------
@@ -3180,7 +3268,7 @@ function showPage(id){
      为什么不能放启动时一起取：启动阶段并发多个 fetch 会和 /api/live 抢时序，
      实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
      把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
-  if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); }
+  if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -3191,7 +3279,7 @@ function ensureSellAlerts(){
 /* 启动时用：只有「上次就停在信号页」才立刻下，其余情况一律等用户切过去 */
 function loadSellAlertsIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
-  if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); }
+  if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
 }
 function setPage(id, save){
   const pid = pageMeta(id).id;
@@ -4551,6 +4639,181 @@ function loadWatchlistIfOpen(){
 }
 
 /* =====================================================================
+   ★ 行情批次看板（rally-batches.json）—— 用户要的【批次视角】
+   ---------------------------------------------------------------------
+   用户核心洞察：「cs 经常会有这样一波品开启一波行情类似的情况…k 线走势相似、
+   开启时间接近，可以归为同一波行情…中间就会有强盘和弱盘」
+   ★ 用户明确说【两个视角都要】：
+     ① 批次视角（本函数）—— 波内看协同：共同背景 + 启动先后 + 批内强弱；
+     ② 单品视角（renderWatchlist / renderStageBoard）—— 品内看个性。
+     本函数同时输出 byGid 映射，供单品卡片标注「它属于哪一批 + 批内强弱排名」。
+   ★ 纪律：
+     1) 批次是【协同关系的描述】，不构成买入依据 —— 这句必须渲染在卡片最上面；
+     2) 批内强弱 = 同一批内部的相对分位（obsRetention 口径，观察窗口取【该批实际周期】），
+        不是全市场排名，不能跨批比较；
+     3) 数据拿不到 → 只空这一块，其他区块/6 页签照常（降级链）；
+     4) 手机 390px 零横向溢出（类名统一 rb- 前缀，容器 min-width:0 + overflow-wrap:anywhere）。
+   ===================================================================== */
+let rbData = null, rbState = 'loading', rbKick = false;
+let rbQ = '', rbShow = 12;
+const RB_LIMIT = 12;
+const RB_BY_GID = new Map();
+function ensureRallyBatches(){ if (rbKick) return; rbKick = true; loadRallyBatches(); }
+async function loadRallyBatches(){
+  try {
+    rbData = await fetchJSON('./rally-batches.json');
+    rbState = rbData ? 'ok' : 'fail';
+  } catch (e){ rbData = null; rbState = 'fail'; }
+  if (rbData && rbData.byGid){
+    Object.keys(rbData.byGid).forEach(function(k){
+      const arr = rbData.byGid[k];
+      if (arr && arr.length) RB_BY_GID.set(String(k), arr);
+    });
+  }
+  renderRallyBatches();
+  /* 单品视角要跟着标注批次 → 批次数据到了以后重画一次监控清单/阶段看板 */
+  try { if (wlData) renderWatchlist(); } catch (e) {}
+  try { if (dsbData) renderStageBoard(); } catch (e) {}
+}
+/* 单品卡片上的批次徽标：属于哪一批 + 批内强弱 */
+function rbBadgeFor(gid){
+  const arr = RB_BY_GID.get(String(gid));
+  if (!arr || !arr.length) return '';
+  const cur = arr[0];
+  const cls = cur.sw === '强盘' ? 'rb-s' : cur.sw === '弱盘' ? 'rb-w' : 'rb-n';
+  return '<span class="rb-badge">批次 ' + esc(cur.batchId) + ' <span class="rb-tag ' + cls + '">' + esc(cur.sw || '样本不足') + '</span>' +
+    (isNum(cur.strengthPct) ? '<em> 批内分位 ' + (cur.strengthPct * 100).toFixed(0) + '% · 共 ' + n2(cur.nItems) + ' 品</em>' : '') +
+    '</span>';
+}
+function rbPct(v, d){ return isNum(v) ? ((v * 100).toFixed(d == null ? 0 : d) + '%') : '—'; }
+function rbGain(v){ return isNum(v) ? ((v >= 0 ? '+' : '') + (v * 100).toFixed(0) + '%') : '—'; }
+function rbSwTag(sw){
+  const cls = sw === '强盘' ? 'rb-s' : sw === '弱盘' ? 'rb-w' : 'rb-n';
+  return '<span class="rb-tag ' + cls + '">' + esc(sw) + '</span>';
+}
+function rbBatchHTML(b, isLive){
+  const chips = [];
+  (b.kindTop || []).slice(0, 3).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
+  (b.caseTop || []).slice(0, 3).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
+  (b.weaponTop || []).slice(0, 4).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
+  (b.priceBandTop || []).slice(0, 3).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
+  let h = '<div class="rb-item ' + (isLive ? 'rb-cur' : 'rb-past') + '">';
+  h += '<div class="rb-h">' + esc(b.id) + '　' + esc(b.start) + ' → ' + esc(b.end) +
+    (isLive ? (b.stage === '已走完' ? '<span class="rb-tag rb-n">刚收尾 · 已走完本批窗口</span>' : '<span class="rb-tag rb-live">正在走 · ' + esc(b.stage || '—') + '</span>') : '') +
+    '<em>' + n2(b.nItems) + ' 个品 · 持续 ' + n2(b.durationDays) + ' 天 · 批内拉升段长中位 ' + n2(b.ralliesMedianDays) + ' 天' +
+    (isNum(b.simMedInGroup) ? ' · 形态相似度中位 ' + b.simMedInGroup.toFixed(2) : '') + '</em></div>';
+  h += '<div class="rb-m">品类纯度 <b>' + rbPct(b.kindPurity) + '</b>　出处纯度 <b>' + rbPct(b.casePurity) + '</b>' +
+    (b.crossSector ? '　<b>跨板块</b>' : '') +
+    '　批内涨幅 p25/中位/p75 <b>' + [b.gainP25, b.gainMed, b.gainP75].map(function(x){ return rbGain(x); }).join(' / ') + '</b>' +
+    (isNum(b.progress) ? '<br>进度 <b>' + (Math.min(1, b.progress) * 100).toFixed(0) + '%</b>' + (b.progress > 1.05 ? '（本批窗口已走完）' : '') + '（已走 ' + n2(b.elapsedDays) + ' 天 / 本批窗口 ' + n2(b.durationDays) + ' 天）' : '') +
+    (b.gapPrevDays != null ? '<br>' + (b.gapPrevDays < 0 ? ('与上一批 <b>' + esc(b.prevId || '—') + '</b> 时间重叠 <b>' + n2(-b.gapPrevDays) + '</b> 天') : ('距上一批 <b>' + n2(b.gapPrevDays) + '</b> 天' + (b.prevId ? '（' + esc(b.prevId) + '）' : ''))) : '') + '</div>';
+  h += '<div class="rb-chips">' + chips.join('') + '</div>';
+  /* 启动先后：一前一后、可能互换 —— 这正是用户说的「拉升时间经常会有一前一后」 */
+  if (b.waves && b.waves.length){
+    h += '<div class="rb-m"><b>启动先后</b>（' + b.waves.length + ' 个开闸日）：' +
+      b.waves.slice(0, 4).map(function(w){ return esc(w.d0) + ' 起 ' + n2(w.n) + ' 个'; }).join('　→　') + '</div>';
+  }
+  /* 批内强弱 */
+  if ((b.strong && b.strong.length) || (b.weak && b.weak.length)){
+    h += '<div class="rb-roll">';
+    if (b.strong && b.strong.length){
+      h += '<div class="rb-row"><i>强盘</i><span>' + b.strong.slice(0, 6).map(function(m){
+        return esc(m.name) + ' <b>' + rbGain(m.gain) + '</b>'; }).join('　·　') + '</span></div>';
+    }
+    if (b.weak && b.weak.length){
+      h += '<div class="rb-row"><i>弱盘</i><span>' + b.weak.slice(0, 6).map(function(m){
+        return esc(m.name) + ' <b>' + rbGain(m.gain) + '</b>'; }).join('　·　') + '</span></div>';
+    }
+    h += '</div>';
+  }
+  /* 成分（前 10） */
+  const mem = (b.members || []).slice(0, 10);
+  if (mem.length){
+    h += '<details style="margin-top:7px"><summary style="cursor:pointer;font-size:11.5px;opacity:.9">成分与批内排名（共 ' + n2(b.nItems) + ' 个，列前 ' + mem.length + '）</summary><div class="rb-roll">';
+    mem.forEach(function(m){
+      h += '<div class="rb-row"><i>' + esc(m.d0) + '</i>' + rbSwTag(m.sw) + '<span>' + esc(m.name) +
+        '　涨 <b>' + rbGain(m.gain) + '</b>　维持力 ' + (isNum(m.obsRetention) ? m.obsRetention.toFixed(2) : '—') +
+        (isNum(m.strengthPct) ? '（批内分位 ' + (m.strengthPct * 100).toFixed(0) + '%）' : '') + '</span></div>';
+    });
+    h += '</div></details>';
+  }
+  h += '</div>';
+  return h;
+}
+function renderRallyBatches(){
+  const box = $('rb-box'); if (!box) return;
+  if (rbState === 'fail' || !rbData){
+    setText('rb-time', '未生成');
+    setText('rb-meta', '—');
+    box.innerHTML = emptyBox('rally-batches.json 还没生成（或线上没发布）。电脑上跑 node cs-quant/rally_batches.cjs 产出。其他页面/区块不受影响。');
+    return;
+  }
+  const C = rbData.counts || {};
+  const M = rbData.method || {};
+  setText('rb-time', rbData.atText || '—');
+  setText('rb-meta', '批次 ' + n2(C.batches) + ' 个 · 覆盖 ' + n2(C.itemsInSomeBatch) + ' 品 / ' + n2(C.episodes) + ' 段 C 主拉升' +
+    ' · 已剔除稀疏品 ' + n2(C.sparseExcluded) + ' 个 · 时间窗 W = ' + n2(rbData.wChosen) + ' 天');
+  const nums = $('rb-nums');
+  if (nums){
+    nums.innerHTML = [
+      ['识别出的批次', n2(C.batches)],
+      ['正在走（近 60 天）', n2(C.liveBatches)],
+      ['批内品数中位', n2(C.medianBatchSize)],
+      ['所属批次可查的品', n2(C.itemsInSomeBatch)],
+      ['稀疏剔除', n2(C.sparseExcluded)]
+    ].map(function(x){ return '<div class="rb-num"><div class="k">' + esc(x[0]) + '</div><div class="v">' + x[1] + '</div></div>'; }).join('');
+  }
+  const q = rbQ.trim();
+  const all = arrOf(rbData.batches);
+  const BY_ID = new Map();
+  all.forEach(function(b){ BY_ID.set(String(b.id), b); });
+  /* live 是精简摘要（只有 id/阶段/进度/强弱），必须用完整批次对象补齐起止/纯度/涨幅分布，
+     否则卡片上会出现「持续 — 天」这种空值。 */
+  const live = arrOf(rbData.live).map(function(x){
+    const full = BY_ID.get(String(x.id)) || {};
+    return Object.assign({}, full, x);
+  });
+  function hit(b){
+    if (!q) return true;
+    if (String(b.id).toLowerCase().indexOf(q.toLowerCase()) >= 0) return true;
+    if (String(b.start).indexOf(q) >= 0) return true;
+    return (b.members || []).some(function(m){ return String(m.name || '').indexOf(q) >= 0 || String(m.caseName || '').indexOf(q) >= 0; });
+  }
+  let h = '';
+  /* ① 当前正在启动的批次 —— 用户最想要的「现在这一波有 X 个品在启动，其中强盘 A/B/C，弱盘 D/E/F」 */
+  h += '<div class="rb-sec">★ 当前正在启动 / 最近 60 天还在走的批次（' + n2(live.length) + ' 个）—— 现在这一波有哪些品、谁是强盘谁是弱盘</div>';
+  const liveHit = live.filter(hit);
+  h += liveHit.length ? liveHit.map(function(b){ return rbBatchHTML(b, true); }).join('')
+    : '<p class="wl-note">近 60 天内没有新开启的批次（或都被搜索条件过滤掉了）。这本身是一个结论：现在没有正在启动的一波。</p>';
+  /* ② 全部批次（时间倒序） */
+  const rest = all.filter(hit);
+  h += '<div class="rb-sec">全部批次（时间倒序，共 ' + n2(rest.length) + ' 个）</div>';
+  h += rest.slice(0, rbShow).map(function(b){ return rbBatchHTML(b, false); }).join('');
+  if (rest.length > rbShow) h += '<button class="rb-more" id="rb-more">再看 ' + n2(Math.min(RB_LIMIT, rest.length - rbShow)) + ' 个（还有 ' + n2(rest.length - rbShow) + ' 个）</button>';
+  /* ③ 用户断言验证（M4A4 红色 DDPAT 与那 8 个武器箱品） */
+  const A = rbData.assertion;
+  if (A && A.verdict){
+    h += '<div class="rb-sec">验证用户的断言：M4A4 | 红色 DDPAT 与那 8 个武器箱品是同一批吗</div>';
+    h += '<div class="rb-live"><div class="rb-live-h">' + esc(A.verdict) + '</div>' +
+      '<div class="rb-m">组员 ↔ 目标曲线相似度中位 <b>' + (isNum(A.simMed) ? A.simMed.toFixed(2) : '—') + '</b>' +
+      '　同批内其它品中位 <b>' + (A.peerSim && isNum(A.peerSim.med) ? A.peerSim.med.toFixed(2) : '—') + '</b>' +
+      '　全市场同期中位 <b>' + (A.marketSim && isNum(A.marketSim.med) ? A.marketSim.med.toFixed(2) : '—') + '</b>' +
+      '<br>判据：8 个组员各自最接近 M4A4 的那一段，是否与 M4A4 落在同一个批次里</div>';
+    h += '<div class="rb-roll">';
+    (A.sims || []).forEach(function(s){
+      h += '<div class="rb-row"><i>corr ' + (isNum(s.corr) ? s.corr.toFixed(2) : '—') + '</i><span>' + esc(s.member) +
+        '　' + esc(s.targetSeg[0]) + ' ⇄ ' + esc(s.memberSeg[0]) + '</span></div>';
+    });
+    h += '</div></div>';
+  }
+  box.innerHTML = h;
+  const qEl = $('rb-q');
+  if (qEl && qEl.value !== rbQ) qEl.value = rbQ;
+  const more = $('rb-more');
+  if (more) more.onclick = function(){ rbShow += RB_LIMIT; renderRallyBatches(); };
+}
+
+/* =====================================================================
    ★ 做盘阶段看板（dealer-stage-board.json）—— 替代旧的「卖出警报」主提示
    ---------------------------------------------------------------------
    用户 2026-10-17 的分工：「具体卖出操作我来做，你要告诉我当前处于做盘的
@@ -4774,6 +5037,8 @@ function renderStageBoard(){
     ih += '<div class="dsb-item" style="border-left-color:' + (s.color || '#8c8c8c') + '">' +
       '<p class="dsb-h">' + esc(x.name) +
       (x.form ? fwdFormBadge(x.form, x.formName) : '') +
+      /* ★ 单品视角也标出所属批次与批内强弱（与监控清单同一份数据，两个视角都在） */
+      rbBadgeFor(x.gid) +
       '<em>' + esc(x.caseName || '') + ' · 数据到 ' + esc(x.asOf || '') +
       (x.isHolding ? ' · ★ 您的持仓' : '') + '</em></p>' +
       '<p class="dsb-m"><b style="color:' + (s.color || 'inherit') + '">' + esc(s.name || x.stage) + '</b>' +
@@ -4817,6 +5082,16 @@ function renderStageBoard(){
   q.addEventListener('input', function(){
     clearTimeout(t);
     t = setTimeout(function(){ dsbQ = q.value.trim(); dsbShow = DSB_LIMIT; renderStageBoard(); }, 180);
+  });
+})();
+/* 批次看板搜索框：只绑定一次 */
+(function(){
+  const q2 = document.getElementById('rb-q');
+  if (!q2) return;
+  let t2 = null;
+  q2.addEventListener('input', function(){
+    clearTimeout(t2);
+    t2 = setTimeout(function(){ rbQ = q2.value.trim(); rbShow = RB_LIMIT; renderRallyBatches(); }, 180);
   });
 })();
 
@@ -4905,6 +5180,10 @@ function wlItemHTML(it){
     '<span class="wl-badge ' + wlStageCls(it.stage) + '">' + esc(it.stage) + ' · ' + n2(it.stageScore) + '/100</span>' +
     /* ★ 拉升三形态（第二根轴）：阶段旁边直接标出来。A = 这段涨幅是吃断层跳价（不是拉升） */
     (it.form ? fwdFormBadge(it.form, FWD_FORM_NAME[it.form]) : '') +
+    /* ★★ 第三根轴（2026-10-17 新增）：这个品属于哪个【行情批次】+ 它在批内的强弱排名。
+       用户明确要「两个视角都要」：批次看协同（上面那个区块），单品看个性（这里标出批次与排名）。
+       数据来自 rally-batches.json 的 byGid；批次数据还没到就什么都不加（不占位、不编造）。 */
+    rbBadgeFor(it.gid) +
     (it.isHolding ? '<span class="wl-badge wl-b-hold">持仓中</span>' : '') +
     (it.sellSignal ? '<span class="wl-badge wl-b-dead">卖出信号：' + esc(it.sellSignalType || '命中') + '</span>' : '') +
     (tiny ? '<span class="wl-badge wl-b-dead">容量不足</span>' : '') +
@@ -4969,7 +5248,7 @@ function renderWatchlist(){
       '<b>⚠️ 读之前必须知道的三件事（这三条不写清就不许看下面的数字）</b>' +
       '<i>阶段判断只是状态描述，不构成任何买入依据。</i>' +
       '<ol>' +
-      '<li><b>判据是在【用户自己给的名单】上标定的</b>：1,073 个品 × <b>1,388 段 C 主拉升</b>（16,551 个候选冲高段里，剔掉了 4,233 段「吃断层跳价」、1,925 段「小拉升筹备」、8,966 段「非拉升」；逐段判定见 data/mani-forms.json）。不是在全市场随机样本上标定的 —— 换成别的品不保证成立。</li>' +
+      '<li><b>判据是在【用户自己给的名单】上标定的</b>：1,073 个品 × <b>2,902 段 C 主拉升</b>（19,329 个候选段里，另分了 3,372 段「吃断层跳价」、1,640 段「小拉升筹备」、10,971 段「非拉升」，并整品剔除了 19 个数据稀疏品；逐段判定见 data/mani-forms.json）。不是在全市场随机样本上标定的 —— 换成别的品不保证成立。</li>' +
       '<li><b>时间外验证未做</b>：用 2023~2025 标定、2025~2026 验证这一步还没跑（成交量序列冻结在 2025-11，时间外验证只能用价格 / 在售 / 求购三条）。</li>' +
       '<li><b>未扣交易成本</b>：这里所有数字都是毛额。一次完整买卖要付来往路费 <b>1.00%（悠悠）~2.485%（BUFF）</b>，外加 <b>7 天交易冷却</b>（买入后 7 天内卖不掉，冷却期 1σ 波动 3.25%）。</li>' +
       '</ol>' +
