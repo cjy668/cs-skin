@@ -1023,6 +1023,64 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .wl-num .v{font-size:15px}
   .wl-cav{font-size:12px;padding:10px}
 }
+
+/* =====================================================================
+   做盘阶段看板（cs-quant/dealer_stage_board.cjs → dealer-stage-board.json）
+   ★ 新前缀 dsb-：已 grep 全站 389 个既有类名，确认无任何 dsb 前缀
+     （踩过的坑：曾有 agent 复用 .basis 导致整页横向溢出 2709px）。
+   ★ 所有容器 min-width:0 + overflow-wrap:anywhere，390px 下横向溢出必须 0px。
+   ===================================================================== */
+.sec-dsb{overflow:hidden}
+.dsb-rule{margin:0 0 11px;padding:9px 12px;border-radius:11px;font-size:12px;line-height:1.7;
+  border:1px solid rgba(86,204,242,.42);background:rgba(86,204,242,.09);color:var(--text);
+  overflow-wrap:anywhere;min-width:0}
+.dsb-stages{display:grid;grid-template-columns:1fr;gap:7px;margin:0 0 11px;min-width:0}
+.dsb-st{border:1px solid var(--line);border-radius:11px;background:var(--card2);padding:8px 10px;
+  min-width:0;overflow-wrap:anywhere;border-left-width:4px}
+.dsb-st-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;font-size:13px;font-weight:800;min-width:0}
+.dsb-st-h i{font-style:normal;font-size:11px;font-weight:700;color:var(--dim)}
+.dsb-st-w{font-size:11.5px;line-height:1.65;color:var(--muted);margin:3px 0 0;overflow-wrap:anywhere}
+.dsb-st-m{font-size:11px;line-height:1.7;color:var(--dim);margin:4px 0 0;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.dsb-st-m b{color:var(--text);font-weight:800}
+.dsb-nums{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-width:0}
+.dsb-num{flex:1 1 84px;min-width:0;background:var(--card2);border:1px solid var(--line);
+  border-radius:11px;padding:7px 9px}
+.dsb-num .k{font-size:11px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.dsb-num .v{font-size:16px;font-weight:800;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.dsb-bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:0 0 4px;min-width:0;
+  background:rgba(139,157,178,.14)}
+.dsb-bar span{display:block;height:100%}
+.dsb-barlg{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 11px;min-width:0}
+.dsb-tools{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px;min-width:0;max-width:100%}
+.dsb-ipt{flex:1 1 100%;width:100%;min-width:0;box-sizing:border-box;background:var(--card2);border:1px solid var(--line);color:var(--text);
+  border-radius:10px;padding:7px 9px;font-size:12.5px;font-family:inherit;overflow-wrap:anywhere}
+.dsb-chips{display:flex;flex-wrap:wrap;gap:5px;min-width:0;flex:1 1 100%;max-width:100%}
+.dsb-chip{background:var(--card2);border:1px solid var(--line);color:var(--muted);border-radius:9px;
+  padding:5px 9px;font-size:11.5px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap}
+.dsb-chip.on{color:var(--text);border-color:rgba(86,204,242,.6);background:rgba(86,204,242,.14)}
+.dsb-item{margin:8px 0 0;padding:9px 11px;border-radius:11px;background:var(--card2);
+  border:1px solid var(--line);min-width:0;overflow-wrap:anywhere;border-left-width:4px}
+.dsb-item .dsb-h{font-size:13px;font-weight:800;margin:0;overflow-wrap:anywhere}
+.dsb-item .dsb-h em{display:block;font-style:normal;font-weight:500;font-size:11px;color:var(--dim);
+  margin-top:2px;overflow-wrap:anywhere}
+.dsb-item .dsb-m{font-size:11.5px;line-height:1.7;color:var(--muted);margin:4px 0 0;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.dsb-hits{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0;min-width:0}
+.dsb-hit{font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px;border:1px solid var(--line);
+  color:var(--dim);background:rgba(139,157,178,.08);overflow-wrap:anywhere;max-width:100%}
+.dsb-hit em{font-style:normal;opacity:.8;font-weight:500}
+.dsb-fo{margin:6px 0 0;padding:7px 9px;border-radius:9px;background:rgba(139,157,178,.09);
+  font-size:11px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.dsb-fo b{color:var(--text)}
+.dsb-aux{margin:6px 0 0;padding:6px 9px;border-radius:9px;font-size:11px;line-height:1.7;
+  border:1px dashed rgba(255,197,49,.5);background:rgba(255,197,49,.07);color:var(--muted);
+  overflow-wrap:anywhere}
+.dsb-more{display:block;width:100%;margin:10px 0 0;background:var(--card2);border:1px solid var(--line);
+  color:var(--text);border-radius:10px;padding:8px;font-size:12.5px;font-weight:700;
+  font-family:inherit;cursor:pointer}
+@media(min-width:560px){.dsb-stages{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -1407,6 +1465,36 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div id="wl-cav"></div>
             <div class="wl-nums" id="wl-nums"></div>
             <div id="wl-box"><div class="skel"><i></i>监控清单加载中…（watchlist-status.json）</div></div>
+          </div>
+
+          <!-- ---------- ★ 做盘阶段看板：替代旧的「卖出警报」主提示 ----------
+               用户 2026-10-17 的分工定义（_用户分工与产品定义.md）：
+                 「具体的卖出操作可以我来做，但是我需要你帮我筛选品类、告诉我买入时机、
+                   当前处于做盘的什么环节，然后在拉升时也告诉我处于做盘的什么时期，
+                   让我不至于被套在高点，但是同时要有较大的利润，
+                   而不是稍微有点利润你就让我出掉大部分仓。」
+               → 本区块【只回答"现在处于什么阶段"】，不给"该减仓/该清仓"的指令。
+                 卖出痕迹（派发/拉升末期）降级为"辅助信息"，不再当主提示。
+               数据源：cs-quant/dealer_stage_board.cjs → dealer-stage-board.json
+               七个阶段：吸筹 / 拉升早期 / 拉升中期 / 拉升末期 / 派发 / 回落 / 平静
+               每个阶段给出：① 定义 ② 命中依据（带数值） ③ 历史上通常持续多久
+                            ④ 历史上进入该阶段【之后】的走势分布（p25/中位/p75，不是单一预测）
+               为什么放这一页：它和「监控清单」是同一层（状态描述），且与「卖出警报」并列时
+                 用户能直接对比"旧的主提示 vs 新的阶段描述"；不新开第 7 页签（手机底部导航 5 格）。
+               降级链：dealer-stage-board.json 拿不到 → 只空这一块，其他区块/6 页签照常。 -->
+          <div class="card span-all sec-dsb" id="sec-dsb">
+            <div class="sec-head"><h2>做盘阶段看板</h2><span class="sec-sub">当前在哪个环节 · 该阶段历史后续分布 · 不是卖出指令</span><span class="r" id="dsb-time">加载中…</span></div>
+            <p class="sec-note" id="dsb-meta">—</p>
+            <div class="dsb-rule" id="dsb-rule">阶段是【状态描述】，不是买卖建议。系统不替您决定卖多少、什么时候卖。</div>
+            <div class="dsb-stages" id="dsb-stages"><div class="skel"><i></i>阶段定义加载中…</div></div>
+            <div class="dsb-nums" id="dsb-nums"></div>
+            <div class="dsb-bar" id="dsb-bar"></div>
+            <div class="dsb-barlg" id="dsb-barlg"></div>
+            <div class="dsb-tools" id="dsb-tools">
+              <input id="dsb-q" class="dsb-ipt" type="search" placeholder="搜品名 / 箱子" autocomplete="off">
+              <div class="dsb-chips" id="dsb-chips"></div>
+            </div>
+            <div id="dsb-box"><div class="skel"><i></i>阶段数据加载中…（dealer-stage-board.json）</div></div>
           </div>
 
         </div>
@@ -2985,7 +3073,7 @@ function showPage(id){
      为什么不能放启动时一起取：启动阶段并发多个 fetch 会和 /api/live 抢时序，
      实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
      把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
-  if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); }
+  if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -2996,7 +3084,7 @@ function ensureSellAlerts(){
 /* 启动时用：只有「上次就停在信号页」才立刻下，其余情况一律等用户切过去 */
 function loadSellAlertsIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
-  if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); }
+  if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); }
 }
 function setPage(id, save){
   const pid = pageMeta(id).id;
@@ -4354,6 +4442,207 @@ function loadWatchlistIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
   if (tab === 'sig') ensureWatchlist();
 }
+
+/* =====================================================================
+   ★ 做盘阶段看板（dealer-stage-board.json）—— 替代旧的「卖出警报」主提示
+   ---------------------------------------------------------------------
+   用户 2026-10-17 的分工：「具体卖出操作我来做，你要告诉我当前处于做盘的
+   什么环节、拉升时处于什么时期」。
+   ★ 本区块的铁律（写在代码里，不靠自觉）：
+     1) 只说"现在处于什么阶段" + "该阶段历史上之后通常怎么走"（给 p25/中位/p75 区间），
+        绝不输出"该减仓/该清仓/该卖出"这类指令；
+     2) 派发 / 拉升末期命中时，只作为【辅助信息】用虚线框显示，
+        并明确写"这是状态描述，不是卖出信号"——用户明确否定过"稍微有点利润就出掉大部分仓"；
+     3) 每个阶段必须带【历史持续时长】与【之后走势分布】，不允许只给一个点预测；
+     4) 数据拿不到 → 只空这一块，其他区块/6 页签照常（降级链）。
+   ===================================================================== */
+let dsbData = null, dsbState = 'loading', dsbKick = false;
+let dsbQ = '', dsbStage = '', dsbShow = 20;
+const DSB_LIMIT = 20;
+
+function ensureStageBoard(){ if (dsbKick) return; dsbKick = true; loadStageBoard(); }
+async function loadStageBoard(){
+  try {
+    dsbData = await fetchJSON('./dealer-stage-board.json');
+    dsbState = dsbData ? 'ok' : 'fail';
+  } catch (e){ dsbData = null; dsbState = 'fail'; }
+  renderStageBoard();
+}
+function dsbPct(v, d){
+  if (!isNum(v)) return '—';
+  const n = d == null ? 1 : d;
+  return (v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(n) + '%';
+}
+function dsbPctNoSign(v, d){
+  if (!isNum(v)) return '—';
+  return (v * 100).toFixed(d == null ? 1 : d) + '%';
+}
+function dsbColor(){
+  const m = {};
+  const s = (dsbData && dsbData.stages) || {};
+  Object.keys(s).forEach(function(k){ m[k] = s[k].color || '#8c8c8c'; });
+  return m;
+}
+function renderStageBoard(){
+  const stagesBox = document.getElementById('dsb-stages');
+  const numsBox = document.getElementById('dsb-nums');
+  const barBox = document.getElementById('dsb-bar');
+  const box = document.getElementById('dsb-box');
+  if (!stagesBox || !box) return;
+  if (dsbState === 'loading'){
+    stagesBox.innerHTML = '<div class="skel"><i></i>阶段定义加载中…</div>';
+    box.innerHTML = '<div class="skel"><i></i>阶段数据加载中…（dealer-stage-board.json）</div>';
+    return;
+  }
+  if (!dsbData){
+    stagesBox.innerHTML = emptyBox('dealer-stage-board.json 还没生成（或线上没发布）。其他页面/区块不受影响。');
+    box.innerHTML = '';
+    setText('dsb-time', '—');
+    setText('dsb-meta', '数据文件不存在');
+    return;
+  }
+  setText('dsb-time', dsbData.atText || '—');
+  const cov = dsbData.coverage || {};
+  setText('dsb-meta', '覆盖 ' + (cov.items || 0) + ' 品（固定池 ' + (cov.pool || 0) + '）× 逐日 ' +
+    (cov.stateDays || 0).toLocaleString() + ' 个状态 · 阶段段数 ' + (cov.episodes || 0).toLocaleString() +
+    ' · 拉升段 ' + (cov.pullSegments || 0).toLocaleString());
+
+  /* --- 阶段定义 + 历史时长 + 后续分布 --- */
+  const order = dsbData.stageOrder || [];
+  const stat = dsbData.stageStats || {};
+  const col = dsbColor();
+  let sh = '';
+  order.forEach(function(k){
+    const s = stat[k];
+    if (!s) return;
+    const d3 = s.durTradingDaysAtLeast3;
+    const f60 = (s.fwd && s.fwd.d60 && !s.fwd.d60.insufficient) ? s.fwd.d60 : null;
+    sh += '<div class="dsb-st" style="border-left-color:' + (col[k] || '#8c8c8c') + '">' +
+      '<div class="dsb-st-h"><span>' + esc(s.name) + '</span>' +
+      '<i>占全部交易日 ' + dsbPctNoSign(s.dayShare, 1) + '</i></div>' +
+      '<p class="dsb-st-w">' + esc(s.what) + '</p>' +
+      '<p class="dsb-st-m">历史上通常持续 <b>' + (d3 ? d3.med : '—') + ' 交易日</b>' +
+      (d3 ? '（p25 ' + d3.p25 + ' / p75 ' + d3.p75 + '）' : '') +
+      (s.durCalDaysApproxAtLeast3 ? ' ≈ ' + s.durCalDaysApproxAtLeast3.med + ' 自然日' : '') + '</p>' +
+      (f60 ? '<p class="dsb-st-m">进入该阶段后 <b>60 个交易日</b>：' +
+        'p25 <b>' + dsbPct(f60.p25) + '</b> · 中位 <b>' + dsbPct(f60.med) + '</b> · p75 <b>' + dsbPct(f60.p75) + '</b>' +
+        ' · 上涨占比 ' + dsbPctNoSign(f60.win, 0) + '</p>' : '') +
+      '</div>';
+  });
+  stagesBox.innerHTML = sh;
+
+  /* --- 当前分布：数字卡 + 比例条 --- */
+  const cc = dsbData.currentCounts || {};
+  const total = order.reduce(function(a, k){ return a + (cc[k] || 0); }, 0) || 1;
+  let nh = '';
+  let bh = '';
+  let lh = '';
+  order.forEach(function(k){
+    const n = cc[k] || 0;
+    if (!n) return;
+    const s = stat[k] || {};
+    nh += '<div class="dsb-num"><div class="k">' + esc(s.name || k) + '</div>' +
+      '<div class="v" style="color:' + (col[k] || 'inherit') + '">' + n + '</div></div>';
+    const w = Math.max(0.6, n / total * 100);
+    bh += '<span style="width:' + w.toFixed(2) + '%;background:' + (col[k] || '#8c8c8c') + '"></span>';
+    lh += '<span class="dsb-hit" style="border-color:' + (col[k] || '#8c8c8c') + '">' +
+      esc(s.name || k) + ' ' + n + '</span>';
+  });
+  if (numsBox) numsBox.innerHTML = nh || '<div class="dsb-num"><div class="k">当前</div><div class="v">—</div></div>';
+  if (barBox) barBox.innerHTML = bh;
+  const barlg = document.getElementById('dsb-barlg');
+  if (barlg) barlg.innerHTML = lh;
+
+  /* --- 阶段筛选 chips --- */
+  const chips = document.getElementById('dsb-chips');
+  if (chips){
+    let ch = '<button class="dsb-chip' + (dsbStage === '' ? ' on' : '') + '" data-dsb-stage="">全部</button>';
+    order.forEach(function(k){
+      const n = cc[k] || 0;
+      if (!n) return;
+      ch += '<button class="dsb-chip' + (dsbStage === k ? ' on' : '') + '" data-dsb-stage="' + k + '">' +
+        esc((stat[k] && stat[k].name) || k) + ' ' + n + '</button>';
+    });
+    chips.innerHTML = ch;
+    Array.prototype.forEach.call(chips.querySelectorAll('[data-dsb-stage]'), function(b){
+      b.onclick = function(){ dsbStage = b.getAttribute('data-dsb-stage') || ''; dsbShow = DSB_LIMIT; renderStageBoard(); };
+    });
+  }
+
+  /* --- 逐品列表 --- */
+  const items = (dsbData.items || []).filter(function(x){
+    if (dsbStage && x.stage !== dsbStage) return false;
+    if (!dsbQ) return true;
+    const q = dsbQ.toLowerCase();
+    return (String(x.name || '').toLowerCase().indexOf(q) >= 0) ||
+      (String(x.caseName || '').toLowerCase().indexOf(q) >= 0);
+  });
+  /* 排序：持仓优先 → 拉升三档优先 → 派发 → 其余；同档按 20 日涨幅降序 */
+  const pri = function(x){
+    if (x.isHolding) return -1;
+    return (order.indexOf(x.stage) >= 0) ? order.indexOf(x.stage) : 9;
+  };
+  items.sort(function(a, b){
+    const p = pri(a) - pri(b);
+    if (p) return p;
+    return (b.change20 == null ? -9 : b.change20) - (a.change20 == null ? -9 : a.change20);
+  });
+  const shown = items.slice(0, dsbShow);
+  let ih = '';
+  shown.forEach(function(x){
+    const s = stat[x.stage] || {};
+    const f = (s.fwd && s.fwd.d60 && !s.fwd.d60.insufficient) ? s.fwd.d60 : null;
+    let hits = '';
+    (x.hits || []).forEach(function(t){
+      const val = (typeof t[1] === 'number') ? (Math.abs(t[1]) < 3 ? t[1].toFixed(3) : t[1].toFixed(2)) : (t[1] == null ? '—' : t[1]);
+      hits += '<span class="dsb-hit">' + esc(t[0]) + ' <em>' + esc(String(val)) + '</em>' +
+        (t[2] ? ' <em>' + esc(t[2]) + '</em>' : '') + '</span>';
+    });
+    ih += '<div class="dsb-item" style="border-left-color:' + (s.color || '#8c8c8c') + '">' +
+      '<p class="dsb-h">' + esc(x.name) +
+      '<em>' + esc(x.caseName || '') + ' · 数据到 ' + esc(x.asOf || '') +
+      (x.isHolding ? ' · ★ 您的持仓' : '') + '</em></p>' +
+      '<p class="dsb-m"><b style="color:' + (s.color || 'inherit') + '">' + esc(s.name || x.stage) + '</b>' +
+      ' · 现价 ¥' + (isNum(x.price) ? x.price.toFixed(2) : '—') +
+      ' · 近 20 日 ' + dsbPct(x.change20) +
+      ' · 距 60 日高 ' + dsbPct(x.ddFromHigh60) +
+      ' · 距 60 日低 ' + dsbPct(x.fromLow60) + '</p>' +
+      (hits ? '<div class="dsb-hits">' + hits + '</div>' : '') +
+      (f ? '<div class="dsb-fo">该阶段历史上（' + (f.n || 0) + ' 个样本）之后 60 个交易日：' +
+        'p25 <b>' + dsbPct(f.p25) + '</b> · 中位 <b>' + dsbPct(f.med) + '</b> · p75 <b>' + dsbPct(f.p75) + '</b>' +
+        ' · 上涨占比 <b>' + dsbPctNoSign(f.win, 0) + '</b>' +
+        (s.durTradingDaysAtLeast3 ? '；该阶段通常持续 <b>' + s.durTradingDaysAtLeast3.med + ' 交易日</b>' : '') +
+        '</div>' : '') +
+      ((x.stage === 'distribute' || x.stage === 'rallyLate')
+        ? '<div class="dsb-aux">⚠️ 辅助信息（不是卖出信号）：' +
+          (x.stage === 'rallyLate' ? '涨幅/时间已到后段且近 5 日放缓' : '在售量堆积进历史前 20%') +
+          '。这只是"位置/痕迹"描述 —— 系统不建议您据此减仓，卖多少、什么时候卖由您决定。</div>'
+        : '') +
+      '</div>';
+  });
+  let tail = '';
+  if (items.length > shown.length){
+    tail = '<button class="dsb-more" id="dsb-more">再显示 ' + Math.min(DSB_LIMIT, items.length - shown.length) +
+      ' 条（共 ' + items.length + ' 条符合条件）</button>';
+  } else if (!items.length){
+    tail = emptyBox('没有符合条件的标的（换个关键词或阶段）。');
+  } else {
+    tail = '<p class="sec-note" style="margin-top:10px">以上 ' + items.length + ' 条已全部显示。</p>';
+  }
+  box.innerHTML = ih + tail;
+  const moreBtn = document.getElementById('dsb-more');
+  if (moreBtn) moreBtn.onclick = function(){ dsbShow += DSB_LIMIT; renderStageBoard(); };
+}
+/* 搜索框：只绑定一次 */
+(function(){
+  const q = document.getElementById('dsb-q');
+  if (!q) return;
+  let t = null;
+  q.addEventListener('input', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ dsbQ = q.value.trim(); dsbShow = DSB_LIMIT; renderStageBoard(); }, 180);
+  });
+})();
 
 /* 阶段 → 徽标样式 */
 /* 本区块自己的百分比格式（1 位小数、带正负号）—— 不复用 pct()：那是 2 位小数，
