@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v15';
+const CACHE = 'cs-skin-app-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -79,7 +79,7 @@ const ASSETS = [
       **必须进 NET_FIRST**：它是「现在处于做盘的什么环节」的答案，卡在缓存里就是
       拿几天前的阶段做今天的判断 —— 同一个坑的第十一次。CACHE v13 → v14。
       体积控制：约 470 KB，但只在用户切到「信号」页才拉（懒加载），不拖首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
