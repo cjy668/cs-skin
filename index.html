@@ -1081,6 +1081,57 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   color:var(--text);border-radius:10px;padding:8px;font-size:12.5px;font-weight:700;
   font-family:inherit;cursor:pointer}
 @media(min-width:560px){.dsb-stages{grid-template-columns:1fr 1fr}}
+
+/* ============================================================================
+   ★ 2026-10-17 新增：「之后 60 日走势分布」三段区间条 + 拉升三形态徽标
+   ----------------------------------------------------------------------------
+   用户原话：「在每个品的阶段旁边，你会看到『之后 60 日走势分布』三段区间，
+   我只能看到拉升前拉升中这些，没有看到三段区间，只有距最低点、距最高点多少」
+   → 这里真的把它画出来：p25 ~ 中位 ~ p75 三段 + 上涨占比。
+   纪律：
+     · 类名前缀统一 fwd-（全新，零复现既有类名；先用 grep 确认过没被占用）
+     · 手机 390px 宽必须零横向溢出：容器 min-width:0 / max-width:100% / overflow:hidden，
+       刻度用 % 定位，文字用 nowrap + 小字号，长数字不撑破
+     · 数据拿不到（该阶段样本不足）时如实写「样本不足」，不画假条
+   ============================================================================ */
+.fwd-box{margin:7px 0 0;padding:7px 9px;border-radius:9px;background:rgba(86,204,242,.06);
+  border:1px solid rgba(86,204,242,.22);min-width:0;max-width:100%;overflow:hidden}
+.fwd-t{font-size:10.5px;line-height:1.5;color:var(--dim);margin:0 0 5px;overflow-wrap:anywhere}
+.fwd-t b{color:var(--text);font-weight:800}
+.fwd-track{position:relative;height:22px;border-radius:6px;background:rgba(139,157,178,.13);
+  margin:0 0 3px;overflow:hidden}
+.fwd-band{position:absolute;top:0;bottom:0;background:rgba(255,197,49,.28);
+  border-left:1px solid rgba(255,197,49,.75);border-right:1px solid rgba(255,197,49,.75)}
+.fwd-med{position:absolute;top:0;bottom:0;width:2px;background:#ffc531;
+  box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.fwd-zero{position:absolute;top:0;bottom:0;width:1px;background:rgba(139,157,178,.85)}
+.fwd-neg{position:absolute;top:0;bottom:0;background:rgba(255,107,107,.16)}
+.fwd-leg{display:flex;align-items:baseline;justify-content:space-between;gap:6px;
+  font-size:10.5px;line-height:1.5;color:var(--muted);font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;min-width:0}
+.fwd-leg span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fwd-leg b{color:var(--text)}
+.fwd-win{font-size:10.5px;font-weight:800;border-radius:5px;padding:0 5px;
+  border:1px solid rgba(139,157,178,.4);background:rgba(139,157,178,.12);color:var(--muted);white-space:nowrap}
+.fwd-win.fwd-up{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.fwd-win.fwd-down{color:var(--red);border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
+/* 拉升三形态徽标：A 吃断层（红）/ B 小拉升（黄）/ C 主拉升（绿） */
+.fwd-form{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin-left:5px;white-space:nowrap;border:1px solid var(--line)}
+.fwd-form.fwd-fa{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.14)}
+.fwd-form.fwd-fb{color:var(--yellow);border-color:rgba(255,197,49,.55);background:rgba(255,197,49,.14)}
+.fwd-form.fwd-fc{color:var(--green);border-color:rgba(47,208,122,.55);background:rgba(47,208,122,.14)}
+.fwd-note{margin:5px 0 0;padding:6px 9px;border-radius:8px;font-size:11px;line-height:1.7;
+  overflow-wrap:anywhere;color:var(--muted)}
+.fwd-note.fwd-fa{background:rgba(255,107,107,.09);border:1px solid rgba(255,107,107,.4)}
+.fwd-note.fwd-fb{background:rgba(255,197,49,.08);border:1px dashed rgba(255,197,49,.45)}
+.fwd-note.fwd-fc{background:rgba(47,208,122,.08);border:1px solid rgba(47,208,122,.35)}
+.fwd-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.fwd-tbl th,.fwd-tbl td{border-bottom:1px solid var(--line);padding:3px 4px;text-align:right;
+  white-space:nowrap;color:var(--muted)}
+.fwd-tbl th:first-child,.fwd-tbl td:first-child{text-align:left;white-space:normal}
+.fwd-tbl th{color:var(--dim);font-weight:700}
 </style>
 </head>
 <body>
@@ -1285,12 +1336,22 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           </div>
           <div id="op-long" class="span-all lt-list"><div class="card"><div class="skel"><i></i>长期方案生成中…（analysis.json）</div></div></div>
 
-          <!-- ---------- B. 短期苗头：只做观察与预警（视觉弱化，放后面） ---------- -->
+          <!-- ---------- B. 短期苗头：★ 2026-10-17 已移除（用户点名的四块之一） ----------
+               用户的说法：「市场的长期/短期方案…应该也是按以前的算法算出的」。
+               核查结果：这一块的每条信号都是 `signalType: "吸筹"` + `strength` 分数，
+               而「吸筹」和「计分模型」两套依据都已被对照检验证伪：
+                 · 吸筹宽版 件内 ρ=−0.0481；27 组网格存活 0/27；1,296 组置换仅 93 分位
+                 · 计分模型 高分样本前向 90 天 37.46% vs 同价位随机 38.20%
+               处理方式：**移除**（纯旧算法 / 已证伪，按用户给的三个选项里的第一档）。
+               不静默删：这里保留这段说明 + 页面上一张说明卡，代码删掉了渲染入口
+               （renderShortTerm 现在只会显示这张说明卡，不再渲染任何「短期苗头」标的）。
+               替代方案：看「监控清单」里的阶段 + 拉升三形态（A/B/C）与「工具」页的
+               spread_washout（本项目唯一通过样本外检验的信号）。 -->
           <div class="card span-all sec-st" id="sec-st">
-            <div class="sec-head"><h2>短期苗头</h2><span class="sec-sub">只是有苗头 · 不是买入建议</span><span class="r" id="st-time">分析生成中…</span></div>
-            <div class="alert warn" id="st-note">—</div>
+            <div class="sec-head"><h2>短期苗头（已移除）</h2><span class="sec-sub">依据已被对照检验证伪 · 不再展示任何标的</span><span class="r" id="st-time">已下线</span></div>
+            <div class="alert warn" id="st-note">这一块原来列的是「吸筹 + 计分强度」排序出来的短期标的，两套依据都已被证伪，所以整块移除。</div>
           </div>
-          <div id="op-short" class="span-all st-list"><div class="card"><div class="skel"><i></i>短期信号生成中…（analysis.json）</div></div></div>
+          <div id="op-short" class="span-all st-list" hidden></div>
           <div id="st-summary" class="span-all" hidden></div>
 
           <!-- ---------- C. 条件单机会：原有的 opportunities[]（一条都没删） ----------
@@ -1337,45 +1398,39 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
         <div class="page-title"><h1>信号</h1><span>吸筹 · 大户 · 跨平台价差 · 箱子 ROI</span></div>
         <div class="cards">
 
-          <!-- ---------- 🔴 已证伪标注（2026-10-16 加）：吸筹类判据三轮对照检验全部被证伪 ----------
-               处理方式选 B（保留证据链 + 显眼标注），不静默删代码：
-               区块仍在（它记录了大户成交流水这个原始事实），但顶部红色声明它不构成任何依据。
-               依据：reports/开发阶段评估报告.md §3「被对照检验杀掉的候选」——
+          <!-- ---------- 🔴 吸筹：2026-10-17 按用户要求【移除】 ----------
+               用户原话：「信号页的『吸筹』也被伪证了」。
+               上一轮（2026-10-16）的处理是「保留 + 显眼标红」，用户复看后仍认为不该留 → 本轮改成移除。
+               证据链（一字未改，仍在报告里）：
                  吸筹宽版 件内 ρ=−0.0481（同一只品内部反而更差）
                  吸筹 27 组网格 存活 0/27
                  吸筹 1,296 组全组合 置换仅 93 分位（<95 判为可能是噪声）
-               注意口径：本卡的数据源是 csqaq 成交流水（flows），
-               与被证伪的「吸筹合成分」不是同一条判据；但它同样**没有通过任何样本外对照检验**，
-               所以按同一纪律标注 —— 不许它进任何推荐。 -->
+               处理方式：**移除**两张「吸筹聚合」卡（多户共识 / 单次快照）与整张已证伪标注卡，
+               只留这张「已移除」说明卡 —— 绝不静默删，痕迹留在页面上。
+               JS 侧：renderSignals 里对 sig-cons / sig-acc 的渲染已改成只写这张说明，
+               不再输出任何吸筹标的（见 renderSignals 的 §吸筹移除）。 -->
           <div class="card span-all" id="sec-acc-dead">
             <div class="wl-cav">
-              <b>🔴 已证伪 · 吸筹类判据（下面两张「吸筹聚合」卡属于这一类）</b>
-              <i>⚠️ 仅供研究，不构成任何依据，也不进任何推荐。</i>
+              <b>🔴 吸筹区块已移除（2026-10-17）</b>
+              <i>不是修好了，是删掉了 —— 它的依据被三轮对照检验连续证伪。</i>
               <ol>
                 <li><b>吸筹宽版</b>：件内 ρ=<b>−0.0481</b> —— 同一只品内部，吸筹信号越强反而越差（方向是反的）。</li>
                 <li><b>吸筹 27 组参数网格</b>：存活 <b>0/27</b>。</li>
                 <li><b>吸筹 1,296 组全组合</b>：置换检验只有 <b>93 分位</b>（&lt;95 判为可能是噪声）。</li>
               </ol>
               <div class="wl-note" style="color:inherit;opacity:.9">
-                口径说明（不夸大也不含糊）：下面两张卡展示的是 <b>csqaq 成交流水里的「大户收货」</b>，
-                与被证伪的「吸筹合成分」<b>不是同一条判据</b>；但它同样没有通过任何样本外对照检验，
-                所以按同一条纪律处理 —— 保留数据、显眼标红、不进推荐。
+                原来这里有两张卡（「吸筹聚合 · 多户共识 / 单次快照」），数据源是 csqaq 成交流水里的「大户收货」。
+                它与被证伪的「吸筹合成分」不是同一条判据，但同样<b>没有通过任何样本外对照检验</b>，
+                所以按同一条纪律处理：<b>不再展示</b>。<br>
+                替代入口：<b>「工具」页的 spread_washout（断层率 12%~16%）</b> —— 本项目唯一通过样本外检验的信号；
+                以及<b>「监控清单」的阶段 + 拉升三形态（A/B/C）</b>。
+                证据链原文见 <code>reports/开发阶段评估报告.md §3</code>。
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">吸筹聚合 · 多户共识 <span class="r" id="sig-time">—</span><span class="wl-badge wl-b-dead">🔴 已证伪 · 仅供研究</span></div>
-            <div id="sig-cons"><div class="skel"><i></i>信号数据加载中…</div></div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">吸筹聚合 · 单次快照 <span class="r" id="sig-acc-n">—</span><span class="wl-badge wl-b-dead">🔴 已证伪 · 仅供研究</span></div>
-            <div id="sig-acc"><div class="skel"><i></i>信号数据加载中…</div></div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">看涨异动 <span class="r">求购增 / 在售减</span></div>
+            <div class="card-title">看涨异动 <span class="r" id="sig-time">—</span><span class="r">求购增 / 在售减</span></div>
             <div id="sig-bull"><div class="skel"><i></i>信号数据加载中…</div></div>
           </div>
 
@@ -1400,9 +1455,18 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div id="sig-whales"><div class="skel"><i></i>信号数据加载中…</div></div>
           </div>
 
-          <!-- ---------- 控盘测算：资金分档 + 资金不是瓶颈 + 量化风险 ---------- -->
+          <!-- ---------- 控盘测算：★ 2026-10-17 按用户要求核查算法后【改写口径 + 下线退出侧】 ----------
+               用户原话：「控盘测算我不知道是不是按照可行的算法算出的」。
+               核查结果（写在卡片里给用户看，不藏）：
+                 · 「多少钱能吃掉盘口」= 预算 ÷ (卖一价 × 在售量 × 可吃比例)。**纯算术**，
+                   每一个输入都能在盘口复核 —— 这部分可信，保留。
+                 · 「吃完能不能出来」（退出天数 / 有没有对手盘）= 用**日成交量**算的，
+                   而成交量序列冻结在 2025-10-26（三处源互证），**用它说"现在能不能出来"是错的**
+                   → 本轮把退出侧的数字全部下线，只写「成交量冻结，算不出」。
+                 · 这块从来没有通过任何对照检验（它不是预测类，是算术），
+                   所以标题改成「盘口厚度测算」，并明确写「吃掉挂单 ≠ 控盘」。 -->
           <div class="card span-all sec-ctl" id="sec-ctl">
-            <div class="sec-head"><h2>控盘测算</h2><span class="sec-sub">多少钱能吃掉盘口 · 吃完能不能出来</span><span class="r" id="ctl-time">分析生成中…</span></div>
+            <div class="sec-head"><h2>盘口厚度测算（原「控盘测算」）</h2><span class="sec-sub">多少钱能吃掉挂单 · 吃掉≠控盘 · 退出侧已下线</span><span class="r" id="ctl-time">分析生成中…</span></div>
             <p class="sec-note" id="ctl-note">—</p>
             <div id="ctl-box"></div>
           </div>
@@ -1528,8 +1592,51 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             ⚠️ 判据是在<b>你人工筛选的这 1,073 品名单</b>上标定的（非全市场无偏样本）；<b>未做时间外验证</b>；
             <b>未扣交易成本</b>；价格分位一律<b>相对自身全历史</b>（不用 <code>pre.price</code> 那个固定基线）。
             铺货墙 / 吸筹合成分 / 计分模型信号均已证伪 → 那一页只做<b>历史事实陈列</b>，不计分、不作为入场理由。
+            ★ 2026-10-17：那页的「逐次拉升表」已换成<b>新定义</b>（A 吃断层跳价 / B 小拉升 / C 主拉升），
+            跳价段不再算拉升。
           </p>
           <a class="btn" href="./mani-atlas.html" target="_blank" rel="noopener">打开做盘痕迹图谱 →</a>
+        </div>
+
+        <!-- ============================================================
+             ★ 2026-10-17 工具逐个评估（用户：「工具页的几个工具现在好像不怎么用得上」）
+             处理原则（用户给的三档）：已证伪/纯噪声 → 移除；口径错但有价值 → 改成可信口径；
+             有真实价值 → 结合已验证算法重新整合。四个工具逐个核查结果如下，写在页面上。
+             ============================================================ -->
+        <div class="card" id="tools-audit">
+          <h2>这四个工具，逐个评估过（2026-10-17）</h2>
+          <p class="sm" style="margin:6px 0 8px">
+            用户说「好像不怎么用得上」→ 逐个核查了它们的算法与验证状态，处理方式不一刀切：
+          </p>
+          <div class="wl-scroll">
+            <table class="fwd-tbl" style="font-size:11.5px">
+              <thead><tr><th>工具</th><th>它算什么</th><th>验证状态</th><th>处理</th></tr></thead>
+              <tbody>
+                <tr><td><b>断层率信号</b><br><span class="hint">washout</span></td>
+                  <td>当日断层率 (卖一−买一)/卖一 ∈ [12%,16%]</td>
+                  <td><b class="wl-pos">唯一通过样本外检验</b>：中位 +18.8% vs 对照 +14.1%（+4.6pp），prob30 35.8% vs 27.8%</td>
+                  <td><b>保留并置顶</b>（它是本项目唯一站得住的信号）</td></tr>
+                <tr><td><b>策略实验台</b><br><span class="hint">strategyLab</span></td>
+                  <td>9 个候选策略 × 前向 90 天，样本外 + 同标的随机对照</td>
+                  <td>存活 <b>2/9</b>（price_drop90_reversal、spread_washout），其余 7 个已被杀</td>
+                  <td><b>保留</b>（只信存活的两个；被杀的 7 个不许当依据）</td></tr>
+                <tr><td><b>组合风险</b><br><span class="hint">portfolioRisk</span></td>
+                  <td>集中度 / 已实现波动 / 减仓后重算</td>
+                  <td><b>纯算术面板</b>（不做价格预测）→ 不需要对照检验，但也不能当预测用</td>
+                  <td><b>保留</b>，标明「纯算术」</td></tr>
+                <tr><td><b>逐件体检</b><br><span class="hint">inspect</span></td>
+                  <td>A/B/C/D 评级（磨损段位 + 单价下限 + 断层率 + 退出天数 + 趋势修正）</td>
+                  <td><b>评级本身未经验证</b>：是减法构造出来的分档，没有做过「A 级 vs D 级前向收益」的对照检验；
+                      其中「退出天数」还依赖冻结的成交量</td>
+                  <td><b>改造</b>：保留可复核的字段（磨损/单价/断层率），<b>评级只作体检清单、不作依据</b>；
+                      「退出天数」按冻结数据标注</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="sm" style="margin:8px 0 0">
+            ★ 结论：没有一个是「纯噪声」，所以<b>一个都没删</b>；但只有断层率信号与 strategyLab 里存活的两个策略
+            算「已验证」。体检评级与组合风险是<b>事实型面板</b>，不是预测。
+          </p>
         </div>
 
         <!-- ============================================================
@@ -4477,6 +4584,72 @@ function dsbPctNoSign(v, d){
   if (!isNum(v)) return '—';
   return (v * 100).toFixed(d == null ? 1 : d) + '%';
 }
+
+/* =====================================================================
+   ★ 「之后 60 日走势分布」三段区间条 + 拉升三形态徽标（2026-10-17 新增）
+   ---------------------------------------------------------------------
+   用户原话：「在每个品的阶段旁边，你会看到『之后 60 日走势分布』三段区间，
+   我只能看到拉升前拉升中这些，没有看到三段区间，只有距最低点、距最高点多少」
+   → 这里真的把它画出来：一条轨道 + p25~中位~p75 的带状区间 + 零线 + 上涨占比。
+   纪律：
+     · 数据拿不到就写「样本不足」，绝不画假条、绝不用 0 冒充；
+     · 手机 390px 零横向溢出（容器 min-width:0 / overflow:hidden，刻度全用 % 定位）；
+     · 类名统一 fwd- 前缀（全新，不覆盖任何既有类名）。
+   ===================================================================== */
+function fwdPct(v){ return isNum(v) ? ((v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%') : '—'; }
+function fwdBar60(f, opt){
+  opt = opt || {};
+  if (!f || !isNum(f.p25) || !isNum(f.med) || !isNum(f.p75)){
+    return '<div class="fwd-box"><div class="fwd-t">该阶段历史上之后 60 日走势分布：<b>样本不足</b>' +
+      '（该阶段历史样本不够，不画假区间）</div></div>';
+  }
+  const lo = Math.min(f.p25, f.med, f.p75, 0);
+  const hi = Math.max(f.p25, f.med, f.p75, 0);
+  const span = (hi - lo) || 1;
+  const L0 = lo - span * 0.10, H0 = hi + span * 0.10, W = (H0 - L0) || 1;
+  const at = (v) => Math.max(0, Math.min(100, (v - L0) / W * 100));
+  const a = at(f.p25), b = at(f.p75), m = at(f.med), z = at(0);
+  const win = f.win, wcls = isNum(win) ? (win >= 0.5 ? ' fwd-up' : ' fwd-down') : '';
+  return '<div class="fwd-box">' +
+    '<div class="fwd-t">' + (opt.title || '该阶段历史上') + '之后 <b>60 个交易日</b>走势分布' +
+      (isNum(f.n) ? ' · 样本 <b>' + Number(f.n).toLocaleString() + '</b>' : '') + '</div>' +
+    '<div class="fwd-track">' +
+      '<div class="fwd-neg" style="left:' + Math.min(z, a).toFixed(2) + '%;width:' + Math.abs(a - z).toFixed(2) + '%"></div>' +
+      '<div class="fwd-band" style="left:' + a.toFixed(2) + '%;width:' + Math.max(1.5, b - a).toFixed(2) + '%"></div>' +
+      '<div class="fwd-med" style="left:' + m.toFixed(2) + '%"></div>' +
+      '<div class="fwd-zero" style="left:' + z.toFixed(2) + '%"></div>' +
+    '</div>' +
+    '<div class="fwd-leg">' +
+      '<span>p25 <b>' + fwdPct(f.p25) + '</b></span>' +
+      '<span>中位 <b>' + fwdPct(f.med) + '</b></span>' +
+      '<span>p75 <b>' + fwdPct(f.p75) + '</b></span>' +
+    '</div>' +
+    '<div class="fwd-leg" style="margin-top:3px">' +
+      '<span>上涨占比 <b class="fwd-win' + wcls + '">' + (isNum(win) ? Math.round(win * 100) + '%' : '—') + '</b></span>' +
+      (isNum(f.p90) ? '<span>p90 <b>' + fwdPct(f.p90) + '</b></span>' : '<span>p90 —</span>') +
+    '</div>' +
+    (opt.foot ? '<div class="fwd-t" style="margin:5px 0 0">' + opt.foot + '</div>' : '') +
+    '</div>';
+}
+/* 拉升三形态徽标：A 吃断层跳价（红）/ B 小拉升·筹备吸货（黄）/ C 主拉升（绿） */
+const FWD_FORM_NAME = { A: '假拉升·吃断层跳价', B: '小拉升·筹备吸货', C: '主拉升' };
+function fwdFormBadge(form, name){
+  if (!form) return '';
+  const c = form === 'A' ? 'fwd-fa' : (form === 'B' ? 'fwd-fb' : 'fwd-fc');
+  return '<span class="fwd-form ' + c + '">' + esc(name || FWD_FORM_NAME[form] || form) + '</span>';
+}
+function fwdFormNote(form, note){
+  if (!form || !note) return '';
+  const c = form === 'A' ? 'fwd-fa' : (form === 'B' ? 'fwd-fb' : 'fwd-fc');
+  return '<div class="fwd-note ' + c + '">' + esc(note) + '</div>';
+}
+function wlStageFwd(stage){
+  const m = (wlData && wlData.stageFwd) || null;
+  if (!m || !stage) return null;
+  const f = m[stage];
+  if (!f || f.insufficient) return null;
+  return f;
+}
 function dsbColor(){
   const m = {};
   const s = (dsbData && dsbData.stages) || {};
@@ -4600,6 +4773,7 @@ function renderStageBoard(){
     });
     ih += '<div class="dsb-item" style="border-left-color:' + (s.color || '#8c8c8c') + '">' +
       '<p class="dsb-h">' + esc(x.name) +
+      (x.form ? fwdFormBadge(x.form, x.formName) : '') +
       '<em>' + esc(x.caseName || '') + ' · 数据到 ' + esc(x.asOf || '') +
       (x.isHolding ? ' · ★ 您的持仓' : '') + '</em></p>' +
       '<p class="dsb-m"><b style="color:' + (s.color || 'inherit') + '">' + esc(s.name || x.stage) + '</b>' +
@@ -4608,11 +4782,13 @@ function renderStageBoard(){
       ' · 距 60 日高 ' + dsbPct(x.ddFromHigh60) +
       ' · 距 60 日低 ' + dsbPct(x.fromLow60) + '</p>' +
       (hits ? '<div class="dsb-hits">' + hits + '</div>' : '') +
-      (f ? '<div class="dsb-fo">该阶段历史上（' + (f.n || 0) + ' 个样本）之后 60 个交易日：' +
-        'p25 <b>' + dsbPct(f.p25) + '</b> · 中位 <b>' + dsbPct(f.med) + '</b> · p75 <b>' + dsbPct(f.p75) + '</b>' +
-        ' · 上涨占比 <b>' + dsbPctNoSign(f.win, 0) + '</b>' +
-        (s.durTradingDaysAtLeast3 ? '；该阶段通常持续 <b>' + s.durTradingDaysAtLeast3.med + ' 交易日</b>' : '') +
-        '</div>' : '') +
+      /* ★ 用户点名的缺口：这里以前只有一行文字，现在真的画出三段区间（p25~中位~p75 + 上涨占比） */
+      fwdBar60(x.fwd60 || f, {
+        title: '该阶段（' + esc(s.name || x.stage) + '）历史上',
+        foot: (s.durTradingDaysAtLeast3 ? ('该阶段通常持续 <b>' + s.durTradingDaysAtLeast3.med + ' 交易日</b>（p25 ' +
+          s.durTradingDaysAtLeast3.p25 + ' / p75 ' + s.durTradingDaysAtLeast3.p75 + '）') : '')
+      }) +
+      (x.form ? fwdFormNote(x.form, x.formNote) : '') +
       ((x.stage === 'distribute' || x.stage === 'rallyLate')
         ? '<div class="dsb-aux">⚠️ 辅助信息（不是卖出信号）：' +
           (x.stage === 'rallyLate' ? '涨幅/时间已到后段且近 5 日放缓' : '在售量堆积进历史前 20%') +
@@ -4727,6 +4903,8 @@ function wlItemHTML(it){
   let h = '<div class="wl-item ' + wlStageItemCls(it.stage) + (tiny ? ' wl-tiny' : '') + '">';
   h += '<div class="wl-h">' + esc(it.name || '—') +
     '<span class="wl-badge ' + wlStageCls(it.stage) + '">' + esc(it.stage) + ' · ' + n2(it.stageScore) + '/100</span>' +
+    /* ★ 拉升三形态（第二根轴）：阶段旁边直接标出来。A = 这段涨幅是吃断层跳价（不是拉升） */
+    (it.form ? fwdFormBadge(it.form, FWD_FORM_NAME[it.form]) : '') +
     (it.isHolding ? '<span class="wl-badge wl-b-hold">持仓中</span>' : '') +
     (it.sellSignal ? '<span class="wl-badge wl-b-dead">卖出信号：' + esc(it.sellSignalType || '命中') + '</span>' : '') +
     (tiny ? '<span class="wl-badge wl-b-dead">容量不足</span>' : '') +
@@ -4740,6 +4918,14 @@ function wlItemHTML(it){
     '<br>距 180 日高点 ' + wlP1(it.fallFrom180High) +
     '　距 21 日低点 ' + wlP1(it.riseFrom21Low) +
     '　形态归类 ' + esc(it.type || '—') + '</div>';
+  /* ★★ 用户点名的缺口就在这里补上：以前这一行只有「距高点/距低点」，
+     现在把该阶段【之后 60 个交易日走势分布】的三段区间真的画出来。
+     数据来源 = watchlist-stage-fwd.json（同一个阶段判定函数在历史上逐日回放）。 */
+  h += fwdBar60(wlStageFwd(it.stage), {
+    title: '该阶段（' + esc(it.stage) + '）历史上',
+    foot: ((wlData && wlData.stageFwdMeta) ? ('口径：' + (wlData.stageFwdMeta.caveats || []).map(function(cv){ return String(cv).replace(/[。；;\s]+$/, ''); }).join(' ／ ')) : '')
+  });
+  if (it.form) h += fwdFormNote(it.form, it.formNote);
   h += '<div class="wl-hits">' + arrOf(it.hits).map(wlHitChip).join('') + '</div>';
   if (it.typeNote) h += '<div class="wl-note">' + esc(it.typeNote) + '</div>';
   if (it.note) h += '<div class="wl-note">' + esc(it.note) + '</div>';
@@ -4942,6 +5128,43 @@ function renderWatchlist(){
     '<b>四条全部不通过</b> —— 中位净收益 −6.64% ~ −28.03%，且<b>全部跑输同期随机买入（−5.11%）</b>；' +
     '96 个出场组合里 <b>0 个为正</b>。所以本区块的「拉升前」只描述状态，' +
     '<b>不构成买入依据</b>（详见 <code>reports/入场规则回测报告.md</code>）。</div>';
+
+  /* =====================================================================
+     ★ ⑦ 拉升三形态（2026-10-17 新板块）：用户定义的 A / B / C
+     ---------------------------------------------------------------------
+     用户原话：「这肯定不是拉升阶段，是有人买了几个 3.2 左右的断层，然后在售就直接
+     到 4.13 了」「10.5/10.6/10.12 三天有小拉升，可能是筹备吸货的信号」
+     → 本板块把判定口径、每层门槛、当前段数摊开给用户看。
+     ===================================================================== */
+  const RF7 = wlData.rallyForms;
+  h += '<div class="wl-sec">⑦ 拉升三形态（新定义 · A 吃断层跳价 / B 小拉升·筹备吸货 / C 主拉升）</div>';
+  if (!RF7){
+    h += '<p class="wl-note">⚠️ 没有装载到 data/rally-forms.json → 本板块留空（先跑 <code>node cs-quant/recalc_rally_forms.cjs</code>）。' +
+      '上面的阶段判定仍是老口径（只看涨了多少），请以「吃断层跳价不算拉升」这条为准。</p>';
+  } else {
+    h += '<div class="wl-note">' +
+      '<b>A 吃断层跳价 = 不是拉升</b>：单日涨幅占整段 ≥50% + 跳价日在售量比前 10 日中位 ≤−10% + 之后 5 个交易日没继续上行（三条同时成立）。' +
+      '<b>B 小拉升·筹备吸货 = 早期信号，不是入场点</b>：涨幅 < 本层门槛 + 没突破前高 + 近 12 个自然日内 ≥2 根明显单日上涨。' +
+      '<b>C 主拉升</b>：涨幅 ≥ 本层门槛 + 连续上涨 ≥3 日 + 上涨日 ≥4 + 突破段前 60 日高点。' +
+      '</div>' +
+      '<div class="wl-note">' + esc((RF7.method && RF7.method.volumeNote) || '') + '</div>' +
+      '<div class="wl-scroll"><table class="fwd-tbl"><thead><tr><th>盘子规模层</th><th>盘口在售金额</th><th>主拉升门槛(p75)</th><th>该层品数</th></tr></thead><tbody>';
+    const tiers7 = RF7.tiers || [];
+    const cuts7 = (RF7.tierCuts && RF7.tierCuts.cuts) || [];
+    tiers7.forEach(function(t, i){
+      const lo = i === 0 ? 0 : cuts7[i - 1];
+      const hi = i < cuts7.length ? cuts7[i] : null;
+      const rng = hi == null ? ('≥ ¥' + fmtNum(lo, 0)) : ('¥' + fmtNum(lo, 0) + '~¥' + fmtNum(hi, 0));
+      h += '<tr><td>' + esc(t.name) + '</td><td>' + rng + '</td><td><b>' +
+        (isNum(t.thr) ? (t.thr * 100).toFixed(0) + '%' : '—') + '</b></td><td>' + n2(t.nItems) + '</td></tr>';
+    });
+    h += '</tbody></table></div>' +
+      '<div class="wl-note">每层门槛 = 该层「结构合格段」（排除 A、连续上涨≥3、上涨日≥4、突破段前 60 日高、单日占比&lt;80%）涨幅分布的 <b>p75</b>。' +
+      '数据依据、重算前后段数对比、两个案例的逐日对照都在 <code>reports/拉升重新定义-重算报告.md</code>。' +
+      (RF7.counts ? ('　旧口径 <b>' + n2((RF7.counts.officialOld || {}).n) + ' 段</b> → 新口径主拉升 <b>' +
+        n2((RF7.counts.forms || {}).C) + ' 段</b>（A ' + n2((RF7.counts.forms || {}).A) + ' / B ' + n2((RF7.counts.forms || {}).B) + '）。') : '') +
+      '</div>';
+  }
   h += '<p class="wl-note">' + tMd(wlData.disclaimer || '') + '</p>';
 
   box.innerHTML = h;
@@ -6348,9 +6571,14 @@ function renderSignals(){
   const bear = (s && Array.isArray(s.bearAlt)) ? s.bearAlt : null;
   const roi = (s && Array.isArray(s.roiTop)) ? s.roiTop : null;
 
-  setText('sig-acc-n', acc ? ('共 ' + acc.length + ' 条') : '—', 'muted');
-  listBox($('sig-cons'), cons, '没有多个大户同时收货的品种（共识为空 = 空仓等待）', accRow, 10);
-  listBox($('sig-acc'), acc, '暂无吸筹快照', accRow, 10);
+  /* ★ 吸筹：2026-10-17 按用户要求【移除】。
+     两张卡（多户共识 / 单次快照）的 DOM 已经被删掉 → 这里不再往 sig-cons / sig-acc 写任何东西。
+     signals.json 里的 consensus / accumulation 字段照旧保留在数据文件里（不删数据，只停止展示），
+     证据链在报告里，页面上留了一张「已移除」说明卡（#sec-acc-dead）。
+     纪律：绝不把已证伪的东西换个名字继续端上来。 */
+  const deadCons = $('sig-cons'), deadAcc = $('sig-acc');
+  if (deadCons) deadCons.innerHTML = '';
+  if (deadAcc) deadAcc.innerHTML = '';
   listBox($('sig-bull'), bull, '暂无看涨异动', altRow, 10);
   listBox($('sig-bear'), bear, '暂无看跌异动', altRow, 10);
   listBox($('sig-roi'), roi, '暂无箱子 ROI 数据', roiRow, 10);
@@ -6733,6 +6961,17 @@ function renderLongTerm(){
   if (note) note.innerHTML = (lt && lt._定位)
     ? ('<b>这一区是什么</b>' + esc(lt._定位))
     : '<b>这一区是什么</b>可实际打入的确定性方案：供给受限 + 需求刚性 + 能扛 7 天锁定 + 明确退出条件。';
+  /* ★ 2026-10-17（用户点名「市场的长期/短期方案」）：长期方案这一块【保留但改写口径】
+     核查结果：它排的依据是**可复核的供给/需求事实**（存世量 180 天增速、在售/存世比、
+     24h 成交、求购单数、租赁年化），不是已证伪的「吸筹 / 计分模型」。
+     但它同样**没有做过前向对照检验** → 必须写明「研究用、不是已验证的买入依据」。
+     这是用户给的三个选项里的第二档：改成可信的数据和方案（口径写清 + 标注未验证）。 */
+  if (note) note.innerHTML += '<div class="alert warn" style="margin-top:8px">' +
+    '<b>口径已改写（2026-10-17）</b>：这一区保留，但排序依据已核查清楚 —— 用的是' +
+    '<b>存世量增速 / 在售÷存世 / 24h 成交 / 求购单数 / 租赁年化</b>这些<b>可复核的供给与需求事实</b>，' +
+    '<b>不是</b>已被证伪的「吸筹信号 / 计分模型评分」（那两套已从短期块整块移除）。' +
+    '但要注意：<b>本区没有做过前向对照检验</b>（没有「按这套规则买入 vs 随机买入」的回测），' +
+    '所以它是<b>研究用的候选清单</b>，不是已验证的买入依据；所有收益数字都是<b>未扣 1.00%~2.485% 往返成本与 7 天冷却</b>的毛额。</div>';
   const sum = $('lt-summary');
   if (sum) sum.innerHTML = (lt && lt.summary) ? ('<p class="hint" style="margin-top:8px"><b>本轮结论</b>　' + esc(lt.summary) + '</p>') : '';
   const bsEl = $('lt-basis');
@@ -6781,37 +7020,26 @@ function signalHTML(s){
   '</div>';
 }
 function renderShortTerm(){
-  const box = $('op-short'); if (!box) return;
+  /* ★ 2026-10-17：整块移除（用户点名的「短期方案」）。
+     原来这里渲染的是 analysis.shortTerm.signals —— 每条都是 signalType:"吸筹" +
+     计分 strength 排出来的。两套依据都已被对照检验证伪（吸筹 ρ=−0.0481 / 27 组网格 0/27；
+     计分 37.46% vs 随机 38.20%），所以按用户给的三个选项选「移除」。
+     不静默删：保留这个函数与说明卡，只清空标的列表，并把移除原因写在卡片里。 */
+  const box = $('op-short');
   const a = analysisData, st = (a && a.shortTerm) ? a.shortTerm : null;
-  setText('st-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
+  setText('st-time', '已下线（2026-10-17）', 'muted');
   const note = $('st-note');
-  if (note) note.innerHTML = (st && st._定位)
-    ? ('<b>⚠️ 先说清楚：</b>' + esc(st._定位))
-    : '<b>⚠️ 先说清楚：</b>只做观察与预警，不构成买入建议（7 天 CD 让短线无法止损）';
+  if (note){
+    const n = arrOf(st && st.signals).length;
+    note.innerHTML = '<b>已移除，不是修好了：</b>这一块原来按「吸筹信号 + 计分强度」排出 ' + n +
+      ' 个短期标的，两条依据都被对照检验证伪 —— 吸筹宽版件内 ρ=−0.0481、27 组参数网格存活 0/27、' +
+      '1,296 组置换仅 93 分位；计分模型高分样本前向 90 天 37.46%，同价位随机 38.20%。' +
+      '所以整块下线，不再展示任何标的。<b>替代入口</b>：「监控清单」的阶段 + 拉升三形态（A 吃断层 / B 小拉升 / C 主拉升）、' +
+      '「工具」页的 spread_washout（本项目唯一通过样本外检验的信号）。';
+  }
   const sum = $('st-summary');
-  const sigs = (st && Array.isArray(st.signals)) ? st.signals : null;
-  const gaps = arrOf(st && st.dataGaps);
-  const sca = (st && st.scanning) || null;
-  if (sum){
-    if (st && (st.summary || gaps.length || sca)){
-      sum.hidden = false;
-      sum.innerHTML = '<div class="card"><div class="card-title">本轮扫描说明 <span class="r">' +
-          (sca && sca.kept != null ? ('保留 ' + fmtNum(Calc.toNum(sca.kept), 0) + ' 条 / 门槛 ' + fmtNum(Calc.toNum(sca.threshold), 0)) : '短期轨') +
-        '</span></div>' +
-        (st.summary ? '<p class="sec-note">' + esc(st.summary) + '</p>' : '') +
-        (sca ? '<p class="hint">扫描：异动榜 ' + n2(sca.alterationRows) + ' 行 → 去重 ' + n2(sca.distinctNames) +
-          ' 个品种 → 候选 ' + n2(sca.candidates) + ' → 保留 ' + n2(sca.kept) + '（阈值 ' + n2(sca.threshold) + '）</p>' : '') +
-        (gaps.length ? '<details class="sec-more"><summary>这次没拿到的数据（' + gaps.length + ' 条）——为什么有些信号出不来</summary>' +
-          '<ul class="risks">' + gaps.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>' : '') +
-        '<p class="hint">再次强调：这一区只用于观察与预警。7 天 CD 意味着看到苗头也来不及止损，所以不构成买入建议。</p>' +
-        '</div>';
-    } else sum.hidden = true;
-  }
-  if (!sigs || !sigs.length){
-    box.innerHTML = '<div class="card">' + (st ? emptyBox('这一轮没有值得记的苗头') : anaWait()) + '</div>';
-    return;
-  }
-  box.innerHTML = sigs.map(signalHTML).join('');
+  if (sum){ sum.hidden = true; sum.innerHTML = ''; }
+  if (box){ box.hidden = true; box.innerHTML = ''; }
 }
 
 /* =====================================================================
@@ -6988,16 +7216,30 @@ function renderControlFeasibility(){
   setText('ctl-time', a ? (a.updatedAtText || '—') : (analysisState === 'fail' ? 'analysis.json 未生成' : '分析生成中…'), 'muted');
   const note = $('ctl-note');
   if (note){
-    note.innerHTML = '<b>这一区问的是什么</b>「拿多少钱能把这个品种的盘口吃掉、吃掉之后能不能出掉」。' +
+    note.innerHTML = '<b>这一区问的是什么</b>「拿多少钱能把这个品种的盘口吃掉」。' +
       '注意：<b>吃掉挂单 ≠ 控住流通盘</b>——在售量只占存世量的个位数百分比。';
   }
+  /* ★ 2026-10-17 按用户要求核查算法后的改写（用户：「控盘测算我不知道是不是按可行的算法算出的」）
+     算法写清楚（可复核）：
+        可吃 ≥50% 在售 的品种数 = count( 预算 ÷ 2 ≥ 卖一价 × 在售量 × 50% )
+        可整本吃光     = count( 预算 ≥ 卖一价 × 在售量 )
+     两个输入（卖一价、在售量）都是实时盘口字段 → 这部分是**算术事实**，保留。
+     退出侧（「吃完能不能出来」/ 日成交 / 清盘天数）用的是**日成交量**，
+     而成交量序列冻结在 2025-10-26 → 拿它描述"现在"是错的 → 本轮全部下线。 */
+  const CTL_BANNER = '<div class="alert warn"><b>口径已核查（2026-10-17）</b><br>' +
+    '① <b>保留的是纯算术</b>：「可吃 ≥50% 在售」= 预算 ÷ 2 ≥ 卖一价 × 在售量 × 50%；「可整本吃光」= 预算 ≥ 卖一价 × 在售量。' +
+    '输入只有卖一价和在售量两个实时盘口字段，任何一个都能在盘口复核 → 这一部分可信。<br>' +
+    '② <b>已下线的部分</b>：「吃完能不能出来 / 30 天内清得掉 / 日成交 0 的品种数」——它们全部依赖<b>日成交量</b>，' +
+    '而成交量序列冻结在 <b>2025-10-26</b>（三处独立数据源互证），拿它说"现在能不能出来"是错的，所以整块隐藏。<br>' +
+    '③ <b>它从来没有通过任何对照检验</b>（它不是预测模型，是算术）→ 所以标题改成「盘口厚度测算」，' +
+    '并且再强调一次：吃光挂单 ≠ 控盘，退出才是真正的瓶颈，而退出这一侧现在算不出（缺成交量）。</div>';
   if (!cf){
-    box.innerHTML = anaWait(); return;
+    box.innerHTML = CTL_BANNER + anaWait(); return;
   }
   const fc = cf.floatControl || {}, fcs = fc.summary || {};
   const tiers = Array.isArray(cf.capitalTiers) ? cf.capitalTiers : [];
   const sc = Array.isArray(fc.scenarios) ? fc.scenarios : [];
-  let h = '';
+  let h = CTL_BANNER;
 
   /* 一句话结论 */
   if (cf.capitalIsNotBottleneck){
@@ -7006,55 +7248,37 @@ function renderControlFeasibility(){
     h += '<div class="concl">' + esc(String(fcs.verdict)) + '</div>';
   }
 
-  /* 资金分档表（¥5万→¥500万） */
+  /* 资金分档表（¥5万→¥500万）—— ★ 退出侧一列（30 天内清得掉）已下线：依赖冻结的成交量 */
   if (tiers.length){
     h += '<div class="tiers-wrap"><table class="tiers"><thead><tr>' +
-      '<th>资金档</th><th>可吃≥50%在售</th><th>可整本吃光</th><th>30 天内清得掉</th></tr></thead><tbody>' +
+      '<th>资金档</th><th>可吃≥50%在售</th><th>可整本吃光</th></tr></thead><tbody>' +
       tiers.map(function(t){
-        const zero = t.canAbsorbAllTradeable === 0 || t.canAbsorbAllTradeable == null;
         return '<tr><td>' + esc(String(t.label || '')) + '</td>' +
           '<td>' + n2(t.canAbsorbHalf) + '</td>' +
-          '<td>' + n2(t.canAbsorbAll) + '</td>' +
-          '<td class="' + (zero ? 'bad' : 'ok') + '">' + n2(t.canAbsorbAllTradeable) + '</td></tr>';
+          '<td>' + n2(t.canAbsorbAll) + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
-      '<p class="hint">「30 天内清得掉」= 整本吃光后还能在 30 天内卖出（按日成交量估）。' +
-        (tiers.every(function(t){ return t.canAbsorbAllTradeable === 0; })
-          ? '<b class="neg">所有资金档都是 0 个</b>：钱再多也买不到对手盘。' : '') + '</p>';
-    const t0 = tiers[0];
-    if (t0.exitFeasibility) h += '<p class="hint">' + esc(String(t0.exitFeasibility)) + '</p>';
+      '<p class="hint">「可整本吃光」= 预算够买下当天全部在售挂单的品种数（纯算术）。' +
+        '<b>「30 天内清得掉」这一列已下线</b>：它按日成交量估，而成交量序列冻结在 2025-10-26，不能用来描述现在。</p>';
   }
 
-  /* 盘口测算（float-control）：预算 → 能吃多少、其中真能退出的有多少 */
+  /* 盘口测算（float-control）：预算 → 能吃多少。★ 「其中退出不困难」已下线（同因：缺成交量） */
   if (sc.length){
-    h += '<div class="card-title" style="margin-top:14px">盘口实测：不同预算能吃下多少 <span class="r">国内悠悠+BUFF 真实盘口</span></div>' +
+    h += '<div class="card-title" style="margin-top:14px">盘口实测：不同预算能吃下多少 <span class="r">国内悠悠+BUFF 真实盘口 · 纯算术</span></div>' +
       '<div class="tiers-wrap"><table class="tiers"><thead><tr>' +
-      '<th>预算</th><th>可吃≥50%在售</th><th>其中退出不困难</th></tr></thead><tbody>' +
+      '<th>预算</th><th>可吃≥50%在售</th></tr></thead><tbody>' +
       sc.map(function(x){
         return '<tr><td>' + esc(String(x.label || '').replace('预算 ', '')) + '</td>' +
-          '<td>' + n2(x.absorbableCount) + '</td>' +
-          '<td class="' + (x.realisticCount === 0 ? 'bad' : 'ok') + '">' + n2(x.realisticCount) + '</td></tr>';
+          '<td>' + n2(x.absorbableCount) + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
-      (fcs.verdict ? '<p class="hint">' + esc(String(fcs.verdict)) + '</p>' : '');
+      '<p class="hint">这张表只回答「钱够不够吃下挂单」。它<b>不回答</b>「吃完能不能出来」—— 那一侧要成交量，' +
+      '现在拿不到（序列冻结在 2025-10-26），所以不下结论。</p>';
   }
 
-  /* 出不来：退出困难桶 */
-  const eb = fc.exitBuckets20k;
-  if (eb){
-    h += '<div class="rows" style="margin-top:10px">' +
-      '<div class="row"><span class="rn">¥2 万吃半盘后出不来<em>日成交 0（无对手盘） + 清盘 > 30 天</em></span>' +
-        '<span class="rv neg">' + n2((Calc.toNum(eb.zeroVolume) + Calc.toNum(eb.over30Days))) + ' 个</span></div>' +
-      '<div class="row"><span class="rn">其中：日成交为 0</span><span class="rv">' + n2(eb.zeroVolume) + ' 个</span></div>' +
-      '<div class="row"><span class="rn">其中：清仓需要 &gt; 30 天</span><span class="rv">' + n2(eb.over30Days) + ' 个</span></div>' +
-      '<div class="row"><span class="rn">进出皆可（真能做）</span><span class="rv pos">' + n2(eb.tradable) + ' 个</span></div>' +
-      '<div class="row"><span class="rn">微盘品种数（可吃半盘）</span><span class="rv">' + n2(fcs.microCapCount) + ' 个</span></div>' +
-    '</div>';
-    if (isNum(eb.zeroVolume) && isNum(eb.over30Days) && (eb.zeroVolume + eb.over30Days) > 0){
-      const tot = Calc.toNum(fcs.microCapCount) || (eb.zeroVolume + eb.over30Days + Calc.toNum(eb.tradable));
-      h += '<div class="concl bad"><b>42% 出不来：</b>¥2 万吃掉一半挂单的 ' + n2(fcs.microCapCount) + ' 个微盘品种里，' +
-        n2(eb.zeroVolume + eb.over30Days) + ' 个（' + (tot ? ((eb.zeroVolume + eb.over30Days) / tot * 100).toFixed(0) + '%' : '—') +
-        '）日成交为 0 或清仓要 &gt; 30 天——<b>买得进、出不来</b>。</div>';
-    }
-  }
+  /* 出不来：退出困难桶 —— ★ 2026-10-17 下线（全部依赖日成交量，而成交量冻结在 2025-10-26） */
+  h += '<div class="concl"><b>退出侧：算不出（已下线）。</b>' +
+    '原来这里会给出「日成交 0 的品种数 / 清盘 &gt; 30 天 / 进出皆可」三档，靠的都是<b>日成交量</b> —— ' +
+    '而成交量序列冻结在 <b>2025-10-26</b>（355 天前，三处独立数据源互证），用它描述"现在能不能出来"是错的。' +
+    '所以这一侧本轮不给数字；等实时成交量接上再补。<b>结论仍然是：吃掉挂单不等于控盘，退出才是瓶颈。</b></div>';
 
   /* 口径纠正：旧口径低估了多少 */
   const cmp = fc.ratioDomesticVsSkinport;
