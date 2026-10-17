@@ -183,7 +183,7 @@ function stageBadge(r){
   if (!r.nPulls) cls += ' mt-none';
   else if (r.nPulls >= 4) cls += ' mt-warn';
   else cls += ' mt-ok';
-  return '<span class="'+cls+'">'+(r.nPulls? r.nPulls+' 次拉升' : '无拉升')+'</span>';
+  return '<span class="'+cls+'">'+(r.nPulls? r.nPulls+' 次主拉升' : '无主拉升')+'</span>';
 }
 function rowHtml(r){
   var last = r.lastPull;
@@ -193,10 +193,10 @@ function rowHtml(r){
     +   '<div class="mt-kv">现价 <b>'+yuan(r.price)+'</b>'
     +     (r.pctAllNow!=null? '（全历史 '+pct(r.pctAllNow,0)+' 分位）' : '')
     +     ' · 在售 '+int(r.listed)+' · 求购 '+int(r.buyNum)
-    +     ' · 拉升 <b>'+r.nPulls+'</b> 次'
+    +     ' · 主拉升 <b>'+r.nPulls+'</b> 次'
     +   '</div>'
     +   '<div class="mt-kv">'
-    +     (last? '最近一次 '+last.d0+' → '+last.d1+' <b>'+pctS(last.gain,0)+'</b>' : '全历史没有 ≥60% 的拉升')
+    +     (last? '最近一次 '+last.d0+' → '+last.d1+' <b>'+pctS(last.gain,0)+'</b>' : '全历史没有一次 C 主拉升（跳价段不算，见下方说明）')
     +     ' · ' + esc(r.stage)
     +   '</div>'
     + '</div>'
@@ -214,7 +214,7 @@ function groupHtml(g){
   }).join('');
   return '<div class="mt-g" data-c="'+esc(g.container)+'">'
     + '<div class="mt-gh"><span class="mt-caret">▸</span><span class="mt-gname">'+esc(g.container)+'</span>'
-    + '<span class="mt-gmeta">'+g.n+' 品 · '+g.nPulls+' 段拉升'+(g.boxPrice!=null? '<br>箱子 '+yuan(g.boxPrice,0) : '')+'</span></div>'
+    + '<span class="mt-gmeta">'+g.n+' 品 · '+g.nPulls+' 段主拉升'+(g.boxPrice!=null? '<br>箱子 '+yuan(g.boxPrice,0) : '')+'</span></div>'
     + '<div class="mt-gbody">'+inner+'</div></div>';
 }
 function render(){
@@ -222,7 +222,7 @@ function render(){
   var listEl = $('mt-list'), statEl = $('mt-stat');
   if (!q){
     listEl.innerHTML = AT.groups.map(groupHtml).join('');
-    statEl.textContent = '共 ' + AT.meta.nItems + ' 品 / ' + AT.meta.nGroups + ' 个箱子/收藏品 / ' + AT.meta.nPulls + ' 段拉升【点箱子展开，点品看详情】';
+    statEl.textContent = '共 ' + AT.meta.nItems + ' 品 / ' + AT.meta.nGroups + ' 个箱子/收藏品 / ' + AT.meta.nPulls + ' 段主拉升（C 主拉升；吃断层跳价已剔除）【点箱子展开，点品看详情】';
   } else {
     var nums = /^\d+$/.test(q);
     var hits = LIST.filter(function(r){
@@ -252,7 +252,7 @@ function detailHtml(it){
     + '</p><p>现价 <b>'+yuan(r.price)+'</b>'
     + (r.pctAllNow!=null? '（自身全历史 '+pct(r.pctAllNow,1)+' 分位）' : '')
     + '　在售 '+int(r.listed)+' 把　求购 '+int(r.buyNum)+' 单　存世 '+int(r.supply)
-    + '　拉升 <b>'+r.nPulls+'</b> 次　'+esc(r.stage)+'</p></div></div>';
+    + '　主拉升 <b>'+r.nPulls+'</b> 次　'+esc(r.stage)+'</p></div></div>';
   h += it.sections.map(function(s){
     if (s.n === 0) return '';
     return '<div class="mt-sec"><div class="mt-sech">'+esc(s.title)+'</div><div class="mt-body">'+mdToHtml(s.body)+'</div></div>';
