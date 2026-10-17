@@ -6,7 +6,7 @@
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
    只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v13';
+const CACHE = 'cs-skin-app-v14';
 const ASSETS = [
   './',
   './index.html',
@@ -71,8 +71,15 @@ const ASSETS = [
       为什么不能走"缓存优先"：这一页的数字全是日更的（清洗后的序列每天可能变），
       卡在缓存里就是同一个坑的第十次。CACHE v12 → v13。
       体积控制：首屏只加载 mani-atlas.json（730 KB）+ 什么都不拉；
-      分片与图都是用户点开那一行才请求，所以放进 NET_FIRST 不会拖慢首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+      分片与图都是用户点开那一行才请求，所以放进 NET_FIRST 不会拖慢首屏。
+   ⚠️ 2026-10-17 十修正：信号页新增「做盘阶段看板」区块（替代旧的「卖出警报」主提示），
+      数据源 dealer-stage-board.json（cs-quant/dealer_stage_board.cjs 产出：
+        7 个阶段的定义与判定依据 + 每个阶段的历史持续时长 + 进入该阶段后
+        60 个交易日的走势分布 p25/中位/p75 + 1,073 品的当前阶段与逐条命中痕迹）。
+      **必须进 NET_FIRST**：它是「现在处于做盘的什么环节」的答案，卡在缓存里就是
+      拿几天前的阶段做今天的判断 —— 同一个坑的第十一次。CACHE v13 → v14。
+      体积控制：约 470 KB，但只在用户切到「信号」页才拉（懒加载），不拖首屏。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
