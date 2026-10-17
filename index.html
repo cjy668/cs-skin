@@ -1192,6 +1192,142 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   white-space:nowrap;color:var(--muted)}
 .fwd-tbl th:first-child,.fwd-tbl td:first-child{text-align:left;white-space:normal}
 .fwd-tbl th{color:var(--dim);font-weight:700}
+
+/* ============================================================================
+   ★ 持仓退出看板（2026-10-17 新增 · cs-quant/exit_board.cjs → exit-board.json）
+   ----------------------------------------------------------------------------
+   用户当前策略：「我现在除非有很好的机会不会再打入，只考虑在拉升时卖出」
+   → 这个区块只做一件事：告诉用户 44 个持仓【各自处在做盘的哪个环节 / 拉升的哪个
+     时期】，那个时期历史上之后 60 个交易日怎么走，以及一个【可以分批】的动作区间。
+
+   ★ 类名前缀 ex-（2026-10-17 先 grep 全站类名，结论写在下面，别靠记）
+     全站已有的 ex* 类名只有 6 个：
+       .ex / .exit / .ex-top / .ex-name / .ex-body / .ex-steps
+       其中后 4 个 + .ex 属于既有「减仓执行」区块（#ex-time / #ex-note / #ex-list）。
+     所以本区块：类名一律 ex-XXXX，且【刻意避开上面这 6 个名字】；
+     元素 ID 另用 exb- 前缀（与既有的 #ex-time / #ex-note / #ex-list 不冲突）。
+     踩过的坑：以前复用既有类名 .basis，把整页撑出 2709px 横向溢出。
+   ★ 手机 390px 零横向溢出：所有容器 min-width:0 / max-width:100%，
+     表格放在 .ex-scroll 里横向滚动（滚动的是容器内部，document 不溢出），
+     长文本一律 overflow-wrap:anywhere。
+   ============================================================================ */
+.ex-box{overflow:hidden}
+.ex-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-width:0;margin:0 0 6px}
+.ex-hdt{font-size:15px;font-weight:800;margin:0;overflow-wrap:anywhere}
+.ex-sub{font-size:11.5px;color:var(--dim);overflow-wrap:anywhere;min-width:0;flex:1 1 100%}
+.ex-hd .r{font-size:11px;color:var(--dim);white-space:nowrap}
+.ex-rule{margin:0 0 10px;padding:8px 11px;border-radius:10px;font-size:11.5px;line-height:1.7;
+  border:1px solid rgba(255,197,49,.42);background:rgba(255,197,49,.08);color:var(--text);
+  overflow-wrap:anywhere;min-width:0;max-width:100%}
+.ex-rule b{color:var(--yellow)}
+.ex-stat{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;min-width:0;max-width:100%}
+.ex-stat > div{flex:1 1 96px;min-width:0;background:var(--card2);border:1px solid var(--line);
+  border-radius:10px;padding:7px 9px;box-sizing:border-box}
+.ex-statk{font-size:10.5px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.ex-statv{font-size:15px;font-weight:800;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ex-chips{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 8px;min-width:0;max-width:100%}
+.ex-chip{background:var(--card2);border:1px solid var(--line);color:var(--muted);border-radius:9px;
+  padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;
+  font-family:inherit;line-height:1.3}
+.ex-chip.on{color:var(--text);border-color:rgba(86,204,242,.6);background:rgba(86,204,242,.14)}
+.ex-chipv{font-weight:800;color:var(--text);margin-left:4px}
+.ex-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 0;
+  min-width:0;max-width:100%}
+.ex-tlabel{font-size:11px;color:var(--dim);white-space:nowrap}
+.ex-sortbtn{background:var(--card2);border:1px solid var(--line);color:var(--muted);border-radius:9px;
+  padding:5px 9px;font-size:11.5px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap}
+.ex-sortbtn.on{color:var(--text);border-color:rgba(86,204,242,.6);background:rgba(86,204,242,.14)}
+.ex-hint{font-size:11px;color:var(--dim);margin:6px 0 0;overflow-wrap:anywhere;line-height:1.7}
+.ex-scroll{margin:8px 0 0;overflow-x:auto;overflow-y:hidden;max-width:100%;
+  -webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:10px;
+  background:var(--card2)}
+.ex-tbl{border-collapse:collapse;width:100%;min-width:880px;font-size:11.5px;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ex-th{background:#1b2230;color:var(--dim);font-size:10.5px;font-weight:800;text-align:left;
+  padding:7px 7px;border-bottom:1px solid var(--line);white-space:nowrap;
+  position:sticky;top:0;z-index:1}
+.ex-tr{cursor:pointer}
+.ex-tr:hover{background:rgba(139,157,178,.07)}
+.ex-tr.on{background:rgba(86,204,242,.10)}
+.ex-td{padding:6px 7px;border-bottom:1px solid var(--line);color:var(--muted);
+  white-space:nowrap;vertical-align:top}
+.ex-td:last-child{border-bottom:0}
+.ex-tr:last-child .ex-td{border-bottom:0}
+.ex-nm{white-space:normal;min-width:190px;color:var(--text);font-weight:700;
+  overflow-wrap:anywhere;line-height:1.5}
+.ex-nm em{display:block;font-style:normal;font-weight:500;font-size:10.5px;color:var(--dim);margin-top:1px}
+/* 手机上不用左右滑动也能看到"阶段 + 动作倾向"：在品名格子里再补一行 */
+.ex-nmsub{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:3px;
+  font-size:10.5px;font-weight:600;color:var(--muted);line-height:1.5;min-width:0}
+.ex-nmsub span{overflow-wrap:anywhere}
+.ex-rk{display:inline-block;min-width:17px;text-align:center;font-size:10.5px;font-weight:800;
+  color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:0 3px;margin-right:4px}
+.ex-rk.ex-rk-hi{color:#1b2230;background:var(--yellow);border-color:var(--yellow)}
+.ex-pnlv.pos{color:var(--green)}
+.ex-pnlv.neg{color:var(--red)}
+.ex-stg{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid var(--line);white-space:nowrap;color:var(--muted)}
+.ex-stg.ex-s-accumulate{color:#5b8ff9;border-color:rgba(91,143,249,.55);background:rgba(91,143,249,.13)}
+.ex-stg.ex-s-rallyEarly{color:#5ad8a6;border-color:rgba(90,216,166,.55);background:rgba(90,216,166,.13)}
+.ex-stg.ex-s-rallyMid{color:#37c978;border-color:rgba(55,201,120,.55);background:rgba(55,201,120,.13)}
+.ex-stg.ex-s-rallyLate{color:var(--yellow);border-color:rgba(255,197,49,.6);background:rgba(255,197,49,.16)}
+.ex-stg.ex-s-distribute{color:#ff9845;border-color:rgba(255,152,69,.6);background:rgba(255,152,69,.16)}
+.ex-stg.ex-s-decline{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.13)}
+.ex-stg.ex-s-calm{color:#8c8c8c;border-color:rgba(139,157,178,.45);background:rgba(139,157,178,.10)}
+.ex-stg.ex-s-insufficient{color:var(--dim);border-color:var(--line);background:transparent}
+.ex-bat{display:inline-block;font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 5px;
+  border:1px solid var(--line);white-space:nowrap}
+.ex-bat.ex-bw{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.13)}
+.ex-bat.ex-bs{color:var(--green);border-color:rgba(47,208,122,.55);background:rgba(47,208,122,.13)}
+.ex-bat.ex-bn{color:var(--dim);border-color:rgba(139,157,178,.45);background:rgba(139,157,178,.10)}
+.ex-sig{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.ex-sig.ex-sig-hit{color:#1b2230;background:var(--red);border-color:var(--red)}
+.ex-fwdv{font-size:11px;line-height:1.5;white-space:nowrap}
+.ex-fwdv b{font-weight:800}
+.ex-act{white-space:normal;min-width:150px;font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.ex-det{margin:10px 0 0;padding:11px 12px;border-radius:12px;background:var(--card2);
+  border:1px solid rgba(86,204,242,.35);min-width:0;overflow-wrap:anywhere;max-width:100%}
+.ex-det h3{margin:0 0 4px;font-size:13.5px;font-weight:800;overflow-wrap:anywhere}
+.ex-det .ex-dsub{font-size:11px;color:var(--dim);margin:0 0 6px;overflow-wrap:anywhere}
+.ex-kv{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0;min-width:0;max-width:100%}
+.ex-kv > div{flex:1 1 132px;min-width:0;background:rgba(139,157,178,.08);border:1px solid var(--line);
+  border-radius:9px;padding:6px 8px;box-sizing:border-box}
+.ex-k{font-size:10.5px;color:var(--dim);overflow-wrap:anywhere;line-height:1.5}
+.ex-v{font-size:12.5px;font-weight:800;overflow-wrap:anywhere;line-height:1.5;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ex-why{margin:8px 0 0;padding:0 0 0 16px;font-size:11.5px;line-height:1.8;color:var(--muted);
+  overflow-wrap:anywhere}
+.ex-why li{margin:2px 0}
+.ex-band{margin:8px 0 0;padding:8px 10px;border-radius:9px;font-size:11.5px;line-height:1.7;
+  border:1px dashed rgba(255,197,49,.5);background:rgba(255,197,49,.07);overflow-wrap:anywhere;
+  color:var(--muted)}
+.ex-bandr{display:inline-block;font-size:11px;font-weight:800;color:#1b2230;background:var(--yellow);
+  border-radius:6px;padding:1px 7px;margin-right:6px;white-space:nowrap}
+.ex-sec{font-size:12px;font-weight:800;margin:12px 0 5px;padding-left:8px;
+  border-left:3px solid var(--yellow);overflow-wrap:anywhere}
+.ex-wait{margin:14px 0 0;padding:11px 12px;border-radius:12px;
+  border:1px solid rgba(86,204,242,.4);background:rgba(86,204,242,.06);
+  min-width:0;overflow-wrap:anywhere;max-width:100%}
+.ex-wait h3{margin:0 0 5px;font-size:13.5px;font-weight:800;overflow-wrap:anywhere}
+.ex-wait p{margin:0 0 6px;font-size:11.5px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.ex-wait p b{color:var(--text)}
+.ex-cond{margin:6px 0 0;padding:7px 9px;border-radius:9px;background:rgba(139,157,178,.08);
+  border:1px solid var(--line);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere;color:var(--muted)}
+.ex-cond b{color:var(--text)}
+.ex-cand{margin:6px 0 0;padding:7px 9px;border-radius:9px;font-size:11.5px;line-height:1.7;
+  border:1px solid rgba(47,208,122,.4);background:rgba(47,208,122,.08);overflow-wrap:anywhere;
+  color:var(--muted)}
+.ex-cand b{color:var(--text)}
+.ex-empty{margin:8px 0 0;padding:10px 12px;border-radius:10px;border:1px dashed var(--line);
+  color:var(--muted);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere}
+.ex-okbtn{background:var(--card2);border:1px solid rgba(47,208,122,.5);color:var(--green);
+  border-radius:9px;padding:6px 11px;font-size:11.5px;font-weight:800;font-family:inherit;
+  cursor:pointer;margin:8px 6px 0 0}
+.ex-okbtn.ex-yes{background:rgba(47,208,122,.14)}
+@media(min-width:560px){.ex-kv > div{flex:1 1 150px}}
+
 </style>
 </head>
 <body>
@@ -1306,6 +1442,32 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
       <section class="page" id="sec-hold" data-page="inv">
         <div class="page-title"><h1>库存</h1><span>真实持仓 · 减仓执行 · 逐项建议 · 仓位台账</span></div>
         <div class="cards">
+
+                    <!-- ============================================================
+               ★ 持仓退出看板（2026-10-17 新增，cs-quant/exit_board.cjs → exit-board.json）
+               为什么放在【库存页】而不是【信号页】：
+                 ① 它讲的是"你自己的 44 个品种"，库存页才是持仓的主场（信号页是市场侧名单）；
+                 ② 库存页原来的三块（减仓执行 / 逐项建议 / 出租评估）都只回答"怎么卖、租不租"，
+                    没有一块回答"现在处在做盘的哪个环节、拉升的哪个时期" —— 这正是用户要的；
+                 ③ 用户策略是「只考虑在拉升时卖出」，决定"卖"的动作发生在看持仓的时候，
+                    所以诊断必须与持仓同屏，不需要跨页签。
+               懒加载：只有切到库存页才拉 exit-board.json（184 KB），不拖首屏。
+               ============================================================ -->
+          <div class="card span-all ex-box" id="sec-exb">
+            <div class="ex-hd">
+              <h2 class="ex-hdt">持仓退出</h2>
+              <span class="ex-sub">该看/该减 · 阶段 · 批次强弱 · 三形态 · 60 日分布 · 动作区间</span>
+              <span class="r" id="exb-time">加载中…</span>
+            </div>
+            <div class="ex-rule" id="exb-rule">角色是<b>参谋</b>，不是命令者：这个区块只说「现在处在做盘的哪个阶段 + 这个阶段历史上之后怎么走」，不说「该卖了」。<b>拉升早期一律不提示减</b>（会错过主升）；任何提示都按<b>分批比例</b>给，不给"一次全卖"。卖多少、什么时候卖，由你决定。</div>
+            <div id="exb-sum"><div class="skel"><i></i>持仓诊断加载中…（exit-board.json，切到本页才下载）</div></div>
+            <div id="exb-dist"></div>
+            <div id="exb-tools"></div>
+            <div id="exb-tbl"></div>
+            <div id="exb-det"></div>
+            <div id="exb-wait"></div>
+            <div id="exb-src"></div>
+          </div>
 
           <!-- ---------- 减仓执行：本轮该卖的品种怎么卖（执行时机分析；缺失则空态） ---------- -->
           <div class="card span-all sec-exec" id="sec-exec">
@@ -3269,6 +3431,8 @@ function showPage(id){
      实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
      把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
   if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
+  /* ★ 持仓退出看板：只有切到「库存」页才下 exit-board.json（184 KB），不拖首屏 */
+  if (pid === 'inv'){ ensureExitBoard(); }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -3280,6 +3444,7 @@ function ensureSellAlerts(){
 function loadSellAlertsIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
   if (tab === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
+  if (tab === 'inv'){ ensureExitBoard(); }
 }
 function setPage(id, save){
   const pid = pageMeta(id).id;
@@ -7917,6 +8082,487 @@ async function init(){
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();
+
+/* =====================================================================
+   ★ 持仓退出看板（cs-quant/exit_board.cjs → exit-board.json）
+   ---------------------------------------------------------------------
+   用户当前策略：「我现在除非有很好的机会不会再打入，只考虑在拉升时卖出」
+   → 这块的用途不是"找买入时机"，是【在拉升的正确时期提醒卖出已有持仓】。
+
+   ★ 铁律（写在代码里，不靠自觉）：
+     1) 参谋口吻：只给「阶段 + 历史依据 + 概率分布 + 可以分批的动作区间」，
+        绝不输出命令式卖出指令；卖多少、什么时候卖由用户决定；
+     2) 拉升早期【一律不提示减】—— 会错过主升（这是用户原话的核心诉求）；
+     3) 一律【分批】（1/3 → 1/2~2/3），不给"一次全卖"；
+     4) 每个数字都要能被追溯：阶段来自 dealer-stage-board / 批次来自 rally-batches /
+        三形态来自 rally-forms / 分布来自 stageStats.fwd.d60 / gap 来自 covert-arb-gap；
+        取不到就写"样本不足 / 不适用"，不用 0 冒充；
+     5) 懒加载 + 降级链：只有切到「库存」页才下 exit-board.json；
+        下不到就只空这一块，其他区块与 6 个页签照常。
+   ===================================================================== */
+let exbData = null, exbState = 'idle', exbKick = false;
+let exbSortKey = 'priority', exbStageFilter = '', exbOpenKey = '';
+
+function ensureExitBoard(){ if (exbKick) return; exbKick = true; loadExitBoard(); }
+async function loadExitBoard(){
+  exbState = 'loading';
+  try {
+    exbData = await fetchJSON('./exit-board.json');
+    exbState = exbData ? 'ok' : 'fail';
+  } catch (e) { exbData = null; exbState = 'fail'; }
+  renderExitBoard();
+}
+
+const EXB_STAGE_ORDER = ['rallyLate', 'distribute', 'rallyMid', 'decline', 'calm', 'accumulate', 'rallyEarly', 'insufficient'];
+const EXB_STAGE_NAME = { accumulate: '吸筹', rallyEarly: '拉升早期', rallyMid: '拉升中期', rallyLate: '拉升末期',
+  distribute: '派发', decline: '回落', calm: '平静', insufficient: '数据不足' };
+const EXB_MODE_NAME = { 'only-sell-on-rally': '只在拉升时卖（除非极好机会不再打入）' };
+const EXB_SORTS = [
+  { k: 'priority', t: '卖出优先级' },
+  { k: 'stage', t: '阶段危险度' },
+  { k: 'pnl', t: '浮亏最深' },
+  { k: 'weight', t: '市值占比' },
+  { k: 'batch', t: '批内强弱' },
+  { k: 'name', t: '品名' }
+];
+function exbP2(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(2) + '%') : '—'; }
+function exbP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
+function exbM(v){ return isNum(v) ? money(v) : '—'; }
+function exbStageKey(it){ return (it && it.stage) ? it.stage : 'insufficient'; }
+function exbStageBadge(k){ return '<span class="ex-stg ex-s-' + esc(k) + '">' + esc(EXB_STAGE_NAME[k] || k) + '</span>'; }
+function exbBatchBadge(b){
+  if (!b) return '<span class="ex-bat ex-bn">无批次</span>';
+  const c = b.sw === '弱盘' ? 'ex-bw' : (b.sw === '强盘' ? 'ex-bs' : 'ex-bn');
+  let h = '<span class="ex-bat ' + c + '">' + esc(b.id || '—') + ' ' + esc(b.sw || '—') + '</span>';
+  if (isNum(b.rankInBatch) && isNum(b.nMembers)) h += '<div style="font-size:10px;color:var(--dim);margin-top:2px">批内第 ' + b.rankInBatch + '/' + b.nMembers + ' 强</div>';
+  return h;
+}
+function exbSigCell(it){
+  if (it && it.signalHit) return '<span class="ex-sig ex-sig-hit">' + esc(it.signalHit.label || '命中') + '</span>';
+  return '<span class="ex-sig">未命中</span>';
+}
+/* 三形态徽标：A 红 / B 黄 / C 绿 / N 灰。
+   ★ N（非拉升）不能复用 fwdFormBadge —— 那个函数把非 A/B 的一律当 C 显示成绿色，
+     于是"N 非拉升"会变成绿色的"主拉升"，正好把意思说反。这里单独给 N 一个中性徽标。 */
+function exbFormBadge(form, name){
+  if (!form) return '';
+  if (form === 'N') return '<span class="ex-stg ex-s-calm">' + esc(name || '非拉升') + '</span>';
+  return fwdFormBadge(form, name);
+}
+function exbFormNote(form, note){
+  if (!form || !note) return '';
+  if (form === 'N') return '<div class="ex-cond">' + esc(note) + '</div>';
+  return fwdFormNote(form, note);
+}
+function exbFwdCell(f){
+  if (!f || !isNum(f.med)) return '<span style="color:var(--dim)">样本不足</span>';
+  return '<span class="ex-fwdv">p25 <b>' + exbP1(f.p25) + '</b><br>中位 <b class="' + cls(f.med) + '">' + exbP1(f.med) +
+    '</b> · 上涨 <b>' + Math.round((f.win || 0) * 100) + '%</b></span>';
+}
+function exbTriple(list){
+  let h = '';
+  (list || []).forEach(function(t){
+    const v = t[1];
+    let val;
+    if (typeof v === 'number') val = Math.abs(v) < 3 ? v.toFixed(3) : v.toFixed(2);
+    else val = (v == null ? '—' : String(v));
+    h += '<span class="dsb-hit">' + esc(t[0]) + ' <em>' + esc(val) + '</em>' +
+      (t[2] ? ' <em>' + esc(t[2]) + '</em>' : '') + '</span>';
+  });
+  return h ? '<div class="dsb-hits">' + h + '</div>' : '';
+}
+
+/* 事件绑定只做一次：renderExitBoard() 会被反复调用（切排序/筛选/点开详情），
+   如果每次都 addEventListener，监听器就会叠加 —— 点一次行会触发 N 次 toggle，
+   N 为偶数时表现为"点了没反应"（第一版就踩了这个）。 */
+function exbBindOnce(el, fn){
+  if (!el || el.__exbBound) return;
+  el.__exbBound = true;
+  el.addEventListener('click', fn);
+}
+
+/* 排序比较器 */
+function exbCmp(a, b){
+  if (exbSortKey === 'priority') return (a.rank || 99) - (b.rank || 99);
+  if (exbSortKey === 'stage'){
+    const ia = EXB_STAGE_ORDER.indexOf(exbStageKey(a)), ib = EXB_STAGE_ORDER.indexOf(exbStageKey(b));
+    if (ia !== ib) return ia - ib;
+    return ((b.danger && b.danger.score) || 0) - ((a.danger && a.danger.score) || 0);
+  }
+  if (exbSortKey === 'pnl'){
+    const va = isNum(a.pnlRate) ? a.pnlRate : 9, vb = isNum(b.pnlRate) ? b.pnlRate : 9;
+    return va - vb;
+  }
+  if (exbSortKey === 'weight') return (b.weight || 0) - (a.weight || 0);
+  if (exbSortKey === 'batch'){
+    const rankSw = function(x){ const s = x.batch && x.batch.sw; return s === '弱盘' ? 0 : (s === '中性' ? 1 : (s === '强盘' ? 2 : 3)); };
+    const ra = rankSw(a), rb2 = rankSw(b);
+    if (ra !== rb2) return ra - rb2;
+    return ((a.batch && a.batch.strengthPct) || 9) - ((b.batch && b.batch.strengthPct) || 9);
+  }
+  return String(a.name || '').localeCompare(String(b.name || ''), 'zh');
+}
+
+function renderExitBoard(){
+  const tEl = $('exb-time'), sumEl = $('exb-sum'), distEl = $('exb-dist');
+  const toolsEl = $('exb-tools'), tblEl = $('exb-tbl'), detEl = $('exb-det');
+  const waitEl = $('exb-wait'), srcEl = $('exb-src');
+  if (exbState === 'loading' || exbState === 'idle'){
+    if (sumEl) sumEl.innerHTML = skelBox('持仓诊断加载中…（exit-board.json，切到本页才下载）');
+    return;
+  }
+  if (exbState === 'fail' || !exbData){
+    if (tEl) tEl.textContent = '数据没取到';
+    if (sumEl) sumEl.innerHTML = emptyBox('exit-board.json 没取到（这一块先空着，其他区块与 6 个页签都不受影响）。' +
+      '它由 cs-quant/exit_board.cjs 产出、publish.cjs 发布。');
+    if (distEl) distEl.innerHTML = '';
+    if (toolsEl) toolsEl.innerHTML = '';
+    if (tblEl) tblEl.innerHTML = '';
+    if (detEl) detEl.innerHTML = '';
+    if (waitEl) waitEl.innerHTML = '';
+    if (srcEl) srcEl.innerHTML = '';
+    return;
+  }
+  const S = exbData.summary || {};
+  const B = exbData.basis || {};
+  if (tEl) tEl.textContent = '数据 ' + (exbData.atText || '—');
+
+  /* ---- ① 顶部一句话：整个组合现在是什么状态 ---- */
+  let h = '<p class="ex-hint" style="margin:0 0 8px;font-size:12px;color:var(--text);line-height:1.75">' +
+    '<b>' + esc(S.headline || '—') + '</b></p>';
+  h += '<div class="ex-stat">' +
+    '<div><div class="ex-statk">品种 / 件数</div><div class="ex-statv">' + n2(S.kinds) + ' / ' + n2(S.items) + '</div></div>' +
+    '<div><div class="ex-statk">现价市值</div><div class="ex-statv">' + exbM(S.valueNow) + '</div></div>' +
+    '<div><div class="ex-statk">买入成本</div><div class="ex-statv">' + exbM(S.cost) + '</div></div>' +
+    '<div><div class="ex-statk">浮动盈亏（现价）</div><div class="ex-statv ' + cls(S.pnlRate) + '">' + exbP2(S.pnlRate) + '</div></div>' +
+    '<div><div class="ex-statk">命中已验证卖出信号</div><div class="ex-statv">' + n2(S.signalHits) + ' 个</div></div>' +
+    '</div>';
+  h += '<p class="ex-hint">口径：现价 = ' + esc(B.priceNow || '—') + '；成本 = 台账（' + esc(B.ledger || '—') + '）。' +
+    '现价口径合计 ' + exbM(S.valueNow) + '，台账口径 ' + exbM(S.valueLedger) + '，成本 ' + exbM(S.cost) + '。' +
+    (B.note ? '<br>' + esc(B.note) : '') + '</p>';
+
+  /* ---- ② Top 10「该看/该减」清单（每条第 ①~⑥ 项得分 + 完整依据） ---- */
+  const t10 = Array.isArray(exbData.top10) ? exbData.top10 : [];
+  h += '<div class="ex-sec">Top 10 该看 / 该减（按加权分排序）</div>';
+  h += '<p class="ex-hint">' + esc(exbData.priorityNote || '') + '</p>';
+  if (exbData.top10Note) h += '<p class="ex-hint" style="color:var(--text)">' + esc(exbData.top10Note) + '</p>';
+  if (!t10.length) h += emptyBox('这次没有排出来的 Top 10（数据为空）。');
+  t10.forEach(function(t){
+    const it = (exbData.items || []).filter(function(x){ return x.key === t.key; })[0] || {};
+    /* 动作区间在下面单独一行加粗显示，从依据列表里剔掉，避免同一句话出现两遍 */
+    const why = (t.why || []).filter(function(w){ return String(w).indexOf('动作区间：') !== 0; });
+    h += '<div class="dsb-item" style="border-left-color:' + (t.stage === 'rallyLate' ? '#f6bd16' : (t.stage === 'distribute' ? '#ff9845' : '#8c8c8c')) + '">' +
+      '<p class="dsb-h"><span class="ex-rk ' + (t.rank <= 3 ? 'ex-rk-hi' : '') + '">' + t.rank + '</span>' +
+      esc(t.name) + exbFormBadge(it.form && it.form.form, it.form && it.form.name) + '</p>' +
+      '<p class="dsb-m">加权分 <b>' + t.score + '</b> / 100 · ' + exbStageBadge(t.stage || 'insufficient') +
+      ' · 现价 ' + (isNum(it.priceNow) ? '¥' + it.priceNow.toFixed(2) : '—') +
+      ' · ' + (isNum(it.pnlRate) ? (it.pnlRate >= 0 ? '浮盈 ' : '浮亏 ') + exbP2(Math.abs(it.pnlRate)) : '无成本记录') +
+      ' · 占比 ' + (isNum(it.weight) ? (it.weight * 100).toFixed(2) + '%' : '—') + '</p>' +
+      '<ul class="ex-why">' + why.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
+      '<p class="dsb-m">动作区间：<b>' + esc((it.plan && it.plan.headline) || '—') + '</b></p>' +
+      fwdBar60(it.fwd60, { title: '该阶段历史上' }) +
+      '</div>';
+  });
+  if (sumEl) sumEl.innerHTML = h;
+
+  /* ---- ③ 阶段分布 chips（同时当筛选器用） ---- */
+  let ch = '';
+  const sd = S.stageDist || {};
+  ch += '<button class="ex-chip ' + (exbStageFilter === '' ? 'on' : '') + '" data-exb-st="">全部<span class="ex-chipv">' + n2(S.kinds) + '</span></button>';
+  EXB_STAGE_ORDER.forEach(function(k){
+    const n = sd[k] || 0;
+    if (!n) return;
+    ch += '<button class="ex-chip ' + (exbStageFilter === k ? 'on' : '') + '" data-exb-st="' + esc(k) + '">' +
+      esc(EXB_STAGE_NAME[k]) + '<span class="ex-chipv">' + n + '</span></button>';
+  });
+  const sv = S.stageDistValue || {};
+  let svTxt = [];
+  EXB_STAGE_ORDER.forEach(function(k){ if ((sd[k] || 0) && isNum(sv[k])) svTxt.push(EXB_STAGE_NAME[k] + ' ' + money0(sv[k])); });
+  ch += '<div class="ex-hint" style="flex:1 1 100%">按阶段分布的市值：' + esc(svTxt.join(' · ') || '—') +
+    '　（占比过高的集中度也在优先级里扣了分）</div>';
+  if (distEl){
+    distEl.innerHTML = '<div class="ex-chips" id="exb-chips">' + ch + '</div>';
+    exbBindOnce(distEl, function(e){
+      const b = e.target && e.target.closest ? e.target.closest('[data-exb-st]') : null;
+      if (!b) return;
+      exbStageFilter = b.getAttribute('data-exb-st') || '';
+      renderExitBoard();
+    });
+  }
+
+  /* ---- ④ 排序工具条 ---- */
+  if (toolsEl){
+    let th = '<span class="ex-tlabel">排序：</span>';
+    EXB_SORTS.forEach(function(s){
+      th += '<button class="ex-sortbtn ' + (exbSortKey === s.k ? 'on' : '') + '" data-exb-sort="' + esc(s.k) + '">' + esc(s.t) + '</button>';
+    });
+    th += '<div class="ex-hint" style="flex:1 1 100%">默认按<b>卖出优先级</b>（① 阶段危险度 30% ② 已验证信号 18% ③ 出口 gap 10% ④ 浮盈亏 14% ⑤ 集中度 13% ⑥ 批内强弱 15%）。点任一行看该品的完整诊断。</div>';
+    toolsEl.innerHTML = th;
+    exbBindOnce(toolsEl, function(e){
+      const b = e.target && e.target.closest ? e.target.closest('[data-exb-sort]') : null;
+      if (!b) return;
+      exbSortKey = b.getAttribute('data-exb-sort') || 'priority';
+      renderExitBoard();
+    });
+  }
+
+  /* ---- ⑤ 44 种一表 ---- */
+  if (tblEl){
+    let arr = (exbData.items || []).slice();
+    if (exbStageFilter) arr = arr.filter(function(it){ return exbStageKey(it) === exbStageFilter; });
+    arr.sort(exbCmp);
+    let tb = '<div class="ex-hint" style="margin-top:10px">共 ' + arr.length + ' 个品种' +
+      (exbStageFilter ? ('（已筛选：' + esc(EXB_STAGE_NAME[exbStageFilter] || exbStageFilter) + '）') : '') +
+      '　← 手机上表格可左右滑动 →</div>' +
+      '<div class="ex-scroll"><table class="ex-tbl"><thead><tr>' +
+      '<th class="ex-th">品名（点开详情）</th><th class="ex-th">件数</th><th class="ex-th">成本/件</th>' +
+      '<th class="ex-th">现价</th><th class="ex-th">浮盈亏</th><th class="ex-th">阶段</th>' +
+      '<th class="ex-th">批内强弱</th><th class="ex-th">卖出信号</th><th class="ex-th">之后 60 日分布</th>' +
+      '<th class="ex-th">动作倾向</th></tr></thead><tbody>';
+    arr.forEach(function(it){
+      const k = exbStageKey(it);
+      const pl = it.plan || {};
+      tb += '<tr class="ex-tr ' + (exbOpenKey === it.key ? 'on' : '') + '" data-exb-key="' + esc(it.key) + '">' +
+        '<td class="ex-td ex-nm"><span class="ex-rk">' + (it.rank || '—') + '</span>' + esc(it.name) +
+        '<em>' + esc(it.caseName || it.fam || '') + (it.num ? (' · ' + it.num + ' 件') : '') + '</em>' +
+        /* 手机上不左右滑动也能看到最关键的两项：阶段 + 动作倾向 */
+        '<div class="ex-nmsub">' + exbStageBadge(k) + '<span>' + esc(pl.headline || '—') + '</span></div></td>' +
+        '<td class="ex-td">' + n2(it.num) + '</td>' +
+        '<td class="ex-td">' + exbM(it.costUnit) + '</td>' +
+        '<td class="ex-td">' + exbM(it.priceNow) + '</td>' +
+        '<td class="ex-td ex-pnlv ' + cls(it.pnlRate) + '">' + exbP2(it.pnlRate) + '</td>' +
+        '<td class="ex-td">' + exbStageBadge(k) + '</td>' +
+        '<td class="ex-td">' + exbBatchBadge(it.batch) + '</td>' +
+        '<td class="ex-td">' + exbSigCell(it) + '</td>' +
+        '<td class="ex-td">' + exbFwdCell(it.fwd60) + '</td>' +
+        '<td class="ex-td ex-act">' + esc(pl.headline || '—') + '</td>' +
+        '</tr>';
+    });
+    tb += '</tbody></table></div>';
+    tblEl.innerHTML = tb;
+    exbBindOnce(tblEl, function(e){
+      const tr = e.target && e.target.closest ? e.target.closest('[data-exb-key]') : null;
+      if (!tr) return;
+      const k = tr.getAttribute('data-exb-key');
+      exbOpenKey = (exbOpenKey === k) ? '' : k;
+      renderExitBoard();
+      if (exbOpenKey){
+        const d = $('exb-det');
+        if (d && d.scrollIntoView) { try { d.scrollIntoView({ block: 'nearest' }); } catch (err) {} }
+      }
+    });
+  }
+
+  /* ---- ⑥ 详情面板（点开看完整诊断） ---- */
+  if (detEl){
+    const it = (exbData.items || []).filter(function(x){ return x.key === exbOpenKey; })[0];
+    if (!it){ detEl.innerHTML = ''; }
+    else {
+      const p = it.plan || {};
+      let d = '<div class="ex-det"><h3>' + esc(it.name) + '</h3>' +
+        '<p class="ex-dsub">' + exbStageBadge(exbStageKey(it)) +
+        '　数据到 ' + esc(it.stageAsOf || '—') + '　gid ' + esc(it.gid == null ? '（台账无此 gid）' : String(it.gid)) +
+        '　' + esc(it.caseName || '') + '　稀有度 ' + esc(it.rarity || '—') + '</p>' +
+        '<div class="ex-kv">' +
+        '<div><div class="ex-k">持有件数</div><div class="ex-v">' + n2(it.num) + ' 件</div></div>' +
+        '<div><div class="ex-k">买入成本（件）</div><div class="ex-v">' + exbM(it.costUnit) + '</div></div>' +
+        '<div><div class="ex-k">台账价（件）</div><div class="ex-v">' + exbM(it.priceLedgerUnit) + '</div></div>' +
+        '<div><div class="ex-k">现价（件）</div><div class="ex-v">' + exbM(it.priceNow) + '</div></div>' +
+        '<div><div class="ex-k">浮动盈亏</div><div class="ex-v ' + cls(it.pnlRate) + '">' + exbP2(it.pnlRate) + '（' + exbM(it.pnl) + '）</div></div>' +
+        '<div><div class="ex-k">现价市值 / 占比</div><div class="ex-v">' + exbM(it.valueNow) + ' / ' + (isNum(it.weight) ? (it.weight * 100).toFixed(2) + '%' : '—') + '</div></div>' +
+        '<div><div class="ex-k">优先级分 / 排名</div><div class="ex-v">' + n2(it.priority && it.priority.score) + ' / 第 ' + n2(it.rank) + ' 位</div></div>' +
+        '<div><div class="ex-k">按日成交估出手</div><div class="ex-v">' + (isNum(it.risk && it.risk.exitDays) ? it.risk.exitDays + ' 天' : '—') + '</div></div>' +
+        '</div>';
+
+      /* 阶段 + 三形态 + 依据 */
+      d += '<div class="ex-sec">当前阶段与判定依据</div>';
+      d += '<p class="ex-hint" style="color:var(--text)">' + esc(EXB_STAGE_NAME[exbStageKey(it)] || '—') +
+        (it.stageStat && it.stageStat.what ? ('：' + esc(it.stageStat.what)) : '') +
+        '　<span style="color:var(--dim)">阶段来源：' + esc(it.stageSrc || '—') + '</span></p>' +
+        exbTriple(it.stageBasis);
+      if (it.stageStat && isNum(it.stageStat.durMedTradingDays)){
+        d += '<p class="ex-hint">该阶段历史上通常持续 <b>' + it.stageStat.durMedTradingDays + ' 个交易日</b>（≥3 交易日段的中位）' +
+          (isNum(it.stageStat.dayShare) ? '；占全部交易日的 ' + (it.stageStat.dayShare * 100).toFixed(1) + '%' : '') + '。</p>';
+      }
+      /* ★ 之后 60 日走势分布（三段区间条） */
+      d += fwdBar60(it.fwd60, {
+        title: '该阶段（' + esc(EXB_STAGE_NAME[exbStageKey(it)] || '') + '）历史上',
+        foot: (it.danger && it.danger.note ? ('阶段危险度分 <b>' + it.danger.score + '</b>：' + esc(it.danger.note)) : '')
+      });
+      /* 三形态 */
+      d += '<div class="ex-sec">三形态：C 主拉升 / A 吃断层跳价 / B 小拉升 / N 非拉升</div>';
+      if (it.form && it.form.form){
+        d += '<p class="ex-hint" style="color:var(--text)">当前这一段：' + exbFormBadge(it.form.form, it.form.name) +
+          '　<span style="color:var(--dim)">（来源 ' + esc(it.form.src || '—') + '）</span></p>';
+        if (it.form.note) d += exbFormNote(it.form.form, it.form.note);
+        d += '<p class="ex-hint">历史上共 ' + n2(it.form.nSeg) + ' 段：C 主拉升 ' + n2(it.form.nC) + ' 段 / A 跳价 ' + n2(it.form.nA) + ' 段 / B 小拉升 ' + n2(it.form.nB) + ' 段。</p>';
+      } else {
+        d += emptyBox('该品不在 1,073 品的痕迹名单里 → 没有三形态标定（不编造）。');
+      }
+      /* 批次 */
+      d += '<div class="ex-sec">所处行情批次与批内强弱</div>';
+      if (it.batch){
+        d += '<p class="ex-hint" style="color:var(--text)">批次 <b>' + esc(it.batch.id) + '</b>　' + esc(it.batch.start) + ' ~ ' + esc(it.batch.end) +
+          '　' + n2(it.batch.nItems) + ' 个品　批次阶段 ' + esc(it.batch.stage || '—') +
+          (it.batch.stillOpen ? '（仍在走）' : '') + '</p>' +
+          '<p class="ex-hint">本批中位涨幅 <b>' + exbP1(it.batch.batchGainMed) + '</b>；该品 <b>' + esc(it.batch.sw || '—') + '</b>' +
+          '（强度分位 ' + (isNum(it.batch.strengthPct) ? (it.batch.strengthPct * 100).toFixed(1) + '%' : '—') +
+          (isNum(it.batch.rankInBatch) ? ('，批内第 ' + it.batch.rankInBatch + '/' + it.batch.nMembers + ' 强') : '') +
+          '；观察窗口收益留存 ' + (isNum(it.batch.obsRetention) ? it.batch.obsRetention.toFixed(2) : '—') + '。</p>' +
+          '<p class="ex-hint">含义：同一波行情里强盘先涨、弱盘跟涨且回撤更深 —— 弱盘在拉升里更容易"一涨就走完"，' +
+          '这正是它被加权到优先级里的原因（权重 15%）。</p>';
+      } else {
+        d += emptyBox('该品没有归入任何行情批次（1,035 个有批次归属的品之外）→ 批内强弱取中性。');
+      }
+      /* 卖出信号 */
+      d += '<div class="ex-sec">是否命中已验证的卖出信号</div>';
+      if (it.signalHit){
+        d += '<p class="ex-hint" style="color:var(--text)">命中 <b>' + esc(it.signalHit.label) + '</b>（' +
+          (it.signalHit.verified ? '已通过样本外检验' : '未通过检验，仅作提示') + '）</p>' +
+          '<p class="ex-hint">' + esc(it.signalHit.note || '') + '</p>';
+      } else {
+        d += '<p class="ex-hint">未命中三个卖出信号（派发背离 / 横盘派发 / 供给涌入）。' +
+          '<b>注意：阶段是派发 ≠ 命中信号</b>，两者是两件事 —— 本区块没有把它们混为一谈。</p>';
+      }
+      d += '<p class="ex-hint">已验证的两个信号扣完成本仍是正的：派发背离 毛 +8.64pp → 悠悠净 +7.55pp / BUFF 净 +5.94pp；' +
+        '横盘派发 毛 +6.68pp → 悠悠净 +5.61pp / BUFF 净 +4.03pp。供给涌入只过了 2/3 判据，标为"仅提示"。</p>';
+      /* covert_arb_gap */
+      d += '<div class="ex-sec">五合一出口 covert_arb_gap（只对隐秘红皮有意义）</div>';
+      if (it.gap && it.gap.gap != null){
+        d += '<p class="ex-hint" style="color:var(--text)">gap = <b>' + it.gap.gap + '</b>　' + esc(it.gap.band || '') +
+          (it.gap.derived ? '　<span style="color:var(--yellow)">（本项为现算）</span>' : '') + '</p>';
+      } else {
+        d += '<p class="ex-hint" style="color:var(--dim)">不适用：' + esc((it.gap && it.gap.note) || '—') + '</p>';
+      }
+      if (it.gap && it.gap.note) d += '<p class="ex-hint" style="font-size:11px">' + esc(it.gap.note) + '</p>';
+      /* 历史 C 主拉升段 */
+      d += '<div class="ex-sec">历史拉升段（C 主拉升）</div>';
+      if (it.cSeg && it.cSeg.n){
+        d += '<p class="ex-hint">共 <b>' + it.cSeg.n + '</b> 段 C 主拉升，最近 3 段：</p>';
+        it.cSeg.last.forEach(function(s){
+          d += '<p class="ex-hint" style="font-size:11px">' + esc(s.d0) + ' → ' + esc(s.d1) + '　' + n2(s.days) + ' 天　涨幅 <b>' + exbP1(s.gain) +
+            '</b>　见顶后回撤 ' + exbP1(s.ddFromPeak) + '　到顶用时 ' + n2(s.daysToPeak) + ' 天</p>';
+        });
+      } else {
+        d += emptyBox(it.cSeg ? '该品历史上没有 C 主拉升段（0 段）。' : '该品不在 1,073 品痕迹名单 → 没有 C 主拉升段可查。');
+      }
+      /* 动作区间 */
+      d += '<div class="ex-sec">动作区间（概率 + 依据，不是指令）</div>';
+      d += '<p class="ex-hint" style="color:var(--text);font-size:12px">' + esc(p.headline || '—') + '</p>' +
+        '<p class="ex-hint">' + esc(p.text || '') + '</p>';
+      if (p.bands && p.bands.length){
+        p.bands.forEach(function(b){
+          d += '<div class="ex-band"><span class="ex-bandr">' + esc(b.ratio) + '</span>' + esc(b.when) + '<br>' + esc(b.why) + '</div>';
+        });
+      } else {
+        d += '<div class="ex-band">这一档【不给分批比例】——' + esc(EXB_STAGE_NAME[exbStageKey(it)] || '') +
+          ' 在历史上之后 60 日的中位是 ' + (it.fwd60 ? exbP1(it.fwd60.med) : '样本不足') +
+          '、上涨占比 ' + (it.fwd60 ? Math.round((it.fwd60.win || 0) * 100) + '%' : '—') +
+          '。按你的策略（只在拉升里卖），这里没有可用的卖出区间；系统不在这里提示减仓。</div>';
+      }
+      d += '<p class="ex-hint" style="color:var(--dim)">' + esc(p.noDirective || '卖多少、什么时候卖由你决定。') + '</p>';
+      if (it.risk && it.risk.keepReason){
+        d += '<p class="ex-hint" style="font-size:11px">风控面板的另一面（供对照）：' + esc(it.risk.keepReason) + '</p>';
+      }
+      d += '</div>';
+      detEl.innerHTML = d;
+    }
+  }
+
+  /* ---- ⑦ 「等」的状态记录 + 「极好机会」候选定义 ---- */
+  if (waitEl) waitEl.innerHTML = renderExitWait(exbData.waitState);
+
+  /* ---- ⑧ 来源与口径 ---- */
+  if (srcEl){
+    srcEl.innerHTML = '<p class="ex-hint" style="margin-top:10px">数据来源：dealer-stage-board.json（阶段 + 60 日分布）· rally-batches.json（批次与强弱）· ' +
+      'rally-forms.json / mani-traces.json（三形态与 C 主拉升段）· sell-alerts.json（卖出信号）· covert-arb-gap.json（五合一出口）· ' +
+      'portfolio-risk.json（现价快照 / 出手天数）· my-portfolio-app.json（代码里的权威台账）。' +
+      '<br>' + esc(exbData.notASellAlert || '') + '</p>';
+  }
+}
+
+/* 「等」的状态：把策略记下来；「极好机会」先给候选定义（需要用户确认） */
+function exbWaitConfirmed(){
+  try { return window.localStorage.getItem('exbWaitConfirm') === '1'; } catch (e) { return false; }
+}
+function renderExitWait(W){
+  if (!W) return emptyBox('「等」的状态记录没取到（exit-wait-state.json）。');
+  const G = W.greatOpportunity || {};
+  const sc = W.scan || {};
+  let h = '<div class="ex-wait"><h3>「等」的状态记录</h3>' +
+    '<p><b>' + esc(W.title || '') + '</b>　当前策略：' + esc(EXB_MODE_NAME[W.mode] || W.mode || '') + '</p>' +
+    '<p>你的原话：「' + esc(W.userQuote || '') + '」</p>' +
+    '<p>' + esc((W.meaning && W.meaning.sellOnlyOnRally) || '') + '</p>' +
+    '<p style="color:var(--dim)">' + esc(W.meaning && W.meaning.notASellAlert || '') + '</p>';
+
+  /* 极好机会候选定义 */
+  h += '<h3 style="margin-top:10px">' + esc(G.title || '「极好机会」的候选定义') +
+    (G.needsUserConfirm ? '　<span style="color:var(--yellow);font-size:11px">待你确认</span>' : '') + '</h3>';
+  h += '<p>' + esc(G.logic || '') + '</p>';
+  (G.conditions || []).forEach(function(c){
+    h += '<div class="ex-cond"><b>' + esc(c.label) + '</b><br>' + esc(c.rule) +
+      '<br><i style="color:var(--dim)">为什么：' + esc(c.why) + '</i></div>';
+  });
+  h += '<p style="margin-top:6px">' + esc(G.output || '') + '</p>';
+
+  /* 当前扫描结果 */
+  h += '<h3 style="margin-top:10px">当前数据上跑一遍（' + n2(sc.universe) + ' 个品）</h3>' +
+    '<div class="ex-stat">' +
+    '<div><div class="ex-statk">① 事件后急跌</div><div class="ex-statv">' + n2(sc.c1) + '</div></div>' +
+    '<div><div class="ex-statk">② 强盘 / 有出口</div><div class="ex-statv">' + n2(sc.c2) + '</div></div>' +
+    '<div><div class="ex-statk">③ 历史低分位 ≤20%</div><div class="ex-statv">' + n2(sc.c3) + '</div></div>' +
+    '<div><div class="ex-statk">三者同时成立</div><div class="ex-statv" style="color:var(--yellow)">' + n2(sc.all3) + '</div></div>' +
+    '</div>';
+  const cands = sc.candidates || [];
+  if (cands.length){
+    cands.forEach(function(c){
+      h += '<div class="ex-cand"><b>' + esc(c.name) + '</b>（gid ' + esc(String(c.gid)) + '）　现价 ¥' + n2(c.priceNow, 2) +
+        '<br>历史分位 ' + (isNum(c.histPct) ? (c.histPct * 100).toFixed(1) + '%' : '—') +
+        '　批次 ' + esc(c.sw || '—') + '　gap ' + (c.gap == null ? '不适用' : c.gap) +
+        '<br>最近一次事件急跌：' + esc(c.evDate || '—') + '（' + esc(c.evType || '—') + '）跌 ' + exbP1(c.evDrop) +
+        '，距谷底 ' + n2(c.dropDaysAgo) + ' 个交易日</div>';
+    });
+  } else {
+    h += '<div class="ex-empty">当前数据上<b>没有</b>三者同时成立的品种 —— 所以现在没有任何提醒。' +
+      '（这是"没问题"的正常状态，不是坏了：按这个定义，极好机会本来就该是稀少的。）</div>';
+  }
+  const nm = sc.nearMiss || [];
+  if (nm.length){
+    h += '<p style="margin-top:8px">差一条就成立的（供参考，不构成提醒）：</p>';
+    nm.slice(0, 6).forEach(function(c){
+      const miss = !c.hits.c1 ? '缺 ①事件后急跌' : (!c.hits.c2 ? '缺 ②强盘/出口' : '缺 ③历史低分位');
+      h += '<div class="ex-cond">' + esc(c.name) + '　' + esc(miss) + '　历史分位 ' +
+        (isNum(c.histPct) ? (c.histPct * 100).toFixed(1) + '%' : '—') + '　批次 ' + esc(c.sw || '—') + '</div>';
+    });
+  }
+  h += '<p style="margin-top:8px;color:var(--dim)">' + esc(sc.note || '') + '</p>';
+  (G.caveats || []).forEach(function(c){ h += '<p style="color:var(--dim)">⚠️ ' + esc(c) + '</p>'; });
+  h += '<p style="color:var(--dim)">' + esc(W.disclaimer || '') + '</p>';
+
+  /* 确认按钮：状态存本机（localStorage），提示"机器可读的那份在 data/exit-wait-state.json" */
+  const ok = exbWaitConfirmed();
+  h += '<button class="ex-okbtn ' + (ok ? 'ex-yes' : '') + '" id="exb-ok">' +
+    (ok ? '✅ 已确认这个「极好机会」定义（点我再取消）' : '我确认这个「极好机会」定义') + '</button>' +
+    '<p style="color:var(--dim);margin-top:6px">口径记录：data/exit-wait-state.json（由 cs-quant/exit_board.cjs 产出）；' +
+    '这里的确认按钮只把状态存在本机，方便你随时改口。</p>';
+  h += '</div>';
+  return h;
+}
+/* 确认按钮：只绑一次（用事件委托，重渲染后仍然有效） */
+(function(){
+  const box = document.getElementById('exb-wait');
+  if (!box) return;
+  box.addEventListener('click', function(e){
+    const b = e.target && e.target.closest ? e.target.closest('#exb-ok') : null;
+    if (!b) return;
+    try {
+      const on = window.localStorage.getItem('exbWaitConfirm') === '1';
+      if (on) window.localStorage.removeItem('exbWaitConfirm');
+      else window.localStorage.setItem('exbWaitConfirm', '1');
+    } catch (err) {}
+    renderExitBoard();
+  });
+})();
 
 })();
 </script>
