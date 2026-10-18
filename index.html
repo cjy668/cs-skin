@@ -989,6 +989,16 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .wl-badge.wl-b-hot{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
 .wl-badge.wl-b-dead{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.13)}
 .wl-badge.wl-b-hold{color:var(--cyan);border-color:rgba(86,204,242,.45);background:rgba(86,204,242,.12)}
+/* ★ 2026-10-18 新增：出口锁死 / 剩余拉升空间 / 盘的类型 三枚徽标（前缀 wl- 已确认全站唯一） */
+.wl-badge.wl-b-lock{color:#ff9f43;border-color:rgba(255,159,67,.55);background:rgba(255,159,67,.14)}
+.wl-badge.wl-b-roombig{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.wl-badge.wl-b-roomsmall{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
+.wl-badge.wl-b-roomnone{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.13)}
+.wl-badge.wl-b-type{color:#b39ddb;border-color:rgba(179,157,219,.5);background:rgba(179,157,219,.12)}
+.wl-room{margin:8px 0 0;font-size:11.5px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere;
+  border-left:2px solid rgba(255,159,67,.55);padding:2px 0 2px 8px}
+.wl-room b{color:var(--text)}
+.wl-lockline{margin:6px 0 0;font-size:11px;line-height:1.65;color:#ff9f43;overflow-wrap:anywhere}
 .wl-tools{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0;min-width:0}
 .wl-input{flex:1 1 150px;min-width:0;background:var(--card2);border:1px solid var(--line);color:var(--text);
   border-radius:10px;padding:7px 9px;font-size:12.5px;font-family:inherit}
@@ -1077,6 +1087,19 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .dsb-aux{margin:6px 0 0;padding:6px 9px;border-radius:9px;font-size:11px;line-height:1.7;
   border:1px dashed rgba(255,197,49,.5);background:rgba(255,197,49,.07);color:var(--muted);
   overflow-wrap:anywhere}
+/* ★ 2026-10-18 新增：出口锁死 / 剩余拉升空间 / 盘的类型 徽标（前缀 dsb- 全站唯一） */
+.dsb-lock{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin:0 4px 0 0;border:1px solid rgba(255,159,67,.6);background:rgba(255,159,67,.15);color:#ff9f43;
+  overflow-wrap:anywhere;max-width:100%}
+.dsb-room{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin:0 4px 0 0;border:1px solid var(--line);color:var(--muted);background:rgba(139,157,178,.1)}
+.dsb-room.dsb-room-big{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.dsb-room.dsb-room-small{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
+.dsb-room.dsb-room-none{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.13)}
+.dsb-type{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  margin:0 4px 0 0;border:1px solid rgba(179,157,219,.5);background:rgba(179,157,219,.12);color:#b39ddb}
+.dsb-locknote{margin:6px 0 0;padding:6px 9px;border-radius:9px;font-size:11px;line-height:1.7;
+  border:1px solid rgba(255,159,67,.4);background:rgba(255,159,67,.07);color:var(--muted);overflow-wrap:anywhere}
 .dsb-more{display:block;width:100%;margin:10px 0 0;background:var(--card2);border:1px solid var(--line);
   color:var(--text);border-radius:10px;padding:8px;font-size:12.5px;font-weight:700;
   font-family:inherit;cursor:pointer}
@@ -1212,6 +1235,28 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
      长文本一律 overflow-wrap:anywhere。
    ============================================================================ */
 .ex-box{overflow:hidden}
+/* ★ 2026-10-18 新增：出口锁死 / 剩余拉升空间 / 盘的类型（前缀 ex- 已确认在本段唯一，且不碰既有 ex-top/ex-name/ex-body/ex-steps） */
+.ex-lock{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid rgba(255,159,67,.6);background:rgba(255,159,67,.15);color:#ff9f43;
+  margin:2px 4px 0 0;overflow-wrap:anywhere;max-width:100%}
+.ex-room{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid var(--line);color:var(--muted);background:rgba(139,157,178,.1);margin:2px 4px 0 0}
+.ex-room.ex-room-big{color:var(--green);border-color:rgba(47,208,122,.45);background:rgba(47,208,122,.12)}
+.ex-room.ex-room-small{color:var(--yellow);border-color:rgba(255,197,49,.45);background:rgba(255,197,49,.12)}
+.ex-room.ex-room-none{color:var(--red);border-color:rgba(255,107,107,.5);background:rgba(255,107,107,.13)}
+.ex-type{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid rgba(179,157,219,.5);background:rgba(179,157,219,.12);color:#b39ddb;margin:2px 4px 0 0}
+.ex-roombox{margin:8px 0 0;padding:8px 10px;border-radius:10px;font-size:11.5px;line-height:1.7;
+  border:1px solid rgba(255,159,67,.35);background:rgba(255,159,67,.06);color:var(--text);
+  overflow-wrap:anywhere;min-width:0;max-width:100%}
+.ex-roombox b{color:var(--yellow)}
+.ex-wtbl{width:100%;border-collapse:collapse;font-size:11.5px;margin:6px 0 0;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ex-wtbl th,.ex-wtbl td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left;
+  overflow-wrap:anywhere;vertical-align:top}
+.ex-wtbl thead th{color:var(--dim);font-size:10.5px;font-weight:800}
+.ex-wtbl .ex-up{color:var(--green);font-weight:800}
+.ex-wtbl .ex-down{color:var(--red);font-weight:800}
 .ex-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-width:0;margin:0 0 6px}
 .ex-hdt{font-size:15px;font-weight:800;margin:0;overflow-wrap:anywhere}
 .ex-sub{font-size:11.5px;color:var(--dim);overflow-wrap:anywhere;min-width:0;flex:1 1 100%}
@@ -5084,6 +5129,35 @@ function dsbColor(){
   Object.keys(s).forEach(function(k){ m[k] = s[k].color || '#8c8c8c'; });
   return m;
 }
+/* =====================================================================
+   ★ 2026-10-18 阶段看板新增三枚徽标：出口锁死 / 剩余拉升空间 / 盘的类型
+   （全部来自 dealer-stage-board.json 里 join 好的字段；没数据就什么都不画，不占位）
+   ===================================================================== */
+function dsbRoomCls(v){ return v === '大' ? 'dsb-room-big' : (v === '小' ? 'dsb-room-small' : (v === '无' ? 'dsb-room-none' : '')); }
+function dsbBadges(x){
+  let s = '';
+  if (x.exitLocked) s += '<span class="dsb-lock">⚠️ 出口锁死（无刀可换）</span>';
+  if (x.room && x.room.verdict && x.room.verdict !== 'insufficient'){
+    s += '<span class="dsb-room ' + dsbRoomCls(x.room.verdict) + '">剩余空间 ' + esc(x.room.verdict) +
+      (x.room.roomKind ? '·' + esc(x.room.roomKind) : '') + '</span>';
+  }
+  if (x.stockType && x.stockType.type) s += '<span class="dsb-type">' + esc(x.stockType.type) + '</span>';
+  return s;
+}
+function dsbNotes(x){
+  let s = '';
+  if (x.exitLocked && x.exitNote) s += '<div class="dsb-locknote">★ 出口锁死：' + esc(x.exitNote) + '</div>';
+  if (x.room && x.room.verdict && x.room.verdict !== 'insufficient'){
+    const p = function(v){ return isNum(v) ? ((v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%') : '—'; };
+    const pc = function(v){ return isNum(v) ? ((v * 100).toFixed(1) + '%') : '—'; };
+    s += '<div class="dsb-locknote" style="border-color:rgba(255,159,67,.3)">★ 剩余拉升空间 <b>' + esc(x.room.verdict) + '</b>' +
+      '　距上一段 C 峰值 ' + p(x.room.distToPeak) +
+      '　之后 60 日最高价中位 ' + p(x.room.med60) + '（p25 ' + p(x.room.p25) + ' / p75 ' + p(x.room.p75) + '）' +
+      '　60 日内没更高的价 ' + pc(x.room.noHigher60) + '　120 日内回前高 ' + pc(x.room.exceedPeak120) +
+      (x.room.refFrom ? ('　参考分布：' + esc(x.room.refFrom)) : '') + '</div>';
+  }
+  return s;
+}
 function renderStageBoard(){
   const stagesBox = document.getElementById('dsb-stages');
   const numsBox = document.getElementById('dsb-nums');
@@ -5201,6 +5275,7 @@ function renderStageBoard(){
     });
     ih += '<div class="dsb-item" style="border-left-color:' + (s.color || '#8c8c8c') + '">' +
       '<p class="dsb-h">' + esc(x.name) +
+      dsbBadges(x) +
       (x.form ? fwdFormBadge(x.form, x.formName) : '') +
       /* ★ 单品视角也标出所属批次与批内强弱（与监控清单同一份数据，两个视角都在） */
       rbBadgeFor(x.gid) +
@@ -5219,6 +5294,7 @@ function renderStageBoard(){
           s.durTradingDaysAtLeast3.p25 + ' / p75 ' + s.durTradingDaysAtLeast3.p75 + '）') : '')
       }) +
       (x.form ? fwdFormNote(x.form, x.formNote) : '') +
+      dsbNotes(x) +
       ((x.stage === 'distribute' || x.stage === 'rallyLate')
         ? '<div class="dsb-aux">⚠️ 辅助信息（不是卖出信号）：' +
           (x.stage === 'rallyLate' ? '涨幅/时间已到后段且近 5 日放缓' : '在售量堆积进历史前 20%') +
@@ -5235,7 +5311,22 @@ function renderStageBoard(){
   } else {
     tail = '<p class="sec-note" style="margin-top:10px">以上 ' + items.length + ' 条已全部显示。</p>';
   }
-  box.innerHTML = ih + tail;
+  /* ★ 2026-10-18：出口锁死总览（不删品，只标记 + 在卖出看板里提权） */
+  let pre = '';
+  if (dsbData.covertGap){
+    const cg = dsbData.covertGap;
+    const cs = cg.stat || {};
+    pre += '<div class="dsb-locknote">⚠️ <b style="color:#ff9f43">出口锁死（无刀可换）</b>：' +
+      esc(String(cs.locked == null ? '—' : cs.locked)) + ' 个品（全池 ' + esc(String(cs.nCovert == null ? '—' : cs.nCovert)) +
+      ' 个隐秘红皮里，本看板内 ' + esc(String(cs.lockedAndInStageBoard == null ? '—' : cs.lockedAndInStageBoard)) + ' 个）　' +
+      esc(cg.rule || '') + '<br>★ 你已确认：<b>加标记 + 卖出看板提高优先级 + 不从池子删除</b> —— ' +
+      '出口锁死只说明"合成刀出货走不通"，这些品仍在本看板里照常盯阶段。</div>';
+  }
+  if (dsbData.roomMeta && dsbData.roomMeta.headline){
+    pre += '<div class="dsb-locknote" style="border-color:rgba(255,159,67,.3)">★ <b>剩余拉升空间</b>：' +
+      esc(dsbData.roomMeta.headline) + '</div>';
+  }
+  box.innerHTML = pre + ih + tail;
   const moreBtn = document.getElementById('dsb-more');
   if (moreBtn) moreBtn.onclick = function(){ dsbShow += DSB_LIMIT; renderStageBoard(); };
 }
@@ -5337,6 +5428,43 @@ function wlRestore(){
 }
 function wlResetSearch(){ wlQ = ''; wlStageFilter = ''; wlOnlyAdded = false; renderWatchlist(); }
 
+/* =====================================================================
+   ★ 2026-10-18 三枚通用徽标：出口锁死 / 剩余拉升空间 / 盘的类型
+   ---------------------------------------------------------------------
+   数据来源（全部由 cs-quant 的离线脚本产出，经监控清单/阶段看板/卖出看板 join 进来）：
+     · exitLocked    ← covert-gap-board.json（五合一出口锁死；用户确认：加标记、提权、不删品）
+     · room.verdict  ← rally-room.json（大 / 小 / 无：回落之后还有没有更高的价）
+     · stockType     ← stock-type.json（控盘型 / 倒货型 / 中间型）
+   三个徽标各自用本区块自己的前缀（wl- / dsb- / ex-），不复用别的区块类名。
+   ===================================================================== */
+function wlRoomCls(v){ return v === '大' ? 'wl-b-roombig' : (v === '小' ? 'wl-b-roomsmall' : (v === '无' ? 'wl-b-roomnone' : 'wl-b-type')); }
+function wlRoomBadge(r){
+  if (!r || !r.verdict) return '';
+  if (r.verdict === 'insufficient') return '';
+  return '<span class="wl-badge ' + wlRoomCls(r.verdict) + '" title="' + esc(r.why || '') + '">剩余空间 ' +
+    esc(r.verdict) + (r.roomKind ? '·' + esc(r.roomKind) : '') + '</span>';
+}
+function wlTypeBadge(t){
+  if (!t || !t.type) return '';
+  const nm = t.type === '控盘型' ? '控盘型' : (t.type === '倒货型' ? '倒货型' : '中间型');
+  return '<span class="wl-badge wl-b-type" title="盘的类型：' + esc(nm) + '（控制指数 ' + esc(String(t.controlIndex)) +
+    '）——只描述性质，不参与买卖信号">' + esc(nm) + '</span>';
+}
+function wlLockBadge(on, note){
+  if (!on) return '';
+  return '<span class="wl-badge wl-b-lock" title="' + esc(note || '五合一汰换出口走不通') + '">⚠️ 出口锁死（无刀可换）</span>';
+}
+function wlRoomLine(r){
+  if (!r || !r.verdict || r.verdict === 'insufficient') return '';
+  const p = function(v){ return isNum(v) ? ((v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%') : '—'; };
+  const pc = function(v){ return isNum(v) ? ((v * 100).toFixed(1) + '%') : '—'; };
+  return '<div class="wl-room">★ <b>剩余拉升空间：' + esc(r.verdict) + (r.roomKind ? '（' + esc(r.roomKind) + '）' : '') + '</b>' +
+    '　距上一段 C 峰值 ' + p(r.distToPeak) +
+    '　之后 60 日最高价 中位 <b>' + p(r.med60) + '</b>（p25 ' + p(r.p25) + ' / p75 ' + p(r.p75) + '）' +
+    '　60 日内没出现更高的价 ' + pc(r.noHigher60) +
+    '　120 日内回前高 ' + pc(r.exceedPeak120) + '</div>';
+}
+
 function wlItemHTML(it){
   const tiny = isNum(it.maxTradable) && it.maxTradable < 3000;
   const removed = wlIsRemoved(it);
@@ -5349,6 +5477,8 @@ function wlItemHTML(it){
        用户明确要「两个视角都要」：批次看协同（上面那个区块），单品看个性（这里标出批次与排名）。
        数据来自 rally-batches.json 的 byGid；批次数据还没到就什么都不加（不占位、不编造）。 */
     rbBadgeFor(it.gid) +
+    /* ★ 2026-10-18：出口锁死 / 剩余拉升空间 / 盘的类型（用户确认：锁死不删品，只加标记 + 提权） */
+    wlLockBadge(it.exitLocked, it.exitNote) + wlRoomBadge(it.room) + wlTypeBadge(it.stockType) +
     (it.isHolding ? '<span class="wl-badge wl-b-hold">持仓中</span>' : '') +
     (it.sellSignal ? '<span class="wl-badge wl-b-dead">卖出信号：' + esc(it.sellSignalType || '命中') + '</span>' : '') +
     (tiny ? '<span class="wl-badge wl-b-dead">容量不足</span>' : '') +
@@ -5370,6 +5500,8 @@ function wlItemHTML(it){
     foot: ((wlData && wlData.stageFwdMeta) ? ('口径：' + (wlData.stageFwdMeta.caveats || []).map(function(cv){ return String(cv).replace(/[。；;\s]+$/, ''); }).join(' ／ ')) : '')
   });
   if (it.form) h += fwdFormNote(it.form, it.formNote);
+  /* ★ 剩余拉升空间的完整一行（不只是一个徽标）：用户 2026-10-18 的核心诉求 */
+  h += wlRoomLine(it.room);
   h += '<div class="wl-hits">' + arrOf(it.hits).map(wlHitChip).join('') + '</div>';
   if (it.typeNote) h += '<div class="wl-note">' + esc(it.typeNote) + '</div>';
   if (it.note) h += '<div class="wl-note">' + esc(it.note) + '</div>';
@@ -5439,6 +5571,27 @@ function renderWatchlist(){
   }
 
   let h = '';
+  /* ★ 2026-10-18：出口锁死（五合一无刀可换）总览 —— 用户确认的处理方式写在这里，不许静默 */
+  if (wlData.exitLock){
+    const EL = wlData.exitLock;
+    const es = EL.stat || {};
+    h += '<div class="wl-limit" style="border-color:rgba(255,159,67,.45)">' +
+      '<b style="color:#ff9f43">⚠️ 出口锁死（无刀可换）：' + n2(es.locked) + ' 个品</b>' +
+      '（全池 ' + n2(es.nCovert) + ' 个隐秘红皮里；监控清单内 ' + n2(es.lockedAndInWatchlist) + ' 个 · 阶段看板内 ' +
+      n2(es.lockedAndInStageBoard) + ' 个 · 你的持仓 ' + n2(sc.exitLockedHolding) + ' 个）' +
+      '<br>口径：' + esc(EL.rule || '') +
+      '<br>★ 处理方式（你已确认）：<b>加标记 + 卖出看板提高优先级 + 不从池子删除</b> —— 出口锁死只说明"靠合成刀出货这条路走不通"，' +
+      '这些品仍在做盘标的池里，仍然要盯它现在处在哪个阶段。</div>';
+  }
+  /* ★ 2026-10-18：剩余拉升空间总览（用户核心诉求：不许只写"可等"） */
+  if (wlData.room && wlData.room.nextPeak){
+    const RP = wlData.room.nextPeak;
+    h += '<div class="wl-limit" style="border-color:rgba(255,159,67,.32)">' +
+      '<b>★ 剩余拉升空间：回落之后，下一次拉升还超不超前高？</b><br>' + esc(RP.headline || '') +
+      '<br>逐品评估写在每个品下面：<b>大</b> = 历史上同位置之后 60 日还出现过明显更高的价；' +
+      '<b>小</b> = 只剩反弹空间（回不到前高）；<b>无</b> = 连比现价更高的价都少见。' +
+      '（完整统计见 <code>reports/剩余拉升空间-回落后再拉升统计.md</code>）</div>';
+  }
   /* 判据来源：把五条痕迹的效应量与可用性摊开写（用户要的「每条标注命中了哪几条已验证痕迹 + 效应量」） */
   h += '<div class="wl-sec">① 判据来源：五条通过检验的拉升前痕迹（阈值取配对对照中位）</div>';
   h += '<div class="wl-note">命中 = 该品的「最近 30 天该量 ÷ 自身 baseline 中位」高于配对对照中位（' +
@@ -5498,7 +5651,10 @@ function renderWatchlist(){
     h += '<div class="wl-scroll"><table class="wl-tbl"><colgroup><col style="width:40%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>' +
       '<thead><tr><th>品名</th><th>阶段</th><th>卖出信号</th><th>浮动盈亏</th></tr></thead><tbody>';
     hold.forEach(function(x){
-      h += '<tr><td>' + esc(x.name || '—') + '<em>gid ' + n2(x.gid) + (x.inWatchlist ? ' · 在监控清单内' : ' · 不在 1,073 名单里（判据没在它上面标定过）') + '</em></td>' +
+      h += '<tr><td>' + esc(x.name || '—') +
+        /* ★ 2026-10-18：持仓行也标「出口锁死」+ 剩余空间（用户明确要求库存表里能直接看到） */
+        wlLockBadge(x.exitLocked, x.exitNote) + wlRoomBadge(x.room) + wlTypeBadge(x.stockType) +
+        '<em>gid ' + n2(x.gid) + (x.inWatchlist ? ' · 在监控清单内' : ' · 不在 1,073 名单里（判据没在它上面标定过）') + '</em></td>' +
         '<td><span class="wl-badge ' + wlStageCls(x.stage) + '">' + esc(x.stage || '—') + '</span></td>' +
         '<td class="' + (x.sellSignal ? 'wl-neg' : 'wl-pos') + '">' + (x.sellSignal ? esc(x.sellSignalType || '命中') : '未命中') + '</td>' +
         '<td class="' + (isNum(x.gainVsCost) ? (x.gainVsCost > 0 ? 'wl-pos' : 'wl-neg') : '') + '">' +
@@ -5545,7 +5701,10 @@ function renderWatchlist(){
     h += '<tr><td colspan="4" class="wl-note">没有匹配的品。搜索是本地过滤（1,073 个全在页面里），不联网。</td></tr>';
   }
   list.slice(0, showN).forEach(function(x){
-    h += '<tr><td>' + esc(x.name) + '<em>gid ' + n2(x.gid) + '</em></td>' +
+    h += '<tr><td>' + esc(x.name) +
+      /* ★ 2026-10-18：index 里 exitLocked=1 的品，在全量搜索表里也标出来（不从池子删除，只加标记） */
+      (x.exitLocked === 1 ? '<span class="wl-badge wl-b-lock">⚠️ 出口锁死</span>' : '') +
+      '<em>gid ' + n2(x.gid) + '</em></td>' +
       '<td><span class="wl-badge ' + wlStageCls(x.stage) + '">' + esc(x.stage) + '</span></td>' +
       '<td>' + n2(x.score) + '</td>' +
       '<td class="' + (isNum(x.maxTradable) && x.maxTradable < 3000 ? 'wl-neg' : '') + '">' +
@@ -8156,6 +8315,29 @@ function exbFormNote(form, note){
   if (form === 'N') return '<div class="ex-cond">' + esc(note) + '</div>';
   return fwdFormNote(form, note);
 }
+/* =====================================================================
+   ★ 2026-10-18 卖出看板新增三枚徽标：出口锁死 / 剩余拉升空间 / 盘的类型
+   ---------------------------------------------------------------------
+   出口锁死：用户确认「加标记 + 提高卖出优先级 + 不从池子删除」，权重已从 gap 10% → 16%，
+              exitLocked 另 +6 分独立加成（见 exbData.priorityWeights / lockBonus）。
+   剩余空间：大 / 小 / 无 —— 修正旧版"一律可等"（用户：做盘后期下一次拉升高点可能不如现价）。
+   盘的类型：控盘型 / 倒货型 / 中间型 —— 只描述性质，不参与买卖信号。
+   ===================================================================== */
+function exbRoomCls(v){ return v === '大' ? 'ex-room-big' : (v === '小' ? 'ex-room-small' : (v === '无' ? 'ex-room-none' : '')); }
+function exbLockBadge(it){
+  if (!it || !it.exitLocked) return '';
+  return '<span class="ex-lock" title="' + esc(it.exitNote || '') + '">⚠️ 出口锁死（无刀可换）</span>';
+}
+function exbRoomBadge(r){
+  if (!r || !r.verdict || r.verdict === 'insufficient') return '';
+  return '<span class="ex-room ' + exbRoomCls(r.verdict) + '" title="' + esc(r.why || '') + '">剩余空间 ' +
+    esc(r.verdict) + (r.roomKind ? '·' + esc(r.roomKind) : '') + '</span>';
+}
+function exbTypeBadge(t){
+  if (!t || !t.type) return '<span class="ex-room">盘的类型 无标定</span>';
+  return '<span class="ex-type" title="控盘型/倒货型来自 6 个结构特征的指数（data/stock-type.json），只描述性质，不参与买卖信号">' +
+    esc(t.type) + '</span>';
+}
 function exbFwdCell(f){
   if (!f || !isNum(f.med)) return '<span style="color:var(--dim)">样本不足</span>';
   return '<span class="ex-fwdv">p25 <b>' + exbP1(f.p25) + '</b><br>中位 <b class="' + cls(f.med) + '">' + exbP1(f.med) +
@@ -8255,8 +8437,11 @@ function renderExitBoard(){
     const why = (t.why || []).filter(function(w){ return String(w).indexOf('动作区间：') !== 0; });
     h += '<div class="dsb-item" style="border-left-color:' + (t.stage === 'rallyLate' ? '#f6bd16' : (t.stage === 'distribute' ? '#ff9845' : '#8c8c8c')) + '">' +
       '<p class="dsb-h"><span class="ex-rk ' + (t.rank <= 3 ? 'ex-rk-hi' : '') + '">' + t.rank + '</span>' +
-      esc(t.name) + exbFormBadge(it.form && it.form.form, it.form && it.form.name) + '</p>' +
-      '<p class="dsb-m">加权分 <b>' + t.score + '</b> / 100 · ' + exbStageBadge(t.stage || 'insufficient') +
+      esc(t.name) + exbLockBadge(it) + exbRoomBadge(it.room) + exbTypeBadge(it.stockType) +
+      exbFormBadge(it.form && it.form.form, it.form && it.form.name) + '</p>' +
+      '<p class="dsb-m">加权分 <b>' + t.score + '</b> / 100' + (t.lockBonus ? ('（含出口锁死加成 +' + t.lockBonus + '）') : '') +
+      ' · 调整前 ' + (isNum(t.scoreBefore) ? t.scoreBefore : '—') + '（名次 ' + (t.rankBefore || '—') + '→' + t.rank + '）' +
+      ' · ' + exbStageBadge(t.stage || 'insufficient') +
       ' · 现价 ' + (isNum(it.priceNow) ? '¥' + it.priceNow.toFixed(2) : '—') +
       ' · ' + (isNum(it.pnlRate) ? (it.pnlRate >= 0 ? '浮盈 +' : '浮亏 ') + exbPAbs(it.pnlRate) : '无成本记录') +
       ' · 占比 ' + (isNum(it.weight) ? (it.weight * 100).toFixed(2) + '%' : '—') + '</p>' +
@@ -8265,6 +8450,58 @@ function renderExitBoard(){
       fwdBar60(it.fwd60, { title: '该阶段历史上' }) +
       '</div>';
   });
+  /* ★ 2026-10-18：权重调整前后的 Top 10 对照（同一个 priorityOf 跑两遍，可复算） */
+  const PC = exbData.priorityChange;
+  if (PC){
+    h += '<div class="ex-sec">★ 卖出优先级权重调整：Top 10 调整前后</div>';
+    h += '<p class="ex-hint">' + esc(PC.why || '') + '</p>';
+    const wB = PC.weightsBefore || {}, wA = PC.weightsAfter || {};
+    const WN = { stage: '阶段危险度', signal: '已验证卖出信号', gap: 'covert_arb_gap 出口', pnl: '浮盈亏', conc: '集中度', batch: '批内强弱' };
+    let wt = '<table class="ex-wtbl"><thead><tr><th>权重项</th><th>调整前</th><th>调整后</th><th>变化</th></tr></thead><tbody>';
+    Object.keys(wA).forEach(function(k){
+      const a = wB[k] == null ? null : wB[k], b = wA[k];
+      const d = (a == null || b == null) ? null : b - a;
+      wt += '<tr><td>' + esc(WN[k] || k) + '</td><td>' + (a == null ? '—' : (a * 100).toFixed(0) + '%') +
+        '</td><td><b>' + (b == null ? '—' : (b * 100).toFixed(0) + '%') + '</b></td>' +
+        '<td class="' + (d > 0 ? 'ex-up' : (d < 0 ? 'ex-down' : '')) + '">' +
+        (d == null ? '—' : ((d > 0 ? '+' : '') + (d * 100).toFixed(0) + 'pp')) + '</td></tr>';
+    });
+    wt += '<tr><td>exitLocked 独立加成</td><td>0</td><td><b>+' + n2(PC.lockBonus) + ' 分</b></td><td class="ex-up">新增</td></tr>';
+    wt += '</tbody></table>';
+    h += wt;
+    h += '<p class="ex-hint">调整前 Top 10：' + arrOf(PC.top10Before).map(function(x){ return x.rank + '. ' + x.name + '(' + x.score + ')'; }).join(' · ') + '</p>';
+    h += '<p class="ex-hint">调整后 Top 10：' + arrOf(PC.top10After).map(function(x){ return x.rank + '. ' + x.name + '(' + x.score + ')'; }).join(' · ') + '</p>';
+    h += '<p class="ex-hint">新进：' + (arrOf(PC.entered).length ? PC.entered.map(function(x){ return esc(x.name) + '(' + x.from + '→' + x.to + ')'; }).join('、')
+      : '无') + '　掉出：' + (arrOf(PC.left).length ? PC.left.map(function(x){ return esc(x.name) + '(' + x.from + '→' + x.to + ')'; }).join('、') : '无') +
+      '　名次变化 ' + n2(PC.changedCount) + ' 个</p>';
+    if (arrOf(PC.changed).length){
+      h += '<p class="ex-hint">' + PC.changed.slice(0, 8).map(function(x){
+        return esc(x.name) + '：' + x.rankBefore + '→' + x.rank + '（分 ' + x.scoreBefore + '→' + x.score +
+          (x.lockBonus ? '，含锁死加成 +' + x.lockBonus : '') + '）';
+      }).join('；') + '</p>';
+    }
+  }
+  /* ★ 出口锁死：44 个持仓里谁被锁死（只提优先级，不删品） */
+  if (exbData.exitLock){
+    const EL = exbData.exitLock;
+    h += '<div class="ex-roombox">⚠️ <b>出口锁死（无刀可换）</b>：' +
+      (arrOf(EL.inHoldings).length
+        ? (EL.inHoldings.map(function(x){ return esc(x.name) + '（gap ' + x.gap + '，' + esc(x.src || '') + '）'; }).join('、'))
+        : '你的 44 个持仓里没有出口锁死的品') +
+      '<br>' + esc(EL.rule || '') +
+      '<br>'+ esc(EL.poolNote || '') + '</div>';
+  }
+  /* ★ 剩余拉升空间：用户 2026-10-18 的核心诉求 —— 动作区间不再只写"可等" */
+  if (exbData.roomMeta){
+    const RM = exbData.roomMeta;
+    h += '<div class="ex-roombox">★ <b>剩余拉升空间（照你的原话补的判断）</b><br>' +
+      '你的原话：「' + esc(RM.userQuote || '') + '」<br>' +
+      '<b>' + esc(RM.nextPeakHeadline || '') + '</b><br>' +
+      '逐品三档：大 = 历史上同位置之后 60 日还出现过明显更高的价（可以等）；' +
+      '小 = 只剩反弹空间、回不到前高（反弹时分批）；无 = 连比现价更高的价都少见（现在就是相对高位）。' +
+      '本次持仓分布：' + Object.keys(RM.verdictDist || {}).map(function(k){ return k + ' ' + n2(RM.verdictDist[k]) + ' 个'; }).join(' · ') +
+      '。动作区间已按这三档改写（见每行的「动作倾向」与点开后的详情）。</div>';
+  }
   if (sumEl) sumEl.innerHTML = h;
 
   /* ---- ③ 阶段分布 chips（同时当筛选器用） ---- */
@@ -8326,6 +8563,8 @@ function renderExitBoard(){
       const pl = it.plan || {};
       tb += '<tr class="ex-tr ' + (exbOpenKey === it.key ? 'on' : '') + '" data-exb-key="' + esc(it.key) + '">' +
         '<td class="ex-td ex-nm"><span class="ex-rk">' + (it.rank || '—') + '</span>' + esc(it.name) +
+        /* ★ 2026-10-18：库存页持仓表里直接标「出口锁死」+ 剩余空间（用户明确要求三处都能看到） */
+        exbLockBadge(it) + exbRoomBadge(it.room) + exbTypeBadge(it.stockType) +
         '<em>' + esc(it.caseName || it.fam || '') + (it.num ? (' · ' + it.num + ' 件') : '') + '</em>' +
         /* 手机上不左右滑动也能看到最关键的两项：阶段 + 动作倾向 */
         '<div class="ex-nmsub">' + exbStageBadge(k) + '<span>' + esc(pl.headline || '—') + '</span></div></td>' +
@@ -8437,6 +8676,38 @@ function renderExitBoard(){
         d += '<p class="ex-hint" style="color:var(--dim)">不适用：' + esc((it.gap && it.gap.note) || '—') + '</p>';
       }
       if (it.gap && it.gap.note) d += '<p class="ex-hint" style="font-size:11px">' + esc(it.gap.note) + '</p>';
+      /* ★ 2026-10-18 出口锁死（用户确认：加标记 + 提权 + 不删品） */
+      if (it.exitLocked){
+        d += '<div class="ex-roombox">⚠️ <b>出口锁死（无刀可换）</b><br>' + esc(it.exitNote || '') +
+          '<br>优先级加分：+' + n2(exbData.lockBonus) + ' 分（独立加成，不进权重和）· 判定来源：' + esc(it.exitLockSrc || '—') +
+          '<br>★ 这不是"卖出指令"：它只说明靠合成刀出货这条路走不通，所以它的"该看程度"被顶上来而已。</div>';
+      }
+      /* ★ 2026-10-18 剩余拉升空间（修正"一律可等"） */
+      d += '<div class="ex-sec">剩余拉升空间（回落之后还有没有更高的价）</div>';
+      if (it.room){
+        const p1 = function(v){ return isNum(v) ? ((v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%') : '—'; };
+        const p0 = function(v){ return isNum(v) ? ((v * 100).toFixed(1) + '%') : '—'; };
+        d += '<div class="ex-roombox"><b>' + esc(it.room.verdict) + (it.room.roomKind ? '（' + esc(it.room.roomKind) + '）' : '') + '</b>　' +
+          '距上一段 C 峰值 ' + p1(it.room.distToPeak) + '（上一段峰值 ¥' + (it.room.lastPeak == null ? '—' : n2(it.room.lastPeak)) + '）' +
+          (it.room.overTop ? '　<span style="color:var(--yellow)">已过顶（≤峰值×0.7）</span>' : '') +
+          '<br>之后 60 个交易日最高价（相对现价）：p25 <b>' + p1(it.room.p25) + '</b> / 中位 <b>' + p1(it.room.med60) +
+          '</b> / p75 <b>' + p1(it.room.p75) + '</b>　·　60 日内没出现更高价的比例 ' + p0(it.room.noHigher60) +
+          '　·　120 日内回到上一段峰值的比例 ' + p0(it.room.exceedPeak120) +
+          '<br>参考分布：' + esc(it.room.refFrom || '—') + '（n=' + n2(it.room.refN) + '）' +
+          '<br>' + esc(it.room.why || '') + '</div>';
+      } else {
+        d += '<p class="ex-hint" style="color:var(--dim)">算不出：该品没有 C 主拉升标定或本地日线不足 —— 不编造数字。</p>';
+      }
+      /* ★ 2026-10-18 盘的类型（控盘型 / 倒货型） */
+      d += '<div class="ex-sec">盘的类型：控盘型 / 倒货型 / 中间型</div>';
+      if (it.stockType){
+        d += '<p class="ex-hint" style="color:var(--text)">' + exbTypeBadge(it.stockType) + '　控制指数 <b>' + n2(it.stockType.controlIndex) +
+          '</b>　置信度 ' + (isNum(it.stockType.confidence) ? (it.stockType.confidence * 100).toFixed(0) + '%' : '—') + '</p>' +
+          '<p class="ex-hint">' + esc(it.stockType.why || '') + '</p>' +
+          '<p class="ex-hint" style="font-size:11px">' + esc(it.stockType.caveat || '') + '</p>';
+      } else {
+        d += '<p class="ex-hint" style="color:var(--dim)">该品不在 1,073 品痕迹名单 → 没有控盘/倒货标定（不编造）。</p>';
+      }
       /* 历史 C 主拉升段 */
       d += '<div class="ex-sec">历史拉升段（C 主拉升）</div>';
       if (it.cSeg && it.cSeg.n){
@@ -8477,7 +8748,8 @@ function renderExitBoard(){
   /* ---- ⑧ 来源与口径 ---- */
   if (srcEl){
     srcEl.innerHTML = '<p class="ex-hint" style="margin-top:10px">数据来源：dealer-stage-board.json（阶段 + 60 日分布）· rally-batches.json（批次与强弱）· ' +
-      'rally-forms.json / mani-traces.json（三形态与 C 主拉升段）· sell-alerts.json（卖出信号）· covert-arb-gap.json（五合一出口）· ' +
+      'rally-forms.json / mani-traces.json（三形态与 C 主拉升段）· sell-alerts.json（卖出信号）· covert-arb-gap.json / covert-gap-board.json（五合一出口 + 出口锁死）· ' +
+      'rally-room.json（★ 剩余拉升空间）· stock-type.json（★ 控盘型 / 倒货型）· ' +
       'portfolio-risk.json（现价快照 / 出手天数）· my-portfolio-app.json（代码里的权威台账）。' +
       '<br>' + esc(exbData.notASellAlert || '') + '</p>';
   }
