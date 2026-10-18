@@ -5320,7 +5320,13 @@ function renderStageBoard(){
       esc(String(cs.locked == null ? '—' : cs.locked)) + ' 个品（全池 ' + esc(String(cs.nCovert == null ? '—' : cs.nCovert)) +
       ' 个隐秘红皮里，本看板内 ' + esc(String(cs.lockedAndInStageBoard == null ? '—' : cs.lockedAndInStageBoard)) + ' 个）　' +
       esc(cg.rule || '') + '<br>★ 你已确认：<b>加标记 + 卖出看板提高优先级 + 不从池子删除</b> —— ' +
-      '出口锁死只说明"合成刀出货走不通"，这些品仍在本看板里照常盯阶段。</div>';
+      '出口锁死只说明"合成刀出货走不通"，这些品仍在本看板里照常盯阶段。' +
+      (function(){
+        const rows = (dsbData.items || []).filter(function(x){ return x.exitLocked; });
+        if (!rows.length) return '';
+        return '<br>名单（' + rows.length + ' 个）：' + rows.slice(0, 40).map(function(x){ return esc(x.name); }).join('、') +
+          (rows.length > 40 ? ' …' : '');
+      })() + '</div>';
   }
   if (dsbData.roomMeta && dsbData.roomMeta.headline){
     pre += '<div class="dsb-locknote" style="border-color:rgba(255,159,67,.3)">★ <b>剩余拉升空间</b>：' +
@@ -5582,6 +5588,16 @@ function renderWatchlist(){
       '<br>口径：' + esc(EL.rule || '') +
       '<br>★ 处理方式（你已确认）：<b>加标记 + 卖出看板提高优先级 + 不从池子删除</b> —— 出口锁死只说明"靠合成刀出货这条路走不通"，' +
       '这些品仍在做盘标的池里，仍然要盯它现在处在哪个阶段。</div>';
+    /* ★ 34 个品【全部点名列出】：1,073 个品里翻不到就等于没接进去 —— 这里直接列清单（含当前阶段） */
+    const lockRows = arrOf(wlData.index).filter(function(x){ return x.exitLocked === 1; });
+    if (lockRows.length){
+      h += '<details class="wl-limit" open style="border-color:rgba(255,159,67,.3)">' +
+        '<summary style="cursor:pointer;color:#ff9f43;font-weight:800">⚠️ 出口锁死的 ' + lockRows.length +
+        ' 个品（全部列出 · 点开可收起）</summary><div class="wl-note" style="margin-top:6px">' +
+        lockRows.map(function(x){ return '<span class="wl-badge wl-b-lock">⚠️</span>' + esc(x.name) +
+          '（' + esc(x.stage || '—') + '）'; }).join('　·　') +
+        '</div></details>';
+    }
   }
   /* ★ 2026-10-18：剩余拉升空间总览（用户核心诉求：不许只写"可等"） */
   if (wlData.room && wlData.room.nextPeak){
