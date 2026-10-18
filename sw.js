@@ -5,8 +5,11 @@
      · 大文件行情（market.json / catalog.json 等）→ 缓存优先 + 后台更新
        （market.json 已扩到 2.2 万件 ≈ 3.5 MB，每次打开都重下太浪费流量；它一天只更新 3 次）
      · 静态资源（图标/manifest）→ 缓存优先
-   只在 https / localhost 下注册。 */
-const CACHE = 'cs-skin-app-v16';
+   只在 https / localhost 下注册。
+   ★ 2026-10-18 → v18：监控清单 / 阶段看板 / 卖出看板三个数据文件都加了新字段
+     （exitLocked 出口锁死 / 剩余拉升空间 room / 盘的类型 stockType），
+     老客户端缓存里没有这些字段 → CACHE 必须 +1 把它换掉。 */
+const CACHE = 'cs-skin-app-v18';
 const ASSETS = [
   './',
   './index.html',
@@ -78,8 +81,15 @@ const ASSETS = [
         60 个交易日的走势分布 p25/中位/p75 + 1,073 品的当前阶段与逐条命中痕迹）。
       **必须进 NET_FIRST**：它是「现在处于做盘的什么环节」的答案，卡在缓存里就是
       拿几天前的阶段做今天的判断 —— 同一个坑的第十一次。CACHE v13 → v14。
-      体积控制：约 470 KB，但只在用户切到「信号」页才拉（懒加载），不拖首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+      体积控制：约 470 KB，但只在用户切到「信号」页才拉（懒加载），不拖首屏。
+   ⚠️ 2026-10-17 十二修正：库存页新增「持仓退出看板」区块，数据源 exit-board.json
+      （cs-quant/exit_board.cjs 产出：44 个持仓逐品的当前阶段 + 所处行情批次与批内强弱
+        + 拉升三形态 C/A/B/N + 是否命中已验证卖出信号 + 五合一出口 covert_arb_gap
+        + 该阶段历史上之后 60 个交易日的走势分布 + 按六项加权的卖出优先级）。
+      **必须进 NET_FIRST**：它回答的是「我这 44 个持仓各自处在拉升的哪个时期」，
+      卡在缓存里就会拿昨天的阶段决定今天卖不卖 —— 同一个坑的第十二次。CACHE v16 → v17。
+      体积控制：约 184 KB，且只在用户切到「库存」页才拉（懒加载），不拖首屏。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
