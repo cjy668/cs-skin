@@ -9,7 +9,16 @@
    ★ 2026-10-18 → v18：监控清单 / 阶段看板 / 卖出看板三个数据文件都加了新字段
      （exitLocked 出口锁死 / 剩余拉升空间 room / 盘的类型 stockType），
      老客户端缓存里没有这些字段 → CACHE 必须 +1 把它换掉。 */
-const CACHE = 'cs-skin-app-v19';
+    ⚠️ 2026-10-19 十三修正：首页最上方新增「拉升前候选」卡（用户最高优先级），
+      数据源 pre-rally-candidates.json（cs-quant/build_pre_rally_candidates.cjs 产出：
+        1,073 品按【①阶段 ②剩余空间 ③强盘排序】三条件串联后的候选名单 +
+        每条的批次强弱 / 剩余空间 / 出口锁死 / 控盘倒货型 / 之后 60 日走势分布 / 命中痕迹 +
+        没有候选时的 near-miss）。
+      **必须进 NET_FIRST**：它是"今天哪些品在拉升前"，卡在缓存里 = 用户拿着昨天的名单做今天的决定
+      —— 同一个坑的第十四次。CACHE v19 → v20。
+      体积控制：约 320 KB，但页面侧 setTimeout(60ms) 才拉（让出首屏关键路径），
+      且只在「大盘」（首页）时拉，不拖首屏。 */
+const CACHE = 'cs-skin-app-v20';
 const ASSETS = [
   './',
   './index.html',
@@ -89,7 +98,7 @@ const ASSETS = [
       **必须进 NET_FIRST**：它回答的是「我这 44 个持仓各自处在拉升的哪个时期」，
       卡在缓存里就会拿昨天的阶段决定今天卖不卖 —— 同一个坑的第十二次。CACHE v16 → v17。
       体积控制：约 184 KB，且只在用户切到「库存」页才拉（懒加载），不拖首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
