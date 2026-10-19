@@ -5244,8 +5244,10 @@ function renderPreRally(){
       '拉升前候选需要 pre-rally-candidates.json（电脑上跑 <code>node cs-quant/build_pre_rally_candidates.cjs</code> 产出，' +
       'daily.cmd 每日在主发布之后自动跑）。在它到位之前，本区块<b>不显示任何候选</b> —— ' +
       '绝不用"差不多的品"凑一张名单。其他页签 / 区块不受影响。</div>';
-    box.innerHTML = emptyBox('pre-rally-candidates.json 还没生成（或线上没发布）。其他页面 / 区块不受影响。');
+    box.innerHTML = emptyBox('pre-rally-candidates.json 还没生成（或线上没发布）。其他页面 / 区块不受影响。') +
+      '<div style="margin-top:8px"><button class="prc-btn" data-prc-retry="1">点此重试（重新拉一次 pre-rally-candidates.json）</button></div>';
     ['prc-nums', 'prc-tools'].forEach(function(id){ const el = $(id); if (el) el.innerHTML = ''; });
+    prcBind();
     return;
   }
   const D = prcData;
@@ -5347,6 +5349,9 @@ function renderPreRally(){
 }
 function prcBind(){
   const root = $('sec-prc'); if (!root) return;
+  /* 取不到数据时的「点此重试」：GitHub Pages 刚发布的那几分钟偶发 404，重试一次通常就好 */
+  const rt = root.querySelector('[data-prc-retry]');
+  if (rt) rt.onclick = function(){ prcKick = false; prcState = 'loading'; ensurePreRally(); };
   root.querySelectorAll('[data-prc-act]').forEach(function(el){
     el.onclick = function(){
       const a = String(el.getAttribute('data-prc-act') || '');
