@@ -1406,6 +1406,107 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .ex-okbtn.ex-yes{background:rgba(47,208,122,.14)}
 @media(min-width:560px){.ex-kv > div{flex:1 1 150px}}
 
+/* ============================================================================
+   ★ 2026-10-19 新增：拉升前候选（首页第一张卡）—— 统一前缀 prc-，与既有类名零冲突
+   （先 grep 全量类名确认：index.html / sw.js 里 prc- 出现 0 次；
+     pr- 已被「组合风控」卡占用 → 本区块用 prc-）
+   手机 390×844 硬要求：所有子元素 min-width:0 + overflow-wrap:anywhere，
+   分布条用百分比定位（不写死 px），横向溢出必须为 0。
+   ============================================================================ */
+.prc-rule{margin:0 0 10px;padding:9px 12px;border-radius:11px;font-size:12px;line-height:1.7;
+  border:1px solid rgba(75,157,255,.4);background:rgba(75,157,255,.07);
+  color:var(--muted);min-width:0;overflow-wrap:anywhere;max-width:100%}
+.prc-rule b{color:var(--text)}
+.prc-cav{margin:0 0 11px;padding:11px 12px;border-radius:12px;font-size:12.5px;line-height:1.75;
+  border:1px solid rgba(255,107,107,.5);background:rgba(255,107,107,.09);
+  color:#ffd7d7;min-width:0;overflow-wrap:anywhere;max-width:100%}
+.prc-cav b{color:var(--red);display:block;font-size:13.5px;margin:0 0 5px}
+/* li / p 里的 <b> 必须回到行内 —— 否则每条都变成"标题一行 + 正文一行"，手机上这张卡会膨胀一整屏 */
+.prc-cav li b, .prc-cav p b, .prc-cav div b, .prc-cav i b{display:inline;font-size:inherit;margin:0}
+.prc-cav i{font-style:normal;color:var(--red);font-weight:800;display:block;margin:0 0 4px;font-size:12.5px}
+.prc-cav ol{margin:5px 0 0;padding-left:19px}
+.prc-cav li{margin:3px 0}
+.prc-nums{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;min-width:0}
+.prc-num{flex:1 1 84px;min-width:0;background:var(--card2);border:1px solid var(--line);
+  border-radius:11px;padding:7px 9px;max-width:100%}
+.prc-num .k{font-size:11px;color:var(--muted);margin-bottom:2px;overflow-wrap:anywhere}
+.prc-num .v{font-size:17px;font-weight:800;letter-spacing:-.2px;overflow-wrap:anywhere;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.prc-num .v.prc-va{color:var(--green)}
+.prc-num .v.prc-vc{color:var(--cyan)}
+.prc-num .v.prc-vd{color:var(--muted)}
+.prc-tools{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px;min-width:0}
+.prc-btn{background:var(--card2);border:1px solid var(--line);color:var(--muted);
+  border-radius:9px;padding:5px 10px;font-size:11.5px;font-weight:700;font-family:inherit;
+  cursor:pointer;min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal;text-align:left}
+.prc-btn.prc-on{color:#0b1017;background:var(--cyan);border-color:var(--cyan);font-weight:800}
+.prc-btn.prc-on-w{color:#0b1017;background:var(--yellow);border-color:var(--yellow);font-weight:800}
+.prc-item{margin:9px 0 0;padding:9px 11px;border-radius:11px;background:var(--card2);
+  border:1px solid var(--line);border-left:3px solid var(--dim);
+  min-width:0;overflow-wrap:anywhere;max-width:100%}
+.prc-item.prc-gA{border-left-color:var(--green);background:rgba(47,208,122,.06)}
+.prc-item.prc-gB{border-left-color:var(--dim)}
+.prc-item.prc-gC{border-left-color:var(--cyan);background:rgba(34,211,238,.05)}
+.prc-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-width:0;
+  font-size:13.5px;font-weight:800;overflow-wrap:anywhere}
+.prc-h .prc-rk{font-size:11px;font-weight:800;color:var(--dim);flex:0 0 auto}
+.prc-h .prc-nm{flex:1 1 120px;min-width:0;overflow-wrap:anywhere}
+.prc-h em{font-style:normal;font-weight:500;font-size:11px;color:var(--dim);flex:0 0 auto}
+.prc-tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;
+  border:1px solid var(--line);color:var(--muted);background:rgba(139,157,178,.1);white-space:nowrap;
+  flex:0 0 auto;max-width:100%}
+.prc-tag.prc-ta{color:var(--green);border-color:rgba(47,208,122,.55);background:rgba(47,208,122,.14)}
+.prc-tag.prc-tc{color:var(--cyan);border-color:rgba(34,211,238,.55);background:rgba(34,211,238,.14)}
+.prc-tag.prc-tw{color:var(--yellow);border-color:rgba(255,197,49,.55);background:rgba(255,197,49,.14)}
+.prc-tag.prc-tr{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.14)}
+.prc-tag.prc-td{color:var(--dim)}
+.prc-kv{display:flex;flex-wrap:wrap;gap:4px 10px;margin:5px 0 0;font-size:11.5px;
+  line-height:1.6;color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.prc-kv b{color:var(--text);font-weight:800}
+.prc-kv .prc-ok{color:var(--green);font-weight:800}
+.prc-kv .prc-bad{color:var(--red);font-weight:800}
+.prc-kv .prc-wa{color:var(--yellow);font-weight:800}
+/* 之后 60 日走势分布（三段区间条：p25→中位→p75→p90，按百分比定位，绝不写死 px） */
+.prc-dist{position:relative;height:12px;margin:7px 0 0;border-radius:6px;
+  background:rgba(139,157,178,.14);overflow:hidden;min-width:0}
+.prc-dseg{position:absolute;top:0;bottom:0}
+.prc-dseg.prc-neg{background:rgba(255,107,107,.55)}
+.prc-dseg.prc-pos{background:rgba(47,208,122,.55)}
+.prc-dseg.prc-pos2{background:rgba(47,208,122,.85)}
+.prc-dseg.prc-pos3{background:rgba(34,211,238,.7)}
+.prc-dzero{position:absolute;top:0;bottom:0;width:2px;background:rgba(233,240,247,.85)}
+.prc-dmed{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--yellow)}
+.prc-dl{font-size:11px;line-height:1.6;color:var(--muted);margin:4px 0 0;
+  min-width:0;overflow-wrap:anywhere}
+.prc-dl b{color:var(--text)}
+.prc-det{margin:7px 0 0;min-width:0}
+.prc-det > summary{cursor:pointer;font-size:11.5px;font-weight:800;color:var(--cyan);
+  padding:3px 0;overflow-wrap:anywhere;list-style:none}
+.prc-det > summary::-webkit-details-marker{display:none}
+.prc-det > summary:before{content:"▸ ";color:var(--dim)}
+.prc-det[open] > summary:before{content:"▾ "}
+.prc-in{padding:7px 0 0;font-size:11.5px;line-height:1.75;color:var(--muted);
+  min-width:0;overflow-wrap:anywhere}
+.prc-in b{color:var(--text)}
+.prc-in .prc-li{margin:4px 0 0;padding:5px 8px;border-radius:8px;background:rgba(139,157,178,.07);
+  border:1px solid var(--line);overflow-wrap:anywhere}
+.prc-in .prc-li span{display:block;font-weight:700;color:var(--text)}
+.prc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin:6px 0 0}
+.prc-tbl{width:100%;border-collapse:collapse;font-size:11px;min-width:0}
+.prc-tbl th,.prc-tbl td{padding:4px 6px;border-bottom:1px solid var(--line);text-align:left;
+  overflow-wrap:anywhere;vertical-align:top}
+.prc-tbl th{color:var(--dim);font-weight:700;white-space:nowrap}
+.prc-empty{margin:8px 0 0;padding:11px 12px;border-radius:11px;border:1px dashed rgba(255,197,49,.55);
+  background:rgba(255,197,49,.07);color:var(--muted);font-size:12px;line-height:1.75;
+  min-width:0;overflow-wrap:anywhere}
+.prc-empty b{color:var(--yellow)}
+.prc-more{margin:9px 0 0;font-size:11.5px;color:var(--muted);overflow-wrap:anywhere}
+@media (max-width:470px){
+  .prc-num{flex:1 1 46%}
+  .prc-h{font-size:13px}
+  .prc-kv{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -1480,6 +1581,32 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
       <section class="page on" id="sec-home" data-page="market">
         <div class="page-title"><h1>大盘</h1><span>饰品指数 · 市场宽度 · 今日结论</span></div>
         <div class="cards">
+
+          <!-- ================= ★★★ 拉升前候选（2026-10-19 新增 · 用户最高优先级） =================
+               用户原话（_产品需求最终版.md §一）：
+                 「我应该最需要的是可以看出【项目在拉升前，或正在小拉升吸筹，且拉升空间】的这种品，
+                   然后还有筛选就是在这这【拉升空间大的品再排出强盘在前面】」
+               ★ 为什么放在【首页（大盘）最上方】而不是信号页第一块：
+                 ① 它是全站唯一回答"买什么"的区块，而大盘页是打开 App 的默认落地页 ——
+                    零点击就能看到，符合"最高优先级"；
+                 ② 信号页是【持仓侧/状态侧】的主场（卖出警报 · 阶段看板 · 监控清单），
+                    把买入侧塞进去会和"该不该卖"混在同一屏，用户明确说过会被诱导；
+                 ③ 需求文档给了二选一（首页最上方 / 信号页第一块），这里选前者并写明理由。
+               ★ 三条硬纪律（写在 HTML 注释里，不靠自觉）：
+                 1) caveat 必须在卡片最上方、红色、不许折叠；
+                 2) 数量为 0 就显示 0 + near-miss（差一个条件的品），绝不硬凑；
+                 3) 只给条件、依据、数值，不给"建议买入"这类命令式措辞。
+               数据源：cs-quant/build_pre_rally_candidates.cjs → pre-rally-candidates.json
+               降级链：pre-rally-candidates.json 拿不到 → 只空这一块，其他卡/6 页签照常。 -->
+          <div class="card span-all" id="sec-prc">
+            <div class="sec-head"><h2>拉升前候选</h2><span class="sec-sub">正在筹备 / 启动前的品 · 三条件串联 · 强盘在前</span><span class="r" id="prc-time">加载中…</span></div>
+            <div class="prc-rule" id="prc-rule">三个条件串联：<b>① 阶段</b>（7 阶段结构口径：吸筹 / 蓄势·启动前 / 小拉升吸筹）× <b>② 还有拉升空间</b>（大 优先，小的标注"只有反弹空间"）× <b>③ 强盘排序</b>（批次 v5 obsRetention 批内分位为主）。<b>阶段和空间是硬门槛，强弱只排序不过滤</b> —— 您原话是"排出强盘在前面"，不是"只要强盘"。</div>
+            <p class="sec-note" id="prc-meta">—</p>
+            <div id="prc-cav"></div>
+            <div class="prc-nums" id="prc-nums"></div>
+            <div class="prc-tools" id="prc-tools"></div>
+            <div id="prc-box"><div class="skel"><i></i>拉升前候选加载中…（pre-rally-candidates.json）</div></div>
+          </div>
 
           <!-- ================= 数据新鲜度（per-source） =================
                ★ 2026-10-19：用户「我早上看都是前一天晚上更新的」——
@@ -3522,6 +3649,9 @@ function showPage(id){
      实测会把「配对后自动填现价」的结果从 market.json 的价挤成 live 的价（两个数值不同），
      把既有的 e2e 用例打红。懒加载既省流量，也不扰动别人已经调好的时序。 */
   if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
+  /* ★ 2026-10-19 拉升前候选：只在「大盘」（首页）才下 pre-rally-candidates.json。
+     它是首页第一张卡，但仍然是懒加载 + 异步 —— 不阻塞首屏其他数字（见 init 里的 setTimeout）。 */
+  if (pid === 'market'){ ensurePreRally(); }
   /* ★ 持仓退出看板：只有切到「库存」页才下 exit-board.json（184 KB），不拖首屏 */
   if (pid === 'inv'){ ensureExitBoard(); }
 }
@@ -4862,6 +4992,10 @@ let wlData = null, wlState = 'loading';
 const WL_LS_KEY = 'cs_skin_watchlist_v1';       /* ★ 新 key，与 cs_skin_app_v2 完全隔离 */
 let wlLocal = { v: 1, added: [], removed: [], note: '' };
 let wlQ = '', wlStageFilter = '', wlOnlyAdded = false;
+/* ★ 2026-10-19：监控清单的「只看拉升前候选」筛选器 ——
+   它筛的是 pre-rally-candidates.json 里那批品（三条件串联后的候选），
+   不是"命中痕迹 ≥3 条"的旧口径（两者不同，见 build_pre_rally_candidates.cjs 的 stages 映射）。 */
+let wlOnlyPrc = false;
 
 function wlLoadLocal(){
   try {
@@ -4892,6 +5026,344 @@ function ensureWatchlist(){ if (wlKick) return; wlKick = true; loadWatchlist(); 
 function loadWatchlistIfOpen(){
   const tab = (state && state.settings && state.settings.tab) || 'market';
   if (tab === 'sig') ensureWatchlist();
+}
+
+/* =====================================================================
+   ★★★ 11.86) 拉升前候选 —— pre-rally-candidates.json（用户最高优先级）
+
+   这是什么：cs-quant/build_pre_rally_candidates.cjs 把 1,073 品按【三条件串联】
+   筛出"在拉升前 / 正在小拉升吸筹 / 且还有拉升空间"的品，再按强盘排序。
+     ① 阶段 ∈ {拉升前(吸筹), 蓄势·启动前(平静+B 型小拉升簇), 小拉升吸筹(拉升早期)}
+     ② 剩余空间 ∈ {大, 小}（复用 build_rally_room.cjs 的三档口径；大优先）
+     ③ 强盘排序（批次 v5 obsRetention 批内分位 0.75 + 合成出口 gap 0.15 + 剩余空间 0.10）
+       ★ 只排序不过滤 —— 用户原话是"排出强盘在前面"，不是"只要强盘"。
+
+   四条硬纪律（写在代码里，不靠自觉）：
+     1) ★ caveat 必须在卡片最上方、红色、不可折叠（判据在用户名单上标定 / 时间外验证未做 /
+        未扣交易成本 / 成交量序列冻结 / 这是条件筛查不是买入建议）；
+     2) ★ 数量为 0 就渲染 0 + near-miss（差一个条件的品）—— 绝不用"差不多"的品凑数；
+     3) ★ 只给条件与依据，不给命令式措辞（没有"建议买入 / 可以入手"这类字眼）；
+     4) ★ 两套阶段口径的关系如实展示（双口径确认 / 痕迹待确认 / 口径不一致 三档），
+        不许把"6 阶段还在回落中"藏起来不说。
+
+   降级链：pre-rally-candidates.json 拿不到 → 只空这一块，其他卡 / 6 页签照常。
+   ===================================================================== */
+let prcData = null, prcState = 'loading', prcKick = false;
+let prcGroup = '';            /* '' | 'A' | 'B' | 'C' */
+let prcOnlyType = false;      /* 只看倒货型（用户个人偏好 → 筛选器，不是硬排序） */
+let prcOnlyGap = false;       /* 只看有合成出口（covert_arb_gap ≥ 0.3） */
+let prcOnlyBig = false;       /* 只看空间大 */
+let prcOnlyDual = false;      /* 只看双口径确认 */
+let prcOnlyFit = false;       /* 只看装得下 ¥3,000 */
+let prcShowN = 6;             /* 首屏只画 6 条（不拖首屏），点「再看」加 24 */
+let prcSort = 'room';         /* 'room' = 空间大优先 → 组内强盘（默认，用户原话："拉升空间大的品再排出强盘在前面"）
+                                 'strength' = 纯强盘排序 */
+const PRC_GID_SET = new Set();   /* 给「监控清单」的筛选器用 */
+const PRC_GAP_OK = 0.3;
+
+function ensurePreRally(){ if (prcKick) return; prcKick = true; loadPreRally(); }
+async function loadPreRally(){
+  try {
+    prcData = await fetchJSON('./pre-rally-candidates.json');
+    prcState = prcData ? 'ok' : 'fail';
+  } catch (e){ prcData = null; prcState = 'fail'; }
+  PRC_GID_SET.clear();
+  arrOf(prcData && prcData.candidates).forEach(function(x){ if (x && x.gid != null) PRC_GID_SET.add(String(x.gid)); });
+  renderPreRally();
+  /* 候选数据到了以后重画一次监控清单（「只看拉升前候选」筛选器要它） */
+  try { if (wlData) renderWatchlist(); } catch (e) {}
+}
+function prcP(v, d){ return isNum(v) ? ((v >= 0 ? '+' : '') + (v * 100).toFixed(d == null ? 0 : d) + '%') : '—'; }
+function prcR(v, d){ return isNum(v) ? ((v * 100).toFixed(d == null ? 1 : d) + '%') : '—'; }
+function prcG(x){ const g = String((x && x.group) || ''); return g.charAt(0) || 'B'; }
+function prcGName(g){ return g === 'A' ? 'A 拉升前·空间大' : g === 'C' ? 'C 小拉升吸筹' : 'B 拉升前·空间小'; }
+function prcGTagCls(g){ return g === 'A' ? 'prc-ta' : g === 'C' ? 'prc-tc' : 'prc-td'; }
+/* 之后 60 日走势分布：三段区间条（p25→中位→p75→p90），百分比定位 → 永远不会横向溢出
+   ★ 用【该品自己/同位置】的 60 日最高价分布（room 口径），不是阶段级 fwd60 ——
+     阶段级 fwd60 对同一阶段的所有品是同一组数字，六条一模一样的条没有信息量；
+     阶段级分布放进展开区里单独标"阶段口径"。 */
+function prcDistHTML(x){
+  const r = (x && x.room) || {};
+  const f = (x && x.fwd60) || {};
+  const p25 = isNum(r.p25) ? r.p25 : f.p25;
+  const md = isNum(r.med60) ? r.med60 : f.med;
+  const p75 = isNum(r.p75) ? r.p75 : f.p75;
+  const p90 = isNum(r.p90) ? r.p90 : f.p90;
+  if (!isNum(p25) || !isNum(md)) return '';
+  const lo = Math.min(0, p25), hi = Math.max(0, p90 == null ? md : p90);
+  const span = (hi - lo) > 1e-9 ? (hi - lo) : 1;
+  const P = function(v){ return Math.max(0, Math.min(100, ((v - lo) / span) * 100)); };
+  const seg = function(a, b, cls, z){
+    const w = Math.max(0, P(b) - P(a));
+    if (w <= 0) return '';
+    return '<i class="prc-dseg ' + cls + '" style="left:' + P(a).toFixed(2) + '%;width:' + w.toFixed(2) + '%;z-index:' + (z || 1) + '"></i>';
+  };
+  const up = isNum(r.noHigher60) ? (1 - r.noHigher60) : f.win;
+  let h = '<div class="prc-dist">';
+  h += seg(p25, Math.min(md, 0), 'prc-neg', 2);
+  h += seg(Math.max(p25, 0), md, 'prc-pos', 2);
+  h += seg(md, Math.max(isNum(p75) ? p75 : md, md), 'prc-pos2', 2);
+  h += seg(Math.max(isNum(p75) ? p75 : md, 0), hi, 'prc-pos3', 2);
+  if (lo < 0 && hi > 0) h += '<i class="prc-dzero" style="left:' + P(0).toFixed(2) + '%;z-index:3"></i>';
+  h += '<i class="prc-dmed" style="left:' + P(md).toFixed(2) + '%;z-index:4"></i>';
+  h += '</div>';
+  h += '<div class="prc-dl">之后 60 日最高价（' + (r.refKind === '该品自己' ? '该品自己同位置' : '池子同位置') + '）：' +
+    'p25 <b>' + prcP(p25, 1) + '</b> · 中位 <b>' + prcP(md, 1) + '</b>' + (isNum(p75) ? ' · p75 <b>' + prcP(p75, 1) + '</b>' : '') +
+    (isNum(p90) ? ' · p90 <b>' + prcP(p90, 1) + '</b>' : '') +
+    ' · 出现过更高价 <b>' + prcR(up) + '</b>' + (isNum(r.refN) ? '（n=' + n2(r.refN) + '）' : '') + '</div>';
+  return h;
+}
+function prcHitsHTML(x){
+  const hs = arrOf(x.hits);
+  if (!hs.length) return '<div class="prc-li">没有可展示的命中痕迹（数据不足，不编造）。</div>';
+  return hs.map(function(h){
+    const bits = [];
+    if (isNum(h.value)) bits.push('当前值 ' + (Math.abs(h.value) >= 1 ? h.value.toFixed(3) : h.value.toFixed(4)));
+    else bits.push('当前值 算不出');
+    if (isNum(h.threshold)) bits.push('对照阈值 ' + h.threshold.toFixed(4));
+    if (isNum(h.vsControl)) bits.push('对照中位 ' + h.vsControl.toFixed(4));
+    if (isNum(h.effect)) bits.push('效应量 exp(DiD) ' + h.effect.toFixed(3) + '×');
+    if (isNum(h.permPct)) bits.push('置换 ' + n2(h.permPct) + ' 分位');
+    if (h.unavailable) bits.push('⚠️ ' + (h.note || '算不出（不是没命中）'));
+    else bits.push(h.hit ? '✅ 命中' : (h.note || '未命中'));
+    return '<div class="prc-li"><span>' + esc(h.trace || '—') +
+      ' <em style="font-style:normal;font-weight:600;color:var(--dim)">（' + esc(h.src || '') + '）</em></span>' +
+      esc(bits.join(' · ')) + '</div>';
+  }).join('');
+}
+function prcItemHTML(x, idx){
+  const g = prcG(x);
+  const tags = [];
+  tags.push('<span class="prc-tag ' + prcGTagCls(g) + '">' + esc(prcGName(g)) + '</span>');
+  if (x.evidenceTier && x.evidenceTier.key === 'dual') tags.push('<span class="prc-tag prc-ta">双口径确认</span>');
+  if (x.exitLocked) tags.push('<span class="prc-tag prc-tr">⚠️ 出口锁死</span>');
+  if (x.capacity && x.capacity.enoughFor3k === false) tags.push('<span class="prc-tag prc-td">装不下 ¥3,000</span>');
+  if (x.justSwitched) tags.push('<span class="prc-tag prc-tw">⚠️ 刚切换</span>');
+  const rt = x.room || {};
+  const st = x.strength || {};
+  const bt = x.batch || {};
+  const ty = x.stockType || {};
+  const cap = x.capacity || {};
+  /* 行内只放需求文档点名的 6 项（现价 / 阶段+稳定天数 / 强弱+批内排名 / 剩余空间 / 出口 / 控盘倒货型），
+     批次 · 可交易 · 在售 · 求购 收进展开区 —— 否则手机上一行变七行，首页第一张卡就变成一屏墙。 */
+  const kv = [];
+  kv.push('现价 <b>' + (isNum(x.price) ? '¥' + fmtNum(x.price, x.price < 10 ? 2 : 1) : '—') + '</b>');
+  kv.push('阶段 <b>' + esc(x.stage || '—') + '</b>' + (isNum(x.stageStableDays) ? '（已稳 ' + n2(x.stageStableDays) + ' 天）' : ''));
+  kv.push('强弱 <b>' + (isNum(st.score) ? n2(st.score) + '/100 ' : '') + esc(st.verdict || '—') + '</b>' +
+    (st.rankInBatch ? '（批内 ' + esc(st.rankInBatch) + '）' : ''));
+  kv.push('剩余空间 <span class="' + (rt.verdict === '大' ? 'prc-ok' : 'prc-wa') + '">' + esc(rt.verdict || '—') + '</span>' +
+    (isNum(rt.med60) ? '（60 日中位 ' + prcP(rt.med60) + '）' : ''));
+  kv.push('出口 ' + (x.exitLocked ? '<span class="prc-bad">锁死</span>'
+    : (isNum(x.covertArbGap) ? ('gap ' + x.covertArbGap.toFixed(2) + (x.covertArbGap >= PRC_GAP_OK ? ' <span class="prc-ok">有合成出口</span>' : ' <span class="prc-bad">&lt;0.3</span>'))
+      : '<b>无合成出口</b>')));
+  kv.push('类型 <b>' + esc(ty.type || '—') + '</b>' + (isNum(ty.confidence) ? '（' + ty.confidence.toFixed(2) + '）' : ''));
+
+  let h = '<div class="prc-item prc-g' + g + '">' +
+    '<div class="prc-h"><span class="prc-rk">#' + (idx + 1) + '</span>' +
+    '<span class="prc-nm">' + esc(x.name || '—') + '</span>' + tags.join('') +
+    '</div>' +
+    '<div class="prc-kv">' + kv.map(function(s){ return '<span>' + s + '</span>'; }).join('') + '</div>' +
+    prcDistHTML(x);
+  /* 点开看完整依据 */
+  let d = '<details class="prc-det"><summary>看完整依据</summary><div class="prc-in">';
+  d += '<div><b>为什么算「' + esc(x.stage || '') + '」</b>：' + esc(x.why || '') + '</div>';
+  if (x.evidenceTier) d += '<div style="margin-top:5px"><b>两套阶段口径</b>：7 阶段=' + esc(x.dealerStageCn || '—') +
+    ' · 6 阶段=' + esc(x.monitorStage || '—') + ' → <b>' + esc(x.evidenceTier.name) + '</b>（' + esc(x.evidenceTier.note || '') + '）</div>';
+  if (bt.id || isNum(cap.maxTradable) || isNum(x.listed) || isNum(x.buyNum) || isNum(x.covertArbGap)) {
+    const extra = [];
+    if (bt.id) extra.push('批次 <b>' + esc(bt.id) + '</b>' + (isNum(bt.n) ? '（' + n2(bt.n) + ' 品）' : ''));
+    if (isNum(cap.maxTradable)) extra.push('可交易 <b>¥' + fmtNum(cap.maxTradable, 0) + '</b>' + (cap.enoughFor3k === false ? '（装不下 ¥3,000）' : ''));
+    if (isNum(x.listed)) extra.push('在售 <b>' + n2(x.listed) + '</b> 件');
+    if (isNum(x.buyNum)) extra.push('求购 <b>' + n2(x.buyNum) + '</b>');
+    if (isNum(x.covertArbGap)) extra.push('covert_arb_gap <b>' + x.covertArbGap.toFixed(4) + '</b>' + (x.gapBand ? '（' + esc(x.gapBand) + '）' : ''));
+    if (isNum(x.monitorScore)) extra.push('6 阶段痕迹得分 <b>' + n2(x.monitorScore) + '/100</b>');
+    d += '<div style="margin-top:5px"><b>盘口与容量</b>：' + extra.join(' · ') + '</div>';
+  }
+  d += '<div style="margin-top:7px"><b>① 命中痕迹（带数值）</b></div>' + prcHitsHTML(x);
+  d += '<div style="margin-top:7px"><b>② 剩余空间依据</b></div>' +
+    '<div class="prc-li"><span>判定：' + esc(rt.verdict || '—') + ' · ' + esc(rt.roomKind || '—') + '</span>' +
+    esc(rt.why || '（数据不足，不编造）') +
+    (rt.refFrom ? ' 参照：' + esc(rt.refFrom) : '') +
+    (isNum(rt.distToPeak) ? ' · 现价距上一段 C 峰值 ' + prcP(rt.distToPeak, 1) : '') +
+    (rt.lastPeakDate ? ' · 上一段峰值 ' + esc(rt.lastPeakDate) : '') + '</div>';
+  d += '<div style="margin-top:7px"><b>③ 批次与批内强弱</b></div>' +
+    '<div class="prc-li"><span>' + (bt.id ? ('批次 ' + esc(bt.id) + '（' + esc(bt.start || '—') + ' ~ ' + esc(bt.end || '—') + '，' + n2(bt.n) + ' 品）') : '无批次归属') + '</span>' +
+    (bt.id ? ('批内排名 ' + esc(bt.rankText || '—') + ' · strengthPct ' + prcR(bt.strengthPct) + ' · obsRetention（v5 口径）' + (isNum(bt.obsRetention) ? bt.obsRetention.toFixed(4) : '—') + ' · 该批涨幅中位 ' + prcP(bt.gain)) : (st.note || '')) + '</div>';
+  /* 阶段口径的 60 日分布（和上面那条"同位置最高价"不同：这条是【该阶段历史】的走势分布） */
+  if (x.fwd60 && isNum(x.fwd60.med)) {
+    const F = x.fwd60;
+    d += '<div style="margin-top:7px"><b>⑥ 该阶段历史之后 60 日走势分布（阶段口径）</b></div>' +
+      '<div class="prc-li"><span>' + esc(x.stage || '') + ' 阶段</span>' +
+      'p25 ' + prcP(F.p25, 1) + ' · 中位 ' + prcP(F.med, 1) + ' · p75 ' + prcP(F.p75, 1) +
+      (isNum(F.p90) ? ' · p90 ' + prcP(F.p90, 1) : '') + ' · 上涨占比 ' + prcR(F.win) +
+      (isNum(F.n) ? '（样本 n=' + n2(F.n) + '）' : '') +
+      '　—— 注意：这一条对同一阶段的所有品是同一组数字，所以列表里画的是【该品自己/同位置】的最高价分布，不是这一条。</div>';
+  }
+  d += '<div style="margin-top:7px"><b>④ 强弱分怎么来的</b></div><div class="prc-li"><span>' +
+    (isNum(st.score) ? ('score ' + n2(st.score) + '/100') : 'score —') + '</span>' + esc(st.formula || '') +
+    (arrOf(st.parts).length ? '　分项：' + esc(arrOf(st.parts).join(' + ')) : '') + '</div>';
+  if (x.formNote) d += '<div style="margin-top:7px"><b>⑤ 三形态</b>：' + esc(x.formName || x.form || '') + ' —— ' + esc(x.formNote) + '</div>';
+  d += '<div style="margin-top:7px;opacity:.85">★ 以上是【条件与依据】，不是买入建议；收益是毛额，未扣来回 1.00%~2.485% 成本与 7 天冷却。</div>';
+  d += '</div></details></div>';
+  return h + d;
+}
+function prcPass(x){
+  if (prcGroup && prcG(x) !== prcGroup) return false;
+  if (prcOnlyBig && !(x.room && x.room.verdict === '大')) return false;
+  if (prcOnlyType && !(x.stockType && x.stockType.type === '倒货型')) return false;
+  if (prcOnlyGap && !(isNum(x.covertArbGap) && x.covertArbGap >= PRC_GAP_OK)) return false;
+  if (prcOnlyDual && !(x.evidenceTier && x.evidenceTier.key === 'dual')) return false;
+  if (prcOnlyFit && !(x.capacity && x.capacity.enoughFor3k !== false)) return false;
+  return true;
+}
+function prcNearHTML(nm){
+  const list = arrOf(nm && nm.list);
+  let h = '<details class="prc-det"' + ((!prcData || !prcData.count) ? ' open' : '') + '><summary>差一个条件的品（near-miss，' +
+    n2((nm && nm.total) || 0) + ' 个' + (list.length ? '，这里列 ' + n2(list.length) + ' 个' : '') + '）—— 点开看它们差在哪一条</summary><div class="prc-in">';
+  h += '<div>列出来只为解释"为什么今天这么少"，<b>不代表它们更接近可买</b>。' +
+    (nm && nm.byGroup ? ('分组：' + Object.keys(nm.byGroup).map(function(k){ return esc(k) + ' ' + n2(nm.byGroup[k]) + ' 个'; }).join(' · ')) : '') + '</div>';
+  if (!list.length) h += '<div class="prc-li">今天没有 near-miss 记录。</div>';
+  list.forEach(function(x){
+    h += '<div class="prc-li"><span>' + esc(x.name || '—') + (x.group ? '　·　' + esc(x.group) : '') + '</span>' +
+      (isNum(x.price) ? '现价 ¥' + fmtNum(x.price, x.price < 10 ? 2 : 1) + ' · ' : '') +
+      (x.dealerStageCn ? '7 阶段=' + esc(x.dealerStageCn) + ' · ' : '') +
+      (x.room ? ('剩余空间=' + esc(x.room.verdict || '—') + (isNum(x.room.med60) ? '（60 日中位 ' + prcP(x.room.med60) + '）' : '') + ' · ') : '') +
+      (isNum(x.strength) ? ('强弱 ' + n2(x.strength) + ' · ') : '') +
+      '<b style="color:var(--yellow)">' + esc(x.missing || '') + '</b></div>';
+  });
+  h += '</div></details>';
+  return h;
+}
+function renderPreRally(){
+  const box = $('prc-box'); if (!box) return;
+  const cavEl = $('prc-cav');
+  if (prcState === 'fail' || !prcData){
+    setText('prc-time', '未生成');
+    setText('prc-meta', '—');
+    if (cavEl) cavEl.innerHTML = '<div class="prc-cav"><b>🔴 这个区块的数据没取到</b>' +
+      '拉升前候选需要 pre-rally-candidates.json（电脑上跑 <code>node cs-quant/build_pre_rally_candidates.cjs</code> 产出，' +
+      'daily.cmd 每日在主发布之后自动跑）。在它到位之前，本区块<b>不显示任何候选</b> —— ' +
+      '绝不用"差不多的品"凑一张名单。其他页签 / 区块不受影响。</div>';
+    box.innerHTML = emptyBox('pre-rally-candidates.json 还没生成（或线上没发布）。其他页面 / 区块不受影响。');
+    ['prc-nums', 'prc-tools'].forEach(function(id){ const el = $(id); if (el) el.innerHTML = ''; });
+    return;
+  }
+  const D = prcData;
+  setText('prc-time', (D.updatedAtText || '—') + (D.asOf ? '　行情 ' + D.asOf : ''));
+  const dq = D.dataQuality || {};
+  const gc = D.groupCounts || {};
+  const gA = n2(gc['A_拉升前_空间大_强盘'] || 0), gB = n2(gc['B_拉升前_空间小'] || 0), gC = n2(gc['C_小拉升吸筹'] || 0);
+  setText('prc-meta', '全池 ' + n2(dq.pool) + ' 个品 → ①阶段过关 ' + n2(dq.stagePass) + ' 个 → ②有拉升空间 ' +
+    n2(D.count) + ' 个候选。分组：A 拉升前·空间大 ' + gA + ' · C 小拉升吸筹 ' + gC + ' · B 拉升前·空间小 ' + gB +
+    '。证据层级：双口径确认 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).dual) +
+    ' / 痕迹待确认 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).tracePending) +
+    ' / 口径不一致 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).caliberConflict));
+
+  /* ★ caveat 必须最上方、红色、不折叠 */
+  if (cavEl){
+    cavEl.innerHTML = '<div class="prc-cav">' +
+      '<b>⚠️ 读之前必须知道的五件事</b>' +
+      '<i>这是【条件筛查】，不是买入建议 —— 只给阶段 / 空间 / 强弱与命中依据，不给指令。</i>' +
+      '<ol>' +
+      '<li><b>判据在【用户自己给的 1,073 品名单】上标定</b>（2,902 段 C 主拉升 + 5 条痕迹），不是全市场随机样本 → 换别的品不保证成立。</li>' +
+      '<li><b>时间外验证未做</b>（2023~2025 标定 / 2025~2026 验证还没跑）。</li>' +
+      '<li><b>未扣交易成本</b>：全是毛额，一次买卖要付来回 <b>1.00%~2.485%</b> + <b>7 天交易冷却</b>。</li>' +
+      '<li><b>成交量序列冻结在 2025-11</b> → 量能配合这一条整体失效，阶段判定里<b>没用量能</b>。</li>' +
+      '<li><b>两套阶段口径会打架</b>：7 阶段判"吸筹"时，6 阶段可能仍判"回落中"（后者是"距 180 日高点回落 ≥20%"这个<b>回撤</b>条件，不代表现在还在跌）。本卡以 <b>7 阶段结构口径</b>为门槛，三档证据层级逐条标注，可用「只看双口径确认」收窄。</li>' +
+      '</ol>' +
+      '<div style="margin-top:5px;opacity:.92">★ 数量为 0 就显示 0，本卡没有任何凑数逻辑；每个品都附命中痕迹与数值，点开可核验。</div>' +
+      '</div>';
+  }
+
+  /* 数字卡 */
+  const nums = $('prc-nums');
+  const wc = D.wantedCombo || {};
+  const tier = (D.evidenceTiers && D.evidenceTiers.counts) || {};
+  if (nums) nums.innerHTML =
+    '<div class="prc-num"><div class="k">候选总数</div><div class="v ' + (D.count ? 'prc-va' : 'prc-vd') + '">' + n2(D.count) + '</div></div>' +
+    '<div class="prc-num"><div class="k">A 拉升前·空间大</div><div class="v prc-vc">' + gA + '</div></div>' +
+    '<div class="prc-num"><div class="k">C 小拉升吸筹</div><div class="v prc-vc">' + gC + '</div></div>' +
+    '<div class="prc-num"><div class="k">B 拉升前·空间小</div><div class="v prc-vd">' + gB + '</div></div>' +
+    '<div class="prc-num"><div class="k">倒货型+空间大+强盘</div><div class="v ' + ((wc.count || 0) ? 'prc-va' : 'prc-vd') + '">' + n2(wc.count || 0) + '</div></div>' +
+    '<div class="prc-num"><div class="k">双口径确认</div><div class="v prc-vd">' + n2(tier.dual || 0) + '</div></div>';
+
+  /* 筛选器 */
+  const tools = $('prc-tools');
+  if (tools){
+    const bt = function(label, on, act, wide){
+      return '<button class="prc-btn' + (on ? (wide ? ' prc-on-w' : ' prc-on') : '') + '" data-prc-act="' + act + '">' + label + '</button>';
+    };
+    let t = bt('全部 ' + n2(D.count), prcGroup === '' && !prcOnlyBig && !prcOnlyType && !prcOnlyGap && !prcOnlyDual && !prcOnlyFit, 'g:', false);
+    t += bt('A 拉升前·空间大 ' + gA, prcGroup === 'A', 'g:A', true);
+    t += bt('C 小拉升吸筹 ' + gC, prcGroup === 'C', 'g:C', true);
+    t += bt('B 拉升前·空间小 ' + gB, prcGroup === 'B', 'g:B', false);
+    t += bt(prcSort === 'room' ? '排序：空间大优先 → 组内强盘' : '排序：纯强盘（全表 score 降序）', true, 's:sort', false);
+    t += bt('只看倒货型（我的偏好）', prcOnlyType, 'f:type', true);
+    t += bt('只看空间大', prcOnlyBig, 'f:big', false);
+    t += bt('只看有合成出口', prcOnlyGap, 'f:gap', false);
+    t += bt('只看双口径确认', prcOnlyDual, 'f:dual', false);
+    t += bt('只看装得下 ¥3,000', prcOnlyFit, 'f:fit', false);
+    tools.innerHTML = t;
+  }
+
+  /* 列表 */
+  const all = arrOf(D.candidates);
+  let list = all.filter(prcPass);
+  /* 排序：默认「空间大优先 → 组内按强弱」——这是用户原话"在这这拉升空间大的品再排出强盘在前面"的字面口径；
+     另一档「纯强盘」= 全表按 score 降序（用户也可以一键切过去）。 */
+  if (prcSort === 'room'){
+    list = list.slice().sort(function(a, b){
+      const ra = (a.room && a.room.verdict === '大') ? 1 : 0;
+      const rb = (b.room && b.room.verdict === '大') ? 1 : 0;
+      if (rb !== ra) return rb - ra;
+      const sa = (a.strength && isNum(a.strength.score)) ? a.strength.score : -1;
+      const sb = (b.strength && isNum(b.strength.score)) ? b.strength.score : -1;
+      return sb - sa;
+    });
+  }
+  let h = '';
+  if (!all.length){
+    /* ★ 今天没有候选：显示 0 + 解释 + near-miss */
+    h += '<div class="prc-empty"><b>今天没有符合条件的品（' + n2(dq.pool) + ' 个品里 0 个同时满足 ①阶段 ②剩余空间）。</b>' +
+      '<br>过滤漏斗：全池 ' + n2(dq.pool) + ' → ①阶段过关 ' + n2(dq.stagePass) + ' → ②有拉升空间 <b>0</b>。' +
+      '<br>停止原因：① 阶段挡掉 ' + n2((dq.stoppedBy || {})['① 阶段']) + ' 个；② 空间再挡掉 ' + n2((dq.stoppedBy || {})['② 剩余空间(阶段过关但 room 不是大/小)']) + ' 个。' +
+      '<br>★ 这不是"系统坏了"，也不代表明天会有 —— 0 就是 0，不硬凑。</div>';
+  } else if (!list.length){
+    h += '<div class="prc-empty"><b>当前筛选条件下 0 个。</b>候选总数 ' + n2(D.count) + ' 个，但都不满足你刚打开的筛选器 → 点「全部」回去。</div>';
+  } else {
+    const show = list.slice(0, prcShowN);
+    h += show.map(function(x, i){ return prcItemHTML(x, i); }).join('');
+    if (list.length > show.length){
+      h += '<div class="prc-more">共 ' + n2(list.length) + ' 个符合当前筛选，这里先显示前 ' + n2(show.length) +
+        ' 个（按强弱分降序）。<button class="prc-btn" data-prc-act="more" style="margin-left:6px">再看 ' +
+        Math.min(24, list.length - show.length) + ' 个</button></div>';
+    } else {
+      h += '<div class="prc-more">共 ' + n2(list.length) + ' 个符合当前筛选，已全部显示（按强弱分降序）。</div>';
+    }
+  }
+  h += prcNearHTML(D.nearMiss);
+  box.innerHTML = h;
+  prcBind();
+}
+function prcBind(){
+  const root = $('sec-prc'); if (!root) return;
+  root.querySelectorAll('[data-prc-act]').forEach(function(el){
+    el.onclick = function(){
+      const a = String(el.getAttribute('data-prc-act') || '');
+      if (a.indexOf('g:') === 0){
+        const g = a.slice(2);
+        prcGroup = (prcGroup === g) ? '' : g;
+        prcShowN = 6;
+      } else if (a === 'f:type'){ prcOnlyType = !prcOnlyType; prcShowN = 6; }
+      else if (a === 'f:big'){ prcOnlyBig = !prcOnlyBig; prcShowN = 6; }
+      else if (a === 'f:gap'){ prcOnlyGap = !prcOnlyGap; prcShowN = 6; }
+      else if (a === 'f:dual'){ prcOnlyDual = !prcOnlyDual; prcShowN = 6; }
+      else if (a === 'f:fit'){ prcOnlyFit = !prcOnlyFit; prcShowN = 6; }
+      else if (a === 's:sort'){ prcSort = (prcSort === 'room') ? 'strength' : 'room'; prcShowN = 6; }
+      else if (a === 'more'){ prcShowN += 24; }
+      renderPreRally();
+    };
+  });
 }
 
 /* =====================================================================
@@ -5600,6 +6072,13 @@ function wlItemHTML(it){
   return h;
 }
 
+/* 「只看拉升前候选」筛选器的谓词：候选名单没加载时一律返回 true（不静默清空整张清单） */
+function wlPrcPass(x){
+  if (!wlOnlyPrc) return true;
+  if (!PRC_GID_SET.size) return true;   /* 名单还没到 → 先不筛，由按钮旁的提示说明 */
+  return PRC_GID_SET.has(String(x && x.gid));
+}
+function wlPrcList(){ return arrOf(prcData && prcData.candidates); }
 function renderWatchlist(){
   const box = $('wl-box'); if (!box) return;
   if (wlState === 'fail' || !wlData){
@@ -5707,7 +6186,7 @@ function renderWatchlist(){
     '本区块把它标成「算不出」而不是「没命中」。</div>';
 
   /* ② 拉升前 —— 用户最想看的一档，单独列出 */
-  const pre = arrOf(wlData.signals).filter(function(x){ return x.stage === '拉升前' && !wlIsRemoved(x); });
+  const pre = arrOf(wlData.signals).filter(function(x){ return x.stage === '拉升前' && !wlIsRemoved(x) && wlPrcPass(x); });
   h += '<div class="wl-sec">② ★ 拉升前（' + n2((SD['拉升前'] || {}).total || 0) + ' 个' +
     (wlLocal.removed.length ? '，其中 ' + wlLocal.removed.length + ' 个被你隐藏' : '') + '）—— 这是这份清单的核心输出</div>';
   if (!pre.length){
@@ -5719,13 +6198,19 @@ function renderWatchlist(){
 
   /* ③ 其他阶段（拉升中/派发中/回落中/平静/数据不足） */
   const others = arrOf(wlData.signals).filter(function(x){
-    return x.stage !== '拉升前' && !wlIsRemoved(x) && !(wlStageFilter && x.stage !== wlStageFilter);
+    return x.stage !== '拉升前' && !wlIsRemoved(x) && !(wlStageFilter && x.stage !== wlStageFilter) && wlPrcPass(x);
   });
   h += '<div class="wl-sec">③ 其他阶段（拉升中 · 派发中 · 回落中 · 平静 · 数据不足）</div>';
   h += '<div class="wl-tools">' +
     ['', '拉升中', '派发中', '回落中', '平静', '数据不足'].map(function(k){
       return '<button class="wl-btn' + (wlStageFilter === k ? ' wl-on' : '') + '" data-wl-stage="' + esc(k) + '">' + (k || '全部') + '</button>';
     }).join('') + '</div>';
+  /* ★ 2026-10-19：「只看拉升前候选」筛选器（对应需求 §一③"监控清单加筛选器"） */
+  h += '<div class="wl-tools" style="margin-top:6px">' +
+    '<button class="wl-btn' + (wlOnlyPrc ? ' wl-on' : '') + '" data-wl-prc="1">★ 只看拉升前候选' +
+    (PRC_GID_SET.size ? '（' + n2(PRC_GID_SET.size) + ' 个）' : '') + '</button>' +
+    '<span class="wl-note" style="margin:0;align-self:center">筛选的是「拉升前候选」那张卡里的三条件串联名单（pre-rally-candidates.json）' +
+    (PRC_GID_SET.size ? '' : '　·　候选名单还没加载，点按钮会去拉') + '</span></div>';
   arrOf(wlData.stageOrder).forEach(function(k){
     if (k === '拉升前') return;
     const d = SD[k] || {};
@@ -5916,6 +6401,14 @@ function wlBind(){
     el.onclick = function(){
       const k = el.getAttribute('data-wl-stage');
       wlStageFilter = (wlStageFilter === k) ? '' : k;
+      renderWatchlist();
+    };
+  });
+  /* ★「只看拉升前候选」：候选名单还没加载就先把它拉下来，到了会自动重画这张清单 */
+  box.querySelectorAll('[data-wl-prc]').forEach(function(el){
+    el.onclick = function(){
+      wlOnlyPrc = !wlOnlyPrc;
+      if (wlOnlyPrc && !PRC_GID_SET.size){ ensurePreRally(); showBanner('正在加载「拉升前候选」名单，到了会自动筛好。'); }
       renderWatchlist();
     };
   });
@@ -8370,6 +8863,14 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
   /* 监控清单（watchlist-status.json）同样懒加载：放在 loadSellAlertsIfOpen 里面一起触发，
      它比 sell-alerts.json 大（约 450 KB），启动阶段绝不主动下。 */
   tqBind(); tqIdle();               /* 工具页「查任意一件」：只绑定 + 空态，不下载 inspect-data.json */
+
+  /* ★ 2026-10-19 拉升前候选（pre-rally-candidates.json，约 320 KB）：
+     它是首页第一张卡，但**不占首屏关键路径** —— 用 setTimeout 让出一帧，先让大盘数字/新鲜度画出来，
+     再异步拉它。这样"包体不拖首屏"与"落地页零点击可见"两条同时成立。
+     只有本次会话就停在大盘页时才自动拉；停在其他页签时等切过去（showPage 里触发）。 */
+  if (((state && state.settings && state.settings.tab) || 'market') === 'market'){
+    setTimeout(function(){ ensurePreRally(); }, 60);
+  }
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
      全新打开时什么都不做，保持「未加载」，等用户点「选择品种 / 刷新全部现价」再下。 */
