@@ -1447,6 +1447,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .prc-item.prc-gA{border-left-color:var(--green);background:rgba(47,208,122,.06)}
 .prc-item.prc-gB{border-left-color:var(--dim)}
 .prc-item.prc-gC{border-left-color:var(--cyan);background:rgba(34,211,238,.05)}
+.prc-item.prc-gD{border-left-color:var(--yellow);background:rgba(255,197,49,.05)}
 .prc-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-width:0;
   font-size:13.5px;font-weight:800;overflow-wrap:anywhere}
 .prc-h .prc-rk{font-size:11px;font-weight:800;color:var(--dim);flex:0 0 auto}
@@ -1596,11 +1597,14 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                  1) caveat 必须在卡片最上方、红色、不许折叠；
                  2) 数量为 0 就显示 0 + near-miss（差一个条件的品），绝不硬凑；
                  3) 只给条件、依据、数值，不给"建议买入"这类命令式措辞。
+               ★ 2026-10-20 修正（用户："石砌…量太少了没有流通性。你这个筛选应该有问题"）：
+                 新增【⓪ 流通性 5 条硬门槛】+【剩余空间改用该品自己历史】+【在涨 signal】+【全部显示】，
+                 并把用户点名的 3 个负样本"被哪条挡掉"直接渲染在 near-miss 里。
                数据源：cs-quant/build_pre_rally_candidates.cjs → pre-rally-candidates.json
                降级链：pre-rally-candidates.json 拿不到 → 只空这一块，其他卡/6 页签照常。 -->
           <div class="card span-all" id="sec-prc">
-            <div class="sec-head"><h2>拉升前候选</h2><span class="sec-sub">正在筹备 / 启动前的品 · 三条件串联 · 强盘在前</span><span class="r" id="prc-time">加载中…</span></div>
-            <div class="prc-rule" id="prc-rule">三个条件串联：<b>① 阶段</b>（7 阶段结构口径：吸筹 / 蓄势·启动前 / 小拉升吸筹）× <b>② 还有拉升空间</b>（大 优先，小的标注"只有反弹空间"）× <b>③ 强盘排序</b>（批次 v5 obsRetention 批内分位为主）。<b>阶段和空间是硬门槛，强弱只排序不过滤</b> —— 您原话是"排出强盘在前面"，不是"只要强盘"。</div>
+            <div class="sec-head"><h2>拉升前候选</h2><span class="sec-sub">⓪流通性 → 阶段 → 拉升空间 → 强盘/在涨 · 全部显示</span><span class="r" id="prc-time">加载中…</span></div>
+            <div class="prc-rule" id="prc-rule">四条件串联：<b>⓪ 流通性</b>（盘子档 ≠ micro · 在售 ≥ 50 把 · 求购 ≥ 5 单 · 可卖金额 > 0 · 可交易 ≥ ¥3,000，<b>5 条全过</b>）× <b>① 阶段</b>（7 阶段结构口径：吸筹 / 蓄势·启动前 / 小拉升吸筹 / 已启动·在涨）× <b>② 还有拉升空间</b>（优先用<b>该品自己的历史</b>算；自身样本不足才退回池子口径并标注降级）→ 排序按「空间大的在前 → 强盘在前」，在涨（从 21 日低点涨幅）做第 4 层。<b>流通性 / 阶段 / 空间是硬门槛；强弱与在涨只排序不过滤。</b>你上次点名的 石砌 / 毒镖 / 大马士革钢 就是被 ⓪ 挡掉的，逐条写在最下面 near-miss 里。</div>
             <p class="sec-note" id="prc-meta">—</p>
             <div id="prc-cav"></div>
             <div class="prc-nums" id="prc-nums"></div>
@@ -5031,12 +5035,18 @@ function loadWatchlistIfOpen(){
 /* =====================================================================
    ★★★ 11.86) 拉升前候选 —— pre-rally-candidates.json（用户最高优先级）
 
-   这是什么：cs-quant/build_pre_rally_candidates.cjs 把 1,073 品按【三条件串联】
-   筛出"在拉升前 / 正在小拉升吸筹 / 且还有拉升空间"的品，再按强盘排序。
-     ① 阶段 ∈ {拉升前(吸筹), 蓄势·启动前(平静+B 型小拉升簇), 小拉升吸筹(拉升早期)}
-     ② 剩余空间 ∈ {大, 小}（复用 build_rally_room.cjs 的三档口径；大优先）
-     ③ 强盘排序（批次 v5 obsRetention 批内分位 0.75 + 合成出口 gap 0.15 + 剩余空间 0.10）
-       ★ 只排序不过滤 —— 用户原话是"排出强盘在前面"，不是"只要强盘"。
+   这是什么：cs-quant/build_pre_rally_candidates.cjs 把 1,073 品按【四条件串联】
+   筛出"在拉升前 / 蓄势 / 正在小拉升吸筹 / 已启动在涨，且还有拉升空间"的品，再排序。
+     ⓪ 流通性硬门槛（2026-10-20 新增，用户批评"量太少了没有流通性"）：
+        盘子档 ≠ micro ∧ 在售 ≥ 50 ∧ 求购 ≥ 5 ∧ 可卖金额 > 0 ∧ 可交易容量 ≥ ¥3,000
+     ① 阶段 ∈ {拉升前(吸筹), 蓄势·启动前(平静+B), 小拉升吸筹(拉升早期), 已启动·在涨(平静/吸筹 + 从21日低点 ≥+10%)}
+     ② 剩余空间 ∈ {大, 小}（★ 优先用【该品自己的历史】算；自身样本不足才退回池子口径，且必须标注 + 排序降级）
+     ③ 强弱与在涨只排序不过滤：批次 v5 obsRetention 批内分位为主 + covert_arb_gap + riseFrom21Low
+
+   排序（用户 2026-10-20 原话「所有都显示，只是把拉升里面的拉升空间大排在前面，然后把强盘排在最前面」）：
+     数据里的 candidates 数组 = 四层优先级（①阶段 ②空间 ③强盘 ④在涨），rank 字段即该顺序；
+     本卡默认用「空间大在前 → 强盘在前」这个用户字面口径，可一键切到「四层（阶段优先）」或「纯强盘」。
+     ★ 全部显示，不再只画 6 条。
 
    四条硬纪律（写在代码里，不靠自觉）：
      1) ★ caveat 必须在卡片最上方、红色、不可折叠（判据在用户名单上标定 / 时间外验证未做 /
@@ -5044,22 +5054,25 @@ function loadWatchlistIfOpen(){
      2) ★ 数量为 0 就渲染 0 + near-miss（差一个条件的品）—— 绝不用"差不多"的品凑数；
      3) ★ 只给条件与依据，不给命令式措辞（没有"建议买入 / 可以入手"这类字眼）；
      4) ★ 两套阶段口径的关系如实展示（双口径确认 / 痕迹待确认 / 口径不一致 三档），
-        不许把"6 阶段还在回落中"藏起来不说。
+        不许把"6 阶段还在回落中"藏起来不说；被流通性挡掉的品也要逐条写明被哪条挡掉。
 
    降级链：pre-rally-candidates.json 拿不到 → 只空这一块，其他卡 / 6 页签照常。
    ===================================================================== */
 let prcData = null, prcState = 'loading', prcKick = false;
-let prcGroup = '';            /* '' | 'A' | 'B' | 'C' */
+let prcGroup = '';            /* '' | 'A' | 'B' | 'C' | 'D' */
 let prcOnlyType = false;      /* 只看倒货型（用户个人偏好 → 筛选器，不是硬排序） */
 let prcOnlyGap = false;       /* 只看有合成出口（covert_arb_gap ≥ 0.3） */
 let prcOnlyBig = false;       /* 只看空间大 */
 let prcOnlyDual = false;      /* 只看双口径确认 */
 let prcOnlyFit = false;       /* 只看装得下 ¥3,000 */
-let prcShowN = 6;             /* 首屏只画 6 条（不拖首屏），点「再看」加 24 */
-let prcSort = 'room';         /* 'room' = 空间大优先 → 组内强盘（默认，用户原话："拉升空间大的品再排出强盘在前面"）
+let prcOnlyRise = false;      /* 只看已启动（riseFrom21Low ≥ +10%） */
+let prcShowN = 0;             /* ★ 0 = 全部显示（用户："所有都显示"）；不再默认只画 6 条 */
+let prcSort = 'room';         /* 'room' = 空间大优先 → 强盘（默认，用户字面口径："拉升空间大的品再排出强盘在前面"）
+                                 'stage' = 四层优先级：阶段 → 空间 → 强盘 → 在涨（= 数据里的 rank 顺序）
                                  'strength' = 纯强盘排序 */
 const PRC_GID_SET = new Set();   /* 给「监控清单」的筛选器用 */
 const PRC_GAP_OK = 0.3;
+const PRC_RISE_STARTED = 0.10;
 
 function ensurePreRally(){ if (prcKick) return; prcKick = true; loadPreRally(); }
 async function loadPreRally(){
@@ -5076,8 +5089,8 @@ async function loadPreRally(){
 function prcP(v, d){ return isNum(v) ? ((v >= 0 ? '+' : '') + (v * 100).toFixed(d == null ? 0 : d) + '%') : '—'; }
 function prcR(v, d){ return isNum(v) ? ((v * 100).toFixed(d == null ? 1 : d) + '%') : '—'; }
 function prcG(x){ const g = String((x && x.group) || ''); return g.charAt(0) || 'B'; }
-function prcGName(g){ return g === 'A' ? 'A 拉升前·空间大' : g === 'C' ? 'C 小拉升吸筹' : 'B 拉升前·空间小'; }
-function prcGTagCls(g){ return g === 'A' ? 'prc-ta' : g === 'C' ? 'prc-tc' : 'prc-td'; }
+function prcGName(g){ return g === 'A' ? 'A 拉升前·空间大' : g === 'C' ? 'C 小拉升吸筹' : g === 'D' ? 'D 已启动·在涨' : 'B 拉升前·空间小'; }
+function prcGTagCls(g){ return g === 'A' ? 'prc-ta' : g === 'C' ? 'prc-tc' : g === 'D' ? 'prc-tw' : 'prc-td'; }
 /* 之后 60 日走势分布：三段区间条（p25→中位→p75→p90），百分比定位 → 永远不会横向溢出
    ★ 用【该品自己/同位置】的 60 日最高价分布（room 口径），不是阶段级 fwd60 ——
      阶段级 fwd60 对同一阶段的所有品是同一组数字，六条一模一样的条没有信息量；
@@ -5136,6 +5149,9 @@ function prcItemHTML(x, idx){
   const tags = [];
   tags.push('<span class="prc-tag ' + prcGTagCls(g) + '">' + esc(prcGName(g)) + '</span>');
   if (x.evidenceTier && x.evidenceTier.key === 'dual') tags.push('<span class="prc-tag prc-ta">双口径确认</span>');
+  /* ★ 在涨（缺陷③）：把 riseFrom21Low 做成标签，不再只是个数字 */
+  if (isNum(x.riseFrom21Low) && x.riseFrom21Low >= PRC_RISE_STARTED) tags.push('<span class="prc-tag prc-ta">已启动 ' + prcP(x.riseFrom21Low, 1) + '</span>');
+  else if (isNum(x.riseFrom21Low)) tags.push('<span class="prc-tag prc-td">尚未启动 ' + prcP(x.riseFrom21Low, 1) + '</span>');
   if (x.exitLocked) tags.push('<span class="prc-tag prc-tr">⚠️ 出口锁死</span>');
   if (x.capacity && x.capacity.enoughFor3k === false) tags.push('<span class="prc-tag prc-td">装不下 ¥3,000</span>');
   if (x.justSwitched) tags.push('<span class="prc-tag prc-tw">⚠️ 刚切换</span>');
@@ -5144,15 +5160,23 @@ function prcItemHTML(x, idx){
   const bt = x.batch || {};
   const ty = x.stockType || {};
   const cap = x.capacity || {};
-  /* 行内只放需求文档点名的 6 项（现价 / 阶段+稳定天数 / 强弱+批内排名 / 剩余空间 / 出口 / 控盘倒货型），
-     批次 · 可交易 · 在售 · 求购 收进展开区 —— 否则手机上一行变七行，首页第一张卡就变成一屏墙。 */
+  const lq = x.liquidity || {};
+  /* 行内只放需求文档点名的 6 项（现价 / 阶段+稳定天数 / 强弱+批内排名 / 剩余空间 / 出口 / 控盘倒货型）
+     + ★ 2026-10-20 新增的两项：流通性（在售/求购/可卖）与剩余空间口径（自历史 / 池子降级）。
+     批次 · 可交易 收进展开区 —— 否则手机上一行变七行，首页第一张卡就变成一屏墙。 */
   const kv = [];
   kv.push('现价 <b>' + (isNum(x.price) ? '¥' + fmtNum(x.price, x.price < 10 ? 2 : 1) : '—') + '</b>');
   kv.push('阶段 <b>' + esc(x.stage || '—') + '</b>' + (isNum(x.stageStableDays) ? '（已稳 ' + n2(x.stageStableDays) + ' 天）' : ''));
   kv.push('强弱 <b>' + (isNum(st.score) ? n2(st.score) + '/100 ' : '') + esc(st.verdict || '—') + '</b>' +
     (st.rankInBatch ? '（批内 ' + esc(st.rankInBatch) + '）' : ''));
   kv.push('剩余空间 <span class="' + (rt.verdict === '大' ? 'prc-ok' : 'prc-wa') + '">' + esc(rt.verdict || '—') + '</span>' +
-    (isNum(rt.med60) ? '（60 日中位 ' + prcP(rt.med60) + '）' : ''));
+    (isNum(rt.med60) ? '（60 日中位 ' + prcP(rt.med60) + '）' : '') +
+    (rt.basis ? '　<span class="' + (rt.basis === 'own' ? 'prc-ok' : 'prc-wa') + '">' + (rt.basis === 'own' ? '该品自己历史 n=' + n2(rt.refN) : '池子口径·已降级') + '</span>' : ''));
+  /* ★ 流通性一行（用户 2026-10-20 批评的正是这一项从来没显示过） */
+  kv.push('流通性 <span class="prc-ok">✔ 在售 ' + (isNum(lq.listed) ? n2(lq.listed) : '—') +
+    ' · 求购 ' + (isNum(lq.buyNum) ? n2(lq.buyNum) : '—') +
+    ' · 可卖 ' + (isNum(lq.exitCapacity) ? '¥' + fmtNum(lq.exitCapacity, 0) : '—') + '</span>' +
+    (lq.tier ? '（' + esc(lq.tier) + '）' : ''));
   kv.push('出口 ' + (x.exitLocked ? '<span class="prc-bad">锁死</span>'
     : (isNum(x.covertArbGap) ? ('gap ' + x.covertArbGap.toFixed(2) + (x.covertArbGap >= PRC_GAP_OK ? ' <span class="prc-ok">有合成出口</span>' : ' <span class="prc-bad">&lt;0.3</span>'))
       : '<b>无合成出口</b>')));
@@ -5179,13 +5203,31 @@ function prcItemHTML(x, idx){
     if (isNum(x.monitorScore)) extra.push('6 阶段痕迹得分 <b>' + n2(x.monitorScore) + '/100</b>');
     d += '<div style="margin-top:5px"><b>盘口与容量</b>：' + extra.join(' · ') + '</div>';
   }
+  /* ★ 流通性 5 条门槛逐条展示（缺陷①：以前根本没检查这一项） */
+  if (lq && arrOf(lq.gates).length){
+    d += '<div style="margin-top:7px"><b>⓪ 流通性 5 条门槛（全过才进候选）</b></div>';
+    d += arrOf(lq.gates).map(function(gt){
+      return '<div class="prc-li"><span>' + (gt.ok ? '✅ ' : '❌ ') + esc(gt.key || '') + '</span>' +
+        esc((gt.got || '') + '　·　门槛：' + (gt.rule || '')) + '</div>';
+    }).join('');
+  }
+  /* ★ 在涨（缺陷③） */
+  if (isNum(x.riseFrom21Low)){
+    d += '<div style="margin-top:7px"><b>③ 在涨信号 riseFrom21Low</b></div>' +
+      '<div class="prc-li"><span>从 21 日低点 ' + prcP(x.riseFrom21Low, 2) + '（' + esc(x.riseTag || '') + '）</span>' +
+      (x.riseInfo ? ('21 日低点 ¥' + fmtNum(x.riseInfo.pxLow21, 2) + '（' + esc(x.riseInfo.lowDate || '—') + '）→ 现价 ¥' +
+        fmtNum(x.riseInfo.pxNow, 2) + '（' + esc(x.riseInfo.asOf || '—') + '）　·　') : '') +
+      '≥ +10% 记为「已启动」；只影响排序与标签，不硬排除 = 0 的品（可能就是启动前一天，但会排在后面）。</div>';
+  }
   d += '<div style="margin-top:7px"><b>① 命中痕迹（带数值）</b></div>' + prcHitsHTML(x);
   d += '<div style="margin-top:7px"><b>② 剩余空间依据</b></div>' +
-    '<div class="prc-li"><span>判定：' + esc(rt.verdict || '—') + ' · ' + esc(rt.roomKind || '—') + '</span>' +
+    '<div class="prc-li"><span>判定：' + esc(rt.verdict || '—') + ' · ' + esc(rt.roomKind || '—') +
+    (rt.basis ? '　·　口径：' + (rt.basis === 'own' ? '该品自己历史（n=' + n2(rt.refN) + '）' : '池子口径（已降级）') : '') + '</span>' +
     esc(rt.why || '（数据不足，不编造）') +
     (rt.refFrom ? ' 参照：' + esc(rt.refFrom) : '') +
     (isNum(rt.distToPeak) ? ' · 现价距上一段 C 峰值 ' + prcP(rt.distToPeak, 1) : '') +
     (rt.lastPeakDate ? ' · 上一段峰值 ' + esc(rt.lastPeakDate) : '') + '</div>';
+  if (rt.refWarning) d += '<div class="prc-li"><span style="color:var(--yellow)">⚠️ 池子口径</span>' + esc(rt.refWarning) + '</div>';
   d += '<div style="margin-top:7px"><b>③ 批次与批内强弱</b></div>' +
     '<div class="prc-li"><span>' + (bt.id ? ('批次 ' + esc(bt.id) + '（' + esc(bt.start || '—') + ' ~ ' + esc(bt.end || '—') + '，' + n2(bt.n) + ' 品）') : '无批次归属') + '</span>' +
     (bt.id ? ('批内排名 ' + esc(bt.rankText || '—') + ' · strengthPct ' + prcR(bt.strengthPct) + ' · obsRetention（v5 口径）' + (isNum(bt.obsRetention) ? bt.obsRetention.toFixed(4) : '—') + ' · 该批涨幅中位 ' + prcP(bt.gain)) : (st.note || '')) + '</div>';
@@ -5214,13 +5256,45 @@ function prcPass(x){
   if (prcOnlyGap && !(isNum(x.covertArbGap) && x.covertArbGap >= PRC_GAP_OK)) return false;
   if (prcOnlyDual && !(x.evidenceTier && x.evidenceTier.key === 'dual')) return false;
   if (prcOnlyFit && !(x.capacity && x.capacity.enoughFor3k !== false)) return false;
+  if (prcOnlyRise && !(isNum(x.riseFrom21Low) && x.riseFrom21Low >= PRC_RISE_STARTED)) return false;
   return true;
+}
+/* 空间档权重：该品自己口径的「大」> 池子口径的「大」> 自己口径的「小」> 池子口径的「小」
+   （与 build_pre_rally_candidates.cjs 的 roomRankOf 一致；池子口径已被降级） */
+function prcRoomRank(x){
+  const r = (x && x.room) || {};
+  const own = r.basis === 'own' || r.refKind === '该品自己';
+  if (r.verdict === '大') return own ? 3 : 2;
+  if (r.verdict === '小') return own ? 1 : 0;
+  return -1;
 }
 function prcNearHTML(nm){
   const list = arrOf(nm && nm.list);
   let h = '<details class="prc-det"' + ((!prcData || !prcData.count) ? ' open' : '') + '><summary>差一个条件的品（near-miss，' +
     n2((nm && nm.total) || 0) + ' 个' + (list.length ? '，这里列 ' + n2(list.length) + ' 个' : '') + '）—— 点开看它们差在哪一条</summary><div class="prc-in">';
-  h += '<div>列出来只为解释"为什么今天这么少"，<b>不代表它们更接近可买</b>。' +
+  /* ★ 2026-10-20：用户点名的 3 个负样本必须能被直接看到（"各被哪条门槛挡掉"） */
+  const reg = arrOf(prcData && prcData.regression);
+  const negs = reg.filter(function(r){ return r && r.expect === 'blocked'; });
+  if (negs.length){
+    h += '<div class="prc-li"><span style="color:var(--yellow)">本轮被流通性门槛挡掉的判例（含你上次点名的 3 个）</span>' +
+      negs.map(function(r){
+        return '· <b>' + esc(r.name || '—') + '</b>：' + esc(r.blockedBy || '—') +
+          '　（tier=' + esc(r.tier || '—') + ' · 在售 ' + n2(r.listed) + ' · 求购 ' + n2(r.buyNum) +
+          ' · 可卖 ' + (isNum(r.exitCapacity) ? '¥' + fmtNum(r.exitCapacity, 0) : '—') +
+          ' · 可交易 ' + (isNum(r.maxTradable) ? '¥' + fmtNum(r.maxTradable, 0) : '—') + '）';
+      }).join('<br>') + '</div>';
+  }
+  const pos = reg.filter(function(r){ return r && r.expect === 'pass'; });
+  if (pos.length){
+    h += '<div class="prc-li"><span style="color:var(--green)">回归测试（正样本必须在候选里）</span>' +
+      pos.map(function(r){
+        return '· <b>' + esc(r.name || '—') + '</b>：' + (r.pass ? '流通性 5 条全过' : '流通性未过') +
+          ' · ' + (r.inCandidates ? ('在候选里（rank #' + n2(r.rank) + '）') : '不在候选里') +
+          ' · 剩余空间 ' + esc(r.roomVerdict || '—') + '（' + (r.roomBasis === 'own' ? '该品自己历史' : '池子口径') +
+          '，120 日内回前高 ' + prcR(r.exceedPeak120) + '）· 在涨 ' + prcP(r.riseFrom21Low, 1);
+      }).join('<br>') + '</div>';
+  }
+  h += '<div>列出来只为解释"为什么今天这么少 / 为什么那个品被排除"，<b>不代表它们更接近可买</b>。' +
     (nm && nm.byGroup ? ('分组：' + Object.keys(nm.byGroup).map(function(k){ return esc(k) + ' ' + n2(nm.byGroup[k]) + ' 个'; }).join(' · ')) : '') + '</div>';
   if (!list.length) h += '<div class="prc-li">今天没有 near-miss 记录。</div>';
   list.forEach(function(x){
@@ -5254,24 +5328,30 @@ function renderPreRally(){
   setText('prc-time', (D.updatedAtText || '—') + (D.asOf ? '　行情 ' + D.asOf : ''));
   const dq = D.dataQuality || {};
   const gc = D.groupCounts || {};
-  const gA = n2(gc['A_拉升前_空间大_强盘'] || 0), gB = n2(gc['B_拉升前_空间小'] || 0), gC = n2(gc['C_小拉升吸筹'] || 0);
-  setText('prc-meta', '全池 ' + n2(dq.pool) + ' 个品 → ①阶段过关 ' + n2(dq.stagePass) + ' 个 → ②有拉升空间 ' +
-    n2(D.count) + ' 个候选。分组：A 拉升前·空间大 ' + gA + ' · C 小拉升吸筹 ' + gC + ' · B 拉升前·空间小 ' + gB +
-    '。证据层级：双口径确认 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).dual) +
+  const gA = n2(gc['A_拉升前_空间大_强盘'] || 0), gB = n2(gc['B_拉升前_空间小'] || 0),
+    gC = n2(gc['C_小拉升吸筹'] || 0), gD = n2(gc['D_已启动_在涨'] || 0);
+  const lqs = D.liquidity || {}, rbs = D.roomBasis || {}, rss = D.rise || {};
+  setText('prc-meta', '全池 ' + n2(dq.pool) + ' 个品 → ⓪流通性过关 ' + n2(dq.liqPass) + ' 个（' +
+    (isNum((lqs.passRate || {}).rate) ? ((lqs.passRate || {}).rate * 100).toFixed(1) + '%' : '—') + '）→ ①阶段 + ②空间 后 ' +
+    n2(D.count) + ' 个候选。分组：A 拉升前·空间大 ' + gA + ' · B 拉升前·空间小 ' + gB + ' · C 小拉升吸筹 ' + gC + ' · D 已启动·在涨 ' + gD +
+    '。剩余空间口径：该品自己历史 ' + n2((rbs.candidates || {}).own) + ' / 池子（已降级）' + n2((rbs.candidates || {}).pool) +
+    '。在涨：候选里已启动 ' + n2(rss.candidatesStarted) + ' 个（门槛 +10%）。证据层级：双口径确认 ' +
+    n2((D.evidenceTiers && D.evidenceTiers.counts || {}).dual) +
     ' / 痕迹待确认 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).tracePending) +
     ' / 口径不一致 ' + n2((D.evidenceTiers && D.evidenceTiers.counts || {}).caliberConflict));
 
   /* ★ caveat 必须最上方、红色、不折叠 */
   if (cavEl){
     cavEl.innerHTML = '<div class="prc-cav">' +
-      '<b>⚠️ 读之前必须知道的五件事</b>' +
-      '<i>这是【条件筛查】，不是买入建议 —— 只给阶段 / 空间 / 强弱与命中依据，不给指令。</i>' +
+      '<b>⚠️ 读之前必须知道的六件事</b>' +
+      '<i>这是【条件筛查】，不是买入建议 —— 只给阶段 / 空间 / 流通性 / 强弱与命中依据，不给指令。</i>' +
       '<ol>' +
       '<li><b>判据在【用户自己给的 1,073 品名单】上标定</b>（2,902 段 C 主拉升 + 5 条痕迹），不是全市场随机样本 → 换别的品不保证成立。</li>' +
       '<li><b>时间外验证未做</b>（2023~2025 标定 / 2025~2026 验证还没跑）。</li>' +
       '<li><b>未扣交易成本</b>：全是毛额，一次买卖要付来回 <b>1.00%~2.485%</b> + <b>7 天交易冷却</b>。</li>' +
       '<li><b>成交量序列冻结在 2025-11</b> → 量能配合这一条整体失效，阶段判定里<b>没用量能</b>。</li>' +
       '<li><b>两套阶段口径会打架</b>：7 阶段判"吸筹"时，6 阶段可能仍判"回落中"（后者是"距 180 日高点回落 ≥20%"这个<b>回撤</b>条件，不代表现在还在跌）。本卡以 <b>7 阶段结构口径</b>为门槛，三档证据层级逐条标注，可用「只看双口径确认」收窄。</li>' +
+      '<li><b>流通性门槛用的是本机快照</b>（在售量 / 求购量 / 可卖金额 / 可交易容量），实时盘口会变；数据缺的品一律算"不过"，不拿 0 顶替、也不假设它流通好。</li>' +
       '</ol>' +
       '<div style="margin-top:5px;opacity:.92">★ 数量为 0 就显示 0，本卡没有任何凑数逻辑；每个品都附命中痕迹与数值，点开可核验。</div>' +
       '</div>';
@@ -5281,11 +5361,15 @@ function renderPreRally(){
   const nums = $('prc-nums');
   const wc = D.wantedCombo || {};
   const tier = (D.evidenceTiers && D.evidenceTiers.counts) || {};
+  const bigN = arrOf(D.candidates).filter(function(x){ return x.room && x.room.verdict === '大'; }).length;
   if (nums) nums.innerHTML =
     '<div class="prc-num"><div class="k">候选总数</div><div class="v ' + (D.count ? 'prc-va' : 'prc-vd') + '">' + n2(D.count) + '</div></div>' +
+    '<div class="prc-num"><div class="k">⓪流通性过关</div><div class="v prc-vc">' + n2(dq.liqPass) + '</div></div>' +
+    '<div class="prc-num"><div class="k">剩余空间 大</div><div class="v ' + (bigN ? 'prc-va' : 'prc-vd') + '">' + n2(bigN) + '</div></div>' +
     '<div class="prc-num"><div class="k">A 拉升前·空间大</div><div class="v prc-vc">' + gA + '</div></div>' +
-    '<div class="prc-num"><div class="k">C 小拉升吸筹</div><div class="v prc-vc">' + gC + '</div></div>' +
     '<div class="prc-num"><div class="k">B 拉升前·空间小</div><div class="v prc-vd">' + gB + '</div></div>' +
+    '<div class="prc-num"><div class="k">C 小拉升吸筹</div><div class="v prc-vc">' + gC + '</div></div>' +
+    '<div class="prc-num"><div class="k">D 已启动·在涨</div><div class="v prc-vc">' + gD + '</div></div>' +
     '<div class="prc-num"><div class="k">倒货型+空间大+强盘</div><div class="v ' + ((wc.count || 0) ? 'prc-va' : 'prc-vd') + '">' + n2(wc.count || 0) + '</div></div>' +
     '<div class="prc-num"><div class="k">双口径确认</div><div class="v prc-vd">' + n2(tier.dual || 0) + '</div></div>';
 
@@ -5295,13 +5379,17 @@ function renderPreRally(){
     const bt = function(label, on, act, wide){
       return '<button class="prc-btn' + (on ? (wide ? ' prc-on-w' : ' prc-on') : '') + '" data-prc-act="' + act + '">' + label + '</button>';
     };
-    let t = bt('全部 ' + n2(D.count), prcGroup === '' && !prcOnlyBig && !prcOnlyType && !prcOnlyGap && !prcOnlyDual && !prcOnlyFit, 'g:', false);
+    let t = bt('全部 ' + n2(D.count), prcGroup === '' && !prcOnlyBig && !prcOnlyType && !prcOnlyGap && !prcOnlyDual && !prcOnlyFit && !prcOnlyRise, 'g:', false);
     t += bt('A 拉升前·空间大 ' + gA, prcGroup === 'A', 'g:A', true);
-    t += bt('C 小拉升吸筹 ' + gC, prcGroup === 'C', 'g:C', true);
     t += bt('B 拉升前·空间小 ' + gB, prcGroup === 'B', 'g:B', false);
-    t += bt(prcSort === 'room' ? '排序：空间大优先 → 组内强盘' : '排序：纯强盘（全表 score 降序）', true, 's:sort', false);
+    t += bt('C 小拉升吸筹 ' + gC, prcGroup === 'C', 'g:C', true);
+    t += bt('D 已启动·在涨 ' + gD, prcGroup === 'D', 'g:D', true);
+    t += bt(prcSort === 'room' ? '排序：空间大在前 → 强盘在前（推荐）'
+      : prcSort === 'stage' ? '排序：四层（阶段 → 空间 → 强盘 → 在涨）'
+        : '排序：纯强盘（全表 score 降序）', true, 's:sort', false);
     t += bt('只看倒货型（我的偏好）', prcOnlyType, 'f:type', true);
     t += bt('只看空间大', prcOnlyBig, 'f:big', false);
+    t += bt('只看已启动（在涨）', prcOnlyRise, 'f:rise', false);
     t += bt('只看有合成出口', prcOnlyGap, 'f:gap', false);
     t += bt('只看双口径确认', prcOnlyDual, 'f:dual', false);
     t += bt('只看装得下 ¥3,000', prcOnlyFit, 'f:fit', false);
@@ -5311,36 +5399,62 @@ function renderPreRally(){
   /* 列表 */
   const all = arrOf(D.candidates);
   let list = all.filter(prcPass);
-  /* 排序：默认「空间大优先 → 组内按强弱」——这是用户原话"在这这拉升空间大的品再排出强盘在前面"的字面口径；
-     另一档「纯强盘」= 全表按 score 降序（用户也可以一键切过去）。 */
+  /* 排序三档（全部在客户端按 JSON 字段算，不依赖服务端顺序）：
+     'room'（默认）= 用户字面口径："拉升空间大的品再排出强盘在前面"
+                     → 空间档（自己历史·大 > 池子·大 > 自己历史·小 > 池子·小）→ 强弱分 → 阶段 → 在涨
+     'stage'        = 四层优先级：阶段（拉升前 → 蓄势 → 小拉升 → 已启动）→ 空间 → 强盘 → 在涨
+                      （= pre-rally-candidates.json 里 candidates 数组的 rank 顺序，逐条可核验）
+     'strength'     = 纯强盘：score 降序 */
+  const stageOrderOf = function(x){
+    const k = String((x && x.stageKey) || '');
+    return k === 'pre' ? 0 : k === 'build' ? 1 : k === 'small' ? 2 : k === 'rise' ? 3 : 9;
+  };
+  const scoreOf = function(x){ return (x.strength && isNum(x.strength.score)) ? x.strength.score : -1; };
+  const riseOf = function(x){ return isNum(x.riseFrom21Low) ? x.riseFrom21Low : -1; };
   if (prcSort === 'room'){
     list = list.slice().sort(function(a, b){
-      const ra = (a.room && a.room.verdict === '大') ? 1 : 0;
-      const rb = (b.room && b.room.verdict === '大') ? 1 : 0;
+      const ra = prcRoomRank(a), rb = prcRoomRank(b);
       if (rb !== ra) return rb - ra;
-      const sa = (a.strength && isNum(a.strength.score)) ? a.strength.score : -1;
-      const sb = (b.strength && isNum(b.strength.score)) ? b.strength.score : -1;
-      return sb - sa;
+      const sa = scoreOf(a), sb = scoreOf(b);
+      if (sb !== sa) return sb - sa;
+      const ta = stageOrderOf(a), tb = stageOrderOf(b);
+      if (ta !== tb) return ta - tb;
+      return riseOf(b) - riseOf(a);
     });
+  } else if (prcSort === 'stage'){
+    list = list.slice().sort(function(a, b){
+      const ta = stageOrderOf(a), tb = stageOrderOf(b);
+      if (ta !== tb) return ta - tb;
+      const ra = prcRoomRank(a), rb = prcRoomRank(b);
+      if (rb !== ra) return rb - ra;
+      const sa = scoreOf(a), sb = scoreOf(b);
+      if (sb !== sa) return sb - sa;
+      return riseOf(b) - riseOf(a);
+    });
+  } else {
+    list = list.slice().sort(function(a, b){ return scoreOf(b) - scoreOf(a); });
   }
+  const sortName = prcSort === 'room' ? '空间大在前 → 强盘在前' : prcSort === 'stage' ? '四层优先级（阶段优先）' : '纯强盘';
   let h = '';
   if (!all.length){
     /* ★ 今天没有候选：显示 0 + 解释 + near-miss */
-    h += '<div class="prc-empty"><b>今天没有符合条件的品（' + n2(dq.pool) + ' 个品里 0 个同时满足 ①阶段 ②剩余空间）。</b>' +
-      '<br>过滤漏斗：全池 ' + n2(dq.pool) + ' → ①阶段过关 ' + n2(dq.stagePass) + ' → ②有拉升空间 <b>0</b>。' +
-      '<br>停止原因：① 阶段挡掉 ' + n2((dq.stoppedBy || {})['① 阶段']) + ' 个；② 空间再挡掉 ' + n2((dq.stoppedBy || {})['② 剩余空间(阶段过关但 room 不是大/小)']) + ' 个。' +
+    h += '<div class="prc-empty"><b>今天没有符合条件的品（' + n2(dq.pool) + ' 个品里 0 个同时满足 ⓪流通性 ①阶段 ②剩余空间）。</b>' +
+      '<br>过滤漏斗：全池 ' + n2(dq.pool) + ' → ⓪流通性过关 ' + n2(dq.liqPass) + ' → ①阶段过关 ' + n2(dq.stageBothPass) + ' → ②有拉升空间 <b>0</b>。' +
+      '<br>停止原因：⓪ 流通性挡掉 ' + n2((dq.stoppedBy || {})['⓪ 流通性']) + ' 个；① 阶段再挡掉 ' + n2((dq.stoppedBy || {})['① 阶段(流通性过关但阶段不对)']) +
+      ' 个；② 空间再挡掉 ' + n2((dq.stoppedBy || {})['② 剩余空间(两条都过关但 room 不是大/小)']) + ' 个。' +
       '<br>★ 这不是"系统坏了"，也不代表明天会有 —— 0 就是 0，不硬凑。</div>';
   } else if (!list.length){
     h += '<div class="prc-empty"><b>当前筛选条件下 0 个。</b>候选总数 ' + n2(D.count) + ' 个，但都不满足你刚打开的筛选器 → 点「全部」回去。</div>';
   } else {
-    const show = list.slice(0, prcShowN);
+    /* ★ 用户 2026-10-20："所有都显示" → 默认 prcShowN = 0 = 全部，不再只画 6 条 */
+    const show = (prcShowN > 0 && list.length > prcShowN) ? list.slice(0, prcShowN) : list;
     h += show.map(function(x, i){ return prcItemHTML(x, i); }).join('');
     if (list.length > show.length){
       h += '<div class="prc-more">共 ' + n2(list.length) + ' 个符合当前筛选，这里先显示前 ' + n2(show.length) +
-        ' 个（按强弱分降序）。<button class="prc-btn" data-prc-act="more" style="margin-left:6px">再看 ' +
+        ' 个（' + esc(sortName) + '）。<button class="prc-btn" data-prc-act="more" style="margin-left:6px">再看 ' +
         Math.min(24, list.length - show.length) + ' 个</button></div>';
     } else {
-      h += '<div class="prc-more">共 ' + n2(list.length) + ' 个符合当前筛选，已全部显示（按强弱分降序）。</div>';
+      h += '<div class="prc-more">共 ' + n2(list.length) + ' 个符合当前筛选，<b>已全部显示</b>（排序：' + esc(sortName) + '）。</div>';
     }
   }
   h += prcNearHTML(D.nearMiss);
@@ -5358,14 +5472,19 @@ function prcBind(){
       if (a.indexOf('g:') === 0){
         const g = a.slice(2);
         prcGroup = (prcGroup === g) ? '' : g;
-        prcShowN = 6;
-      } else if (a === 'f:type'){ prcOnlyType = !prcOnlyType; prcShowN = 6; }
-      else if (a === 'f:big'){ prcOnlyBig = !prcOnlyBig; prcShowN = 6; }
-      else if (a === 'f:gap'){ prcOnlyGap = !prcOnlyGap; prcShowN = 6; }
-      else if (a === 'f:dual'){ prcOnlyDual = !prcOnlyDual; prcShowN = 6; }
-      else if (a === 'f:fit'){ prcOnlyFit = !prcOnlyFit; prcShowN = 6; }
-      else if (a === 's:sort'){ prcSort = (prcSort === 'room') ? 'strength' : 'room'; prcShowN = 6; }
-      else if (a === 'more'){ prcShowN += 24; }
+        prcShowN = 0;   /* ★ 用户："所有都显示" → 切筛选器也保持全部显示 */
+      } else if (a === 'f:type'){ prcOnlyType = !prcOnlyType; prcShowN = 0; }
+      else if (a === 'f:big'){ prcOnlyBig = !prcOnlyBig; prcShowN = 0; }
+      else if (a === 'f:rise'){ prcOnlyRise = !prcOnlyRise; prcShowN = 0; }
+      else if (a === 'f:gap'){ prcOnlyGap = !prcOnlyGap; prcShowN = 0; }
+      else if (a === 'f:dual'){ prcOnlyDual = !prcOnlyDual; prcShowN = 0; }
+      else if (a === 'f:fit'){ prcOnlyFit = !prcOnlyFit; prcShowN = 0; }
+      /* 排序三档循环：空间大在前 → 四层（阶段优先）→ 纯强盘 → 回到第一档 */
+      else if (a === 's:sort'){
+        prcSort = (prcSort === 'room') ? 'stage' : (prcSort === 'stage') ? 'strength' : 'room';
+        prcShowN = 0;
+      }
+      else if (a === 'more'){ prcShowN = (prcShowN > 0 ? prcShowN : 0) + 24; }
       renderPreRally();
     };
   });
