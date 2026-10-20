@@ -22,7 +22,7 @@
       —— 同一个坑的第十四次。CACHE v19 → v20。
       体积控制：约 320 KB，但页面侧 setTimeout(60ms) 才拉（让出首屏关键路径），
       且只在「大盘」（首页）时拉，不拖首屏。 */
-const CACHE = 'cs-skin-app-v22';
+const CACHE = 'cs-skin-app-v23';
 const ASSETS = [
   './',
   './index.html',
@@ -108,7 +108,7 @@ const ASSETS = [
       写死的生成时刻旧价造成的（同一个品在 7 个 JSON 里有 7 个价）。
       **必须进 NET_FIRST**：它进了「缓存优先」分支就等于价格永远停在第一次打开时 ——
       那正是这次事故的同一种失败（数据是旧价、用户不知道）。CACHE v21 → v22。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|price-live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|price-live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|crash-buy\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
