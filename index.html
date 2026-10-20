@@ -86,9 +86,13 @@ input,button,select,textarea{font-family:inherit}
   padding:5px 11px;border-radius:9px;font-size:11.5px;line-height:1.55;
   border:1px solid rgba(120,140,170,.28);background:rgba(120,140,170,.08);color:var(--muted)}
 .barsgate .bg-ico{flex:0 0 auto;font-size:12px}
-.barsgate .bg-txt{min-width:0}
+.barsgate .bg-txt{min-width:0;overflow-wrap:anywhere;overflow:hidden}
 .barsgate .bg-txt b{color:var(--text);font-weight:800}
 .barsgate .bg-when{opacity:.85}
+/* ★ 2026-10-20 新增：自建日线 vs 官方差异 >5% 的红字（用户指定文案，单独一行，不挤在 message 里） */
+.barsgate .bg-conf{display:block;margin-top:2px;color:#ff9b9b;font-weight:800}
+.barsgate.warn .bg-conf{color:#ffd166}
+.barsgate.bad .bg-conf{color:#ff8f8f}
 .barsgate.ok{border-color:rgba(90,216,166,.26);background:rgba(90,216,166,.07)}
 .barsgate.warn{border-color:rgba(246,189,22,.50);background:rgba(246,189,22,.12);color:#ffe0a3}
 .barsgate.warn .bg-txt b{color:#ffd166}
@@ -8178,6 +8182,17 @@ async function initFreshness(){
      阶段/档位判定用 2026-10-14 的日线，页面显示 2026-10-20 的实时价，
      中间 4 天的走势完全没有进入判定，而页面上没有任何地方说明这件事。
 
+   ★ 2026-10-20 晚升级（本轮）：自建日线（实时快照 + 分时聚合）补最新几天
+     页面这一条现在显示【三个日期口径】，缺一个都不行：
+       数据截止 (doc.effective.latestTrueDay)   ← 真实 UTC+8 交易日，用户最认这个
+       结论基于 (doc.bars.latest)               ← 官方日线标签（项目历史口径）
+       价格     (doc.live.atText)               ← 实时价时间
+     为什么"数据截止"和"结论基于"会差一天：官方日线 timestamp 全在 16:00Z
+     （= UTC+8 次日 00:00），项目历史标签用的是 UTC 日期 → 标签 L 实际代表
+     UTC+8 交易日 L+1。这条差异写在 title 里，不藏。
+   ★ 差异报警：doc.conflictText（build_bars_freshness 生成，>5% 才非空）单独一行红字，
+     原文照用户要求：「⚠️ 自建日线与 csqaq 官方有 X 个品差异 >5%，请确认口径」
+
    ★ 硬纪律（写在这里，不靠记性）
      1) ok 状态也必须显示两个日期 —— 「没问题就不说」正是这次事故的成因；
      2) 不许自己重算落后天数：一律读 bars-freshness.json 的 level / extraLagDays，
@@ -8194,6 +8209,15 @@ function barsGateWhen(doc){
   var live = (doc && doc.live) ? (doc.live.atText || doc.live.date || '—') : '—';
   return '结论基于 <b>' + esc(bar) + '</b> 日线　·　价格 <b>' + esc(live) + '</b>';
 }
+/* ★ 新增：数据截止（真实 UTC+8 交易日）+ 数据来源构成 */
+function barsGateCutoff(doc){
+  var eff = (doc && doc.effective && doc.effective.latestTrueDay) ? doc.effective.latestTrueDay : null;
+  if (!eff) return '';
+  var cov = doc.rtCoverage || null;
+  var n = (cov && cov.coversDays != null) ? Number(cov.coversDays) : 0;
+  var src = n > 0 ? ('历史 csqaq + 最近 ' + n + ' 天自建') : '目前全部是 csqaq 官方日线';
+  return '数据截止 <b>' + esc(eff) + '</b><span class="bg-when">（' + esc(src) + '）</span>　·　';
+}
 function barsGateInner(doc){
   if (!doc){
     return '<span class="bg-ico">⬜</span><span class="bg-txt">bars-freshness.json 未接入 —— 无法核对结论基于哪一天的日线（这一步没跑或没发布）。</span>';
@@ -8205,11 +8229,13 @@ function barsGateInner(doc){
   else if (lv === 'warn') head = '⚠️ <b>结论落后</b>：';
   var msg = doc.message ? esc(doc.message) : '';
   var html = '<span class="bg-ico">' + ico + '</span><span class="bg-txt">';
-  html += head + barsGateWhen(doc);
+  html += head + barsGateCutoff(doc) + barsGateWhen(doc);
   if (msg) html += '<span class="bg-when">　—　' + msg + '</span>';
   if (doc.extraLagDays != null && lv !== 'ok'){
     html += '<span class="bg-when">　（落后 ' + esc(String(doc.extraLagDays)) + ' 个交易日）</span>';
   }
+  /* ★ 自建 vs 官方 差异 >5%：单独一行红字（用户指定文案，build_bars_freshness 生成） */
+  if (doc.conflictText) html += '<span class="bg-conf">' + esc(doc.conflictText) + '</span>';
   html += '</span>';
   return html;
 }
@@ -8226,8 +8252,16 @@ function barsGateApply(doc){
   bar.innerHTML = barsGateInner(doc);
   barsGateAttr(bar, 'data-level', doc ? (doc.level || 'na') : 'na');
   barsGateAttr(bar, 'data-bars', (doc && doc.bars && doc.bars.latest) || '');
+  barsGateAttr(bar, 'data-cutoff', (doc && doc.effective && doc.effective.latestTrueDay) || '');
+  barsGateAttr(bar, 'data-rt-days', (doc && doc.rtCoverage && doc.rtCoverage.days) ? String(doc.rtCoverage.days.length) : '0');
+  barsGateAttr(bar, 'data-conflict', (doc && doc.conflict && doc.conflict.level) || '');
   barsGateAttr(bar, 'data-extra-lag', (doc && doc.extraLagDays != null) ? String(doc.extraLagDays) : '');
-  bar.title = doc ? ('bars-freshness.json 生成于 ' + (doc.atText || '—') + '；分级口径：extraLagDays = 距今天数 − 源端固有滞后(' + ((doc.spec && doc.spec.sourceLagDays) != null ? doc.spec.sourceLagDays : '?') + ' 天)') : '';
+  bar.title = doc ? ('bars-freshness.json 生成于 ' + (doc.atText || '—') +
+    '；分级口径：extraLagDays = 距今天数 − 源端固有滞后(' + ((doc.spec && doc.spec.sourceLagDays) != null ? doc.spec.sourceLagDays : '?') + ' 天)' +
+    '；日期口径：官方日线 timestamp 全在 16:00Z（= UTC+8 次日 00:00），所以官方标签 ' + ((doc.bars && doc.bars.latest) || '?') +
+    ' 代表 UTC+8 交易日 ' + ((doc.effective && doc.effective.latestTrueDay) || '?') +
+    '；自建天数 ' + ((doc.rtCoverage && doc.rtCoverage.days) ? doc.rtCoverage.days.length : 0) +
+    (doc.conflict && doc.conflict.level && doc.conflict.level !== 'ok' ? '；⚠️ 自建 vs 官方差异超门槛' : '')) : '';
   /* warn / bad 时给每个页签顶部再插一条（ok 时不插，避免满屏重复） */
   var lv = doc ? (doc.level || 'na') : 'na';
   var pages = (document.querySelectorAll ? document.querySelectorAll('section.page') : []) || [];
