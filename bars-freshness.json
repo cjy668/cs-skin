@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792493329261,
- "atText": "2026/10/20 18:48:49",
+ "at": 1792501910791,
+ "atText": "2026/10/20 21:11:50",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线」写成显式文件，落后时页面顶部告警 + watchdog 检查",
  "spec": {
@@ -11,24 +11,24 @@
   "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数"
  },
  "bars": {
-  "latest": "2026-10-14",
-  "gidsAtLatest": 1598,
-  "gids": 1598,
-  "noSeries": 60,
+  "latest": "2026-10-18",
+  "gidsAtLatest": 1658,
+  "gids": 1658,
+  "noSeries": 0,
   "tailDist": [
    {
-    "date": "2026-10-14",
-    "gids": 1598
+    "date": "2026-10-18",
+    "gids": 1658
    }
   ],
   "byKey": {
    "p": {
-    "date": "2026-10-14",
-    "gids": 1598
+    "date": "2026-10-18",
+    "gids": 1658
    },
    "n": {
-    "date": "2026-10-14",
-    "gids": 1598
+    "date": "2026-10-18",
+    "gids": 1658
    },
    "b": {
     "date": "2026-10-14",
@@ -36,18 +36,18 @@
    },
    "bp": {
     "date": "2026-10-14",
-    "gids": 1062
+    "gids": 1122
    }
   }
  },
  "live": {
   "date": "2026-10-20",
-  "atText": "2026/10/20 18:48:02",
-  "n": 2114
+  "atText": "2026/10/20 21:08:37",
+  "n": 2120
  },
- "lagDays": 6,
- "extraLagDays": 4,
- "level": "bad",
+ "lagDays": 2,
+ "extraLagDays": 0,
+ "level": "ok",
  "expectedBarsLatest": "2026-10-18",
  "downstreamStale": false,
  "staleFiles": [],
@@ -55,21 +55,21 @@
   {
    "file": "replenish-points.json",
    "label": "回调补仓点",
-   "asOf": "2026-10-14",
+   "asOf": "2026-10-18",
    "via": "asOf",
-   "asOfDate": "2026-10-14",
-   "generatedAt": "2026/10/20 17:06:20",
-   "basedOnBars": "2026-10-14",
+   "asOfDate": "2026-10-18",
+   "generatedAt": "2026/10/20 21:10:05",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": false
   },
   {
    "file": "watchlist-status.json",
    "label": "监控清单",
-   "asOf": "2026-10-14",
+   "asOf": "2026-10-18",
    "via": "asOfSeries",
-   "asOfDate": "2026-10-14",
-   "generatedAt": "2026/10/20 18:47:37",
-   "basedOnBars": "2026-10-14",
+   "asOfDate": "2026-10-18",
+   "generatedAt": "2026/10/20 21:08:14",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": false
   },
   {
@@ -78,8 +78,8 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/10/20 17:06:33",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:11:10",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
@@ -88,28 +88,28 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/10/20 17:05:39",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:09:12",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
    "file": "unified-stage.json",
    "label": "统一阶段层",
-   "asOf": "2026/10/20 17:02:20",
+   "asOf": "2026/10/20 21:05:24",
    "via": "atText",
    "asOfDate": null,
-   "generatedAt": "2026/10/20 17:02:20",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:05:24",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
    "file": "dealer-stage-board.json",
    "label": "做盘阶段看板",
-   "asOf": "2026/10/20 17:01:08",
+   "asOf": "2026/10/20 21:04:18",
    "via": "atText",
    "asOfDate": null,
-   "generatedAt": "2026/10/20 17:01:08",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:04:18",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
@@ -118,18 +118,18 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/10/20 16:55:24",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 20:57:42",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
    "file": "crash-buy.json",
    "label": "事件急跌抄底点",
-   "asOf": "2026-10-14",
+   "asOf": "2026-10-18",
    "via": "asOf",
-   "asOfDate": "2026-10-14",
+   "asOfDate": "2026-10-18",
    "generatedAt": null,
-   "basedOnBars": "2026-10-14",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": false
   },
   {
@@ -139,7 +139,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": null,
-   "basedOnBars": "2026-10-14",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
@@ -148,8 +148,8 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/10/20 16:58:31",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:00:52",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   },
   {
@@ -158,10 +158,10 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/10/20 17:04:53",
-   "basedOnBars": "2026-10-14",
+   "generatedAt": "2026/10/20 21:08:07",
+   "basedOnBars": "2026-10-18",
    "staleVsBars": null
   }
  ],
- "message": "🔴 结论基于 2026-10-14 日线，已落后 4 天（源端最新应为 2026-10-18）—— 下面所有结论都已失真"
+ "message": "结论基于 2026-10-18 日线（源端日线正常滞后 2 天）　价格 2026-10-20 实时"
 }
