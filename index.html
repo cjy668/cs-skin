@@ -6686,6 +6686,14 @@ function renderStageBoard(){
    而且它是别处的既有函数，改它会波及别的区块。 */
 function wlP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
 function wlStageCls(s){
+  /* 7 阶段（权威 stage） */
+  if (s === '拉升早期') return 'wl-b-pre';
+  if (s === '拉升中期') return 'wl-b-pre';
+  if (s === '拉升末期') return 'wl-b-hot';
+  if (s === '派发') return 'wl-b-dead';
+  if (s === '吸筹') return 'wl-b-hold';
+  if (s === '回落' || s === '平静') return '';
+  /* 6 阶段（stage6 确认位，徽标用同一套颜色） */
   if (s === '拉升前') return 'wl-b-pre';
   if (s === '拉升中') return 'wl-b-hot';
   if (s === '派发中') return 'wl-b-dead';
@@ -6693,10 +6701,18 @@ function wlStageCls(s){
   return '';
 }
 function wlStageItemCls(s){
-  if (s === '拉升前') return 'wl-pre';
-  if (s === '派发中') return 'wl-hot';
+  if (s === '拉升早期' || s === '拉升中期' || s === '拉升前') return 'wl-pre';
+  if (s === '拉升末期' || s === '派发' || s === '拉升中' || s === '派发中') return 'wl-hot';
   return '';
 }
+/* ★ 2026-10-20（M1/M2）：两套阶段词表的【唯一权威说明】
+   · stage   = 7 阶段（吸筹/拉升早期/拉升中期/拉升末期/派发/回落/平静）→ 权威，"现在处在哪一段"
+   · stage6  = 6 阶段（拉升前/拉升中/派发中/回落中/平静/数据不足）→ 确认信号，"有没有人做这只品"
+   本区块「② 拉升前 / ③ 其他阶段」的分组与筛选按钮用 stage6（那是 6 阶段的概念），
+   徽标主字用 stage（7 阶段）；两者不同时把 stage6 显式标出来，绝不混在一句话里。 */
+const WL_STAGE7 = ['吸筹', '拉升早期', '拉升中期', '拉升末期', '派发', '回落', '平静'];
+const WL_STAGE6 = ['拉升前', '拉升中', '派发中', '回落中', '平静', '数据不足'];
+function wlStage6Of(x){ return (x && (x.stage6 || (WL_STAGE6.indexOf(x.stage) >= 0 ? x.stage : null))) || null; }
 /* 痕迹一格：命中 / 未命中 / 算不出（三态必须分开，不许把 null 当 0） */
 function wlHitChip(h){
   const eff = isNum(h.effect) ? '效应 ' + h.effect.toFixed(3) + '×' : '效应 —';
@@ -6800,7 +6816,12 @@ function wlItemHTML(it){
   const removed = wlIsRemoved(it);
   let h = '<div class="wl-item ' + wlStageItemCls(it.stage) + (tiny ? ' wl-tiny' : '') + '">';
   h += '<div class="wl-h">' + esc(it.name || '—') +
-    '<span class="wl-badge ' + wlStageCls(it.stage) + '">' + esc(it.stage) + ' · ' + n2(it.stageScore) + '/100</span>' +
+    /* ★ M1/M2：徽标主字 = 7 阶段（权威 stage）；6 阶段确认位不同时紧跟一个小徽标，两者都有出处 */
+    '<span class="wl-badge ' + wlStageCls(it.stage) + '" title="7 阶段（权威）：现在处在哪一段。与阶段看板/统一层同一份判定">' +
+      esc(it.stage || '—') + ' · ' + n2(it.stageScore) + '/100</span>' +
+    (wlStage6Of(it) && wlStage6Of(it) !== it.stage
+      ? '<span class="wl-badge ' + wlStageCls(wlStage6Of(it)) + '" style="opacity:.8" title="6 阶段确认位 stage6：30/90 天痕迹中位口径，回答「有没有人做这只品」">6阶段 ' + esc(wlStage6Of(it)) + '</span>'
+      : '') +
     /* ★ 拉升三形态（第二根轴）：阶段旁边直接标出来。A = 这段涨幅是吃断层跳价（不是拉升） */
     (it.form ? fwdFormBadge(it.form, FWD_FORM_NAME[it.form]) : '') +
     /* ★★ 第三根轴（2026-10-17 新增）：这个品属于哪个【行情批次】+ 它在批内的强弱排名。
@@ -6825,8 +6846,11 @@ function wlItemHTML(it){
   /* ★★ 用户点名的缺口就在这里补上：以前这一行只有「距高点/距低点」，
      现在把该阶段【之后 60 个交易日走势分布】的三段区间真的画出来。
      数据来源 = watchlist-stage-fwd.json（同一个阶段判定函数在历史上逐日回放）。 */
-  h += fwdBar60(wlStageFwd(it.stage), {
-    title: '该阶段（' + esc(it.stage) + '）历史上',
+  /* ★ M1：这张分布表是【6 阶段确认口径】算出来的（--fwddist 用 computeOne 回放），
+     所以查表键必须是 stage6 —— 以前用 it.stage 查，统一层把 stage 改成 7 阶段之后
+     这一行就永远查不到（页面上整段消失，而且没人发现）。 */
+  h += fwdBar60(wlStageFwd(wlStage6Of(it)), {
+    title: '该阶段（6 阶段确认位：' + esc(wlStage6Of(it) || '—') + '）历史上',
     foot: ((wlData && wlData.stageFwdMeta) ? ('口径：' + (wlData.stageFwdMeta.caveats || []).map(function(cv){ return String(cv).replace(/[。；;\s]+$/, ''); }).join(' ／ ')) : '')
   });
   if (it.form) h += fwdFormNote(it.form, it.formNote);
@@ -6895,16 +6919,25 @@ function renderWatchlist(){
       '</div>';
   }
 
-  /* 阶段数量 */
+  /* 阶段数量（★ M2：默认顺序 = 7 阶段权威词表；不再退回 6 阶段词表） */
   const nums = $('wl-nums');
   if (nums){
-    const order = arrOf(wlData.stageOrder).length ? wlData.stageOrder : ['拉升前', '拉升中', '派发中', '回落中', '平静', '数据不足'];
+    const order = arrOf(wlData.stageOrder).length ? wlData.stageOrder : WL_STAGE7;
+    const title7 = '7 阶段权威口径（stage）：吸筹/拉升早期/拉升中期/拉升末期/派发/回落/平静。' +
+      '下面每档的数字就是全池 1,073 个品在这一档的个数（与阶段看板同口径）。';
+    nums.setAttribute('title', title7);
+    const st6 = wlData.stages6 || {};
+    const order6 = arrOf(wlData.stageOrder6).length ? wlData.stageOrder6 : WL_STAGE6;
     nums.innerHTML = order.map(function(k){
-      const cls = k === '拉升前' ? 'wl-pre' : (k === '派发中' ? 'wl-hot' : (k === '数据不足' ? 'wl-dim' : ''));
+      const cls = k === '拉升早期' ? 'wl-pre' : (k === '拉升末期' || k === '派发' ? 'wl-hot' : '');
       return '<div class="wl-num"><div class="k">' + esc(k) + '</div><div class="v ' + cls + '">' + n2(st[k] || 0) + '</div></div>';
     }).join('') +
       '<div class="wl-num"><div class="k">可交易 ≥¥3,000</div><div class="v ' + ((wlData.capacity && wlData.capacity.ok) ? '' : 'wl-dim') + '">' +
-      n2(wlData.capacity && wlData.capacity.ok) + '</div></div>';
+      n2(wlData.capacity && wlData.capacity.ok) + '</div></div>' +
+      /* 6 阶段确认位单独一行 —— 两套词表在同一张卡里也必须是两组数字，绝不并成一个数组 */
+      '<div class="wl-num" style="opacity:.85"><div class="k">6 阶段确认位<br><span style="font-size:10px;opacity:.8">' +
+      esc(order6.join('/')) + '</span></div><div class="v wl-dim">' +
+      order6.map(function(k){ return esc(k) + ' ' + n2(st6[k] || 0); }).join('　') + '</div></div>';
   }
 
   let h = '';
@@ -6958,10 +6991,13 @@ function renderWatchlist(){
     '），但 csqaq 的成交量序列（turnover_number）冻结在 2025-11，对今天的判断**整体失效** —— ' +
     '本区块把它标成「算不出」而不是「没命中」。</div>';
 
-  /* ② 拉升前 —— 用户最想看的一档，单独列出 */
-  const pre = arrOf(wlData.signals).filter(function(x){ return x.stage === '拉升前' && !wlIsRemoved(x) && wlPrcPass(x); });
-  h += '<div class="wl-sec">② ★ 拉升前（' + n2((SD['拉升前'] || {}).total || 0) + ' 个' +
-    (wlLocal.removed.length ? '，其中 ' + wlLocal.removed.length + ' 个被你隐藏' : '') + '）—— 这是这份清单的核心输出</div>';
+  /* ② 拉升前 —— 用户最想看的一档，单独列出（★ M1：这是 6 阶段确认位 stage6 的概念） */
+  const pre = arrOf(wlData.signals).filter(function(x){ return wlStage6Of(x) === '拉升前' && !wlIsRemoved(x) && wlPrcPass(x); });
+  const SD6 = wlData.stagesDetail6 || {};
+  h += '<div class="wl-sec">② ★ 拉升前（' + n2((SD6['拉升前'] || {}).total || 0) + ' 个' +
+    (wlLocal.removed.length ? '，其中 ' + wlLocal.removed.length + ' 个被你隐藏' : '') + '）—— 这是这份清单的核心输出</div>' +
+    '<div class="wl-note">口径：<b>6 阶段确认位 stage6 = 拉升前</b>（命中 ≥3 条通过检验的痕迹、且价格还没启动）。' +
+    '它旁边徽标里的阶段词是 <b>7 阶段 stage</b>（现在处在哪一段）—— 两个是不同的东西，页面上都标出来。</div>';
   if (!pre.length){
     h += '<p class="wl-note">今天没有「命中 ≥3 条痕迹且价格还没启动」的品。这本身是一个结论：' +
       '不需要为了有东西看而降低门槛。</p>';
@@ -6969,13 +7005,13 @@ function renderWatchlist(){
     h += pre.map(wlItemHTML).join('');
   }
 
-  /* ③ 其他阶段（拉升中/派发中/回落中/平静/数据不足） */
+  /* ③ 其他阶段（★ M1：分组与筛选都按 6 阶段确认位 stage6，与②一致） */
   const others = arrOf(wlData.signals).filter(function(x){
-    return x.stage !== '拉升前' && !wlIsRemoved(x) && !(wlStageFilter && x.stage !== wlStageFilter) && wlPrcPass(x);
+    return wlStage6Of(x) !== '拉升前' && !wlIsRemoved(x) && !(wlStageFilter && wlStage6Of(x) !== wlStageFilter) && wlPrcPass(x);
   });
-  h += '<div class="wl-sec">③ 其他阶段（拉升中 · 派发中 · 回落中 · 平静 · 数据不足）</div>';
+  h += '<div class="wl-sec">③ 其他阶段（6 阶段确认位：拉升中 · 派发中 · 回落中 · 平静 · 数据不足）</div>';
   h += '<div class="wl-tools">' +
-    ['', '拉升中', '派发中', '回落中', '平静', '数据不足'].map(function(k){
+    WL_STAGE6.filter(function(k){ return k !== '拉升前'; }).reduce(function(a, k){ return a.concat([k]); }, ['']).map(function(k){
       return '<button class="wl-btn' + (wlStageFilter === k ? ' wl-on' : '') + '" data-wl-stage="' + esc(k) + '">' + (k || '全部') + '</button>';
     }).join('') + '</div>';
   /* ★ 2026-10-19：「只看拉升前候选」筛选器（对应需求 §一③"监控清单加筛选器"） */
