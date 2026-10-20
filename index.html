@@ -8252,7 +8252,11 @@ function barsGateCutoff(doc){
   var cov = doc.rtCoverage || null;
   var n = (cov && cov.coversDays != null) ? Number(cov.coversDays) : 0;
   var src = n > 0 ? ('历史 csqaq + 最近 ' + n + ' 天自建') : '目前全部是 csqaq 官方日线';
-  return '数据截止 <b>' + esc(eff) + '</b><span class="bg-when">（' + esc(src) + '）</span>　·　';
+  /* ★ 过 UTC+8 零点后新的一天刚开始，自建只覆盖 1~2 个 gid —— 必须标出来，
+     否则「数据截止 10-21」会让用户以为是完整的一天（与 build_bars_freshness 的
+     rtCoverage.latestPartial 同口径，两处不各写一套）。 */
+  var partial = (cov && cov.latestPartial) ? ('　最新一天进行中 · p ' + (cov.latestDayGids || 0) + ' 个') : '';
+  return '数据截止 <b>' + esc(eff) + '</b><span class="bg-when">（' + esc(src) + esc(partial) + '）</span>　·　';
 }
 function barsGateInner(doc){
   if (!doc){
