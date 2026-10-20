@@ -357,6 +357,18 @@ details[open] summary::before{content:'▾ '}
 /* 「价格时间 / 结论时间」两个时间标签：钱用绿色（价格），建议用灰色（结论）——一眼分得清哪个会每 3 分钟动 */
 .lvtag.at{color:var(--muted);background:rgba(140,160,185,.10);border-color:rgba(140,160,185,.34)}
 .lvtag.fz2{color:var(--yellow);background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.45)}
+/* ★ 2026-10-20 唯一价格源 price-live.json 的「取价时间」小标签（全站价格旁边都挂一个）
+   pltag      = 实时（≤6 分钟）        绿色
+   pltag.fz1  = ⚠️ 滞后 N 分钟         黄色
+   pltag.fz2  = ⚠️ 滞后 N 小时 / 非实时价（price-live 里没有这个 gid）红色
+   为什么必须挂在价格旁边：用户当天就是被「754 看起来像现价」坑的 ——
+   一个数字旁边没有时间，用户就会把它当实时价。 */
+.pltag{display:inline-block;font-size:10px;font-weight:700;line-height:14px;padding:0 3px;margin-left:3px;
+  border-radius:4px;white-space:nowrap;vertical-align:1px;
+  color:var(--green);background:rgba(47,208,122,.10);border:1px solid rgba(47,208,122,.38)}
+.pltag.fz1{color:var(--yellow);background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.42)}
+.pltag.fz2{color:#ff7a7a;background:rgba(255,77,79,.12);border-color:rgba(255,77,79,.42)}
+.pltag.nb{margin-left:0;margin-right:4px}
 .fresh{display:flex;align-items:center;gap:7px;flex-wrap:wrap;max-width:680px;margin:0 auto;padding:4px 14px 7px;
   border-top:1px solid rgba(35,48,66,.6);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
 .fresh b{color:var(--muted);font-weight:700}
@@ -4173,6 +4185,117 @@ function mQty(v){
   if (i.steam && i.steam[1]) return i.steam[1];
   return null;
 }
+
+/* ============================================================================
+   ★★ 唯一价格源 PriceLive（2026-10-20）
+   ----------------------------------------------------------------------------
+   事故：用户报「M4A4 | 红色 DDPAT (崭新出厂) 今日价格 845，app 说 754」。
+   根因：daily.cmd 一天只跑几次，它生成的 watch-list.json / dealer-stage-board.json /
+        exit-board.json… 里写死了「生成那一刻的价」，之后永不更新；用户手机上看到的
+        754 就是 09:34 那一批的快照价，而悠悠卖一早就 845 了（同一个品在 7 个 JSON
+        里有 7 个不同价格：845 / 808 / 754 / 748 / 897.5 / 860）。
+   根治：cs-quant/price_live.cjs 产出 data/price-live.json（由 fast_refresh.cjs 每 3 分钟
+        刷新，≈72 KB，只存 {gid→现价} 和 {gid→取价时间}）。前端所有面板显示价格时
+        一律按 gid 从这里 join，各文件自带的 price 只当兜底，并显式打「⚠️ 滞后」标记。
+   三条纪律：
+     ① 价格只能来自 PriceLive.px(gid)，不许再直接读 x.price / x.priceNow 当现价；
+     ② 每个价格旁边必须挂 PriceLive.tag(gid)（实时 / 滞后 N 分钟 / 非实时价）；
+     ③ price-live.json 拿不到 → 退回文件自带价，但必须显示「⚠️ 价格可能滞后」——
+        绝不让一个没有时间的数字冒充现价。
+   ============================================================================ */
+const PLIVE = { data:null, state:'idle', at:0, pending:null, failCount:0, loadedAtText:'' };
+/* 取这个价的「真实取价时间」：pxAt 优先，退到文件整体 at */
+function pliveRow(gid){
+  const d = PLIVE.data;
+  if (!d || !d.px) return null;
+  const k = String(gid == null ? '' : gid);
+  if (!k) return null;
+  const p = Number(d.px[k]);
+  if (!(p > 0)) return null;
+  const at = Number((d.pxAt && d.pxAt[k]) || d.at) || 0;
+  return { px:p, at:at };
+}
+/* 现价：price-live 里没有这个 gid 才用兜底值（兜底值一律会被打上「非实时」标记） */
+function plivePx(gid, fallback){
+  const r = pliveRow(gid);
+  if (r && r.px > 0) return r.px;
+  const f = Calc.toNum(fallback);
+  return f > 0 ? f : null;
+}
+function pliveAgeMin(gid){
+  const r = pliveRow(gid);
+  if (!r) return null;
+  return Math.max(0, Math.round((Date.now() - (r.at || PLIVE.at)) / 60000));
+}
+/* 价格的「取价时间」标记 —— 价格旁边必须挂这个 */
+function pliveTag(gid){
+  if (!PLIVE.data){
+    return PLIVE.state === 'fail'
+      ? '<span class="pltag fz2" title="price-live.json 没取到，这个价来自本文件自带的快照（可能很久以前）">⚠️ 价格可能滞后</span>'
+      : '';
+  }
+  const r = pliveRow(gid);
+  if (!r){
+    return '<span class="pltag fz2" title="price-live.json 里没有这个 gid 的价（接口没覆盖到），用的是本文件自带的价">⚠️ 非实时价</span>';
+  }
+  const a = Math.max(0, Math.round((Date.now() - (r.at || PLIVE.at)) / 60000));
+  const hhmm = new Date(r.at || PLIVE.at).toLocaleTimeString('zh-CN', { hour:'2-digit', minute:'2-digit' });
+  if (a <= 6) return '<span class="pltag" title="价格取自唯一价格源 price-live.json，取价时间 ' + hhmm + '">实时 ' + hhmm + '</span>';
+  if (a < 90) return '<span class="pltag fz1" title="这个品不在每 3 分钟必刷的热池里，价格来自 ' + hhmm + '，正在轮转刷新">⚠️ 滞后 ' + a + ' 分钟</span>';
+  return '<span class="pltag fz2" title="价格来自 ' + hhmm + '，已明显滞后（接口取不到或该 gid 没被覆盖）">⚠️ 滞后 ' + (a / 60).toFixed(1) + ' 小时</span>';
+}
+/* 拉 price-live.json（失败不报错：退回文件自带价 + 打滞后标记） */
+async function loadPriceLive(force){
+  if (PLIVE.pending && !force) return PLIVE.pending;
+  if (PLIVE.data && !force && Date.now() - PLIVE.loadedAt < 120000) return PLIVE.data;
+  PLIVE.pending = (async function(){
+    try {
+      const j = await fetchJSON('./price-live.json');
+      if (!j || !j.px || typeof j.px !== 'object') throw new Error('price-live.json 结构不对');
+      PLIVE.data = j;
+      PLIVE.at = Number(j.at) || Date.now();
+      PLIVE.loadedAt = Date.now();
+      PLIVE.loadedAtText = j.atText || new Date(PLIVE.at).toLocaleString('zh-CN');
+      PLIVE.state = 'ok';
+      PLIVE.failCount = 0;
+    } catch (e){
+      PLIVE.failCount++;
+      if (!PLIVE.data) PLIVE.state = 'fail';
+    } finally {
+      PLIVE.pending = null;
+    }
+    /* 到手后把已经画出来的价格区块重画一遍（首屏那几个卡是异步并行拉的，谁先到都不奇怪） */
+    try { rerenderPriceBlocks(); } catch (e) {}
+    return PLIVE.data;
+  })();
+  return PLIVE.pending;
+}
+/* 价格源就绪后重画：只重画「数据已经拿到」的区块，没拿到的保持原样（不空态、不闪烁） */
+function rerenderPriceBlocks(){
+  if (!PLIVE.data) return;
+  try { if (twData) renderTodayWatchCard(); } catch (e) {}
+  try { if (prcData) renderPreRally(); } catch (e) {}
+  try { if (dsbData) renderStageBoard(); } catch (e) {}
+  try { if (wlData) renderWatchlist(); } catch (e) {}
+  try { if (exbData) renderExitBoard(); } catch (e) {}
+  try { if (saData) renderSellAlerts(); } catch (e) {}
+  try { renderLiveBadge(); } catch (e) {}
+}
+/* 「现价 ¥X + 时间标记」一行，取不到就返回空串（near-miss / 候选列表这种次要行用） */
+function pliveLine(gid, fallback, prefix){
+  const p = plivePx(gid, fallback);
+  if (!isNum(p)) return '';
+  return (prefix === undefined ? '现价 ' : prefix) + '¥' + fmtNum(p, p < 10 ? 2 : 1) + pliveTag(gid) + ' · ';
+}
+/* 给一行文字用的「价格 + 时间标记」组合（避免每个地方自己拼） */
+function pliveHTML(gid, fallback, opts){
+  opts = opts || {};
+  const p = plivePx(gid, fallback);
+  if (p == null) return '—' + (opts.noTag ? '' : pliveTag(gid));
+  const txt = (opts.raw ? '' : '¥') + (opts.digits === undefined ? (p < 10 ? (Math.round(p * 100) / 100) : (Math.round(p * 10) / 10)) : fmtNum(p, opts.digits));
+  return txt + (opts.noTag ? '' : pliveTag(gid));
+}
+
 function renderMarketOverview(){
   applyPulseToMarket();                                  /* 有脉搏就先覆盖头条数字（见 loadPulse） */
   const set = (id, txt, cls) => setText(id, txt, cls);
@@ -4435,7 +4558,7 @@ function renderTodayWatchCard(){
       '<div class="tw-n">' + esc(x.name || ('gid ' + x.gid)) + '</div>' +
       '<div class="tw-s">' + (r.chip || '') + twStageChip(x.stage || '') + esc(sub) + '</div>' +
       '</div>' +
-      '<div class="tw-r"><b>' + (isNil(x.price) ? '—' : ('¥' + n2(x.price, 2))) + '</b>' +
+      '<div class="tw-r"><b>' + pliveHTML(x.gid, x.price) + '</b>' +
       (x.group ? esc(x.group === 'strong' ? '强盘' : x.group === 'weak' ? '弱盘' : '中性') : '') + '</div>' +
       '</div>';
   }).join('') + (rows.length > LIMIT ? ('<div class="tw-more">还有 ' + (rows.length - LIMIT) + ' 条（点顶部徽标切换分组）</div>') : '');
@@ -5341,7 +5464,10 @@ function prcItemHTML(x, idx){
      + ★ 2026-10-20 新增的两项：流通性（在售/求购/可卖）与剩余空间口径（自历史 / 池子降级）。
      批次 · 可交易 收进展开区 —— 否则手机上一行变七行，首页第一张卡就变成一屏墙。 */
   const kv = [];
-  kv.push('现价 <b>' + (isNum(x.price) ? '¥' + fmtNum(x.price, x.price < 10 ? 2 : 1) : '—') + '</b>');
+  /* ★ 2026-10-20：现价一律走唯一价格源 price-live.json（不再用 prc 文件里那份 daily 快照价），
+     并在价格旁边挂取价时间标记 —— 用户当天报的「754 vs 845」就是这一处。 */
+  const pxShow = plivePx(x.gid, x.price);
+  kv.push('现价 <b>' + (isNum(pxShow) ? '¥' + fmtNum(pxShow, pxShow < 10 ? 2 : 1) : '—') + '</b>' + pliveTag(x.gid));
   kv.push('阶段 <b>' + esc(x.stage || '—') + '</b>' + (isNum(x.stageStableDays) ? '（已稳 ' + n2(x.stageStableDays) + ' 天）' : ''));
   kv.push('强弱 <b>' + (isNum(st.score) ? n2(st.score) + '/100 ' : '') + esc(st.verdict || '—') + '</b>' +
     (st.rankInBatch ? '（批内 ' + esc(st.rankInBatch) + '）' : ''));
@@ -5475,7 +5601,7 @@ function prcNearHTML(nm){
   if (!list.length) h += '<div class="prc-li">今天没有 near-miss 记录。</div>';
   list.forEach(function(x){
     h += '<div class="prc-li"><span>' + esc(x.name || '—') + (x.group ? '　·　' + esc(x.group) : '') + '</span>' +
-      (isNum(x.price) ? '现价 ¥' + fmtNum(x.price, x.price < 10 ? 2 : 1) + ' · ' : '') +
+      pliveLine(x.gid, x.price) +
       (x.dealerStageCn ? '7 阶段=' + esc(x.dealerStageCn) + ' · ' : '') +
       (x.room ? ('剩余空间=' + esc(x.room.verdict || '—') + (isNum(x.room.med60) ? '（60 日中位 ' + prcP(x.room.med60) + '）' : '') + ' · ') : '') +
       (isNum(x.strength) ? ('强弱 ' + n2(x.strength) + ' · ') : '') +
@@ -6130,7 +6256,7 @@ function renderStageBoard(){
       '<em>' + esc(x.caseName || '') + ' · 数据到 ' + esc(x.asOf || '') +
       (x.isHolding ? ' · ★ 您的持仓' : '') + '</em></p>' +
       '<p class="dsb-m"><b style="color:' + (s.color || 'inherit') + '">' + esc(s.name || x.stage) + '</b>' +
-      ' · 现价 ¥' + (isNum(x.price) ? x.price.toFixed(2) : '—') +
+      ' · 现价 ¥' + (isNum(plivePx(x.gid, x.price)) ? fmtNum(plivePx(x.gid, x.price), 2) : '—') + pliveTag(x.gid) +
       ' · 近 20 日 ' + dsbPct(x.change20) +
       ' · 距 60 日高 ' + dsbPct(x.ddFromHigh60) +
       ' · 距 60 日低 ' + dsbPct(x.fromLow60) + '</p>' +
@@ -6342,7 +6468,7 @@ function wlItemHTML(it){
     (it.userTag ? '<span class="wl-badge wl-b-hot">用户批注：' + esc(it.userTag) + '</span>' : '') +
     '<em>' + esc(it.caseName || '（无箱子归属）') + '　·　gid ' + n2(it.gid) +
     (it.priceSource === 'live' ? '　·　现价含 3 分钟级实时价' : '') + '</em></div>';
-  h += '<div class="wl-meta">现价 ' + (isNum(it.price) ? '¥' + fmtNum(it.price, 2) : '—') +
+  h += '<div class="wl-meta">现价 ' + (isNum(plivePx(it.gid, it.price)) ? '¥' + fmtNum(plivePx(it.gid, it.price), 2) : '—') + pliveTag(it.gid) +
     '　在售 ' + n2(it.listed) + '　求购 ' + n2(it.buyNum) +
     '　可交易 <b class="' + (tiny ? 'wl-neg' : 'wl-pos') + '">' + (isNum(it.maxTradable) ? '¥' + fmtNum(it.maxTradable, 0) : '—') + '</b>' +
     (it.maxQty != null ? '<em>吃 30% 盘口 ≈ ' + n2(it.maxQty) + ' 件</em>' : '') +
@@ -8397,6 +8523,14 @@ function renderLiveNote(){
     '<br>已覆盖行情文件 <b>' + ov + '</b> 件；命中持仓 <b>' + liveCount(a.holdings, function(x){ return null; }) + '</b> 个、' +
     '长期方案 <b>' + liveCount((a.longTerm || {}).plans, function(x){ return x.hash; }) + '</b> 个、' +
     '条件单机会 <b>' + liveCount(a.opportunities, function(x){ return x.hash; }) + '</b> 个（卡片上带「价格 HH:MM」标签的数字就是按那一刻的价算的）。' +
+    /* ★ 2026-10-20：把「唯一价格源」的状态也摊在这里 —— 面板上的价格全来自它 */
+    '<br><b>唯一价格源 price-live.json</b>：' + (PLIVE.data
+      ? ('<b>' + n2(PLIVE.data.n) + '</b> 个 gid · 取价时间 <b>' + esc(PLIVE.loadedAtText || '—') + '</b>' +
+         (PLIVE.data.live != null ? '（本次实时刷到 ' + n2(PLIVE.data.live) + ' 个，其余按轮转刷）' : '') +
+         '　·　各面板价格都按 gid 从这里 join，旁边的「实时/滞后 N 分钟」标记就是用它的取价时间算的')
+      : (PLIVE.state === 'fail'
+          ? '<span class="fz2">⚠️ 没取到（脚本没跑或还没发布）→ 各面板退回文件自带价，价格旁边标「⚠️ 价格可能滞后」</span>'
+          : '加载中…')) +
     (frozen ? '　⚠️ 冻结期间这些价格是旧的，别按它下手；结论（建议）本身不受影响。'
             : '　每 60 秒自动刷新一次（页面切到后台就不请求）。');
 }
@@ -8408,6 +8542,9 @@ function startLiveTimer(){
     refreshLive();
     refreshAnalysisIfDue();   // 每 3 分钟再对一次 analysis.json（后端轻刷过的价格 + 新的结论）
     refreshPulseIfDue();      // 每 3 分钟再取一次大盘脉搏（指数/贪婪/宽度/板块）
+    /* ★ 2026-10-20：唯一价格源也每 3 分钟对一次（后端 fast_refresh 就是这个节奏）。
+       refreshAnalysisIfDue 内部已经限流到「超过 3 分钟才真拉」，这里同样只在过期时拉。 */
+    if (Date.now() - PLIVE.loadedAt > 170000) loadPriceLive();
   }, LIVE_TTL);
 }
 
@@ -9179,6 +9316,9 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
   }
 
   /* 实时价：本机 /api/live → 云端 live.json → 静态；可见时每 60 秒重拉一次 */
+  /* ★ 2026-10-20：唯一价格源 price-live.json 先拉（≈72 KB，全站所有面板的价格都从它 join）。
+     拿不到也不阻断：各面板退回文件自带价 + 打「⚠️ 价格可能滞后」标记。 */
+  loadPriceLive();
   refreshLive();
   startLiveTimer();
   /* 大盘脉搏（每 3 分钟一次的小文件）：拿到就覆盖「大盘」页的头条数字，拿不到就照旧 */
@@ -9450,8 +9590,12 @@ function renderExitBoard(){
       (x.justSwitched ? ' · <b class="fres-warn">⚠️ 上个交易日刚切换</b>' : '') +
       (isNum(x.switchRate100) ? ' · 该品历史每 100 交易日切换 ' + x.switchRate100.toFixed(1) + ' 次' : '') +
       '</p>';
-    s += '<p class="dsb-m">现价 ' + (isNum(x.priceNow) ? '¥' + x.priceNow.toFixed(2) : '—') +
-      ' · ' + (isNum(x.pnlRate) ? (x.pnlRate >= 0 ? '浮盈 +' : '浮亏 ') + exbPAbs(x.pnlRate) : '无成本记录') +
+    /* ★ 2026-10-20：现价与浮盈浮亏一律用唯一价格源重算（文件里那份是 daily 生成时的快照价，
+       costUnit 是台账成本、不会变，所以 现价/成本-1 可以就地重算，不必等 daily 重跑） */
+    const pxLive = plivePx(x.gid, x.priceNow);
+    const pnlLive = (isNum(pxLive) && isNum(x.costUnit) && x.costUnit > 0) ? (pxLive / x.costUnit - 1) : x.pnlRate;
+    s += '<p class="dsb-m">现价 ' + (isNum(pxLive) ? '¥' + fmtNum(pxLive, 2) : '—') + pliveTag(x.gid) +
+      ' · ' + (isNum(pnlLive) ? (pnlLive >= 0 ? '浮盈 +' : '浮亏 ') + exbPAbs(pnlLive) : '无成本记录') +
       ' · 占比 ' + (isNum(x.weight) ? (x.weight * 100).toFixed(2) + '%' : '—') + '</p>';
     /* ★ 卖出口径：这一行就是用户要的"到底给不给卖点" */
     s += '<div class="ex-gate' + (hot ? ' hot' : ' cold') + '">' +
@@ -9836,7 +9980,7 @@ function renderExitWait(W){
   const cands = sc.candidates || [];
   if (cands.length){
     cands.forEach(function(c){
-      h += '<div class="ex-cand"><b>' + esc(c.name) + '</b>（gid ' + esc(String(c.gid)) + '）　现价 ¥' + n2(c.priceNow, 2) +
+      h += '<div class="ex-cand"><b>' + esc(c.name) + '</b>（gid ' + esc(String(c.gid)) + '）　现价 ¥' + n2(plivePx(c.gid, c.priceNow), 2) + pliveTag(c.gid) +
         '<br>历史分位 ' + (isNum(c.histPct) ? (c.histPct * 100).toFixed(1) + '%' : '—') +
         '　批次 ' + esc(c.sw || '—') + '　gap ' + (c.gap == null ? '不适用' : c.gap) +
         '<br>最近一次事件急跌：' + esc(c.evDate || '—') + '（' + esc(c.evType || '—') + '）跌 ' + exbP1(c.evDrop) +
