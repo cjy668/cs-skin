@@ -1,8 +1,8 @@
 {
  "v": 1,
- "at": 1792510161461,
- "atText": "2026/10/20 23:29:21",
- "asOfDate": "2026-10-20",
+ "at": 1792513012545,
+ "atText": "2026/10/21 00:16:52",
+ "asOfDate": "2026-10-21",
  "script": "cs-quant/build_watch_list.cjs",
  "purpose": "用户原话：「明显已经新启动的品明显不会只有一波，必须要持续关注，帮我分析阶段，并在合适补仓的位置提醒我」。自动收录新启动品；用户可手动加(pinned=true / manual=true)或隐藏(hidden=true)，脚本不会删。",
  "entryRule": [
@@ -17,378 +17,35 @@
   "caution": "脚本每次运行会【重写】items 的 latest 字段，但不会删掉 manual/pinned 项。"
  },
  "counts": {
-  "watchTotal": 386,
-  "newStart": 26,
-  "refill": 19,
+  "watchTotal": 389,
+  "newStart": 0,
+  "refill": 18,
   "refillLegacy": 18,
-  "refillFourCond": 1,
+  "refillFourCond": 0,
   "refillBlockedByLiquidity": 0,
-  "late": 15,
+  "late": 16,
   "sell": 0,
-  "stageChanged": 0
+  "stageChanged": 3
  },
  "badge": {
-  "total": 60,
+  "total": 34,
   "breakdown": {
-   "新启动": 26,
-   "到补仓位置": 19,
-   "到末期": 15
+   "新启动": 0,
+   "到补仓位置": 18,
+   "到末期": 16
   },
   "extra": {
-   "阶段变化": 0,
+   "阶段变化": 3,
    "卖出信号": 0,
    "到补仓位置_旧阶梯": 18,
-   "到补仓位置_四条件": 1,
+   "到补仓位置_四条件": 0,
    "到补仓位置_流通性挡掉": 0
   },
   "rule": "新启动 = 今天新进列表或阶段由别档变成拉升早期；到补仓位置 = 旧价格阶梯今日首次触发 ∪ 四条件版补仓点（含 3 个交易日内刚触发），且必须通过流通性 5 条门槛（tier≠micro / 在售≥50 / 求购≥5 / 可卖>0 / 可交易≥¥3,000）；到末期 = 统一阶段 = 拉升末期/派发"
  },
  "alerts": {
-  "newStart": [
-   {
-    "gid": 464,
-    "name": "CZ75 | 毒镖 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 95,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3571,
-    "strength": "mid",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 678,
-    "name": "双持贝瑞塔 | 海斗士 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 165,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3751,
-    "strength": "mid",
-    "stockType": "控盘型"
-   },
-   {
-    "gid": 690,
-    "name": "双持贝瑞塔 | 报应 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-14）",
-    "price": 39.36,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.4087,
-    "strength": "weak",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 797,
-    "name": "法玛斯 | 冥界之憎 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 铺货吸筹（2026-10-11 在售+12.9%/价-5.3%）",
-    "price": 790,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3982,
-    "strength": "mid",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 931,
-    "name": "G3SG1 | 沙漠风暴 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 3.78,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.4882,
-    "strength": "mid",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 990,
-    "name": "G3SG1 | 通风机 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-13）",
-    "price": 4.33,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3968,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 1127,
-    "name": "格洛克 18 型 | 铁之作 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "铺货吸筹（2026-10-10 在售+12.5%/价-9.1%） + 扫单收货（2026-10-13）",
-    "price": 290,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.5303,
-    "strength": "strong",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 1137,
-    "name": "格洛克 18 型 | 异星世界 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-14）",
-    "price": 51.8,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.4608,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 1173,
-    "name": "格洛克 18 型 | 鼬鼠 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 铺货吸筹（2026-10-09 在售+26.3%/价-3.7%） + 扫单收货（2026-10-13）",
-    "price": 243,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.253,
-    "strength": "strong",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 1196,
-    "name": "M4A1消音版 | 原子合金 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 1254.4,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3253,
-    "strength": "mid",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 1619,
-    "name": "MP9 | 橘皮涂装 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "扫单收货（2026-10-11）",
-    "price": 31,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.4188,
-    "strength": "mid",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 1765,
-    "name": "P2000 | 林间猎者 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 307,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.5351,
-    "strength": "strong",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 1977,
-    "name": "P90 | 暴风呼啸 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-11）",
-    "price": 139,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.2636,
-    "strength": null,
-    "stockType": "中间型"
-   },
-   {
-    "gid": 6365,
-    "name": "Tec-9 | 碎蛋白石 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 铺货吸筹（2026-10-09 在售+41.2%/价-3.3%）",
-    "price": 54.8,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.5419,
-    "strength": "strong",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 6494,
-    "name": "UMP-45 | 合金绽放 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 49.2,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.2982,
-    "strength": "weak",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 10360,
-    "name": "沙漠之鹰 | 轻轨 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-13）",
-    "price": 91.68,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3522,
-    "strength": "strong",
-    "stockType": "控盘型"
-   },
-   {
-    "gid": 12891,
-    "name": "SSG 08 | 丛林虚线 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 330,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.65,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 12938,
-    "name": "R8 左轮手枪 | 噩梦之夜 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 69.59,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.6617,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 13364,
-    "name": "MP7 | 掠夺者 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 铺货吸筹（2026-10-07 在售+109.5%/价-12.2%）",
-    "price": 18.88,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 1.0589,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 17594,
-    "name": "XM1014 | 寒霜锁链 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 702.5,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.2775,
-    "strength": "mid",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 17860,
-    "name": "截短霰弹枪 | 梭鲈 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 14.88,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.2718,
-    "strength": "weak",
-    "stockType": "中间型"
-   },
-   {
-    "gid": 17937,
-    "name": "截短霰弹枪 | 森林 DDPAT (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 3.29,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.2802,
-    "strength": "mid",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 18180,
-    "name": "新星 | 致幻时刻 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 45,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3123,
-    "strength": "mid",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 18225,
-    "name": "新星 | 捕食者 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期 + 扫单收货（2026-10-14）",
-    "price": 4.29,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.5213,
-    "strength": "strong",
-    "stockType": "倒货型"
-   },
-   {
-    "gid": 18604,
-    "name": "M249 | 狂野丛林 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "扫单收货（2026-10-14）",
-    "price": 120,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3001,
-    "strength": "mid",
-    "stockType": "控盘型"
-   },
-   {
-    "gid": 18809,
-    "name": "内格夫 | 军队之辉 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "统一阶段=拉升早期",
-    "price": 0.33,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.65,
-    "strength": "strong",
-    "stockType": "倒货型"
-   }
-  ],
+  "newStart": [],
   "refill": [
-   {
-    "gid": 13363,
-    "name": "AK-47 | 抽象派 1337 (略有磨损)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "at_refill",
-    "price": 1629,
-    "position": "1/3 仓（主仓）",
-    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
-    "priceAt": 1792509851375,
-    "priceSrc": "price-live.json",
-    "seriesPx": 1625,
-    "retrace": 0.5337,
-    "drawdownFromPeak": -0.156,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-09-25",
-     "tier": "stable",
-     "px": 1678,
-     "barsAgo": 24
-    },
-    "levels": {
-     "fastPx": 1633.49,
-     "anchorPx": 1648,
-     "stableNeedDays": 14,
-     "startPx": 1366
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": false
-   },
    {
     "gid": 940,
     "name": "G3SG1 | 绿苹果 (崭新出厂)",
@@ -736,38 +393,7 @@
     "outsideWatch": true
    }
   ],
-  "refillFourCond": [
-   {
-    "gid": 13363,
-    "name": "AK-47 | 抽象派 1337 (略有磨损)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "at_refill",
-    "price": 1629,
-    "position": "1/3 仓（主仓）",
-    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
-    "priceAt": 1792509851375,
-    "priceSrc": "price-live.json",
-    "seriesPx": 1625,
-    "retrace": 0.5337,
-    "drawdownFromPeak": -0.156,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-09-25",
-     "tier": "stable",
-     "px": 1678,
-     "barsAgo": 24
-    },
-    "levels": {
-     "fastPx": 1633.49,
-     "anchorPx": 1648,
-     "stableNeedDays": 14,
-     "startPx": 1366
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": false
-   }
-  ],
+  "refillFourCond": [],
   "refillBlockedByLiquidity": [],
   "late": [
    {
@@ -778,6 +404,17 @@
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
     "ddFromHigh60": -0.0691,
+    "sellAlert": null,
+    "exitLocked": null
+   },
+   {
+    "gid": 279,
+    "name": "AWP | 火卫一 (崭新出厂)",
+    "stage": "派发",
+    "price": 38,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
+    "ddFromHigh60": -0.331,
     "sellAlert": null,
     "exitLocked": null
    },
@@ -937,7 +574,35 @@
    }
   ],
   "sell": [],
-  "stageChanged": []
+  "stageChanged": [
+   {
+    "gid": 279,
+    "name": "AWP | 火卫一 (崭新出厂)",
+    "from": "calm",
+    "to": "distribute",
+    "price": 38,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
+   },
+   {
+    "gid": 1173,
+    "name": "格洛克 18 型 | 鼬鼠 (崭新出厂)",
+    "from": "rallyEarly",
+    "to": "calm",
+    "price": 243,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
+   },
+   {
+    "gid": 1277,
+    "name": "M4A1消音版 | 氮化处理 (崭新出厂)",
+    "from": "decline",
+    "to": "calm",
+    "price": 66,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
+   }
+  ]
  },
  "priceBasis": {
   "src": "dealer-stage-board 日线收盘 / replenish-points 判定价（均为生成时快照）",
@@ -953,7 +618,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1021,7 +686,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1091,7 +756,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1159,7 +824,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1227,7 +892,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1295,7 +960,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1363,7 +1028,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1431,7 +1096,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -1497,7 +1162,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1563,7 +1228,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1638,7 +1303,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1704,7 +1369,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1742,7 +1407,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -1780,7 +1445,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -1818,7 +1483,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1856,7 +1521,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1922,7 +1587,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -1960,7 +1625,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2026,7 +1691,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2092,7 +1757,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2130,7 +1795,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -2196,7 +1861,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2236,20 +1901,20 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
-    "stage": "calm",
-    "stageName": "平静",
-    "stageChanged": false,
+    "asOf": "2026-10-21",
+    "stage": "distribute",
+    "stageName": "派发",
+    "stageChanged": true,
     "stagePrev": "calm",
-    "stage6": "平静",
-    "conflict": false,
-    "confidence": "high",
-    "price": 33.65,
+    "stage6": "派发",
+    "conflict": true,
+    "confidence": "low",
+    "price": 38,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0679,
-    "fromLow60": 0.0925,
-    "ddFromHigh60": -0.4076,
+    "change20": 0.0556,
+    "fromLow60": 0.2338,
+    "ddFromHigh60": -0.331,
     "strength": "weak",
     "stockType": "中间型",
     "batch": "B027",
@@ -2270,7 +1935,7 @@
       "fastDrop": 0.1631,
       "anchorPx": 36.1,
       "stableNeedDays": 3,
-      "stableReady": true
+      "stableReady": false
      },
      "filledPx": {
       "fast": null,
@@ -2284,7 +1949,7 @@
      },
      "nextAction": "锚点档已补过：若再急跌到 33.73 可小补；否则等企稳（距峰值≥3 天 + 反弹 2%）（弱盘：只小仓位，拉升即出，不要加满）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.165
+     "drawdownFromPeak": -0.0571
     },
     "holding": null,
     "exitLocked": null,
@@ -2302,7 +1967,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -2368,14 +2033,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 95,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -2432,7 +2097,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2470,7 +2135,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2536,7 +2201,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -2602,7 +2267,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -2668,7 +2333,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2734,7 +2399,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -2772,7 +2437,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -2810,7 +2475,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -2848,14 +2513,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 165,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -2912,14 +2577,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 39.36,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -2979,7 +2644,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3045,7 +2710,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3083,14 +2748,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 790,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -3150,7 +2815,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -3216,7 +2881,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -3282,7 +2947,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3348,7 +3013,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3368,7 +3033,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": null,
     "holding": null,
     "exitLocked": null,
@@ -3386,7 +3051,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3452,14 +3117,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 3.78,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -3516,7 +3181,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3582,14 +3247,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 4.33,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -3649,7 +3314,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyMid",
     "stageName": "拉升中期",
     "stageChanged": false,
@@ -3687,7 +3352,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3753,7 +3418,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -3761,12 +3426,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 1.01,
+    "price": 1,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0381,
-    "fromLow60": 0.2785,
-    "ddFromHigh60": -0.4899,
+    "change20": 0.2658,
+    "fromLow60": 0.2658,
+    "ddFromHigh60": -0.4819,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": "B058",
@@ -3816,7 +3481,7 @@
      "verified": null
     },
     "reasons": [
-     "扫单收货（2026-10-18）"
+     "扫单收货（2026-10-19）"
     ]
    }
   },
@@ -3828,7 +3493,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -3866,7 +3531,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -3886,7 +3551,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -3932,7 +3597,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4000,7 +3665,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4075,14 +3740,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 290,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -4096,7 +3761,7 @@
      "form1",
      "form2"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -4153,7 +3818,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4219,7 +3884,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4257,27 +3922,27 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
-    "price": 51.8,
+    "confidence": "medium",
+    "price": 53.4,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.4,
-    "fromLow60": 0.4608,
-    "ddFromHigh60": -0.0912,
+    "change20": 0.4554,
+    "fromLow60": 0.5059,
+    "ddFromHigh60": -0.0632,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": "B012",
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -4324,7 +3989,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4362,7 +4027,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4437,7 +4102,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4475,7 +4140,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4513,14 +4178,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
-    "stage": "rallyEarly",
-    "stageName": "拉升早期",
-    "stageChanged": false,
+    "asOf": "2026-10-21",
+    "stage": "calm",
+    "stageName": "平静",
+    "stageChanged": true,
     "stagePrev": "rallyEarly",
-    "stage6": "拉升早期",
-    "conflict": true,
-    "confidence": "low",
+    "stage6": "平静",
+    "conflict": false,
+    "confidence": "high",
     "price": 243,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -4568,7 +4233,6 @@
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "统一阶段=拉升早期",
      "铺货吸筹（2026-10-09 在售+26.3%/价-3.7%）",
      "扫单收货（2026-10-13）"
     ]
@@ -4582,7 +4246,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4602,7 +4266,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -4648,14 +4312,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 1254.4,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -4712,7 +4376,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4750,7 +4414,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4818,7 +4482,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -4884,7 +4548,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -4950,7 +4614,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5016,7 +4680,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5082,7 +4746,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -5120,7 +4784,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -5186,20 +4850,20 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
-    "stage": "decline",
-    "stageName": "回落",
-    "stageChanged": false,
+    "asOf": "2026-10-21",
+    "stage": "calm",
+    "stageName": "平静",
+    "stageChanged": true,
     "stagePrev": "decline",
-    "stage6": "回落",
-    "conflict": true,
-    "confidence": "low",
-    "price": 63.88,
+    "stage6": "平静",
+    "conflict": false,
+    "confidence": "high",
+    "price": 66,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0995,
-    "fromLow60": 0.1367,
-    "ddFromHigh60": -0.4721,
+    "change20": -0.0205,
+    "fromLow60": 0.1744,
+    "ddFromHigh60": -0.4545,
     "strength": "weak",
     "stockType": "倒货型",
     "batch": "B012",
@@ -5234,7 +4898,7 @@
      },
      "nextAction": "锚点档已补过：若再急跌到 100.97 可小补；否则等企稳（距峰值≥4 天 + 反弹 2%）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.4721
+     "drawdownFromPeak": -0.4545
     },
     "holding": null,
     "exitLocked": null,
@@ -5252,7 +4916,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -5290,7 +4954,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5356,7 +5020,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -5376,7 +5040,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -5422,7 +5086,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -5488,7 +5152,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5554,7 +5218,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5592,7 +5256,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -5630,7 +5294,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5699,7 +5363,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -5763,7 +5427,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -5829,7 +5493,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -5895,7 +5559,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -5961,7 +5625,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -6027,7 +5691,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6065,7 +5729,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6131,7 +5795,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6152,7 +5816,7 @@
      "form1",
      "form2"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -6180,7 +5844,7 @@
      },
      "nextAction": "未补过：等急跌到 54.33（需单日跌 ≥ 20.11%）小仓 1/3；或回撤到锚点 59.34 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": 0
+     "drawdownFromPeak": -0.0015
     },
     "holding": null,
     "exitLocked": null,
@@ -6199,7 +5863,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -6265,7 +5929,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -6303,7 +5967,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -6369,14 +6033,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 31,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -6436,7 +6100,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6502,7 +6166,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6568,7 +6232,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6576,12 +6240,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 37.29,
+    "price": 38.5,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.1509,
-    "fromLow60": 0.3385,
-    "ddFromHigh60": -0.4034,
+    "change20": 0.1832,
+    "fromLow60": 0.3819,
+    "ddFromHigh60": -0.384,
     "strength": "mid",
     "stockType": "倒货型",
     "batch": "B146",
@@ -6622,7 +6286,7 @@
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "扫单收货（2026-10-18）"
+     "扫单收货（2026-10-19）"
     ]
    }
   },
@@ -6634,7 +6298,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6674,7 +6338,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -6740,7 +6404,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6778,7 +6442,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -6853,7 +6517,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -6921,14 +6585,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 307,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -6985,7 +6649,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -7021,7 +6685,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -7087,7 +6751,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -7154,7 +6818,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7220,14 +6884,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
-    "stage6": "拉升早期",
+    "stage6": "平静",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 139,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -7259,7 +6923,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -7295,7 +6959,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7315,7 +6979,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -7361,7 +7025,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -7429,7 +7093,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -7459,9 +7123,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 17.3623,
-      "fastDrop": 0.1947,
-      "anchorPx": 18.425,
+      "fastPx": 17.3287,
+      "fastDrop": 0.1936,
+      "anchorPx": 18.39,
       "stableNeedDays": 4,
       "stableReady": false
      },
@@ -7475,7 +7139,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 17.36（需单日跌 ≥ 19.47%）小仓 1/3；或回撤到锚点 18.42 补主仓",
+     "nextAction": "未补过：等急跌到 17.33（需单日跌 ≥ 19.36%）小仓 1/3；或回撤到锚点 18.39 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -7495,7 +7159,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7533,7 +7197,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7571,7 +7235,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -7637,7 +7301,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7703,7 +7367,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7741,7 +7405,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7807,7 +7471,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7845,7 +7509,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -7883,7 +7547,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -7891,12 +7555,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 0.27,
+    "price": 0.26,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.2273,
-    "fromLow60": 0.4211,
-    "ddFromHigh60": -0.4808,
+    "change20": 0.2381,
+    "fromLow60": 0.3684,
+    "ddFromHigh60": -0.5,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": "B058",
@@ -7931,7 +7595,7 @@
      },
      "nextAction": "未补过：等急跌到 0.23（需单日跌 ≥ 55.84%）小仓 1/3；或回撤到锚点 0.35 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": -0.4808
+     "drawdownFromPeak": -0.5
     },
     "holding": null,
     "exitLocked": null,
@@ -7949,7 +7613,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -7987,7 +7651,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8025,7 +7689,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8091,7 +7755,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8129,14 +7793,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 54.8,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -8196,7 +7860,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8262,14 +7926,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 49.2,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -8326,7 +7990,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8392,7 +8056,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -8458,7 +8122,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -8524,7 +8188,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -8562,7 +8226,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8592,9 +8256,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 208.3288,
-      "fastDrop": 0.1583,
-      "anchorPx": 210.2,
+      "fastPx": 210.3252,
+      "fastDrop": 0.1587,
+      "anchorPx": 211.445,
       "stableNeedDays": 8,
       "stableReady": false
      },
@@ -8608,7 +8272,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 208.33（需单日跌 ≥ 15.83%）小仓 1/3；或回撤到锚点 210.20 补主仓",
+     "nextAction": "未补过：等急跌到 210.33（需单日跌 ≥ 15.87%）小仓 1/3；或回撤到锚点 211.44 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -8616,7 +8280,7 @@
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "扫单收货（2026-10-18）"
+     "扫单收货（2026-10-19）"
     ]
    }
   },
@@ -8628,7 +8292,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8646,7 +8310,8 @@
     "stockType": null,
     "batch": null,
     "accumForms": [
-     "form1"
+     "form1",
+     "form2"
     ],
     "accumConfirmed": false,
     "refill": {
@@ -8682,7 +8347,8 @@
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "扫单收货（2026-10-17）"
+     "铺货吸筹（2026-10-19 在售+17.3%/价-2.6%）",
+     "扫单收货（2026-10-19）"
     ]
    }
   },
@@ -8694,7 +8360,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -8760,7 +8426,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -8796,7 +8462,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8862,7 +8528,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8928,7 +8594,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -8994,7 +8660,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9060,7 +8726,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9126,7 +8792,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyMid",
     "stageName": "拉升中期",
     "stageChanged": false,
@@ -9192,7 +8858,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9230,7 +8896,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -9266,7 +8932,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9304,7 +8970,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9337,44 +9003,6 @@
    }
   },
   {
-   "gid": 8202,
-   "name": "FN57 | 焰色反应 (崭新出厂)",
-   "addedAt": "2026-10-20",
-   "addedReason": "铺货吸筹（2026-10-08 在售+29.6%/价-7.2%）",
-   "pinned": false,
-   "hidden": false,
-   "latest": {
-    "asOf": "2026-10-20",
-    "stage": "calm",
-    "stageName": "平静",
-    "stageChanged": false,
-    "stagePrev": "calm",
-    "stage6": "平静",
-    "conflict": false,
-    "confidence": "high",
-    "price": 3.14,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.1844,
-    "fromLow60": 0,
-    "ddFromHigh60": -0.4758,
-    "strength": null,
-    "stockType": "中间型",
-    "batch": "B012",
-    "accumForms": [
-     "form2"
-    ],
-    "accumConfirmed": false,
-    "refill": null,
-    "holding": null,
-    "exitLocked": null,
-    "sellAlert": null,
-    "reasons": [
-     "铺货吸筹（2026-10-08 在售+29.6%/价-7.2%）"
-    ]
-   }
-  },
-  {
    "gid": 8205,
    "name": "MP7 | 血腥运动 (略有磨损)",
    "addedAt": "2026-10-20",
@@ -9382,7 +9010,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9420,7 +9048,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9458,7 +9086,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -9524,7 +9152,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9590,7 +9218,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9628,7 +9256,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9694,7 +9322,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -9702,12 +9330,12 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 0.33,
+    "price": 0.32,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.2326,
-    "fromLow60": 0.1786,
-    "ddFromHigh60": -0.5075,
+    "change20": -0.2,
+    "fromLow60": 0.1429,
+    "ddFromHigh60": -0.5224,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": null,
@@ -9742,7 +9370,7 @@
      },
      "nextAction": "锚点档已补过：若再急跌到 0.46 可小补；否则等企稳（距峰值≥5 天 + 反弹 2%）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.5075
+     "drawdownFromPeak": -0.5224
     },
     "holding": null,
     "exitLocked": null,
@@ -9760,7 +9388,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9798,7 +9426,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9864,7 +9492,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9902,7 +9530,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -9910,12 +9538,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 0.8,
+    "price": 0.85,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0588,
-    "fromLow60": 0.0256,
-    "ddFromHigh60": -0.2157,
+    "change20": 0,
+    "fromLow60": 0.0897,
+    "ddFromHigh60": -0.1667,
     "strength": null,
     "stockType": "倒货型",
     "batch": "B058",
@@ -9940,7 +9568,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10006,7 +9634,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10072,7 +9700,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10138,7 +9766,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10197,6 +9825,44 @@
    }
   },
   {
+   "gid": 9571,
+   "name": "M4A4 | 变频器 (崭新出厂)",
+   "addedAt": "2026-10-21",
+   "addedReason": "扫单收货（2026-10-19）",
+   "pinned": false,
+   "hidden": false,
+   "latest": {
+    "asOf": "2026-10-21",
+    "stage": "calm",
+    "stageName": "平静",
+    "stageChanged": null,
+    "stagePrev": null,
+    "stage6": "平静",
+    "conflict": false,
+    "confidence": "high",
+    "price": 8.75,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
+    "change20": -0.0079,
+    "fromLow60": 0.1104,
+    "ddFromHigh60": -0.3039,
+    "strength": null,
+    "stockType": "控盘型",
+    "batch": "B027",
+    "accumForms": [
+     "form1"
+    ],
+    "accumConfirmed": false,
+    "refill": null,
+    "holding": null,
+    "exitLocked": null,
+    "sellAlert": null,
+    "reasons": [
+     "扫单收货（2026-10-19）"
+    ]
+   }
+  },
+  {
    "gid": 9582,
    "name": "MP5-SD | 越野 (崭新出厂)",
    "addedAt": "2026-10-20",
@@ -10204,7 +9870,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -10270,7 +9936,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10336,7 +10002,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10356,7 +10022,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -10384,7 +10050,7 @@
      },
      "nextAction": "未补过：等急跌到 254.73（需单日跌 ≥ 15.71%）小仓 1/3；或回撤到锚点 261.83 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0205
+     "drawdownFromPeak": -0.0056
     },
     "holding": null,
     "exitLocked": null,
@@ -10402,7 +10068,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10422,7 +10088,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": null,
     "holding": null,
     "exitLocked": null,
@@ -10440,7 +10106,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10478,7 +10144,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -10544,7 +10210,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -10610,7 +10276,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10676,7 +10342,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -10742,7 +10408,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10808,7 +10474,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10874,14 +10540,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 91.68,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -10941,7 +10607,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -10961,7 +10627,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -11007,7 +10673,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11073,7 +10739,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11111,7 +10777,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11119,47 +10785,47 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 14.79,
+    "price": 17.8,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.3622,
-    "fromLow60": 0.2545,
-    "ddFromHigh60": -0.656,
-    "strength": "mid",
+    "change20": -0.2124,
+    "fromLow60": 0.5098,
+    "ddFromHigh60": -0.586,
+    "strength": "weak",
     "stockType": "倒货型",
     "batch": "B036",
     "accumForms": [
      "form2"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
-      "anchor": true,
-      "stable": true
+      "anchor": false,
+      "stable": false
      },
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 37.646,
-      "fastDrop": 0.1245,
-      "anchorPx": 38,
-      "stableNeedDays": 5,
-      "stableReady": true
+      "fastPx": 13.8914,
+      "fastDrop": 0.2196,
+      "anchorPx": 16.225,
+      "stableNeedDays": 3,
+      "stableReady": false
      },
      "filledPx": {
       "fast": null,
-      "anchor": 34.6,
-      "stable": 23.38
+      "anchor": null,
+      "stable": null
      },
      "filledDay": {
       "fast": null,
-      "anchor": "2026-09-05",
-      "stable": "2026-09-18"
+      "anchor": null,
+      "stable": null
      },
-     "nextAction": "锚点档已补过：若再急跌到 37.65 可小补；否则等企稳（距峰值≥5 天 + 反弹 2%）",
+     "nextAction": "未补过：等急跌到 13.89（需单日跌 ≥ 21.96%）小仓 1/3；或回撤到锚点 16.23 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.656
+     "drawdownFromPeak": 0
     },
     "holding": null,
     "exitLocked": null,
@@ -11177,7 +10843,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11215,7 +10881,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11281,7 +10947,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11301,7 +10967,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -11347,7 +11013,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11385,7 +11051,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11451,7 +11117,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -11489,7 +11155,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11529,7 +11195,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11567,7 +11233,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11605,7 +11271,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11643,7 +11309,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11681,7 +11347,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -11719,7 +11385,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11757,7 +11423,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11795,7 +11461,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11833,7 +11499,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -11871,7 +11537,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11937,7 +11603,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -11958,7 +11624,7 @@
      "form1",
      "form2"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -12005,7 +11671,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12073,7 +11739,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12139,7 +11805,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12205,7 +11871,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12271,7 +11937,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12337,7 +12003,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12375,7 +12041,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12441,7 +12107,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12507,7 +12173,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12573,7 +12239,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12639,14 +12305,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 330,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -12703,14 +12369,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 69.59,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -12767,7 +12433,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -12833,7 +12499,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12871,7 +12537,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -12909,7 +12575,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -12975,7 +12641,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13029,7 +12695,7 @@
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "扫单收货（2026-10-18）"
+     "扫单收货（2026-10-19）"
     ]
    }
   },
@@ -13041,14 +12707,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 18.88,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -13108,7 +12774,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13146,7 +12812,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13214,7 +12880,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13280,7 +12946,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13346,7 +13012,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13412,7 +13078,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13450,7 +13116,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13516,7 +13182,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13582,7 +13248,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13648,7 +13314,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13686,7 +13352,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13734,7 +13400,7 @@
      },
      "nextAction": "未补过：等急跌到 156.92（需单日跌 ≥ 16.53%）小仓 1/3；或回撤到锚点 164.00 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0453
+     "drawdownFromPeak": -0.0427
     },
     "holding": null,
     "exitLocked": null,
@@ -13752,7 +13418,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -13818,7 +13484,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -13893,7 +13559,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -13959,7 +13625,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -14025,7 +13691,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14091,7 +13757,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -14129,7 +13795,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14188,6 +13854,72 @@
    }
   },
   {
+   "gid": 14378,
+   "name": "AUG（纪念品） | 璞玉 (崭新出厂)",
+   "addedAt": "2026-10-21",
+   "addedReason": "扫单收货（2026-10-16）",
+   "pinned": false,
+   "hidden": false,
+   "latest": {
+    "asOf": "2026-10-21",
+    "stage": "calm",
+    "stageName": "平静",
+    "stageChanged": null,
+    "stagePrev": null,
+    "stage6": null,
+    "conflict": false,
+    "confidence": "high",
+    "price": 44,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
+    "change20": null,
+    "fromLow60": null,
+    "ddFromHigh60": null,
+    "strength": "weak",
+    "stockType": null,
+    "batch": null,
+    "accumForms": [
+     "form1"
+    ],
+    "accumConfirmed": false,
+    "refill": {
+     "fired": {
+      "fast": false,
+      "anchor": true,
+      "stable": true
+     },
+     "allFired": false,
+     "firedToday": [],
+     "levels": {
+      "fastPx": 86.4668,
+      "fastDrop": 0.1764,
+      "anchorPx": 93.495,
+      "stableNeedDays": 4,
+      "stableReady": true
+     },
+     "filledPx": {
+      "fast": null,
+      "anchor": 90.04,
+      "stable": 86.88
+     },
+     "filledDay": {
+      "fast": null,
+      "anchor": "2026-08-03",
+      "stable": "2026-08-06"
+     },
+     "nextAction": "锚点档已补过：若再急跌到 86.47 可小补；否则等企稳（距峰值≥4 天 + 反弹 2%）（弱盘：只小仓位，拉升即出，不要加满）",
+     "stopBuy": false,
+     "drawdownFromPeak": -0.5809
+    },
+    "holding": null,
+    "exitLocked": null,
+    "sellAlert": null,
+    "reasons": [
+     "扫单收货（2026-10-16）"
+    ]
+   }
+  },
+  {
    "gid": 14464,
    "name": "加利尔 AR（纪念品） | 渐变琥珀 (崭新出厂)",
    "addedAt": "2026-10-20",
@@ -14195,7 +13927,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14261,7 +13993,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14327,7 +14059,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14365,7 +14097,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14403,7 +14135,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14469,7 +14201,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14507,7 +14239,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14545,7 +14277,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14611,7 +14343,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14649,7 +14381,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -14687,7 +14419,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14753,7 +14485,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14819,7 +14551,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14885,7 +14617,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -14923,7 +14655,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -14961,7 +14693,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -14999,7 +14731,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -15035,7 +14767,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15101,7 +14833,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15167,7 +14899,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15233,7 +14965,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15299,7 +15031,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15337,7 +15069,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15375,7 +15107,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -15413,7 +15145,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15451,7 +15183,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -15489,7 +15221,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15527,7 +15259,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -15563,7 +15295,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15601,7 +15333,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15667,7 +15399,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15705,7 +15437,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -15713,13 +15445,13 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 44.8,
+    "price": 49,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.2394,
-    "fromLow60": 0.2549,
-    "ddFromHigh60": -0.5968,
-    "strength": "weak",
+    "change20": -0.1311,
+    "fromLow60": 0.3725,
+    "ddFromHigh60": -0.559,
+    "strength": "mid",
     "stockType": "中间型",
     "batch": "B037",
     "accumForms": [
@@ -15735,9 +15467,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 35.7692,
-      "fastDrop": 0.2016,
-      "anchorPx": 40.25,
+      "fastPx": 38.7508,
+      "fastDrop": 0.2092,
+      "anchorPx": 42.35,
       "stableNeedDays": 4,
       "stableReady": false
      },
@@ -15751,7 +15483,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 35.77（需单日跌 ≥ 20.16%）小仓 1/3；或回撤到锚点 40.25 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
+     "nextAction": "未补过：等急跌到 38.75（需单日跌 ≥ 20.92%）小仓 1/3；或回撤到锚点 42.35 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -15764,6 +15496,72 @@
    }
   },
   {
+   "gid": 16505,
+   "name": "M4A1消音版 | 泥斑迷彩 (崭新出厂)",
+   "addedAt": "2026-10-21",
+   "addedReason": "扫单收货（2026-10-19）",
+   "pinned": false,
+   "hidden": false,
+   "latest": {
+    "asOf": "2026-10-21",
+    "stage": "decline",
+    "stageName": "回落",
+    "stageChanged": null,
+    "stagePrev": null,
+    "stage6": "回落",
+    "conflict": true,
+    "confidence": "low",
+    "price": 12.5,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
+    "change20": -0.0064,
+    "fromLow60": 0.2525,
+    "ddFromHigh60": -0.4462,
+    "strength": "weak",
+    "stockType": "中间型",
+    "batch": "B012",
+    "accumForms": [
+     "form1"
+    ],
+    "accumConfirmed": false,
+    "refill": {
+     "fired": {
+      "fast": false,
+      "anchor": false,
+      "stable": false
+     },
+     "allFired": false,
+     "firedToday": [],
+     "levels": {
+      "fastPx": 10.47,
+      "fastDrop": 0.1624,
+      "anchorPx": 11.24,
+      "stableNeedDays": 4,
+      "stableReady": false
+     },
+     "filledPx": {
+      "fast": null,
+      "anchor": null,
+      "stable": null
+     },
+     "filledDay": {
+      "fast": null,
+      "anchor": null,
+      "stable": null
+     },
+     "nextAction": "未补过：等急跌到 10.47（需单日跌 ≥ 16.24%）小仓 1/3；或回撤到锚点 11.24 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
+     "stopBuy": false,
+     "drawdownFromPeak": 0
+    },
+    "holding": null,
+    "exitLocked": null,
+    "sellAlert": null,
+    "reasons": [
+     "扫单收货（2026-10-19）"
+    ]
+   }
+  },
+  {
    "gid": 16509,
    "name": "AK-47 | 钢铁三角洲 (久经沙场)",
    "addedAt": "2026-10-20",
@@ -15771,7 +15569,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15837,7 +15635,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15875,7 +15673,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -15941,7 +15739,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16007,7 +15805,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16075,7 +15873,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16115,7 +15913,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16181,7 +15979,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16247,14 +16045,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 702.5,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -16311,7 +16109,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -16347,7 +16145,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -16413,14 +16211,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 14.88,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -16477,7 +16275,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16543,7 +16341,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16609,14 +16407,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 3.29,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -16676,7 +16474,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16742,7 +16540,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16808,7 +16606,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16846,7 +16644,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16866,7 +16664,7 @@
     "accumForms": [
      "form1"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": {
      "fired": {
       "fast": false,
@@ -16912,7 +16710,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -16978,7 +16776,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17018,7 +16816,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -17084,14 +16882,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 45,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -17148,14 +16946,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 4.29,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -17215,7 +17013,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17281,7 +17079,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17347,7 +17145,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17385,7 +17183,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17423,7 +17221,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17461,7 +17259,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -17527,7 +17325,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
     "stageChanged": false,
@@ -17593,7 +17391,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17659,7 +17457,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -17725,7 +17523,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -17763,7 +17561,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -17801,14 +17599,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 120,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -17868,7 +17666,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -17934,7 +17732,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -17972,7 +17770,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -18010,7 +17808,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -18046,7 +17844,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -18112,7 +17910,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18150,7 +17948,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18188,14 +17986,14 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
     "stageChanged": false,
     "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
-    "confidence": "low",
+    "confidence": "medium",
     "price": 0.33,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
@@ -18252,7 +18050,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18290,7 +18088,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18328,7 +18126,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -18366,7 +18164,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18404,7 +18202,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18470,7 +18268,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18508,7 +18306,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18574,7 +18372,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -18640,7 +18438,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18680,7 +18478,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -18711,6 +18509,72 @@
    }
   },
   {
+   "gid": 19558,
+   "name": "格洛克 18 型 | 崩络克-18 (崭新出厂)",
+   "addedAt": "2026-10-21",
+   "addedReason": "扫单收货（2026-10-19）",
+   "pinned": false,
+   "hidden": false,
+   "latest": {
+    "asOf": "2026-10-21",
+    "stage": "calm",
+    "stageName": "平静",
+    "stageChanged": null,
+    "stagePrev": null,
+    "stage6": "平静",
+    "conflict": false,
+    "confidence": "high",
+    "price": 8.5,
+    "priceAt": null,
+    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
+    "change20": -0.0556,
+    "fromLow60": 0.1229,
+    "ddFromHigh60": -0.337,
+    "strength": "weak",
+    "stockType": "中间型",
+    "batch": "B043",
+    "accumForms": [
+     "form1"
+    ],
+    "accumConfirmed": false,
+    "refill": {
+     "fired": {
+      "fast": false,
+      "anchor": false,
+      "stable": false
+     },
+     "allFired": false,
+     "firedToday": [],
+     "levels": {
+      "fastPx": 8.5009,
+      "fastDrop": 0.0849,
+      "anchorPx": 8.43,
+      "stableNeedDays": 4,
+      "stableReady": false
+     },
+     "filledPx": {
+      "fast": null,
+      "anchor": null,
+      "stable": null
+     },
+     "filledDay": {
+      "fast": null,
+      "anchor": null,
+      "stable": null
+     },
+     "nextAction": "未补过：等急跌到 8.50（需单日跌 ≥ 8.49%）小仓 1/3；或回撤到锚点 8.43 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
+     "stopBuy": false,
+     "drawdownFromPeak": 0
+    },
+    "holding": null,
+    "exitLocked": null,
+    "sellAlert": null,
+    "reasons": [
+     "扫单收货（2026-10-19）"
+    ]
+   }
+  },
+  {
    "gid": 19592,
    "name": "USP 消音版（StatTrak™） | 破颚者 (久经沙场)",
    "addedAt": "2026-10-20",
@@ -18718,7 +18582,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18756,7 +18620,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -18822,7 +18686,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18860,7 +18724,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -18926,7 +18790,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -18964,7 +18828,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -19002,7 +18866,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
     "stageChanged": false,
@@ -19068,7 +18932,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -19106,7 +18970,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
     "stageChanged": false,
@@ -19114,19 +18978,19 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 408,
+    "price": 437.5,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.1976,
-    "fromLow60": 0.0303,
-    "ddFromHigh60": -0.3344,
+    "change20": -0.1248,
+    "fromLow60": 0.1048,
+    "ddFromHigh60": -0.2863,
     "strength": null,
     "stockType": "中间型",
     "batch": "B100",
     "accumForms": [
      "form2"
     ],
-    "accumConfirmed": false,
+    "accumConfirmed": true,
     "refill": null,
     "holding": null,
     "exitLocked": null,
@@ -19144,7 +19008,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19182,7 +19046,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19248,7 +19112,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19314,7 +19178,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19380,7 +19244,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19446,7 +19310,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19484,7 +19348,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19522,7 +19386,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19588,7 +19452,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19654,7 +19518,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19720,7 +19584,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19786,7 +19650,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19852,7 +19716,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19918,7 +19782,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -19984,7 +19848,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20050,7 +19914,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20088,7 +19952,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20128,7 +19992,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20194,7 +20058,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20260,7 +20124,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20298,7 +20162,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20364,7 +20228,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20430,7 +20294,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20496,7 +20360,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20534,7 +20398,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
     "stageChanged": false,
@@ -20609,7 +20473,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20675,7 +20539,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20713,7 +20577,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20779,7 +20643,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20845,7 +20709,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20883,7 +20747,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -20949,7 +20813,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21015,7 +20879,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21053,7 +20917,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21091,7 +20955,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21157,7 +21021,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21195,7 +21059,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21261,7 +21125,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21299,7 +21163,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21365,7 +21229,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21431,7 +21295,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21499,7 +21363,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21537,7 +21401,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21605,7 +21469,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21643,7 +21507,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21709,7 +21573,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21747,7 +21611,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21813,7 +21677,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21853,7 +21717,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21891,7 +21755,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21929,7 +21793,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -21967,7 +21831,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22005,7 +21869,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22043,7 +21907,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22081,7 +21945,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22147,7 +22011,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22185,7 +22049,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22223,7 +22087,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22294,7 +22158,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
@@ -22332,7 +22196,7 @@
    "pinned": false,
    "hidden": false,
    "latest": {
-    "asOf": "2026-10-20",
+    "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
     "stageChanged": false,
