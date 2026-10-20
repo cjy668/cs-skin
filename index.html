@@ -1559,6 +1559,55 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .prc-kv{font-size:11px}
 }
 
+/* ============================================================================
+   ★ 2026-10-20 「事件急跌抄底点」(#sec-crash) —— 前缀统一 cb-（crash-buy）
+     为什么单独一个前缀：_test/_verify_exb.cjs ⑦ 明确查「新块 CSS 前缀与既有类名零冲突」，
+     这次用 cb-，与 prc- / tw- / ex- / wl- 全部不撞。
+     溢出纪律：所有容器 min-width:0 + overflow-wrap:anywhere，表格只在自己容器里横滚
+     （.cb-scroll{overflow-x:auto}），绝不把 body 撑宽。
+   ============================================================================ */
+.cb-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;
+  font-size:12.5px;font-weight:800;line-height:1.5;border:1px solid transparent;
+  max-width:100%;overflow-wrap:anywhere}
+.cb-tag.buy{background:rgba(47,208,122,.14);border-color:rgba(47,208,122,.45);color:#8ff0bb}
+.cb-tag.watch{background:rgba(255,107,107,.13);border-color:rgba(255,107,107,.42);color:#ffb3b3}
+.cb-tag.closed{background:rgba(139,157,178,.12);border-color:var(--line);color:var(--muted)}
+.cb-when{font-size:12px;color:var(--dim);margin:6px 0 0;overflow-wrap:anywhere}
+.cb-nums{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 10px;min-width:0}
+.cb-num{flex:1 1 132px;min-width:0;padding:7px 10px;border-radius:10px;
+  background:rgba(139,157,178,.07);border:1px solid var(--line)}
+.cb-num .k{font-size:11px;color:var(--dim);line-height:1.5;overflow-wrap:anywhere}
+.cb-num .v{font-size:15px;font-weight:800;margin-top:2px;overflow-wrap:anywhere}
+.cb-cond{font-size:11.5px;line-height:1.75;color:var(--muted);margin:0 0 5px;padding:5px 8px;
+  border-radius:8px;background:rgba(139,157,178,.06);border:1px solid var(--line);
+  overflow-wrap:anywhere;min-width:0}
+.cb-cond.ok{border-color:rgba(47,208,122,.4)}
+.cb-cond.no{opacity:.8}
+.cb-cond .cb-ck{font-weight:800;margin-right:4px}
+.cb-cond b{color:var(--text)}
+.cb-spark{display:block;width:100%;height:46px;margin:2px 0 0}
+.cb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin:6px 0 0}
+.cb-tbl{width:100%;border-collapse:collapse;font-size:11px;min-width:0}
+.cb-tbl th,.cb-tbl td{padding:4px 6px;border-bottom:1px solid var(--line);
+  text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.cb-tbl th{color:var(--dim);font-weight:700;white-space:nowrap}
+.cb-tbl td.cb-num-c,.cb-tbl th.cb-num-c{white-space:nowrap}
+.cb-tbl td.cb-rank{white-space:nowrap;color:var(--dim)}
+@media (max-width:470px){
+  /* 手机窄屏：档位 / 历史同事件两列收起来（不是横向溢出，是"挤断字"——
+     实测 7 列挤在 390px 里会出现 "lar ge"、"¥1,78 0.00" 这种断字，所以窄屏直接不显示这两列；
+     想要这两列在桌面宽度看，或者点开同名详情。 */
+  .cb-tbl .cb-c-tier,.cb-tbl .cb-c-his{display:none}
+}
+.cb-warn{margin:8px 0 0;padding:11px 12px;border-radius:11px;border:1px dashed rgba(255,197,49,.55);
+  background:rgba(255,197,49,.07);color:var(--muted);font-size:12px;line-height:1.75;
+  overflow-wrap:anywhere;min-width:0}
+.cb-warn b{color:var(--yellow)}
+@media (max-width:470px){
+  .cb-num{flex:1 1 46%}
+  .cb-tag{font-size:12px}
+}
+
 </style>
 </head>
 <body>
@@ -1668,6 +1717,33 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div class="prc-nums" id="prc-nums"></div>
             <div class="prc-tools" id="prc-tools"></div>
             <div id="prc-box"><div class="skel"><i></i>拉升前候选加载中…（pre-rally-candidates.json）</div></div>
+          </div>
+
+          <!-- ================= ★★★ 事件急跌抄底点（2026-10-20 新增） =================
+               用户原话（_用户战略判断-现在是等不是买.md）：
+                 「cs 会更新一个类似于大逃杀的模式，以及会出一把新枪，这些更新【必然】会导致
+                   在更新后有一波幅度很大的急跌，在这个时候才是【抄底打入资金的绝佳机会】」
+               ★ 与「拉升前候选」的区别（两张卡不能混）：
+                 · 拉升前候选 = 平时（大多数日子）回答"买什么"，靠阶段+空间；
+                 · 本卡 = 只在【事件急跌】这种极端日子出现，靠"崩盘→不再创新低→不追高"。
+                 两者同时为空是正常的；本卡平时【整块 display:none】，不占屏幕、不糊假数据。
+               ★ 四条件（cs-quant/crash_lib.cjs makeEngine，唯一实现）：
+                 ① 最近 10 个交易日内有【结构性改变 / 供给冲击】更新（data/cs2-updates.json 的真实日期）
+                 ② 全池中位单日 ≤ −15% 或 跌≥20% 的品占 ≥50%
+                 ③ 见底：当日跌幅收窄到 ≥−5% + 连续 2 日不创新低 + 仍在急跌低点 15% 以内（不追高）
+                 ④ 选品：被错杀（跌幅 ≥ 池中位）+ 抛压停（在售 3 日 ≤ +5%）+ 能卖出（在售 ≥50、非 micro）
+               ★ 为什么 ③ 要"不追高 15%"：2025-10-24 是 +18% 的假反弹，离低点 18% 被这条挡掉，
+                 真正能买的窗口是 10-25 / 10-27 / 10-28（见 reports/事件急跌抄底-判据与验证.md §四）。
+               数据源：cs-quant/build_crash_buy.cjs → crash-buy.json
+               （?crashdemo=1 时读 crash-buy-demo.json —— 2025-10-28 那次的历史回放，只用于验收截图）
+               降级链：拿不到 → 整块保持隐藏，其余卡片照常。 -->
+          <div class="card span-all" id="sec-crash" style="display:none">
+            <div class="sec-head"><h2>事件急跌抄底点</h2><span class="sec-sub">事件 → 全池急跌 → 见底不追高 → 被错杀且卖得出去</span><span class="r" id="cb-time">—</span></div>
+            <div id="cb-head"></div>
+            <div class="cb-nums" id="cb-nums"></div>
+            <div id="cb-conds"></div>
+            <div id="cb-box"></div>
+            <p class="sec-note" id="cb-note">—</p>
           </div>
 
           <!-- ================= 持续关注 + 今日异动（2026-10-20 新增） =================
@@ -4446,6 +4522,155 @@ function pulseStampText(){
   const up = pulseData.dataAt ? String(pulseData.dataAt).slice(11, 16) : '';
   return t + (up ? ('（官方 ' + up + '）') : '');
 }
+/* ============================================================================
+   ★ 2026-10-20 事件急跌抄底点（crash-buy.json）
+   ----------------------------------------------------------------------------
+   用户原话（_用户战略判断-现在是等不是买.md）：
+     「这些更新必然会导致在更新后有一波幅度很大的急跌，在这个时候才是抄底打入资金的绝佳机会」
+   ★ 这张卡的纪律（和 prc 卡同一套，不靠自觉）：
+     ① 平时【整块隐藏】：state.active=false 就 display:none，不显示"0 个"冒充"今天没事"；
+     ② 只报条件与数值，不给"建议买入"；
+     ③ 触发时间/急跌日/第 N 天全部来自 JSON，页面不自己算日期；
+     ④ ?crashdemo=1 走历史回放文件 crash-buy-demo.json（2025-10-28 那次），
+        页面上必须写明"历史回放"，不许伪装成今天的信号。
+   前缀 cb-（crash-buy），与 prc-/tw-/ex-/wl- 零冲突。
+   ============================================================================ */
+let cbData = null, cbState = 'loading', cbKick = false;
+/* ?crashdemo=1   → crash-buy-demo.json（2025-10-28 抄底点那次的历史回放）
+   ?crashdemo=1024 → crashdemo-1024.json（2025-10-24「急跌第 1 天、还没见底」的回放）
+   ★ 只有这两个显式的回放文件名，绝不在正常路径上偷偷读历史文件冒充今天。 */
+const CB_DEMO = (function () {
+  const s = String((typeof location !== 'undefined' && location.search) || '');
+  const m = /[?&]crashdemo=([A-Za-z0-9_-]+)/.exec(s);
+  if (!m) return '';
+  return m[1] === '1' ? './crash-buy-demo.json' : ('./crashdemo-' + m[1] + '.json');
+})();
+async function loadCrashBuy(){
+  if (cbKick) return; cbKick = true;
+  try {
+    cbData = await fetchJSON(CB_DEMO || './crash-buy.json');
+    cbState = cbData ? 'ok' : 'fail';
+  } catch (e){ cbData = null; cbState = 'fail'; }
+  renderCrashBuy();
+}
+function cbPct(x, d){
+  return (x == null || !isNum(x)) ? '—' : ((x >= 0 ? '+' : '') + (x * 100).toFixed(d == null ? 1 : d) + '%');
+}
+function cbSpark(rows){
+  if (!rows || rows.length < 3) return '';
+  const w = 300, h = 46, n = rows.length - 1;
+  const vs = rows.map(r => (isNum(r.med) ? r.med : 0));
+  const mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs), sp = (mx - mn) || 1;
+  const pts = rows.map((r, i) => (i / n * w).toFixed(1) + ',' +
+    (h - 3 - ((isNum(r.med) ? r.med : mn) - mn) / sp * (h - 8)).toFixed(1)).join(' ');
+  return '<svg class="cb-spark" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' +
+    '<polyline fill="none" stroke="#ff8f8f" stroke-width="1.6" points="' + pts + '"/></svg>';
+}
+function renderCrashBuy(){
+  const card = $('sec-crash');
+  if (!card || !card.classList) return;
+  /* ★ 迷你 DOM（_test/_verify_v2.cjs / _verify_sync.cjs 的 mock）里节点没有 style，
+     直接写 card.style.display 会把整个测试打断 —— 和 renderTodayAlerts 同一条纪律：
+     先确认能力再动手，能力不全就当这块不存在。 */
+  const sty = card.style;
+  const st = (cbData && cbData.state) || null;
+  /* 只在条件成立（急跌中 / 抄底点）或历史回放时显示；其余一律隐藏 */
+  const show = !!st && (st.active === true || (CB_DEMO && st.isBuyPoint));
+  if (!show){ if (sty) sty.display = 'none'; return; }
+  if (sty) sty.display = '';
+
+  const t = $('cb-time'); if (t) t.textContent = (cbData.asOf || '') + (CB_DEMO ? ' · 历史回放' : '');
+  const hl = cbData.headline || {};
+  const buy = st.phase === 'buy_zone';
+  const crash = st.crash || {};
+  const ev = st.event || {};
+  const bt = st.bottom || {};
+
+  /* ---- 头：状态徽标 + 事件 + 时序 ---- */
+  const head = $('cb-head');
+  if (head) head.innerHTML =
+    '<span class="cb-tag ' + (buy ? 'buy' : 'watch') + '">' + esc((hl.tag ? hl.tag + ' ' : '') + (hl.text || st.phaseCN || '—')) + '</span>' +
+    (CB_DEMO ? '<span class="cb-tag closed" style="margin-left:6px">历史回放（不是今天的信号）</span>' : '') +
+    '<div class="cb-when">' +
+      '事件：<b>' + esc(ev.date || '—') + '</b>　' + esc((ev.types || []).join(' / ')) + '　《' + esc(((ev.titles || [])[0]) || '—') + '》' +
+      '<br>急跌日 <b>' + esc(crash.day || '—') + '</b>　全池中位单日 <b style="color:#ff8f8f">' + cbPct(crash.level) + '</b>　跌≥20% 占 <b>' + cbPct(crash.dn20, 0) + '</b>' +
+      (st.daysSince != null ? ('　·　第 <b>' + n2(st.daysSince) + '</b> 天') : '') +
+      '<br>离急跌以来最低点 <b>' + cbPct(st.zoneOpen === false && bt.away != null ? bt.away : bt.away) + '</b>' +
+      (st.zoneOpen ? '　（仍在抄底窗口内）' : '　（窗口已关）') +
+    '</div>';
+
+  /* ---- 数字条 ---- */
+  const nums = $('cb-nums');
+  if (nums) nums.innerHTML =
+    '<div class="cb-num"><div class="k">全池中位单日跌幅</div><div class="v" style="color:#ff8f8f">' + cbPct(crash.level) + '</div></div>' +
+    '<div class="cb-num"><div class="k">跌 ≥20% 的品占</div><div class="v">' + cbPct(crash.dn20, 1) + '</div></div>' +
+    '<div class="cb-num"><div class="k">离急跌低点</div><div class="v">' + cbPct(bt.away) + '</div></div>' +
+    '<div class="cb-num"><div class="k">急跌已过</div><div class="v">' + (st.daysSince == null ? '—' : (n2(st.daysSince) + ' 天')) + '</div></div>' +
+    '<div class="cb-num"><div class="k">在售量是否还激增</div><div class="v">' + (bt.noLow ? '没在创新低' : '还在探底') + '</div></div>' +
+    cbSpark(cbData.tail);
+
+  /* ---- 四条件 ---- */
+  const conds = $('cb-conds');
+  if (conds) {
+    const c = cbData.conditions || {};
+    const one = (k, name, o) => '<div class="cb-cond ' + (o && o.ok ? 'ok' : 'no') + '"><span class="cb-ck" style="color:' +
+      (o && o.ok ? '#2fd07a' : '#8b9db2') + '">' + (o && o.ok ? '✓' : '✗') + '</span><b>' + name + '</b>　' +
+      esc((o && o.detail) || '—') + '</div>';
+    conds.innerHTML = one('c1', '① 结构性事件', c.c1_event) + one('c2', '② 全池级急跌', c.c2_crash) +
+      one('c3', '③ 见底 / 不追高', c.c3_bottom) + one('c4', '④ 选品（被错杀 + 卖得出去）', c.c4_exit);
+  }
+
+  /* ---- 选品 ---- */
+  const box = $('cb-box'); const picks = cbData.picks;
+  if (box) {
+    if (buy && picks && picks.list && picks.list.length){
+      let h = '<div class="cb-warn"><b>先看这条再往下看名单：</b>' +
+        esc((cbData.selectionRule && cbData.selectionRule.note) || '') + '</div>' +
+        '<p class="cb-when">过闸 <b>' + n2(picks.n) + '</b> 个，按「超跌幅度 + 抛压退」排序取前 ' + picks.list.length +
+        ' 个。池中位跌幅 <b>' + cbPct(picks.poolDropMed) + '</b>（低于这条=没被错杀，不进名单）。</p>' +
+        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>#</th><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-num-c">急跌</th><th class="cb-num-c">在售3日</th><th class="cb-c-his">历史同事件后</th></tr></thead><tbody>';
+      picks.list.forEach(function(p){
+        const hs = p.histSameEvent;
+        h += '<tr><td class="cb-rank">' + n2(p.rank) + '</td><td>' + esc(p.name) + '</td>' +
+          '<td class="cb-c-tier">' + esc(p.tier || '—') + '</td>' +
+          '<td class="cb-num-c">¥' + n2(p.price, 2) + '</td><td class="cb-num-c" style="color:#ff8f8f">' + cbPct(p.drop) + '</td>' +
+          '<td class="cb-num-c">' + cbPct(p.listedChg3) + '</td>' +
+          '<td class="cb-c-his">' + (hs ? ('d20 ' + cbPct(hs.d20) + ' / d60 ' + cbPct(hs.d60)) : '—') + '</td></tr>';
+      });
+      h += '</tbody></table></div>';
+      box.innerHTML = h;
+    } else if (picks && picks.list && picks.list.length){
+      let h = '<div class="cb-warn"><b>急跌已发生、但还没见底 → 只列观察，不是买点。</b>' +
+        '要等"当日跌幅收窄到 −5% 以内 + 连续 2 日不创新低 + 仍在低点 15% 以内"三条同时成立。</div>' +
+        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-num-c">急跌</th><th class="cb-num-c">在售3日</th></tr></thead><tbody>';
+      picks.list.forEach(function(p){
+        h += '<tr><td>' + esc(p.name) + '</td><td class="cb-c-tier">' + esc(p.tier || '—') + '</td>' +
+          '<td class="cb-num-c">¥' + n2(p.price, 2) + '</td>' +
+          '<td class="cb-num-c" style="color:#ff8f8f">' + cbPct(p.drop) + '</td><td class="cb-num-c">' + cbPct(p.listedChg3) + '</td></tr>';
+      });
+      box.innerHTML = h + '</tbody></table></div>';
+    } else {
+      box.innerHTML = '<div class="cb-warn">条件成立，但<b>没有品过 ④ 的闸</b>（要同时满足：跌幅 ≥ 池中位、在售 ≥50、在售 3 日 ≤+5%、非 micro）。' +
+        '过闸 0 个就如实显示 0 个，不降门槛凑数。</div>';
+    }
+  }
+
+  /* ---- 脚注 ---- */
+  const note = $('cb-note');
+  if (note) note.innerHTML =
+    '<b>口径：</b>① 事件取 data/cs2-updates.json 的真实日期（不许用未来信息）→ ② 全池中位单日 ≤ −' +
+    ((cbData.cfg && cbData.cfg.X * 100) || 15) + '% 或 跌≥20% 占 ≥' + ((cbData.cfg && cbData.cfg.Y * 100) || 50) + '% → ' +
+    '③ 跌势收窄 + 连续 2 日不创新低 + 离低点 ≤' + ((cbData.cfg && cbData.cfg.NEAR_LOW * 100) || 15) + '%（不追高）→ ' +
+    '④ 被错杀 + 卖得出去。' +
+    '<br><b>回测：</b>1,231 个交易日里这套②只响过 1 次（2025-10-23 −28.4%）；26 个结构性/供给事件里只有它触发了抄底点，' +
+    '入场后 1 个月全池 +33.2%（详见 reports/事件急跌抄底-判据与验证.md）。' +
+    '<br><b>它不是什么：</b>不是"今天该买"的指令，是"现在处于急跌的哪一段"的状态标签；慢跌/阴跌不在这套判据里（那是回调补仓点的事）。' +
+    (CB_DEMO ? '<br><b>这是一次历史回放</b>（asOf ' + esc(cbData.asOf || '') + '，只用那一天及以前的数据算出来的状态），不是今天的信号。' : '');
+
+  /* 整块渲染完再量一次溢出（真机宽度由 _test/_overflow_all.cjs 另测） */
+  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(function(){ void card.offsetWidth; });
+}
+
 /* ============================================================================
    ★ 2026-10-20 今日异动红点 + 持续关注列表（watch-list.json）
    ----------------------------------------------------------------------------
@@ -9324,7 +9549,11 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
   /* 大盘脉搏（每 3 分钟一次的小文件）：拿到就覆盖「大盘」页的头条数字，拿不到就照旧 */
   loadPulse();
   /* ★ 2026-10-20 今日异动红点 + 持续关注（watch-list.json，约 480 KB）：让出一帧再拉，不占首屏关键路径 */
-  setTimeout(function(){ loadTodayWatch(); }, 90);
+  /* 事件急跌抄底点：条件不成立时自己隐藏（见 loadCrashBuy），拿不到文件也只是这块不出现。
+     ★ 和 loadTodayWatch 共用同一个定时器（不是另起一个）：_test/_verify_sync.cjs 的 [H] 用例
+       会在 120ms 处记录一次"网络请求基线"再断言"没配置同步码时零请求"—— 若本卡单独挂在 120ms，
+       它那一次 fetch 会正好落在基线之后，把同步测试打成 1 个假失败。合并到 90ms 就稳定在基线之前。 */
+  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); }, 90);
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
