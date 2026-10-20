@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792492666334,
- "atText": "2026/10/20 18:37:46",
+ "at": 1792493329261,
+ "atText": "2026/10/20 18:48:49",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线」写成显式文件，落后时页面顶部告警 + watchdog 检查",
  "spec": {
@@ -42,12 +42,13 @@
  },
  "live": {
   "date": "2026-10-20",
-  "atText": "2026/10/20 18:35:55",
+  "atText": "2026/10/20 18:48:02",
   "n": 2114
  },
  "lagDays": 6,
  "extraLagDays": 4,
  "level": "bad",
+ "expectedBarsLatest": "2026-10-18",
  "downstreamStale": false,
  "staleFiles": [],
  "conclusions": [
@@ -67,7 +68,7 @@
    "asOf": "2026-10-14",
    "via": "asOfSeries",
    "asOfDate": "2026-10-14",
-   "generatedAt": "2026/10/20 18:35:31",
+   "generatedAt": "2026/10/20 18:47:37",
    "basedOnBars": "2026-10-14",
    "staleVsBars": false
   },
@@ -162,5 +163,5 @@
    "staleVsBars": null
   }
  ],
- "message": "🔴 结论基于 2026-10-14 日线，已落后 4 天（源端最新应为 今天 −2 天），下面所有结论都已失真"
+ "message": "🔴 结论基于 2026-10-14 日线，已落后 4 天（源端最新应为 2026-10-18）—— 下面所有结论都已失真"
 }
