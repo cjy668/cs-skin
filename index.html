@@ -56,6 +56,45 @@ input,button,select,textarea{font-family:inherit}
 .s-k{font-size:12px;color:var(--muted);margin-bottom:3px}
 .s-v{font-size:18px;font-weight:800;letter-spacing:-.3px;word-break:break-word}
 .crumbbar{display:none}
+/* ---------------- ★ 2026-10-20 今日异动红点条（数据源 watch-list.json → badge/alerts） ----------------
+   用户要求：「网站首页顶部加红点/数字：今日新启动 N 个 · 今日到补仓位置 N 个 · 今日到末期 N 个」
+   纪律：① 拿不到 watch-list.json 就整条隐藏（不显示 0 冒充"今天没事"）；
+         ② 每个数字都可点开看名单，不只是一坨总数；
+         ③ flex-wrap + min-width:0 —— 手机上宁可换行，也不许横向溢出。 */
+.alertsbar{display:none;max-width:680px;margin:0 auto;padding:6px 12px 8px;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center}
+.alertsbar.on{display:flex}
+.abadge{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font-size:12px;line-height:1.5;
+  background:rgba(35,48,66,.72);border:1px solid var(--line);color:var(--muted);white-space:nowrap;min-width:0;cursor:pointer}
+.abadge b{color:var(--text);font-size:13px;font-weight:800}
+.abadge:hover{border-color:rgba(75,157,255,.55)}
+.abadge.hot{background:rgba(255,107,107,.13);border-color:rgba(255,107,107,.42);color:#ffb3b3}
+.abadge.hot b{color:#ff8f8f}
+.abadge.warm{background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.38);color:#ffe0a3}
+.abadge.warm b{color:#ffd166}
+.abadge.zeroc{opacity:.55}
+.abadge.ghost{background:transparent}
+.adot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,107,107,.6);
+  animation:apulse 1.8s infinite;flex:0 0 auto}
+@keyframes apulse{0%{box-shadow:0 0 0 0 rgba(255,107,107,.55)}70%{box-shadow:0 0 0 7px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
+@media (prefers-reduced-motion:reduce){.adot{animation:none}}
+.tw-list{display:flex;flex-direction:column;gap:6px;margin:2px 0 0}
+.tw-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;
+  padding:8px 10px;border-radius:10px;background:var(--card2);border:1px solid var(--line);min-width:0}
+.tw-row.hit{border-color:rgba(255,197,49,.42);background:rgba(255,197,49,.07)}
+.tw-n{font-size:13px;font-weight:650;word-break:break-word;min-width:0}
+.tw-s{font-size:11.5px;color:var(--muted);margin-top:2px;word-break:break-word}
+.tw-r{text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.tw-r b{display:block;color:var(--text);font-size:13px}
+.tw-chip{display:inline-block;padding:1px 6px;border-radius:6px;font-size:11px;margin-right:4px;
+  background:rgba(75,157,255,.16);border:1px solid rgba(75,157,255,.34);color:#a9cdff}
+.tw-chip.refill{background:rgba(255,197,49,.16);border-color:rgba(255,197,49,.44);color:#ffd166}
+.tw-chip.late{background:rgba(255,107,107,.16);border-color:rgba(255,107,107,.44);color:#ff9d9d}
+.tw-more{font-size:12px;color:var(--muted);text-align:center;padding:6px 0 0}
+.tw-nums{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.tw-num{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font-size:12px;background:rgba(35,48,66,.72);border:1px solid var(--line);color:var(--muted);min-width:0}
+.tw-num b{color:var(--text);font-size:13px;font-weight:800}
+.tw-num.hot{background:rgba(255,107,107,.13);border-color:rgba(255,107,107,.4);color:#ffb3b3}
+.tw-num.warm{background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.38);color:#ffe0a3}
 
 /* ---------------- 布局骨架 ---------------- */
 .app{min-height:100vh}
@@ -1572,6 +1611,13 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
         <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
         <div class="crumb-time">数据更新 <b id="crumb-time">—</b></div>
       </div>
+      <!-- ★ 2026-10-20 今日异动红点条：数字全部来自 watch-list.json 的 badge.breakdown -->
+      <div class="alertsbar" id="alerts-bar">
+        <span class="abadge hot" id="ab-new" title="今天新进关注列表、或阶段由别档变成【拉升早期】的品"><i class="adot"></i>今日新启动 <b id="ab-new-n">—</b></span>
+        <span class="abadge warm" id="ab-refill" title="四条件版回调补仓点（已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）+ 旧价格阶梯今日首次触发"><i class="adot" style="background:#ffd166"></i>今日到补仓位置 <b id="ab-refill-n">—</b></span>
+        <span class="abadge" id="ab-late" title="统一阶段 = 拉升末期 / 派发"><i class="adot" style="background:#ff8f8f"></i>今日到末期 <b id="ab-late-n">—</b></span>
+        <span class="abadge ghost" id="ab-watch" title="持续关注列表里正在跟踪的品（点击看名单）">持续关注 <b id="ab-watch-n">—</b></span>
+      </div>
     </header>
 
     <main>
@@ -1610,6 +1656,20 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div class="prc-nums" id="prc-nums"></div>
             <div class="prc-tools" id="prc-tools"></div>
             <div id="prc-box"><div class="skel"><i></i>拉升前候选加载中…（pre-rally-candidates.json）</div></div>
+          </div>
+
+          <!-- ================= 持续关注 + 今日异动（2026-10-20 新增） =================
+               用户原话：「对于这种明显已经新启动的品明显不会只有一波，必须要持续关注，
+                         帮我分析阶段，并在合适补仓的位置提醒我」
+               · 收录规则（watch-list.json 的 entryRule）：统一阶段=拉升早期 / 近 10 日铺货吸筹 /
+                 近 10 日扫单收货 / 拉升前候选且阶段=吸筹；到末期的品不再新增但继续跟踪
+               · 这张卡只回答"我盯着哪些、现在到哪一档了"，不给买卖指令
+               · 数据源：cs-quant/build_watch_list.cjs → watch-list.json；拿不到就整块隐藏（不糊假数据） -->
+          <div class="card span-all" id="sec-today" style="display:none">
+            <div class="sec-head"><h2>持续关注</h2><span class="sec-sub">已启动的品不会只有一波 · 到补仓位置/到末期就标出来</span><span class="r" id="tw-time">—</span></div>
+            <div class="tw-nums" id="tw-nums"></div>
+            <div class="tw-list" id="tw-list"></div>
+            <p class="sec-note" id="tw-note">收录规则：统一阶段=拉升早期 ／ 近 10 日【铺货吸筹】 ／ 近 10 日【扫单收货】 ／ 拉升前候选且阶段=吸筹。到【拉升末期/派发】的品不再新增，但已经在列表里的继续跟踪（"不会只有一波"）。补仓位置判据：四条件（已启动过 ≥+10% · 从峰值回调 ≥10% · 回吐涨幅 1/3~2/3 · 回调期在售没激增 &lt;+10%）→ 三档（急跌试探 / 锚点主仓 / 企稳加满）。</p>
           </div>
 
           <!-- ================= 数据新鲜度（per-source） =================
@@ -4249,8 +4309,7 @@ async function loadPulse(){
     return true;
   } catch (e) { return false; }        // 脉搏缺失：照旧用 market.json，静默
 }
-const PULSE_TTL = 180000;              // 3 分钟：与 cs-quant/fast_refresh.cjs 写脉搏的节奏一致
-let pulseAt = 0, pulseFetching = false;
+const PULSE_TTL = 180000;              // 3 分钟：与 cs-quant/fast_refresh.cjs 写脉搏的节奏一致let pulseAt = 0, pulseFetching = false;
 async function refreshPulseIfDue(){
   if (pulseFetching) return false;
   if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return false;
@@ -4263,6 +4322,123 @@ function pulseStampText(){
   const t = hhmmOf(pulseData.updatedAtText);
   const up = pulseData.dataAt ? String(pulseData.dataAt).slice(11, 16) : '';
   return t + (up ? ('（官方 ' + up + '）') : '');
+}
+/* ============================================================================
+   ★ 2026-10-20 今日异动红点 + 持续关注列表（watch-list.json）
+   ----------------------------------------------------------------------------
+   用户原话：「对于这种明显已经新启动的品明显不会只有一波，必须要持续关注，
+             帮我分析阶段，并在合适补仓的位置提醒我」
+            「网站首页顶部加红点/数字：今日新启动 N 个 · 今日到补仓位置 N 个 · 今日到末期 N 个」
+   数据源：cs-quant/build_watch_list.cjs → watch-list.json
+          （badge.breakdown 三个数 + alerts 三张名单 + items 跟踪列表）
+   ⚠️ 命名前缀统一用 tw-（today-watch）：页面里已有 wlData / wl-time / wl-num 属于
+      【监控清单 watchlist-status.json】那张卡，不能复用同名变量或 id，否则整段脚本语法报错。
+   纪律：
+     ① 拿不到 watch-list.json → 顶部条不显示、卡片隐藏（绝不显示 0 冒充"今天没事"）；
+     ② 数字可点开看名单（点徽标 → 滚到持续关注卡并切分组）；
+     ③ 只报"到哪一档了"，不给命令式买卖措辞（角色是参谋）。
+   ============================================================================ */
+let twData = null, twState = 'loading', twFocus = 'refill';
+async function loadTodayWatch(){
+  twData = await fetchJSON('./watch-list.json');
+  twState = twData ? 'ok' : 'fail';
+  renderTodayAlerts();
+  renderTodayWatchCard();
+}
+function twNum(id, v){
+  const el = $(id); if (!el) return;
+  if (el.textContent === undefined) return;
+  el.textContent = (v == null || !isNum(v)) ? '—' : String(v);
+}
+function renderTodayAlerts(){
+  const bar = $('alerts-bar'); if (!bar || !bar.classList) return;   /* 迷你 DOM 里可能是空壳 */
+  const bd = (twData && twData.badge && twData.badge.breakdown) ? twData.badge.breakdown : null;
+  if (!bd){ bar.classList.remove('on'); return; }         /* 数据没到 → 整条不显示 */
+  bar.classList.add('on');
+  const nNew = Calc.toNum(bd['新启动']), nRef = Calc.toNum(bd['到补仓位置']), nLate = Calc.toNum(bd['到末期']);
+  twNum('ab-new-n', nNew); twNum('ab-refill-n', nRef); twNum('ab-late-n', nLate);
+  twNum('ab-watch-n', twData.counts ? twData.counts.watchTotal : null);
+  const bNew = $('ab-new'), bRef = $('ab-refill'), bLate = $('ab-late'), bWatch = $('ab-watch');
+  if (bNew) bNew.classList.toggle('zeroc', !(nNew > 0));
+  if (bRef) bRef.classList.toggle('zeroc', !(nRef > 0));
+  if (bLate) bLate.classList.toggle('zeroc', !(nLate > 0));
+  const jump = function(kind){
+    const card = $('sec-today');
+    if (!card || card.style.display === 'none') return;
+    twFocus = kind; renderTodayWatchCard();
+    try { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { card.scrollIntoView(); }
+  };
+  if (bNew) bNew.onclick = function(){ jump('newStart'); };
+  if (bRef) bRef.onclick = function(){ jump('refill'); };
+  if (bLate) bLate.onclick = function(){ jump('late'); };
+  if (bWatch) bWatch.onclick = function(){ jump('all'); };
+}
+function twStageChip(stage){
+  if (stage === 'rallyLate') return '<span class="tw-chip late">拉升末期</span>';
+  if (stage === 'distribute') return '<span class="tw-chip late">派发</span>';
+  if (stage === 'rallyEarly') return '<span class="tw-chip">拉升早期</span>';
+  if (stage === 'accumulate') return '<span class="tw-chip">吸筹</span>';
+  if (stage === 'rallyMid') return '<span class="tw-chip">拉升中期</span>';
+  if (stage === 'decline') return '<span class="tw-chip">回落</span>';
+  return '';
+}
+function renderTodayWatchCard(){
+  const card = $('sec-today'), box = $('tw-list'), nums = $('tw-nums'), stamp = $('tw-time');
+  if (!card || !box || !card.style) return;   /* 迷你 DOM 里可能是空壳 */
+  if (!twData){ card.style.display = 'none'; return; }
+  const bd = (twData.badge && twData.badge.breakdown) || {};
+  const al = twData.alerts || {};
+  const cnt = twData.counts || {};
+  const asOf = twData.asOfDate || (twData.atText ? String(twData.atText).slice(0, 10) : '—');
+  card.style.display = '';
+  if (stamp && stamp.textContent !== undefined) stamp.textContent = 'as of ' + asOf + '（' + String(twData.atText || '').slice(11, 17) + '）';
+  const nRefill = Calc.toNum(bd['到补仓位置']), nNew = Calc.toNum(bd['新启动']), nLate = Calc.toNum(bd['到末期']);
+  if (nums && nums.innerHTML !== undefined){
+    nums.innerHTML = '<span class="tw-num hot">今日新启动 <b>' + n2(nNew) + '</b></span>' +
+      '<span class="tw-num warm">今日到补仓位置 <b>' + n2(nRefill) + '</b></span>' +
+      '<span class="tw-num">今日到末期 <b>' + n2(nLate) + '</b></span>' +
+      '<span class="tw-num">持续关注 <b>' + n2(cnt.watchTotal) + '</b></span>';
+  }
+  /* 顺序：到补仓位置（可执行）→ 今日新启动 → 到末期 → （点"持续关注"徽标才列全部） */
+  const rows = [], seen = new Set();
+  const push = function(x, kind, chip){
+    if (!x || x.gid == null) return;
+    const k = String(x.gid) + '|' + kind;
+    if (seen.has(k)) return;
+    seen.add(k); rows.push({ x, kind, chip });
+  };
+  const wantRefill = (twFocus === 'refill' || twFocus === 'all');
+  const wantNew = (twFocus === 'newStart' || twFocus === 'all');
+  const wantLate = (twFocus === 'late' || twFocus === 'all');
+  if (wantRefill) arrOf(al.refill).forEach(function(x){ push(x, 'refill', '<span class="tw-chip refill">到补仓位置</span>' + (x.tierCN ? ('<span class="tw-chip refill">' + esc(x.tierCN) + '</span>') : '')); });
+  if (wantNew) arrOf(al.newStart).forEach(function(x){ push(x, 'newStart', '<span class="tw-chip">今日新启动</span>'); });
+  if (wantLate) arrOf(al.late).forEach(function(x){ push(x, 'late', '<span class="tw-chip late">到末期</span>'); });
+  if (twFocus === 'all') arrOf(twData.items).forEach(function(it){ if (it && !it.hidden) push({ gid: it.gid, name: it.name, price: it.latest && it.latest.price, stage: it.latest && it.latest.stage, stageName: it.latest && it.latest.stageName, advice: it.addedReason }, 'all', ''); });
+  if (!rows.length){
+    box.innerHTML = emptyBox('这个分组今天没有红点。持续关注列表里还有 ' + n2(cnt.watchTotal) + ' 个品在跟踪。');
+    return;
+  }
+  const LIMIT = 24;
+  box.innerHTML = rows.slice(0, LIMIT).map(function(r){
+    const x = r.x;
+    const lf = x.lastFire ? (x.lastFire.day + ' @ ¥' + n2(x.lastFire.px, 2)) : '';
+    const sub = [
+      (x.status === 'just_triggered') ? ('刚触发：' + (x.tierCN || '') + ' ' + lf) : '',
+      (x.retrace != null && isNum(x.retrace)) ? ('回吐 ' + pct(x.retrace, true) + ' ／ 距峰值 ' + pct(x.drawdownFromPeak, true)) : '',
+      x.advice || '',
+      (r.kind === 'newStart' && x.reason) ? String(x.reason).slice(0, 60) : '',
+      (r.kind === 'late' && x.stageName) ? ('统一阶段：' + x.stageName) : '',
+      (r.kind === 'all' && x.advice) ? String(x.advice).slice(0, 60) : '',
+    ].filter(Boolean).join(' · ');
+    return '<div class="tw-row' + (r.kind === 'refill' ? ' hit' : '') + '">' +
+      '<div style="min-width:0">' +
+      '<div class="tw-n">' + esc(x.name || ('gid ' + x.gid)) + '</div>' +
+      '<div class="tw-s">' + (r.chip || '') + twStageChip(x.stage || '') + esc(sub) + '</div>' +
+      '</div>' +
+      '<div class="tw-r"><b>' + (isNil(x.price) ? '—' : ('¥' + n2(x.price, 2))) + '</b>' +
+      (x.group ? esc(x.group === 'strong' ? '强盘' : x.group === 'weak' ? '弱盘' : '中性') : '') + '</div>' +
+      '</div>';
+  }).join('') + (rows.length > LIMIT ? ('<div class="tw-more">还有 ' + (rows.length - LIMIT) + ' 条（点顶部徽标切换分组）</div>') : '');
 }
 function renderMarketStatus(){
   const n = marketData ? marketKeys().length : 0;
@@ -5606,7 +5782,7 @@ function renderRallyBatches(){
   setText('rb-meta', '批次 ' + n2(C.batches) + ' 个 · 覆盖 ' + n2(C.itemsInSomeBatch) + ' 品 / ' + n2(C.episodes) + ' 段 C 主拉升' +
     ' · 已剔除稀疏品 ' + n2(C.sparseExcluded) + ' 个 · 时间窗 W = ' + n2(rbData.wChosen) + ' 天');
   const nums = $('rb-nums');
-  if (nums){
+  if (nums && nums.innerHTML !== undefined){
     nums.innerHTML = [
       ['识别出的批次', n2(C.batches)],
       ['正在走（近 60 天）', n2(C.liveBatches)],
@@ -9007,6 +9183,8 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
   startLiveTimer();
   /* 大盘脉搏（每 3 分钟一次的小文件）：拿到就覆盖「大盘」页的头条数字，拿不到就照旧 */
   loadPulse();
+  /* ★ 2026-10-20 今日异动红点 + 持续关注（watch-list.json，约 480 KB）：让出一帧再拉，不占首屏关键路径 */
+  setTimeout(function(){ loadTodayWatch(); }, 90);
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
