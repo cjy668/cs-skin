@@ -6385,7 +6385,14 @@ function renderStageBoard(){
   const cov = dsbData.coverage || {};
   setText('dsb-meta', '覆盖 ' + (cov.items || 0) + ' 品（固定池 ' + (cov.pool || 0) + '）× 逐日 ' +
     (cov.stateDays || 0).toLocaleString() + ' 个状态 · 阶段段数 ' + (cov.episodes || 0).toLocaleString() +
-    ' · 拉升段 ' + (cov.pullSegments || 0).toLocaleString());
+    /* ★ 2026-10-20 S2 修复：这里以前打的是 dealer_stage_board.cjs 自己重跑枚举出来的「拉升段 16,551」，
+       而首页写的是「2,902 段 C 主拉升（19,329 个候选段里…）」—— 同一个网站同一天两个段落数，
+       用户不知道信哪个。16,551 是 mani-traces 第一版（4,985 段时代）的候选段枚举数，
+       在 1,388 段 / 2,902 段两次重定义后都该作废。
+       现在段数一律取 data/mani-traces.json → counts（dealer-stage-board 的 coverage.pullSegments /
+       pullCandidates 就是它），文案与首页完全一致：2,902 段 C 主拉升（19,329 个候选段里）。 */
+    ' · ' + (cov.pullSegments || 0).toLocaleString() + ' 段 C 主拉升' +
+    (cov.pullCandidates ? ('（' + cov.pullCandidates.toLocaleString() + ' 个候选段里）') : ''));
 
   /* --- 阶段定义 + 历史时长 + 后续分布 --- */
   const order = dsbData.stageOrder || [];
