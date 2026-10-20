@@ -3,14 +3,14 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1792512248070,
-   "atText": "2026/10/21 00:04:08",
+   "at": 1792512625812,
+   "atText": "2026/10/21 00:10:25",
    "level": "ok",
-   "compared": 459,
-   "gids": 153,
+   "compared": 357,
+   "gids": 119,
    "medianPct": 0,
    "p90Pct": 0,
-   "maxPct": 1.654,
+   "maxPct": 1.5786,
    "over5PctShare": 0,
    "conflictGidCount": 0,
    "conflictShare": 0,
@@ -21,37 +21,54 @@
     "2026-10-18",
     "2026-10-19"
    ],
-   "note": "自建日线 vs 官方：459 个 (gid×日) 可比，完全相等 94.5534%，中位差异 0%，>5% 的品 0/153 个 → 口径一致"
+   "note": "自建日线 vs 官方：357 个 (gid×日) 可比，完全相等 95.5182%，中位差异 0%，>5% 的品 0/119 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1792512243562,
-   "atText": "2026/10/21 00:04:03",
+   "at": 1792512621236,
+   "atText": "2026/10/21 00:10:21",
    "level": "ok",
    "officialLatestLabel": "2026-10-18",
    "officialLatestTrueDay": "2026-10-19",
    "overlapDays": 7,
    "appendedDays": 2,
-   "compared": 1071,
+   "compared": 833,
    "medianPct": 0,
    "p90Pct": 0,
-   "maxPct": 20.3401,
-   "over5PctShare": 0.2801,
-   "conflictGidCount": 3,
-   "conflictShare": 1.9608,
+   "maxPct": 7.6923,
+   "over5PctShare": 0.2401,
+   "conflictGidCount": 2,
+   "conflictShare": 1.6807,
    "conflictGids": [
-    2103,
     9521,
     9583
    ],
    "samples": [
     {
-     "gid": 2103,
-     "key": "p",
+     "gid": 6441,
+     "key": "b",
      "trueDay": "2026-10-14",
      "officialLabel": "2026-10-13",
-     "official": 15.29,
-     "ours": 18.4,
-     "diffPct": 20.3401
+     "official": 7,
+     "ours": 6,
+     "diffPct": 14.2857
+    },
+    {
+     "gid": 578,
+     "key": "b",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "official": 11,
+     "ours": 10,
+     "diffPct": 9.0909
+    },
+    {
+     "gid": 896,
+     "key": "b",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 12,
+     "ours": 13,
+     "diffPct": 8.3333
     },
     {
      "gid": 9521,
@@ -61,6 +78,24 @@
      "official": 0.13,
      "ours": 0.14,
      "diffPct": 7.6923
+    },
+    {
+     "gid": 19558,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 13,
+     "ours": 14,
+     "diffPct": 7.6923
+    },
+    {
+     "gid": 2011,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 14,
+     "ours": 13,
+     "diffPct": 7.1429
     },
     {
      "gid": 279,
@@ -81,6 +116,15 @@
      "diffPct": 5.5938
     },
     {
+     "gid": 578,
+     "key": "b",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 18,
+     "ours": 17,
+     "diffPct": 5.5556
+    },
+    {
      "gid": 20489,
      "key": "n",
      "trueDay": "2026-10-13",
@@ -90,13 +134,85 @@
      "diffPct": 5.2738
     },
     {
-     "gid": 6441,
-     "key": "p",
+     "gid": 13257,
+     "key": "b",
      "trueDay": "2026-10-16",
      "officialLabel": "2026-10-15",
-     "official": 1.72,
-     "ours": 1.65,
-     "diffPct": 4.0698
+     "official": 20,
+     "ours": 21,
+     "diffPct": 5
+    },
+    {
+     "gid": 1068,
+     "key": "b",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 20,
+     "ours": 19,
+     "diffPct": 5
+    },
+    {
+     "gid": 6543,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 202,
+     "ours": 212,
+     "diffPct": 4.9505
+    },
+    {
+     "gid": 9736,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 21,
+     "ours": 20,
+     "diffPct": 4.7619
+    },
+    {
+     "gid": 13257,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 22,
+     "ours": 23,
+     "diffPct": 4.5455
+    },
+    {
+     "gid": 2103,
+     "key": "b",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 48,
+     "ours": 46,
+     "diffPct": 4.1667
+    },
+    {
+     "gid": 1516,
+     "key": "b",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 49,
+     "ours": 47,
+     "diffPct": 4.0816
+    },
+    {
+     "gid": 16518,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 26,
+     "ours": 27,
+     "diffPct": 3.8462
+    },
+    {
+     "gid": 896,
+     "key": "bp",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 2.6,
+     "ours": 2.7,
+     "diffPct": 3.8462
     },
     {
      "gid": 11217,
@@ -106,154 +222,27 @@
      "official": 1318,
      "ours": 1268,
      "diffPct": 3.7936
-    },
-    {
-     "gid": 16338,
-     "key": "p",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 8,
-     "ours": 8.25,
-     "diffPct": 3.125
-    },
-    {
-     "gid": 13198,
-     "key": "n",
-     "trueDay": "2026-10-14",
-     "officialLabel": "2026-10-13",
-     "official": 764,
-     "ours": 786,
-     "diffPct": 2.8796
-    },
-    {
-     "gid": 578,
-     "key": "n",
-     "trueDay": "2026-10-16",
-     "officialLabel": "2026-10-15",
-     "official": 1977,
-     "ours": 2028,
-     "diffPct": 2.5797
-    },
-    {
-     "gid": 19596,
-     "key": "n",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 1567,
-     "ours": 1529,
-     "diffPct": 2.425
-    },
-    {
-     "gid": 6543,
-     "key": "p",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 186.3,
-     "ours": 181.9,
-     "diffPct": 2.3618
-    },
-    {
-     "gid": 9725,
-     "key": "n",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 1088,
-     "ours": 1111,
-     "diffPct": 2.114
-    },
-    {
-     "gid": 9563,
-     "key": "n",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 2363,
-     "ours": 2322,
-     "diffPct": 1.7351
-    },
-    {
-     "gid": 9736,
-     "key": "n",
-     "trueDay": "2026-10-16",
-     "officialLabel": "2026-10-15",
-     "official": 1101,
-     "ours": 1082,
-     "diffPct": 1.7257
-    },
-    {
-     "gid": 13588,
-     "key": "n",
-     "trueDay": "2026-10-19",
-     "officialLabel": "2026-10-18",
-     "official": 1160,
-     "ours": 1140,
-     "diffPct": 1.7241
-    },
-    {
-     "gid": 1319,
-     "key": "p",
-     "trueDay": "2026-10-18",
-     "officialLabel": "2026-10-17",
-     "official": 44.74,
-     "ours": 44,
-     "diffPct": 1.654
-    },
-    {
-     "gid": 13623,
-     "key": "p",
-     "trueDay": "2026-10-19",
-     "officialLabel": "2026-10-18",
-     "official": 338.28,
-     "ours": 343.62,
-     "diffPct": 1.5786
-    },
-    {
-     "gid": 55,
-     "key": "p",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 256,
-     "ours": 260,
-     "diffPct": 1.5625
-    },
-    {
-     "gid": 1137,
-     "key": "p",
-     "trueDay": "2026-10-19",
-     "officialLabel": "2026-10-18",
-     "official": 51.8,
-     "ours": 51,
-     "diffPct": 1.5444
     }
    ],
-   "note": "交界处 7 天，p 中位差异 0%，92.2502% 完全相等 → 自建口径与官方一致"
+   "note": "交界处 7 天，p 中位差异 0%，93.0372% 完全相等 → 自建口径与官方一致"
   },
   "intraday_calibration": {
-   "at": 1792512241045,
-   "atText": "2026/10/21 00:04:01",
+   "at": 1792512568018,
+   "atText": "2026/10/21 00:09:28",
    "level": "ok",
-   "compared": 1071,
-   "gids": 153,
+   "compared": 833,
+   "gids": 119,
    "medianPct": 0,
-   "maxPct": 20.3401,
+   "maxPct": 7.6923,
    "p90Pct": 0,
-   "over5PctShare": 0.2801,
-   "conflictGidCount": 3,
-   "conflictShare": 1.9608,
+   "over5PctShare": 0.2401,
+   "conflictGidCount": 2,
+   "conflictShare": 1.6807,
    "conflictGids": [
-    2103,
     9521,
     9583
    ],
    "samples": [
-    {
-     "gid": 2103,
-     "key": "p",
-     "trueDay": "2026-10-14",
-     "officialLabel": "2026-10-13",
-     "ours": 18.4,
-     "official": 15.29,
-     "diffPct": 20.3401
-    },
     {
      "gid": 9583,
      "key": "p",
@@ -289,13 +278,67 @@
      "ours": 1356,
      "official": 1270,
      "diffPct": 6.7717
+    },
+    {
+     "gid": 2011,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "ours": 13,
+     "official": 14,
+     "diffPct": 7.1429
+    },
+    {
+     "gid": 19558,
+     "key": "b",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "ours": 14,
+     "official": 13,
+     "diffPct": 7.6923
+    },
+    {
+     "gid": 578,
+     "key": "b",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "ours": 17,
+     "official": 18,
+     "diffPct": 5.5556
+    },
+    {
+     "gid": 6441,
+     "key": "b",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "ours": 6,
+     "official": 7,
+     "diffPct": 14.2857
+    },
+    {
+     "gid": 896,
+     "key": "b",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "ours": 13,
+     "official": 12,
+     "diffPct": 8.3333
+    },
+    {
+     "gid": 578,
+     "key": "b",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "ours": 10,
+     "official": 11,
+     "diffPct": 9.0909
     }
    ],
    "note": "分时（UTC+8 切日取最后采样）与官方日线中位差异 0%，口径一致，可用于补最新 1~2 天"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1792512243750,
-   "atText": "2026/10/21 00:04:03",
+   "at": 1792512618647,
+   "atText": "2026/10/21 00:10:18",
    "level": "ok",
    "compared": 3,
    "medianPct": 0.165,
@@ -308,16 +351,9 @@
   }
  },
  "level": "ok",
- "at": 1792512248070,
- "atText": "2026/10/21 00:04:08",
+ "at": 1792512625812,
+ "atText": "2026/10/21 00:10:25",
  "conflictGids": [
-  {
-   "gid": 2103,
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
   {
    "gid": 9521,
    "in": [
@@ -333,16 +369,8 @@
    ]
   }
  ],
- "conflictGidCount": 3,
+ "conflictGidCount": 2,
  "conflictSamples": [
-  {
-   "gid": 2103,
-   "name": "R8 左轮手枪 | 渐变琥珀 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
   {
    "gid": 9521,
    "name": "UMP-45 | 设施系列·深色图 (崭新出厂)",
@@ -360,5 +388,5 @@
    ]
   }
  ],
- "message": "自建日线与 csqaq 官方差异均在 5% 以内（3 个品超门槛）"
+ "message": "自建日线与 csqaq 官方差异均在 5% 以内（2 个品超门槛）"
 }
