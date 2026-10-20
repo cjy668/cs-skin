@@ -1,0 +1,304 @@
+{
+ "v": 1,
+ "thresholdPct": 5,
+ "sections": {
+  "daily_verify": {
+   "at": 1792509367366,
+   "atText": "2026/10/20 23:16:07",
+   "level": "ok",
+   "compared": 135,
+   "gids": 45,
+   "medianPct": 0,
+   "p90Pct": 0.0134,
+   "maxPct": 1.654,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
+   "conflictShare": 0,
+   "conflictGids": [],
+   "samples": [],
+   "window": [
+    "2026-10-17",
+    "2026-10-18",
+    "2026-10-19"
+   ],
+   "note": "自建日线 vs 官方：135 个 (gid×日) 可比，完全相等 89.6296%，中位差异 0%，>5% 的品 0/45 个 → 口径一致"
+  },
+  "merge_junction": {
+   "at": 1792509126750,
+   "atText": "2026/10/20 23:12:06",
+   "level": "warn",
+   "officialLatestLabel": "2026-10-18",
+   "officialLatestTrueDay": "2026-10-19",
+   "overlapDays": 7,
+   "appendedDays": 1,
+   "compared": 175,
+   "medianPct": 0,
+   "p90Pct": 0.1346,
+   "maxPct": 20.3401,
+   "over5PctShare": 0.5714,
+   "conflictGidCount": 1,
+   "conflictShare": 4,
+   "conflictGids": [
+    2103
+   ],
+   "samples": [
+    {
+     "gid": 2103,
+     "key": "p",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 15.29,
+     "ours": 18.4,
+     "diffPct": 20.3401
+    },
+    {
+     "gid": 578,
+     "key": "n",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "official": 1977,
+     "ours": 2028,
+     "diffPct": 2.5797
+    },
+    {
+     "gid": 6543,
+     "key": "p",
+     "trueDay": "2026-10-13",
+     "officialLabel": "2026-10-12",
+     "official": 186.3,
+     "ours": 181.9,
+     "diffPct": 2.3618
+    },
+    {
+     "gid": 9563,
+     "key": "n",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 2363,
+     "ours": 2322,
+     "diffPct": 1.7351
+    },
+    {
+     "gid": 9736,
+     "key": "n",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "official": 1101,
+     "ours": 1082,
+     "diffPct": 1.7257
+    },
+    {
+     "gid": 1319,
+     "key": "p",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 44.74,
+     "ours": 44,
+     "diffPct": 1.654
+    },
+    {
+     "gid": 1823,
+     "key": "p",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 0.7,
+     "ours": 0.71,
+     "diffPct": 1.4286
+    },
+    {
+     "gid": 6543,
+     "key": "p",
+     "trueDay": "2026-10-17",
+     "officialLabel": "2026-10-16",
+     "official": 218,
+     "ours": 215,
+     "diffPct": 1.3761
+    },
+    {
+     "gid": 2103,
+     "key": "p",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 18,
+     "ours": 17.77,
+     "diffPct": 1.2778
+    },
+    {
+     "gid": 6543,
+     "key": "n",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 2890,
+     "ours": 2926,
+     "diffPct": 1.2457
+    },
+    {
+     "gid": 13660,
+     "key": "p",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 178.3,
+     "ours": 179.98,
+     "diffPct": 0.9422
+    },
+    {
+     "gid": 6543,
+     "key": "p",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 216,
+     "ours": 214,
+     "diffPct": 0.9259
+    },
+    {
+     "gid": 9563,
+     "key": "p",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 45.9,
+     "ours": 46.3,
+     "diffPct": 0.8715
+    },
+    {
+     "gid": 9618,
+     "key": "n",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 2269,
+     "ours": 2288,
+     "diffPct": 0.8374
+    },
+    {
+     "gid": 2103,
+     "key": "n",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 2545,
+     "ours": 2524,
+     "diffPct": 0.8251
+    },
+    {
+     "gid": 13660,
+     "key": "n",
+     "trueDay": "2026-10-18",
+     "officialLabel": "2026-10-17",
+     "official": 1034,
+     "ours": 1026,
+     "diffPct": 0.7737
+    },
+    {
+     "gid": 1516,
+     "key": "n",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "official": 1592,
+     "ours": 1602,
+     "diffPct": 0.6281
+    },
+    {
+     "gid": 9736,
+     "key": "n",
+     "trueDay": "2026-10-15",
+     "officialLabel": "2026-10-14",
+     "official": 1091,
+     "ours": 1085,
+     "diffPct": 0.55
+    },
+    {
+     "gid": 13363,
+     "key": "p",
+     "trueDay": "2026-10-19",
+     "officialLabel": "2026-10-18",
+     "official": 1607,
+     "ours": 1599,
+     "diffPct": 0.4978
+    },
+    {
+     "gid": 1516,
+     "key": "n",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "official": 1453,
+     "ours": 1460,
+     "diffPct": 0.4818
+    }
+   ],
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5714%），请确认口径"
+  },
+  "intraday_calibration": {
+   "at": 1792509179600,
+   "atText": "2026/10/20 23:12:59",
+   "level": "warn",
+   "compared": 315,
+   "gids": 45,
+   "medianPct": 0,
+   "maxPct": 20.3401,
+   "p90Pct": 0.0361,
+   "over5PctShare": 0.6349,
+   "conflictGidCount": 2,
+   "conflictShare": 4.4444,
+   "conflictGids": [
+    2103,
+    9521
+   ],
+   "samples": [
+    {
+     "gid": 2103,
+     "key": "p",
+     "trueDay": "2026-10-14",
+     "officialLabel": "2026-10-13",
+     "ours": 18.4,
+     "official": 15.29,
+     "diffPct": 20.3401
+    },
+    {
+     "gid": 9521,
+     "key": "p",
+     "trueDay": "2026-10-16",
+     "officialLabel": "2026-10-15",
+     "ours": 0.14,
+     "official": 0.13,
+     "diffPct": 7.6923
+    }
+   ],
+   "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
+  }
+ },
+ "level": "warn",
+ "at": 1792509367366,
+ "atText": "2026/10/20 23:16:07",
+ "conflictGids": [
+  {
+   "gid": 2103,
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 9521,
+   "in": [
+    "intraday_calibration"
+   ]
+  }
+ ],
+ "conflictGidCount": 2,
+ "conflictSamples": [
+  {
+   "gid": 2103,
+   "name": "R8 左轮手枪 | 渐变琥珀 (崭新出厂)",
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 9521,
+   "name": "UMP-45 | 设施系列·深色图 (崭新出厂)",
+   "in": [
+    "intraday_calibration"
+   ]
+  }
+ ],
+ "message": "⚠️ 自建日线与 csqaq 官方有 2 个品差异 >5%，请确认口径"
+}
