@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792460857171,
- "atText": "2026/10/20 09:47:37",
+ "at": 1792461274876,
+ "atText": "2026/10/20 09:54:34",
  "asOfDate": "2026-10-20",
  "script": "cs-quant/build_watch_list.cjs",
  "purpose": "用户原话：「明显已经新启动的品明显不会只有一波，必须要持续关注，帮我分析阶段，并在合适补仓的位置提醒我」。自动收录新启动品；用户可手动加(pinned=true / manual=true)或隐藏(hidden=true)，脚本不会删。",
@@ -546,6 +546,141 @@
   ],
   "refill": [
    {
+    "gid": 11724,
+    "name": "R8 左轮手枪 | 水都泛波 (崭新出厂)",
+    "tier": "anchor",
+    "tierCN": "② 锚点档（主仓）",
+    "status": "at_refill",
+    "price": 99.98,
+    "position": "1/3 仓（主仓）",
+    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
+    "retrace": 0.5002,
+    "drawdownFromPeak": -0.2309,
+    "group": "strong",
+    "lastFire": {
+     "day": "2026-10-12",
+     "tier": "anchor",
+     "px": 99.27,
+     "barsAgo": 2
+    },
+    "levels": {
+     "fastPx": 73.8,
+     "anchorPx": 99.99,
+     "stableNeedDays": 5,
+     "startPx": 69.98
+    },
+    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
+    "outsideWatch": true
+   },
+   {
+    "gid": 13680,
+    "name": null,
+    "tier": "anchor",
+    "tierCN": "② 锚点档（主仓）",
+    "status": "at_refill",
+    "price": 183.79,
+    "position": "1/3 仓（主仓）",
+    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
+    "retrace": 0.6637,
+    "drawdownFromPeak": -0.1777,
+    "group": "strong",
+    "lastFire": {
+     "day": "2026-10-07",
+     "tier": "stable",
+     "px": 188,
+     "barsAgo": 7
+    },
+    "levels": {
+     "fastPx": 205.73,
+     "anchorPx": 193.58,
+     "stableNeedDays": 14,
+     "startPx": 163.67
+    },
+    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
+    "outsideWatch": true
+   },
+   {
+    "gid": 8489,
+    "name": "沙漠之鹰 | 红色代号 (崭新出厂)",
+    "tier": "anchor",
+    "tierCN": "② 锚点档（主仓）",
+    "status": "at_refill",
+    "price": 1037.9,
+    "position": "1/3 仓（主仓）",
+    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
+    "retrace": 0.655,
+    "drawdownFromPeak": -0.1002,
+    "group": "mid",
+    "lastFire": {
+     "day": "2026-10-14",
+     "tier": "stable",
+     "px": 1037.9,
+     "barsAgo": 0
+    },
+    "levels": {
+     "fastPx": 1025.07,
+     "anchorPx": 1065.25,
+     "stableNeedDays": 19,
+     "startPx": 977
+    },
+    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
+    "outsideWatch": true
+   },
+   {
+    "gid": 1196,
+    "name": "M4A1消音版 | 原子合金 (崭新出厂)",
+    "tier": "anchor",
+    "tierCN": "② 锚点档（主仓）",
+    "status": "just_triggered",
+    "price": 1146.66,
+    "position": "不加仓",
+    "advice": "★ 刚触发过（anchor @ ¥1039.5，2026-10-12）——今日已反弹则等下一次回调；未反弹可补",
+    "retrace": 0.2659,
+    "drawdownFromPeak": -0.0674,
+    "group": "strong",
+    "lastFire": {
+     "day": "2026-10-12",
+     "tier": "anchor",
+     "px": 1039.5,
+     "barsAgo": 2
+    },
+    "levels": {
+     "fastPx": 1133.03,
+     "anchorPx": 1073.7,
+     "stableNeedDays": 26,
+     "startPx": 917.9
+    },
+    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
+    "outsideWatch": false
+   },
+   {
+    "gid": 1610,
+    "name": "MP9 | 绿色格纹 (崭新出厂)",
+    "tier": "anchor",
+    "tierCN": "② 锚点档（主仓）",
+    "status": "just_triggered",
+    "price": 59.99,
+    "position": "不加仓",
+    "advice": "★ 刚触发过（anchor @ ¥68.99，2026-10-11）——今日已反弹则等下一次回调；未反弹可补",
+    "retrace": 1.0563,
+    "drawdownFromPeak": -0.2383,
+    "group": "strong",
+    "lastFire": {
+     "day": "2026-10-11",
+     "tier": "anchor",
+     "px": 68.99,
+     "barsAgo": 3
+    },
+    "levels": {
+     "fastPx": 67.77,
+     "anchorPx": 69.88,
+     "stableNeedDays": 17,
+     "startPx": 60.99
+    },
+    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
+    "outsideWatch": true
+   },
+   {
     "gid": 279,
     "name": "AWP | 火卫一 (崭新出厂)",
     "tiers": [
@@ -933,141 +1068,6 @@
     "nextAction": "本次拉升三档都已触发过（不要再补）→ 等下一段拉升（弱盘：只小仓位，拉升即出，不要加满）",
     "price": 140.87,
     "group": "weak",
-    "outsideWatch": true
-   },
-   {
-    "gid": 11724,
-    "name": "R8 左轮手枪 | 水都泛波 (崭新出厂)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "at_refill",
-    "price": 99.98,
-    "position": "1/3 仓（主仓）",
-    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
-    "retrace": 0.5002,
-    "drawdownFromPeak": -0.2309,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-10-12",
-     "tier": "anchor",
-     "px": 99.27,
-     "barsAgo": 2
-    },
-    "levels": {
-     "fastPx": 73.8,
-     "anchorPx": 99.99,
-     "stableNeedDays": 5,
-     "startPx": 69.98
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": true
-   },
-   {
-    "gid": 13680,
-    "name": null,
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "at_refill",
-    "price": 183.79,
-    "position": "1/3 仓（主仓）",
-    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
-    "retrace": 0.6637,
-    "drawdownFromPeak": -0.1777,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-10-07",
-     "tier": "stable",
-     "px": 188,
-     "barsAgo": 7
-    },
-    "levels": {
-     "fastPx": 205.73,
-     "anchorPx": 193.58,
-     "stableNeedDays": 14,
-     "startPx": 163.67
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": true
-   },
-   {
-    "gid": 8489,
-    "name": "沙漠之鹰 | 红色代号 (崭新出厂)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "at_refill",
-    "price": 1037.9,
-    "position": "1/3 仓（主仓）",
-    "advice": "★ 主仓档：1/3 仓，CD ≥4 日",
-    "retrace": 0.655,
-    "drawdownFromPeak": -0.1002,
-    "group": "mid",
-    "lastFire": {
-     "day": "2026-10-14",
-     "tier": "stable",
-     "px": 1037.9,
-     "barsAgo": 0
-    },
-    "levels": {
-     "fastPx": 1025.07,
-     "anchorPx": 1065.25,
-     "stableNeedDays": 19,
-     "startPx": 977
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": true
-   },
-   {
-    "gid": 1196,
-    "name": "M4A1消音版 | 原子合金 (崭新出厂)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "just_triggered",
-    "price": 1146.66,
-    "position": "不加仓",
-    "advice": "★ 刚触发过（anchor @ ¥1039.5，2026-10-12）——今日已反弹则等下一次回调；未反弹可补",
-    "retrace": 0.2659,
-    "drawdownFromPeak": -0.0674,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-10-12",
-     "tier": "anchor",
-     "px": 1039.5,
-     "barsAgo": 2
-    },
-    "levels": {
-     "fastPx": 1133.03,
-     "anchorPx": 1073.7,
-     "stableNeedDays": 26,
-     "startPx": 917.9
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
-    "outsideWatch": false
-   },
-   {
-    "gid": 1610,
-    "name": "MP9 | 绿色格纹 (崭新出厂)",
-    "tier": "anchor",
-    "tierCN": "② 锚点档（主仓）",
-    "status": "just_triggered",
-    "price": 59.99,
-    "position": "不加仓",
-    "advice": "★ 刚触发过（anchor @ ¥68.99，2026-10-11）——今日已反弹则等下一次回调；未反弹可补",
-    "retrace": 1.0563,
-    "drawdownFromPeak": -0.2383,
-    "group": "strong",
-    "lastFire": {
-     "day": "2026-10-11",
-     "tier": "anchor",
-     "px": 68.99,
-     "barsAgo": 3
-    },
-    "levels": {
-     "fastPx": 67.77,
-     "anchorPx": 69.88,
-     "stableNeedDays": 17,
-     "startPx": 60.99
-    },
-    "source": "replenish-points.json（四条件版：已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）",
     "outsideWatch": true
    }
   ],
