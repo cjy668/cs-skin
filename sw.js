@@ -18,7 +18,7 @@
       —— 同一个坑的第十四次。CACHE v19 → v20。
       体积控制：约 320 KB，但页面侧 setTimeout(60ms) 才拉（让出首屏关键路径），
       且只在「大盘」（首页）时拉，不拖首屏。 */
-const CACHE = 'cs-skin-app-v20';
+const CACHE = 'cs-skin-app-v21';
 const ASSETS = [
   './',
   './index.html',
@@ -98,7 +98,7 @@ const ASSETS = [
       **必须进 NET_FIRST**：它回答的是「我这 44 个持仓各自处在拉升的哪个时期」，
       卡在缓存里就会拿昨天的阶段决定今天卖不卖 —— 同一个坑的第十二次。CACHE v16 → v17。
       体积控制：约 184 KB，且只在用户切到「库存」页才拉（懒加载），不拖首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
