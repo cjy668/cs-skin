@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "at": 1792509367358,
+ "atText": "2026/10/20 23:16:07",
+ "script": "verify_bars_daily.cjs",
+ "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
+ "threshold": {
+  "diffAlarmPct": 5,
+  "shareWarn": 0.03,
+  "shareAlarm": 0.1
+ },
+ "official": {
+  "latestLabel": "2026-10-18",
+  "latestTrueDay": "2026-10-19"
+ },
+ "rt": {
+  "days": 8,
+  "latestTrueDay": "2026-10-20",
+  "snapshotDays": 0,
+  "snapshotLatest": null
+ },
+ "window": {
+  "recentDays": [
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19"
+  ],
+  "confirmedDays": [
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19"
+  ]
+ },
+ "byKey": {
+  "p": {
+   "n": 135,
+   "gids": 45,
+   "exact": 121,
+   "exactPct": 89.6296,
+   "medianPct": 0,
+   "p75Pct": 0,
+   "p90Pct": 0.0134,
+   "p99Pct": 1.5444,
+   "maxPct": 1.654,
+   "over5Pct": 0,
+   "conflictGidCount": 0,
+   "conflictShare": 0,
+   "conflictGids": [],
+   "byDay": [
+    {
+     "day": "2026-10-17",
+     "n": 45,
+     "exact": 44,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 1.3761
+    },
+    {
+     "day": "2026-10-18",
+     "n": 45,
+     "exact": 37,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 1.654
+    },
+    {
+     "day": "2026-10-19",
+     "n": 45,
+     "exact": 40,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 1.5444
+    }
+   ]
+  },
+  "n": {
+   "n": 135,
+   "gids": 45,
+   "exact": 115,
+   "exactPct": 85.1852,
+   "medianPct": 0,
+   "p75Pct": 0,
+   "p90Pct": 0.2229,
+   "p99Pct": 1.0033,
+   "maxPct": 1.3423,
+   "over5Pct": 0,
+   "conflictGidCount": 0,
+   "conflictShare": 0,
+   "conflictGids": [],
+   "byDay": [
+    {
+     "day": "2026-10-17",
+     "n": 45,
+     "exact": 44,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 0.2845
+    },
+    {
+     "day": "2026-10-18",
+     "n": 45,
+     "exact": 33,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 0.8251
+    },
+    {
+     "day": "2026-10-19",
+     "n": 45,
+     "exact": 38,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 1.3423
+    }
+   ]
+  },
+  "b": {
+   "n": 0,
+   "gids": 0,
+   "exact": 0,
+   "exactPct": 0,
+   "medianPct": 0,
+   "p75Pct": 0,
+   "p90Pct": 0,
+   "p99Pct": 0,
+   "maxPct": 0,
+   "over5Pct": 0,
+   "conflictGidCount": 0,
+   "conflictShare": 0,
+   "conflictGids": [],
+   "byDay": []
+  },
+  "bp": {
+   "n": 0,
+   "gids": 0,
+   "exact": 0,
+   "exactPct": 0,
+   "medianPct": 0,
+   "p75Pct": 0,
+   "p90Pct": 0,
+   "p99Pct": 0,
+   "maxPct": 0,
+   "over5Pct": 0,
+   "conflictGidCount": 0,
+   "conflictShare": 0,
+   "conflictGids": [],
+   "byDay": []
+  }
+ },
+ "level": "ok",
+ "conflictGidCount": 0,
+ "conflictShare": 0,
+ "conflictGids": [],
+ "samples": [],
+ "selfTest": null,
+ "message": "自建日线 vs 官方：135 个 (gid×日) 可比，完全相等 89.6296%，中位差异 0%，>5% 的品 0/45 个 → 口径一致"
+}
