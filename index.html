@@ -4424,7 +4424,7 @@ function renderTodayWatchCard(){
     const lf = x.lastFire ? (x.lastFire.day + ' @ ¥' + n2(x.lastFire.px, 2)) : '';
     const sub = [
       (x.status === 'just_triggered') ? ('刚触发：' + (x.tierCN || '') + ' ' + lf) : '',
-      (x.retrace != null && isNum(x.retrace)) ? ('回吐 ' + pct(x.retrace, true) + ' ／ 距峰值 ' + pct(x.drawdownFromPeak, true)) : '',
+      (x.retrace != null && isNum(x.retrace)) ? ('回吐 ' + pct(x.retrace) + ' ／ 距峰值 ' + pct(x.drawdownFromPeak, true)) : '',
       x.advice || '',
       (r.kind === 'newStart' && x.reason) ? String(x.reason).slice(0, 60) : '',
       (r.kind === 'late' && x.stageName) ? ('统一阶段：' + x.stageName) : '',
