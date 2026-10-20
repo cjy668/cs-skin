@@ -8,8 +8,12 @@
    只在 https / localhost 下注册。
    ★ 2026-10-18 → v18：监控清单 / 阶段看板 / 卖出看板三个数据文件都加了新字段
      （exitLocked 出口锁死 / 剩余拉升空间 room / 盘的类型 stockType），
-     老客户端缓存里没有这些字段 → CACHE 必须 +1 把它换掉。 */
-    ⚠️ 2026-10-19 十三修正：首页最上方新增「拉升前候选」卡（用户最高优先级），
+     老客户端缓存里没有这些字段 → CACHE 必须 +1 把它换掉。
+   ⚠️ 2026-10-20 修：上面这段注释在 v19 时被误写了一个「注释结束符」，
+     导致整个 sw.js 语法错误、Service Worker 根本注册不上（浏览器控制台报
+     "Invalid or unexpected token"）—— 也就是说 2026-10-19 之后的缓存策略全部没生效。
+     现在只保留最后那一个注释结束符，语法恢复正常。
+   ⚠️ 2026-10-19 十三修正：首页最上方新增「拉升前候选」卡（用户最高优先级），
       数据源 pre-rally-candidates.json（cs-quant/build_pre_rally_candidates.cjs 产出：
         1,073 品按【①阶段 ②剩余空间 ③强盘排序】三条件串联后的候选名单 +
         每条的批次强弱 / 剩余空间 / 出口锁死 / 控盘倒货型 / 之后 60 日走势分布 / 命中痕迹 +
@@ -18,7 +22,7 @@
       —— 同一个坑的第十四次。CACHE v19 → v20。
       体积控制：约 320 KB，但页面侧 setTimeout(60ms) 才拉（让出首屏关键路径），
       且只在「大盘」（首页）时拉，不拖首屏。 */
-const CACHE = 'cs-skin-app-v21';
+const CACHE = 'cs-skin-app-v22';
 const ASSETS = [
   './',
   './index.html',
@@ -97,8 +101,14 @@ const ASSETS = [
         + 该阶段历史上之后 60 个交易日的走势分布 + 按六项加权的卖出优先级）。
       **必须进 NET_FIRST**：它回答的是「我这 44 个持仓各自处在拉升的哪个时期」，
       卡在缓存里就会拿昨天的阶段决定今天卖不卖 —— 同一个坑的第十二次。CACHE v16 → v17。
-      体积控制：约 184 KB，且只在用户切到「库存」页才拉（懒加载），不拖首屏。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
+      体积控制：约 184 KB，且只在用户切到「库存」页才拉（懒加载），不拖首屏。
+   ⚠️ 2026-10-20 十三修正：★ 唯一价格源 price-live.json（cs-quant/price_live.cjs 产出，
+      由 fast_refresh.cjs 每 3 分钟刷新）。它是全站所有价格的唯一来源：
+      用户当天报「M4A4 | 红色 DDPAT 今日 845，app 说 754」，就是各派生文件里
+      写死的生成时刻旧价造成的（同一个品在 7 个 JSON 里有 7 个价）。
+      **必须进 NET_FIRST**：它进了「缓存优先」分支就等于价格永远停在第一次打开时 ——
+      那正是这次事故的同一种失败（数据是旧价、用户不知道）。CACHE v21 → v22。 */
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|price-live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|data-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\//i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
