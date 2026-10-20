@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "at": 1792492666334,
+ "atText": "2026/10/20 18:37:46",
+ "script": "build_bars_freshness.cjs",
+ "purpose": "S5 时效闸门：把「结论基于哪一天的日线」写成显式文件，落后时页面顶部告警 + watchdog 检查",
+ "spec": {
+  "sourceLagDays": 2,
+  "warnExtraDays": 1,
+  "badExtraDays": 3,
+  "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数"
+ },
+ "bars": {
+  "latest": "2026-10-14",
+  "gidsAtLatest": 1598,
+  "gids": 1598,
+  "noSeries": 60,
+  "tailDist": [
+   {
+    "date": "2026-10-14",
+    "gids": 1598
+   }
+  ],
+  "byKey": {
+   "p": {
+    "date": "2026-10-14",
+    "gids": 1598
+   },
+   "n": {
+    "date": "2026-10-14",
+    "gids": 1598
+   },
+   "b": {
+    "date": "2026-10-14",
+    "gids": 1588
+   },
+   "bp": {
+    "date": "2026-10-14",
+    "gids": 1062
+   }
+  }
+ },
+ "live": {
+  "date": "2026-10-20",
+  "atText": "2026/10/20 18:35:55",
+  "n": 2114
+ },
+ "lagDays": 6,
+ "extraLagDays": 4,
+ "level": "bad",
+ "downstreamStale": false,
+ "staleFiles": [],
+ "conclusions": [
+  {
+   "file": "replenish-points.json",
+   "label": "回调补仓点",
+   "asOf": "2026-10-14",
+   "via": "asOf",
+   "asOfDate": "2026-10-14",
+   "generatedAt": "2026/10/20 17:06:20",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": false
+  },
+  {
+   "file": "watchlist-status.json",
+   "label": "监控清单",
+   "asOf": "2026-10-14",
+   "via": "asOfSeries",
+   "asOfDate": "2026-10-14",
+   "generatedAt": "2026/10/20 18:35:31",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": false
+  },
+  {
+   "file": "watch-list.json",
+   "label": "持续关注列表",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 17:06:33",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "pre-rally-candidates.json",
+   "label": "拉升前候选",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 17:05:39",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "unified-stage.json",
+   "label": "统一阶段层",
+   "asOf": "2026/10/20 17:02:20",
+   "via": "atText",
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 17:02:20",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "dealer-stage-board.json",
+   "label": "做盘阶段看板",
+   "asOf": "2026/10/20 17:01:08",
+   "via": "atText",
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 17:01:08",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "rally-forms.json",
+   "label": "拉升形态",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 16:55:24",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "crash-buy.json",
+   "label": "事件急跌抄底点",
+   "asOf": "2026-10-14",
+   "via": "asOf",
+   "asOfDate": "2026-10-14",
+   "generatedAt": null,
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": false
+  },
+  {
+   "file": "refill-plan.json",
+   "label": "回调补仓计划",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": null,
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "stock-accum.json",
+   "label": "铺货吸筹",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 16:58:31",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  },
+  {
+   "file": "exit-board.json",
+   "label": "持仓退出看板",
+   "asOf": null,
+   "via": null,
+   "asOfDate": null,
+   "generatedAt": "2026/10/20 17:04:53",
+   "basedOnBars": "2026-10-14",
+   "staleVsBars": null
+  }
+ ],
+ "message": "🔴 结论基于 2026-10-14 日线，已落后 4 天（源端最新应为 今天 −2 天），下面所有结论都已失真"
+}
