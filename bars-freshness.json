@@ -1,14 +1,15 @@
 {
- "v": 1,
- "at": 1792502756032,
- "atText": "2026/10/20 21:25:56",
+ "v": 2,
+ "at": 1792509444093,
+ "atText": "2026/10/20 23:17:24",
  "script": "build_bars_freshness.cjs",
- "purpose": "S5 时效闸门：把「结论基于哪一天的日线」写成显式文件，落后时页面顶部告警 + watchdog 检查",
+ "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
   "sourceLagDays": 2,
+  "sourceLagTrueDays": 1,
   "warnExtraDays": 1,
   "badExtraDays": 3,
-  "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数"
+  "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数。★ 2026-10-20 实测：官方日线 timestamp 全在 16:00Z（= UTC+8 次日 00:00），项目标签 L 真正代表 UTC+8 交易日 L+1，所以真实滞后 = 1 天"
  },
  "bars": {
   "latest": "2026-10-18",
@@ -24,33 +25,124 @@
   "byKey": {
    "p": {
     "date": "2026-10-18",
-    "gids": 1658
+    "gids": 1658,
+    "trueDay": "2026-10-19"
    },
    "n": {
     "date": "2026-10-18",
-    "gids": 1658
+    "gids": 1658,
+    "trueDay": "2026-10-19"
    },
    "b": {
     "date": "2026-10-14",
-    "gids": 1588
+    "gids": 1567,
+    "trueDay": "2026-10-15"
    },
    "bp": {
     "date": "2026-10-14",
-    "gids": 1122
+    "gids": 1122,
+    "trueDay": "2026-10-15"
    }
-  }
+  },
+  "latestTrueDay": "2026-10-19",
+  "source": "csqaq 官方日线（_harvest，只读，一个字节都没动）"
+ },
+ "rt": {
+  "days": [
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20"
+  ],
+  "latestTrueDay": "2026-10-20",
+  "latestLabel": "2026-10-19",
+  "byKey": {
+   "p": 360,
+   "n": 360,
+   "b": 0,
+   "bp": 0
+  },
+  "points": 360,
+  "appendedDays": [
+   {
+    "trueDay": "2026-10-20",
+    "label": "2026-10-19"
+   }
+  ],
+  "snapshotDays": [],
+  "snapshotByKey": {
+   "p": 0,
+   "n": 0,
+   "b": 0,
+   "bp": 0
+  },
+  "snapshotPoints": 0,
+  "buyLive": null,
+  "note": "自建日线 = 分时聚合（intraday_to_bars.cjs，优先）+ 实时快照固化（rt_bar_collector.cjs），按真实 UTC+8 交易日分片"
+ },
+ "rtCoverage": {
+  "days": [
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20"
+  ],
+  "latestTrueDay": "2026-10-20",
+  "byKey": {
+   "p": 360,
+   "n": 360,
+   "b": 0,
+   "bp": 0
+  },
+  "points": 360,
+  "snapshotDays": [],
+  "coversLatest": true,
+  "coversDays": 1
+ },
+ "effective": {
+  "latestLabel": "2026-10-19",
+  "latestTrueDay": "2026-10-20",
+  "sourceNote": "历史 = csqaq 官方日线；最新 = 自建（分时/实时快照）。两者标签口径一致（见 spec.note）"
  },
  "live": {
   "date": "2026-10-20",
-  "atText": "2026/10/20 21:24:15",
-  "n": 2120
+  "atText": "2026/10/20 23:15:25",
+  "n": 2125
  },
- "lagDays": 2,
+ "lagDays": 1,
  "extraLagDays": 0,
+ "lagDaysTrue": 0,
+ "extraLagTrue": 0,
  "level": "ok",
+ "levelNote": "",
  "expectedBarsLatest": "2026-10-18",
- "downstreamStale": false,
- "staleFiles": [],
+ "expectedBarsTrueDay": "2026-10-19",
+ "downstreamStale": true,
+ "staleFiles": [
+  {
+   "file": "replenish-points.json",
+   "label": "回调补仓点",
+   "asOf": "2026-10-18"
+  },
+  {
+   "file": "watchlist-status.json",
+   "label": "监控清单",
+   "asOf": "2026-10-18"
+  },
+  {
+   "file": "crash-buy.json",
+   "label": "事件急跌抄底点",
+   "asOf": "2026-10-18"
+  }
+ ],
  "conclusions": [
   {
    "file": "replenish-points.json",
@@ -60,7 +152,7 @@
    "asOfDate": "2026-10-18",
    "generatedAt": "2026/10/20 21:25:54",
    "basedOnBars": "2026-10-18",
-   "staleVsBars": false
+   "staleVsBars": true
   },
   {
    "file": "watchlist-status.json",
@@ -68,9 +160,9 @@
    "asOf": "2026-10-18",
    "via": "asOfSeries",
    "asOfDate": "2026-10-18",
-   "generatedAt": "2026/10/20 21:23:17",
+   "generatedAt": "2026/10/20 23:15:03",
    "basedOnBars": "2026-10-18",
-   "staleVsBars": false
+   "staleVsBars": true
   },
   {
    "file": "watch-list.json",
@@ -130,7 +222,7 @@
    "asOfDate": "2026-10-18",
    "generatedAt": null,
    "basedOnBars": "2026-10-18",
-   "staleVsBars": false
+   "staleVsBars": true
   },
   {
    "file": "refill-plan.json",
@@ -163,5 +255,45 @@
    "staleVsBars": null
   }
  ],
- "message": "结论基于 2026-10-18 日线（源端日线正常滞后 2 天）　价格 2026-10-20 实时"
+ "conflict": {
+  "level": "warn",
+  "thresholdPct": 5,
+  "conflictGidCount": 2,
+  "message": "⚠️ 自建日线与 csqaq 官方有 2 个品差异 >5%，请确认口径",
+  "sections": [
+   {
+    "section": "daily_verify",
+    "level": "ok",
+    "compared": 135,
+    "medianPct": 0,
+    "conflictGidCount": 0,
+    "atText": "2026/10/20 23:16:07"
+   },
+   {
+    "section": "merge_junction",
+    "level": "warn",
+    "compared": 175,
+    "medianPct": 0,
+    "conflictGidCount": 1,
+    "atText": "2026/10/20 23:12:06"
+   },
+   {
+    "section": "intraday_calibration",
+    "level": "warn",
+    "compared": 315,
+    "medianPct": 0,
+    "conflictGidCount": 2,
+    "atText": "2026/10/20 23:12:59"
+   }
+  ],
+  "atText": "2026/10/20 23:16:07"
+ },
+ "message": "官方日线标签 2026-10-19 = UTC+8 交易日 2026-10-20；自建日线覆盖 8 天（已补到 2026-10-20，追加 1 天）",
+ "conflictText": "⚠️ 自建日线与 csqaq 官方有 2 个品差异 >5%，请确认口径",
+ "alarm": {
+  "level": "warn",
+  "text": "⚠️ 自建日线与 csqaq 官方有 2 个品差异 >5%，请确认口径",
+  "detail": "⚠️ 自建日线与 csqaq 官方有 2 个品差异 >5%，请确认口径",
+  "since": "2026/10/20 23:16:07"
+ }
 }
