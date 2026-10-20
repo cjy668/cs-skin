@@ -73,6 +73,31 @@ input,button,select,textarea{font-family:inherit}
 .abadge.warm b{color:#ffd166}
 .abadge.zeroc{opacity:.55}
 .abadge.ghost{background:transparent}
+/* ============================================================================
+   ★ 2026-10-20 S5 时效闸门（data/bars-freshness.json · build_bars_freshness.cjs）
+   ----------------------------------------------------------------------------
+   为什么必须有这条：用户实测「新启动的品和今日到补仓位置的品基本上都不对吧」——
+   根因是页面把【10-20 的实时价】和【10-14 的阶段判定】并排显示，且没有任何地方
+   说明这两个日期不是同一天。这条闸门把「结论基于哪一天的日线」永久显示在
+   顶部（6 个页签全部可见，因为它在 <header> 里、不在 <section class="page"> 里），
+   并在落后时变色。ok 也必须显示 —— 不许"没问题就不说"。
+   ============================================================================ */
+.barsgate{display:flex;align-items:center;gap:7px;max-width:680px;margin:0 auto 6px;
+  padding:5px 11px;border-radius:9px;font-size:11.5px;line-height:1.55;
+  border:1px solid rgba(120,140,170,.28);background:rgba(120,140,170,.08);color:var(--muted)}
+.barsgate .bg-ico{flex:0 0 auto;font-size:12px}
+.barsgate .bg-txt{min-width:0}
+.barsgate .bg-txt b{color:var(--text);font-weight:800}
+.barsgate .bg-when{opacity:.85}
+.barsgate.ok{border-color:rgba(90,216,166,.26);background:rgba(90,216,166,.07)}
+.barsgate.warn{border-color:rgba(246,189,22,.50);background:rgba(246,189,22,.12);color:#ffe0a3}
+.barsgate.warn .bg-txt b{color:#ffd166}
+.barsgate.bad{border-color:rgba(255,77,79,.60);background:rgba(255,77,79,.15);color:#ffb3b3;font-weight:600}
+.barsgate.bad .bg-txt b{color:#ff8f8f;font-size:12.5px}
+.barsgate.na{opacity:.7}
+/* 每个结论页签自己的那一行（warn/bad 时才插，避免和顶部条重复刷屏） */
+.barsgate-inline{margin:0 0 10px;max-width:none}
+@media(max-width:899px){.barsgate{font-size:11px;padding:4px 9px;margin-bottom:4px}}
 .adot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,107,107,.6);
   animation:apulse 1.8s infinite;flex:0 0 auto}
 @keyframes apulse{0%{box-shadow:0 0 0 0 rgba(255,107,107,.55)}70%{box-shadow:0 0 0 7px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
@@ -1229,6 +1254,14 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .rb-tag.rb-w{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.14)}
 .rb-tag.rb-n{color:var(--dim);border-color:rgba(139,157,178,.45);background:rgba(139,157,178,.10)}
 .rb-tag.rb-live{color:#1b2230;background:var(--yellow);border-color:var(--yellow)}
+/* ★ B1（2026-10-20）：批级事件标签。三类事件的判定见 cs-quant/data/event-class.json */
+.rb-tag.rb-ev-sj{color:var(--yellow);border-color:rgba(255,196,0,.6);background:rgba(255,196,0,.14)}
+.rb-tag.rb-ev-rs{color:#8ab4f8;border-color:rgba(138,180,248,.6);background:rgba(138,180,248,.14)}
+.rb-tag.rb-ev-none{color:var(--dim);border-color:rgba(139,157,178,.35);background:rgba(139,157,178,.07);font-weight:700}
+.rb-ev-note{font-size:11px;line-height:1.65;margin:6px 0 0;padding:5px 7px;border-radius:7px;
+  border:1px dashed rgba(138,180,248,.5);background:rgba(138,180,248,.07);color:var(--muted);overflow-wrap:anywhere;min-width:0;max-width:100%}
+.rb-ev-note.rb-sj{border-color:rgba(255,196,0,.5);background:rgba(255,196,0,.07)}
+.rb-ev-note b{color:var(--text)}
 .rb-chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0;min-width:0;max-width:100%}
 .rb-chip{font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px;border:1px solid var(--line);
   color:var(--dim);background:rgba(139,157,178,.08);overflow-wrap:anywhere;max-width:100%}
@@ -1671,6 +1704,15 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
       <div class="crumbbar">
         <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
         <div class="crumb-time">数据更新 <b id="crumb-time">—</b></div>
+      </div>
+      <!-- ★★★ 2026-10-20 S5 时效闸门：常显，说明「结论基于哪一天的日线 / 价格是哪一天」
+           位置：在 alertsbar（今日新启动 / 今日到补仓位置 那几个数字）【正上方】——
+           因为它警戒的正是下面这几个数字。它在 <header> 里 → 6 个页签全都能看到。
+           数据源：data/bars-freshness.json（cs-quant/build_bars_freshness.cjs）。
+           拿不到文件 → 显示「未接入」灰条，绝不隐藏（隐藏就等于假装没问题）。 -->
+      <div class="barsgate" id="bars-gate">
+        <span class="bg-ico" id="bg-ico">·</span>
+        <span class="bg-txt" id="bg-txt">正在核对结论的日线日期…</span>
       </div>
       <!-- ★ 2026-10-20 今日异动红点条：数字全部来自 watch-list.json 的 badge.breakdown -->
       <div class="alertsbar" id="alerts-bar">
@@ -6106,6 +6148,33 @@ function rbSwTag(sw){
   const cls = sw === '强盘' ? 'rb-s' : sw === '弱盘' ? 'rb-w' : 'rb-n';
   return '<span class="rb-tag ' + cls + '">' + esc(sw) + '</span>';
 }
+/* ★ B1：批级事件标签的渲染件（判据与逐事件结果见 cs-quant/data/event-class.json） */
+function rbEventChip(ec){
+  if (ec === 'sync_jump') return '<span class="rb-tag rb-ev-sj" title="当日同步跳价：全池中位 ≤ −10%、下跌 ≥90%、p90 ≤ −5%、5日分化不持续">sync_jump · 同步跳价</span>';
+  if (ec === 'regime_shift') return '<span class="rb-tag rb-ev-rs" title="结构性变化：只有暴露组肥尾 / +20→+60日分化扩大 / DiD ≤ −10pp —— 不剔除，只打标签">regime_shift · 结构性变化</span>';
+  return '<span class="rb-tag rb-ev-none">无事件标签</span>';
+}
+function rbShortTitle(t){
+  let s = String(t || '');
+  const m = s.match(/（([^）]*)）/);
+  if (m && m[1]) s = m[1];
+  s = s.replace(/^《反恐精英》更新/, '').replace(/^更新日志/, '更新日志').replace(/★/g, '').replace(/^[（(]|[）)]$/g, '').trim();
+  if (!s) s = String(t || '');
+  return s.length > 32 ? s.slice(0, 32) + '…' : s;
+}
+function rbEventNote(b){
+  const evs = arrOf(b && b.eventEvents);
+  if (!evs.length) return '';
+  const top = evs[0];
+  if (b.eventClass === 'sync_jump'){
+    return '<div class="rb-ev-note rb-sj">★ 事件核对：本批 ' + n2(top.n) + ' 个品的拉升段是在 <b>' + esc(top.reactionDay || top.eventDate) +
+      '</b> 的全场同步跳价窗口里启动的。已核对它们【不是】跳价反弹（本批段长中位 <b>' + n2(b.ralliesMedianDays) + '</b> 天、涨幅中位 <b>' + rbGain(b.gainMed) +
+      '</b>）—— 是崩盘见底后的<b>真实主拉升</b>，所以<b>保留不剔</b>；只有段长 &lt; 30 天且涨幅 &gt; 100% 的 8 段短促跳价噪声被剔掉（留档 data/rally-batches-excluded.json）。</div>';
+  }
+  const more = evs.length > 1 ? '（另有 ' + (evs.length - 1) + ' 个同期事件）' : '';
+  return '<div class="rb-ev-note">★ 受 <b>' + esc(rbShortTitle(top.title)) + '</b>（' + esc(top.eventDate) + '，反应日 ' + esc(top.reactionDay || top.eventDate) +
+    '）影响：本批 ' + n2(top.n) + ' 个品在该事件后的启动窗口内' + more + '。这是 <b>regime_shift（结构性变化）</b>，所以<b>不剔除</b> —— 段收益需要按「暴露组 vs 对照组」相对化解读，不要直接当成做盘幅度。</div>';
+}
 function rbBatchHTML(b, isLive){
   const chips = [];
   (b.kindTop || []).slice(0, 3).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
@@ -6114,6 +6183,7 @@ function rbBatchHTML(b, isLive){
   (b.priceBandTop || []).slice(0, 3).forEach(function(x){ chips.push('<span class="rb-chip">' + esc(x[0]) + ' <b>' + n2(x[1]) + '</b></span>'); });
   let h = '<div class="rb-item ' + (isLive ? 'rb-cur' : 'rb-past') + '">';
   h += '<div class="rb-h">' + esc(b.id) + '　' + esc(b.start) + ' → ' + esc(b.end) +
+    rbEventChip(b.eventClass) +
     (isLive ? (b.stage === '已走完' ? '<span class="rb-tag rb-n">刚收尾 · 已走完本批窗口</span>' : '<span class="rb-tag rb-live">正在走 · ' + esc(b.stage || '—') + '</span>') : '') +
     '<em>' + n2(b.nItems) + ' 个品 · 持续 ' + n2(b.durationDays) + ' 天 · 批内拉升段长中位 ' + n2(b.ralliesMedianDays) + ' 天' +
     (isNum(b.simMedInGroup) ? ' · 形态相似度中位 ' + b.simMedInGroup.toFixed(2) : '') + '</em></div>';
@@ -6123,6 +6193,8 @@ function rbBatchHTML(b, isLive){
     (isNum(b.progress) ? '<br>进度 <b>' + (Math.min(1, b.progress) * 100).toFixed(0) + '%</b>' + (b.progress > 1.05 ? '（本批窗口已走完）' : '') + '（已走 ' + n2(b.elapsedDays) + ' 天 / 本批窗口 ' + n2(b.durationDays) + ' 天）' : '') +
     (b.gapPrevDays != null ? '<br>' + (b.gapPrevDays < 0 ? ('与上一批 <b>' + esc(b.prevId || '—') + '</b> 时间重叠 <b>' + n2(-b.gapPrevDays) + '</b> 天') : ('距上一批 <b>' + n2(b.gapPrevDays) + '</b> 天' + (b.prevId ? '（' + esc(b.prevId) + '）' : ''))) : '') + '</div>';
   h += '<div class="rb-chips">' + chips.join('') + '</div>';
+  /* ★ B1：事件标签的说明（sync_jump 说明为什么保留；regime_shift 说明受哪个事件影响） */
+  h += rbEventNote(b);
   /* 启动先后：一前一后、可能互换 —— 这正是用户说的「拉升时间经常会有一前一后」 */
   if (b.waves && b.waves.length){
     h += '<div class="rb-m"><b>启动先后</b>（' + b.waves.length + ' 个开闸日）：' +
@@ -6167,7 +6239,8 @@ function renderRallyBatches(){
   const M = rbData.method || {};
   setText('rb-time', rbData.atText || '—');
   setText('rb-meta', '批次 ' + n2(C.batches) + ' 个 · 覆盖 ' + n2(C.itemsInSomeBatch) + ' 品 / ' + n2(C.episodes) + ' 段 C 主拉升' +
-    ' · 已剔除稀疏品 ' + n2(C.sparseExcluded) + ' 个 · 时间窗 W = ' + n2(rbData.wChosen) + ' 天');
+    ' · 已剔除稀疏品 ' + n2(C.sparseExcluded) + ' 个 · 时间窗 W = ' + n2(rbData.wChosen) + ' 天' +
+    ' · 事件口径=按段打标签（sync_jump ' + n2(C.batchSyncJump) + ' 批 / regime_shift ' + n2(C.batchRegimeShift) + ' 批 / 无事件 ' + n2(C.batchNoEvent) + ' 批；只剔跳价噪声段 ' + n2(C.eventExcludedSegments) + ' 段）');
   const nums = $('rb-nums');
   if (nums && nums.innerHTML !== undefined){
     nums.innerHTML = [
@@ -6175,7 +6248,9 @@ function renderRallyBatches(){
       ['正在走（近 60 天）', n2(C.liveBatches)],
       ['批内品数中位', n2(C.medianBatchSize)],
       ['所属批次可查的品', n2(C.itemsInSomeBatch)],
-      ['稀疏剔除', n2(C.sparseExcluded)]
+      ['稀疏剔除', n2(C.sparseExcluded)],
+      /* ★ B1：事件口径改成【按段打标签】后，只有 sync_jump 窗口里的短促跳价噪声段被剔 */
+      ['跳价噪声段已剔', n2(C.eventExcludedSegments) + ' 段']
     ].map(function(x){ return '<div class="rb-num"><div class="k">' + esc(x[0]) + '</div><div class="v">' + x[1] + '</div></div>'; }).join('');
   }
   const q = rbQ.trim();
@@ -8095,6 +8170,86 @@ async function initFreshness(){
   if (noteEl && doc.caveat) noteEl.textContent = doc.caveat;
 }
 
+/* ============================================================================
+   11.975) ★★★ S5 时效闸门（bars-freshness.json · cs-quant/build_bars_freshness.cjs）
+   ----------------------------------------------------------------------------
+   用户实测（2026-10-20）：「现在分析的新启动的品和今日到补仓位置的品基本上都不对吧」
+   根因不是判据写错，是【判据的日期 ≠ 价格的日期】：
+     阶段/档位判定用 2026-10-14 的日线，页面显示 2026-10-20 的实时价，
+     中间 4 天的走势完全没有进入判定，而页面上没有任何地方说明这件事。
+
+   ★ 硬纪律（写在这里，不靠记性）
+     1) ok 状态也必须显示两个日期 —— 「没问题就不说」正是这次事故的成因；
+     2) 不许自己重算落后天数：一律读 bars-freshness.json 的 level / extraLagDays，
+        与 watchdog 同口径（两处各写一套必然漂移，本项目已踩过）；
+     3) 拿不到文件 → 灰条「未接入」，绝不隐藏（隐藏 = 假装没问题）；
+     4) warn / bad 时，除了顶栏这一条，还在每个页签（.page）顶部插一条 ——
+        用户可能直接落在「信号」页，不能只在首页可见。
+   ============================================================================ */
+var BARS_GATE_CN = { ok: '新鲜', warn: '落后', bad: '已失真', na: '未接入' };
+var barsGateDoc = null;
+
+function barsGateWhen(doc){
+  var bar = (doc && doc.bars && doc.bars.latest) ? doc.bars.latest : '—';
+  var live = (doc && doc.live) ? (doc.live.atText || doc.live.date || '—') : '—';
+  return '结论基于 <b>' + esc(bar) + '</b> 日线　·　价格 <b>' + esc(live) + '</b>';
+}
+function barsGateInner(doc){
+  if (!doc){
+    return '<span class="bg-ico">⬜</span><span class="bg-txt">bars-freshness.json 未接入 —— 无法核对结论基于哪一天的日线（这一步没跑或没发布）。</span>';
+  }
+  var lv = doc.level || 'na';
+  var ico = lv === 'bad' ? '🔴' : (lv === 'warn' ? '⚠️' : (lv === 'ok' ? '·' : '⬜'));
+  var head = '';
+  if (lv === 'bad') head = '🔴 <b>结论已失真</b>：';
+  else if (lv === 'warn') head = '⚠️ <b>结论落后</b>：';
+  var msg = doc.message ? esc(doc.message) : '';
+  var html = '<span class="bg-ico">' + ico + '</span><span class="bg-txt">';
+  html += head + barsGateWhen(doc);
+  if (msg) html += '<span class="bg-when">　—　' + msg + '</span>';
+  if (doc.extraLagDays != null && lv !== 'ok'){
+    html += '<span class="bg-when">　（落后 ' + esc(String(doc.extraLagDays)) + ' 个交易日）</span>';
+  }
+  html += '</span>';
+  return html;
+}
+function barsGateAttr(el, k, v){
+  /* ★ 容错：_test/_verify_v2.cjs 的 DOM 桩（class El）没有 setAttribute —— 直接调用会抛
+     TypeError，async 函数变成未处理的 rejection，Node 24 会把整个测试进程直接判死（实测）。
+     所以统一走这个存在性判断：桩环境静默跳过，真实浏览器正常写。 */
+  try { if (el && typeof el.setAttribute === 'function') el.setAttribute(k, v); } catch (e){}
+}
+function barsGateApply(doc){
+  var bar = $('bars-gate');
+  if (!bar) return;
+  bar.className = 'barsgate ' + (doc ? (doc.level || 'na') : 'na');
+  bar.innerHTML = barsGateInner(doc);
+  barsGateAttr(bar, 'data-level', doc ? (doc.level || 'na') : 'na');
+  barsGateAttr(bar, 'data-bars', (doc && doc.bars && doc.bars.latest) || '');
+  barsGateAttr(bar, 'data-extra-lag', (doc && doc.extraLagDays != null) ? String(doc.extraLagDays) : '');
+  bar.title = doc ? ('bars-freshness.json 生成于 ' + (doc.atText || '—') + '；分级口径：extraLagDays = 距今天数 − 源端固有滞后(' + ((doc.spec && doc.spec.sourceLagDays) != null ? doc.spec.sourceLagDays : '?') + ' 天)') : '';
+  /* warn / bad 时给每个页签顶部再插一条（ok 时不插，避免满屏重复） */
+  var lv = doc ? (doc.level || 'na') : 'na';
+  var pages = (document.querySelectorAll ? document.querySelectorAll('section.page') : []) || [];
+  for (var i = 0; i < pages.length; i++){
+    var sec = pages[i];
+    if (!sec || typeof sec.insertBefore !== 'function') continue;
+    var old = (typeof sec.querySelector === 'function') ? sec.querySelector(':scope > .barsgate-inline') : null;
+    if (lv !== 'warn' && lv !== 'bad'){ if (old && old.parentNode) old.parentNode.removeChild(old); continue; }
+    var el = old || document.createElement('div');
+    el.className = 'barsgate barsgate-inline ' + lv;
+    el.innerHTML = barsGateInner(doc);
+    barsGateAttr(el, 'data-level', lv);
+    if (!old) sec.insertBefore(el, sec.firstChild);
+  }
+}
+async function initBarsGate(){
+  var doc = null;
+  try { doc = await fetchJSON('./bars-freshness.json'); } catch (e) { doc = null; }
+  barsGateDoc = doc;
+  barsGateApply(doc);
+}
+
 /* =====================================================================
    11.98) 数据新鲜度徽标（health.json）
    ---------------------------------------------------------------------
@@ -9555,6 +9710,7 @@ async function init(){
   initMarket();
   initStaleTip();
   initFreshness();                 /* ★ 2026-10-19 数据新鲜度卡片：每源独立时间戳 + 距今多久 + 6h/12h 变色 */
+  initBarsGate();                  /* ★ 2026-10-20 S5 时效闸门：结论基于哪一天的日线（常显，落后时红黄） */
 initHealthBadge();                /* 数据新鲜度徽标：读 health.json，拿不到就灰点，不影响其他页 */
   loadHealth();
   renderDataTime();
