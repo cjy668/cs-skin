@@ -1727,22 +1727,28 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                  · 拉升前候选 = 平时（大多数日子）回答"买什么"，靠阶段+空间；
                  · 本卡 = 只在【事件急跌】这种极端日子出现，靠"崩盘→不再创新低→不追高"。
                  两者同时为空是正常的；本卡平时【整块 display:none】，不占屏幕、不糊假数据。
-               ★ 四条件（cs-quant/crash_lib.cjs makeEngine，唯一实现）：
+               ★ 四条件【必须是时序关系，不许同一天同时要求】（cs-quant/crash_buy_lib.cjs，唯一实现）：
                  ① 最近 10 个交易日内有【结构性改变 / 供给冲击】更新（data/cs2-updates.json 的真实日期）
-                 ② 全池中位单日 ≤ −15% 或 跌≥20% 的品占 ≥50%
-                 ③ 见底：当日跌幅收窄到 ≥−5% + 连续 2 日不创新低 + 仍在急跌低点 15% 以内（不追高）
-                 ④ 选品：被错杀（跌幅 ≥ 池中位）+ 抛压停（在售 3 日 ≤ +5%）+ 能卖出（在售 ≥50、非 micro）
-               ★ 为什么 ③ 要"不追高 15%"：2025-10-24 是 +18% 的假反弹，离低点 18% 被这条挡掉，
-                 真正能买的窗口是 10-25 / 10-27 / 10-28（见 reports/事件急跌抄底-判据与验证.md §四）。
+                 ② 全池急跌（过去式）：全池中位单日 ≤ −15% 或 跌≥20% 的品占 ≥50%
+                 ③ 见底信号（现在式）：连续 2 日不创新的品占比 ≥50%
+                 ④ ★ 时序：② 的日子必须【严格早于】③ 的判定日至少 1 个交易日
+               ★ 为什么必须有时序④：2025 五合一那次急跌在 10-22 / 10-23、见底在 10-24 起。
+                 把②③要求同一天 → 永远不触发（这是踩过的坑，写死在这里）。
+                 按四条：10-22 不触发（③只有 30%）· 10-23 不触发（③只有 9%）· ★ 10-24 触发（③ 86%）。
+               ★ 选品（a~e 逐条回测后的结论，见 reports/事件急跌抄底-判据与验证.md §五）：
+                 能卖出（在售≥50、价≥10）+ 抛压没激增（在售较事件日 ≤+5%）+ 崩盘前 30 日维持力 P75 以上。
+                 「跌幅最深」实测三处全负 → 删掉；「低价档」方向不稳定 → 只展示不做门槛。
                数据源：cs-quant/build_crash_buy.cjs → crash-buy.json
-               （?crashdemo=1 时读 crash-buy-demo.json —— 2025-10-28 那次的历史回放，只用于验收截图）
+               （?crashdemo=1023 急跌中 / ?crashdemo=1024 见底日 / ?crashdemo=1 窗口第 7 天，
+                 都是历史回放，只用于验收截图，页面上必须写明"历史回放"）
                降级链：拿不到 → 整块保持隐藏，其余卡片照常。 -->
           <div class="card span-all" id="sec-crash" style="display:none">
-            <div class="sec-head"><h2>事件急跌抄底点</h2><span class="sec-sub">事件 → 全池急跌 → 见底不追高 → 被错杀且卖得出去</span><span class="r" id="cb-time">—</span></div>
+            <div class="sec-head"><h2>事件急跌抄底点</h2><span class="sec-sub">先跌 → 后稳：事件急跌之后等见底信号，不是更新当天买</span><span class="r" id="cb-time">—</span></div>
             <div id="cb-head"></div>
             <div class="cb-nums" id="cb-nums"></div>
             <div id="cb-conds"></div>
             <div id="cb-box"></div>
+            <div id="cb-hist"></div>
             <p class="sec-note" id="cb-note">—</p>
           </div>
 
@@ -4536,9 +4542,11 @@ function pulseStampText(){
    前缀 cb-（crash-buy），与 prc-/tw-/ex-/wl- 零冲突。
    ============================================================================ */
 let cbData = null, cbState = 'loading', cbKick = false;
-/* ?crashdemo=1   → crash-buy-demo.json（2025-10-28 抄底点那次的历史回放）
-   ?crashdemo=1024 → crashdemo-1024.json（2025-10-24「急跌第 1 天、还没见底」的回放）
-   ★ 只有这两个显式的回放文件名，绝不在正常路径上偷偷读历史文件冒充今天。 */
+/* ?crashdemo=X 的回放映射（★ 都是【历史回放】，页面上会打「历史回放」徽标，绝不冒充今天的信号）：
+     ?crashdemo=1023 → crashdemo-1023.json（2025-10-23 急跌第 2 天，state=crashing「⚠️ 事件急跌中」）
+     ?crashdemo=1024 → crashdemo-1024.json（2025-10-24 见底日，  state=bottom  「🟢 抄底窗口」）
+     ?crashdemo=1    → crash-buy-demo.json（2025-10-28 窗口第 7 天， state=window_open「🟢 窗口仍开」）
+   ★ 只有这几个显式的回放文件名，绝不在正常路径上偷偷读历史文件冒充今天。 */
 const CB_DEMO = (function () {
   const s = String((typeof location !== 'undefined' && location.search) || '');
   const m = /[?&]crashdemo=([A-Za-z0-9_-]+)/.exec(s);
@@ -4573,98 +4581,126 @@ function renderCrashBuy(){
      直接写 card.style.display 会把整个测试打断 —— 和 renderTodayAlerts 同一条纪律：
      先确认能力再动手，能力不全就当这块不存在。 */
   const sty = card.style;
-  const st = (cbData && cbData.state) || null;
-  /* 只在条件成立（急跌中 / 抄底点）或历史回放时显示；其余一律隐藏 */
-  const show = !!st && (st.active === true || (CB_DEMO && st.isBuyPoint));
+  const st = (cbData && cbData.state) || '';     /* ★ v2：state 是字符串（none/crashing/bottom/window_open/closed） */
+  /* 只在条件成立（急跌中 / 抄底窗口）时显示；none（平时）和 closed（窗口已关）一律隐藏 */
+  const show = !!cbData && (st === 'crashing' || st === 'bottom' || st === 'window_open');
   if (!show){ if (sty) sty.display = 'none'; return; }
   if (sty) sty.display = '';
 
   const t = $('cb-time'); if (t) t.textContent = (cbData.asOf || '') + (CB_DEMO ? ' · 历史回放' : '');
   const hl = cbData.headline || {};
-  const buy = st.phase === 'buy_zone';
-  const crash = st.crash || {};
-  const ev = st.event || {};
-  const bt = st.bottom || {};
+  const buy = (st === 'bottom' || st === 'window_open');
+  const crash = cbData.crash || {};
+  const ev = cbData.event || {};
+  const bt = cbData.bottom || {};
+  const sig = cbData.signal || {};
+  const noLowPct = (bt && bt.noNewLowPct != null) ? bt.noNewLowPct : (sig ? sig.noNewLowPct : null);
+  const dayN = cbData.dayN;
+  const c3ok = !!(cbData.conditions && cbData.conditions.c3_bottom && cbData.conditions.c3_bottom.ok);
 
-  /* ---- 头：状态徽标 + 事件 + 时序 ---- */
+  /* ---- 头：状态徽标 + 事件 + 崩盘日 + 见底信号 ---- */
   const head = $('cb-head');
   if (head) head.innerHTML =
-    '<span class="cb-tag ' + (buy ? 'buy' : 'watch') + '">' + esc((hl.tag ? hl.tag + ' ' : '') + (hl.text || st.phaseCN || '—')) + '</span>' +
+    '<span class="cb-tag ' + (buy ? 'buy' : 'watch') + '">' + esc((hl.tag ? hl.tag + ' ' : '') + (hl.text || cbData.stateCN || '—')) + '</span>' +
     (CB_DEMO ? '<span class="cb-tag closed" style="margin-left:6px">历史回放（不是今天的信号）</span>' : '') +
     '<div class="cb-when">' +
-      '事件：<b>' + esc(ev.date || '—') + '</b>　' + esc((ev.types || []).join(' / ')) + '　《' + esc(((ev.titles || [])[0]) || '—') + '》' +
-      '<br>急跌日 <b>' + esc(crash.day || '—') + '</b>　全池中位单日 <b style="color:#ff8f8f">' + cbPct(crash.level) + '</b>　跌≥20% 占 <b>' + cbPct(crash.dn20, 0) + '</b>' +
-      (st.daysSince != null ? ('　·　第 <b>' + n2(st.daysSince) + '</b> 天') : '') +
-      '<br>离急跌以来最低点 <b>' + cbPct(st.zoneOpen === false && bt.away != null ? bt.away : bt.away) + '</b>' +
-      (st.zoneOpen ? '　（仍在抄底窗口内）' : '　（窗口已关）') +
+      '事件：<b>' + esc(ev.date || '—') + '</b>　' + esc(ev.type || '') + '　《' + esc(ev.title || '—') + '》' +
+      '<br>崩盘日 <b>' + esc(crash.day || '—') + '</b>' + (crash.dayFirst && crash.dayFirst !== crash.day ? ('（首次 ' + esc(crash.dayFirst) + '）') : '') +
+      '　全池中位单日 <b style="color:#ff8f8f">' + cbPct(crash.poolDropMed) + '</b>　跌≥20% 占 <b>' + cbPct(crash.drop20Pct, 1) + '</b>' +
+      (dayN != null ? ('　·　急跌第 <b>' + n2(dayN) + '</b> 天') : '') +
+      '<br>见底信号：连续 2 日不创新的品占比 <b style="color:' + (c3ok ? '#2fd07a' : '#ffb3b3') + '">' + cbPct(noLowPct) + '</b>' +
+      '（门槛 ' + cbPct((cbData.cfg && cbData.cfg.W) || 0.5, 0) + '）' +
+      (bt.signalDay ? ('　见底日 <b>' + esc(bt.signalDay) + '</b>') : '　<b>尚未成立</b>') +
+      '<br>离急跌以来最低点 <b>' + cbPct(cbData.awayFromLow) + '</b>（' + esc(cbData.lowDay || '') + ' 的 ¥' + n2(cbData.lowFromCrash, 2) + '）' +
+      (cbData.zoneOpen ? '　（仍在抄底窗口内）' : '') +
     '</div>';
 
   /* ---- 数字条 ---- */
   const nums = $('cb-nums');
   if (nums) nums.innerHTML =
-    '<div class="cb-num"><div class="k">全池中位单日跌幅</div><div class="v" style="color:#ff8f8f">' + cbPct(crash.level) + '</div></div>' +
-    '<div class="cb-num"><div class="k">跌 ≥20% 的品占</div><div class="v">' + cbPct(crash.dn20, 1) + '</div></div>' +
-    '<div class="cb-num"><div class="k">离急跌低点</div><div class="v">' + cbPct(bt.away) + '</div></div>' +
-    '<div class="cb-num"><div class="k">急跌已过</div><div class="v">' + (st.daysSince == null ? '—' : (n2(st.daysSince) + ' 天')) + '</div></div>' +
-    '<div class="cb-num"><div class="k">在售量是否还激增</div><div class="v">' + (bt.noLow ? '没在创新低' : '还在探底') + '</div></div>' +
+    '<div class="cb-num"><div class="k">全池中位单日跌幅</div><div class="v" style="color:#ff8f8f">' + cbPct(crash.poolDropMed) + '</div></div>' +
+    '<div class="cb-num"><div class="k">跌 ≥20% 的品占</div><div class="v">' + cbPct(crash.drop20Pct, 1) + '</div></div>' +
+    '<div class="cb-num"><div class="k">连续 2 日不创新低占比</div><div class="v" style="color:' + (c3ok ? '#2fd07a' : '#ffb3b3') + '">' + cbPct(noLowPct) + '</div></div>' +
+    '<div class="cb-num"><div class="k">离急跌低点</div><div class="v">' + cbPct(cbData.awayFromLow) + '</div></div>' +
+    '<div class="cb-num"><div class="k">急跌第几天</div><div class="v">' + (dayN == null ? '—' : (n2(dayN) + ' 天')) + '</div></div>' +
     cbSpark(cbData.tail);
 
-  /* ---- 四条件 ---- */
+  /* ---- 四条件（按【时序】排：事件 → 急跌 → 见底 → 必须更晚） ---- */
   const conds = $('cb-conds');
   if (conds) {
     const c = cbData.conditions || {};
-    const one = (k, name, o) => '<div class="cb-cond ' + (o && o.ok ? 'ok' : 'no') + '"><span class="cb-ck" style="color:' +
+    const one = (name, o) => '<div class="cb-cond ' + (o && o.ok ? 'ok' : 'no') + '"><span class="cb-ck" style="color:' +
       (o && o.ok ? '#2fd07a' : '#8b9db2') + '">' + (o && o.ok ? '✓' : '✗') + '</span><b>' + name + '</b>　' +
       esc((o && o.detail) || '—') + '</div>';
-    conds.innerHTML = one('c1', '① 结构性事件', c.c1_event) + one('c2', '② 全池级急跌', c.c2_crash) +
-      one('c3', '③ 见底 / 不追高', c.c3_bottom) + one('c4', '④ 选品（被错杀 + 卖得出去）', c.c4_exit);
+    conds.innerHTML = one('① 事件窗口', c.c1_event) + one('② 全池急跌（过去式）', c.c2_crash) +
+      one('③ 见底信号（现在式）', c.c3_bottom) + one('④ 时序：② 必须早于 ③', c.c4_timeorder);
   }
 
-  /* ---- 选品 ---- */
-  const box = $('cb-box'); const picks = cbData.picks;
+  /* ---- 选品 / 观察 ---- */
+  const box = $('cb-box'); const picks = cbData.picks || [];
   if (box) {
-    if (buy && picks && picks.list && picks.list.length){
-      let h = '<div class="cb-warn"><b>先看这条再往下看名单：</b>' +
-        esc((cbData.selectionRule && cbData.selectionRule.note) || '') + '</div>' +
-        '<p class="cb-when">过闸 <b>' + n2(picks.n) + '</b> 个，按「超跌幅度 + 抛压退」排序取前 ' + picks.list.length +
-        ' 个。池中位跌幅 <b>' + cbPct(picks.poolDropMed) + '</b>（低于这条=没被错杀，不进名单）。</p>' +
-        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>#</th><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-num-c">急跌</th><th class="cb-num-c">在售3日</th><th class="cb-c-his">历史同事件后</th></tr></thead><tbody>';
-      picks.list.forEach(function(p){
-        const hs = p.histSameEvent;
+    const pm = cbData.picksMeta || {};
+    if (buy && picks.length){
+      let h = '<div class="cb-warn"><b>先看这条再往下看名单：</b>' + esc(cbData.pickRule || '') + '</div>' +
+        '<p class="cb-when">过闸 <b>' + n2(pm.passCount) + '</b> 个 / 能卖出的底仓 <b>' + n2(pm.baseCount) + '</b> 个 / 全池 <b>' + n2(pm.universeCount) + '</b> 个。' +
+        '按名单里的 why 排序取前 ' + picks.length + ' 个；tier 与跌幅只展示，不做门槛。</p>' +
+        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>#</th><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-c-his">急跌幅度</th><th class="cb-num-c">维持力</th><th class="cb-num-c">在售变化</th></tr></thead><tbody>';
+      picks.forEach(function(p){
         h += '<tr><td class="cb-rank">' + n2(p.rank) + '</td><td>' + esc(p.name) + '</td>' +
           '<td class="cb-c-tier">' + esc(p.tier || '—') + '</td>' +
-          '<td class="cb-num-c">¥' + n2(p.price, 2) + '</td><td class="cb-num-c" style="color:#ff8f8f">' + cbPct(p.drop) + '</td>' +
-          '<td class="cb-num-c">' + cbPct(p.listedChg3) + '</td>' +
-          '<td class="cb-c-his">' + (hs ? ('d20 ' + cbPct(hs.d20) + ' / d60 ' + cbPct(hs.d60)) : '—') + '</td></tr>';
+          '<td class="cb-num-c">¥' + n2(p.price, 2) + '</td>' +
+          '<td class="cb-c-his" style="color:#ff8f8f">' + cbPct(p.dropPct) + '</td>' +
+          '<td class="cb-num-c">' + cbPct(p.retain30, 0) + '</td>' +
+          '<td class="cb-num-c">' + cbPct(p.listedChg, 0) + '</td></tr>';
       });
       h += '</tbody></table></div>';
       box.innerHTML = h;
-    } else if (picks && picks.list && picks.list.length){
-      let h = '<div class="cb-warn"><b>急跌已发生、但还没见底 → 只列观察，不是买点。</b>' +
-        '要等"当日跌幅收窄到 −5% 以内 + 连续 2 日不创新低 + 仍在低点 15% 以内"三条同时成立。</div>' +
-        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-num-c">急跌</th><th class="cb-num-c">在售3日</th></tr></thead><tbody>';
-      picks.list.forEach(function(p){
-        h += '<tr><td>' + esc(p.name) + '</td><td class="cb-c-tier">' + esc(p.tier || '—') + '</td>' +
+    } else if (st === 'crashing' && cbData.watch && cbData.watch.list && cbData.watch.list.length){
+      let h = '<div class="cb-warn"><b>还在急跌，这些只是观察、不是买点。</b>' + esc(cbData.watch.note || '') + '</div>' +
+        '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>#</th><th>品</th><th class="cb-c-tier">档</th><th class="cb-num-c">现价</th><th class="cb-c-his">急跌幅度</th><th class="cb-num-c">在售变化</th></tr></thead><tbody>';
+      cbData.watch.list.forEach(function(p){
+        h += '<tr><td class="cb-rank">' + n2(p.rank) + '</td><td>' + esc(p.name) + '</td>' +
+          '<td class="cb-c-tier">' + esc(p.tier || '—') + '</td>' +
           '<td class="cb-num-c">¥' + n2(p.price, 2) + '</td>' +
-          '<td class="cb-num-c" style="color:#ff8f8f">' + cbPct(p.drop) + '</td><td class="cb-num-c">' + cbPct(p.listedChg3) + '</td></tr>';
+          '<td class="cb-c-his" style="color:#ff8f8f">' + cbPct(p.dropPct) + '</td>' +
+          '<td class="cb-num-c">' + cbPct(p.listedChg, 0) + '</td></tr>';
       });
       box.innerHTML = h + '</tbody></table></div>';
     } else {
-      box.innerHTML = '<div class="cb-warn">条件成立，但<b>没有品过 ④ 的闸</b>（要同时满足：跌幅 ≥ 池中位、在售 ≥50、在售 3 日 ≤+5%、非 micro）。' +
-        '过闸 0 个就如实显示 0 个，不降门槛凑数。</div>';
+      box.innerHTML = '<div class="cb-warn">条件成立，但<b>没有品过选品闸</b>（在售 ≥50、价 ≥10、在售较事件日 ≤+5%、维持力 P75 以上）。过闸 0 个就如实显示 0 个，不降门槛凑数。</div>';
     }
   }
+
+  /* ---- 历史：26 个结构性/供给事件逐个 + 触发那次的之后收益 ---- */
+  const hist = $('cb-hist');
+  if (hist && cbData.history && cbData.history.length){
+    const hs = cbData.historySummary || {};
+    const trig = (hs.triggeredList && hs.triggeredList[0]) || null;
+    let h = '<div class="cb-when" style="margin-top:9px"><b>历史回测：</b>' + hs.events + ' 个结构性/供给事件里，' +
+      '<b>' + n2(hs.withCrash) + '</b> 个在事件后 10 个交易日内出现过全池级急跌，四条件触发 <b>' + n2(hs.withTrigger) + '</b> 次。' +
+      (trig ? ('唯一那次：事件 <b>' + esc(trig.eventDate) + '</b> → 崩盘 <b>' + esc((trig.crashDays || []).join('、')) + '</b> → 触发 <b>' + esc(trig.trigger) + '</b>' +
+        (trig.fwd ? ('，其后 d10 ' + cbPct(trig.fwd.d10) + ' / d20 ' + cbPct(trig.fwd.d20) + ' / d60 ' + cbPct(trig.fwd.d60) + '（全池中位，未扣费）') : '')) : '') +
+      '</div>';
+    h += '<div class="cb-scroll"><table class="cb-tbl"><thead><tr><th>事件</th><th class="cb-c-his">类型</th><th>首次急跌</th><th>触发</th><th class="cb-c-his">其后 d20</th></tr></thead><tbody>';
+    cbData.history.slice().reverse().slice(0, 8).forEach(function(x){
+      const fd = x.fwd ? String(n2(((x.fwd.d20 || 0) * 100), 1)) + '%' : '—';
+      h += '<tr><td>' + esc(x.date) + '</td><td class="cb-c-his">' + esc(x.type || '') + '</td>' +
+        '<td>' + (x.crashDays && x.crashDays.length ? esc(x.crashDays[0]) : '—') + '</td>' +
+        '<td style="color:' + (x.triggered ? '#2fd07a' : '#8b9db2') + '">' + (x.triggered ? ('★ ' + esc(x.trigger)) : '未触发') + '</td>' +
+        '<td class="cb-c-his">' + fd + '</td></tr>';
+    });
+    hist.innerHTML = h + '</tbody></table></div>';
+  } else if (hist) hist.innerHTML = '';
 
   /* ---- 脚注 ---- */
   const note = $('cb-note');
   if (note) note.innerHTML =
-    '<b>口径：</b>① 事件取 data/cs2-updates.json 的真实日期（不许用未来信息）→ ② 全池中位单日 ≤ −' +
+    '<b>口径：</b>① 事件取 data/cs2-updates.json 的真实日期（只用当时可得信息）→ ② 全池中位单日 ≤−' +
     ((cbData.cfg && cbData.cfg.X * 100) || 15) + '% 或 跌≥20% 占 ≥' + ((cbData.cfg && cbData.cfg.Y * 100) || 50) + '% → ' +
-    '③ 跌势收窄 + 连续 2 日不创新低 + 离低点 ≤' + ((cbData.cfg && cbData.cfg.NEAR_LOW * 100) || 15) + '%（不追高）→ ' +
-    '④ 被错杀 + 卖得出去。' +
-    '<br><b>回测：</b>1,231 个交易日里这套②只响过 1 次（2025-10-23 −28.4%）；26 个结构性/供给事件里只有它触发了抄底点，' +
-    '入场后 1 个月全池 +33.2%（详见 reports/事件急跌抄底-判据与验证.md）。' +
-    '<br><b>它不是什么：</b>不是"今天该买"的指令，是"现在处于急跌的哪一段"的状态标签；慢跌/阴跌不在这套判据里（那是回调补仓点的事）。' +
+    '③ 连续 2 日不创新的品占比 ≥' + ((cbData.cfg && cbData.cfg.W * 100) || 50) + '% → ④ ② 必须严格早于 ③ 至少 1 个交易日。' +
+    '<br><b>回测：</b>1,231 个交易日里「事件 + 全池急跌」只出现过 1 次（2025-10-22 五合一 → 10-23 崩盘）；' +
+    '按本判据 10-24 触发，入场 ¥99.7 → 10-31 ¥118.0 = +18.4%（全池中位）；一个月后 10-23 跌≥20% 那批 92.1% 高于崩盘日收盘。' +
+    '<br><b>它不是什么：</b>不是"今天该买"的指令，是"现在处在急跌的哪一段"的状态标签；慢跌/阴跌不在这套判据里（那是回调补仓点的事）。' +
     (CB_DEMO ? '<br><b>这是一次历史回放</b>（asOf ' + esc(cbData.asOf || '') + '，只用那一天及以前的数据算出来的状态），不是今天的信号。' : '');
 
   /* 整块渲染完再量一次溢出（真机宽度由 _test/_overflow_all.cjs 另测） */
