@@ -5431,7 +5431,7 @@ function renderNewsWatch(){
     } else {
       lat = '巡检节拍未知（数据里没给 cadenceMin）。';
     }
-    latEl.textContent = lat + (wd ? '下面列最近 ' + wd + ' 天的官方公告。' : '');
+    latEl.textContent = lat + (wd ? ' 下面列最近 ' + wd + ' 天的官方公告。' : '');
     latEl.className = (tk && !reg) ? 'nw-lat nw-lat-warn' : 'nw-lat';
   }
   if (metaEl){
