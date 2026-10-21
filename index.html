@@ -1645,6 +1645,72 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .cb-tag{font-size:12px}
 }
 
+/* ============================================================================
+   B3 · CS2 官方更新监测（2026-10-21 新增，前缀 nw-）
+   ----------------------------------------------------------------------------
+   为什么单独一套前缀：本站历史上踩过「复用 .basis 导致整页横向溢出 2709px」，
+   新区块一律用新前缀 + min-width:0 + overflow-wrap:anywhere，不许继承旧类。
+   颜色只表达"这条更新有多可能动供需"（红=机制级，橙=供给级，灰=赛事级/无关），
+   不表达"会涨会跌" —— 涨跌这件事本机给不出结论（见卡片顶部那句声明）。
+   ============================================================================ */
+.nw-card{min-width:0;max-width:100%}
+.nw-card h2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0}
+.nw-state{display:inline-block;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:700;
+  border:1px solid var(--line);background:var(--card2);color:var(--muted);white-space:nowrap}
+.nw-state-ok{color:var(--green);border-color:rgba(47,208,122,.42);background:rgba(47,208,122,.1)}
+.nw-state-bad{color:var(--red);border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
+.nw-state-wait{color:var(--dim)}
+.nw-honest{margin:8px 0 10px;padding:11px 12px;border-radius:12px;min-width:0;
+  border:1px solid rgba(255,197,49,.42);background:rgba(255,197,49,.08)}
+.nw-honest b{display:block;color:var(--yellow);font-size:12.5px;line-height:1.5;margin-bottom:5px;overflow-wrap:anywhere}
+.nw-honest p{margin:0;font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.nw-lat{margin:6px 0 0;font-size:11.5px;line-height:1.6;color:var(--dim);overflow-wrap:anywhere}
+.nw-lat-warn{color:var(--yellow)}
+.nw-meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;min-width:0}
+.nw-meta span{display:inline-block;max-width:100%;padding:3px 8px;border-radius:8px;font-size:11.5px;
+  color:var(--muted);background:var(--card2);border:1px solid var(--line);overflow-wrap:anywhere}
+.nw-meta span b{color:var(--text);font-weight:700}
+.nw-meta a{color:var(--cyan);text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.45)}
+.nw-groups{min-width:0}
+.nw-grp{margin:0 0 14px;min-width:0}
+.nw-grp-h{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0 0 7px;min-width:0}
+.nw-grp-h .nw-grp-note{font-size:11.5px;color:var(--dim);overflow-wrap:anywhere}
+.nw-grp-h b{font-size:12px;color:var(--text)}
+.nw-lv{display:inline-block;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:700;
+  border:1px solid transparent;white-space:nowrap}
+.nw-lv-mech{color:#ffb9b9;background:rgba(255,107,107,.14);border-color:rgba(255,107,107,.48)}
+.nw-lv-sup{color:#ffd8a1;background:rgba(255,170,60,.13);border-color:rgba(255,170,60,.45)}
+.nw-lv-event{color:#b9c7d6;background:rgba(139,157,178,.13);border-color:rgba(139,157,178,.38)}
+.nw-lv-none{color:var(--dim);background:rgba(93,111,131,.13);border-color:rgba(93,111,131,.38)}
+.nw-item{min-width:0;max-width:100%;margin:0 0 8px;padding:10px 12px;border-radius:12px;
+  border:1px solid var(--line);background:var(--card2)}
+.nw-item-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 5px;
+  font-size:11.5px;color:var(--muted);min-width:0}
+.nw-date{font-variant-numeric:tabular-nums}
+.nw-conf,.nw-src{font-size:11px;color:var(--dim)}
+.nw-new{font-size:10.5px;font-weight:700;color:#ffd8a1;border:1px solid rgba(255,170,60,.5);
+  background:rgba(255,170,60,.14);border-radius:6px;padding:1px 6px}
+.nw-title{margin:0;font-size:13px;font-weight:700;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.nw-title a{color:inherit;text-decoration:none;border-bottom:1px dashed rgba(139,157,178,.55)}
+.nw-sum{margin:5px 0 0;font-size:11.5px;line-height:1.65;color:var(--muted);overflow-wrap:anywhere}
+.nw-kw{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:7px 0 0;min-width:0;
+  font-size:11px;color:var(--dim)}
+.nw-kw i{font-style:normal;max-width:100%;padding:1px 6px;border-radius:6px;overflow-wrap:anywhere;
+  color:#9be7f5;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3)}
+.nw-sim{margin:8px 0 0;padding-top:7px;border-top:1px dashed var(--line);min-width:0}
+.nw-sim-t{margin:0 0 4px;font-size:11px;color:var(--dim);overflow-wrap:anywhere}
+.nw-sim-row{margin:2px 0;font-size:11.5px;line-height:1.6;color:var(--muted);overflow-wrap:anywhere}
+.nw-sim-row b{color:var(--text)}
+.nw-sim-note{color:var(--dim)}
+.nw-caveat{margin:8px 0 0;font-size:11px;line-height:1.55;color:var(--yellow);overflow-wrap:anywhere}
+.nw-empty{padding:10px 12px;border-radius:10px;border:1px dashed var(--line);background:var(--card);
+  font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+.nw-foot{margin:10px 0 0;font-size:11px;line-height:1.6;color:var(--dim);overflow-wrap:anywhere}
+@media (max-width:470px){
+  .nw-item{padding:9px 10px}
+  .nw-meta span{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -2255,6 +2321,30 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
            ============================================================ -->
       <section class="page" id="sec-tools" data-page="tools">
         <div class="page-title"><h1>工具</h1><span>策略验证 · 组合风控 · 持仓体检 · 断层率信号 · 查任意一件</span></div>
+
+        <!-- ============================================================
+             ★ 2026-10-21 台账 B3（用户最早问的问题之一）：
+               「如果明天早上更新，你会得到消息并且在 app 中给出预测性判断吗，这个准确吗？」
+             这一卡只回答它能回答的那一半，并且把不能回答的那一半写在最上面：
+               · 能：明早更新 → cs-quant/update_watcher.cjs 每 30 分钟巡检 Steam 官方公告
+                     → cs2-news-watch.json 里就有标题 / 时间 / 链接 / 命中关键词
+               · 不能：预测这次更新会让哪些品涨跌（历史样本 n=1，见卡片顶部声明）
+             数据源：data/cs2-news-watch.json（update_watcher.cjs 产出，只读 GET、不带账号）
+             ★ 硬纪律：本卡【一个数字都不写死】—— 条数 / 日期 / 关键词 / 相似度 /
+               甚至「历史多少个更新里只有几个造成全池急跌」都是渲染时从 JSON 读的。
+               验证脚本会拿数据反例改一遍，页面必须跟着变。
+             ============================================================ -->
+        <div class="card nw-card" id="sec-news">
+          <h2>CS2 官方更新监测 <span class="nw-state nw-state-wait" id="nw-state">读取中…</span></h2>
+          <div class="nw-honest">
+            <b>先说清楚：本机只能检测到【有更新】，不能预测这次更新会让哪些品涨跌。</b>
+            <p id="nw-honest">正在读 cs2-news-watch.json…（下面每个数字都来自那份文件，本卡不写死任何结论）</p>
+            <p class="nw-lat" id="nw-lat"></p>
+          </div>
+          <div class="nw-meta" id="nw-meta"></div>
+          <div class="nw-groups" id="nw-groups"></div>
+          <p class="nw-foot" id="nw-foot"></p>
+        </div>
 
         <!-- ============================================================
              做盘痕迹图谱入口（2026-10-16 加）
@@ -3869,6 +3959,8 @@ function showPage(id){
   if (pid === 'market'){ ensurePreRally(); }
   /* ★ 持仓退出看板：只有切到「库存」页才下 exit-board.json（184 KB），不拖首屏 */
   if (pid === 'inv'){ ensureExitBoard(); }
+  /* ★ 2026-10-21 台账 B3：切到「工具」页才下 cs2-news-watch.json（几 KB），首屏不拉 */
+  if (pid === 'tools'){ ensureNewsWatch(); }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -5202,6 +5294,204 @@ async function loadTools(){
   toolsState = toolsData ? 'ok' : 'fail';
   renderTools();
 }
+
+/* =====================================================================
+   11.86) B3 · CS2 官方更新监测 —— cs2-news-watch.json（只读，懒加载）
+
+   这是什么：cs-quant/update_watcher.cjs 每 30 分钟只读拉一次 Steam 官方公告
+   （ISteamNews API + 中文 RSS，不带任何账号/token），写成本文件。页面只读展示。
+
+   三条硬纪律（和上面 tools / pattern-types 同一套）：
+     1) 顶部必须先说【不能预测】，再说能做什么 —— 不许把"抓到公告"包装成"预测"。
+     2) 所有数字（条数/日期/关键词数/相似度/历史事件数）一律从 JSON 读；
+        页面里一个都不写死（验证脚本会改数据反例，页面必须跟着变）。
+     3) 拿不到文件 → 明确写"本机现在不知道有没有更新"，绝不用旧缓存假装正常。
+   降级：cs2-news-watch.json 404/断网 → 只空这一块，其他页签照常。
+   ===================================================================== */
+/* ===== B3-NEWS-START =====
+   ★ 这两个标记不是装饰：_verify_b3.cjs 会把这一整段（从 START 到 END）抽出来，
+     在 Node 里配一个桩 DOM 跑「改数据 → 页面必须跟着变」的反例。
+     删掉标记 = 这条反例测试立刻失效（脚本会报 FAIL），所以别删。 */
+let nwData = null, nwState = 'idle', nwKick = false;
+const NW_LEVELS = ['机制级', '供给级', '赛事级', '无关'];
+const NW_LEVEL_CLS = { '机制级': 'nw-lv-mech', '供给级': 'nw-lv-sup', '赛事级': 'nw-lv-event', '无关': 'nw-lv-none' };
+const NW_LEVEL_NOTE = {
+  '机制级': '可能改变供需结构（交易规则 / 汰换 / 箱子里装什么）→ 这一档最该看',
+  '供给级': '新增投放（箱子 / 通行证 / 印花 / 挂件）→ 供给变多',
+  '赛事级': 'Major / Pick\'Em / 大行动（不直接改供需）',
+  '无关': '地图 / 音效 / 平衡 / Bug 修复（不触及供需）'
+};
+function nwLvCls(lv){ return NW_LEVEL_CLS[lv] || 'nw-lv-none'; }
+function nwLvText(lv){ return NW_LEVELS.indexOf(lv) >= 0 ? lv : '未分类'; }
+function nwAgo(ms){
+  if (!isNum(ms)) return '—';
+  const m = Math.max(0, Math.floor((Date.now() - ms) / 60000));
+  if (m < 1) return '刚刚';
+  if (m < 60) return m + ' 分钟前';
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + ' 小时 ' + (m % 60) + ' 分钟前';
+  return Math.floor(h / 24) + ' 天 ' + (h % 24) + ' 小时前';
+}
+async function loadNewsWatch(){
+  nwState = 'loading';
+  renderNewsWatch();
+  nwData = await fetchJSON('./cs2-news-watch.json');
+  nwState = nwData ? 'ok' : 'fail';
+  renderNewsWatch();
+}
+/* 只下一次：来回切页签不重复请求 */
+function ensureNewsWatch(){ if (nwKick) return; nwKick = true; loadNewsWatch(); }
+
+function nwSimHtml(list){
+  const arr = Array.isArray(list) ? list : [];
+  if (!arr.length){
+    return '<div class="nw-sim-row nw-sim-note">没有相似度 &gt; 0 的历史事件（这条公告的措辞和 265 条历史都不像）。</div>';
+  }
+  let h = '';
+  for (const s of arr){
+    h += '<div class="nw-sim-row"><b>' + esc(String(s.date || '—')) + '</b> ' + esc(String(s.title || '')) +
+      '（相似度 ' + esc(String(s.similarity)) + '）<span class="nw-sim-note"> — ' +
+      esc(String(s.note || '没有价格效应记录')) + '</span></div>';
+  }
+  return h;
+}
+function nwItemHtml(it){
+  const kw = Array.isArray(it.matchedKeywords) ? it.matchedKeywords : [];
+  const kwHtml = kw.length ? kw.map(function(k){ return '<i>' + esc(String(k)) + '</i>'; }).join('')
+    : '<span class="nw-sim-note">没有命中机制/供给/赛事关键词</span>';
+  const url = String(it.url || '');
+  const title = esc(String(it.title || '(无标题)'));
+  const titleHtml = /^https?:\/\//i.test(url)
+    ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + title + '</a>' : title;
+  const dateLocal = String(it.dateLocal || it.date || '—');
+  const steamDate = (it.date && it.dateLocal && it.date !== it.dateLocal)
+    ? '<span class="nw-src">Steam 日期 ' + esc(String(it.date)) + '</span>' : '';
+  return '<div class="nw-item">' +
+    '<div class="nw-item-top">' +
+      '<span class="nw-date">' + esc(dateLocal) + '</span>' +
+      '<span class="nw-lv ' + nwLvCls(it.level) + '">' + esc(nwLvText(it.level)) + '</span>' +
+      '<span class="nw-conf">置信 ' + esc(String(it.confidence || '—')) + '</span>' +
+      (it.alreadyKnown ? '<span class="nw-src">历史已收录</span>' : '<span class="nw-new">🆕 新</span>') +
+      steamDate +
+    '</div>' +
+    '<p class="nw-title">' + titleHtml + '</p>' +
+    (it.summary ? '<p class="nw-sum">' + esc(String(it.summary)) + '</p>' : '') +
+    '<div class="nw-kw">命中：' + kwHtml + '</div>' +
+    '<div class="nw-sim"><div class="nw-sim-t">相似历史事件（这是【类比】不是预测）：</div>' +
+      nwSimHtml(it.similarEvents) + '</div>' +
+    (it.caveat ? '<p class="nw-caveat">⚠️ ' + esc(String(it.caveat)) + '</p>' : '') +
+    '</div>';
+}
+function renderNewsWatch(){
+  const stateEl = $('nw-state'), honestEl = $('nw-honest'), latEl = $('nw-lat');
+  const metaEl = $('nw-meta'), box = $('nw-groups'), footEl = $('nw-foot');
+  if (!box) return;
+  if (nwState === 'idle' || nwState === 'loading'){
+    if (stateEl){ stateEl.className = 'nw-state nw-state-wait'; stateEl.textContent = '读取中…'; }
+    if (metaEl) metaEl.innerHTML = '';
+    box.innerHTML = skelBox('正在读 cs2-news-watch.json…');
+    return;
+  }
+  if (nwState === 'fail' || !nwData){
+    if (stateEl){ stateEl.className = 'nw-state nw-state-bad'; stateEl.textContent = '⚠️ 没取到数据'; }
+    if (honestEl){
+      honestEl.textContent = 'cs2-news-watch.json 没取到 —— 本机现在【不知道】有没有更新，不能假装知道。' +
+        '（电脑上跑一次 node cs-quant/update_watcher.cjs，或等 CSQuant_UpdateWatch 计划任务跑一轮）';
+    }
+    if (latEl) latEl.textContent = '';
+    if (metaEl) metaEl.innerHTML = '';
+    box.innerHTML = emptyBox('没有数据文件，这一块先空着（其他页面不受影响）。');
+    if (footEl) footEl.textContent = '';
+    return;
+  }
+  const d = nwData;
+  const at = Number(d.at) || 0;
+  const ageMin = at ? Math.floor((Date.now() - at) / 60000) : null;
+  const staleAfter = Number(d.staleAfterMin) || 0;
+  const stale = staleAfter > 0 && ageMin !== null && ageMin > staleAfter;
+  if (stateEl){
+    stateEl.className = 'nw-state ' + (stale ? 'nw-state-bad' : 'nw-state-ok');
+    stateEl.textContent = stale ? ('⚠️ 巡检已 ' + ageMin + ' 分钟没成功') : ('✅ ' + nwAgo(at) + '巡检');
+  }
+  if (honestEl) honestEl.textContent = d.caveat || '（数据里缺 caveat 字段 —— 这是缺陷，不是"没问题"）';
+  if (latEl){
+    const cad = Number(d.cadenceMin) || 0;
+    const wd = Number(d.windowDays) || 0;
+    const tk = d.task || null;
+    const reg = !!(tk && tk.registered === true);
+    let lat;
+    if (tk && !reg){
+      /* ★ 诚实闸门：任务没注册时，绝不能说"最多 30 分钟" —— 那是我们希望它多久跑一次，
+         不是它真的多久跑一次。这时如实说"只有 daily 兜底"。 */
+      lat = '⚠️ 每 ' + (cad || '?') + ' 分钟的巡检任务（' + (tk.name || 'CSQuant_UpdateWatch') +
+        '）还没注册 —— 现在只有 daily 兜底（一天 6 次，最坏约 4 小时才知道更新）。注册：右键 cs-quant\\注册CSQuant_UpdateWatch-右键管理员运行.cmd';
+    } else if (cad){
+      lat = '更新发布 → 本机知道：最多 ' + cad + ' 分钟（计划任务 ' + ((tk && tk.name) || 'CSQuant_UpdateWatch') +
+        ' 每 ' + cad + ' 分钟巡检一次）。';
+    } else {
+      lat = '巡检节拍未知（数据里没给 cadenceMin）。';
+    }
+    latEl.textContent = lat + (wd ? '下面列最近 ' + wd + ' 天的官方公告。' : '');
+    latEl.className = (tk && !reg) ? 'nw-lat nw-lat-warn' : 'nw-lat';
+  }
+  if (metaEl){
+    let h = '';
+    if (d.lastSeenDate){
+      h += '<span>最新公告 <b>' + esc(String(d.lastSeenDate)) + '</b> ' + esc(String(d.lastSeenTitle || '')) +
+        (d.lastSeenUrl ? ' <a href="' + esc(String(d.lastSeenUrl)) + '" target="_blank" rel="noopener">Steam 原文</a>' : '') + '</span>';
+    }
+    h += '<span>巡检时间 <b>' + esc(String(d.atText || '—')) + '</b>（' + esc(nwAgo(at)) + '）</span>';
+    h += '<span>本次新增 <b>' + esc(String(isNil(d.newCount) ? '—' : d.newCount)) + '</b> 条</span>';
+    const st = Array.isArray(d.sourceStatus) ? d.sourceStatus : [];
+    if (st.length){
+      h += '<span>源 ' + st.map(function(s){
+        return esc(String(s.name || '')) + ' ' + (s.ok ? '✅' : (s.skipped ? '（本轮未用）' : '❌'));
+      }).join(' · ') + '</span>';
+    }
+    const hist = d.hist || {};
+    if (isNum(hist.coreEventDates) && isNum(hist.syncJumpCount)){
+      h += '<span>历史 <b>' + esc(String(hist.coreEventDates)) + '</b> 个「结构性改变/供给冲击」更新 · 其中 <b>' +
+        esc(String(hist.syncJumpCount)) + '</b> 个造成全池急跌</span>';
+    }
+    if (d.task){
+      h += '<span>' + (d.task.registered
+        ? '巡检任务 <b>已注册</b>（每 ' + esc(String(Number(d.cadenceMin) || 0)) + ' 分钟）'
+        : '⚠️ 巡检任务 <b>未注册</b>（现在只有 daily 兜底）') + '</span>';
+    }
+    metaEl.innerHTML = h;
+  }
+  const items = (Array.isArray(d.recent) && d.recent.length ? d.recent : (Array.isArray(d.items) ? d.items : []));
+  if (!items.length){
+    const wd = Number(d.windowDays) || 0;
+    box.innerHTML = '<div class="nw-empty">最近 ' + esc(String(wd || '—')) + ' 天<b>没有</b>官方公告。' +
+      (d.lastSeenDate ? '最后一条：<b>' + esc(String(d.lastSeenDate)) + '</b> ' + esc(String(d.lastSeenTitle || '')) + '。' : '') +
+      '巡检仍在跑 —— 一有新更新就会出现在这里（同一份公告不会重复报）。</div>';
+  } else {
+    const groups = {};
+    for (const it of items){
+      const lv = nwLvText(it.level);
+      (groups[lv] = groups[lv] || []).push(it);
+    }
+    let h = '';
+    for (const lv of NW_LEVELS){
+      const g = groups[lv];
+      if (!g || !g.length) continue;
+      g.sort(function(a, b){
+        return String(b.dateLocal || b.date || '').localeCompare(String(a.dateLocal || a.date || ''));
+      });
+      h += '<div class="nw-grp"><div class="nw-grp-h"><span class="nw-lv ' + nwLvCls(lv) + '">' + esc(lv) + '</span>' +
+        '<b>' + g.length + ' 条</b><span class="nw-grp-note">' + esc(NW_LEVEL_NOTE[lv] || '') + '</span></div>';
+      for (const it of g) h += nwItemHtml(it);
+      h += '</div>';
+    }
+    box.innerHTML = h;
+  }
+  if (footEl){
+    footEl.textContent = (d.itemCaveat ? d.itemCaveat + ' ' : '') +
+      '相似度 = 文本关键词重合（中英同义词已对齐），不是"涨跌概率"。';
+  }
+}
+/* ===== B3-NEWS-END ===== */
 
 /* =====================================================================
    11.84) 做盘类型 —— pattern-types.json / _types-detail.json（只读展示）
