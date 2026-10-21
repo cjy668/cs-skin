@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1792559390387,
-   "atText": "2026/10/21 13:09:50",
+   "at": 1792562402537,
+   "atText": "2026/10/21 14:00:02",
    "level": "ok",
    "compared": 820,
    "gids": 529,
@@ -106,8 +106,8 @@
    "note": "自建日线 vs 官方：820 个 (gid×日) 可比，完全相等 70.122%，中位差异 0%，>5% 的品 8/529 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1792559385274,
-   "atText": "2026/10/21 13:09:45",
+   "at": 1792562398105,
+   "atText": "2026/10/21 13:59:58",
    "level": "ok",
    "officialLatestLabel": "2026-10-19",
    "officialLatestTrueDay": "2026-10-20",
@@ -310,8 +310,8 @@
    "note": "交界处 8 天，p 中位差异 0%，91.1404% 完全相等 → 自建口径与官方一致"
   },
   "intraday_calibration": {
-   "at": 1792559382335,
-   "atText": "2026/10/21 13:09:42",
+   "at": 1792562395601,
+   "atText": "2026/10/21 13:59:55",
    "level": "ok",
    "compared": 1140,
    "gids": 146,
@@ -412,22 +412,22 @@
    "note": "分时（UTC+8 切日取最后采样）与官方日线中位差异 0%，口径一致，可用于补最新 1~2 天"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1792559385556,
-   "atText": "2026/10/21 13:09:45",
+   "at": 1792562398315,
+   "atText": "2026/10/21 13:59:58",
    "level": "ok",
    "compared": 129,
    "medianPct": 0,
-   "p90Pct": 0.1842,
-   "maxPct": 7.9897,
-   "over5PctShare": 1.5504,
-   "conflictGidCount": 2,
+   "p90Pct": 0.0691,
+   "maxPct": 1.9231,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "ok",
- "at": 1792559390387,
- "atText": "2026/10/21 13:09:50",
+ "at": 1792562402537,
+ "atText": "2026/10/21 14:00:02",
  "conflictGids": [
   {
    "gid": 883,
