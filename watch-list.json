@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792551710474,
- "atText": "2026/10/21 11:01:50",
+ "at": 1792553512153,
+ "atText": "2026/10/21 11:31:52",
  "asOfDate": "2026-10-21",
  "script": "cs-quant/build_watch_list.cjs",
  "purpose": "用户原话：「明显已经新启动的品明显不会只有一波，必须要持续关注，帮我分析阶段，并在合适补仓的位置提醒我」。自动收录新启动品；用户可手动加(pinned=true / manual=true)或隐藏(hidden=true)，脚本不会删。",
@@ -17,46 +17,34 @@
   "caution": "脚本每次运行会【重写】items 的 latest 字段，但不会删掉 manual/pinned 项。"
  },
  "counts": {
-  "watchTotal": 396,
-  "newStart": 3,
+  "watchTotal": 395,
+  "newStart": 1,
   "refill": 24,
   "refillLegacy": 24,
   "refillFourCond": 0,
-  "refillBlockedByLiquidity": 1,
+  "refillBlockedByLiquidity": 0,
   "late": 16,
   "sell": 0,
-  "stageChanged": 14
+  "stageChanged": 0
  },
  "badge": {
-  "total": 43,
+  "total": 41,
   "breakdown": {
-   "新启动": 3,
+   "新启动": 1,
    "到补仓位置": 24,
    "到末期": 16
   },
   "extra": {
-   "阶段变化": 14,
+   "阶段变化": 0,
    "卖出信号": 0,
    "到补仓位置_旧阶梯": 24,
    "到补仓位置_四条件": 0,
-   "到补仓位置_流通性挡掉": 1
+   "到补仓位置_流通性挡掉": 0
   },
   "rule": "新启动 = 今天新进列表或阶段由别档变成拉升早期；到补仓位置 = 旧价格阶梯今日首次触发 ∪ 四条件版补仓点（含 3 个交易日内刚触发），且必须通过流通性 5 条门槛（tier≠micro / 在售≥50 / 求购≥5 / 可卖>0 / 可交易≥¥3,000）；到末期 = 统一阶段 = 拉升末期/派发"
  },
  "alerts": {
   "newStart": [
-   {
-    "gid": 1058,
-    "name": "加利尔 AR | 冷石 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "铺货吸筹（2026-10-10 在售+23.6%/价-4.2%）",
-    "price": 158.89,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.3779,
-    "strength": "mid",
-    "stockType": "中间型"
-   },
    {
     "gid": 9587,
     "name": "P250 | 交换机 (崭新出厂)",
@@ -68,18 +56,6 @@
     "fromLow60": 0.3828,
     "strength": "mid",
     "stockType": "中间型"
-   },
-   {
-    "gid": 9613,
-    "name": "MP9 | 滑移 (崭新出厂)",
-    "stage": "拉升早期",
-    "reason": "扫单收货（2026-10-05）",
-    "price": 19.5,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "fromLow60": 0.6102,
-    "strength": "strong",
-    "stockType": "倒货型"
    }
   ],
   "refill": [
@@ -204,8 +180,8 @@
      "stableNeedDays": 4,
      "stableReady": false
     },
-    "nextAction": "急跌档已补过：等锚点 8.43（当前还差 -0.24%）补 1/3（弱盘：只小仓位，拉升即出，不要加满）",
-    "price": 8.41,
+    "nextAction": "急跌档已补过：等锚点 8.43（当前还差 -0.12%）补 1/3（弱盘：只小仓位，拉升即出，不要加满）",
+    "price": 8.42,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
    },
@@ -246,26 +222,6 @@
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
    },
    {
-    "gid": 1521,
-    "name": "MP7 | 森林 DDPAT (崭新出厂)",
-    "tiers": [
-     "stable"
-    ],
-    "levels": {
-     "fastPx": 18.4401,
-     "fastDrop": 0.0956,
-     "anchorPx": 16.14,
-     "stableNeedDays": 18,
-     "stableReady": true
-    },
-    "nextAction": "锚点档已补过：若再急跌到 18.44 可小补；否则等企稳（距峰值≥18 天 + 反弹 2%）",
-    "price": 12.5,
-    "priceAt": null,
-    "priceSrc": null,
-    "group": "strong",
-    "outsideWatch": true
-   },
-   {
     "gid": 1891,
     "name": "P90 | 白蜡木 (崭新出厂)",
     "tiers": [
@@ -283,6 +239,26 @@
     "priceAt": null,
     "priceSrc": null,
     "group": "weak",
+    "outsideWatch": true
+   },
+   {
+    "gid": 1521,
+    "name": "MP7 | 森林 DDPAT (崭新出厂)",
+    "tiers": [
+     "stable"
+    ],
+    "levels": {
+     "fastPx": 18.4401,
+     "fastDrop": 0.0956,
+     "anchorPx": 16.14,
+     "stableNeedDays": 18,
+     "stableReady": true
+    },
+    "nextAction": "锚点档已补过：若再急跌到 18.44 可小补；否则等企稳（距峰值≥18 天 + 反弹 2%）",
+    "price": 12.5,
+    "priceAt": null,
+    "priceSrc": null,
+    "group": "strong",
     "outsideWatch": true
    },
    {
@@ -548,19 +524,7 @@
    }
   ],
   "refillFourCond": [],
-  "refillBlockedByLiquidity": [
-   {
-    "gid": 20525,
-    "name": "加利尔 AR | NV (崭新出厂)",
-    "tier": "small",
-    "tierNow": null,
-    "price": 2.55,
-    "priceAt": 1792551223016,
-    "priceSrc": "price-live.json",
-    "status": "just_triggered",
-    "blockedBy": "⑤ 可交易容量 ≥ ¥3000（maxTradable=¥1344）"
-   }
-  ],
+  "refillBlockedByLiquidity": [],
   "late": [
    {
     "gid": 154,
@@ -577,10 +541,10 @@
     "gid": 279,
     "name": "AWP | 火卫一 (崭新出厂)",
     "stage": "派发",
-    "price": 38.63,
+    "price": 38.64,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "ddFromHigh60": -0.3199,
+    "ddFromHigh60": -0.3197,
     "sellAlert": null,
     "exitLocked": null
    },
@@ -740,134 +704,7 @@
    }
   ],
   "sell": [],
-  "stageChanged": [
-   {
-    "gid": 1058,
-    "name": "加利尔 AR | 冷石 (崭新出厂)",
-    "from": "calm",
-    "to": "rallyEarly",
-    "price": 158.89,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 1238,
-    "name": "M4A1消音版 | 闪回 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 753.3,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 1328,
-    "name": "M4A4 | 狮鹫 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 526,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 1977,
-    "name": "P90 | 暴风呼啸 (崭新出厂)",
-    "from": "rallyEarly",
-    "to": "calm",
-    "price": 139,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 2103,
-    "name": "R8 左轮手枪 | 渐变琥珀 (崭新出厂)",
-    "from": "distribute",
-    "to": "calm",
-    "price": 20.59,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 2179,
-    "name": "SCAR-20 | 丛林滑流 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 1.7,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 6568,
-    "name": "USP 消音版 | 黑色魅影 (崭新出厂)",
-    "from": "accumulate",
-    "to": "calm",
-    "price": 655.55,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 9613,
-    "name": "MP9 | 滑移 (崭新出厂)",
-    "from": "calm",
-    "to": "rallyEarly",
-    "price": 19.5,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 9649,
-    "name": "R8 左轮手枪 | 氮化处理 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 19.78,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 13181,
-    "name": "格洛克 18 型 | 一目了然 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 19.9,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 13740,
-    "name": "AK-47 | 绿色层压板 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 255,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 16505,
-    "name": "M4A1消音版 | 泥斑迷彩 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 12.55,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 17937,
-    "name": "截短霰弹枪 | 森林 DDPAT (崭新出厂)",
-    "from": "rallyEarly",
-    "to": "calm",
-    "price": 3.29,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 18604,
-    "name": "M249 | 狂野丛林 (崭新出厂)",
-    "from": "rallyEarly",
-    "to": "accumulate",
-    "price": 120,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   }
-  ]
+  "stageChanged": []
  },
  "priceBasis": {
   "src": "dealer-stage-board 日线收盘 / replenish-points 判定价（均为生成时快照）",
@@ -1301,12 +1138,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 8.41,
+    "price": 8.42,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0624,
-    "fromLow60": 0.111,
-    "ddFromHigh60": -0.3229,
+    "change20": -0.0613,
+    "fromLow60": 0.1123,
+    "ddFromHigh60": -0.3221,
     "strength": "weak",
     "stockType": "中间型",
     "batch": "B043",
@@ -1332,7 +1169,7 @@
       "stableReady": false
      },
      "filledPx": {
-      "fast": 8.41,
+      "fast": 8.42,
       "anchor": null,
       "stable": null
      },
@@ -1341,9 +1178,9 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "急跌档已补过：等锚点 8.43（当前还差 -0.24%）补 1/3（弱盘：只小仓位，拉升即出，不要加满）",
+     "nextAction": "急跌档已补过：等锚点 8.43（当前还差 -0.12%）补 1/3（弱盘：只小仓位，拉升即出，不要加满）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0947
+     "drawdownFromPeak": -0.0936
     },
     "holding": null,
     "exitLocked": null,
@@ -2244,12 +2081,12 @@
     "stage6": "派发",
     "conflict": true,
     "confidence": "low",
-    "price": 38.63,
+    "price": 38.64,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.1069,
-    "fromLow60": 0.2542,
-    "ddFromHigh60": -0.3199,
+    "change20": 0.1072,
+    "fromLow60": 0.2545,
+    "ddFromHigh60": -0.3197,
     "strength": "weak",
     "stockType": "中间型",
     "batch": "B027",
@@ -2284,7 +2121,7 @@
      },
      "nextAction": "锚点档已补过：若再急跌到 33.73 可小补；否则等企稳（距峰值≥3 天 + 反弹 2%）（弱盘：只小仓位，拉升即出，不要加满）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0414
+     "drawdownFromPeak": -0.0412
     },
     "holding": null,
     "exitLocked": null,
@@ -3389,8 +3226,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -3728,8 +3565,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -3794,8 +3631,8 @@
     "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
-    "stageChanged": true,
-    "stagePrev": "calm",
+    "stageChanged": false,
+    "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
     "confidence": "medium",
@@ -4991,8 +4828,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -5298,12 +5135,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 68.89,
+    "price": 68.66,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.0781,
-    "fromLow60": 0.2258,
-    "ddFromHigh60": -0.4307,
+    "change20": 0.0745,
+    "fromLow60": 0.2217,
+    "ddFromHigh60": -0.4326,
     "strength": "weak",
     "stockType": "倒货型",
     "batch": "B012",
@@ -5320,9 +5157,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 58.8352,
-      "fastDrop": 0.146,
-      "anchorPx": 62.545,
+      "fastPx": 58.6585,
+      "fastDrop": 0.1457,
+      "anchorPx": 62.43,
       "stableNeedDays": 5,
       "stableReady": false
      },
@@ -5336,7 +5173,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 58.84（需单日跌 ≥ 14.60%）小仓 1/3；或回撤到锚点 62.55 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
+     "nextAction": "未补过：等急跌到 58.66（需单日跌 ≥ 14.57%）小仓 1/3；或回撤到锚点 62.43 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -5463,8 +5300,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -5938,8 +5775,8 @@
     "asOf": "2026-10-21",
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "rallyLate",
     "stage6": "拉升末期",
     "conflict": true,
     "confidence": "low",
@@ -5950,7 +5787,7 @@
     "fromLow60": 0.8237,
     "ddFromHigh60": -0.2219,
     "strength": "strong",
-    "stockType": "倒货型",
+    "stockType": "中间型",
     "batch": "B071",
     "accumForms": [
      "form1"
@@ -6245,12 +6082,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 67.8,
+    "price": 67.9,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.2327,
-    "fromLow60": 0.3378,
-    "ddFromHigh60": -0.3082,
+    "change20": 0.2345,
+    "fromLow60": 0.3398,
+    "ddFromHigh60": -0.3071,
     "strength": "mid",
     "stockType": "倒货型",
     "batch": "B043",
@@ -6286,7 +6123,7 @@
      },
      "nextAction": "未补过：等急跌到 54.33（需单日跌 ≥ 20.11%）小仓 1/3；或回撤到锚点 59.34 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0029
+     "drawdownFromPeak": -0.0015
     },
     "holding": null,
     "exitLocked": null,
@@ -6357,7 +6194,7 @@
     "change20": 0.0488,
     "fromLow60": 0.5327,
     "ddFromHigh60": -0.8084,
-    "strength": "mid",
+    "strength": "strong",
     "stockType": "中间型",
     "batch": "B004",
     "accumForms": [
@@ -6479,8 +6316,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -6682,12 +6519,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 38.5,
+    "price": 37.2,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.1832,
-    "fromLow60": 0.3819,
-    "ddFromHigh60": -0.384,
+    "change20": 0.2197,
+    "fromLow60": 0.3352,
+    "ddFromHigh60": -0.4048,
     "strength": "mid",
     "stockType": "倒货型",
     "batch": "B146",
@@ -6722,13 +6559,13 @@
      },
      "nextAction": "未补过：等急跌到 31.21（需单日跌 ≥ 18.93%）小仓 1/3；或回撤到锚点 33.18 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": 0
+     "drawdownFromPeak": -0.0338
     },
     "holding": null,
     "exitLocked": null,
     "sellAlert": null,
     "reasons": [
-     "扫单收货（2026-10-19）"
+     "扫单收货（2026-10-20）"
     ]
    }
   },
@@ -7329,8 +7166,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "rallyEarly",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -7403,8 +7240,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -7606,8 +7443,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "distribute",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -8022,8 +7859,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -8046,72 +7883,6 @@
     "sellAlert": null,
     "reasons": [
      "铺货吸筹（2026-10-15 在售+30.9%/价-2.2%）"
-    ]
-   }
-  },
-  {
-   "gid": 2218,
-   "name": "SG 553 | 军队之辉 (崭新出厂)",
-   "addedAt": "2026-10-20",
-   "addedReason": "铺货吸筹（2026-10-09 在售+62.3%/价-7.1%）",
-   "pinned": false,
-   "hidden": false,
-   "latest": {
-    "asOf": "2026-10-21",
-    "stage": "calm",
-    "stageName": "平静",
-    "stageChanged": false,
-    "stagePrev": "calm",
-    "stage6": "平静",
-    "conflict": false,
-    "confidence": "high",
-    "price": 0.26,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.2381,
-    "fromLow60": 0.3684,
-    "ddFromHigh60": -0.5,
-    "strength": "strong",
-    "stockType": "倒货型",
-    "batch": "B058",
-    "accumForms": [
-     "form2"
-    ],
-    "accumConfirmed": false,
-    "refill": {
-     "fired": {
-      "fast": false,
-      "anchor": false,
-      "stable": true
-     },
-     "allFired": false,
-     "firedToday": [],
-     "levels": {
-      "fastPx": 0.2296,
-      "fastDrop": 0.5584,
-      "anchorPx": 0.355,
-      "stableNeedDays": 4,
-      "stableReady": true
-     },
-     "filledPx": {
-      "fast": null,
-      "anchor": null,
-      "stable": 0.28
-     },
-     "filledDay": {
-      "fast": null,
-      "anchor": null,
-      "stable": "2026-10-11"
-     },
-     "nextAction": "未补过：等急跌到 0.23（需单日跌 ≥ 55.84%）小仓 1/3；或回撤到锚点 0.35 补主仓",
-     "stopBuy": false,
-     "drawdownFromPeak": -0.5
-    },
-    "holding": null,
-    "exitLocked": null,
-    "sellAlert": null,
-    "reasons": [
-     "铺货吸筹（2026-10-09 在售+62.3%/价-7.1%）"
     ]
    }
   },
@@ -8373,8 +8144,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -8746,12 +8517,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 257.18,
+    "price": 257.5,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.3572,
-    "fromLow60": 0.4874,
-    "ddFromHigh60": -0.3283,
+    "change20": 0.3588,
+    "fromLow60": 0.4893,
+    "ddFromHigh60": -0.3275,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": "B016",
@@ -8768,9 +8539,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 217.1687,
+      "fastPx": 217.4275,
       "fastDrop": 0.1556,
-      "anchorPx": 215.04,
+      "anchorPx": 215.2,
       "stableNeedDays": 9,
       "stableReady": false
      },
@@ -8784,7 +8555,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 217.17（需单日跌 ≥ 15.56%）小仓 1/3；或回撤到锚点 215.04 补主仓",
+     "nextAction": "未补过：等急跌到 217.43（需单日跌 ≥ 15.56%）小仓 1/3；或回撤到锚点 215.20 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -8873,8 +8644,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "accumulate",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -9419,8 +9190,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -9842,12 +9613,12 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 0.27,
+    "price": 0.32,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.325,
-    "fromLow60": 0,
-    "ddFromHigh60": -0.597,
+    "change20": -0.2,
+    "fromLow60": 0.1429,
+    "ddFromHigh60": -0.5224,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": null,
@@ -9868,7 +9639,7 @@
       "fastDrop": 0.318,
       "anchorPx": 0.545,
       "stableNeedDays": 5,
-      "stableReady": false
+      "stableReady": true
      },
      "filledPx": {
       "fast": null,
@@ -9882,7 +9653,7 @@
      },
      "nextAction": "锚点档已补过：若再急跌到 0.46 可小补；否则等企稳（距峰值≥5 天 + 反弹 2%）",
      "stopBuy": false,
-     "drawdownFromPeak": -0.597
+     "drawdownFromPeak": -0.5224
     },
     "holding": null,
     "exitLocked": null,
@@ -10050,12 +9821,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 0.83,
+    "price": 0.82,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0119,
-    "fromLow60": 0.0641,
-    "ddFromHigh60": -0.1863,
+    "change20": -0.0238,
+    "fromLow60": 0.0513,
+    "ddFromHigh60": -0.1961,
     "strength": null,
     "stockType": "倒货型",
     "batch": "B058",
@@ -10149,17 +9920,17 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 57.7,
+    "price": 57.6,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.294,
-    "fromLow60": 0.4108,
-    "ddFromHigh60": -0.4044,
+    "change20": 0.2918,
+    "fromLow60": 0.4083,
+    "ddFromHigh60": -0.4055,
     "strength": "strong",
     "stockType": "中间型",
     "batch": "B027",
@@ -10194,7 +9965,7 @@
      },
      "nextAction": "未补过：等急跌到 47.30（需单日跌 ≥ 18.45%）小仓 1/3；或回撤到锚点 49.45 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": -0.0052
+     "drawdownFromPeak": -0.0069
     },
     "holding": null,
     "exitLocked": null,
@@ -10517,8 +10288,8 @@
     "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
     "confidence": "medium",
@@ -10581,8 +10352,8 @@
     "asOf": "2026-10-21",
     "stage": "rallyEarly",
     "stageName": "拉升早期",
-    "stageChanged": true,
-    "stagePrev": "calm",
+    "stageChanged": false,
+    "stagePrev": "rallyEarly",
     "stage6": "拉升早期",
     "conflict": true,
     "confidence": "medium",
@@ -10653,12 +10424,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 304,
+    "price": 302.88,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.3451,
-    "fromLow60": 0.3726,
-    "ddFromHigh60": -0.2274,
+    "change20": 0.3402,
+    "fromLow60": 0.3675,
+    "ddFromHigh60": -0.2303,
     "strength": "mid",
     "stockType": "中间型",
     "batch": "B071",
@@ -10675,9 +10446,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 257.7153,
+      "fastPx": 256.7635,
       "fastDrop": 0.1523,
-      "anchorPx": 262.74,
+      "anchorPx": 262.18,
       "stableNeedDays": 9,
       "stableReady": false
      },
@@ -10691,7 +10462,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 257.72（需单日跌 ≥ 15.23%）小仓 1/3；或回撤到锚点 262.74 补主仓",
+     "nextAction": "未补过：等急跌到 256.76（需单日跌 ≥ 15.23%）小仓 1/3；或回撤到锚点 262.18 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -10790,8 +10561,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -11253,8 +11024,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -12953,8 +12724,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -13289,8 +13060,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -13355,8 +13126,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -13726,8 +13497,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -14109,12 +13880,12 @@
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
-    "price": 189.99,
+    "price": 190.49,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": 0.3166,
-    "fromLow60": 0.3571,
-    "ddFromHigh60": -0.3849,
+    "change20": 0.3201,
+    "fromLow60": 0.3606,
+    "ddFromHigh60": -0.3833,
     "strength": "strong",
     "stockType": "倒货型",
     "batch": "B012",
@@ -14131,9 +13902,9 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 153.3697,
-      "fastDrop": 0.1927,
-      "anchorPx": 164.995,
+      "fastPx": 153.7365,
+      "fastDrop": 0.1929,
+      "anchorPx": 165.245,
       "stableNeedDays": 9,
       "stableReady": false
      },
@@ -14147,7 +13918,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 153.37（需单日跌 ≥ 19.27%）小仓 1/3；或回撤到锚点 165.00 补主仓",
+     "nextAction": "未补过：等急跌到 153.74（需单日跌 ≥ 19.29%）小仓 1/3；或回撤到锚点 165.25 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
@@ -14311,8 +14082,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -16156,12 +15927,12 @@
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
-    "price": 49.5,
+    "price": 48.4,
     "priceAt": null,
     "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）",
-    "change20": -0.0275,
-    "fromLow60": 0.3866,
-    "ddFromHigh60": -0.5545,
+    "change20": -0.0491,
+    "fromLow60": 0.3557,
+    "ddFromHigh60": -0.5644,
     "strength": "mid",
     "stockType": "中间型",
     "batch": "B037",
@@ -16178,10 +15949,10 @@
      "allFired": false,
      "firedToday": [],
      "levels": {
-      "fastPx": 39.1829,
-      "fastDrop": 0.2084,
-      "anchorPx": 42.6,
-      "stableNeedDays": 5,
+      "fastPx": 38.7508,
+      "fastDrop": 0.2092,
+      "anchorPx": 42.35,
+      "stableNeedDays": 4,
       "stableReady": false
      },
      "filledPx": {
@@ -16194,9 +15965,9 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 39.18（需单日跌 ≥ 20.84%）小仓 1/3；或回撤到锚点 42.60 补主仓",
+     "nextAction": "未补过：等急跌到 38.75（需单日跌 ≥ 20.92%）小仓 1/3；或回撤到锚点 42.35 补主仓",
      "stopBuy": false,
-     "drawdownFromPeak": 0
+     "drawdownFromPeak": -0.0122
     },
     "holding": null,
     "exitLocked": null,
@@ -16217,8 +15988,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -16349,8 +16120,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -16965,8 +16736,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "rallyEarly",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -17572,8 +17343,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -17638,8 +17409,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -18150,8 +17921,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -18226,8 +17997,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -18330,8 +18101,8 @@
     "asOf": "2026-10-21",
     "stage": "accumulate",
     "stageName": "吸筹",
-    "stageChanged": true,
-    "stagePrev": "rallyEarly",
+    "stageChanged": false,
+    "stagePrev": "accumulate",
     "stage6": "吸筹",
     "conflict": true,
     "confidence": "low",
@@ -19418,8 +19189,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -19685,7 +19456,10 @@
     "refill": null,
     "holding": null,
     "exitLocked": null,
-    "sellAlert": null,
+    "sellAlert": {
+     "type": null,
+     "verified": null
+    },
     "reasons": [
      "铺货吸筹（2026-10-14 在售+10.5%/价-3.4%）"
     ]
@@ -19949,7 +19723,7 @@
     "change20": null,
     "fromLow60": null,
     "ddFromHigh60": null,
-    "strength": "weak",
+    "strength": "mid",
     "stockType": null,
     "batch": null,
     "accumForms": [
@@ -19981,7 +19755,7 @@
       "anchor": null,
       "stable": null
      },
-     "nextAction": "未补过：等急跌到 268.77（需单日跌 ≥ 9.20%）小仓 1/3；或回撤到锚点 263.00 补主仓（弱盘：只小仓位，拉升即出，不要加满）",
+     "nextAction": "未补过：等急跌到 268.77（需单日跌 ≥ 9.20%）小仓 1/3；或回撤到锚点 263.00 补主仓",
      "stopBuy": false,
      "drawdownFromPeak": 0
     },
