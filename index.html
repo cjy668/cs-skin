@@ -5977,7 +5977,7 @@ function renderPreRally(){
       '<b>⚠️ 读之前必须知道的六件事</b>' +
       '<i>这是【条件筛查】，不是买入建议 —— 只给阶段 / 空间 / 流通性 / 强弱与命中依据，不给指令。</i>' +
       '<ol>' +
-      '<li><b>判据在【用户自己给的 1,073 品名单】上标定</b>（2,902 段 C 主拉升 + 5 条痕迹），不是全市场随机样本 → 换别的品不保证成立。</li>' +
+      '<li><b>判据在【用户自己给的 1,073 品名单】上标定</b>（' + segPullsText() + ' + 5 条痕迹），不是全市场随机样本 → 换别的品不保证成立。</li>' +
       '<li><b>时间外验证未做</b>（2023~2025 标定 / 2025~2026 验证还没跑）。</li>' +
       '<li><b>未扣交易成本</b>：全是毛额，一次买卖要付来回 <b>1.00%~2.485%</b> + <b>7 天交易冷却</b>。</li>' +
       '<li><b>成交量序列冻结在 2025-11</b> → 量能配合这一条整体失效，阶段判定里<b>没用量能</b>。</li>' +
@@ -6492,12 +6492,11 @@ function renderStageBoard(){
   const cov = dsbData.coverage || {};
   setText('dsb-meta', '覆盖 ' + (cov.items || 0) + ' 品（固定池 ' + (cov.pool || 0) + '）× 逐日 ' +
     (cov.stateDays || 0).toLocaleString() + ' 个状态 · 阶段段数 ' + (cov.episodes || 0).toLocaleString() +
-    /* ★ 2026-10-20 S2 修复：这里以前打的是 dealer_stage_board.cjs 自己重跑枚举出来的「拉升段 16,551」，
-       而首页写的是「2,902 段 C 主拉升（19,329 个候选段里…）」—— 同一个网站同一天两个段落数，
-       用户不知道信哪个。16,551 是 mani-traces 第一版（4,985 段时代）的候选段枚举数，
-       在 1,388 段 / 2,902 段两次重定义后都该作废。
+    /* ★ 2026-10-20 S2 修复：这里以前打的是 dealer_stage_board.cjs 自己重跑枚举出来的「拉升段 N」，
+       而首页打的是 C 主拉升段数 —— 同一个网站同一天两个段落数，用户不知道信哪个。
+       那套自算枚举是 mani-traces 第一版（4,985 段时代）的候选段数，在后续两次重定义后都该作废。
        现在段数一律取 data/mani-traces.json → counts（dealer-stage-board 的 coverage.pullSegments /
-       pullCandidates 就是它），文案与首页完全一致：2,902 段 C 主拉升（19,329 个候选段里）。 */
+       pullCandidates 就是它），文案与首页完全一致（同一个 counts，页面不写死任何段数）。 */
     ' · ' + (cov.pullSegments || 0).toLocaleString() + ' 段 C 主拉升' +
     (cov.pullCandidates ? ('（' + cov.pullCandidates.toLocaleString() + ' 个候选段里）') : ''));
 
@@ -6713,6 +6712,90 @@ function renderStageBoard(){
 /* 本区块自己的百分比格式（1 位小数、带正负号）—— 不复用 pct()：那是 2 位小数，
    而且它是别处的既有函数，改它会波及别的区块。 */
 function wlP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
+
+/* ============================================================================
+   ★ S10（2026-10-21 根治）：阈值在页面上【一个都不写死】
+   ----------------------------------------------------------------------------
+   真问题：页面上同时存在两套"命中阈值" —— 页头那句 criteria 文案里写死了四个数
+     （1,388 段纪元那版：价格/在售/求购/断层，其中求购与断层是【正数】），
+   而判定实际用的是 watchlist-status.json scope.traces[].medCtrl
+     （当前那版：价格 +0.0222 / 在售 +0.1514 / 求购 −0.0953 / 断层 +0.0323）→ 求购、断层【方向相反】。
+   修法（选 B：页面动态读数据字段，信息更全）：
+     · 数据侧：monitor_watchlist.cjs 把阈值结构化写进 scope.traceThresholds
+       （并带 direction / verified / permPct / medCase 与纪元 scope.traceEra）
+     · 页面侧：只从 sc.traceThresholds 读；老数据没有这个字段时退回
+       sc.traces[].medCtrl（同一个字段，判定用的也是它）→ 永远与判定同源
+     · 拿不到就显示"未取到"，绝不退回任何一个历史数字（写死就会再回归）
+   ============================================================================ */
+function wlFmtTh(v){
+  return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '−' : '')) + Math.abs(v).toFixed(3)) : '—';
+}
+/* 阈值列表：唯一入口（表格、chip、说明都走这里，避免两处各拼一套） */
+function wlThresholds(){
+  const sc = (wlData && wlData.scope) || {};
+  const list = arrOf(sc.traceThresholds);
+  if (list.length){
+    return list.map(function(t){
+      return {
+        key: t.key, trace: t.trace || t.key, tag: t.tag || 'd30',
+        threshold: isNum(t.threshold) ? t.threshold : null,
+        direction: t.direction || '>',
+        medCase: isNum(t.medCase) ? t.medCase : null,
+        expDiD: isNum(t.expDiD) ? t.expDiD : null,
+        permPct: isNum(t.permPct) ? t.permPct : null,
+        verified: !!t.verified, usableNow: t.usableNow !== false,
+        missing: !!t.missing, src: 'scope.traceThresholds'
+      };
+    });
+  }
+  /* 老数据兜底：直接用判定所用的同一字段 medCtrl（不是另抄一份） */
+  return arrOf(sc.traces).map(function(t){
+    return {
+      key: t.key, trace: t.label || t.key, tag: 'd30',
+      threshold: isNum(t.medCtrl) ? t.medCtrl : null, direction: '>',
+      medCase: isNum(t.medCase) ? t.medCase : null,
+      expDiD: isNum(t.expDiD) ? t.expDiD : null,
+      permPct: isNum(t.permPct) ? t.permPct : null,
+      verified: !!t.verified, usableNow: t.usableNow !== false,
+      missing: !isNum(t.medCtrl), src: 'scope.traces[].medCtrl'
+    };
+  });
+}
+function wlTraceEra(){ return (wlData && wlData.scope && wlData.scope.traceEra) || null; }
+
+/* ============================================================================
+   ★ S2（2026-10-21 根治）：段数在页面上【一个都不写死】
+   ----------------------------------------------------------------------------
+   真问题：把"当时的"段数写进 HTML（C 主拉升段数 + 候选段数 + 另分的 A/B/N 三类段数 + 稀疏品数，
+   一共六个数），数据一前进就变成错数字 —— 这不是"差一段"，
+   是"每次重建都会再错一次"。修法 = 生成式：
+     优先 watchlist-status.scope.segmentCounts（monitor_watchlist 直读 mani-traces.counts）
+     其次 pre-rally-candidates.segmentCounts / dealer-stage-board.coverage
+     都没有 → 返回 null，调用方显示"段数未取到"，绝不拿历史数字顶上。
+   ============================================================================ */
+function segCounts(){
+  const a = (wlData && wlData.scope && wlData.scope.segmentCounts) || null;
+  if (a && isNum(a.pulls)) return a;
+  const b = (typeof prcData !== 'undefined' && prcData && prcData.segmentCounts) || null;
+  if (b && isNum(b.pulls)) return b;
+  const cov = (typeof dsbData !== 'undefined' && dsbData && dsbData.coverage) || null;
+  if (cov && isNum(cov.pullSegments)){
+    return { pulls: cov.pullSegments, candidates: cov.pullCandidates, forms: null,
+      sparseItems: null, eraText: cov.asOf || null, source: 'dealer-stage-board.coverage' };
+  }
+  return null;
+}
+function segPullsText(){           /* "N 段 C 主拉升" */
+  const s = segCounts();
+  return s ? (n2(s.pulls) + ' 段 C 主拉升') : '段数未取到（mani-traces.counts）';
+}
+function segPullsCandText(){       /* "N 段 C 主拉升（M 个候选段里…）" */
+  const s = segCounts();
+  if (!s) return '段数未取到（mani-traces.counts）';
+  return n2(s.pulls) + ' 段 C 主拉升（' + n2(s.candidates) + ' 个候选段里，另分了 ' +
+    (s.forms ? (n2(s.forms.A) + ' 段「吃断层跳价」、' + n2(s.forms.B) + ' 段「小拉升筹备」、' + n2(s.forms.N) + ' 段「非拉升」，') : '') +
+    (isNum(s.sparseItems) ? ('并整品剔除了 ' + n2(s.sparseItems) + ' 个数据稀疏品') : '') + '）';
+}
 function wlStageCls(s){
   /* 7 阶段（权威 stage） */
   if (s === '拉升早期') return 'wl-b-pre';
@@ -6748,8 +6831,9 @@ function wlHitChip(h){
     return '<span class="wl-hit wl-na" title="' + esc(h.why || '算不出') + '">' + esc(h.trace) +
       ' <em>算不出（' + esc(String(h.why || '').slice(0, 26)) + '）</em></span>';
   }
-  const v = isNum(h.value) ? h.value.toFixed(3) : '—';
-  const th = isNum(h.threshold) ? h.threshold.toFixed(3) : '—';
+  const v = wlFmtTh(h.value);
+  /* ★ S10：阈值统一走 wlFmtTh（带符号），与 ①判据来源表同一格式 —— 负数阈值不再被写成"0.095" */
+  const th = wlFmtTh(h.threshold);
   const vs = isNum(h.vsControl) ? ((h.vsControl > 0 ? '+' : '') + h.vsControl.toFixed(3)) : '—';
   return '<span class="wl-hit ' + (h.hit ? 'wl-on' : 'wl-off') + '" title="' +
     esc(h.trace + '：当前 ' + v + '，对照阈值 ' + th + '（超过即命中），vs 对照 ' + vs + (isNum(h.permPct) ? '，置换 ' + h.permPct + ' 分位' : '')) + '">' +
@@ -6934,7 +7018,7 @@ function renderWatchlist(){
       '<b>⚠️ 读之前必须知道的三件事（这三条不写清就不许看下面的数字）</b>' +
       '<i>阶段判断只是状态描述，不构成任何买入依据。</i>' +
       '<ol>' +
-      '<li><b>判据是在【用户自己给的名单】上标定的</b>：1,073 个品 × <b>2,902 段 C 主拉升</b>（19,329 个候选段里，另分了 3,372 段「吃断层跳价」、1,640 段「小拉升筹备」、10,971 段「非拉升」，并整品剔除了 19 个数据稀疏品；逐段判定见 data/mani-forms.json）。不是在全市场随机样本上标定的 —— 换成别的品不保证成立。</li>' +
+      '<li><b>判据是在【用户自己给的名单】上标定的</b>：1,073 个品 × <b>' + segPullsCandText() + '</b>（逐段判定见 data/mani-forms.json）。不是在全市场随机样本上标定的 —— 换成别的品不保证成立。</li>' +
       '<li><b>时间外验证未做</b>：用 2023~2025 标定、2025~2026 验证这一步还没跑（成交量序列冻结在 2025-11，时间外验证只能用价格 / 在售 / 求购三条）。</li>' +
       '<li><b>未扣交易成本</b>：这里所有数字都是毛额。一次完整买卖要付来往路费 <b>1.00%（悠悠）~2.485%（BUFF）</b>，外加 <b>7 天交易冷却</b>（买入后 7 天内卖不掉，冷却期 1σ 波动 3.25%）。</li>' +
       '</ol>' +
@@ -7000,20 +7084,43 @@ function renderWatchlist(){
       '<b>小</b> = 只剩反弹空间（回不到前高）；<b>无</b> = 连比现价更高的价都少见。' +
       '（完整统计见 <code>reports/剩余拉升空间-回落后再拉升统计.md</code>）</div>';
   }
-  /* 判据来源：把五条痕迹的效应量与可用性摊开写（用户要的「每条标注命中了哪几条已验证痕迹 + 效应量」） */
+  /* 判据来源：把五条痕迹的效应量与可用性摊开写（用户要的「每条标注命中了哪几条已验证痕迹 + 效应量」）
+     ★ S10：阈值 + 方向 + 纪元全部运行时读（wlThresholds() / wlTraceEra()），页面一个字都不写死。
+       旧版这里把四个阈值写成了字面量（1,388 段纪元那版，其中求购与断层是正数），而判定用的是 medCtrl
+       （求购、断层方向相反）→ 用户按文案理解会得出相反结论。现在"展示的阈值"和"判定用的阈值"
+       是同一个字段，并排写清楚方向（命中 = 当前值 > 阈值）。 */
+  const TH = wlThresholds();
+  const ERA = wlTraceEra();
   h += '<div class="wl-sec">① 判据来源：五条通过检验的拉升前痕迹（阈值取配对对照中位）</div>';
-  h += '<div class="wl-note">命中 = 该品的「最近 30 天该量 ÷ 自身 baseline 中位」高于配对对照中位（' +
-    '效应量 exp(DiD) 越大 = 病例组与对照组的差距越大 = 判据越强）。</div>';
-  h += '<div class="wl-scroll"><table class="wl-tbl"><colgroup><col style="width:34%"><col style="width:22%"><col style="width:22%"><col style="width:22%"></colgroup>' +
-    '<thead><tr><th>痕迹</th><th>效应量 exp(DiD)</th><th>对照阈值</th><th>现在可用？</th></tr></thead><tbody>';
-  arrOf(sc.traces).forEach(function(t){
-    h += '<tr><td>' + esc(t.label || t.key) + (t.verified ? '<em>✅ 已通过检验（置换 100 分位）</em>' : '<em>⚠️ 未通过</em>') + '</td>' +
+  h += '<div class="wl-note">命中 = 该品的「最近 30 天该量 ÷ 自身 baseline 中位」<b>高于</b>下表「对照阈值」那一格（' +
+    '效应量 exp(DiD) 越大 = 病例组与对照组的差距越大 = 判据越强）。' +
+    '★ 阈值与方向都是读 <code>watchlist-status.json</code> 的 <code>scope.traceThresholds</code> 现算的，' +
+    '和判定命中用的是同一个字段 —— 页面上没有写死任何一个阈值。</div>';
+  h += '<div class="wl-note">' +
+    (ERA && ERA.at ? ('阈值纪元：<code>data/mani-trace-tests.json</code> at <b>' + esc(String(ERA.at)) + '</b>' +
+      (isNum(ERA.casePulls) ? ' · 段集 <b>' + n2(ERA.casePulls) + '</b> 段（与 C 主拉升 counts 同纪元）' : '') +
+      '（每次 <code>mani_traces --build</code> 之后紧跟 <code>--test</code> 重算，页面跟着变）')
+      : '阈值纪元：数据文件未带 <code>traceEra</code>（旧产物）→ 只能确认阈值本身来自 <code>scope.traces[].medCtrl</code>') +
+    '</div>';
+  h += '<div class="wl-scroll"><table class="wl-tbl"><colgroup><col style="width:26%"><col style="width:16%"><col style="width:26%"><col style="width:16%"><col style="width:16%"></colgroup>' +
+    '<thead><tr><th>痕迹</th><th>效应量 exp(DiD)</th><th>命中规则（当前值 vs 阈值）</th><th>置换分位</th><th>现在可用？</th></tr></thead><tbody>';
+  if (!TH.length){
+    h += '<tr><td colspan="5" class="wl-neg">读不到阈值字段（scope.traceThresholds / scope.traces 都没有）→ ' +
+      '本表留空，<b>不写任何历史阈值</b>。先跑 <code>node cs-quant/monitor_watchlist.cjs</code>。</td></tr>';
+  }
+  TH.forEach(function(t){
+    const rule = t.missing || !isNum(t.threshold)
+      ? '<b class="wl-neg">阈值未取到</b>'
+      : ('当前值 <b>' + t.direction + '</b> 阈值 <b>' + wlFmtTh(t.threshold) + '</b>');
+    h += '<tr><td>' + esc(t.trace) + '<em>' + esc(t.tag || 'd30') + ' · ln 口径</em>' +
+      (t.verified ? '<em>✅ 已通过检验</em>' : '<em>⚠️ 未通过</em>') + '</td>' +
       '<td><b>' + (isNum(t.expDiD) ? t.expDiD.toFixed(3) + '×' : '—') + '</b></td>' +
-      '<td>' + (isNum(t.medCtrl) ? t.medCtrl.toFixed(3) : '—') + '</td>' +
+      '<td>' + rule + '</td>' +
+      '<td>' + (isNum(t.permPct) ? n2(t.permPct) + ' 分位' : '—') + '</td>' +
       '<td class="' + (t.usableNow ? 'wl-pos' : 'wl-neg') + '">' + (t.usableNow ? '可用' : '❌ 算不出（序列冻结）') + '</td></tr>';
   });
   h += '</tbody></table></div>';
-  const volT = arrOf(sc.traces).filter(function(t){ return !t.usableNow; })[0];
+  const volT = TH.filter(function(t){ return !t.usableNow; })[0] || arrOf(sc.traces).filter(function(t){ return !t.usableNow; })[0];
   if (volT) h += '<div class="wl-limit"><b>⚠️ 实测：5 条里只有 4 条对「现在」可用。</b>' +
     '「' + esc(volT.label || '') + '」在历史样本上成立（exp(DiD) ' + (isNum(volT.expDiD) ? volT.expDiD.toFixed(3) + '×' : '—') +
     '），但 csqaq 的成交量序列（turnover_number）冻结在 2025-11，对今天的判断**整体失效** —— ' +
@@ -7139,7 +7246,7 @@ function renderWatchlist(){
     '④ <b>不用「计分模型评分」</b>（高分 37.46% vs 同价位随机 38.20%）；<br>' +
     '⑤ <b>不用「断层率 40 名单」当「有人做盘」的证据</b>（它是收益/滑点信号，前提不同）。<br>' +
     '另外：本区块的「形态归类」列（七类）只作参考 —— 其中「在售量变薄」那条<b>与机器输出方向相反</b>，' +
-    'Lead 已裁定：<b>采信机器输出</b>（在售量是【变多】：病例 +0.199 &gt; 对照 +0.066），' +
+    'Lead 已裁定：<b>采信机器输出</b>（在售量是【变多】：病例组中位 &gt; 对照组中位，具体数值见机器输出），' +
     '文字版报告已就地追加勘误（见 <code>reports/报告勘误说明.md</code>）。' +
     '因此 A/B/C/F 四类的归类本身有争议，只作参考、<b>不进阶段判定</b>。</div>' +
     '<div class="wl-note"><b>★ 入场规则前向收益回测（2026-10-16 已跑完）</b>：按上面的机器阈值预注册了四条买入规则' +
