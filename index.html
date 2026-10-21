@@ -1817,12 +1817,17 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                  页面以前只显示 HH:MM，不显示日期也不显示"距今多久"，
                  用户没法判断看到的是今天还是昨晚的。这张卡把每个数据源自己的
                  时间戳 + 距今多久 + 颜色阈值（>6h 黄 / >12h 红）摊开。
-               数据源：data-freshness.json（cs-quant/build_freshness.cjs） -->
+               ★ 2026-10-20 台账 M10（方案 B）：改成【前端自己算】——
+                 以前读 data-freshness.json，而那个文件只有 daily 才发布（3 分钟档不发布），
+                 于是卡片永远显示 6~12 小时前的旧值：一份"新鲜度索引"自己比数据还不新鲜。
+                 现在直接用本页【刚拉到的文档】里自带的时间戳现算，页面一刷新就是真实值。
+                 data-freshness.json 仍然保留，但只作后端审计索引（watchdog 用它确认
+                 build_freshness.cjs 还在跑），页面不再读它。 -->
           <div class="card" id="card-fres">
             <div class="card-title">数据新鲜度（每个数据源各自的时间） <span class="r" id="fres-time">—</span></div>
             <div id="fres-verdict" class="fres-h"><span class="fres-big">加载中…</span></div>
             <div class="fres-wrap" id="fres-body"></div>
-            <p class="sec-note" id="fres-note">阈值：距今 &lt; 6 小时正常（绿）／6~12 小时标黄／≥ 12 小时标红。年龄取「文件修改时间」与「文件内时间戳」里更旧的那个 —— 宁可高估陈旧度，不许低估。</p>
+            <p class="sec-note" id="fres-note">阈值：距今 &lt; 6 小时正常（绿）／6~12 小时标黄／≥ 12 小时标红。年龄 = 本页打开时刻 − 该数据源【文件内自带的时间戳】，现算现显示（不再读一份可能已经过期的汇总文件）。注：「文件修改时间」浏览器拿不到，所以这一列不显示 —— 不编一个数出来。</p>
           </div>
 
           <div class="card">
@@ -4019,6 +4024,8 @@ async function loadMarket(manual){
       writeMarketCache(j);                          // 后台写 IndexedDB（不阻塞交互）
       if (!signalsData && j.signals && typeof j.signals === 'object'){ signalsData = j.signals; signalsState = 'ok'; }
       renderSignals(); renderWhales(); renderDataTime(); renderSpread();
+      /* ★ M10：market.json 是 3.5 MB 按需加载的，到手后让「数据新鲜度」卡重画一次 */
+      try { refreshFreshnessCard(); } catch (e) {}
       if (manual){
         showBanner('行情已更新：' + marketKeys().length.toLocaleString('zh-CN') + ' 件（' + (j.updatedAtText || '') + '）');
         setTimeout(function(){ $('banner').hidden = true; }, 4000);
@@ -4074,6 +4081,9 @@ async function loadPortfolio(){
     const j = await r.json();
     if (!j || !j.summary) throw new Error('格式不对');
     pfData = j; renderPortfolio();
+    /* ★ M10：持仓台账是按需加载的，到手后让「数据新鲜度」那张卡重画一次，
+       否则它会一直显示「本页未加载」（那虽然如实，但没必要一直挂在上面）。 */
+    try { refreshFreshnessCard(); } catch (e) {}
   } catch (e) { /* 没有台账文件就不显示这张卡，不打扰用户 */ }
 }
 /* 现价口径总账：后端没算出来就返回 null（前端不自己编一份，避免两个口径算法分叉） */
@@ -5151,6 +5161,9 @@ let ptData = null, ptState = 'loading', ptDetail = null, ptDetailState = 'idle',
 
 async function loadPatternTypes(){
   ptData = await fetchJSON('./pattern-types.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
   ptState = ptData ? 'ok' : 'fail';
   renderPatternTypes();
   /* 实时名单：fast_refresh.cjs（3 分钟）重扫的「今天谁落在类型里」。
@@ -5417,6 +5430,9 @@ let saData = null, saState = 'loading';
 
 async function loadSellAlerts(){
   saData = await fetchJSON('./sell-alerts.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
   saState = saData ? 'ok' : 'fail';
   renderSellAlerts();
 }
@@ -5627,6 +5643,9 @@ function wlSaveLocal(){
 }
 async function loadWatchlist(){
   wlData = await fetchJSON('./watchlist-status.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
   wlState = wlData ? 'ok' : 'fail';
   wlLoadLocal();
   renderWatchlist();
@@ -5684,6 +5703,9 @@ function ensurePreRally(){ if (prcKick) return; prcKick = true; loadPreRally(); 
 async function loadPreRally(){
   try {
     prcData = await fetchJSON('./pre-rally-candidates.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
     prcState = prcData ? 'ok' : 'fail';
   } catch (e){ prcData = null; prcState = 'fail'; }
   PRC_GID_SET.clear();
@@ -6123,6 +6145,9 @@ function ensureRallyBatches(){ if (rbKick) return; rbKick = true; loadRallyBatch
 async function loadRallyBatches(){
   try {
     rbData = await fetchJSON('./rally-batches.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
     rbState = rbData ? 'ok' : 'fail';
   } catch (e){ rbData = null; rbState = 'fail'; }
   if (rbData && rbData.byGid){
@@ -6328,6 +6353,9 @@ function ensureStageBoard(){ if (dsbKick) return; dsbKick = true; loadStageBoard
 async function loadStageBoard(){
   try {
     dsbData = await fetchJSON('./dealer-stage-board.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
     dsbState = dsbData ? 'ok' : 'fail';
   } catch (e){ dsbData = null; dsbState = 'fail'; }
   renderStageBoard();
@@ -8165,49 +8193,149 @@ function fresCnParse(s){
 async function initFreshness(){
   var bodyEl = $('fres-body'), verEl = $('fres-verdict'), timeEl = $('fres-time');
   if (!bodyEl || !verEl) return;
-  var doc = null;
-  try { doc = await fetchJSON('./data-freshness.json'); } catch (e) { doc = null; }
-  if (!doc || !Array.isArray(doc.sources)){
-    verEl.innerHTML = '<span class="fres-big fres-na">数据新鲜度：未接入</span>' +
-      '<span class="fres-na">data-freshness.json 没取到（这一步没跑或没发布）。不影响其他区块。</span>';
-    bodyEl.innerHTML = '';
-    return;
-  }
-  if (timeEl) timeEl.textContent = '生成 ' + (doc.atText || '—');
-  /* ★ 页面停留久了年龄会变 → 用"生成时刻"重算（不在文件里写死一个会过期的数） */
-  var baseMs = (fresCnParse(doc.atText) || new Date()).getTime();
-  var driftH = Math.max(0, (Date.now() - baseMs) / 3600000);
-  var rows = doc.sources.map(function (s){
-    var age = (s.ageHours == null) ? null : (s.ageHours + driftH);
-    return { s: s, age: age, lv: fresLevel(age) };
+  /* ★ 2026-10-20 台账 M10（方案 B）：不再 fetch('./data-freshness.json')。
+     旧实现的问题：那个文件只有 daily 才发布（fast_refresh 的 3 分钟档不发布它），
+     所以线上永远是 daily 那次发布的版本 → 卡片常年显示 6~12 小时前的"旧新鲜度"，
+     而它要反映的恰恰是"现在新不新鲜"。一份新鲜度索引自己比数据还不新鲜，逻辑上自相矛盾。
+     新实现：每个数据源都用【本页刚拉到的文档】里自带的时间戳现算年龄。
+        · 拿得到文档 → 用它自己的时间戳算，颜色阈值不变（6h / 12h）；
+        · 文档还没加载（按需加载的 market.json / portfolio.json） → 如实写「本页未加载」，不编；
+        · 文档有、但里面没有可解析的时间戳 → 写「该文件没带时间戳」，也是如实。
+     ★ 代价（如实写在这里）：浏览器拿不到文件的修改时间（mtime），所以只保留「文件内时间戳」口径。
+       后端那句"取 mtime 与内嵌时间戳里更旧的那个"仍然由 cs-quant/build_freshness.cjs 算，
+       它产出的 data-freshness.json 继续给 watchdog / CLI 审计用（页面不再读它）。 */
+  var rows = FRESH_SRC.map(function (s){
+    var doc = null;
+    try { doc = s.get(); } catch (e) { doc = null; }
+    var tsField = null, tsRaw = null, tsMs = null;
+    if (doc){
+      for (var i = 0; i < s.ts.length; i++){
+        var v = doc[s.ts[i]];
+        if (v == null || v === '') continue;
+        var d = fresAnyParse(v);
+        if (d){ tsField = s.ts[i]; tsRaw = v; tsMs = d.getTime(); break; }
+      }
+    }
+    var age = (tsMs == null) ? null : Math.max(0, (Date.now() - tsMs) / 3600000);
+    var lv = !doc ? 'na' : (tsMs == null ? 'na' : fresLevel(age));
+    return { s: s, loaded: !!doc, field: tsField, tsText: tsRaw == null ? null : fresTextOf(tsRaw),
+      age: age, lv: lv };
   });
   var bad = rows.filter(function (r){ return r.lv === 'bad'; });
   var warn = rows.filter(function (r){ return r.lv === 'warn'; });
   var na = rows.filter(function (r){ return r.lv === 'na'; });
+  var notLoaded = rows.filter(function (r){ return !r.loaded; });
+  var noTs = rows.filter(function (r){ return r.loaded && r.age == null; });
   var worst = rows.filter(function (r){ return r.age != null; })
     .sort(function (a, b){ return b.age - a.age; })[0] || null;
   var head = bad.length ? ('<span class="fres-big fres-bad">⚠️ ' + bad.length + ' 个数据源 ≥ ' + FRES_BAD_H + ' 小时没更新</span>')
     : (warn.length ? ('<span class="fres-big fres-warn">🟡 ' + warn.length + ' 个数据源 ≥ ' + FRES_WARN_H + ' 小时没更新</span>')
-      : (na.length ? ('<span class="fres-big fres-na">⬜ ' + na.length + ' 个数据源文件缺失</span>')
+      : (na.length ? ('<span class="fres-big fres-na">⬜ ' + na.length + ' 个数据源读不到时间（未加载 / 文件没带时间戳）</span>')
         : '<span class="fres-big fres-ok">✅ 全部数据源都在 ' + FRES_WARN_H + ' 小时内更新过</span>'));
-  var sub = worst ? ('最旧：「' + esc(worst.s.label) + '」' + esc(worst.s.mtimeText || worst.s.tsText || '—') +
+  var sub = worst ? ('最旧：「' + esc(worst.s.label) + '」' + esc(worst.tsText || '—') +
     '（' + fresAgeText(worst.age) + '）') : '';
-  verEl.innerHTML = head + (sub ? '<span class="fres-na">' + sub + '</span>' : '');
-  var t = '<table class="fres-tbl"><thead><tr><th>数据源</th><th>文件更新时间</th><th>文件内时间戳</th><th>距今</th><th>状态</th></tr></thead><tbody>';
+  verEl.innerHTML = head + (sub ? '<span class="fres-na">' + sub + '</span>' : '') +
+    (notLoaded.length ? '<span class="fres-na">本页未加载 ' + notLoaded.length + ' 个：' +
+      esc(notLoaded.map(function (r){ return r.s.label; }).join('、')) + '（按需加载，不编数）</span>' : '') +
+    (noTs.length ? '<span class="fres-na">有文件但没带时间戳 ' + noTs.length + ' 个：' +
+      esc(noTs.map(function (r){ return r.s.label; }).join('、')) + '</span>' : '');
+  if (timeEl) timeEl.textContent = '本页读取时刻 ' + fresNowText();
+  var t = '<table class="fres-tbl"><thead><tr><th>数据源</th><th>时间戳字段</th><th>文件内时间戳</th><th>距今</th><th>状态</th></tr></thead><tbody>';
   rows.sort(function (a, b){ return (b.age == null ? -1 : b.age) - (a.age == null ? -1 : a.age); });
   rows.forEach(function (r){
     t += '<tr>' +
       '<td>' + esc(r.s.label) + '<br><span class="fres-na" style="font-size:10.5px">' + esc(r.s.expect || '') + '</span></td>' +
-      '<td>' + esc(r.s.mtimeText || '—') + '</td>' +
-      '<td>' + esc(r.s.tsText || '—') + '</td>' +
-      '<td class="fres-' + r.lv + '">' + fresAgeText(r.age) + '</td>' +
-      '<td class="fres-' + r.lv + '">' + FRES_LEVEL_CN[r.lv] + '</td>' +
+      '<td class="fres-na" style="font-size:10.5px">' + esc(r.field || '—') + '</td>' +
+      '<td>' + esc(r.tsText || (r.loaded ? '（无）' : '本页未加载')) + '</td>' +
+      '<td class="fres-' + r.lv + '">' + (r.loaded ? fresAgeText(r.age) : '—') + '</td>' +
+      '<td class="fres-' + r.lv + '">' + (r.loaded ? FRES_LEVEL_CN[r.lv] : '本页未加载') + '</td>' +
       '</tr>';
   });
   t += '</tbody></table>';
   bodyEl.innerHTML = t;
-  var noteEl = $('fres-note');
-  if (noteEl && doc.caveat) noteEl.textContent = doc.caveat;
+  /* ★ M10：这张卡依赖很多区块的加载结果，而它们是【并行 async】的 —— 首帧往往还没到齐。
+     用一组递增延时自动重画（只重画 DOM，不发任何请求），直到"未加载"降到 0 或次数用完。
+     这样既不会在首帧编数，也不会永远停在"本页未加载"。 */
+  fresScheduleRetry();
+}
+var FRES_RETRY = { i: 0, timer: null };
+var FRES_RETRY_DELAYS = [800, 1600, 3000, 5000, 8000, 13000];
+function fresScheduleRetry(){
+  if (FRES_RETRY.timer) return;
+  var left = 0;
+  for (var i = 0; i < FRESH_SRC.length; i++){
+    var d = null;
+    try { d = FRESH_SRC[i].get(); } catch (e) { d = null; }
+    if (!d) left++;
+  }
+  if (left === 0 || FRES_RETRY.i >= FRES_RETRY_DELAYS.length) return;
+  var wait = FRES_RETRY_DELAYS[FRES_RETRY.i++];
+  FRES_RETRY.timer = setTimeout(function (){
+    FRES_RETRY.timer = null;
+    try { initFreshness(); } catch (e) {}
+  }, wait);
+}
+/* ★ M10：数据源登记表 —— 每一项都指向【本页已经加载的文档全局量】，
+   不读任何"汇总索引"文件。ts 是该文件里时间戳字段的优先级列表（与 build_freshness.cjs 同口径）。 */
+var FRESH_SRC = [
+  { key: 'priceLive', label: '★ 唯一价格源（全站取价）', expect: '每 3 分钟（fast_refresh）', ts: ['atText', 'at'],
+    get: function (){ return PLIVE.data; } },
+  { key: 'live', label: '实时行情', expect: '每 3 分钟（fast_refresh）', ts: ['updatedAtText', 'atText'],
+    get: function (){ return liveData; } },
+  { key: 'marketPulse', label: '大盘脉搏', expect: '每 3 分钟', ts: ['updatedAtText', 'atText'],
+    get: function (){ return pulseData; } },
+  { key: 'market', label: '全量行情', expect: '每天 3~6 次', ts: ['updatedAtText', 'atText'],
+    get: function (){ return marketData; } },
+  { key: 'signals', label: '吸筹信号', expect: '每天 3~6 次', ts: ['updatedAtText', 'atText'],
+    get: function (){ return signalsData; } },
+  { key: 'analysis', label: '分析结论', expect: '每天 3~6 次', ts: ['analysisAsOf', 'updatedAtText', 'atText'],
+    get: function (){ return analysisData; } },
+  { key: 'portfolio', label: '持仓台账', expect: '每天 3~6 次', ts: ['updatedAtText', 'atText'],
+    get: function (){ return pfData; } },
+  { key: 'sellAlerts', label: '卖出警报（含卖出口径闸门）', expect: '每天 3~6 次 + 每 3 分钟轻刷', ts: ['updatedAtText', 'atText'],
+    get: function (){ return saData; } },
+  { key: 'watchlist', label: '监控清单', expect: '每天 3~6 次', ts: ['atText', 'updatedAtText'],
+    get: function (){ return wlData; } },
+  { key: 'dealerStage', label: '做盘阶段看板（含阶段稳定性）', expect: '每天 3~6 次', ts: ['atText', 'updatedAtText'],
+    get: function (){ return dsbData; } },
+  { key: 'exitBoard', label: '持仓退出看板（三组）', expect: '每天 3~6 次', ts: ['atText', 'updatedAtText'],
+    get: function (){ return exbData; } },
+  { key: 'rallyBatches', label: '行情批次', expect: '每天 3~6 次', ts: ['atText', 'updatedAtText'],
+    get: function (){ return rbData; } },
+  { key: 'preRally', label: '拉升前候选（首页第一张卡）', expect: '每天 3~6 次（日频结论）', ts: ['updatedAtText', 'at'],
+    get: function (){ return prcData; } },
+  { key: 'patternTypes', label: '做盘类型', expect: '每天 3~6 次', ts: ['atText', 'updatedAtText'],
+    get: function (){ return ptData; } },
+  { key: 'health', label: '新鲜度体检（watchdog）', expect: '每约 12 分钟', ts: ['checkedAt'],
+    get: function (){ return healthData; } }
+];
+/* 时间戳解析：中文串 / ISO 串 / epoch 毫秒都要能吃 */
+function fresAnyParse(v){
+  if (typeof v === 'number' && isFinite(v) && v > 0){
+    var d0 = new Date(v);
+    return isFinite(d0.getTime()) ? d0 : null;
+  }
+  if (typeof v !== 'string' || !v) return null;
+  var s = v.trim();
+  if (/^\d{10,}$/.test(s)){ var dn = new Date(Number(s)); return isFinite(dn.getTime()) ? dn : null; }
+  var d = fresCnParse(s);
+  if (d) return d;
+  var di = Date.parse(s);
+  return isFinite(di) ? new Date(di) : null;
+}
+function fresTextOf(v){ return (typeof v === 'number') ? fresNowTextOfMs(v) : String(v); }
+function fresNowTextOfMs(ms){
+  var d = new Date(ms);
+  if (!isFinite(d.getTime())) return String(ms);
+  var p = function (x){ return String(x).padStart(2, '0'); };
+  return d.getFullYear() + '/' + p(d.getMonth() + 1) + '/' + p(d.getDate()) + ' ' +
+    p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+}
+function fresNowText(){ return fresNowTextOfMs(Date.now()); }
+/* 有的区块加载完得更晚（按需加载的 market.json / portfolio.json），
+   拿到新文档后把这张卡重画一遍，免得一直显示"本页未加载"。 */
+function refreshFreshnessCard(){
+  try { if ($('fres-body')) initFreshness(); } catch (e) {}
 }
 
 /* ============================================================================
@@ -9896,6 +10024,9 @@ async function loadExitBoard(){
   exbState = 'loading';
   try {
     exbData = await fetchJSON('./exit-board.json');
+      /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
+         （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
+      try { refreshFreshnessCard(); } catch (e) {}
     exbState = exbData ? 'ok' : 'fail';
   } catch (e) { exbData = null; exbState = 'fail'; }
   renderExitBoard();
