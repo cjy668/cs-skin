@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792513012545,
- "atText": "2026/10/21 00:16:52",
+ "at": 1792548248065,
+ "atText": "2026/10/21 10:04:08",
  "asOfDate": "2026-10-21",
  "script": "cs-quant/build_watch_list.cjs",
  "purpose": "用户原话：「明显已经新启动的品明显不会只有一波，必须要持续关注，帮我分析阶段，并在合适补仓的位置提醒我」。自动收录新启动品；用户可手动加(pinned=true / manual=true)或隐藏(hidden=true)，脚本不会删。",
@@ -25,7 +25,7 @@
   "refillBlockedByLiquidity": 0,
   "late": 16,
   "sell": 0,
-  "stageChanged": 3
+  "stageChanged": 0
  },
  "badge": {
   "total": 34,
@@ -35,7 +35,7 @@
    "到末期": 16
   },
   "extra": {
-   "阶段变化": 3,
+   "阶段变化": 0,
    "卖出信号": 0,
    "到补仓位置_旧阶梯": 18,
    "到补仓位置_四条件": 0,
@@ -574,35 +574,7 @@
    }
   ],
   "sell": [],
-  "stageChanged": [
-   {
-    "gid": 279,
-    "name": "AWP | 火卫一 (崭新出厂)",
-    "from": "calm",
-    "to": "distribute",
-    "price": 38,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 1173,
-    "name": "格洛克 18 型 | 鼬鼠 (崭新出厂)",
-    "from": "rallyEarly",
-    "to": "calm",
-    "price": 243,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   },
-   {
-    "gid": 1277,
-    "name": "M4A1消音版 | 氮化处理 (崭新出厂)",
-    "from": "decline",
-    "to": "calm",
-    "price": 66,
-    "priceAt": null,
-    "priceSrc": "dealer-stage-board 日线口径（生成时快照，非实时；展示以 price-live.json 为准）"
-   }
-  ]
+  "stageChanged": []
  },
  "priceBasis": {
   "src": "dealer-stage-board 日线收盘 / replenish-points 判定价（均为生成时快照）",
@@ -1904,8 +1876,8 @@
     "asOf": "2026-10-21",
     "stage": "distribute",
     "stageName": "派发",
-    "stageChanged": true,
-    "stagePrev": "calm",
+    "stageChanged": false,
+    "stagePrev": "distribute",
     "stage6": "派发",
     "conflict": true,
     "confidence": "low",
@@ -4181,8 +4153,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "rallyEarly",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -4853,8 +4825,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": true,
-    "stagePrev": "decline",
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -9835,8 +9807,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
@@ -13864,8 +13836,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": null,
     "conflict": false,
     "confidence": "high",
@@ -15506,8 +15478,8 @@
     "asOf": "2026-10-21",
     "stage": "decline",
     "stageName": "回落",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "decline",
     "stage6": "回落",
     "conflict": true,
     "confidence": "low",
@@ -18519,8 +18491,8 @@
     "asOf": "2026-10-21",
     "stage": "calm",
     "stageName": "平静",
-    "stageChanged": null,
-    "stagePrev": null,
+    "stageChanged": false,
+    "stagePrev": "calm",
     "stage6": "平静",
     "conflict": false,
     "confidence": "high",
