@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792512625795,
- "atText": "2026/10/21 00:10:25",
+ "at": 1792551063449,
+ "atText": "2026/10/21 10:51:03",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -10,8 +10,8 @@
   "shareAlarm": 0.1
  },
  "official": {
-  "latestLabel": "2026-10-18",
-  "latestTrueDay": "2026-10-19"
+  "latestLabel": "2026-10-19",
+  "latestTrueDay": "2026-10-20"
  },
  "rt": {
   "days": 9,
@@ -21,9 +21,9 @@
  },
  "window": {
   "recentDays": [
-   "2026-10-17",
    "2026-10-18",
-   "2026-10-19"
+   "2026-10-19",
+   "2026-10-20"
   ],
   "confirmedDays": [
    "2026-10-13",
@@ -32,127 +32,129 @@
    "2026-10-16",
    "2026-10-17",
    "2026-10-18",
-   "2026-10-19"
+   "2026-10-19",
+   "2026-10-20"
   ]
  },
  "byKey": {
   "p": {
-   "n": 357,
-   "gids": 119,
-   "exact": 341,
-   "exactPct": 95.5182,
+   "n": 812,
+   "gids": 529,
+   "exact": 566,
+   "exactPct": 69.7044,
    "medianPct": 0,
-   "p75Pct": 0,
-   "p90Pct": 0,
-   "p99Pct": 1.0989,
-   "maxPct": 1.5786,
-   "over5Pct": 0,
-   "conflictGidCount": 0,
-   "conflictShare": 0,
-   "conflictGids": [],
+   "p75Pct": 0.1178,
+   "p90Pct": 0.6803,
+   "p99Pct": 4.8346,
+   "maxPct": 16.4659,
+   "over5Pct": 0.9852,
+   "conflictGidCount": 8,
+   "conflictShare": 1.5123,
+   "conflictGids": [
+    883,
+    1044,
+    1854,
+    8139,
+    9613,
+    13452,
+    18259,
+    20507
+   ],
    "byDay": [
     {
-     "day": "2026-10-17",
-     "n": 119,
-     "exact": 119,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 0
-    },
-    {
      "day": "2026-10-18",
-     "n": 119,
-     "exact": 110,
+     "n": 142,
+     "exact": 127,
      "conflict": 0,
      "medianPct": 0,
-     "maxPct": 1.4
+     "maxPct": 1.654
     },
     {
      "day": "2026-10-19",
-     "n": 119,
-     "exact": 112,
+     "n": 142,
+     "exact": 134,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.5786
+    },
+    {
+     "day": "2026-10-20",
+     "n": 528,
+     "exact": 305,
+     "conflict": 8,
+     "medianPct": 0,
+     "maxPct": 16.4659
     }
    ]
   },
   "n": {
-   "n": 357,
-   "gids": 119,
-   "exact": 308,
-   "exactPct": 86.2745,
+   "n": 425,
+   "gids": 142,
+   "exact": 331,
+   "exactPct": 77.8824,
    "medianPct": 0,
    "p75Pct": 0,
-   "p90Pct": 0.0872,
-   "p99Pct": 1.0033,
-   "maxPct": 1.7241,
+   "p90Pct": 0.1886,
+   "p99Pct": 1.2195,
+   "maxPct": 2.1924,
    "over5Pct": 0,
    "conflictGidCount": 0,
    "conflictShare": 0,
    "conflictGids": [],
    "byDay": [
     {
-     "day": "2026-10-17",
-     "n": 119,
-     "exact": 117,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 0.4381
-    },
-    {
      "day": "2026-10-18",
-     "n": 119,
-     "exact": 94,
+     "n": 142,
+     "exact": 108,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 0.9153
     },
     {
      "day": "2026-10-19",
-     "n": 119,
-     "exact": 97,
+     "n": 142,
+     "exact": 119,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.7241
+    },
+    {
+     "day": "2026-10-20",
+     "n": 141,
+     "exact": 104,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 2.1924
     }
    ]
   },
   "b": {
-   "n": 90,
-   "gids": 30,
-   "exact": 82,
-   "exactPct": 91.1111,
+   "n": 14,
+   "gids": 7,
+   "exact": 14,
+   "exactPct": 100,
    "medianPct": 0,
    "p75Pct": 0,
    "p90Pct": 0,
-   "p99Pct": 5,
-   "maxPct": 5,
+   "p99Pct": 0,
+   "maxPct": 0,
    "over5Pct": 0,
    "conflictGidCount": 0,
    "conflictShare": 0,
    "conflictGids": [],
    "byDay": [
     {
-     "day": "2026-10-17",
-     "n": 30,
-     "exact": 30,
+     "day": "2026-10-18",
+     "n": 7,
+     "exact": 7,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 0
     },
     {
-     "day": "2026-10-18",
-     "n": 30,
-     "exact": 22,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 5
-    },
-    {
      "day": "2026-10-19",
-     "n": 30,
-     "exact": 30,
+     "n": 7,
+     "exact": 7,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 0
@@ -177,10 +179,92 @@
   }
  },
  "level": "ok",
- "conflictGidCount": 0,
- "conflictShare": 0,
- "conflictGids": [],
- "samples": [],
+ "conflictGidCount": 8,
+ "conflictShare": 1.5123,
+ "conflictGids": [
+  883,
+  1044,
+  1854,
+  8139,
+  9613,
+  13452,
+  18259,
+  20507
+ ],
+ "samples": [
+  {
+   "gid": 883,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 29,
+   "official": 24.9,
+   "diffPct": 16.4659,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1044,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 7.99,
+   "official": 8.6,
+   "diffPct": 7.093,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1854,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 3.58,
+   "official": 3.86,
+   "diffPct": 7.2539,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 8139,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 4.9,
+   "official": 5.39,
+   "diffPct": 9.0909,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 9613,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 18.5,
+   "official": 19.5,
+   "diffPct": 5.1282,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 13452,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 13.78,
+   "official": 12.89,
+   "diffPct": 6.9046,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 18259,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 1.37,
+   "official": 1.45,
+   "diffPct": 5.5172,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 20507,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 1.99,
+   "official": 2.17,
+   "diffPct": 8.2949,
+   "src": "rt_snapshot"
+  }
+ ],
  "selfTest": null,
- "message": "自建日线 vs 官方：357 个 (gid×日) 可比，完全相等 95.5182%，中位差异 0%，>5% 的品 0/119 个 → 口径一致"
+ "message": "自建日线 vs 官方：812 个 (gid×日) 可比，完全相等 69.7044%，中位差异 0%，>5% 的品 8/529 个 → 口径一致"
 }
