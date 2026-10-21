@@ -1721,7 +1721,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
       <!-- ★ 2026-10-20 今日异动红点条：数字全部来自 watch-list.json 的 badge.breakdown -->
       <div class="alertsbar" id="alerts-bar">
         <span class="abadge hot" id="ab-new" title="今天新进关注列表、或阶段由别档变成【拉升早期】的品"><i class="adot"></i>今日新启动 <b id="ab-new-n">—</b></span>
-        <span class="abadge warm" id="ab-refill" title="四条件版回调补仓点（已启动过 / 回调≥10% / 回吐 1/3~2/3 / 在售没激增）+ 旧价格阶梯今日首次触发"><i class="adot" style="background:#ffd166"></i>今日到补仓位置 <b id="ab-refill-n">—</b></span>
+        <span class="abadge warm" id="ab-refill" title="今日到档位 = 旧价格阶梯今日首次触发 ∪ 四条件版回调补仓点（含 3 个交易日内刚触发）。★ 两个口径不是一回事，点开「持续关注」卡看 refillExplain 的逐项解释"><i class="adot" style="background:#ffd166"></i>今日到档位 <b id="ab-refill-n">—</b></span>
         <span class="abadge" id="ab-late" title="统一阶段 = 拉升末期 / 派发"><i class="adot" style="background:#ff8f8f"></i>今日到末期 <b id="ab-late-n">—</b></span>
         <span class="abadge ghost" id="ab-watch" title="持续关注列表里正在跟踪的品（点击看名单）">持续关注 <b id="ab-watch-n">—</b></span>
       </div>
@@ -1808,7 +1808,13 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           <div class="card span-all" id="sec-today" style="display:none">
             <div class="sec-head"><h2>持续关注</h2><span class="sec-sub">已启动的品不会只有一波 · 到补仓位置/到末期就标出来</span><span class="r" id="tw-time">—</span></div>
             <div class="tw-nums" id="tw-nums"></div>
+            <!-- ★ M22：为什么「到档位 24」但「可执行 0」——这段文字由 watch-list.json 的
+                 refillExplain.note 生成，页面不写死任何数字。没有数据就整块不显示。 -->
+            <div class="sec-note" id="tw-explain" style="display:none;color:#ffd166"></div>
             <div class="tw-list" id="tw-list"></div>
+            <!-- ★ M21：latest 字段的覆盖情况（price/strength/stockType/stage6 各缺多少、为什么），
+                 同样由 watch-list.json 的 dataQuality 生成。 -->
+            <div class="sec-note" id="tw-quality" style="display:none"></div>
             <p class="sec-note" id="tw-note">收录规则：统一阶段=拉升早期 ／ 近 10 日【铺货吸筹】 ／ 近 10 日【扫单收货】 ／ 拉升前候选且阶段=吸筹。到【拉升末期/派发】的品不再新增，但已经在列表里的继续跟踪（"不会只有一波"）。补仓位置判据：四条件（已启动过 ≥+10% · 从峰值回调 ≥10% · 回吐涨幅 1/3~2/3 · 回调期在售没激增 &lt;+10%）→ 三档（急跌试探 / 锚点主仓 / 企稳加满）。</p>
           </div>
 
@@ -4790,6 +4796,28 @@ function twNum(id, v){
   if (el.textContent === undefined) return;
   el.textContent = (v == null || !isNum(v)) ? '—' : String(v);
 }
+/* ★ M22（2026-10-21）：refillExplain 读取器。
+   数据里没有这一段（老缓存 / 文件没更新）→ 返回 null，页面整块不显示（不编数字）。 */
+function twRefillExplain(d){
+  const ex = d && d.refillExplain;
+  if (!ex || typeof ex !== 'object') return null;
+  if (!isNum(ex.total) || !isNum(ex.legacy) || !isNum(ex.fourCond) || !isNum(ex.executable)) return null;
+  return ex;
+}
+/* ★ M21（2026-10-21）：latest 字段覆盖情况的一句话（数字全部来自 dataQuality，现算/数据驱动）。 */
+function twDataQualityNote(d){
+  const q = d && d.dataQuality;
+  if (!q || !q.fields) return null;
+  const f = q.fields;
+  const part = [];
+  ['price', 'strength', 'stockType', 'stage6'].forEach(function(k){
+    const x = f[k]; if (!x || !isNum(x.present)) return;
+    part.push(k + ' 有 ' + n2(x.present) + ' / 缺 ' + n2(x.missing));
+  });
+  if (!part.length) return null;
+  return '数据覆盖（共 ' + n2(q.total) + ' 个品，在池 ' + n2(q.inPool) + ' / 不在池 ' + n2(q.notInPool) + '）：' + part.join(' · ') +
+    '。★ 这几个数不是同一个口径：' + (q.note || '');
+}
 function renderTodayAlerts(){
   const bar = $('alerts-bar'); if (!bar || !bar.classList) return;   /* 迷你 DOM 里可能是空壳 */
   const bd = (twData && twData.badge && twData.badge.breakdown) ? twData.badge.breakdown : null;
@@ -4799,6 +4827,14 @@ function renderTodayAlerts(){
   twNum('ab-new-n', nNew); twNum('ab-refill-n', nRef); twNum('ab-late-n', nLate);
   twNum('ab-watch-n', twData.counts ? twData.counts.watchTotal : null);
   const bNew = $('ab-new'), bRef = $('ab-refill'), bLate = $('ab-late'), bWatch = $('ab-watch');
+  /* ★ M22：「24 但可执行 0」必须在条上就说明，不许只留一个 24。
+     文案与第二个数字都来自 watch-list.json 的 refillExplain（页面不写死任何数）。 */
+  const ex = twRefillExplain(twData);
+  if (bRef && bRef.innerHTML !== undefined){
+    bRef.innerHTML = '<i class="adot" style="background:#ffd166"></i>今日到档位 <b>' + n2(nRef) + '</b>' +
+      (ex ? (' <span style="opacity:.9">· 四条件可执行 <b>' + n2(ex.executable) + '</b></span>') : '');
+    bRef.title = ex ? ex.note : '今日到档位 = 旧价格阶梯今日首次触发 ∪ 四条件回调补仓点；两个口径的解释见「持续关注」卡。';
+  }
   if (bNew) bNew.classList.toggle('zeroc', !(nNew > 0));
   if (bRef) bRef.classList.toggle('zeroc', !(nRef > 0));
   if (bLate) bLate.classList.toggle('zeroc', !(nLate > 0));
@@ -4835,9 +4871,24 @@ function renderTodayWatchCard(){
   const nRefill = Calc.toNum(bd['到补仓位置']), nNew = Calc.toNum(bd['新启动']), nLate = Calc.toNum(bd['到末期']);
   if (nums && nums.innerHTML !== undefined){
     nums.innerHTML = '<span class="tw-num hot">今日新启动 <b>' + n2(nNew) + '</b></span>' +
-      '<span class="tw-num warm">今日到补仓位置 <b>' + n2(nRefill) + '</b></span>' +
+      '<span class="tw-num warm">今日到档位 <b>' + n2(nRefill) + '</b>' +
+      (twRefillExplain(twData) ? ('　四条件可执行 <b>' + n2(twRefillExplain(twData).executable) + '</b>') : '') + '</span>' +
       '<span class="tw-num">今日到末期 <b>' + n2(nLate) + '</b></span>' +
       '<span class="tw-num">持续关注 <b>' + n2(cnt.watchTotal) + '</b></span>';
+  }
+  /* ★ M22：把「24 = 旧阶梯 24 + 四条件 0，为什么可执行是 0」直接印在卡上（数据驱动） */
+  const ex = twRefillExplain(twData);
+  const exEl = $('tw-explain');
+  if (exEl && exEl.innerHTML !== undefined){
+    if (ex){ exEl.style.display = ''; exEl.innerHTML = esc(ex.note); }
+    else { exEl.style.display = 'none'; exEl.innerHTML = ''; }
+  }
+  /* ★ M21：latest 各字段覆盖情况（price / strength / stockType / stage6 各缺多少、为什么） */
+  const dqEl = $('tw-quality');
+  if (dqEl && dqEl.innerHTML !== undefined){
+    const qn = twDataQualityNote(twData);
+    if (qn){ dqEl.style.display = ''; dqEl.innerHTML = esc(qn); }
+    else { dqEl.style.display = 'none'; dqEl.innerHTML = ''; }
   }
   /* 顺序：到补仓位置（可执行）→ 今日新启动 → 到末期 → （点"持续关注"徽标才列全部） */
   const rows = [], seen = new Set();
@@ -4853,7 +4904,12 @@ function renderTodayWatchCard(){
   if (wantRefill) arrOf(al.refill).forEach(function(x){ push(x, 'refill', '<span class="tw-chip refill">到补仓位置</span>' + (x.tierCN ? ('<span class="tw-chip refill">' + esc(x.tierCN) + '</span>') : '')); });
   if (wantNew) arrOf(al.newStart).forEach(function(x){ push(x, 'newStart', '<span class="tw-chip">今日新启动</span>'); });
   if (wantLate) arrOf(al.late).forEach(function(x){ push(x, 'late', '<span class="tw-chip late">到末期</span>'); });
-  if (twFocus === 'all') arrOf(twData.items).forEach(function(it){ if (it && !it.hidden) push({ gid: it.gid, name: it.name, price: it.latest && it.latest.price, stage: it.latest && it.latest.stage, stageName: it.latest && it.latest.stageName, advice: it.addedReason }, 'all', ''); });
+  if (twFocus === 'all') arrOf(twData.items).forEach(function(it){ if (it && !it.hidden) push({ gid: it.gid, name: it.name, price: it.latest && it.latest.price, stage: it.latest && it.latest.stage, stageName: it.latest && it.latest.stageName, advice: it.addedReason,
+    /* ★ M21：把「这个品为什么没有强弱/类型/6阶段」带进名单（页面不再只给一个「—」） */
+    inPool: it.latest ? it.latest.inPool : null, missing: (it.latest && it.latest.missing) || [],
+    stage6: it.latest ? it.latest.stage6 : null, stage6Note: it.latest ? it.latest.stage6Note : null,
+    strength: it.latest ? it.latest.strength : null, stockType: it.latest ? it.latest.stockType : null,
+    strengthNote: it.latest ? it.latest.strengthNote : null, stockTypeNote: it.latest ? it.latest.stockTypeNote : null }, 'all', ''); });
   if (!rows.length){
     box.innerHTML = emptyBox('这个分组今天没有红点。持续关注列表里还有 ' + n2(cnt.watchTotal) + ' 个品在跟踪。');
     return;
@@ -4865,10 +4921,17 @@ function renderTodayWatchCard(){
     const sub = [
       (x.status === 'just_triggered') ? ('刚触发：' + (x.tierCN || '') + ' ' + lf) : '',
       (x.retrace != null && isNum(x.retrace)) ? ('回吐 ' + pct(x.retrace) + ' ／ 距峰值 ' + pct(x.drawdownFromPeak, true)) : '',
+      /* ★ M22：每条都写清「来自哪个口径 / 为什么不算可执行」 */
+      (r.kind === 'refill' && x.source) ? String(x.source) : '',
+      (r.kind === 'refill' && x.whyNotExecutable) ? String(x.whyNotExecutable) : '',
+      (r.kind === 'refill' && x.nextAction) ? String(x.nextAction).slice(0, 80) : '',
       x.advice || '',
       (r.kind === 'newStart' && x.reason) ? String(x.reason).slice(0, 60) : '',
       (r.kind === 'late' && x.stageName) ? ('统一阶段：' + x.stageName) : '',
       (r.kind === 'all' && x.advice) ? String(x.advice).slice(0, 60) : '',
+      /* ★ M21：不在池的品，明说没有哪几项判定（而不是让「—」自己说话） */
+      (r.kind === 'all' && x.inPool === false) ? ('未入 1,073 品池：' + ((x.missing && x.missing.length) ? ('无 ' + x.missing.join(' / ')) : '无池内判定')) : '',
+      (r.kind === 'all' && x.stage6Note) ? String(x.stage6Note) : '',
     ].filter(Boolean).join(' · ');
     return '<div class="tw-row' + (r.kind === 'refill' ? ' hit' : '') + '">' +
       '<div style="min-width:0">' +
@@ -10175,6 +10238,9 @@ async function loadExitBoard(){
   exbState = 'loading';
   try {
     exbData = await fetchJSON('./exit-board.json');
+      /* ★ 2026-10-21 M20：阶段档位以数据为准（stageOrder/stageNames），页面自带的是兜底。
+         这样「数据不足」这种展示桶即使以后改名/增减，页面也不用改代码。 */
+      try { exbSyncStageVocab(); } catch (e) {}
       /* ★ 2026-10-20 台账 M10：这个文件是本页按需加载的，到手后让「数据新鲜度」卡重画一次
          （否则它会一直显示「本页未加载」—— 那虽然如实，但没必要一直挂着） */
       try { refreshFreshnessCard(); } catch (e) {}
@@ -10186,6 +10252,14 @@ async function loadExitBoard(){
 const EXB_STAGE_ORDER = ['rallyLate', 'distribute', 'rallyMid', 'decline', 'calm', 'accumulate', 'rallyEarly', 'insufficient'];
 const EXB_STAGE_NAME = { accumulate: '吸筹', rallyEarly: '拉升早期', rallyMid: '拉升中期', rallyLate: '拉升末期',
   distribute: '派发', decline: '回落', calm: '平静', insufficient: '数据不足' };
+/* ★ M20（2026-10-21）：把数据文件声明的档位/名称同步进来（兜底值只用于文件旧版/加载前）。
+   判据：stageOrder 是【页面档位】= 7 阶段 + insufficient(数据不足)；stageNames 是显示名。 */
+function exbSyncStageVocab(){
+  const d = exbData || {};
+  const names = d.stageNames || {};
+  Object.keys(names).forEach(function(k){ if (names[k]) EXB_STAGE_NAME[k] = String(names[k]); });
+  arrOf(d.stageOrder).forEach(function(k){ if (EXB_STAGE_ORDER.indexOf(k) < 0) EXB_STAGE_ORDER.push(k); });
+}
 const EXB_MODE_NAME = { 'only-sell-on-rally': '只在拉升时卖（除非极好机会不再打入）' };
 const EXB_SORTS = [
   { k: 'priority', t: '卖出优先级' },
@@ -10200,7 +10274,9 @@ function exbPAbs(v){ return isNum(v) ? ((Math.abs(v) * 100).toFixed(2) + '%') : 
 function exbP2(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(2) + '%') : '—'; }
 function exbP1(v){ return isNum(v) ? ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(1) + '%') : '—'; }
 function exbM(v){ return isNum(v) ? money(v) : '—'; }
-function exbStageKey(it){ return (it && it.stage) ? it.stage : 'insufficient'; }
+/* ★ M20：优先用数据里的 stageBucket（生成时已把 null 统一成 insufficient）；
+   老文件没有该字段时才退回「stage || insufficient」。 */
+function exbStageKey(it){ return (it && (it.stageBucket || it.stage)) || 'insufficient'; }
 function exbStageBadge(k){ return '<span class="ex-stg ex-s-' + esc(k) + '">' + esc(EXB_STAGE_NAME[k] || k) + '</span>'; }
 function exbBatchBadge(b){
   if (!b) return '<span class="ex-bat ex-bn">无批次</span>';
@@ -10541,7 +10617,9 @@ function renderExitBoard(){
         exbLockBadge(it) + exbRoomBadge(it.room) + exbTypeBadge(it.stockType) +
         '<em>' + esc(it.caseName || it.fam || '') + (it.num ? (' · ' + it.num + ' 件') : '') + '</em>' +
         /* 手机上不左右滑动也能看到最关键的两项：阶段 + 动作倾向 */
-        '<div class="ex-nmsub">' + exbStageBadge(k) + '<span>' + esc(pl.headline || '—') + '</span></div></td>' +
+        '<div class="ex-nmsub">' + exbStageBadge(k) +
+          (it.stageStale ? ('<span class="ex-stg ex-s-insufficient" title="' + esc(it.stageAsOfNote || '') + '">⚠️ 日线止于 ' + esc(it.stageAsOf || '—') + '</span>') : '') +
+          '<span>' + esc(pl.headline || '—') + '</span></div></td>' +
         '<td class="ex-td">' + n2(it.num) + '</td>' +
         '<td class="ex-td">' + exbM(it.costUnit) + '</td>' +
         '<td class="ex-td">' + exbM(it.priceNow) + '</td>' +
@@ -10578,6 +10656,10 @@ function renderExitBoard(){
         '<p class="ex-dsub">' + exbStageBadge(exbStageKey(it)) +
         '　数据到 ' + esc(it.stageAsOf || '—') + '　gid ' + esc(it.gid == null ? '（台账无此 gid）' : String(it.gid)) +
         '　' + esc(it.caseName || '') + '　稀有度 ' + esc(it.rarity || '—') + '</p>' +
+        /* ★ M19（2026-10-21）：stageAsOf 不是"随便一个日期"——来自阶段看板 / 本地日线尾 / 数据不足，
+           三种来路写清楚；补算行比池内最新旧 ≥1 天时给出警示，不许让用户以为它和阶段看板同步。 */
+        (it.stageAsOfNote ? ('<p class="ex-hint" style="color:' + (it.stageStale ? '#ffb454' : 'var(--dim)') + '">' +
+          (it.stageStale ? '⚠️ ' : 'ℹ️ ') + esc(it.stageAsOfNote) + '</p>') : '');
         '<div class="ex-kv">' +
         '<div><div class="ex-k">持有件数</div><div class="ex-v">' + n2(it.num) + ' 件</div></div>' +
         '<div><div class="ex-k">买入成本（件）</div><div class="ex-v">' + exbM(it.costUnit) + '</div></div>' +
