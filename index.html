@@ -8445,6 +8445,49 @@ function barsGateApply(doc){
     if (!old) sec.insertBefore(el, sec.firstChild);
   }
 }
+/* ★★★ 2026-10-21 P1：流水线卡住 → 复用顶栏「时效条」变红（不新增区块）
+   ----------------------------------------------------------------------------
+   用户实测：「daily 卡在 [9.02] 10 小时，但没有任何地方告警（watchdog 100 分，页面正常）」
+   为什么读 health.json 而不是 bars-freshness.json：
+     daily 卡住时 bars-freshness.json 也一起停更（它只由 daily 写），拿它判"卡住"会永远滞后；
+     health.json 由 watchdog 每约 12 分钟写一次，状态变化会立刻发布（run_watchdog.cjs），
+     它是流水线停摆时唯一还在动的信号。
+   判定口径不在这里写死：只认 health.checks 里 file='pipeline-status.json' 且 ok!==true 的那一项，
+   阈值（同一步 30 分钟 / 整轮 4 小时 / 上次完成 12 小时）全部在 cs-quant/watchdog.cjs 里，
+   页面只负责显示它算出来的 issue —— 与 S5 时效闸门同一条纪律（两处各写一套必然漂移）。
+   ★ 只覆写【顶栏那一条】；流水线恢复后立刻还原成 barsGateApply(原始文档)，不永久污染。 */
+var pipelineGateStuck = false;
+function pipelineGateBad(h){
+  try {
+    var cs = (h && Array.isArray(h.checks)) ? h.checks : [];
+    for (var i = 0; i < cs.length; i++){
+      var c = cs[i];
+      if (c && c.file === 'pipeline-status.json' && c.ok !== true) return c;
+    }
+  } catch (e) {}
+  return null;
+}
+function pipelineGateFromHealth(h){
+  var bar = $('bars-gate');
+  if (!bar) return;
+  var bad = pipelineGateBad(h);
+  if (!bad){
+    if (pipelineGateStuck){ pipelineGateStuck = false; barsGateApply(barsGateDoc); }
+    barsGateAttr(bar, 'data-pipeline', 'ok');
+    return;
+  }
+  var msg = bad.issue || bad.label || '流水线异常';
+  pipelineGateStuck = true;
+  bar.className = 'barsgate bad';
+  bar.innerHTML = '<span class="bg-ico">🔴</span><span class="bg-txt"><b>流水线卡住</b>：' + esc(msg) +
+    '<span class="bg-when">　—　这条来自 health.json（watchdog 检查于 ' + esc(h.checkedAt || '—') +
+    '）；daily 停更时它仍然会更新</span></span>';
+  barsGateAttr(bar, 'data-level', 'bad');
+  barsGateAttr(bar, 'data-pipeline', 'stuck');
+  bar.title = '流水线进度告警来自 cs-quant/watchdog.cjs 对 data/pipeline-status.json 的检查；' +
+    '在电脑上执行 node cs-quant/pipeline_status.cjs show 可以看到卡在哪一步、卡了多久';
+}
+
 async function initBarsGate(){
   var doc = null;
   try { doc = await fetchJSON('./bars-freshness.json'); } catch (e) { doc = null; }
@@ -8605,6 +8648,7 @@ async function loadHealth(){
   healthAt = Date.now();
   renderHealthBadge();
   renderHealthPanel();
+  pipelineGateFromHealth(healthData);   /* ★ 2026-10-21 P1：流水线卡住 → 顶栏时效条变红 */
 }
 function refreshHealthIfDue(){
   if (Date.now() - healthAt > HEALTH_TTL) loadHealth();
