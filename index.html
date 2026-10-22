@@ -1549,6 +1549,14 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .prc-tag.prc-tw{color:var(--yellow);border-color:rgba(255,197,49,.55);background:rgba(255,197,49,.14)}
 .prc-tag.prc-tr{color:var(--red);border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.14)}
 .prc-tag.prc-td{color:var(--dim)}
+/* ★ M15（2026-10-22）：段集口径标记 —— 强弱分旁边那个「ⓘ N 段口径」。
+   它只解释「强弱盘结论建立在哪一段集上」，不参与排序、不改变任何判定。
+   数字由 segCalText()/prcCalTag() 从 pre-rally-candidates.segmentCaliber 现算（页面 0 处字面量）。 */
+.prc-cal{display:inline-block;font-size:10px;font-weight:700;border-radius:5px;padding:0 5px;margin-left:4px;
+  border:1px dashed var(--line);color:var(--dim);cursor:help;white-space:nowrap}
+.prc-cal:hover{color:var(--muted);border-color:var(--muted)}
+.segcal-why{font-size:11.5px;line-height:1.75;color:var(--muted);margin-top:8px}
+.segcal-why b{color:var(--text)}
 .prc-kv{display:flex;flex-wrap:wrap;gap:4px 10px;margin:5px 0 0;font-size:11.5px;
   line-height:1.6;color:var(--muted);min-width:0;overflow-wrap:anywhere}
 .prc-kv b{color:var(--text);font-weight:800}
@@ -2344,6 +2352,28 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           <div class="nw-meta" id="nw-meta"></div>
           <div class="nw-groups" id="nw-groups"></div>
           <p class="nw-foot" id="nw-foot"></p>
+        </div>
+
+        <!-- ============================================================
+             ★ M15（2026-10-22 · 用户拍板方案 a「保持现有段集、只加标注」）
+               三个「段集」数各是什么、为什么强弱盘用最小的那个 —— 全部生成式：
+               数字来自 pre-rally-candidates.json 的 segmentCaliber（生产者运行时读
+               mani-traces.counts / exit-price-compare.segTotal / strong-weak-classification.source），
+               本卡页面源码里 0 处段数字面量。取不到就照实显示「未取到」。
+             ============================================================ -->
+        <div class="card" id="sec-segcal">
+          <h2>段集口径：三个数各是什么 <span class="r" id="segcal-time">读取中…</span></h2>
+          <p class="sm" style="margin:6px 0 8px">
+            项目里同时存在<b>三个「段」</b>，它们<b>不是同一个数</b>，也不是谁写错了 —— 各有各的产出方式与用途。
+            这一栏把三个数并排列出，免得把一个数当成另一个数用。
+          </p>
+          <div class="wl-scroll">
+            <table class="fwd-tbl" style="font-size:11.5px">
+              <thead><tr><th>名字</th><th>数值</th><th>谁产的</th><th>它是什么 / 用途</th></tr></thead>
+              <tbody id="segcal-rows"></tbody>
+            </table>
+          </div>
+          <div class="segcal-why" id="segcal-why"></div>
         </div>
 
         <!-- ============================================================
@@ -3961,6 +3991,8 @@ function showPage(id){
   if (pid === 'inv'){ ensureExitBoard(); }
   /* ★ 2026-10-21 台账 B3：切到「工具」页才下 cs2-news-watch.json（几 KB），首屏不拉 */
   if (pid === 'tools'){ ensureNewsWatch(); }
+  /* ★ M15：工具页「段集口径」卡用已加载的 prcData.segmentCaliber 重画一次（不发新请求） */
+  if (pid === 'tools'){ try { renderSegCaliber(); } catch (e) {} }
 }
 /* 只下一次：来回切页签不会重复请求 */
 let saKick = false;
@@ -6064,6 +6096,8 @@ async function loadPreRally(){
   PRC_GID_SET.clear();
   arrOf(prcData && prcData.candidates).forEach(function(x){ if (x && x.gid != null) PRC_GID_SET.add(String(x.gid)); });
   renderPreRally();
+  /* ★ M15：候选数据到了 → 工具页「段集口径」卡跟着重画（同一份 segmentCaliber） */
+  try { renderSegCaliber(); } catch (e) {}
   /* 候选数据到了以后重画一次监控清单（「只看拉升前候选」筛选器要它） */
   try { if (wlData) renderWatchlist(); } catch (e) {}
 }
@@ -6151,8 +6185,10 @@ function prcItemHTML(x, idx){
   const pxShow = plivePx(x.gid, x.price);
   kv.push('现价 <b>' + (isNum(pxShow) ? '¥' + fmtNum(pxShow, pxShow < 10 ? 2 : 1) : '—') + '</b>' + pliveTag(x.gid));
   kv.push('阶段 <b>' + esc(x.stage || '—') + '</b>' + (isNum(x.stageStableDays) ? '（已稳 ' + n2(x.stageStableDays) + ' 天）' : ''));
+  /* ★ M15（2026-10-22 用户拍板方案 a）：强弱分旁边挂「段集口径」标记 —— 鼠标悬停看全句，
+     点开 ④ 有完整解释。文字与数字全部来自 prcData.segmentCaliber（页面不写死）。 */
   kv.push('强弱 <b>' + (isNum(st.score) ? n2(st.score) + '/100 ' : '') + esc(st.verdict || '—') + '</b>' +
-    (st.rankInBatch ? '（批内 ' + esc(st.rankInBatch) + '）' : ''));
+    (st.rankInBatch ? '（批内 ' + esc(st.rankInBatch) + '）' : '') + prcCalTag());
   kv.push('剩余空间 <span class="' + (rt.verdict === '大' ? 'prc-ok' : 'prc-wa') + '">' + esc(rt.verdict || '—') + '</span>' +
     (isNum(rt.med60) ? '（60 日中位 ' + prcP(rt.med60) + '）' : '') +
     (rt.basis ? '　<span class="' + (rt.basis === 'own' ? 'prc-ok' : 'prc-wa') + '">' + (rt.basis === 'own' ? '该品自己历史 n=' + n2(rt.refN) : '池子口径·已降级') + '</span>' : ''));
@@ -6228,6 +6264,9 @@ function prcItemHTML(x, idx){
   d += '<div style="margin-top:7px"><b>④ 强弱分怎么来的</b></div><div class="prc-li"><span>' +
     (isNum(st.score) ? ('score ' + n2(st.score) + '/100') : 'score —') + '</span>' + esc(st.formula || '') +
     (arrOf(st.parts).length ? '　分项：' + esc(arrOf(st.parts).join(' + ')) : '') + '</div>';
+  /* ★ M15：把「强弱盘结论建立在哪一段集上」写明（用户 2026-10-22 拍板：判据不动，页面必须标注）。
+     这段的每个数字都来自 segCaliber()，取不到就照实说未取到 —— 不拿旧数字顶。 */
+  d += '<div class="prc-li" data-segcal="1"><span>段集口径</span>' + esc(segCalText()) + '　—　' + esc(segCalExplain()) + '</div>';
   if (x.formNote) d += '<div style="margin-top:7px"><b>⑤ 三形态</b>：' + esc(x.formName || x.form || '') + ' —— ' + esc(x.formNote) + '</div>';
   d += '<div style="margin-top:7px;opacity:.85">★ 以上是【条件与依据】，不是买入建议；收益是毛额，未扣来回 1.00%~2.485% 成本与 7 天冷却。</div>';
   d += '</div></details></div>';
@@ -7148,6 +7187,74 @@ function segPullsCandText(){       /* "N 段 C 主拉升（M 个候选段里…�
   return n2(s.pulls) + ' 段 C 主拉升（' + n2(s.candidates) + ' 个候选段里，另分了 ' +
     (s.forms ? (n2(s.forms.A) + ' 段「吃断层跳价」、' + n2(s.forms.B) + ' 段「小拉升筹备」、' + n2(s.forms.N) + ' 段「非拉升」，') : '') +
     (isNum(s.sparseItems) ? ('并整品剔除了 ' + n2(s.sparseItems) + ' 个数据稀疏品') : '') + '）';
+}
+/* ============================================================================
+   ★ M15（2026-10-22 · 用户拍板方案 a「保持现有段集（池 ∩ C）、只加标注」）：段集口径的【显示层】
+   ----------------------------------------------------------------------------
+   三个数不是同一个数，而且「强弱盘」用的不是最大的那个：
+     · C 主拉升全集   = 全站 caveat 显示的那个段数（mani-traces.counts）
+     · 自算段集       = exit_price_compare 的三档阈值枚举（只服务《按品类出货方式》）
+     · 强弱分类样本   = 池 ∩ C 且 d0|d1 逐段吻合 → 强弱盘 v1~v5 都在它上面算
+   用户 2026-10-22 拍板：**不改判据**（换成全量 C 段会让每条强弱盘结论都可能变），
+   但页面必须把「强弱基于哪一段集、为什么是它」标清楚。
+   本组函数只做显示：数字全部读 prcData.segmentCaliber（生产者 build_pre_rally_candidates
+   运行时合成），取不到就显示「未取到」，绝不拿旧数字顶（S2 同款纪律）。
+   ============================================================================ */
+function segCaliber(){
+  try { return (typeof prcData !== 'undefined' && prcData && prcData.segmentCaliber) || null; }
+  catch (e){ return null; }
+}
+function segCalFmt(n){ return (n == null || !isNum(n)) ? '未取到' : n2(n); }
+function segCalText(){                 /* 「强弱基于 N 段（池 ∩ C，双算法确认）」 */
+  const c = segCaliber();
+  if (!c) return '强弱段数未取到（pre-rally-candidates.segmentCaliber → strong-weak-classification.json）';
+  if (c.classifiedLabel) return c.classifiedLabel;
+  return '强弱基于 ' + segCalFmt(c.classifiedSegments) + ' 段（池 ∩ C，双算法确认）';
+}
+function segCalExplain(){              /* 一句把三个数的关系说清（数字全部现算） */
+  const c = segCaliber();
+  if (!c) return '段集口径要等 pre-rally-candidates.json 读进来才能显示（不猜、不拿旧数字顶）。';
+  const pool = isNum(c.poolGids) ? (n2(c.poolGids) + ' 品的') : '池内';
+  const before = isNum(c.classifiedPoolBarSegments) ? (n2(c.classifiedPoolBarSegments) + ' 段') : 'BT 自算段';
+  const ratio = isNum(c.classifiedRatioOfC) ? ((c.classifiedRatioOfC * 100).toFixed(1) + '%') : '—';
+  return pool + ' BT 自算 ' + before + ' 里，只有 ' + segCalFmt(c.classifiedSegments) +
+    ' 段同时被 C 主拉升判定确认（d0|d1 逐段吻合）→ 不是样本少，是【高置信度子集】（占 C 主拉升 ' + ratio + '）；' +
+    'C 主拉升全集 ' + segCalFmt(c.cPullSegments) + '、自算段集 ' + segCalFmt(c.selfComputedSegments) + ' 三个数各有各的用途。' +
+    '强弱盘要押钱 → 宁可用两个算法都认的；判据不变（用户 2026-10-22 拍板）。';
+}
+function segCalWhy(){                  /* 卡片里那一段「为什么用最小那个数」 */
+  const c = segCaliber();
+  if (!c) return '';
+  return (c.whyUseClassified || '') + (c.doubleConfirmNote ? ('　·　' + c.doubleConfirmNote) : '') +
+    (c.thresholdNote ? ('　·　' + c.thresholdNote) : '');
+}
+function prcCalTag(){                  /* 候选卡上那个「ⓘ N 段口径」标记（悬停看全句） */
+  const c = segCaliber();
+  if (!c || !isNum(c.classifiedSegments)) return '';
+  return '<span class="prc-cal" title="' + esc(segCalText() + '　·　' + (c.doubleConfirmNote || '双算法确认')) +
+    '" data-segcal-tag="1">ⓘ ' + esc(segCalFmt(c.classifiedSegments)) + ' 段口径</span>';
+}
+/* 工具页「段集口径」卡：三个数逐行列出（表里的每个数都来自数据文件，页面 0 处字面量） */
+function renderSegCaliber(){
+  const tbody = $('segcal-rows');
+  if (!tbody || tbody.innerHTML === undefined) return;
+  const c = segCaliber();
+  if (!c){
+    setText('segcal-time', '未取到');
+    tbody.innerHTML = '<tr><td colspan="4">还没读到 pre-rally-candidates.json —— 这一卡的数字全部来自它，' +
+      '取不到就照实显示「未取到」，不拿旧数字顶上。</td></tr>';
+    const w0 = $('segcal-why'); if (w0) w0.innerHTML = '';
+    return;
+  }
+  setText('segcal-time', c.at ? String(c.at).slice(0, 16).replace('T', ' ') : '—');
+  tbody.innerHTML = arrOf(c.threeNumbers).map(function(x){
+    return '<tr><td><b>' + esc(x.name) + '</b></td>' +
+      '<td><b>' + esc(x.valueText || segCalFmt(x.value)) + '</b> 段</td>' +
+      '<td style="text-align:left"><code style="font-size:10.5px;word-break:break-all">' + esc(x.src) + '</code></td>' +
+      '<td style="text-align:left">' + esc(x.role) + '</td></tr>';
+  }).join('');
+  const w = $('segcal-why');
+  if (w) w.innerHTML = '<b>为什么「强弱盘」用最小的那个数：</b>' + esc(segCalWhy());
 }
 function wlStageCls(s){
   /* 7 阶段（权威 stage） */
