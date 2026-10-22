@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792658202725,
- "atText": "2026/10/22 16:36:42",
+ "at": 1792660500392,
+ "atText": "2026/10/22 17:15:00",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -83,10 +83,10 @@
    ]
   },
   "n": {
-   "n": 418,
-   "gids": 143,
-   "exact": 325,
-   "exactPct": 77.7512,
+   "n": 424,
+   "gids": 145,
+   "exact": 329,
+   "exactPct": 77.5943,
    "medianPct": 0,
    "p75Pct": 0,
    "p90Pct": 0.1726,
@@ -99,24 +99,24 @@
    "byDay": [
     {
      "day": "2026-10-19",
-     "n": 143,
-     "exact": 120,
+     "n": 145,
+     "exact": 121,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.7241
     },
     {
      "day": "2026-10-20",
-     "n": 142,
-     "exact": 104,
+     "n": 144,
+     "exact": 106,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 2.1924
     },
     {
      "day": "2026-10-21",
-     "n": 133,
-     "exact": 101,
+     "n": 135,
+     "exact": 102,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 0.9653
