@@ -1,20 +1,19 @@
 {
  "v": 1,
- "at": 1792656953171,
- "atText": "2026-10-22 16:15:53",
+ "at": 1792657569328,
+ "atText": "2026-10-22 16:26:09",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "ISteamNews"
  ],
  "cadenceMin": 30,
- "staleAfterMin": 90,
+ "staleAfterMin": 300,
  "windowDays": 7,
  "task": {
   "name": "CSQuant_UpdateWatch",
-  "registered": true,
-  "checkedAt": 1792656954171,
-  "note": "计划任务已注册（每 30 分钟巡检）"
+  "registered": false,
+  "checkedAt": 1792657583228,
+  "note": "任务未注册或查询失败（exit=1）"
  },
  "lastSeen": "1846651706675829",
  "lastSeenTitle": "Counter-Strike 2 Update",
@@ -40,7 +39,7 @@
   "officialItems": 89,
   "newItems": 0,
   "recentItems": 0,
-  "rssItems": 10
+  "rssItems": 0
  },
  "sourceStatus": [
   {
@@ -49,26 +48,26 @@
    "ok": true,
    "status": 200,
    "bytes": 175208,
-   "ms": 951,
+   "ms": 630,
    "attempts": 1,
    "error": null
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": true,
-   "status": 200,
-   "bytes": 19659,
-   "ms": 498,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 13825,
+   "attempts": 2,
+   "error": "timeout"
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-10-14",
-  "rssNewestDate": "2026-10-14",
-  "agree": true,
-  "note": "两个源的最新公告日期一致"
+  "rssNewestDate": null,
+  "agree": false,
+  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
  "items": [],
  "recent": []
