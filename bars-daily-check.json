@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792639018399,
- "atText": "2026/10/22 11:16:58",
+ "at": 1792649833723,
+ "atText": "2026/10/22 14:17:13",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -10,8 +10,8 @@
   "shareAlarm": 0.1
  },
  "official": {
-  "latestLabel": "2026-10-19",
-  "latestTrueDay": "2026-10-20"
+  "latestLabel": "2026-10-20",
+  "latestTrueDay": "2026-10-21"
  },
  "rt": {
   "days": 10,
@@ -21,9 +21,9 @@
  },
  "window": {
   "recentDays": [
-   "2026-10-18",
    "2026-10-19",
-   "2026-10-20"
+   "2026-10-20",
+   "2026-10-21"
   ],
   "confirmedDays": [
    "2026-10-13",
@@ -33,68 +33,102 @@
    "2026-10-17",
    "2026-10-18",
    "2026-10-19",
-   "2026-10-20"
+   "2026-10-20",
+   "2026-10-21"
   ]
  },
  "byKey": {
   "p": {
-   "n": 820,
-   "gids": 529,
-   "exact": 575,
-   "exactPct": 70.122,
+   "n": 1513,
+   "gids": 684,
+   "exact": 849,
+   "exactPct": 56.1137,
    "medianPct": 0,
-   "p75Pct": 0.1147,
-   "p90Pct": 0.6692,
-   "p99Pct": 4.8346,
-   "maxPct": 16.4659,
-   "over5Pct": 0.9756,
-   "conflictGidCount": 8,
-   "conflictShare": 1.5123,
+   "p75Pct": 0.4,
+   "p90Pct": 1.4286,
+   "p99Pct": 9.0909,
+   "maxPct": 29.4643,
+   "over5Pct": 2.7098,
+   "conflictGidCount": 41,
+   "conflictShare": 5.9942,
    "conflictGids": [
+    240,
+    821,
+    849,
     883,
+    986,
     1044,
+    1209,
+    1400,
+    1496,
+    1706,
+    1814,
     1854,
+    1891,
+    2032,
+    2071,
+    2091,
     8139,
+    9521,
+    9540,
     9613,
+    9780,
+    9810,
+    10359,
+    10372,
+    11515,
+    12259,
+    12590,
+    13181,
+    13421,
     13452,
+    13534,
+    15506,
+    16506,
+    17450,
+    17718,
+    18129,
     18259,
-    20507
+    20379,
+    20420,
+    20507,
+    20560
    ],
    "byDay": [
     {
-     "day": "2026-10-18",
-     "n": 146,
-     "exact": 130,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 1.654
-    },
-    {
      "day": "2026-10-19",
-     "n": 146,
-     "exact": 138,
+     "n": 147,
+     "exact": 139,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.5786
     },
     {
      "day": "2026-10-20",
-     "n": 528,
-     "exact": 307,
-     "conflict": 8,
+     "n": 683,
+     "exact": 408,
+     "conflict": 13,
      "medianPct": 0,
      "maxPct": 16.4659
+    },
+    {
+     "day": "2026-10-21",
+     "n": 683,
+     "exact": 302,
+     "conflict": 28,
+     "medianPct": 0.0764,
+     "maxPct": 29.4643
     }
    ]
   },
   "n": {
-   "n": 437,
-   "gids": 146,
-   "exact": 339,
-   "exactPct": 77.5744,
+   "n": 428,
+   "gids": 147,
+   "exact": 332,
+   "exactPct": 77.5701,
    "medianPct": 0,
    "p75Pct": 0,
-   "p90Pct": 0.2229,
+   "p90Pct": 0.1726,
    "p99Pct": 1.2195,
    "maxPct": 2.1924,
    "over5Pct": 0,
@@ -103,35 +137,35 @@
    "conflictGids": [],
    "byDay": [
     {
-     "day": "2026-10-18",
-     "n": 146,
-     "exact": 110,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 0.9153
-    },
-    {
      "day": "2026-10-19",
-     "n": 146,
-     "exact": 122,
+     "n": 147,
+     "exact": 123,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.7241
     },
     {
      "day": "2026-10-20",
-     "n": 145,
+     "n": 146,
      "exact": 107,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 2.1924
+    },
+    {
+     "day": "2026-10-21",
+     "n": 135,
+     "exact": 102,
+     "conflict": 0,
+     "medianPct": 0,
+     "maxPct": 0.9653
     }
    ]
   },
   "b": {
-   "n": 10,
+   "n": 5,
    "gids": 5,
-   "exact": 10,
+   "exact": 5,
    "exactPct": 100,
    "medianPct": 0,
    "p75Pct": 0,
@@ -143,14 +177,6 @@
    "conflictShare": 0,
    "conflictGids": [],
    "byDay": [
-    {
-     "day": "2026-10-18",
-     "n": 5,
-     "exact": 5,
-     "conflict": 0,
-     "medianPct": 0,
-     "maxPct": 0
-    },
     {
      "day": "2026-10-19",
      "n": 5,
@@ -178,20 +204,116 @@
    "byDay": []
   }
  },
- "level": "ok",
- "conflictGidCount": 8,
- "conflictShare": 1.5123,
+ "level": "warn",
+ "conflictGidCount": 41,
+ "conflictShare": 5.9942,
  "conflictGids": [
+  240,
+  821,
+  849,
   883,
+  986,
   1044,
+  1209,
+  1400,
+  1496,
+  1706,
+  1814,
   1854,
+  1891,
+  2032,
+  2071,
+  2091,
   8139,
+  9521,
+  9540,
   9613,
+  9780,
+  9810,
+  10359,
+  10372,
+  11515,
+  12259,
+  12590,
+  13181,
+  13421,
   13452,
+  13534,
+  15506,
+  16506,
+  17450,
+  17718,
+  18129,
   18259,
-  20507
+  20379,
+  20420,
+  20507,
+  20560
  ],
  "samples": [
+  {
+   "gid": 9521,
+   "trueDay": "2026-10-19",
+   "officialLabel": "2026-10-18",
+   "ours": 0.18,
+   "official": 0.18,
+   "diffPct": 0,
+   "src": "intraday_agg"
+  },
+  {
+   "gid": 9540,
+   "trueDay": "2026-10-19",
+   "officialLabel": "2026-10-18",
+   "ours": 0.19,
+   "official": 0.19,
+   "diffPct": 0,
+   "src": "intraday_agg"
+  },
+  {
+   "gid": 9521,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 0.17,
+   "official": 0.17,
+   "diffPct": 0,
+   "src": "intraday_agg"
+  },
+  {
+   "gid": 9540,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 0.25,
+   "official": 0.25,
+   "diffPct": 0,
+   "src": "intraday_agg"
+  },
+  {
+   "gid": 240,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 750,
+   "official": 799.5,
+   "diffPct": 6.1914,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 821,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 12.9,
+   "official": 12.8,
+   "diffPct": 0.7812,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 849,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 199.44,
+   "official": 199.38,
+   "diffPct": 0.0301,
+   "src": "rt_snapshot"
+  },
   {
    "gid": 883,
    "trueDay": "2026-10-20",
@@ -199,6 +321,15 @@
    "ours": 29,
    "official": 24.9,
    "diffPct": 16.4659,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 986,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 1.97,
+   "official": 1.96,
+   "diffPct": 0.5102,
    "src": "rt_snapshot"
   },
   {
@@ -211,6 +342,51 @@
    "src": "rt_snapshot"
   },
   {
+   "gid": 1209,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 49.99,
+   "official": 49.9,
+   "diffPct": 0.1804,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1400,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 15.39,
+   "official": 15.38,
+   "diffPct": 0.065,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1496,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 10.11,
+   "official": 10.11,
+   "diffPct": 0,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1706,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 35.94,
+   "official": 35.91,
+   "diffPct": 0.0835,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1814,
+   "trueDay": "2026-10-20",
+   "officialLabel": "2026-10-19",
+   "ours": 40.39,
+   "official": 40.22,
+   "diffPct": 0.4227,
+   "src": "rt_snapshot"
+  },
+  {
    "gid": 1854,
    "trueDay": "2026-10-20",
    "officialLabel": "2026-10-19",
@@ -220,51 +396,42 @@
    "src": "rt_snapshot"
   },
   {
-   "gid": 8139,
+   "gid": 1891,
    "trueDay": "2026-10-20",
    "officialLabel": "2026-10-19",
-   "ours": 4.9,
-   "official": 5.39,
-   "diffPct": 9.0909,
+   "ours": 1.02,
+   "official": 1.02,
+   "diffPct": 0,
    "src": "rt_snapshot"
   },
   {
-   "gid": 9613,
+   "gid": 2032,
    "trueDay": "2026-10-20",
    "officialLabel": "2026-10-19",
-   "ours": 18.5,
-   "official": 19.5,
-   "diffPct": 5.1282,
+   "ours": 29.64,
+   "official": 32,
+   "diffPct": 7.375,
    "src": "rt_snapshot"
   },
   {
-   "gid": 13452,
+   "gid": 2071,
    "trueDay": "2026-10-20",
    "officialLabel": "2026-10-19",
-   "ours": 13.78,
-   "official": 12.89,
-   "diffPct": 6.9046,
+   "ours": 16.1,
+   "official": 16.1,
+   "diffPct": 0,
    "src": "rt_snapshot"
   },
   {
-   "gid": 18259,
+   "gid": 2091,
    "trueDay": "2026-10-20",
    "officialLabel": "2026-10-19",
-   "ours": 1.37,
-   "official": 1.45,
-   "diffPct": 5.5172,
-   "src": "rt_snapshot"
-  },
-  {
-   "gid": 20507,
-   "trueDay": "2026-10-20",
-   "officialLabel": "2026-10-19",
-   "ours": 1.99,
-   "official": 2.17,
-   "diffPct": 8.2949,
+   "ours": 4.46,
+   "official": 4.45,
+   "diffPct": 0.2247,
    "src": "rt_snapshot"
   }
  ],
  "selfTest": null,
- "message": "自建日线 vs 官方：820 个 (gid×日) 可比，完全相等 70.122%，中位差异 0%，>5% 的品 8/529 个 → 口径一致"
+ "message": "⚠️ 自建日线与 csqaq 官方有 41 个品差异 >5%（可比 1513 个，中位 0%，>5% 占 2.7098%），请确认口径"
 }
