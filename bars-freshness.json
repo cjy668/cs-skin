@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1792637807708,
- "atText": "2026/10/22 10:56:47",
+ "at": 1792647217599,
+ "atText": "2026/10/22 13:33:37",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -13,28 +13,28 @@
  },
  "bars": {
   "latest": "2026-10-18",
-  "gidsAtLatest": 1130,
+  "gidsAtLatest": 975,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
     "date": "2026-10-18",
-    "gids": 1130
+    "gids": 975
    },
    {
-    "date": "2026-10-19",
-    "gids": 528
+    "date": "2026-10-20",
+    "gids": 683
    }
   ],
   "byKey": {
    "p": {
     "date": "2026-10-18",
-    "gids": 1130,
+    "gids": 975,
     "trueDay": "2026-10-19"
    },
    "n": {
     "date": "2026-10-18",
-    "gids": 1130,
+    "gids": 975,
     "trueDay": "2026-10-19"
    },
    "b": {
@@ -116,27 +116,27 @@
     "bp": 9
    },
    "2026-10-21": {
-    "p": 129,
-    "n": 129,
+    "p": 133,
+    "n": 133,
     "b": 4,
     "bp": 4
    },
    "2026-10-22": {
-    "p": 123,
-    "n": 123,
+    "p": 132,
+    "n": 132,
     "b": 0,
     "bp": 0
    }
   },
-  "latestDayGids": 123,
+  "latestDayGids": 132,
   "latestPartial": false,
   "byKey": {
-   "p": 1393,
-   "n": 1393,
+   "p": 1406,
+   "n": 1406,
    "b": 101,
    "bp": 101
   },
-  "points": 1494,
+  "points": 1507,
   "appendedDays": [
    {
     "trueDay": "2026-10-20",
@@ -157,12 +157,12 @@
    "2026-10-22"
   ],
   "snapshotByKey": {
-   "p": 6404,
+   "p": 6410,
    "n": 0,
    "b": 68,
    "bp": 68
   },
-  "snapshotPoints": 6404,
+  "snapshotPoints": 6410,
   "buyLive": {
    "atText": "2026/10/21 00:09:26",
    "b": 34,
@@ -184,7 +184,7 @@
    "2026-10-22"
   ],
   "latestTrueDay": "2026-10-22",
-  "latestDayGids": 123,
+  "latestDayGids": 132,
   "latestPartial": false,
   "coverByDay": {
    "2026-10-13": {
@@ -236,25 +236,25 @@
     "bp": 9
    },
    "2026-10-21": {
-    "p": 129,
-    "n": 129,
+    "p": 133,
+    "n": 133,
     "b": 4,
     "bp": 4
    },
    "2026-10-22": {
-    "p": 123,
-    "n": 123,
+    "p": 132,
+    "n": 132,
     "b": 0,
     "bp": 0
    }
   },
   "byKey": {
-   "p": 1393,
-   "n": 1393,
+   "p": 1406,
+   "n": 1406,
    "b": 101,
    "bp": 101
   },
-  "points": 1494,
+  "points": 1507,
   "snapshotDays": [
    "2026-10-20",
    "2026-10-21",
@@ -270,8 +270,8 @@
  },
  "live": {
   "date": "2026-10-22",
-  "atText": "2026/10/22 10:53:50",
-  "n": 2117
+  "atText": "2026/10/22 13:32:34",
+  "n": 2116
  },
  "lagDays": 1,
  "extraLagDays": 0,
@@ -306,7 +306,7 @@
    "asOf": "2026-10-21",
    "via": "asOfSeries",
    "asOfDate": "2026-10-21",
-   "generatedAt": "2026/10/22 10:56:25",
+   "generatedAt": "2026/10/22 13:32:11",
    "basedOnBars": "2026-10-21",
    "staleVsBars": false
   },
@@ -413,7 +413,7 @@
     "compared": 820,
     "medianPct": 0,
     "conflictGidCount": 8,
-    "atText": "2026/10/22 10:37:41"
+    "atText": "2026/10/22 11:16:58"
    },
    {
     "section": "merge_junction",
@@ -421,7 +421,7 @@
     "compared": 1140,
     "medianPct": 0,
     "conflictGidCount": 3,
-    "atText": "2026/10/22 10:37:31"
+    "atText": "2026/10/22 11:16:49"
    },
    {
     "section": "intraday_calibration",
@@ -429,18 +429,18 @@
     "compared": 1140,
     "medianPct": 0,
     "conflictGidCount": 3,
-    "atText": "2026/10/22 10:37:28"
+    "atText": "2026/10/22 11:16:45"
    },
    {
     "section": "rt_snapshot_vs_intraday",
     "level": "ok",
-    "compared": 123,
+    "compared": 132,
     "medianPct": 0,
     "conflictGidCount": 0,
-    "atText": "2026/10/22 10:37:32"
+    "atText": "2026/10/22 11:16:49"
    }
   ],
-  "atText": "2026/10/22 10:37:41"
+  "atText": "2026/10/22 11:16:58"
  },
  "message": "官方日线标签 2026-10-18（= UTC+8 交易日 2026-10-19） → 生效最新 2026-10-21 = UTC+8 交易日 2026-10-22；自建日线覆盖 10 天（已补到 2026-10-22，追加 3 天）",
  "conflictText": "",
