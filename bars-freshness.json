@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1792657562634,
- "atText": "2026/10/22 16:26:02",
+ "at": 1792657958448,
+ "atText": "2026/10/22 16:32:38",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -13,28 +13,28 @@
  },
  "bars": {
   "latest": "2026-10-20",
-  "gidsAtLatest": 863,
+  "gidsAtLatest": 978,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
     "date": "2026-10-20",
-    "gids": 863
+    "gids": 978
    },
    {
     "date": "2026-10-18",
-    "gids": 795
+    "gids": 680
    }
   ],
   "byKey": {
    "p": {
     "date": "2026-10-20",
-    "gids": 863,
+    "gids": 978,
     "trueDay": "2026-10-21"
    },
    "n": {
     "date": "2026-10-20",
-    "gids": 863,
+    "gids": 978,
     "trueDay": "2026-10-21"
    },
    "b": {
@@ -262,7 +262,7 @@
  },
  "live": {
   "date": "2026-10-22",
-  "atText": "2026/10/22 16:24:02",
+  "atText": "2026/10/22 16:26:53",
   "n": 2113
  },
  "lagDays": 1,
@@ -298,7 +298,7 @@
    "asOf": "2026-10-21",
    "via": "asOfSeries",
    "asOfDate": "2026-10-21",
-   "generatedAt": "2026/10/22 16:23:26",
+   "generatedAt": "2026/10/22 16:32:22",
    "basedOnBars": "2026-10-21",
    "staleVsBars": false
   },
@@ -396,16 +396,16 @@
  "conflict": {
   "level": "warn",
   "thresholdPct": 5,
-  "conflictGidCount": 44,
-  "message": "⚠️ 自建日线与 csqaq 官方有 44 个品差异 >5%，请确认口径",
+  "conflictGidCount": 49,
+  "message": "⚠️ 自建日线与 csqaq 官方有 49 个品差异 >5%，请确认口径",
   "sections": [
    {
     "section": "daily_verify",
     "level": "warn",
-    "compared": 1633,
+    "compared": 2053,
     "medianPct": 0,
-    "conflictGidCount": 42,
-    "atText": "2026/10/22 16:17:22"
+    "conflictGidCount": 47,
+    "atText": "2026/10/22 16:31:14"
    },
    {
     "section": "merge_junction",
@@ -432,14 +432,14 @@
     "atText": "2026/10/22 16:17:16"
    }
   ],
-  "atText": "2026/10/22 16:17:22"
+  "atText": "2026/10/22 16:31:14"
  },
  "message": "官方日线标签 2026-10-20（= UTC+8 交易日 2026-10-21） → 生效最新 2026-10-21 = UTC+8 交易日 2026-10-22；自建日线覆盖 10 天（已补到 2026-10-22，追加 1 天）",
- "conflictText": "⚠️ 自建日线与 csqaq 官方有 44 个品差异 >5%，请确认口径",
+ "conflictText": "⚠️ 自建日线与 csqaq 官方有 49 个品差异 >5%，请确认口径",
  "alarm": {
   "level": "warn",
-  "text": "⚠️ 自建日线与 csqaq 官方有 44 个品差异 >5%，请确认口径",
-  "detail": "⚠️ 自建日线与 csqaq 官方有 44 个品差异 >5%，请确认口径",
-  "since": "2026/10/22 16:17:22"
+  "text": "⚠️ 自建日线与 csqaq 官方有 49 个品差异 >5%，请确认口径",
+  "detail": "⚠️ 自建日线与 csqaq 官方有 49 个品差异 >5%，请确认口径",
+  "since": "2026/10/22 16:31:14"
  }
 }
