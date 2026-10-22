@@ -1,10 +1,10 @@
 {
  "v": 1,
- "at": 1792651553128,
- "atText": "2026-10-22 14:45:53",
+ "at": 1792653353127,
+ "atText": "2026-10-22 15:15:53",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -12,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1792651576465,
+  "checkedAt": 1792653383657,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1846651706675829",
+ "lastSeen": "687519694976975304",
  "lastSeenTitle": "Counter-Strike 2 Update",
  "lastSeenDate": "2026-10-14",
  "lastSeenAtText": "2026-10-15 07:02:48",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706675829",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/687519694976975304",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-10-14",
@@ -35,39 +35,39 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 89,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 0,
-  "rssItems": 0
+  "rssItems": 10
  },
  "sourceStatus": [
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 175208,
-   "ms": 705,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 30490,
+   "attempts": 3,
+   "error": "timeout"
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": false,
-   "status": 0,
-   "bytes": 0,
-   "ms": 23276,
-   "attempts": 2,
-   "error": "read ECONNRESET"
+   "ok": true,
+   "status": 200,
+   "bytes": 19659,
+   "ms": 601,
+   "attempts": 1,
+   "error": null
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-10-14",
-  "rssNewestDate": null,
-  "agree": false,
-  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
+  "rssNewestDate": "2026-10-14",
+  "agree": true,
+  "note": "两个源的最新公告日期一致"
  },
  "items": [],
  "recent": []
