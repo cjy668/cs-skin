@@ -1,19 +1,19 @@
 {
  "v": 1,
- "at": 1792637814465,
- "atText": "2026-10-22 10:56:54",
+ "at": 1792642553135,
+ "atText": "2026-10-22 12:15:53",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
   "ISteamNews"
  ],
  "cadenceMin": 30,
- "staleAfterMin": 300,
+ "staleAfterMin": 90,
  "windowDays": 7,
  "task": {
   "name": "CSQuant_UpdateWatch",
-  "registered": false,
-  "checkedAt": 1792637825199,
-  "note": "任务未注册或查询失败（exit=1）"
+  "registered": true,
+  "checkedAt": 1792642576500,
+  "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "1846651706675829",
  "lastSeenTitle": "Counter-Strike 2 Update",
@@ -48,7 +48,7 @@
    "ok": true,
    "status": 200,
    "bytes": 175208,
-   "ms": 1115,
+   "ms": 810,
    "attempts": 1,
    "error": null
   },
@@ -58,9 +58,9 @@
    "ok": false,
    "status": 0,
    "bytes": 0,
-   "ms": 10613,
+   "ms": 23302,
    "attempts": 2,
-   "error": "timeout"
+   "error": "read ECONNRESET"
   }
  ],
  "crossCheck": {
