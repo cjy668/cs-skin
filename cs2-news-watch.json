@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1792852784364,
- "atText": "2026-10-24 22:39:44",
+ "at": 1792856384364,
+ "atText": "2026-10-24 23:39:44",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "ISteamNews"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1792852785268,
+  "checkedAt": 1792856401751,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "1847286114034398",
@@ -40,7 +39,7 @@
   "officialItems": 89,
   "newItems": 0,
   "recentItems": 1,
-  "rssItems": 10
+  "rssItems": 0
  },
  "sourceStatus": [
   {
@@ -49,26 +48,26 @@
    "ok": true,
    "status": 200,
    "bytes": 177487,
-   "ms": 847,
+   "ms": 2005,
    "attempts": 1,
    "error": null
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": true,
-   "status": 200,
-   "bytes": 21615,
-   "ms": 829,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 17312,
+   "attempts": 2,
+   "error": "timeout"
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-10-22",
-  "rssNewestDate": "2026-10-22",
-  "agree": true,
-  "note": "两个源的最新公告日期一致"
+  "rssNewestDate": null,
+  "agree": false,
+  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
  "items": [],
  "recent": [
