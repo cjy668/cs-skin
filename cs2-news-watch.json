@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1792817657628,
- "atText": "2026-10-24 12:54:17",
+ "at": 1792818584444,
+ "atText": "2026-10-24 13:09:44",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
   "ISteamNews"
@@ -12,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1792817674720,
+  "checkedAt": 1792818605206,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "1847286114034398",
@@ -20,9 +20,9 @@
  "lastSeenDate": "2026-10-22",
  "lastSeenAtText": "2026-10-23 06:56:10",
  "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114034398",
- "newCount": 1,
+ "newCount": 0,
  "firstRun": false,
- "lastKnownDate": "2026-10-14",
+ "lastKnownDate": "2026-10-22",
  "hist": {
   "updatesTotal": 265,
   "coreEventDates": 27,
@@ -37,7 +37,7 @@
  "checked": {
   "feedItems": 100,
   "officialItems": 89,
-  "newItems": 1,
+  "newItems": 0,
   "recentItems": 1,
   "rssItems": 0
  },
@@ -48,8 +48,8 @@
    "ok": true,
    "status": 200,
    "bytes": 177487,
-   "ms": 1065,
-   "attempts": 1,
+   "ms": 6334,
+   "attempts": 2,
    "error": null
   },
   {
@@ -58,7 +58,7 @@
    "ok": false,
    "status": 0,
    "bytes": 0,
-   "ms": 16954,
+   "ms": 20660,
    "attempts": 2,
    "error": "timeout"
   }
@@ -69,76 +69,7 @@
   "agree": false,
   "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
- "items": [
-  {
-   "gid": "1847286114034398",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
-   "date": "2026-10-22",
-   "dateLocal": "2026-10-23",
-   "at": 1792709770000,
-   "atText": "2026-10-23 06:56:10",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114034398",
-   "summary": "MAP SCRIPTING · Added Instance.Precache · Returns a CSPrecache object · Added CSPrecache.IsServerLoading · Added CSPrecache.IsServerLoaded · Added CSPrecache.IsClientLoading · Added CSPrecache.IsClientLoaded · Added CSPrecache.IsLoadedForAll · Added CSPrecache.Release · Added CSHostage · Added CSHostage.IsBeingPickedUp · Added CSHostage.IsBeingCarried · Added CSHostage.IsRescued · Added CSHostage.GetRescuer · Added CSHostage.GetPickUpStartTime · Added CSHostage.GetPickUpFinishTime · Added CSPlay…",
-   "level": "机制级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Rarity",
-    "Map",
-    "Bug"
-   ],
-   "levelBasis": "强机制 1 个（Rarity）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 2 个",
-   "mechanismHits": [
-    "Rarity"
-   ],
-   "strongMechanismHits": [
-    "Rarity"
-   ],
-   "supplyHits": [],
-   "eventHits": [],
-   "noiseHits": [
-    "Map",
-    "Bug"
-   ],
-   "alreadyKnown": false,
-   "similarEvents": [
-    {
-     "date": "2024-12-19",
-     "title": "《反恐精英》更新",
-     "similarity": 0.607,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2026-05-07",
-     "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "similarity": 0.508,
-     "eventDate": "2026-05-07",
-     "eventClass": "regime_shift",
-     "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "reactionDay": "2026-05-09",
-     "medPct": -2.3,
-     "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
-    },
-    {
-     "date": "2026-09-09",
-     "title": "《反恐精英》更新",
-     "similarity": 0.424,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  }
- ],
+ "items": [],
  "recent": [
   {
    "gid": "1847286114034398",
@@ -170,7 +101,7 @@
     "Map",
     "Bug"
    ],
-   "alreadyKnown": false,
+   "alreadyKnown": true,
    "similarEvents": [
     {
      "date": "2024-12-19",
