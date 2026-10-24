@@ -3,67 +3,39 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1792822195050,
-   "atText": "2026/10/24 14:09:55",
+   "at": 1792833532979,
+   "atText": "2026/10/24 17:18:52",
    "level": "ok",
-   "compared": 3501,
+   "compared": 2472,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 1.0309,
+   "p90Pct": 1.2943,
    "maxPct": 69,
-   "over5PctShare": 0.3142,
-   "conflictGidCount": 11,
-   "conflictShare": 0.6651,
+   "over5PctShare": 0.7686,
+   "conflictGidCount": 19,
+   "conflictShare": 1.1487,
    "conflictGids": [
     883,
-    986,
+    1247,
+    1638,
+    1748,
+    1814,
+    1826,
+    1891,
     1939,
+    2218,
+    9521,
     9747,
+    9799,
+    12519,
     12713,
+    13181,
     15516,
-    17427,
     17434,
-    17554,
-    19580,
-    24032
+    17450,
+    18129
    ],
    "samples": [
-    {
-     "gid": 883,
-     "trueDay": "2026-10-19",
-     "officialLabel": "2026-10-18",
-     "ours": 17.69,
-     "official": 15.03,
-     "diffPct": 17.6979,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 986,
-     "trueDay": "2026-10-19",
-     "officialLabel": "2026-10-18",
-     "ours": 1.99,
-     "official": 1.99,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 883,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 24.9,
-     "official": 24.9,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 986,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 1.85,
-     "official": 1.96,
-     "diffPct": 5.6122,
-     "src": "intraday_agg"
-    },
     {
      "gid": 883,
      "trueDay": "2026-10-21",
@@ -74,172 +46,242 @@
      "src": "intraday_agg"
     },
     {
-     "gid": 986,
+     "gid": 1638,
      "trueDay": "2026-10-21",
      "officialLabel": "2026-10-20",
-     "ours": 1.59,
-     "official": 1.59,
+     "ours": 38.7,
+     "official": 38.7,
      "diffPct": 0,
      "src": "intraday_agg"
     },
     {
-     "gid": 1939,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 155,
-     "official": 155,
+     "gid": 1814,
+     "trueDay": "2026-10-21",
+     "officialLabel": "2026-10-20",
+     "ours": 37.87,
+     "official": 37.87,
      "diffPct": 0,
-     "src": "rt_snapshot"
+     "src": "intraday_agg"
     },
     {
-     "gid": 9747,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 30.5,
-     "official": 30.2,
-     "diffPct": 0.9934,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 12713,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 66,
-     "official": 66,
+     "gid": 1891,
+     "trueDay": "2026-10-21",
+     "officialLabel": "2026-10-20",
+     "ours": 0.9,
+     "official": 0.9,
      "diffPct": 0,
-     "src": "rt_snapshot"
+     "src": "intraday_agg"
     },
     {
-     "gid": 15516,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 26.61,
-     "official": 26.61,
+     "gid": 2218,
+     "trueDay": "2026-10-21",
+     "officialLabel": "2026-10-20",
+     "ours": 0.29,
+     "official": 0.29,
      "diffPct": 0,
-     "src": "rt_snapshot"
+     "src": "intraday_agg"
     },
     {
-     "gid": 17427,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 21.2,
-     "official": 20,
-     "diffPct": 6,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 17434,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 28.32,
-     "official": 28.32,
+     "gid": 9521,
+     "trueDay": "2026-10-21",
+     "officialLabel": "2026-10-20",
+     "ours": 0.14,
+     "official": 0.14,
      "diffPct": 0,
-     "src": "rt_snapshot"
+     "src": "intraday_agg"
     },
     {
-     "gid": 17554,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 66,
-     "official": 69.9,
-     "diffPct": 5.5794,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 19580,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 21.99,
-     "official": 20,
-     "diffPct": 9.95,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 24032,
-     "trueDay": "2026-10-20",
-     "officialLabel": "2026-10-19",
-     "ours": 130,
-     "official": 140,
-     "diffPct": 7.1429,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 1939,
+     "gid": 12519,
      "trueDay": "2026-10-21",
      "officialLabel": "2026-10-20",
-     "ours": 155,
-     "official": 500,
-     "diffPct": 69,
-     "src": "rt_snapshot"
+     "ours": 164.8,
+     "official": 164.8,
+     "diffPct": 0,
+     "src": "intraday_agg"
     },
     {
-     "gid": 9747,
+     "gid": 13181,
      "trueDay": "2026-10-21",
      "officialLabel": "2026-10-20",
-     "ours": 30,
-     "official": 31.9,
-     "diffPct": 5.9561,
-     "src": "rt_snapshot"
+     "ours": 21.88,
+     "official": 21.88,
+     "diffPct": 0,
+     "src": "intraday_agg"
     },
     {
-     "gid": 12713,
+     "gid": 17450,
      "trueDay": "2026-10-21",
      "officialLabel": "2026-10-20",
-     "ours": 66.9,
-     "official": 72.88,
-     "diffPct": 8.2053,
-     "src": "rt_snapshot"
+     "ours": 5.77,
+     "official": 5.77,
+     "diffPct": 0,
+     "src": "intraday_agg"
     },
     {
-     "gid": 15516,
+     "gid": 18129,
      "trueDay": "2026-10-21",
      "officialLabel": "2026-10-20",
-     "ours": 26.63,
-     "official": 25,
-     "diffPct": 6.52,
-     "src": "rt_snapshot"
+     "ours": 0.19,
+     "official": 0.19,
+     "diffPct": 0,
+     "src": "intraday_agg"
     },
     {
-     "gid": 17427,
-     "trueDay": "2026-10-21",
-     "officialLabel": "2026-10-20",
-     "ours": 21.5,
-     "official": 21.4,
-     "diffPct": 0.4673,
-     "src": "rt_snapshot"
+     "gid": 883,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 23,
+     "official": 21.9,
+     "diffPct": 5.0228,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 1638,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 39.91,
+     "official": 37.2,
+     "diffPct": 7.2849,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 1814,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 39.99,
+     "official": 42.99,
+     "diffPct": 6.9784,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 1891,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 1,
+     "official": 0.9,
+     "diffPct": 11.1111,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 2218,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 0.29,
+     "official": 0.42,
+     "diffPct": 30.9524,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 9521,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 0.15,
+     "official": 0.3,
+     "diffPct": 50,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 12519,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 163.33,
+     "official": 155.3,
+     "diffPct": 5.1706,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 13181,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 21.8,
+     "official": 20.5,
+     "diffPct": 6.3415,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 17450,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 4,
+     "official": 4.3,
+     "diffPct": 6.9767,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 18129,
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 0.2,
+     "official": 0.25,
+     "diffPct": 20,
+     "src": "intraday_agg"
     }
    ],
    "window": [
-    "2026-10-19",
-    "2026-10-20",
-    "2026-10-21"
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23"
    ],
-   "note": "自建日线 vs 官方：3501 个 (gid×日) 可比，完全相等 56.5838%，中位差异 0%，>5% 的品 11/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：2472 个 (gid×日) 可比，完全相等 53.5194%，中位差异 0%，>5% 的品 19/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1792822187911,
-   "atText": "2026/10/24 14:09:47",
+   "at": 1792833526076,
+   "atText": "2026/10/24 17:18:46",
    "level": "warn",
-   "officialLatestLabel": "2026-10-20",
-   "officialLatestTrueDay": "2026-10-21",
-   "overlapDays": 9,
-   "appendedDays": 3,
-   "compared": 1605,
+   "officialLatestLabel": "2026-10-22",
+   "officialLatestTrueDay": "2026-10-23",
+   "overlapDays": 11,
+   "appendedDays": 1,
+   "compared": 1918,
    "medianPct": 0,
    "p90Pct": 0,
-   "maxPct": 20.3401,
-   "over5PctShare": 0.3738,
-   "conflictGidCount": 6,
-   "conflictShare": 3.1088,
+   "maxPct": 50,
+   "over5PctShare": 0.8342,
+   "conflictGidCount": 13,
+   "conflictShare": 6.701,
    "conflictGids": [
     883,
     986,
+    1638,
+    1814,
+    1891,
     2103,
+    2218,
     9521,
     9583,
+    12519,
+    13181,
+    17450,
     18129
    ],
    "samples": [
+    {
+     "gid": 9521,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 0.3,
+     "ours": 0.15,
+     "diffPct": 50
+    },
+    {
+     "gid": 2218,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 0.42,
+     "ours": 0.29,
+     "diffPct": 30.9524
+    },
+    {
+     "gid": 19547,
+     "key": "n",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 968,
+     "ours": 745,
+     "diffPct": 23.0372
+    },
     {
      "gid": 2103,
      "key": "p",
@@ -248,6 +290,15 @@
      "official": 15.29,
      "ours": 18.4,
      "diffPct": 20.3401
+    },
+    {
+     "gid": 18129,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 0.25,
+     "ours": 0.2,
+     "diffPct": 20
     },
     {
      "gid": 883,
@@ -259,6 +310,15 @@
      "diffPct": 17.6979
     },
     {
+     "gid": 1638,
+     "key": "n",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 895,
+     "ours": 759,
+     "diffPct": 15.1955
+    },
+    {
      "gid": 6441,
      "key": "b",
      "trueDay": "2026-10-14",
@@ -266,6 +326,24 @@
      "official": 7,
      "ours": 6,
      "diffPct": 14.2857
+    },
+    {
+     "gid": 1891,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 0.9,
+     "ours": 1,
+     "diffPct": 11.1111
+    },
+    {
+     "gid": 2218,
+     "key": "n",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 366,
+     "ours": 331,
+     "diffPct": 9.5628
     },
     {
      "gid": 9521,
@@ -286,6 +364,15 @@
      "diffPct": 7.6923
     },
     {
+     "gid": 1638,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 37.2,
+     "ours": 39.91,
+     "diffPct": 7.2849
+    },
+    {
      "gid": 2011,
      "key": "b",
      "trueDay": "2026-10-13",
@@ -293,6 +380,24 @@
      "official": 14,
      "ours": 13,
      "diffPct": 7.1429
+    },
+    {
+     "gid": 1814,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 42.99,
+     "ours": 39.99,
+     "diffPct": 6.9784
+    },
+    {
+     "gid": 17450,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 4.3,
+     "ours": 4,
+     "diffPct": 6.9767
     },
     {
      "gid": 279,
@@ -313,6 +418,15 @@
      "diffPct": 6.4683
     },
     {
+     "gid": 13181,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "official": 20.5,
+     "ours": 21.8,
+     "diffPct": 6.3415
+    },
+    {
      "gid": 986,
      "key": "p",
      "trueDay": "2026-10-20",
@@ -320,127 +434,35 @@
      "official": 1.96,
      "ours": 1.85,
      "diffPct": 5.6122
-    },
-    {
-     "gid": 9583,
-     "key": "p",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 62.39,
-     "ours": 65.88,
-     "diffPct": 5.5938
-    },
-    {
-     "gid": 20489,
-     "key": "n",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 2484,
-     "ours": 2615,
-     "diffPct": 5.2738
-    },
-    {
-     "gid": 18129,
-     "key": "p",
-     "trueDay": "2026-10-18",
-     "officialLabel": "2026-10-17",
-     "official": 0.2,
-     "ours": 0.19,
-     "diffPct": 5
-    },
-    {
-     "gid": 6543,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 202,
-     "ours": 212,
-     "diffPct": 4.9505
-    },
-    {
-     "gid": 9736,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 21,
-     "ours": 20,
-     "diffPct": 4.7619
-    },
-    {
-     "gid": 13257,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 22,
-     "ours": 23,
-     "diffPct": 4.5455
-    },
-    {
-     "gid": 16518,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 26,
-     "ours": 27,
-     "diffPct": 3.8462
-    },
-    {
-     "gid": 11217,
-     "key": "n",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "official": 1318,
-     "ours": 1268,
-     "diffPct": 3.7936
-    },
-    {
-     "gid": 20354,
-     "key": "p",
-     "trueDay": "2026-10-21",
-     "officialLabel": "2026-10-20",
-     "official": 68.5,
-     "ours": 66,
-     "diffPct": 3.6496
-    },
-    {
-     "gid": 16338,
-     "key": "p",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "official": 8,
-     "ours": 8.25,
-     "diffPct": 3.125
-    },
-    {
-     "gid": 12590,
-     "key": "p",
-     "trueDay": "2026-10-21",
-     "officialLabel": "2026-10-20",
-     "official": 32,
-     "ours": 33,
-     "diffPct": 3.125
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.3738%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.8342%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1792822184940,
-   "atText": "2026/10/24 14:09:44",
+   "at": 1792833522887,
+   "atText": "2026/10/24 17:18:42",
    "level": "warn",
-   "compared": 1605,
-   "gids": 193,
+   "compared": 1918,
+   "gids": 194,
    "medianPct": 0,
-   "maxPct": 20.3401,
+   "maxPct": 50,
    "p90Pct": 0,
-   "over5PctShare": 0.3738,
-   "conflictGidCount": 6,
-   "conflictShare": 3.1088,
+   "over5PctShare": 0.8342,
+   "conflictGidCount": 13,
+   "conflictShare": 6.701,
    "conflictGids": [
     883,
     986,
+    1638,
+    1814,
+    1891,
     2103,
+    2218,
     9521,
     9583,
+    12519,
+    13181,
+    17450,
     18129
    ],
    "samples": [
@@ -499,79 +521,79 @@
      "diffPct": 5.6122
     },
     {
-     "gid": 20489,
-     "key": "n",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "ours": 2615,
-     "official": 2484,
-     "diffPct": 5.2738
+     "gid": 883,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 23,
+     "official": 21.9,
+     "diffPct": 5.0228
     },
     {
-     "gid": 279,
-     "key": "n",
-     "trueDay": "2026-10-15",
-     "officialLabel": "2026-10-14",
-     "ours": 1356,
-     "official": 1270,
-     "diffPct": 6.7717
+     "gid": 1638,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 39.91,
+     "official": 37.2,
+     "diffPct": 7.2849
     },
     {
-     "gid": 12519,
-     "key": "n",
-     "trueDay": "2026-10-16",
-     "officialLabel": "2026-10-15",
-     "ours": 723,
-     "official": 773,
-     "diffPct": 6.4683
+     "gid": 1814,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 39.99,
+     "official": 42.99,
+     "diffPct": 6.9784
     },
     {
-     "gid": 2011,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "ours": 13,
-     "official": 14,
-     "diffPct": 7.1429
+     "gid": 1891,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 1,
+     "official": 0.9,
+     "diffPct": 11.1111
     },
     {
-     "gid": 19558,
-     "key": "b",
-     "trueDay": "2026-10-13",
-     "officialLabel": "2026-10-12",
-     "ours": 14,
-     "official": 13,
-     "diffPct": 7.6923
+     "gid": 2218,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 0.29,
+     "official": 0.42,
+     "diffPct": 30.9524
     },
     {
-     "gid": 6441,
-     "key": "b",
-     "trueDay": "2026-10-14",
-     "officialLabel": "2026-10-13",
-     "ours": 6,
-     "official": 7,
-     "diffPct": 14.2857
+     "gid": 9521,
+     "key": "p",
+     "trueDay": "2026-10-22",
+     "officialLabel": "2026-10-21",
+     "ours": 0.15,
+     "official": 0.3,
+     "diffPct": 50
     }
    ],
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1792822188143,
-   "atText": "2026/10/24 14:09:48",
+   "at": 1792833526283,
+   "atText": "2026/10/24 17:18:46",
    "level": "ok",
-   "compared": 130,
+   "compared": 131,
    "medianPct": 0,
-   "p90Pct": 0.1928,
-   "maxPct": 3.3333,
-   "over5PctShare": 0,
-   "conflictGidCount": 0,
+   "p90Pct": 0.9639,
+   "maxPct": 6.1937,
+   "over5PctShare": 0.7634,
+   "conflictGidCount": 1,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1792822195050,
- "atText": "2026/10/24 14:09:55",
+ "at": 1792833532979,
+ "atText": "2026/10/24 17:18:52",
  "conflictGids": [
   {
    "gid": 883,
@@ -583,6 +605,47 @@
   },
   {
    "gid": 986,
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1247,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1638,
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1748,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1814,
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1826,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1891,
    "in": [
     "daily_verify",
     "merge_junction",
@@ -603,8 +666,17 @@
    ]
   },
   {
+   "gid": 2218,
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 9521,
    "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -623,19 +695,35 @@
    ]
   },
   {
+   "gid": 9799,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 12519,
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 12713,
    "in": [
     "daily_verify"
    ]
   },
   {
-   "gid": 15516,
+   "gid": 13181,
    "in": [
-    "daily_verify"
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
-   "gid": 17427,
+   "gid": 15516,
    "in": [
     "daily_verify"
    ]
@@ -647,32 +735,23 @@
    ]
   },
   {
-   "gid": 17554,
+   "gid": 17450,
    "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 18129,
-   "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
   },
   {
-   "gid": 19580,
+   "gid": 18129,
    "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 24032,
-   "in": [
-    "daily_verify"
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
    ]
   }
  ],
- "conflictGidCount": 15,
+ "conflictGidCount": 22,
  "conflictSamples": [
   {
    "gid": 883,
@@ -686,6 +765,53 @@
   {
    "gid": 986,
    "name": "G3SG1 | 多变迷彩 (崭新出厂)",
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1247,
+   "name": "M4A1消音版 | 守护者 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1638,
+   "name": "MP9 | 砂垢 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1748,
+   "name": "P2000 | 电子脉冲 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1814,
+   "name": "P250 | 铠甲 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 1826,
+   "name": "P250 | 日式薄荷涂装 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1891,
+   "name": "P90 | 白蜡木 (崭新出厂)",
    "in": [
     "daily_verify",
     "merge_junction",
@@ -708,9 +834,19 @@
    ]
   },
   {
+   "gid": 2218,
+   "name": "SG 553 | 军队之辉 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 9521,
    "name": "UMP-45 | 设施系列·深色图 (崭新出厂)",
    "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -731,10 +867,35 @@
    ]
   },
   {
+   "gid": 9799,
+   "name": "MP9 | 中度威胁 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 12519,
+   "name": "沙漠之鹰 | 古铜密码 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 12713,
    "name": "法玛斯 | 黑水 (略有磨损)",
    "in": [
     "daily_verify"
+   ]
+  },
+  {
+   "gid": 13181,
+   "name": "格洛克 18 型 | 一目了然 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
@@ -745,48 +906,12 @@
    ]
   },
   {
-   "gid": 17427,
-   "name": "XM1014 | 埋葬之影 (久经沙场)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 17434,
    "name": "XM1014 | 要抱抱 (略有磨损)",
    "in": [
     "daily_verify"
    ]
-  },
-  {
-   "gid": 17554,
-   "name": "XM1014 | 蔚蓝多变迷彩 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 18129,
-   "name": "新星 | 芯轴 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 19580,
-   "name": "USP 消音版 | 破颚者 (久经沙场)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 24032,
-   "name": "格洛克 18 型 | 镜面马赛克 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 15 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 22 个品差异 >5%，请确认口径"
 }
