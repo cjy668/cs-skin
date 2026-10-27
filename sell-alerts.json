@@ -1,7 +1,7 @@
 {
  "v": 1,
- "updatedAt": 1793114665467,
- "updatedAtText": "2026/10/27 23:24:25",
+ "updatedAt": 1793118705327,
+ "updatedAtText": "2026/10/28 00:31:45",
  "source": "csqaq 官方 API 日线（platform=2）· 由 sell_alert.cjs 判定",
  "validation": {
   "status": "✅ 已通过样本外检验（845 标的 × 192,437 行）",
@@ -23,7 +23,7 @@
   "nc30_up": 0.1,
   "nc30_dispatch": 0.25
  },
- "livePriceAt": 1793114588777,
+ "livePriceAt": 1793115128730,
  "livePriceUsed": 57,
  "scanned": 1978,
  "seriesRange": [
@@ -1359,8 +1359,8 @@
    "mkt": 3887.5,
    "value": 3887.5,
    "pnlRate": -0.20953639690931272,
-   "priceNow": 2980,
-   "gainVsCost": -0.3941,
+   "priceNow": 3013.5,
+   "gainVsCost": -0.3873,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1368,13 +1368,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2641,
+    "pc30": -0.2558,
     "nc30": -0.0781,
     "bc30": -0.1639,
     "listed": 307,
     "buyNum": 51,
     "date": "2026-10-13",
-    "price": 2980
+    "price": 3013.5
    },
    "action": null,
    "batches": null,
@@ -2074,8 +2074,8 @@
    "mkt": 269.88,
    "value": 269.88,
    "pnlRate": -0.03572959839931399,
-   "priceNow": 237,
-   "gainVsCost": -0.1532,
+   "priceNow": 235,
+   "gainVsCost": -0.1604,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2083,13 +2083,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0405,
+    "pc30": -0.0486,
     "nc30": -0.3604,
     "bc30": 0.6739,
     "listed": 639,
     "buyNum": 77,
     "date": "2026-10-13",
-    "price": 237
+    "price": 235
    },
    "action": null,
    "batches": null,
@@ -2129,8 +2129,8 @@
    "mkt": 4.6,
    "value": 229.99999999999997,
    "pnlRate": -0.6753705010585744,
-   "priceNow": 4.81,
-   "gainVsCost": -0.6606,
+   "priceNow": 4.79,
+   "gainVsCost": -0.662,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2138,13 +2138,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1943,
+    "pc30": -0.1977,
     "nc30": -0.1797,
     "bc30": 0.0435,
     "listed": 1187,
     "buyNum": 24,
     "date": "2026-10-13",
-    "price": 4.81
+    "price": 4.79
    },
    "action": null,
    "batches": null,
@@ -2671,8 +2671,8 @@
    "mkt": 7.27,
    "value": 101.78,
    "pnlRate": -0.4862190812720848,
-   "priceNow": 7,
-   "gainVsCost": -0.5053,
+   "priceNow": 7.09,
+   "gainVsCost": -0.4989,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2680,13 +2680,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.125,
+    "pc30": -0.1138,
     "nc30": 0.0281,
     "bc30": -0.1429,
     "listed": 1939,
     "buyNum": 18,
     "date": "2026-10-13",
-    "price": 7
+    "price": 7.09
    },
    "action": null,
    "batches": null,
@@ -3679,7 +3679,7 @@
  "sellGate": {
   "stageSource": "data/dealer-stage-board.json",
   "loaded": true,
-  "stageAtText": "2026/10/27 22:19:49",
+  "stageAtText": "2026/10/27 23:26:39",
   "note": "阶段来自上一次 dealer_stage_board.cjs 的产出（daily.cmd 里它在本脚本之后跑）。阶段用日线算、一天内不变，所以与本次同一天口径一致。",
   "dangerStages": [
    "rallyLate",
@@ -3751,10 +3751,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2641,
+    "pc30": -0.2558,
     "nc30": -0.0781,
     "bc30": -0.1639,
-    "price": 2980
+    "price": 3013.5
    }
   },
   {
@@ -3946,10 +3946,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0405,
+    "pc30": -0.0486,
     "nc30": -0.3604,
     "bc30": 0.6739,
-    "price": 237
+    "price": 235
    }
   },
   {
@@ -3961,10 +3961,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1943,
+    "pc30": -0.1977,
     "nc30": -0.1797,
     "bc30": 0.0435,
-    "price": 4.81
+    "price": 4.79
    }
   },
   {
@@ -4111,10 +4111,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.125,
+    "pc30": -0.1138,
     "nc30": 0.0281,
     "bc30": -0.1429,
-    "price": 7
+    "price": 7.09
    }
   },
   {
@@ -4546,10 +4546,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2891,
+    "pc30": -0.3025,
     "nc30": 0.0039,
     "bc30": -0.5098,
-    "price": 42.3
+    "price": 41.5
    }
   },
   {
@@ -4561,10 +4561,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.433,
+    "pc30": -0.4294,
     "nc30": 0,
     "bc30": -0.5464,
-    "price": 309
+    "price": 311
    }
   },
   {
