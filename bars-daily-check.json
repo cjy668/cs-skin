@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1793114464026,
- "atText": "2026/10/27 23:21:04",
+ "at": 1793118515065,
+ "atText": "2026/10/28 00:28:35",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -14,10 +14,10 @@
   "latestTrueDay": "2026-10-23"
  },
  "rt": {
-  "days": 15,
-  "latestTrueDay": "2026-10-27",
-  "snapshotDays": 5,
-  "snapshotLatest": "2026-10-27"
+  "days": 16,
+  "latestTrueDay": "2026-10-28",
+  "snapshotDays": 6,
+  "snapshotLatest": "2026-10-28"
  },
  "window": {
   "recentDays": [
@@ -41,18 +41,18 @@
  },
  "byKey": {
   "p": {
-   "n": 3140,
+   "n": 3146,
    "gids": 1654,
-   "exact": 1797,
-   "exactPct": 57.2293,
+   "exact": 1810,
+   "exactPct": 57.5334,
    "medianPct": 0,
-   "p75Pct": 0.2825,
-   "p90Pct": 1.1364,
-   "p99Pct": 4.3932,
+   "p75Pct": 0.2755,
+   "p90Pct": 1.1146,
+   "p99Pct": 4.3077,
    "maxPct": 69,
-   "over5Pct": 0.6369,
-   "conflictGidCount": 20,
-   "conflictShare": 1.2092,
+   "over5Pct": 0.6039,
+   "conflictGidCount": 19,
+   "conflictShare": 1.1487,
    "conflictGids": [
     883,
     1247,
@@ -66,7 +66,6 @@
     9521,
     9747,
     9799,
-    12519,
     12713,
     13181,
     15516,
@@ -79,23 +78,23 @@
     {
      "day": "2026-10-21",
      "n": 1654,
-     "exact": 745,
+     "exact": 748,
      "conflict": 5,
-     "medianPct": 0.0333,
+     "medianPct": 0.0308,
      "maxPct": 69
     },
     {
      "day": "2026-10-22",
      "n": 1354,
-     "exact": 925,
-     "conflict": 15,
+     "exact": 929,
+     "conflict": 14,
      "medianPct": 0,
      "maxPct": 50
     },
     {
      "day": "2026-10-23",
-     "n": 132,
-     "exact": 127,
+     "n": 138,
+     "exact": 133,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.6393
@@ -103,18 +102,18 @@
    ]
   },
   "n": {
-   "n": 407,
-   "gids": 138,
-   "exact": 321,
-   "exactPct": 78.8698,
+   "n": 421,
+   "gids": 142,
+   "exact": 336,
+   "exactPct": 79.81,
    "medianPct": 0,
    "p75Pct": 0,
-   "p90Pct": 0.1452,
-   "p99Pct": 2.4129,
+   "p90Pct": 0.1279,
+   "p99Pct": 1.087,
    "maxPct": 23.0372,
-   "over5Pct": 0.4914,
+   "over5Pct": 0.4751,
    "conflictGidCount": 2,
-   "conflictShare": 1.4493,
+   "conflictShare": 1.4085,
    "conflictGids": [
     2218,
     19547
@@ -122,24 +121,24 @@
    "byDay": [
     {
      "day": "2026-10-21",
-     "n": 138,
-     "exact": 105,
+     "n": 142,
+     "exact": 109,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 0.9653
     },
     {
      "day": "2026-10-22",
-     "n": 137,
-     "exact": 110,
+     "n": 141,
+     "exact": 115,
      "conflict": 2,
      "medianPct": 0,
      "maxPct": 23.0372
     },
     {
      "day": "2026-10-23",
-     "n": 132,
-     "exact": 106,
+     "n": 138,
+     "exact": 112,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.5247
@@ -189,8 +188,8 @@
   }
  },
  "level": "ok",
- "conflictGidCount": 20,
- "conflictShare": 1.2092,
+ "conflictGidCount": 19,
+ "conflictShare": 1.1487,
  "conflictGids": [
   883,
   1247,
@@ -204,7 +203,6 @@
   9521,
   9747,
   9799,
-  12519,
   12713,
   13181,
   15516,
@@ -256,15 +254,6 @@
    "officialLabel": "2026-10-20",
    "ours": 0.14,
    "official": 0.14,
-   "diffPct": 0,
-   "src": "intraday_agg"
-  },
-  {
-   "gid": 12519,
-   "trueDay": "2026-10-21",
-   "officialLabel": "2026-10-20",
-   "ours": 164.8,
-   "official": 164.8,
    "diffPct": 0,
    "src": "intraday_agg"
   },
@@ -341,15 +330,6 @@
    "src": "intraday_agg"
   },
   {
-   "gid": 12519,
-   "trueDay": "2026-10-22",
-   "officialLabel": "2026-10-21",
-   "ours": 163.33,
-   "official": 155.3,
-   "diffPct": 5.1706,
-   "src": "intraday_agg"
-  },
-  {
    "gid": 13181,
    "trueDay": "2026-10-22",
    "officialLabel": "2026-10-21",
@@ -393,8 +373,26 @@
    "official": 72,
    "diffPct": 0,
    "src": "rt_snapshot"
+  },
+  {
+   "gid": 1748,
+   "trueDay": "2026-10-21",
+   "officialLabel": "2026-10-20",
+   "ours": 31.5,
+   "official": 33,
+   "diffPct": 4.5455,
+   "src": "rt_snapshot"
+  },
+  {
+   "gid": 1826,
+   "trueDay": "2026-10-21",
+   "officialLabel": "2026-10-20",
+   "ours": 74.9,
+   "official": 76,
+   "diffPct": 1.4474,
+   "src": "rt_snapshot"
   }
  ],
  "selfTest": null,
- "message": "自建日线 vs 官方：3140 个 (gid×日) 可比，完全相等 57.2293%，中位差异 0%，>5% 的品 20/1654 个 → 口径一致"
+ "message": "自建日线 vs 官方：3146 个 (gid×日) 可比，完全相等 57.5334%，中位差异 0%，>5% 的品 19/1654 个 → 口径一致"
 }
