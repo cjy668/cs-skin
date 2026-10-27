@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1793112400914,
- "atText": "2026-10-27 22:46:40",
+ "at": 1793117800891,
+ "atText": "2026-10-28 00:16:40",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1793112402743,
+  "checkedAt": 1793117837271,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1847286114034398",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "694275728822244199",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-10-22",
  "lastSeenAtText": "2026-10-23 06:56:10",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114034398",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/694275728822244199",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-10-22",
@@ -36,8 +35,8 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 89,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 1,
   "rssItems": 10
@@ -46,12 +45,12 @@
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 177487,
-   "ms": 1065,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 36311,
+   "attempts": 3,
+   "error": "read ECONNRESET"
   },
   {
    "name": "Steam 中文 RSS",
@@ -59,7 +58,7 @@
    "ok": true,
    "status": 200,
    "bytes": 21615,
-   "ms": 1752,
+   "ms": 723,
    "attempts": 1,
    "error": null
   }
@@ -73,29 +72,24 @@
  "items": [],
  "recent": [
   {
-   "gid": "1847286114034398",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694275728822244199",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-10-22",
    "dateLocal": "2026-10-23",
    "at": 1792709770000,
    "atText": "2026-10-23 06:56:10",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114034398",
-   "summary": "MAP SCRIPTING · Added Instance.Precache · Returns a CSPrecache object · Added CSPrecache.IsServerLoading · Added CSPrecache.IsServerLoaded · Added CSPrecache.IsClientLoading · Added CSPrecache.IsClientLoaded · Added CSPrecache.IsLoadedForAll · Added CSPrecache.Release · Added CSHostage · Added CSHostage.IsBeingPickedUp · Added CSHostage.IsBeingCarried · Added CSHostage.IsRescued · Added CSHostage.GetRescuer · Added CSHostage.GetPickUpStartTime · Added CSHostage.GetPickUpFinishTime · Added CSPlay…",
-   "level": "机制级",
-   "confidence": "medium",
+   "url": "https://store.steampowered.com/news/app/730/view/694275728822244199",
+   "summary": "地图脚本 · 新增Instance.Precache · 返回一个CSPrecache对象 · 新增CSPrecache.IsServerLoading · 新增CSPrecache.IsServerLoaded · 新增CSPrecache.IsClientLoading · 新增CSPrecache.IsClientLoaded · 新增CSPrecache.IsLoadedForAll · 新增CSPrecache.Release · 新增CSHostage · 新增CSHostage.IsBeingPickedUp · 新增CSHostage.IsBeingCarried · 新增CSHostage.IsRescued · 新增CSHostage.GetRescuer · 新增CSHostage.GetPickUpStartTime · 新增CSHostage.GetPickUpFinishTime · 新增CSPlayerPawn.GetHostage · 新增Instance.OnHostagePickUpStart · 新增Instance.OnHostagePickUp…",
+   "level": "无关",
+   "confidence": "low",
    "matchedKeywords": [
-    "Rarity",
     "Map",
     "Bug"
    ],
-   "levelBasis": "强机制 1 个（Rarity）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 2 个",
-   "mechanismHits": [
-    "Rarity"
-   ],
-   "strongMechanismHits": [
-    "Rarity"
-   ],
+   "levelBasis": "强机制 0 个（无）· 机制词 0 个 · 供给 0 个 · 赛事 0 个 · 噪声 2 个",
+   "mechanismHits": [],
+   "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
    "noiseHits": [
@@ -105,20 +99,9 @@
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2024-12-19",
-     "title": "《反恐精英》更新",
-     "similarity": 0.607,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
      "date": "2026-05-07",
      "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "similarity": 0.508,
+     "similarity": 0.673,
      "eventDate": "2026-05-07",
      "eventClass": "regime_shift",
      "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
@@ -127,9 +110,20 @@
      "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
     },
     {
-     "date": "2026-09-09",
+     "date": "2025-09-25",
      "title": "《反恐精英》更新",
-     "similarity": 0.424,
+     "similarity": 0.528,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2024-10-15",
+     "title": "更新日志（2024年10月15日）",
+     "similarity": 0.524,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
