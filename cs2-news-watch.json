@@ -1,10 +1,10 @@
 {
  "v": 1,
- "at": 1793443601480,
- "atText": "2026-10-31 18:46:41",
+ "at": 1793445401369,
+ "atText": "2026-10-31 19:16:41",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -12,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1793443624930,
+  "checkedAt": 1793445440596,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1847920302232686",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "694276363007296020",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-10-28",
  "lastSeenAtText": "2026-10-29 05:48:09",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302232686",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/694276363007296020",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-10-28",
@@ -35,65 +35,62 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 89,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 1,
-  "rssItems": 0
+  "rssItems": 10
  },
  "sourceStatus": [
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 177462,
-   "ms": 2856,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 39137,
+   "attempts": 3,
+   "error": "read ECONNRESET"
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": false,
-   "status": 0,
-   "bytes": 0,
-   "ms": 23316,
-   "attempts": 2,
-   "error": "read ECONNRESET"
+   "ok": true,
+   "status": 200,
+   "bytes": 19230,
+   "ms": 1528,
+   "attempts": 1,
+   "error": null
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-10-28",
-  "rssNewestDate": null,
-  "agree": false,
-  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
+  "rssNewestDate": "2026-10-28",
+  "agree": true,
+  "note": "两个源的最新公告日期一致"
  },
  "items": [],
  "recent": [
   {
-   "gid": "1847920302232686",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694276363007296020",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-10-28",
    "dateLocal": "2026-10-29",
    "at": 1793224089000,
    "atText": "2026-10-29 05:48:09",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302232686",
-   "summary": "GAMEPLAY · Added an option to switch Silent Reload Mode between Hold and Toggle. With toggle enabled, once the silent reload starts you can let go of the reload button. To cancel a silent reload and go back to a fast reload, you can tap the reload button again. · Fixed various cases where the first sound of a reload was audible irrespective if a user requested a silent reload or not.…",
-   "level": "机制级",
-   "confidence": "medium",
+   "url": "https://store.steampowered.com/news/app/730/view/694276363007296020",
+   "summary": "游戏 · 新增了在“按住”和“切换”之间切换静默换弹模式的选项。启用切换后，一旦开始静默换弹，您就可以松开换弹键。若要取消静默换弹并恢复为快速换弹，您可以再次按换弹键。 · 修复了多种情况下，无论玩家是否静默换弹，换弹的第一声都能被听见的问题。 杂项 · 修复了在AMD显卡上液体可能渲染成黑色的问题 · 修复了在录像回放中倒带时出现的一些声音和界面问题",
+   "level": "无关",
+   "confidence": "low",
    "matchedKeywords": [
-    "Case",
     "Audio",
     "Bug",
     "UI",
     "Misc"
    ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 4 个",
-   "mechanismHits": [
-    "Case"
-   ],
+   "levelBasis": "强机制 0 个（无）· 机制词 0 个 · 供给 0 个 · 赛事 0 个 · 噪声 4 个",
+   "mechanismHits": [],
    "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
@@ -106,9 +103,9 @@
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2025-02-06",
+     "date": "2025-09-24",
      "title": "《反恐精英》更新",
-     "similarity": 0.807,
+     "similarity": 0.539,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -117,20 +114,20 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2026-09-25",
+     "date": "2024-11-14",
      "title": "《反恐精英》更新",
-     "similarity": 0.701,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+     "similarity": 0.532,
+     "eventDate": "2024-11-12",
+     "eventClass": "regime_shift",
+     "eventTitle": "《反恐精英》更新",
+     "reactionDay": "2024-11-12",
+     "medPct": 0,
+     "note": "该事件（2024-11-12 《反恐精英》更新）在事件分类表里是 regime_shift：反应日 2024-11-12 全池中位 0.0%、下跌占比 49% —— 不是全池级急跌"
     },
     {
-     "date": "2023-11-14",
-     "title": "更新日志（2023年11月13日）",
-     "similarity": 0.7,
+     "date": "2025-09-25",
+     "title": "《反恐精英》更新",
+     "similarity": 0.521,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
