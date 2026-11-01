@@ -290,6 +290,11 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .kv .k2{color:var(--muted);flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
 .kv .v2{text-align:right;font-weight:600;flex:0 1 auto;min-width:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 .banner{background:rgba(255,107,107,.13);border-bottom:1px solid rgba(255,107,107,.4);color:#ffc9c9;font-size:12.5px;padding:9px 14px;text-align:center}
+/* ★ 2026-11-01（M36）：流水线停机横幅 —— 常驻页面最顶部，红底白字。
+   10-28~11-01 那次停更 8 天，用户「完全不知道」；这条横幅存在的唯一目的就是让它不可能被忽略。 */
+.stallbanner{position:sticky;top:0;z-index:70;background:linear-gradient(90deg,rgba(120,20,36,.97),rgba(88,14,28,.97));border-bottom:1px solid rgba(255,107,107,.6);color:#ffe0e0;font-size:13px;padding:10px 14px;text-align:center;font-weight:600;line-height:1.6}
+.stallbanner .sb-when{color:#ffb3b3;font-weight:400;font-size:12px;margin-left:8px}
+.stallbanner .sb-why{display:block;color:#ffc9c9;font-weight:400;font-size:12px;margin-top:3px}
 .risks{margin:0;padding-left:17px;color:#c3d2e2;font-size:13px;line-height:1.7}
 .risks li{margin:6px 0}
 .risks b{color:#fff}
@@ -1724,6 +1729,12 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 <body>
 
 <div class="banner" id="banner" hidden></div>
+
+<!-- ★ 2026-11-01（M36）：流水线停机横幅（页面最顶部、常驻、不自动消失）
+     数据源：health.json 的 pipelineStall 字段（cs-quant/watchdog.cjs 每约 12 分钟写一次并发布）。
+     ★ 为什么必须单独一条：原来停机只写进 health.json 的 high 项 → 只在「时效条」里显示，
+       而且要刚好看到那一块；10-28~11-01 停更 8 天，用户根本没看见。 -->
+<div class="stallbanner" id="stall-banner" hidden></div>
 
 <div class="app">
 
@@ -9034,6 +9045,40 @@ function pipelineGateBad(h){
   } catch (e) {}
   return null;
 }
+/* ★ 2026-11-01（M36）：流水线停机 → 页面最顶部常驻红横幅
+   ----------------------------------------------------------------------------
+   用户 2026-11-01 的原话：「10-28 之后 4 天一直 ALERT、数据 8 天没更新，用户完全不知道」。
+   口径不在这里算：全部读 health.json 的 pipelineStall（watchdog 算好的，页面只负责显示，
+   与 S5 时效闸门、P1 时效条同一条纪律 —— 两处各算一套必然漂移）。
+   · 拿不到 health.json / 没有 pipelineStall 字段 → 横幅保持隐藏，绝不误报。
+   · 恢复后（stalled=false）立刻隐藏，不永久污染页面。 */
+function stallDurText(st){
+  if (!st) return '';
+  var h = (typeof st.hours === 'number' && isFinite(st.hours)) ? st.hours : null;
+  if (h == null) return '时长未知';
+  if (h < 1.5) return Math.max(1, Math.round(h * 60)) + ' 分钟';
+  return (h >= 10 ? Math.round(h) : Math.round(h * 10) / 10) + ' 小时';
+}
+function renderStallBanner(h){
+  var el = $('stall-banner');
+  if (!el) return;
+  var st = (h && h.pipelineStall) ? h.pipelineStall : null;
+  if (!st || st.stalled !== true){
+    try { el.hidden = true; el.innerHTML = ''; } catch (e) {}
+    barsGateAttr(el, 'data-stalled', '');
+    return;
+  }
+  var dur = stallDurText(st);
+  var step = (st.stepMinutes != null && st.state === 'running')
+    ? ('当前卡在「' + String(st.step || '?') + '」已 ' + st.stepMinutes + ' 分钟') : '';
+  var why = String(st.issue || '').trim();
+  var html = '⚠️ 流水线已停机 ' + esc(dur) + '，数据可能过时' +
+    (st.lastSuccessText ? '<span class="sb-when">最后成功：' + esc(st.lastSuccessText) + '</span>' : '') +
+    (step || why ? '<span class="sb-why">' + esc([step, why].filter(Boolean).join('；')) + '</span>' : '') +
+    '<span class="sb-when">（本条来自 health.json · 检查于 ' + esc(h.checkedAt || '—') + '；daily 停更时它仍然会更新）</span>';
+  try { el.innerHTML = html; el.hidden = false; } catch (e) {}
+  barsGateAttr(el, 'data-stalled', '1');
+}
 function pipelineGateFromHealth(h){
   var bar = $('bars-gate');
   if (!bar) return;
@@ -9216,6 +9261,7 @@ async function loadHealth(){
   renderHealthBadge();
   renderHealthPanel();
   pipelineGateFromHealth(healthData);   /* ★ 2026-10-21 P1：流水线卡住 → 顶栏时效条变红 */
+  renderStallBanner(healthData);        /* ★ 2026-11-01 M36：流水线停机 → 页面最顶部常驻红横幅 */
 }
 function refreshHealthIfDue(){
   if (Date.now() - healthAt > HEALTH_TTL) loadHealth();
