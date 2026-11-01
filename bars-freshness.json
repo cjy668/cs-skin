@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1793523520422,
- "atText": "2026/11/1 16:58:40",
+ "at": 1793532729970,
+ "atText": "2026/11/1 19:32:09",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -12,35 +12,39 @@
   "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数。★ 2026-10-20 实测：官方日线 timestamp 全在 16:00Z（= UTC+8 次日 00:00），项目标签 L 真正代表 UTC+8 交易日 L+1，所以真实滞后 = 1 天"
  },
  "bars": {
-  "latest": "2026-10-22",
-  "gidsAtLatest": 1354,
+  "latest": "2026-10-30",
+  "gidsAtLatest": 1077,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
-    "date": "2026-10-22",
-    "gids": 1354
+    "date": "2026-10-30",
+    "gids": 1077
    },
    {
     "date": "2026-10-20",
     "gids": 304
+   },
+   {
+    "date": "2026-10-22",
+    "gids": 277
    }
   ],
   "byKey": {
    "p": {
-    "date": "2026-10-22",
-    "gids": 1354,
-    "trueDay": "2026-10-23"
+    "date": "2026-10-30",
+    "gids": 1077,
+    "trueDay": "2026-10-31"
    },
    "n": {
-    "date": "2026-10-22",
-    "gids": 1354,
-    "trueDay": "2026-10-23"
+    "date": "2026-10-30",
+    "gids": 1077,
+    "trueDay": "2026-10-31"
    },
    "b": {
-    "date": "2026-10-14",
-    "gids": 1129,
-    "trueDay": "2026-10-15"
+    "date": "2026-10-20",
+    "gids": 10,
+    "trueDay": "2026-10-21"
    },
    "bp": {
     "date": "2026-10-14",
@@ -48,7 +52,7 @@
     "trueDay": "2026-10-15"
    }
   },
-  "latestTrueDay": "2026-10-23",
+  "latestTrueDay": "2026-10-31",
   "source": "csqaq 官方日线（_harvest，只读，一个字节都没动）"
  },
  "rt": {
@@ -208,38 +212,6 @@
   },
   "points": 3203,
   "appendedDays": [
-   {
-    "trueDay": "2026-10-24",
-    "label": "2026-10-23"
-   },
-   {
-    "trueDay": "2026-10-25",
-    "label": "2026-10-24"
-   },
-   {
-    "trueDay": "2026-10-26",
-    "label": "2026-10-25"
-   },
-   {
-    "trueDay": "2026-10-27",
-    "label": "2026-10-26"
-   },
-   {
-    "trueDay": "2026-10-28",
-    "label": "2026-10-27"
-   },
-   {
-    "trueDay": "2026-10-29",
-    "label": "2026-10-28"
-   },
-   {
-    "trueDay": "2026-10-30",
-    "label": "2026-10-29"
-   },
-   {
-    "trueDay": "2026-10-31",
-    "label": "2026-10-30"
-   },
    {
     "trueDay": "2026-11-01",
     "label": "2026-10-31"
@@ -439,7 +411,7 @@
    "2026-11-01"
   ],
   "coversLatest": true,
-  "coversDays": 9
+  "coversDays": 1
  },
  "effective": {
   "latestLabel": "2026-10-31",
@@ -448,7 +420,7 @@
  },
  "live": {
   "date": "2026-11-01",
-  "atText": "2026/11/1 16:56:41",
+  "atText": "2026/11/1 19:30:16",
   "n": 2120
  },
  "lagDays": 1,
@@ -484,7 +456,7 @@
    "asOf": "2026-10-31",
    "via": "asOfSeries",
    "asOfDate": "2026-10-31",
-   "generatedAt": "2026/11/1 16:56:12",
+   "generatedAt": "2026/11/1 19:29:46",
    "basedOnBars": "2026-10-31",
    "staleVsBars": false
   },
@@ -495,7 +467,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:58:06",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -505,7 +477,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:56:59",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -515,7 +487,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:53:49",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -525,7 +497,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:52:58",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -535,7 +507,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:47:35",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -555,7 +527,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": null,
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -565,7 +537,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:49:48",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   },
   {
@@ -575,7 +547,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/1 16:56:07",
-   "basedOnBars": "2026-10-22",
+   "basedOnBars": "2026-10-30",
    "staleVsBars": null
   }
  ],
@@ -620,7 +592,7 @@
   ],
   "atText": "2026/11/1 16:46:51"
  },
- "message": "官方日线标签 2026-10-22（= UTC+8 交易日 2026-10-23） → 生效最新 2026-10-31 = UTC+8 交易日 2026-11-01；自建日线覆盖 20 天（已补到 2026-11-01，追加 9 天）",
+ "message": "官方日线标签 2026-10-30（= UTC+8 交易日 2026-10-31） → 生效最新 2026-10-31 = UTC+8 交易日 2026-11-01；自建日线覆盖 20 天（已补到 2026-11-01，追加 1 天）",
  "conflictText": "⚠️ 自建日线与 csqaq 官方有 22 个品差异 >5%，请确认口径",
  "alarm": {
   "level": "warn",
