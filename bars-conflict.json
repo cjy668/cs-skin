@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1793611097353,
-   "atText": "2026/11/2 17:18:17",
+   "at": 1793614658244,
+   "atText": "2026/11/2 18:17:38",
    "level": "warn",
    "compared": 3231,
    "gids": 1077,
@@ -272,8 +272,8 @@
    "note": "⚠️ 自建日线与 csqaq 官方有 66 个品差异 >5%（可比 3231 个，中位 0%，>5% 占 2.2284%），请确认口径"
   },
   "merge_junction": {
-   "at": 1793611072366,
-   "atText": "2026/11/2 17:17:52",
+   "at": 1793614639396,
+   "atText": "2026/11/2 18:17:19",
    "level": "warn",
    "officialLatestLabel": "2026-10-30",
    "officialLatestTrueDay": "2026-10-31",
@@ -489,8 +489,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.63%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1793611064748,
-   "atText": "2026/11/2 17:17:44",
+   "at": 1793614633842,
+   "atText": "2026/11/2 18:17:13",
    "level": "warn",
    "compared": 3016,
    "gids": 199,
@@ -631,22 +631,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1793611072701,
-   "atText": "2026/11/2 17:17:52",
+   "at": 1793614639644,
+   "atText": "2026/11/2 18:17:19",
    "level": "ok",
-   "compared": 110,
+   "compared": 117,
    "medianPct": 0,
-   "p90Pct": 0.3802,
-   "maxPct": 4.5455,
-   "over5PctShare": 0,
-   "conflictGidCount": 0,
+   "p90Pct": 0.1067,
+   "maxPct": 23.0769,
+   "over5PctShare": 0.8547,
+   "conflictGidCount": 1,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1793611097353,
- "atText": "2026/11/2 17:18:17",
+ "at": 1793614658244,
+ "atText": "2026/11/2 18:17:38",
  "conflictGids": [
   {
    "gid": 17,
