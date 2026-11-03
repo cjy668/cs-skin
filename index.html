@@ -1752,6 +1752,76 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .ano-more summary{cursor:pointer;font-size:11px;color:#7c8aa5}
 .ano-more .ano-dump{font-size:11px;line-height:1.6;color:#8b93a7;margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
 .ano-empty{font-size:12px;color:#8b93a7;padding:8px 0}
+
+/* ============ 系统在学什么（lrn-*，2026-11-03 新增） ============
+   ★ 前缀 lrn- 与既有 ano-/prc-/dsb-/mt-/pt- 零冲突。
+   ★ 全部 flex-wrap + min-width:0 + overflow-wrap:anywhere ——
+     权重条用百分比宽度（不是固定 px），所以任何长品名 / 长日志都不会把卡片撑出横向滚动条。 */
+.lrn-live{font-size:11px;font-weight:500;color:#40dca0;background:rgba(64,220,160,.12);border:1px solid rgba(64,220,160,.35);border-radius:999px;padding:1px 8px;margin-left:8px;white-space:nowrap}
+.lrn-note{font-size:12px;line-height:1.7;color:#8b93a7;margin:2px 0 10px;overflow-wrap:anywhere}
+.lrn-box{display:flex;flex-direction:column;gap:10px;min-width:0}
+.lrn-head{font-size:13px;line-height:1.6;color:#e8ecf5;padding:8px 10px;border-radius:10px;background:rgba(64,220,160,.07);border:1px solid rgba(64,220,160,.24);overflow-wrap:anywhere;min-width:0}
+.lrn-head b{color:#40dca0}
+.lrn-grid{display:flex;flex-wrap:wrap;gap:10px;min-width:0}
+.lrn-cell{flex:1 1 150px;min-width:0;border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.03)}
+.lrn-cell .lrn-t{font-size:11px;color:#8b93a7;white-space:nowrap}
+.lrn-cell .lrn-v{font-size:17px;font-weight:600;color:#e8ecf5;margin-top:2px;overflow-wrap:anywhere}
+.lrn-cell .lrn-s{font-size:11px;color:#6c748a;margin-top:2px;overflow-wrap:anywhere}
+.lrn-sig{display:flex;flex-direction:column;gap:6px;min-width:0}
+.lrn-sigrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;min-width:0}
+.lrn-k{font-size:11px;font-weight:600;color:#cfd6e6;background:rgba(255,255,255,.07);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.lrn-nm{font-size:12px;color:#c3cadb;flex:0 1 132px;min-width:0;overflow-wrap:anywhere}
+.lrn-bar{position:relative;flex:1 1 120px;min-width:70px;height:9px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+.lrn-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#7c5cff,#40b4ff)}
+.lrn-bar i.neg{background:linear-gradient(90deg,#ff8a4c,#ff5656)}
+.lrn-w{font-size:11px;color:#8b93a7;white-space:nowrap}
+.lrn-auc{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12px;color:#c3cadb;min-width:0;overflow-wrap:anywhere}
+.lrn-arrow{color:#6c748a}
+.lrn-up{color:#40dca0;font-weight:600}
+.lrn-down{color:#ff7a7a;font-weight:600}
+.lrn-pill{font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:#aab2c5;white-space:nowrap}
+.lrn-pill b{color:#e8ecf5}
+.lrn-log{font-size:11px;line-height:1.7;color:#9aa3b8;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:7px 9px;overflow-wrap:anywhere;min-width:0}
+.lrn-warn{font-size:11px;line-height:1.7;color:#ffb020;background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.28);border-radius:8px;padding:7px 9px;overflow-wrap:anywhere;min-width:0}
+.lrn-div{font-size:11px;line-height:1.7;color:#c3cadb;border-left:2px solid rgba(124,92,255,.6);padding:2px 0 2px 8px;overflow-wrap:anywhere;min-width:0}
+.lrn-detail{margin-top:2px}
+.lrn-detail summary{cursor:pointer;font-size:11px;color:#7c8aa5}
+.lrn-dump{font-size:11px;line-height:1.6;color:#8b93a7;margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
+.lrn-empty{font-size:12px;color:#8b93a7;padding:8px 0}
+
+/* ============ 单品供给端诊断抽屉（dia-*，2026-11-03 新增） ============
+   ★ 移动端 width:100%，桌面端 max 720px；body 区 overflow-x:hidden —— 横溢 0px。
+   ★ 数据只在点开时拉 item-diagnosis.json（2.8MB），不拖首屏。 */
+.dia-open{font-size:11px;line-height:1.4;padding:2px 8px;border-radius:7px;cursor:pointer;background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.40);color:#cbbfff;white-space:nowrap}
+.dia-open:hover{background:rgba(124,92,255,.24)}
+.dia-mask{position:fixed;inset:0;background:rgba(6,8,14,.70);z-index:9998;display:none}
+.dia-mask.on{display:block}
+.dia-panel{position:fixed;right:0;top:0;bottom:0;width:min(720px,100%);max-width:100vw;background:#0f1320;border-left:1px solid rgba(255,255,255,.10);z-index:9999;display:none;flex-direction:column;min-width:0}
+.dia-panel.on{display:flex}
+.dia-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.09);min-width:0}
+.dia-title{font-size:13px;font-weight:600;color:#e8ecf5;flex:1 1 160px;min-width:0;overflow-wrap:anywhere}
+.dia-btn{font-size:11px;padding:3px 10px;border-radius:7px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#cfd6e6;white-space:nowrap}
+.dia-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:12px;min-width:0}
+.dia-loading{font-size:12px;color:#8b93a7;padding:10px 0;overflow-wrap:anywhere}
+.dia-head{font-size:14px;font-weight:600;color:#e8ecf5;overflow-wrap:anywhere}
+.dia-badge{display:inline-block;font-size:12px;font-weight:600;border-radius:8px;padding:2px 10px;margin:6px 0 2px;white-space:nowrap}
+.dia-badge.dead{color:#ff8a8a;background:rgba(255,86,86,.14);border:1px solid rgba(255,86,86,.40)}
+.dia-badge.dumping{color:#ffb020;background:rgba(255,176,32,.14);border:1px solid rgba(255,176,32,.40)}
+.dia-badge.nobid{color:#ffa07a;background:rgba(255,138,76,.14);border:1px solid rgba(255,138,76,.40)}
+.dia-badge.absorbing{color:#40b4ff;background:rgba(64,180,255,.14);border:1px solid rgba(64,180,255,.40)}
+.dia-badge.life{color:#40dca0;background:rgba(64,220,160,.14);border:1px solid rgba(64,220,160,.40)}
+.dia-badge.normal{color:#aab2c5;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.dia-sub{font-size:11px;color:#8b93a7;line-height:1.7;overflow-wrap:anywhere}
+.dia-sec{font-size:12px;font-weight:600;color:#cbbfff;margin:12px 0 6px;white-space:nowrap}
+.dia-ev{display:flex;flex-direction:column;gap:2px;padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);margin-bottom:6px;min-width:0}
+.dia-ev .dia-ek{font-size:11px;color:#8b93a7;white-space:nowrap}
+.dia-ev .dia-ev2{font-size:12px;line-height:1.65;color:#c3cadb;overflow-wrap:anywhere;min-width:0}
+.dia-ev .dia-er{font-size:12px;line-height:1.65;color:#8f7cff;overflow-wrap:anywhere;min-width:0}
+.dia-nar{font-size:12px;line-height:1.8;color:#d5dbe8;overflow-wrap:anywhere;min-width:0;margin-bottom:4px}
+.dia-sim{font-size:12px;line-height:1.65;color:#c3cadb;overflow-wrap:anywhere;min-width:0;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+.dia-sim b{color:#e8ecf5}
+.dia-simsum{font-size:12px;line-height:1.7;color:#40dca0;overflow-wrap:anywhere;min-width:0;margin-top:6px}
+.dia-note{font-size:11px;line-height:1.7;color:#6c748a;overflow-wrap:anywhere;min-width:0;margin-top:8px}
 </style>
 </head>
 <body>
@@ -1883,6 +1953,22 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <div class="ano-note" id="ano-note">每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。</div>
             <div class="ano-chips" id="ano-chips"></div>
             <div id="ano-box" class="ano-box"><div class="skel"><i></i>今日异常加载中…（daily-anomalies.json）</div></div>
+          </div>
+
+          <!-- ================= ★★★ 系统在学什么（2026-11-03 新增） =================
+               用户原话：「我需要知道自动学习怎么做」「我需要知道自动学习怎么做，做类似对于今天钢铁禁锢这种实时分析，并学习」
+               ★ 这一块只干一件事：把【学习过程】摊开给用户看，不当黑盒。
+                 六条供给信号的当前权重（柱状图）+ 学习前后 AUC + 最近累积的案例数 + 一条人能读的学习日志。
+               ★ 三层数据链（全在 cs-quant/ 里，每天随 daily 跑）：
+                   ① snapshot_features.cjs → data/feature-snapshots/YYYY-MM-DD.json（特征快照库，180 天滚动）
+                   ② label_outcomes.cjs    → data/outcome-labels.json（回看 30/60/120 天，打「真死/反弹/横盘」）
+                   ③ learn_weights.cjs     → data/signal-weights.json + learning-report.json（权重 + AUC + 回滚）
+               ★ 纪律：页面显式写「这是统计权重的自适应，不是 AI 预测」；AUC 不升就回滚，并把回滚原因写在卡片里。
+               降级链：learning-report.json 拿不到 → 只空这一块，其他卡 / 6 页签照常。 -->
+          <div class="card span-all" id="sec-lrn">
+            <div class="sec-head"><h2>系统在学什么 <span class="lrn-live">权重是算出来的，不是设的</span></h2><span class="sec-sub">六条供给信号的权重 · 学习前后 AUC · 最近累积的案例数</span><span class="r" id="lrn-time">加载中…</span></div>
+            <div class="lrn-note" id="lrn-note">这一块展示的是<b>统计权重的自适应</b>，不是 AI 预测：每天把全池特征冻结成快照 → 回看 120 天后「真死了多少」→ 重新估六个信号的权重。<b>跑不赢等权就回滚</b>，回滚原因照实写在下面。</div>
+            <div id="lrn-box" class="lrn-box"><div class="skel"><i></i>学习报告加载中…（learning-report.json）</div></div>
           </div>
 
                     <div class="card span-all" id="sec-prc">
@@ -2892,6 +2978,20 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   <span class="hwatch-txt" id="hwatch-txt">数据检查中…</span>
 </div>
 <div class="hwatch-panel" id="hwatch-panel" hidden></div>
+
+<!-- ================= 单品供给端诊断抽屉（2026-11-03 新增） =================
+     「今日异常」每条右边的「看诊断」按钮打开这里。
+     ★ 内容不是分数，是叙事：结论（已死/出货中/无人接盘/疑似吸货/生命迹象/正常）
+       + 六条带数字的证据 + 3~5 句人话 + 与历史案例的相似度。
+     ★ 数据来自 cs-quant/diagnose_item.cjs --all → item-diagnosis.json，只在第一次点开时拉。 -->
+<div class="dia-mask" id="dia-mask"></div>
+<div class="dia-panel" id="dia-panel" aria-hidden="true">
+  <div class="dia-top">
+    <span class="dia-title" id="dia-title">供给端诊断</span>
+    <button type="button" class="dia-btn" id="dia-close">关闭</button>
+  </div>
+  <div class="dia-body" id="dia-body"></div>
+</div>
 
 <script src="./inspect-engine.js"></script>
 
@@ -4042,7 +4142,9 @@ function showPage(id){
   if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
   /* ★ 2026-10-19 拉升前候选：只在「大盘」（首页）才下 pre-rally-candidates.json。
      它是首页第一张卡，但仍然是懒加载 + 异步 —— 不阻塞首屏其他数字（见 init 里的 setTimeout）。 */
-  if (pid === 'market'){ ensureAnomalies(); ensurePreRally(); }
+/* ★ 2026-11-03「系统在学什么」：learning-report.json 只有几 KB，和今日异常同一批下。
+   它不参与首屏任何数字，拿不到只空这一块。 */
+  if (pid === 'market'){ ensureAnomalies(); ensurePreRally(); ensureLearning(); }
   /* ★ 持仓退出看板：只有切到「库存」页才下 exit-board.json（184 KB），不拖首屏 */
   if (pid === 'inv'){ ensureExitBoard(); }
   /* ★ 2026-10-21 台账 B3：切到「工具」页才下 cs2-news-watch.json（几 KB），首屏不拉 */
@@ -6204,6 +6306,8 @@ function renderAnomalies(){
       + '<div class="ano-advice">' + esc(x.advice || '') + '</div>'
       + '<div class="ano-meta">现价 ¥' + (x.price == null ? '—' : x.price) + ' · 在售 ' + (x.listed == null ? '—' : x.listed) + ' 把 · 求购 ' + (x.buy == null ? '—' : x.buy) + ' 单'
       +   (x.caseName ? ' · 同箱：' + esc(x.caseName) : '') + ' · gid ' + esc(String(x.gid)) + '</div>'
+      + '<div class="ano-top" style="margin-top:6px"><button type="button" class="dia-open" data-gid="' + esc(String(x.gid)) + '">看供给端诊断</button>'
+      +   '<span class="lrn-w">点开看：结论 + 六条带数字的证据 + 与历史案例的相似度</span></div>'
       + '</div>';
   });
   let html = rows.join('');
@@ -6215,7 +6319,209 @@ function renderAnomalies(){
       + '\n★ ' + ((d.method && d.method.notAnAdvice) || '不是买卖建议'))
     + '</div></details>';
   box.innerHTML = html;
+  /* 每条异常右边的「看供给端诊断」→ 交给抽屉（事件委托，只绑一次） */
+  box.onclick = function(ev){
+    const el = (ev && ev.target && ev.target.closest) ? ev.target.closest('.dia-open') : null;
+    if (!el) return;
+    const gid = el.getAttribute('data-gid');
+    if (gid) openDiagnosis(gid);
+  };
 }
+
+/* =====================================================================
+   系统在学什么（2026-11-03）
+   ★ 三层：特征快照库 → 事后标签 → 权重自适应。页面只读 daily 产出的
+     learning-report.json，不在前端算任何模型（算在前端就是黑盒）。
+   ★ 纪律（写进渲染文本，不是注释里）：
+       · 明确写「统计权重的自适应，不是 AI 预测」
+       · AUC 学习前后都要露出来；没跑赢等权就写「已回滚」
+       · 每条信号的权重、单变量 AUC、方向都列出来，用户可以自己判
+   ===================================================================== */
+let lrnData = null, lrnState = 'loading', lrnKick = false;
+function ensureLearning(){ if (lrnKick) return; lrnKick = true; loadLearning(); }
+async function loadLearning(){
+  try { lrnData = await fetchJSON('./learning-report.json'); lrnState = lrnData ? 'ok' : 'fail'; }
+  catch (e){ lrnData = null; lrnState = 'fail'; }
+  renderLearning();
+}
+function lrnPct(v, d){ return isNum(v) ? (v * 100).toFixed(d == null ? 0 : d) + '%' : '—'; }
+function lrnNum(v, d){ return isNum(v) ? Number(v).toFixed(d == null ? 3 : d) : '—'; }
+function renderLearning(){
+  const box = $('lrn-box'); if (!box) return;
+  const t = $('lrn-time');
+  if (lrnState !== 'ok' || !lrnData){
+    if (t) t.textContent = '拿不到数据';
+    box.innerHTML = '<div class="lrn-empty">learning-report.json 拿不到 —— 只空这一块，其他卡片照常。（降级，不假装有数据）</div>';
+    return;
+  }
+  const d = lrnData;
+  if (t) t.textContent = d.lastUpdate || d.atText || '—';
+  const sigs = arrOf(d.signals).slice().sort(function(a, b){ return b.share - a.share; });
+  const auc = d.auc || {};
+  const sm = d.samples || {};
+  const rol = !!auc.rollback;
+  let h = '';
+
+  /* ① 一句话总结 */
+  h += '<div class="lrn-head">' + esc(d.headline || '—') + '</div>';
+
+  /* ② 关键数字：AUC / 样本 / 新增 */
+  h += '<div class="lrn-grid">'
+    + '<div class="lrn-cell"><div class="lrn-t">时序交叉验证 AUC</div><div class="lrn-v">' + lrnNum(auc.before, 3)
+    +   '<span class="lrn-arrow"> → </span><span class="' + (isNum(auc.delta) && auc.delta > 0 ? 'lrn-up' : 'lrn-down') + '">' + lrnNum(auc.after, 3) + '</span></div>'
+    +   '<div class="lrn-s">等权基准（学习前）→ 采用模型（学习后）' + (rol ? ' · <b style="color:#ffb020">已回滚等权</b>' : (isNum(auc.delta) ? ' · <b class="' + (auc.delta > 0 ? 'lrn-up' : 'lrn-down') + '">' + (auc.delta > 0 ? '+' : '') + lrnNum(auc.delta, 3) + '</b>' : '')) + '</div></div>'
+    + '<div class="lrn-cell"><div class="lrn-t">已标注案例</div><div class="lrn-v">' + (isNum(sm.labeled) ? sm.labeled.toLocaleString() : '—') + '</div>'
+    +   '<div class="lrn-s">真死 ' + (sm.dead == null ? '—' : sm.dead) + ' · 反弹 ' + (sm.rebound == null ? '—' : sm.rebound) + ' · 横盘 ' + (sm.flat == null ? '—' : sm.flat) + ' · 待定 ' + (sm.pending == null ? '—' : sm.pending) + '（' + (auc.horizon || '—') + ' 日口径）</div></div>'
+    + '<div class="lrn-cell"><div class="lrn-t">特征快照库</div><div class="lrn-v">' + (sm.snapshots == null ? '—' : sm.snapshots) + ' 天</div>'
+    +   '<div class="lrn-s">' + (sm.records == null ? '—' : sm.records.toLocaleString()) + ' 条记录（品 × 天）· 本次新增可标注 <b>' + (sm.newCasesThisRun == null ? '—' : sm.newCasesThisRun) + '</b> 个</div></div>'
+    + '</div>';
+
+  /* ③ 六个信号的权重（百分比宽度柱状图，不会横向溢出） */
+  h += '<div class="lrn-sig">';
+  for (const s of sigs){
+    const w = Math.max(2, Math.min(100, (s.share || 0) * 100));
+    const neg = isNum(s.weight) && s.weight < 0;
+    h += '<div class="lrn-sigrow">'
+      + '<span class="lrn-k">' + esc(s.key) + '</span>'
+      + '<span class="lrn-nm">' + esc(s.name) + '</span>'
+      + '<span class="lrn-bar"><i class="' + (neg ? 'neg' : '') + '" style="width:' + w.toFixed(1) + '%"></i></span>'
+      + '<span class="lrn-w">权重 ' + lrnNum(s.weight, 3) + ' · 占比 ' + lrnPct(s.share, 1) + ' · 单变量AUC ' + lrnNum(s.uniAuc, 3) + ' · 方向 ' + esc(s.direction || '—') + '</span>'
+      + '</div>';
+  }
+  h += '</div>';
+
+  /* ④ 学习日志一条（人能读） */
+  if (d.logLine) h += '<div class="lrn-log">' + esc(d.logLine) + '</div>';
+
+  /* ⑤ 这次学习改了什么 */
+  if (arrOf(d.changes).length){
+    h += '<div class="lrn-auc"><span class="lrn-t" style="font-size:11px;color:#8b93a7">本次变化</span>'
+      + arrOf(d.changes).map(function(c){ return '<span class="lrn-pill">' + esc(c) + '</span>'; }).join('') + '</div>';
+  }
+
+  /* ⑥ DiD 与 AUC 的分歧（有就摆出来，不藏） */
+  if (arrOf(d.divergence).length){
+    h += '<div class="lrn-sec" style="font-size:12px;font-weight:600;color:#cbbfff;margin-top:4px">两套检验打架的地方（如实列出）</div>';
+    for (const x of arrOf(d.divergence)){
+      h += '<div class="lrn-div">' + esc(x.key) + ' ' + esc(x.name) + '：' + esc(x.reading) + '</div>';
+    }
+  }
+
+  /* ⑦ 已知局限 */
+  if (d.warning) h += '<div class="lrn-warn">已知局限：' + esc(d.warning) + '</div>';
+
+  /* ⑧ 展开：候选模型 / 口径 / 数据链 */
+  h += '<details class="lrn-detail"><summary>学习是怎么做的 / 四个候选模型谁赢了 / 为什么不是「AI 预测」</summary><div class="lrn-dump">'
+    + esc('① 特征快照：' + (sm.snapshots == null ? '—' : sm.snapshots) + ' 天 × 全池品，字段 = 六个 0~1 触发强度 + 价格位置 + 在售/求购 + 当时判定\n'
+      + '② 事后标签（' + (auc.horizon || '—') + ' 日）：真死 = 之后跌幅 >20% 且最大反弹 <10%；反弹 = 之后涨幅 >20%；横盘 = 其余；待定 = 数据还不够\n'
+      + '③ 权重：' + (d.model || '') + '\n'
+      + '④ 评分：score = Σ(权重 × 触发强度)，阈值由 ROC 最佳点定；分数只用于排序，不替用户决定买卖\n'
+      + '⑤ 数据链：snapshot_features.cjs → label_outcomes.cjs → learn_weights.cjs（每天随 daily 跑）\n'
+      + '⑥ ' + (d.notAnAI || '这是统计权重的自适应，不是 AI 预测') + '\n'
+      + '⑦ 方法：' + ((auc && auc.method) || '—'))
+    + (arrOf(d.modelCandidates).length ? '\n\n四个候选模型的时序交叉验证 AUC：\n' + arrOf(d.modelCandidates).map(function(m){ return '  · ' + m.key + '  AUC ' + lrnNum(m.cvAuc, 4) + '  ' + m.label; }).join('\n') : '')
+    + '</div></details>';
+  box.innerHTML = h;
+}
+
+/* =====================================================================
+   单品供给端诊断抽屉（2026-11-03）
+   ★ item-diagnosis.json 2.8MB，只在第一次点「看诊断」时才下（懒加载）。
+   ★ 渲染的是叙事，不是分数：结论 + 六条证据 + 3~5 句人话 + 历史案例相似度。
+   ===================================================================== */
+let diaIdx = null, diaState = 'idle', diaWant = null, diaBound = false;
+function diaBindOnce(){
+  if (diaBound) return; diaBound = true;
+  try {
+    const c = $('dia-close'), m = $('dia-mask');
+    if (c && c.addEventListener) c.addEventListener('click', function(){ diaMask(false); });
+    if (m && m.addEventListener) m.addEventListener('click', function(){ diaMask(false); });
+    if (document && document.addEventListener) document.addEventListener('keydown', function(ev){ if (ev && ev.key === 'Escape') diaMask(false); });
+  } catch (e) {}
+}
+function diaMask(on){
+  const m = $('dia-mask'), p = $('dia-panel');
+  if (m) m.classList[on ? 'add' : 'remove']('on');
+  if (p) { p.classList[on ? 'add' : 'remove']('on'); p.setAttribute('aria-hidden', on ? 'false' : 'true'); }
+}
+function diaFind(gid){
+  if (!diaIdx) return null;
+  const arr = arrOf(diaIdx.items);
+  const want = String(gid);
+  for (let i = 0; i < arr.length; i++) if (String(arr[i].gid) === want) return arr[i];
+  return null;
+}
+async function openDiagnosis(gid){
+  diaWant = gid;
+  diaBindOnce();
+  diaMask(true);
+  const body = $('dia-body'), title = $('dia-title');
+  if (title) title.textContent = '供给端诊断 · gid ' + gid;
+  if (diaState === 'ok') { renderDiagnosis(gid); return; }
+  if (body) body.innerHTML = '<div class="dia-loading">诊断详细数据加载中…（item-diagnosis.json 只在你点开时才下，不占首屏）</div>';
+  if (diaState === 'loading') return;
+  diaState = 'loading';
+  try { diaIdx = await fetchJSON('./item-diagnosis.json'); diaState = diaIdx ? 'ok' : 'fail'; }
+  catch (e){ diaIdx = null; diaState = 'fail'; }
+  renderDiagnosis(diaWant);
+}
+function renderDiagnosis(gid){
+  const body = $('dia-body'); if (!body) return;
+  if (diaState !== 'ok' || !diaIdx){
+    body.innerHTML = '<div class="dia-loading">item-diagnosis.json 拿不到 —— 诊断这一块降级，其他卡片照常。（不假装有数据）</div>';
+    return;
+  }
+  const x = diaFind(gid);
+  if (!x){ body.innerHTML = '<div class="dia-loading">这个 gid 不在诊断集里（诊断覆盖全池 1,073 品；如果刚换池子，等下一次 daily 跑完再点）。</div>'; return; }
+  const title = $('dia-title');
+  if (title) title.textContent = x.name + ' · ¥' + x.price;
+  const vk = x.verdictKey || 'normal';
+  let h = '<div class="dia-head">' + esc(x.name) + '　¥' + esc(String(x.price)) + '</div>';
+  h += '<div class="dia-sub">' + esc(String(x.at || '')) + ' 官方日线 · 命中 ' + esc(String(x.hits)) + '/' + esc(String(x.deadMin)) + ' 条（判死门槛 ≥' + esc(String(x.deadMin)) + ' 条）'
+    + (arrOf(x.hitPool).length ? ' · 命中池 ' + esc(arrOf(x.hitPool).join('/')) : '') + '</div>';
+  h += '<div class="dia-badge ' + esc(vk) + '">结论：' + esc(x.verdict) + '</div>';
+  if (arrOf(x.lifeSigns).length) h += '<div class="dia-sub">生命迹象：' + esc(arrOf(x.lifeSigns).join('、')) + ' → 强制不判 dead</div>';
+
+  h += '<div class="dia-sec">证据（每条都带数字，全部可回查日线）</div>';
+  for (const e of arrOf(x.evidence)){
+    h += '<div class="dia-ev"><div class="dia-ek">' + esc(e.k) + '</div>'
+      + '<div class="dia-ev2">' + esc(e.v) + '</div>'
+      + '<div class="dia-er">→ ' + esc(e.read) + '</div></div>';
+  }
+
+  h += '<div class="dia-sec">叙事</div>';
+  for (const s of arrOf(x.narrative)) h += '<div class="dia-nar">' + esc(s) + '</div>';
+
+  h += '<div class="dia-sec">与历史案例的相似度</div>';
+  const sims = arrOf(x.similar);
+  if (!sims.length){
+    h += '<div class="dia-nar">池子里没有供给形态相近的历史观测点（最小距离 &gt; 0.25），不给相似案例，避免硬凑。</div>';
+  } else {
+    for (const s of sims){
+      h += '<div class="dia-sim"><b>' + esc(s.name) + '</b>　' + esc(String(s.obs)) + ' 时形态（距离 ' + lrnNum(s.dist, 3) + '）→ 之后 120 日 '
+        + (isNum(s.fwd120) ? ((s.fwd120 >= 0 ? '+' : '') + (s.fwd120 * 100).toFixed(1) + '%') : '—')
+        + '，期间最大反弹 ' + (isNum(s.maxFwd) ? '+' + (s.maxFwd * 100).toFixed(1) + '%' : '—') + '</div>';
+    }
+    const ss = x.similarSummary || {};
+    h += '<div class="dia-simsum">这 ' + esc(String(ss.n || sims.length)) + ' 个最像的案例：120 日中位 '
+      + (isNum(ss.fwd120Med) ? ((ss.fwd120Med >= 0 ? '+' : '') + (ss.fwd120Med * 100).toFixed(1) + '%') : '—')
+      + '；其中 ' + esc(String(ss.worse10 == null ? '—' : ss.worse10)) + ' 个继续跌超 10%，'
+      + esc(String(ss.better10 == null ? '—' : ss.better10)) + ' 个涨超 10%。</div>';
+  }
+  h += '<div class="dia-note">这是统计对照，不是收益预测：它只说历史上供给形态最接近的品后来怎么走，不等于这一个会那样走。'
+    + '数据源 cs-quant/diagnose_item.cjs（模型版本 ' + esc(String(x.modelAt || '—')) + '）；价格跌幅按规矩【不进判据】，只作背景。</div>';
+  body.innerHTML = h;
+}
+
+/* 暴露一个入口，给三处用：
+   ① 深链 index.html?dia=1156（单品页 / 群里直接发一个诊断链接）
+   ② 验收脚本 `_test/_shot_lrn.cjs` 抓钢铁禁锢那段叙事
+   ③ 以后别的卡片想加「看诊断」按钮，直接调 window.openDiagnosis(gid) */
+try { if (typeof window !== 'undefined') window.openDiagnosis = openDiagnosis; } catch (e) {}
+try {
+  const mDia = String((typeof location !== 'undefined' && location && location.search) || '').match(/[?&]dia=(\d+)/);
+  if (mDia) setTimeout(function(){ openDiagnosis(mDia[1]); }, 900);
+} catch (e) {}
 
 function ensurePreRally(){ if (prcKick) return; prcKick = true; loadPreRally(); }
 async function loadPreRally(){
@@ -10711,7 +11017,7 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
      再异步拉它。这样"包体不拖首屏"与"落地页零点击可见"两条同时成立。
      只有本次会话就停在大盘页时才自动拉；停在其他页签时等切过去（showPage 里触发）。 */
   if (((state && state.settings && state.settings.tab) || 'market') === 'market'){
-    setTimeout(function(){ ensureAnomalies(); ensurePreRally(); }, 60);
+    setTimeout(function(){ ensureAnomalies(); ensurePreRally(); ensureLearning(); }, 60);
   }
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
