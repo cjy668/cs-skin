@@ -40,7 +40,7 @@
        卡在缓存里 = 用户看到的是几小时前的"没有新更新"，那比没有这一块更糟
        （它会让人以为巡检过了、其实看到的是旧的）。CACHE 必须 +1（v25 → v26）。
      体积：目前几 KB（只存最近 7 天 + 本次新增），只有切到「工具」页才拉。 */
-const CACHE = 'cs-skin-app-v26';
+const CACHE = 'cs-skin-app-v27';
 const ASSETS = [
   './',
   './index.html',
@@ -126,7 +126,7 @@ const ASSETS = [
       写死的生成时刻旧价造成的（同一个品在 7 个 JSON 里有 7 个价）。
       **必须进 NET_FIRST**：它进了「缓存优先」分支就等于价格永远停在第一次打开时 ——
       那正是这次事故的同一种失败（数据是旧价、用户不知道）。CACHE v21 → v22。 */
-const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|price-live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|watch-list\.json|replenish-points\.json|crash-buy\.json|crash-buy-demo\.json|crashdemo-\d+\.json|data-freshness\.json|bars-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\/|cs2-news-watch\.json/i;
+const NET_FIRST = /\.html?(\?|$)|\/api\/|live\.json|price-live\.json|analysis\.json|signals\.json|portfolio\.json|market-pulse\.json|tools\.json|inspect-data\.json|inspect-engine\.js|health\.json|pattern-types\.json|_types-detail\.json|_types-live\.json|sell-alerts\.json|watchlist-status\.json|dealer-stage-board\.json|rally-batches\.json|exit-board\.json|pre-rally-candidates\.json|daily-anomalies\.json|dead-items\.json|watch-list\.json|replenish-points\.json|crash-buy\.json|crash-buy-demo\.json|crashdemo-\d+\.json|data-freshness\.json|bars-freshness\.json|mani-atlas\.json|mani-shard-\d+\.json|mani-svg\/|cs2-news-watch\.json/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(
