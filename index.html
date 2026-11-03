@@ -6316,6 +6316,9 @@ function renderAnomalies(){
     + esc('覆盖：' + ((d.coverage && d.coverage.scanned) || '—') + ' 品，asOf ' + ((d.coverage && d.coverage.asOf) || '—')
       + '\n排序：score = severity（该品自己 365 日分布的 z）× 可操作性（在售≥50 / 求购≥5 / 可卖>0 → 1.0 / 0.6 / 0.3）'
       + '\n阶段转折：和上一次快照比（' + ((d.method && d.method.stageTurn) || '') + '）'
+      + '\n★ 已死判据：' + ((d.method && d.method.deadCriterion) || '（数据里没写，降级）')
+      + '\n★ 已死来源：' + ((d.counts && d.counts.deadSource) || '—')
+      + '（全池判死 ' + ((d.counts && d.counts.dead) == null ? '—' : (d.counts && d.counts.dead)) + ' 个）'
       + '\n★ ' + ((d.method && d.method.notAnAdvice) || '不是买卖建议'))
     + '</div></details>';
   box.innerHTML = html;
