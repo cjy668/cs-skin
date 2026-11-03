@@ -1724,6 +1724,34 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   .nw-meta span{font-size:11px}
 }
 
+
+/* ============ 今日异常（ano-*，2026-11-03 新增） ============
+   ★ 前缀 ano- 与既有 prc-/dsb-/mt-/pt- 零冲突；全部用 flex-wrap + min-width:0，
+     保证任何一条长品名都不会把卡片撑出横向滚动条（验收要求横溢 0px）。 */
+.ano-live{font-size:11px;font-weight:500;color:#7c5cff;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.35);border-radius:999px;padding:1px 8px;margin-left:8px;white-space:nowrap}
+.ano-note{font-size:12px;line-height:1.7;color:#8b93a7;margin:2px 0 10px;overflow-wrap:anywhere}
+.ano-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ano-chip{font-size:11px;line-height:1.5;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:#aab2c5;white-space:nowrap}
+.ano-chip b{color:#e8ecf5;font-weight:600}
+.ano-box{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ano-row{min-width:0;border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.03)}
+.ano-row.dead{border-color:rgba(255,86,86,.30);background:rgba(255,86,86,.06)}
+.ano-row.supply{border-color:rgba(255,176,32,.28);background:rgba(255,176,32,.05)}
+.ano-row.price{border-color:rgba(64,180,255,.28);background:rgba(64,180,255,.05)}
+.ano-row.stage{border-color:rgba(124,92,255,.28);background:rgba(124,92,255,.05)}
+.ano-row.peer{border-color:rgba(64,220,160,.26);background:rgba(64,220,160,.05)}
+.ano-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0}
+.ano-rank{font-size:11px;color:#6c748a;min-width:22px}
+.ano-k{font-size:11px;padding:1px 7px;border-radius:6px;background:rgba(255,255,255,.07);color:#cfd6e6;white-space:nowrap}
+.ano-name{font-size:13px;font-weight:600;color:#e8ecf5;min-width:0;overflow-wrap:anywhere;flex:1 1 220px}
+.ano-score{font-size:11px;color:#8b93a7;white-space:nowrap}
+.ano-detail{font-size:12px;line-height:1.65;color:#c3cadb;margin-top:4px;overflow-wrap:anywhere}
+.ano-advice{font-size:12px;line-height:1.65;color:#8b93a7;margin-top:2px;overflow-wrap:anywhere}
+.ano-meta{font-size:11px;color:#6c748a;margin-top:4px;overflow-wrap:anywhere}
+.ano-more{margin-top:6px}
+.ano-more summary{cursor:pointer;font-size:11px;color:#7c8aa5}
+.ano-more .ano-dump{font-size:11px;line-height:1.6;color:#8b93a7;margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ano-empty{font-size:12px;color:#8b93a7;padding:8px 0}
 </style>
 </head>
 <body>
@@ -1840,7 +1868,24 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                  并把用户点名的 3 个负样本"被哪条挡掉"直接渲染在 near-miss 里。
                数据源：cs-quant/build_pre_rally_candidates.cjs → pre-rally-candidates.json
                降级链：pre-rally-candidates.json 拿不到 → 只空这一块，其他卡/6 页签照常。 -->
-          <div class="card span-all" id="sec-prc">
+<!-- ================= ★★★ 今日异常（2026-11-03 新增 · 首页第一张卡） =================
+             用户原话：「我还是想你可以自己学习、来分析判断，而不是每次我指出来了你才分析出来。
+                       我本身就是一个懒人，我让你写这个系统就是想你自己学习自己分析」
+             ★ 为什么把它放在「拉升前候选」前面：
+               候选是【人定的规则】筛出来的（空间大/阶段/强盘），规则不变就永远看不见新问题；
+               这一张是【系统自己扫全池】找偏离 —— 五类异常（供需背离 / 供给 / 价格 / 阶段转折 / 同类背离），
+               按「severity（偏离该品自己 365 日分布多少个标准差）× 可操作性（在售≥50 / 求购≥5 / 可卖>0）」排序。
+               ★ 它回答的不是「买什么」，而是「今天哪里不对、最该看的是哪几件」。
+             数据源：cs-quant/scan_anomalies.cjs → daily-anomalies.json（日频，随 daily 发布）
+             降级链：拿不到 → 只空这一块，其他卡 / 6 页签照常。 -->
+          <div class="card span-all" id="sec-ano">
+            <div class="sec-head"><h2>今日异常 <span class="ano-live">系统自己扫出来的</span></h2><span class="sec-sub">全池 1,073 品 · 五类异常 · 按「偏离程度 × 能不能操作」排序</span><span class="r" id="ano-time">加载中…</span></div>
+            <div class="ano-note" id="ano-note">每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。</div>
+            <div class="ano-chips" id="ano-chips"></div>
+            <div id="ano-box" class="ano-box"><div class="skel"><i></i>今日异常加载中…（daily-anomalies.json）</div></div>
+          </div>
+
+                    <div class="card span-all" id="sec-prc">
             <div class="sec-head"><h2>拉升前候选</h2><span class="sec-sub">⓪流通性 → 阶段 → 拉升空间 → 强盘/在涨 · 全部显示</span><span class="r" id="prc-time">加载中…</span></div>
             <div class="prc-rule" id="prc-rule">四条件串联：<b>⓪ 流通性</b>（盘子档 ≠ micro · 在售 ≥ 50 把 · 求购 ≥ 5 单 · 可卖金额 > 0 · 可交易 ≥ ¥3,000，<b>5 条全过</b>）× <b>① 阶段</b>（7 阶段结构口径：吸筹 / 蓄势·启动前 / 小拉升吸筹 / 已启动·在涨）× <b>② 还有拉升空间</b>（优先用<b>该品自己的历史</b>算；自身样本不足才退回池子口径并标注降级）→ 排序按「空间大的在前 → 强盘在前」，在涨（从 21 日低点涨幅）做第 4 层。<b>流通性 / 阶段 / 空间是硬门槛；强弱与在涨只排序不过滤。</b>你上次点名的 石砌 / 毒镖 / 大马士革钢 就是被 ⓪ 挡掉的，逐条写在最下面 near-miss 里。</div>
             <p class="sec-note" id="prc-meta">—</p>
@@ -3997,7 +4042,7 @@ function showPage(id){
   if (pid === 'sig'){ ensureSellAlerts(); ensureWatchlist(); ensureStageBoard(); ensureRallyBatches(); }
   /* ★ 2026-10-19 拉升前候选：只在「大盘」（首页）才下 pre-rally-candidates.json。
      它是首页第一张卡，但仍然是懒加载 + 异步 —— 不阻塞首屏其他数字（见 init 里的 setTimeout）。 */
-  if (pid === 'market'){ ensurePreRally(); }
+  if (pid === 'market'){ ensureAnomalies(); ensurePreRally(); }
   /* ★ 持仓退出看板：只有切到「库存」页才下 exit-board.json（184 KB），不拖首屏 */
   if (pid === 'inv'){ ensureExitBoard(); }
   /* ★ 2026-10-21 台账 B3：切到「工具」页才下 cs2-news-watch.json（几 KB），首屏不拉 */
@@ -6094,6 +6139,83 @@ let prcSort = 'room';         /* 'room' = 空间大优先 → 强盘（默认，
 const PRC_GID_SET = new Set();   /* 给「监控清单」的筛选器用 */
 const PRC_GAP_OK = 0.3;
 const PRC_RISE_STARTED = 0.10;
+
+
+/* =====================================================================
+   今日异常（2026-11-03）—— 首页第一张卡
+   ★ 与「拉升前候选」的分工（两张卡不能混）：
+     · 拉升前候选 = 人定的规则筛出来的「买什么」（空间大 / 阶段 / 强盘）；
+     · 今日异常   = 系统自己扫全池发现的「哪里不对」（五类偏离 × 可操作性）。
+   ★ 纪律：每条只给「哪里偏离 + 下一步看什么」，不含任何买卖指令；
+     就算异常类型是 dead，也只是「不建议再等反弹」，不替用户决定卖不卖。
+   ★ 降级链：daily-anomalies.json 拿不到 → 只空这一块，其他卡照常。
+   ===================================================================== */
+let anoData = null, anoState = 'loading', anoKick = false;
+function ensureAnomalies(){ if (anoKick) return; anoKick = true; loadAnomalies(); }
+async function loadAnomalies(){
+  try {
+    anoData = await fetchJSON('./daily-anomalies.json');
+    anoState = anoData ? 'ok' : 'fail';
+  } catch (e){ anoData = null; anoState = 'fail'; }
+  renderAnomalies();
+}
+function anoKindClass(k){
+  if (k === 'dead') return 'dead';
+  if (k === 'listed_spike' || k === 'listed_drop' || k === 'listed_down_streak') return 'supply';
+  if (k === 'price_jump' || k === 'slow_uptrend') return 'price';
+  if (k === 'stage_turn') return 'stage';
+  if (k === 'peer_lagging' || k === 'peer_against') return 'peer';
+  return 'supply';
+}
+function renderAnomalies(){
+  const box = $('ano-box'); if (!box) return;
+  const t = $('ano-time');
+  if (anoState !== 'ok' || !anoData){
+    if (t) t.textContent = '拿不到数据';
+    box.innerHTML = '<div class="ano-empty">daily-anomalies.json 拿不到 —— 只空这一块，其他卡片照常。（降级，不假装有数据）</div>';
+    return;
+  }
+  const d = anoData;
+  if (t) t.textContent = d.atText || '—';
+  const note = $('ano-note');
+  if (note && d.method) {
+    note.innerHTML = '每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。'
+      + '<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。'
+      + '<span style="color:#6c748a">（排序 = severity z × 可操作性；覆盖 ' + esc(String((d.coverage && d.coverage.scanned) || '—')) + ' 品）</span>';
+  }
+  const chips = $('ano-chips');
+  if (chips) {
+    const bk = (d.counts && d.counts.byKind) || {};
+    const names = { fake_rally: '假拉升', absorb_on_drop: '跌着收货', silent_absorb: '静默吸货', absorb_then_push: '先吸后拉', listed_spike: '供给暴增', listed_drop: '供给暴减', listed_down_streak: '连续减仓', price_jump: '单日跳价', slow_uptrend: '慢牛', dead: '已死', stage_turn: '阶段转折', peer_lagging: '同箱没动', peer_against: '同箱逆势' };
+    const order = ['dead', 'listed_spike', 'listed_drop', 'absorb_then_push', 'silent_absorb', 'absorb_on_drop', 'fake_rally', 'listed_down_streak', 'price_jump', 'slow_uptrend', 'stage_turn', 'peer_lagging', 'peer_against'];
+    chips.innerHTML = order.filter(function(k){ return bk[k]; }).map(function(k){
+      return '<span class="ano-chip">' + esc(names[k] || k) + ' <b>' + bk[k] + '</b></span>';
+    }).join('') + '<span class="ano-chip">合计 <b>' + ((d.counts && d.counts.total) || 0) + '</b> 条 · 可操作 <b>' + ((d.counts && d.counts.operable) || 0) + '</b> 条</span>';
+  }
+  const top = arrOf(d.top);
+  const rows = top.map(function(x){
+    const cls = anoKindClass(x.kind);
+    return '<div class="ano-row ' + cls + '">'
+      + '<div class="ano-top"><span class="ano-rank">#' + x.rank + '</span>'
+      +   '<span class="ano-k">' + esc(x.kindName || x.kind) + '</span>'
+      +   '<span class="ano-name">' + esc(x.name || '') + '</span>'
+      +   '<span class="ano-score">程度 ' + (x.severity == null ? '—' : x.severity) + ' × 操作性 ' + (x.operability == null ? '—' : x.operability) + '</span></div>'
+      + '<div class="ano-detail">' + esc(x.detail || '') + '</div>'
+      + '<div class="ano-advice">' + esc(x.advice || '') + '</div>'
+      + '<div class="ano-meta">现价 ¥' + (x.price == null ? '—' : x.price) + ' · 在售 ' + (x.listed == null ? '—' : x.listed) + ' 把 · 求购 ' + (x.buy == null ? '—' : x.buy) + ' 单'
+      +   (x.caseName ? ' · 同箱：' + esc(x.caseName) : '') + ' · gid ' + esc(String(x.gid)) + '</div>'
+      + '</div>';
+  });
+  let html = rows.join('');
+  if (!rows.length) html = '<div class="ano-empty">今天没有触发任何异常（这本身是信息：全池没有明显偏离）。</div>';
+  html += '<details class="ano-more"><summary>看今天的扫描口径 / 分类计数 / 为什么这样排</summary><div class="ano-dump">'
+    + esc('覆盖：' + ((d.coverage && d.coverage.scanned) || '—') + ' 品，asOf ' + ((d.coverage && d.coverage.asOf) || '—')
+      + '\n排序：score = severity（该品自己 365 日分布的 z）× 可操作性（在售≥50 / 求购≥5 / 可卖>0 → 1.0 / 0.6 / 0.3）'
+      + '\n阶段转折：和上一次快照比（' + ((d.method && d.method.stageTurn) || '') + '）'
+      + '\n★ ' + ((d.method && d.method.notAnAdvice) || '不是买卖建议'))
+    + '</div></details>';
+  box.innerHTML = html;
+}
 
 function ensurePreRally(){ if (prcKick) return; prcKick = true; loadPreRally(); }
 async function loadPreRally(){
@@ -10589,7 +10711,7 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
      再异步拉它。这样"包体不拖首屏"与"落地页零点击可见"两条同时成立。
      只有本次会话就停在大盘页时才自动拉；停在其他页签时等切过去（showPage 里触发）。 */
   if (((state && state.settings && state.settings.tab) || 'market') === 'market'){
-    setTimeout(function(){ ensurePreRally(); }, 60);
+    setTimeout(function(){ ensureAnomalies(); ensurePreRally(); }, 60);
   }
 
   /* 行情库懒加载：只有「本次会话已经下过一次」才从 IndexedDB 装回来（0 下载、瞬时可用）。
