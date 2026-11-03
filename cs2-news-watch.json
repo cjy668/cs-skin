@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1793697400773,
- "atText": "2026-11-03 17:16:40",
+ "at": 1793702800793,
+ "atText": "2026-11-03 18:46:40",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "ISteamNews"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1793697402302,
+  "checkedAt": 1793702818152,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "1847920302232686",
@@ -37,10 +36,10 @@
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
   "feedItems": 100,
-  "officialItems": 89,
+  "officialItems": 88,
   "newItems": 0,
   "recentItems": 1,
-  "rssItems": 10
+  "rssItems": 0
  },
  "sourceStatus": [
   {
@@ -48,27 +47,27 @@
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
    "ok": true,
    "status": 200,
-   "bytes": 177462,
-   "ms": 606,
+   "bytes": 179174,
+   "ms": 821,
    "attempts": 1,
    "error": null
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": true,
-   "status": 200,
-   "bytes": 19230,
-   "ms": 1460,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 17290,
+   "attempts": 2,
+   "error": "read ECONNRESET"
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-10-28",
-  "rssNewestDate": "2026-10-28",
-  "agree": true,
-  "note": "两个源的最新公告日期一致"
+  "rssNewestDate": null,
+  "agree": false,
+  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
  "items": [],
  "recent": [
