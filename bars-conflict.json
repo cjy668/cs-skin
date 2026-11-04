@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1793783884944,
-   "atText": "2026/11/4 17:18:04",
+   "at": 1793794855942,
+   "atText": "2026/11/4 20:20:55",
    "level": "ok",
    "compared": 4962,
    "gids": 1654,
@@ -244,8 +244,8 @@
    "note": "自建日线 vs 官方：4962 个 (gid×日) 可比，完全相等 59.9355%，中位差异 0%，>5% 的品 38/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1793783855448,
-   "atText": "2026/11/4 17:17:35",
+   "at": 1793794838500,
+   "atText": "2026/11/4 20:20:38",
    "level": "warn",
    "officialLatestLabel": "2026-11-02",
    "officialLatestTrueDay": "2026-11-03",
@@ -357,6 +357,15 @@
      "diffPct": 11.1111
     },
     {
+     "gid": 6441,
+     "key": "b",
+     "trueDay": "2026-10-20",
+     "officialLabel": "2026-10-19",
+     "official": 9,
+     "ours": 10,
+     "diffPct": 11.1111
+    },
+    {
      "gid": 2218,
      "key": "n",
      "trueDay": "2026-10-22",
@@ -445,22 +454,13 @@
      "official": 12.09,
      "ours": 12.89,
      "diffPct": 6.617
-    },
-    {
-     "gid": 12519,
-     "key": "n",
-     "trueDay": "2026-10-16",
-     "officialLabel": "2026-10-15",
-     "official": 773,
-     "ours": 723,
-     "diffPct": 6.4683
     }
    ],
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4901%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1793783848211,
-   "atText": "2026/11/4 17:17:28",
+   "at": 1793794833319,
+   "atText": "2026/11/4 20:20:33",
    "level": "warn",
    "compared": 3469,
    "gids": 203,
@@ -599,13 +599,13 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1793783855815,
-   "atText": "2026/11/4 17:17:35",
+   "at": 1793794838708,
+   "atText": "2026/11/4 20:20:38",
    "level": "ok",
    "compared": 125,
    "medianPct": 0,
-   "p90Pct": 0.4545,
-   "maxPct": 6.4214,
+   "p90Pct": 0.4098,
+   "maxPct": 11.1111,
    "over5PctShare": 0.8,
    "conflictGidCount": 1,
    "conflictGids": [],
@@ -613,8 +613,8 @@
   }
  },
  "level": "warn",
- "at": 1793783884944,
- "atText": "2026/11/4 17:18:04",
+ "at": 1793794855942,
+ "atText": "2026/11/4 20:20:55",
  "conflictGids": [
   {
    "gid": 590,
