@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1793809251247,
- "atText": "2026-11-05 00:20:51",
+ "at": 1793861451378,
+ "atText": "2026-11-05 14:50:51",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
   "ISteamNews"
@@ -12,15 +12,15 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1793809268388,
+  "checkedAt": 1793861462196,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1847920302232686",
+ "lastSeen": "1848557880481353",
  "lastSeenTitle": "Counter-Strike 2 Update",
- "lastSeenDate": "2026-10-28",
- "lastSeenAtText": "2026-10-29 05:48:09",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302232686",
- "newCount": 0,
+ "lastSeenDate": "2026-11-05",
+ "lastSeenAtText": "2026-11-05 08:54:07",
+ "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880481353",
+ "newCount": 1,
  "firstRun": false,
  "lastKnownDate": "2026-10-28",
  "hist": {
@@ -37,7 +37,7 @@
  "checked": {
   "feedItems": 100,
   "officialItems": 88,
-  "newItems": 0,
+  "newItems": 1,
   "recentItems": 1,
   "rssItems": 0
  },
@@ -47,8 +47,8 @@
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
    "ok": true,
    "status": 200,
-   "bytes": 179104,
-   "ms": 786,
+   "bytes": 178278,
+   "ms": 4870,
    "attempts": 1,
    "error": null
   },
@@ -58,57 +58,47 @@
    "ok": false,
    "status": 0,
    "bytes": 0,
-   "ms": 17074,
+   "ms": 10615,
    "attempts": 2,
    "error": "timeout"
   }
  ],
  "crossCheck": {
-  "apiNewestDate": "2026-10-28",
+  "apiNewestDate": "2026-11-05",
   "rssNewestDate": null,
   "agree": false,
   "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
- "items": [],
- "recent": [
+ "items": [
   {
-   "gid": "1847920302232686",
+   "gid": "1848557880481353",
    "title": "Counter-Strike 2 Update",
    "titleZh": null,
-   "date": "2026-10-28",
-   "dateLocal": "2026-10-29",
-   "at": 1793224089000,
-   "atText": "2026-10-29 05:48:09",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302232686",
-   "summary": "GAMEPLAY · Added an option to switch Silent Reload Mode between Hold and Toggle. With toggle enabled, once the silent reload starts you can let go of the reload button. To cancel a silent reload and go back to a fast reload, you can tap the reload button again. · Fixed various cases where the first sound of a reload was audible irrespective if a user requested a silent reload or not.…",
-   "level": "机制级",
-   "confidence": "medium",
+   "date": "2026-11-05",
+   "dateLocal": "2026-11-05",
+   "at": 1793840047000,
+   "atText": "2026-11-05 08:54:07",
+   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880481353",
+   "summary": "GAMEPLAY · Bomb defusal in Retakes mode will now instantly finish when there is sufficient time remaining in the round and no active utility remains to prevent the defuse. · Reduced freeze time and round restart delay in Retakes mode. · Pinging pet chickens during freeze time will request a trick from them. · Pet chicken names are no longer displayed when customized item text game option is set to hidden.…",
+   "level": "无关",
+   "confidence": "low",
    "matchedKeywords": [
-    "Case",
-    "Audio",
-    "Bug",
-    "UI",
-    "Misc"
+    "Map"
    ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 4 个",
-   "mechanismHits": [
-    "Case"
-   ],
+   "levelBasis": "强机制 0 个（无）· 机制词 0 个 · 供给 0 个 · 赛事 0 个 · 噪声 1 个",
+   "mechanismHits": [],
    "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
    "noiseHits": [
-    "Audio",
-    "Bug",
-    "UI",
-    "Misc"
+    "Map"
    ],
-   "alreadyKnown": true,
+   "alreadyKnown": false,
    "similarEvents": [
     {
-     "date": "2025-02-06",
+     "date": "2025-07-16",
      "title": "《反恐精英》更新",
-     "similarity": 0.807,
+     "similarity": 0.682,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -117,9 +107,9 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2026-09-25",
+     "date": "2025-01-28",
      "title": "《反恐精英》更新",
-     "similarity": 0.701,
+     "similarity": 0.678,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -128,9 +118,72 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2023-11-14",
-     "title": "更新日志（2023年11月13日）",
-     "similarity": 0.7,
+     "date": "2026-03-18",
+     "title": "《反恐精英》更新",
+     "similarity": 0.667,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    }
+   ],
+   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
+  }
+ ],
+ "recent": [
+  {
+   "gid": "1848557880481353",
+   "title": "Counter-Strike 2 Update",
+   "titleZh": null,
+   "date": "2026-11-05",
+   "dateLocal": "2026-11-05",
+   "at": 1793840047000,
+   "atText": "2026-11-05 08:54:07",
+   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880481353",
+   "summary": "GAMEPLAY · Bomb defusal in Retakes mode will now instantly finish when there is sufficient time remaining in the round and no active utility remains to prevent the defuse. · Reduced freeze time and round restart delay in Retakes mode. · Pinging pet chickens during freeze time will request a trick from them. · Pet chicken names are no longer displayed when customized item text game option is set to hidden.…",
+   "level": "无关",
+   "confidence": "low",
+   "matchedKeywords": [
+    "Map"
+   ],
+   "levelBasis": "强机制 0 个（无）· 机制词 0 个 · 供给 0 个 · 赛事 0 个 · 噪声 1 个",
+   "mechanismHits": [],
+   "strongMechanismHits": [],
+   "supplyHits": [],
+   "eventHits": [],
+   "noiseHits": [
+    "Map"
+   ],
+   "alreadyKnown": false,
+   "similarEvents": [
+    {
+     "date": "2025-07-16",
+     "title": "《反恐精英》更新",
+     "similarity": 0.682,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2025-01-28",
+     "title": "《反恐精英》更新",
+     "similarity": 0.678,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2026-03-18",
+     "title": "《反恐精英》更新",
+     "similarity": 0.667,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
