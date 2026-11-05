@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1793881096861,
- "atText": "2026/11/5 20:18:16",
+ "at": 1793892133200,
+ "atText": "2026/11/5 23:22:13",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -53,18 +53,18 @@
  },
  "byKey": {
   "p": {
-   "n": 4082,
+   "n": 4380,
    "gids": 1654,
-   "exact": 2570,
-   "exactPct": 62.9593,
+   "exact": 2831,
+   "exactPct": 64.6347,
    "medianPct": 0,
-   "p75Pct": 0.1433,
-   "p90Pct": 0.7273,
-   "p99Pct": 5.35,
+   "p75Pct": 0.123,
+   "p90Pct": 0.6711,
+   "p99Pct": 5.2381,
    "maxPct": 23.1912,
-   "over5Pct": 1.1024,
-   "conflictGidCount": 43,
-   "conflictShare": 2.5998,
+   "over5Pct": 1.0502,
+   "conflictGidCount": 44,
+   "conflictShare": 2.6602,
    "conflictGids": [
     185,
     590,
@@ -107,6 +107,7 @@
     17841,
     18272,
     18388,
+    18604,
     20464,
     24904
    ],
@@ -129,9 +130,9 @@
     },
     {
      "day": "2026-11-04",
-     "n": 774,
-     "exact": 507,
-     "conflict": 17,
+     "n": 1072,
+     "exact": 768,
+     "conflict": 18,
      "medianPct": 0,
      "maxPct": 16.9231
     }
@@ -140,11 +141,11 @@
   "n": {
    "n": 395,
    "gids": 134,
-   "exact": 322,
-   "exactPct": 81.519,
+   "exact": 323,
+   "exactPct": 81.7722,
    "medianPct": 0,
    "p75Pct": 0,
-   "p90Pct": 0.1751,
+   "p90Pct": 0.1674,
    "p99Pct": 2.5253,
    "maxPct": 11.195,
    "over5Pct": 0.2532,
@@ -173,7 +174,7 @@
     {
      "day": "2026-11-04",
      "n": 127,
-     "exact": 96,
+     "exact": 97,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 1.9915
@@ -265,8 +266,8 @@
   }
  },
  "level": "ok",
- "conflictGidCount": 43,
- "conflictShare": 2.5998,
+ "conflictGidCount": 44,
+ "conflictShare": 2.6602,
  "conflictGids": [
   185,
   590,
@@ -309,6 +310,7 @@
   17841,
   18272,
   18388,
+  18604,
   20464,
   24904
  ],
@@ -495,5 +497,5 @@
   }
  ],
  "selfTest": null,
- "message": "自建日线 vs 官方：4082 个 (gid×日) 可比，完全相等 62.9593%，中位差异 0%，>5% 的品 43/1654 个 → 口径一致"
+ "message": "自建日线 vs 官方：4380 个 (gid×日) 可比，完全相等 64.6347%，中位差异 0%，>5% 的品 44/1654 个 → 口径一致"
 }
