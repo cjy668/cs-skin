@@ -3,17 +3,17 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1793881096875,
-   "atText": "2026/11/5 20:18:16",
+   "at": 1793892133214,
+   "atText": "2026/11/5 23:22:13",
    "level": "ok",
-   "compared": 4082,
+   "compared": 4380,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.7273,
+   "p90Pct": 0.6711,
    "maxPct": 23.1912,
-   "over5PctShare": 1.1024,
-   "conflictGidCount": 43,
-   "conflictShare": 2.5998,
+   "over5PctShare": 1.0502,
+   "conflictGidCount": 44,
+   "conflictShare": 2.6602,
    "conflictGids": [
     185,
     590,
@@ -56,6 +56,7 @@
     17841,
     18272,
     18388,
+    18604,
     20464,
     24904
    ],
@@ -246,11 +247,11 @@
     "2026-11-03",
     "2026-11-04"
    ],
-   "note": "自建日线 vs 官方：4082 个 (gid×日) 可比，完全相等 62.9593%，中位差异 0%，>5% 的品 43/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：4380 个 (gid×日) 可比，完全相等 64.6347%，中位差异 0%，>5% 的品 44/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1793881078555,
-   "atText": "2026/11/5 20:17:58",
+   "at": 1793892113859,
+   "atText": "2026/11/5 23:21:53",
    "level": "warn",
    "officialLatestLabel": "2026-11-03",
    "officialLatestTrueDay": "2026-11-04",
@@ -464,8 +465,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4718%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1793881073317,
-   "atText": "2026/11/5 20:17:53",
+   "at": 1793892108298,
+   "atText": "2026/11/5 23:21:48",
    "level": "warn",
    "compared": 3603,
    "gids": 204,
@@ -604,22 +605,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1793881078741,
-   "atText": "2026/11/5 20:17:58",
+   "at": 1793892114052,
+   "atText": "2026/11/5 23:21:54",
    "level": "ok",
-   "compared": 119,
-   "medianPct": 0.1306,
-   "p90Pct": 1.8519,
-   "maxPct": 15.8572,
-   "over5PctShare": 2.521,
-   "conflictGidCount": 3,
+   "compared": 120,
+   "medianPct": 0,
+   "p90Pct": 0.1695,
+   "maxPct": 3.8462,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1793881096875,
- "atText": "2026/11/5 20:18:16",
+ "at": 1793892133214,
+ "atText": "2026/11/5 23:22:13",
  "conflictGids": [
   {
    "gid": 185,
@@ -956,6 +957,12 @@
    ]
   },
   {
+   "gid": 18604,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 20464,
    "in": [
     "daily_verify"
@@ -968,7 +975,7 @@
    ]
   }
  ],
- "conflictGidCount": 55,
+ "conflictGidCount": 56,
  "conflictSamples": [
   {
    "gid": 185,
@@ -1117,5 +1124,5 @@
    ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 55 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 56 个品差异 >5%，请确认口径"
 }
