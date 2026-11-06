@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1793892133214,
-   "atText": "2026/11/5 23:22:13",
+   "at": 1793948200843,
+   "atText": "2026/11/6 14:56:40",
    "level": "ok",
    "compared": 4380,
    "gids": 1654,
@@ -250,13 +250,13 @@
    "note": "自建日线 vs 官方：4380 个 (gid×日) 可比，完全相等 64.6347%，中位差异 0%，>5% 的品 44/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1793892113859,
-   "atText": "2026/11/5 23:21:53",
+   "at": 1793948180599,
+   "atText": "2026/11/6 14:56:20",
    "level": "warn",
    "officialLatestLabel": "2026-11-03",
    "officialLatestTrueDay": "2026-11-04",
    "overlapDays": 23,
-   "appendedDays": 1,
+   "appendedDays": 2,
    "compared": 3603,
    "medianPct": 0,
    "p90Pct": 0,
@@ -465,8 +465,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4718%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1793892108298,
-   "atText": "2026/11/5 23:21:48",
+   "at": 1793948175081,
+   "atText": "2026/11/6 14:56:15",
    "level": "warn",
    "compared": 3603,
    "gids": 204,
@@ -605,13 +605,13 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1793892114052,
-   "atText": "2026/11/5 23:21:54",
+   "at": 1793948180792,
+   "atText": "2026/11/6 14:56:20",
    "level": "ok",
-   "compared": 120,
+   "compared": 102,
    "medianPct": 0,
-   "p90Pct": 0.1695,
-   "maxPct": 3.8462,
+   "p90Pct": 0,
+   "maxPct": 0.9004,
    "over5PctShare": 0,
    "conflictGidCount": 0,
    "conflictGids": [],
@@ -619,8 +619,8 @@
   }
  },
  "level": "warn",
- "at": 1793892133214,
- "atText": "2026/11/5 23:22:13",
+ "at": 1793948200843,
+ "atText": "2026/11/6 14:56:40",
  "conflictGids": [
   {
    "gid": 185,
