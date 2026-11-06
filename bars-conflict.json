@@ -3,17 +3,17 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1793967653708,
-   "atText": "2026/11/6 20:20:53",
+   "at": 1793978572604,
+   "atText": "2026/11/6 23:22:52",
    "level": "ok",
-   "compared": 3755,
+   "compared": 4962,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.6387,
+   "p90Pct": 0.6374,
    "maxPct": 23.1912,
-   "over5PctShare": 1.012,
-   "conflictGidCount": 35,
-   "conflictShare": 2.1161,
+   "over5PctShare": 0.8061,
+   "conflictGidCount": 37,
+   "conflictShare": 2.237,
    "conflictGids": [
     185,
     590,
@@ -23,6 +23,7 @@
     1030,
     1044,
     1106,
+    1158,
     1207,
     1759,
     1869,
@@ -30,16 +31,17 @@
     1957,
     2018,
     6359,
+    7132,
     8206,
     9540,
     9659,
     9729,
     10343,
-    11217,
     11244,
     12196,
     12261,
     12426,
+    12713,
     12776,
     12919,
     13188,
@@ -59,15 +61,6 @@
      "ours": 3.7,
      "official": 3.7,
      "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 11217,
-     "trueDay": "2026-11-03",
-     "officialLabel": "2026-11-02",
-     "ours": 12.44,
-     "official": 12.32,
-     "diffPct": 0.974,
      "src": "intraday_agg"
     },
     {
@@ -152,6 +145,15 @@
      "src": "rt_snapshot"
     },
     {
+     "gid": 1158,
+     "trueDay": "2026-11-03",
+     "officialLabel": "2026-11-02",
+     "ours": 52.8,
+     "official": 52.8,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
      "gid": 1207,
      "trueDay": "2026-11-03",
      "officialLabel": "2026-11-02",
@@ -215,21 +217,21 @@
      "src": "rt_snapshot"
     },
     {
+     "gid": 7132,
+     "trueDay": "2026-11-03",
+     "officialLabel": "2026-11-02",
+     "ours": 2398.49,
+     "official": 2398.48,
+     "diffPct": 0.0004,
+     "src": "rt_snapshot"
+    },
+    {
      "gid": 8206,
      "trueDay": "2026-11-03",
      "officialLabel": "2026-11-02",
      "ours": 1.5,
      "official": 1.49,
      "diffPct": 0.6711,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 9540,
-     "trueDay": "2026-11-03",
-     "officialLabel": "2026-11-02",
-     "ours": 0.28,
-     "official": 0.28,
-     "diffPct": 0,
      "src": "rt_snapshot"
     }
    ],
@@ -238,21 +240,21 @@
     "2026-11-04",
     "2026-11-05"
    ],
-   "note": "自建日线 vs 官方：3755 个 (gid×日) 可比，完全相等 68.2823%，中位差异 0%，>5% 的品 35/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：4962 个 (gid×日) 可比，完全相等 66.1024%，中位差异 0%，>5% 的品 37/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1793967632277,
-   "atText": "2026/11/6 20:20:32",
+   "at": 1793978540797,
+   "atText": "2026/11/6 23:22:20",
    "level": "warn",
    "officialLatestLabel": "2026-11-04",
    "officialLatestTrueDay": "2026-11-05",
    "overlapDays": 24,
    "appendedDays": 1,
-   "compared": 3725,
+   "compared": 3757,
    "medianPct": 0,
    "p90Pct": 0,
    "maxPct": 50,
-   "over5PctShare": 0.4832,
+   "over5PctShare": 0.4791,
    "conflictGidCount": 15,
    "conflictShare": 7.3529,
    "conflictGids": [
@@ -454,18 +456,18 @@
      "diffPct": 6.9767
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4832%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4791%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1793967626631,
-   "atText": "2026/11/6 20:20:26",
+   "at": 1793978531772,
+   "atText": "2026/11/6 23:22:11",
    "level": "warn",
-   "compared": 3725,
+   "compared": 3757,
    "gids": 204,
    "medianPct": 0,
    "maxPct": 50,
    "p90Pct": 0,
-   "over5PctShare": 0.4832,
+   "over5PctShare": 0.4791,
    "conflictGidCount": 15,
    "conflictShare": 7.3529,
    "conflictGids": [
@@ -598,13 +600,13 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1793967632481,
-   "atText": "2026/11/6 20:20:32",
+   "at": 1793978541165,
+   "atText": "2026/11/6 23:22:21",
    "level": "ok",
-   "compared": 111,
+   "compared": 126,
    "medianPct": 0,
-   "p90Pct": 0,
-   "maxPct": 1.5152,
+   "p90Pct": 0.4098,
+   "maxPct": 4.5288,
    "over5PctShare": 0,
    "conflictGidCount": 0,
    "conflictGids": [],
@@ -612,8 +614,8 @@
   }
  },
  "level": "warn",
- "at": 1793967653708,
- "atText": "2026/11/6 20:20:53",
+ "at": 1793978572604,
+ "atText": "2026/11/6 23:22:52",
  "conflictGids": [
   {
    "gid": 185,
@@ -675,6 +677,12 @@
   },
   {
    "gid": 1106,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1158,
    "in": [
     "daily_verify"
    ]
@@ -745,6 +753,12 @@
    ]
   },
   {
+   "gid": 7132,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 8206,
    "in": [
     "daily_verify"
@@ -798,12 +812,6 @@
    ]
   },
   {
-   "gid": 11217,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 11244,
    "in": [
     "daily_verify"
@@ -832,6 +840,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 12713,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -916,7 +930,7 @@
    ]
   }
  ],
- "conflictGidCount": 47,
+ "conflictGidCount": 49,
  "conflictSamples": [
   {
    "gid": 185,
@@ -993,6 +1007,13 @@
    ]
   },
   {
+   "gid": 1158,
+   "name": "格洛克 18 型 | 钢铁禁锢 (略有磨损)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 1207,
    "name": "M4A1消音版 | 血虎 (略有磨损)",
    "in": [
@@ -1059,14 +1080,7 @@
     "merge_junction",
     "intraday_calibration"
    ]
-  },
-  {
-   "gid": 6359,
-   "name": "Tec-9 | 蓝钛 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 47 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 49 个品差异 >5%，请确认口径"
 }
