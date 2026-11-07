@@ -3,19 +3,20 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794022806210,
-   "atText": "2026/11/7 11:40:06",
+   "at": 1794032634818,
+   "atText": "2026/11/7 14:23:54",
    "level": "ok",
-   "compared": 3885,
+   "compared": 4559,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.6579,
-   "maxPct": 17.43,
-   "over5PctShare": 0.7979,
-   "conflictGidCount": 29,
-   "conflictShare": 1.7533,
+   "p90Pct": 0.5835,
+   "maxPct": 18.1901,
+   "over5PctShare": 0.8335,
+   "conflictGidCount": 36,
+   "conflictShare": 2.1765,
    "conflictGids": [
     185,
+    498,
     590,
     774,
     807,
@@ -23,10 +24,13 @@
     1044,
     1106,
     1158,
+    1547,
+    1562,
     1759,
     1869,
     1891,
     1957,
+    2236,
     6359,
     7132,
     8190,
@@ -43,7 +47,10 @@
     13188,
     13691,
     15528,
-    18604
+    17725,
+    18249,
+    18604,
+    18659
    ],
    "samples": [
     {
@@ -80,6 +87,15 @@
      "ours": 27.49,
      "official": 29.79,
      "diffPct": 7.7207,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 498,
+     "trueDay": "2026-11-04",
+     "officialLabel": "2026-11-03",
+     "ours": 8.54,
+     "official": 8.54,
+     "diffPct": 0,
      "src": "rt_snapshot"
     },
     {
@@ -137,6 +153,24 @@
      "src": "rt_snapshot"
     },
     {
+     "gid": 1547,
+     "trueDay": "2026-11-04",
+     "officialLabel": "2026-11-03",
+     "ours": 59.48,
+     "official": 59.48,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 1562,
+     "trueDay": "2026-11-04",
+     "officialLabel": "2026-11-03",
+     "ours": 28.58,
+     "official": 28.58,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
      "gid": 1759,
      "trueDay": "2026-11-04",
      "officialLabel": "2026-11-03",
@@ -173,6 +207,15 @@
      "src": "rt_snapshot"
     },
     {
+     "gid": 2236,
+     "trueDay": "2026-11-04",
+     "officialLabel": "2026-11-03",
+     "ours": 9.09,
+     "official": 9.09,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
      "gid": 6359,
      "trueDay": "2026-11-04",
      "officialLabel": "2026-11-03",
@@ -189,42 +232,6 @@
      "official": 2650,
      "diffPct": 5.6611,
      "src": "rt_snapshot"
-    },
-    {
-     "gid": 8190,
-     "trueDay": "2026-11-04",
-     "officialLabel": "2026-11-03",
-     "ours": 9.95,
-     "official": 10.01,
-     "diffPct": 0.5994,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 8206,
-     "trueDay": "2026-11-04",
-     "officialLabel": "2026-11-03",
-     "ours": 1.56,
-     "official": 1.56,
-     "diffPct": 0,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 9540,
-     "trueDay": "2026-11-04",
-     "officialLabel": "2026-11-03",
-     "ours": 0.19,
-     "official": 0.18,
-     "diffPct": 5.5556,
-     "src": "rt_snapshot"
-    },
-    {
-     "gid": 9659,
-     "trueDay": "2026-11-04",
-     "officialLabel": "2026-11-03",
-     "ours": 63.6,
-     "official": 67.88,
-     "diffPct": 6.3052,
-     "src": "rt_snapshot"
     }
    ],
    "window": [
@@ -232,11 +239,11 @@
     "2026-11-05",
     "2026-11-06"
    ],
-   "note": "自建日线 vs 官方：3885 个 (gid×日) 可比，完全相等 66.9755%，中位差异 0%，>5% 的品 29/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：4559 个 (gid×日) 可比，完全相等 67.9754%，中位差异 0%，>5% 的品 36/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1794022785331,
-   "atText": "2026/11/7 11:39:45",
+   "at": 1794032613986,
+   "atText": "2026/11/7 14:23:33",
    "level": "warn",
    "officialLatestLabel": "2026-11-05",
    "officialLatestTrueDay": "2026-11-06",
@@ -450,8 +457,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4369%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794022779577,
-   "atText": "2026/11/7 11:39:39",
+   "at": 1794032608256,
+   "atText": "2026/11/7 14:23:28",
    "level": "warn",
    "compared": 3891,
    "gids": 204,
@@ -590,25 +597,31 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794022785516,
-   "atText": "2026/11/7 11:39:45",
+   "at": 1794032614183,
+   "atText": "2026/11/7 14:23:34",
    "level": "ok",
-   "compared": 113,
+   "compared": 116,
    "medianPct": 0,
-   "p90Pct": 0.1703,
-   "maxPct": 6.25,
-   "over5PctShare": 0.885,
-   "conflictGidCount": 1,
+   "p90Pct": 0.1269,
+   "maxPct": 2.1516,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1794022806210,
- "atText": "2026/11/7 11:40:06",
+ "at": 1794032634818,
+ "atText": "2026/11/7 14:23:54",
  "conflictGids": [
   {
    "gid": 185,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 498,
    "in": [
     "daily_verify"
    ]
@@ -672,6 +685,18 @@
    ]
   },
   {
+   "gid": 1547,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1562,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 1759,
    "in": [
     "daily_verify"
@@ -716,6 +741,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 2236,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -857,6 +888,12 @@
    ]
   },
   {
+   "gid": 17725,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 18129,
    "in": [
     "merge_junction",
@@ -864,17 +901,36 @@
    ]
   },
   {
+   "gid": 18249,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 18604,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 18659,
    "in": [
     "daily_verify"
    ]
   }
  ],
- "conflictGidCount": 41,
+ "conflictGidCount": 48,
  "conflictSamples": [
   {
    "gid": 185,
    "name": "AUG | 众枪之的 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 498,
+   "name": "CZ75 | 燕尾 (崭新出厂)",
    "in": [
     "daily_verify"
    ]
@@ -947,6 +1003,20 @@
    ]
   },
   {
+   "gid": 1547,
+   "name": "MP7 | 海之泡沫 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1562,
+   "name": "MP7 | 速递 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 1759,
    "name": "P2000 | 银质 (崭新出厂)",
    "in": [
@@ -999,28 +1069,7 @@
     "merge_junction",
     "intraday_calibration"
    ]
-  },
-  {
-   "gid": 6359,
-   "name": "Tec-9 | 蓝钛 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 7132,
-   "name": "裹手（★） | 屠夫 (久经沙场)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 8190,
-   "name": "UMP-45 | 白狼 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 41 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 48 个品差异 >5%，请确认口径"
 }
