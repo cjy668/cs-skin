@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1794217852425,
- "atText": "2026-11-09 17:50:52",
+ "at": 1794221452542,
+ "atText": "2026-11-09 18:50:52",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
   "RSS(主源)"
@@ -12,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1794217894053,
+  "checkedAt": 1794221482190,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "694277000588690211",
@@ -48,9 +48,9 @@
    "ok": false,
    "status": 0,
    "bytes": 0,
-   "ms": 41481,
+   "ms": 29547,
    "attempts": 3,
-   "error": "read ECONNRESET"
+   "error": "timeout"
   },
   {
    "name": "Steam 中文 RSS",
@@ -58,7 +58,7 @@
    "ok": true,
    "status": 200,
    "bytes": 20967,
-   "ms": 593,
+   "ms": 689,
    "attempts": 1,
    "error": null
   }
