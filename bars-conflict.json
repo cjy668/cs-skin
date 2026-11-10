@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794237647936,
-   "atText": "2026/11/9 23:20:47",
+   "at": 1794283262624,
+   "atText": "2026/11/10 12:01:02",
    "level": "warn",
    "compared": 4962,
    "gids": 1654,
@@ -304,16 +304,16 @@
    "note": "⚠️ 自建日线与 csqaq 官方有 98 个品差异 >5%（可比 4962 个，中位 0.0155%，>5% 占 2.1161%），请确认口径"
   },
   "merge_junction": {
-   "at": 1794237607886,
-   "atText": "2026/11/9 23:20:07",
+   "at": 1794283237152,
+   "atText": "2026/11/10 12:00:37",
    "level": "warn",
    "officialLatestLabel": "2026-11-07",
    "officialLatestTrueDay": "2026-11-08",
    "overlapDays": 27,
-   "appendedDays": 1,
+   "appendedDays": 2,
    "compared": 4140,
    "medianPct": 0,
-   "p90Pct": 0.0228,
+   "p90Pct": 0.026,
    "maxPct": 50,
    "over5PctShare": 0.4106,
    "conflictGidCount": 14,
@@ -519,14 +519,14 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4106%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794237599230,
-   "atText": "2026/11/9 23:19:59",
+   "at": 1794283230725,
+   "atText": "2026/11/10 12:00:30",
    "level": "warn",
    "compared": 4140,
    "gids": 204,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.0228,
+   "p90Pct": 0.026,
    "over5PctShare": 0.4106,
    "conflictGidCount": 14,
    "conflictShare": 6.8627,
@@ -659,22 +659,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794237608220,
-   "atText": "2026/11/9 23:20:08",
+   "at": 1794283237356,
+   "atText": "2026/11/10 12:00:37",
    "level": "ok",
-   "compared": 117,
+   "compared": 84,
    "medianPct": 0,
-   "p90Pct": 0.813,
-   "maxPct": 3.125,
-   "over5PctShare": 0,
-   "conflictGidCount": 0,
+   "p90Pct": 0.1011,
+   "maxPct": 7.0423,
+   "over5PctShare": 2.381,
+   "conflictGidCount": 2,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1794237647936,
- "atText": "2026/11/9 23:20:47",
+ "at": 1794283262624,
+ "atText": "2026/11/10 12:01:02",
  "conflictGids": [
   {
    "gid": 13,
