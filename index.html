@@ -6603,9 +6603,12 @@ function renderAnomalies(){
     const bk = (d.counts && d.counts.byKind) || {};
     const names = { fake_rally: '假拉升', absorb_on_drop: '跌着收货', silent_absorb: '静默吸货', absorb_then_push: '先吸后拉', listed_spike: '供给暴增', listed_drop: '供给暴减', listed_down_streak: '连续减仓', price_jump: '单日跳价', slow_uptrend: '慢牛', dead: '已死', stage_turn: '阶段转折', peer_lagging: '同箱没动', peer_against: '同箱逆势' };
     const order = ['dead', 'listed_spike', 'listed_drop', 'absorb_then_push', 'silent_absorb', 'absorb_on_drop', 'fake_rally', 'listed_down_streak', 'price_jump', 'slow_uptrend', 'stage_turn', 'peer_lagging', 'peer_against'];
+    const distN = d.distribute ? (Number(d.distribute.countHigh || 0) + Number(d.distribute.countMid || 0)) : 0;
     chips.innerHTML = order.filter(function(k){ return bk[k]; }).map(function(k){
       return '<span class="ano-chip">' + esc(names[k] || k) + ' <b>' + bk[k] + '</b></span>';
-    }).join('') + '<span class="ano-chip">合计 <b>' + ((d.counts && d.counts.total) || 0) + '</b> 条 · 可操作 <b>' + ((d.counts && d.counts.operable) || 0) + '</b> 条</span>';
+    }).join('')
+      + (distN ? '<span class="ano-chip">派发信号 <b>' + distN + '</b>（≥2 条成立）</span>' : '')
+      + '<span class="ano-chip">合计 <b>' + ((d.counts && d.counts.total) || 0) + '</b> 条 · 可操作 <b>' + ((d.counts && d.counts.operable) || 0) + '</b> 条</span>';
   }
   const top = arrOf(d.top);
   const rows = top.map(function(x){
