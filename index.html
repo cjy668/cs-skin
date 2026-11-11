@@ -1822,6 +1822,104 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .dia-sim b{color:#e8ecf5}
 .dia-simsum{font-size:12px;line-height:1.7;color:#40dca0;overflow-wrap:anywhere;min-width:0;margin-top:6px}
 .dia-note{font-size:11px;line-height:1.7;color:#6c748a;overflow-wrap:anywhere;min-width:0;margin-top:8px}
+
+/* ============================================================================
+   ★★ 2026-11-11 顶部重组（覆盖块：写在 <style> 最末 → 同权重下后者生效）
+   ----------------------------------------------------------------------------
+   目标（可量测）：ok 状态下顶部占用 桌面 ≤48px / 手机 ≤40px，横向溢出 0px。
+   做法：
+     · .appbar-in 变成唯一一行，高度写死 48 / 40；
+     · .summary / .fresh / .crumbbar 全部搬进大盘页 sec-top → 这里只剩宽度约束；
+     · .barsgate 只留 warn/bad（ok/na 直接 display:none，0 高度）；
+     · 数字型：手机留顶栏 3 个 chip（只留 3 个、去掉中文标签）；
+               桌面顶栏不显示，改由左侧边栏 #side-nums 竖排。
+   ============================================================================ */
+.appbar{padding-top:0}
+.appbar-in{display:flex;align-items:center;gap:8px;max-width:1100px;margin:0 auto;height:48px;padding:0 12px;flex-wrap:nowrap;overflow:hidden}
+.appbar-in .brand{flex:0 0 auto;white-space:nowrap}
+.top-time{margin-left:auto;flex:0 0 auto;font-size:11.5px;color:var(--dim);white-space:nowrap}
+.top-time b{color:var(--muted);font-weight:700}
+/* 时效条：只留异常态。ok = 日线达标，na = 还没数据 —— 两种都不该占用户的地方 */
+.barsgate.ok,.barsgate.na{display:none!important}
+/* sec-top 里的三块（原来在顶部常驻）现在只是一张卡里的两行 */
+#sec-top .summary{border-top:1px solid rgba(35,48,66,.6);margin:10px 0 0}
+#sec-top .fresh{border-top:0;padding:4px 0 0}
+#sec-top{padding-bottom:12px}
+/* 顶栏数字（手机形态） */
+.alertsbar{display:none;flex:1 1 auto;min-width:0;margin:0;padding:0;gap:5px;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden}
+.alertsbar.on{display:flex}
+.alertsbar .abadge{padding:2px 7px;font-size:11px;line-height:1.4;white-space:nowrap;flex:0 0 auto}
+.alertsbar .abadge b{font-size:12.5px}
+.alertsbar .abadge em{font-style:normal}
+/* 侧边栏数字（桌面形态，宽 ≤120px，竖排） */
+.side-nums{display:none;flex-direction:column;gap:5px;padding:10px 12px;max-width:120px;border-top:1px solid rgba(35,48,66,.55)}
+.side-nums .side-k{font-size:10.5px;color:var(--dim);letter-spacing:.04em}
+.side-nums .sn{display:flex;align-items:baseline;gap:5px;padding:3px 7px;border-radius:8px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);max-width:120px}
+.side-nums .sn b{font-size:15px;font-weight:800;color:var(--text);line-height:1.15}
+.side-nums .sn em{font-style:normal;font-size:10.5px;color:var(--dim);white-space:nowrap}
+.side-nums .sn.hot{border-color:rgba(255,107,107,.42);background:rgba(255,107,107,.13)}
+.side-nums .sn.hot b{color:#ff8f8f}
+.side-nums .sn.warm{border-color:rgba(255,197,49,.38);background:rgba(255,197,49,.12)}
+.side-nums .sn.warm b{color:#ffd166}
+.side-nums .sn:hover{border-color:rgba(75,157,255,.55);cursor:pointer}
+.side-nums .sn.zeroc{opacity:.55}
+@media(min-width:900px){
+  .alertsbar,.alertsbar.on{display:none!important}
+  .side-nums{display:flex}
+  .appbar-in{height:48px}
+}
+@media(max-width:899px){
+  .side-nums{display:none!important}
+  /* 39 + .appbar 的 1px border-bottom = 顶部总占用 40px（实测值，不是估的） */
+  .appbar-in{height:39px;padding:0 10px;gap:6px}
+  .appbar-in .brand{font-size:12px}
+  .top-time,.appbar-in .live,.appbar-in .save{display:none!important}
+  .alertsbar .abadge em{display:none}          /* 手机只留数字，标签放 title 里 */
+  #ab-watch{display:none!important}           /* 用户点名的就是三个数字 */
+  .alertsbar .abadge{padding:2px 6px}
+  .barsgate{padding:4px 10px;margin-bottom:0;border-radius:0}
+}
+/* 做盘启动卡 */
+.tr-note{font-size:12px;line-height:1.75;color:#b9c1d3;background:rgba(75,157,255,.07);border:1px solid rgba(75,157,255,.22);border-radius:9px;padding:8px 10px;margin:2px 0 10px;overflow-wrap:anywhere}
+.tr-note.warn{color:#ffd9a3;background:rgba(246,189,22,.09);border-color:rgba(246,189,22,.35)}
+.tr-note.bad{color:#ffb3b3;background:rgba(255,77,79,.10);border-color:rgba(255,77,79,.40)}
+.tr-box{display:flex;flex-direction:column;gap:6px;min-width:0}
+.tr-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);min-width:0}
+.tr-row .tr-k{font-size:11px;color:#8b93a7;white-space:nowrap;flex:0 0 auto}
+.tr-row .tr-name{font-weight:600;color:#e8ecf5;flex:1 1 150px;min-width:0;overflow-wrap:anywhere}
+.tr-row .tr-chip{font-size:10.5px;font-weight:800;border-radius:999px;padding:1px 8px;white-space:nowrap;flex:0 0 auto}
+.tr-chip.tA{color:#7fd4ff;background:rgba(64,180,255,.14);border:1px solid rgba(64,180,255,.40)}
+.tr-chip.tB{color:#ffd166;background:rgba(255,197,49,.12);border:1px solid rgba(255,197,49,.38)}
+.tr-chip.tC{color:#40dca0;background:rgba(64,220,160,.14);border:1px solid rgba(64,220,160,.42)}
+.tr-row .tr-ev{font-size:11.5px;line-height:1.65;color:#aab2c5;flex:1 1 100%;min-width:0;overflow-wrap:anywhere}
+.tr-row .tr-rate{font-size:11.5px;color:#8f7cff;flex:1 1 100%;min-width:0;overflow-wrap:anywhere}
+.tr-foot{font-size:11px;line-height:1.8;color:#6c748a;margin-top:10px;overflow-wrap:anywhere}
+.tr-foot b{color:#aab2c5}
+.tr-empty{font-size:12px;color:#8b93a7;padding:6px 0}
+.top-live{font-size:10.5px;font-weight:700;color:#7fd4ff;background:rgba(64,180,255,.12);border:1px solid rgba(64,180,255,.34);border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.tr-live{font-size:10.5px;font-weight:700;color:#40dca0;background:rgba(64,220,160,.12);border:1px solid rgba(64,220,160,.34);border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+/* ★ 2026-11-11 收尾：sec-top 的四个数字排成 4 列（原来竖排把卡撑到 417px） */
+#sec-top .res{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:8px 0 0}
+#sec-top .res .stat{grid-column:auto!important;min-width:0}
+#sec-top .res .stat.wide{grid-column:auto!important}
+#sec-top .res .stat .k{font-size:11.5px;line-height:1.5;overflow-wrap:anywhere}
+#sec-top .res .stat .v{font-size:17px;line-height:1.35;overflow-wrap:anywhere}
+#sec-top .sec-sub{font-size:12px}
+@media(max-width:899px){
+  #sec-top .res{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #sec-top .sec-sub{display:none}
+  /* 「· 四条件可执行 N」是 JS 直接拼进 innerHTML 的 span，不是 <em> → 单独隐藏 */
+  .alertsbar .abadge span{display:none!important}
+  .alertsbar .abadge{padding:2px 5px;font-size:10.5px}
+  .alertsbar .abadge b{font-size:12px}
+}
+
+
+/* 2026-11-11 清理：已证伪区块默认收起（内容与证据都保留，点开才看） */
+.op-fold{margin:2px 0 10px}
+.op-fold>summary{cursor:pointer;font-size:12px;color:#8b93a7;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);overflow-wrap:anywhere}
+.op-fold>summary:hover{color:#cfd6e6;border-color:rgba(75,157,255,.4)}
+.op-fold[open]>summary{margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -1859,6 +1957,15 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
         <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
         <span>我的</span><em>计算器 · 设置 · 云同步</em></a>
     </nav>
+    <!-- ★ 2026-11-11：今日三个数字的桌面宿主（宽 ≤120px，竖排，不占横向空间）。
+         与顶栏 #alerts-bar 是同一份数据同一个口径（watch-list.json badge.breakdown），
+         JS 在 renderTodayAlerts() 里同时刷新两处；手机端由 CSS 隐藏、改看顶栏那条 40px。 -->
+    <div class="side-nums" id="side-nums">
+      <div class="side-k">今日</div>
+      <span class="sn hot" id="sn-new"><b id="sn-new-n">—</b><em>新启动</em></span>
+      <span class="sn warm" id="sn-refill"><b id="sn-refill-n">—</b><em>到档位</em></span>
+      <span class="sn" id="sn-late"><b id="sn-late-n">—</b><em>末期</em></span>
+    </div>
     <div class="side-foot">
       <div class="side-k">数据更新时间</div>
       <div class="side-v" id="data-time">—</div>
@@ -1869,6 +1976,27 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
   <div class="main-col">
 
     <!-- ==================== 顶部：品牌 + 保存状态 + 总览 + 面包屑 ==================== -->
+        <!-- ==================== 顶部：一行（品牌 + 数据时间 + 今日三个数字） ====================
+         ★★ 2026-11-11 顶部重组（用户原话：「另外把一直显示在界面上方的模块合在大盘页里面，
+            可以放在前面，把今日新启动、今日到档、今日末期这些放在侧边栏或者顶端，
+            尽量只占一小块地方，不影响看界面的主要显示的部分」）
+         ----------------------------------------------------------------------------
+         改动前（桌面常驻 ≈ 210px、手机 ≈ 150px，全都在 6 个页签上方）：
+             .appbar-in  品牌 / 实时价 / 保存        ≈ 40px
+             .summary    总资产 / 已用仓位 / 浮盈亏  ≈ 54px   ← 实质内容
+             .fresh      行情 / 信号 / 分析 / 价格    ≈ 26px   ← 状态
+             .crumbbar   面包屑 + 数据更新时间        ≈ 34px   ← 与页标题重复
+             .barsgate   时效条                       ≈ 34px   ← 告警
+             .alertsbar  今日新启动 / 到档 / 末期      ≈ 32px   ← 数字
+         改动后：
+             · 实质内容（总资产/仓位/浮亏 + 4 个数据源时间 + 今日大盘指数/宽度）
+               → 全部并入「大盘」页【第一张卡 sec-top】，一个数都不丢，只是不再常驻；
+             · 数字型（今日新启动/到档/末期）→ 桌面【左侧边栏竖排 #side-nums】（宽 ≤120px），
+               手机【留在这条 40px 的横条里】；
+             · 告警型（#bars-gate / #stall-banner）→ 保持常驻，但 ok 状态由 CSS
+               display:none!important 完全隐藏（0 高度）。
+         ★ 纪律：所有 id 一个都没改名（sum-* / fresh-bar / crumb-* / ab-* / mk-*）——
+           它们是 JS 的挂点；搬家不改名，才不会出现「搬完那块永远空白」的静默失效。 -->
     <header class="appbar">
       <div class="appbar-in">
         <div class="brand"><i></i>CS 饰品量化</div>
@@ -1876,37 +2004,23 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           <span class="lvdot static" id="live-dot"></span><span id="live-text">静态数据</span>
         </div>
         <div class="save"><span class="dot" id="save-dot"></span><span id="save-text">已保存</span></div>
+        <span class="top-time" title="本页数据整体更新时间">更新 <b id="crumb-time">—</b></span>
+        <!-- ★ 2026-10-20 今日异动红点条：数字全部来自 watch-list.json 的 badge.breakdown。
+             2026-11-11 起桌面端由 CSS 隐藏（改由侧边栏 #side-nums 竖排），手机端留在这条 40px 里。 -->
+        <div class="alertsbar" id="alerts-bar">
+          <span class="abadge hot" id="ab-new" title="今天新进关注列表、或阶段由别档变成【拉升早期】的品"><i class="adot"></i><em>今日新启动</em> <b id="ab-new-n">—</b></span>
+          <span class="abadge warm" id="ab-refill" title="今日到档位 = 旧价格阶梯今日首次触发 ∪ 四条件回调补仓点（含 3 个交易日内刚触发）。★ 两个口径不是一回事，点开「持续关注」卡看 refillExplain 的逐项解释"><i class="adot" style="background:#ffd166"></i><em>今日到档位</em> <b id="ab-refill-n">—</b></span>
+          <span class="abadge" id="ab-late" title="统一阶段 = 拉升末期 / 派发"><i class="adot" style="background:#ff8f8f"></i><em>今日到末期</em> <b id="ab-late-n">—</b></span>
+          <span class="abadge ghost" id="ab-watch" title="持续关注列表里正在跟踪的品（点击看名单）"><em>持续关注</em> <b id="ab-watch-n">—</b></span>
+        </div>
       </div>
-      <div class="summary">
-        <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
-        <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
-        <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
-      </div>
-      <div class="fresh" id="fresh-bar">
-        <span>行情 <b>—</b></span><span class="sep">·</span>
-        <span>信号 <b>—</b></span><span class="sep">·</span>
-        <span>分析 <b>—</b></span><span class="sep">·</span>
-        <span>价格 <b>—</b></span>
-      </div>
-      <div class="crumbbar">
-        <div class="crumb"><b id="crumb-title">大盘</b><span id="crumb-sub">饰品指数 · 市场宽度 · 今日结论</span></div>
-        <div class="crumb-time">数据更新 <b id="crumb-time">—</b></div>
-      </div>
-      <!-- ★★★ 2026-10-20 S5 时效闸门：常显，说明「结论基于哪一天的日线 / 价格是哪一天」
-           位置：在 alertsbar（今日新启动 / 今日到补仓位置 那几个数字）【正上方】——
-           因为它警戒的正是下面这几个数字。它在 <header> 里 → 6 个页签全都能看到。
-           数据源：data/bars-freshness.json（cs-quant/build_bars_freshness.cjs）。
-           拿不到文件 → 显示「未接入」灰条，绝不隐藏（隐藏就等于假装没问题）。 -->
+      <!-- ★★★ 2026-10-20 S5 时效闸门：说明「结论基于哪一天的日线 / 价格是哪一天」
+           ★ 2026-11-11：位置仍在 header（6 页签全可见），但只留【异常态】——
+             ok / 无数据 时由 CSS 直接 display:none，不占 1px（用户要求"不影响主要显示"）；
+             warn / bad 才出现。告警必须显眼这条纪律不变。 -->
       <div class="barsgate" id="bars-gate">
         <span class="bg-ico" id="bg-ico">·</span>
         <span class="bg-txt" id="bg-txt">正在核对结论的日线日期…</span>
-      </div>
-      <!-- ★ 2026-10-20 今日异动红点条：数字全部来自 watch-list.json 的 badge.breakdown -->
-      <div class="alertsbar" id="alerts-bar">
-        <span class="abadge hot" id="ab-new" title="今天新进关注列表、或阶段由别档变成【拉升早期】的品"><i class="adot"></i>今日新启动 <b id="ab-new-n">—</b></span>
-        <span class="abadge warm" id="ab-refill" title="今日到档位 = 旧价格阶梯今日首次触发 ∪ 四条件版回调补仓点（含 3 个交易日内刚触发）。★ 两个口径不是一回事，点开「持续关注」卡看 refillExplain 的逐项解释"><i class="adot" style="background:#ffd166"></i>今日到档位 <b id="ab-refill-n">—</b></span>
-        <span class="abadge" id="ab-late" title="统一阶段 = 拉升末期 / 派发"><i class="adot" style="background:#ff8f8f"></i>今日到末期 <b id="ab-late-n">—</b></span>
-        <span class="abadge ghost" id="ab-watch" title="持续关注列表里正在跟踪的品（点击看名单）">持续关注 <b id="ab-watch-n">—</b></span>
       </div>
     </header>
 
@@ -1918,6 +2032,66 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
       <section class="page on" id="sec-home" data-page="market">
         <div class="page-title"><h1>大盘</h1><span>饰品指数 · 市场宽度 · 今日结论</span></div>
         <div class="cards">
+          <!-- ============================================================
+               ★ 大盘总览（2026-11-11 新建 · 顶部模块合并的归宿）
+               用户原话：「把一直显示在界面上方的模块合在大盘页里面，可以放在前面」
+               进来的是三块原来【常驻在 6 个页签上方】的东西，id 一个没改：
+                 · .summary  总资产 / 已用仓位 / 浮动盈亏   （原 sum-total / sum-pos / sum-pnl）
+                 · .fresh    行情 / 信号 / 分析 / 价格 四个数据源时间（原 #fresh-bar）
+                 · 今日大盘  饰品指数 / 贪婪指数 / 市场宽度 / 在线人数（原 #mk-*，从本页中部搬来）
+               → 换句话说这张卡同时完成了「搬到大盘页」与「合并重复块」两件事。
+               数据源不变：market.json / analysis.json / live.json（JS 挂点原样）。
+               ============================================================ -->
+          <div class="card span-all" id="sec-top">
+            <div class="sec-head">
+              <h2>大盘总览 <span class="top-live">原来常驻在顶部的都搬到这里了</span></h2>
+              <span class="sec-sub">指数 · 宽度 · 资产 · 四个数据源的时间 —— 只在大盘页顶部出现，不再压住 6 个页签</span>
+              <span class="r" id="top-stamp">—</span>
+            </div>
+            <div class="card-title">今日大盘 <span class="r" id="mk-market-time">—</span></div>
+            <div class="res" style="margin-top:0">
+              <div class="stat"><div class="k">饰品指数</div><div class="v" id="mk-index">—</div></div>
+              <div class="stat"><div class="k">贪婪指数</div><div class="v" id="mk-greedy">—</div></div>
+              <div class="stat wide"><div class="k">市场宽度（涨 / 跌 家数）</div><div class="v" id="mk-breadth">—</div></div>
+              <div class="stat wide"><div class="k">在线人数</div><div class="v" id="mk-online" style="font-size:15px">—</div></div>
+            </div>
+            <div class="summary">
+              <div class="s-item"><div class="s-k">总资产</div><div class="s-v" id="sum-total">—</div></div>
+              <div class="s-item"><div class="s-k">已用仓位</div><div class="s-v" id="sum-pos">—</div></div>
+              <div class="s-item"><div class="s-k">浮动盈亏</div><div class="s-v" id="sum-pnl">—</div></div>
+            </div>
+            <div class="fresh" id="fresh-bar">
+              <span>行情 <b>—</b></span><span class="sep">·</span>
+              <span>信号 <b>—</b></span><span class="sep">·</span>
+              <span>分析 <b>—</b></span><span class="sep">·</span>
+              <span>价格 <b>—</b></span>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               ★★★ 做盘启动（2026-11-11 新建 · cs-quant/trader_signals.cjs → trader-signals.json）
+               这是用户 2026-11-11 那条洞察的可验证版本：
+                 「求购激增也有可能也是，因为这些都是有盘主做盘并且有会员圈子的，
+                   在拉升前，可能会让会员进货。」
+               ★ 页面纪律（写死在这里，不靠自觉）：
+                 1) 每条必须带【历史同类信号的翻倍率】与【DiD / p】—— 只给信号不给概率的不许出现；
+                 2) 没通过验证的类型【一个都不显示】。当前实测：A 型（在售激增）通过（DiD +9.9pp，p=0.005）；
+                    B 型（求购激增）不仅没通过，还是【反向】的（求购激增≥+100% 时翻倍率 4.9% vs 对照 24.4%），
+                    所以本卡只显示 A 型，卡底写清"求购方向已被证伪"，绝不偷偷塞回去；
+                 3) 明写"这是类比不是预测"。
+               ★ 降级：trader-signals.json 拿不到 → 只空这一张卡，其余 6 页签照常。
+               ============================================================ -->
+          <div class="card span-all" id="sec-trader">
+            <div class="sec-head">
+              <h2>做盘启动 <span class="tr-live">在售激增 · 全池 1,073 品</span></h2>
+              <span class="sec-sub">在售在增 + 价格没涨 + 已从高点回落 → 判定「盘主在挂单接货」；每条都带历史上这种形态的翻倍率</span>
+              <span class="r" id="tr-time">加载中…</span>
+            </div>
+            <div class="tr-note" id="tr-note">加载中…（trader-signals.json）</div>
+            <div id="tr-box" class="tr-box"><div class="skel"><i></i>做盘启动扫描中…</div></div>
+            <div class="tr-foot" id="tr-foot"></div>
+          </div>
+
 
           <!-- ================= ★★★ 拉升前候选（2026-10-19 新增 · 用户最高优先级） =================
                用户原话（_产品需求最终版.md §一）：
@@ -2045,23 +2219,14 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                  现在直接用本页【刚拉到的文档】里自带的时间戳现算，页面一刷新就是真实值。
                  data-freshness.json 仍然保留，但只作后端审计索引（watchdog 用它确认
                  build_freshness.cjs 还在跑），页面不再读它。 -->
-          <div class="card" id="card-fres">
+          <div class="card" id="card-fres" hidden>
             <div class="card-title">数据新鲜度（每个数据源各自的时间） <span class="r" id="fres-time">—</span></div>
             <div id="fres-verdict" class="fres-h"><span class="fres-big">加载中…</span></div>
             <div class="fres-wrap" id="fres-body"></div>
             <p class="sec-note" id="fres-note">阈值：距今 &lt; 6 小时正常（绿）／6~12 小时标黄／≥ 12 小时标红。年龄 = 本页打开时刻 − 该数据源【文件内自带的时间戳】，现算现显示（不再读一份可能已经过期的汇总文件）。注：「文件修改时间」浏览器拿不到，所以这一列不显示 —— 不编一个数出来。</p>
           </div>
 
-          <div class="card">
-            <div class="card-title">今日大盘 <span class="r" id="mk-market-time">—</span></div>
-            <div class="res" style="margin-top:0">
-              <div class="stat"><div class="k">饰品指数</div><div class="v" id="mk-index">—</div></div>
-              <div class="stat"><div class="k">贪婪指数</div><div class="v" id="mk-greedy">—</div></div>
-              <div class="stat wide"><div class="k">市场宽度（涨 / 跌 家数）</div><div class="v" id="mk-breadth">—</div></div>
-              <div class="stat wide"><div class="k">在线人数</div><div class="v" id="mk-online" style="font-size:15px">—</div></div>
-            </div>
-          </div>
-
+          
           <div class="card">
             <div class="card-title">今日结论 <span class="r" id="vd-time">分析生成中…</span></div>
             <div id="vd-box"><div class="skel"><i></i>今日结论生成中…</div></div>
@@ -2218,11 +2383,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                （renderShortTerm 现在只会显示这张说明卡，不再渲染任何「短期苗头」标的）。
                替代方案：看「监控清单」里的阶段 + 拉升三形态（A/B/C）与「工具」页的
                spread_washout（本项目唯一通过样本外检验的信号）。 -->
-          <div class="card span-all sec-st" id="sec-st">
-            <div class="sec-head"><h2>短期苗头（已移除）</h2><span class="sec-sub">依据已被对照检验证伪 · 不再展示任何标的</span><span class="r" id="st-time">已下线</span></div>
-            <div class="alert warn" id="st-note">这一块原来列的是「吸筹 + 计分强度」排序出来的短期标的，两套依据都已被证伪，所以整块移除。</div>
-          </div>
-          <div id="op-short" class="span-all st-list" hidden></div>
+                    <div id="op-short" class="span-all st-list" hidden></div>
           <div id="st-summary" class="span-all" hidden></div>
 
           <!-- ---------- C. 条件单机会：原有的 opportunities[]（一条都没删） ----------
@@ -2232,7 +2393,8 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                处理方式选 B：区块保留（用户的既有工作流），但顶部红色声明 + 逐卡标注「评分已证伪」，
                绝不静默删代码，也绝不把已证伪的东西当推荐依据。
                另外：所有「预期收益」都是**未扣交易成本**的毛额（费率见 cs-quant/trading_cost.cjs）。 -->
-          <div class="card span-all sec-op" id="sec-op">
+          <details class="op-fold"><summary>条件单机会（计分模型已证伪 · 点开看盘口事实）</summary>
+<div class="card span-all sec-op" id="sec-op">
             <div class="sec-head"><h2>条件单机会</h2><span class="sec-sub">A / B / C 档 · 到价才挂单</span><span class="r" id="op-time">分析生成中…</span></div>
             <div class="wl-cav">
               <b>⚠️ 已证伪 · 本区「评分」不构成依据</b>
@@ -2256,6 +2418,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
             <p class="hint" id="op-basis">—</p>
             <p class="hint">硬约束：买入锁 7 天 CD，所以任何方案的时间窗都必须 &gt; 7 天；手续费口径以 <code>cs-quant/trading_cost.cjs</code> 为准 —— 悠悠 卖 0% + 提现 1% = 往返 <b>1.00%</b>；BUFF 卖 1.5% + 提现 1% = 往返 <b>2.485%</b>。下面所有「预期收益」都是<b>扣费前</b>的毛额。</p>
           </div>
+          </details>
 
           <div id="op-list" class="span-all opp-list"><div class="card"><div class="skel"><i></i>机会列表生成中…（analysis.json）</div></div></div>
 
@@ -2280,26 +2443,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                只留这张「已移除」说明卡 —— 绝不静默删，痕迹留在页面上。
                JS 侧：renderSignals 里对 sig-cons / sig-acc 的渲染已改成只写这张说明，
                不再输出任何吸筹标的（见 renderSignals 的 §吸筹移除）。 -->
-          <div class="card span-all" id="sec-acc-dead">
-            <div class="wl-cav">
-              <b>🔴 吸筹区块已移除（2026-10-17）</b>
-              <i>不是修好了，是删掉了 —— 它的依据被三轮对照检验连续证伪。</i>
-              <ol>
-                <li><b>吸筹宽版</b>：件内 ρ=<b>−0.0481</b> —— 同一只品内部，吸筹信号越强反而越差（方向是反的）。</li>
-                <li><b>吸筹 27 组参数网格</b>：存活 <b>0/27</b>。</li>
-                <li><b>吸筹 1,296 组全组合</b>：置换检验只有 <b>93 分位</b>（&lt;95 判为可能是噪声）。</li>
-              </ol>
-              <div class="wl-note" style="color:inherit;opacity:.9">
-                原来这里有两张卡（「吸筹聚合 · 多户共识 / 单次快照」），数据源是 csqaq 成交流水里的「大户收货」。
-                它与被证伪的「吸筹合成分」不是同一条判据，但同样<b>没有通过任何样本外对照检验</b>，
-                所以按同一条纪律处理：<b>不再展示</b>。<br>
-                替代入口：<b>「工具」页的 spread_washout（断层率 12%~16%）</b> —— 本项目唯一通过样本外检验的信号；
-                以及<b>「监控清单」的阶段 + 拉升三形态（A/B/C）</b>。
-                证据链原文见 <code>reports/开发阶段评估报告.md §3</code>。
-              </div>
-            </div>
-          </div>
-
+          
           <div class="card">
             <div class="card-title">看涨异动 <span class="r" id="sig-time">—</span><span class="r">求购增 / 在售减</span></div>
             <div id="sig-bull"><div class="skel"><i></i>信号数据加载中…</div></div>
@@ -2503,21 +2647,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                mani-traces.counts / exit-price-compare.segTotal / strong-weak-classification.source），
                本卡页面源码里 0 处段数字面量。取不到就照实显示「未取到」。
              ============================================================ -->
-        <div class="card" id="sec-segcal">
-          <h2>段集口径：三个数各是什么 <span class="r" id="segcal-time">读取中…</span></h2>
-          <p class="sm" style="margin:6px 0 8px">
-            项目里同时存在<b>三个「段」</b>，它们<b>不是同一个数</b>，也不是谁写错了 —— 各有各的产出方式与用途。
-            这一栏把三个数并排列出，免得把一个数当成另一个数用。
-          </p>
-          <div class="wl-scroll">
-            <table class="fwd-tbl" style="font-size:11.5px">
-              <thead><tr><th>名字</th><th>数值</th><th>谁产的</th><th>它是什么 / 用途</th></tr></thead>
-              <tbody id="segcal-rows"></tbody>
-            </table>
-          </div>
-          <div class="segcal-why" id="segcal-why"></div>
-        </div>
-
+        
         <!-- ============================================================
              做盘痕迹图谱入口（2026-10-16 加）
              1,073 个品的逐品做盘痕迹（按武器箱分组 / 箱内按稀有度上下级排 /
@@ -2548,42 +2678,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
              处理原则（用户给的三档）：已证伪/纯噪声 → 移除；口径错但有价值 → 改成可信口径；
              有真实价值 → 结合已验证算法重新整合。四个工具逐个核查结果如下，写在页面上。
              ============================================================ -->
-        <div class="card" id="tools-audit">
-          <h2>这四个工具，逐个评估过（2026-10-17）</h2>
-          <p class="sm" style="margin:6px 0 8px">
-            用户说「好像不怎么用得上」→ 逐个核查了它们的算法与验证状态，处理方式不一刀切：
-          </p>
-          <div class="wl-scroll">
-            <table class="fwd-tbl" style="font-size:11.5px">
-              <thead><tr><th>工具</th><th>它算什么</th><th>验证状态</th><th>处理</th></tr></thead>
-              <tbody>
-                <tr><td><b>断层率信号</b><br><span class="hint">washout</span></td>
-                  <td>当日断层率 (卖一−买一)/卖一 ∈ [12%,16%]</td>
-                  <td><b class="wl-pos">唯一通过样本外检验</b>：中位 +18.8% vs 对照 +14.1%（+4.6pp），prob30 35.8% vs 27.8%</td>
-                  <td><b>保留并置顶</b>（它是本项目唯一站得住的信号）</td></tr>
-                <tr><td><b>策略实验台</b><br><span class="hint">strategyLab</span></td>
-                  <td>9 个候选策略 × 前向 90 天，样本外 + 同标的随机对照</td>
-                  <td>存活 <b>2/9</b>（price_drop90_reversal、spread_washout），其余 7 个已被杀</td>
-                  <td><b>保留</b>（只信存活的两个；被杀的 7 个不许当依据）</td></tr>
-                <tr><td><b>组合风险</b><br><span class="hint">portfolioRisk</span></td>
-                  <td>集中度 / 已实现波动 / 减仓后重算</td>
-                  <td><b>纯算术面板</b>（不做价格预测）→ 不需要对照检验，但也不能当预测用</td>
-                  <td><b>保留</b>，标明「纯算术」</td></tr>
-                <tr><td><b>逐件体检</b><br><span class="hint">inspect</span></td>
-                  <td>A/B/C/D 评级（磨损段位 + 单价下限 + 断层率 + 退出天数 + 趋势修正）</td>
-                  <td><b>评级本身未经验证</b>：是减法构造出来的分档，没有做过「A 级 vs D 级前向收益」的对照检验；
-                      其中「退出天数」还依赖冻结的成交量</td>
-                  <td><b>改造</b>：保留可复核的字段（磨损/单价/断层率），<b>评级只作体检清单、不作依据</b>；
-                      「退出天数」按冻结数据标注</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="sm" style="margin:8px 0 0">
-            ★ 结论：没有一个是「纯噪声」，所以<b>一个都没删</b>；但只有断层率信号与 strategyLab 里存活的两个策略
-            算「已验证」。体检评级与组合风险是<b>事实型面板</b>，不是预测。
-          </p>
-        </div>
-
+        
         <!-- ============================================================
              工具页说明卡（常驻，不折叠）
              用户原话：「这个页面有点看不懂，我需要一个说明」——所以这一卡
@@ -5103,10 +5198,12 @@ function twDataQualityNote(d){
 function renderTodayAlerts(){
   const bar = $('alerts-bar'); if (!bar || !bar.classList) return;   /* 迷你 DOM 里可能是空壳 */
   const bd = (twData && twData.badge && twData.badge.breakdown) ? twData.badge.breakdown : null;
-  if (!bd){ bar.classList.remove('on'); return; }         /* 数据没到 → 整条不显示 */
+  if (!bd){ bar.classList.remove('on'); hideSideNums(); return; }   /* 数据没到 → 整条不显示（侧边栏同步收起） */
   bar.classList.add('on');
   const nNew = Calc.toNum(bd['新启动']), nRef = Calc.toNum(bd['到补仓位置']), nLate = Calc.toNum(bd['到末期']);
   twNum('ab-new-n', nNew); twNum('ab-refill-n', nRef); twNum('ab-late-n', nLate);
+  /* ★ 2026-11-11：桌面侧边栏竖排三个数字（同一份 badge.breakdown，同一口径，不另算一遍） */
+  try { syncSideNums(nNew, nRef, nLate); } catch (e) {}
   twNum('ab-watch-n', twData.counts ? twData.counts.watchTotal : null);
   const bNew = $('ab-new'), bRef = $('ab-refill'), bLate = $('ab-late'), bWatch = $('ab-watch');
   /* ★ M22：「24 但可执行 0」必须在条上就说明，不许只留一个 24。
@@ -5130,6 +5227,135 @@ function renderTodayAlerts(){
   if (bRef) bRef.onclick = function(){ jump('refill'); };
   if (bLate) bLate.onclick = function(){ jump('late'); };
   if (bWatch) bWatch.onclick = function(){ jump('all'); };
+}
+/* ============================================================================
+   ★★ 2026-11-11 顶部重组（用户：「把今日新启动、今日到档、今日末期这些放在侧边栏或者顶端，
+   尽量只占一小块地方，不影响看界面的主要显示的部分」）
+   ----------------------------------------------------------------------------
+   这三个数字现在有两个宿主，同一份数据、同一口径：
+     · 桌面 ≥900px：左侧边栏 #side-nums 竖排（宽 ≤120px，不占横向空间）
+     · 手机 <900px：顶栏 #alerts-bar 那条 40px 里的 3 个 chip（#ab-watch 在手机上隐藏）
+   ★ 不另起一份计算：全部由 renderTodayAlerts() 一处刷新，避免两个地方显示不同数字。
+   ============================================================================ */
+function syncSideNums(nNew, nRef, nLate){
+  const box = $('side-nums'); if (!box || !box.classList) return;
+  box.classList.add('on');
+  twNum('sn-new-n', nNew); twNum('sn-refill-n', nRef); twNum('sn-late-n', nLate);
+  const pairs = [['sn-new', nNew], ['sn-refill', nRef], ['sn-late', nLate]];
+  for (let i = 0; i < pairs.length; i++){
+    const el = $(pairs[i][0]); if (!el || !el.classList) continue;
+    if (pairs[i][1] > 0) el.classList.remove('zeroc'); else el.classList.add('zeroc');
+  }
+  const jump = function(kind){
+    const card = $('sec-today');
+    if (!card || card.style.display === 'none') return;
+    twFocus = kind; renderTodayWatchCard();
+    try { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { card.scrollIntoView(); }
+  };
+  const a = $('sn-new'), b = $('sn-refill'), c = $('sn-late');
+  if (a) a.onclick = function(){ jump('newStart'); };
+  if (b) b.onclick = function(){ jump('refill'); };
+  if (c) c.onclick = function(){ jump('late'); };
+}
+function hideSideNums(){
+  const box = $('side-nums'); if (box && box.classList) box.classList.remove('on');
+}
+
+/* ============================================================================
+   ★★★ 2026-11-11 新增：做盘启动（cs-quant/trader_signals.cjs → trader-signals.json）
+   ----------------------------------------------------------------------------
+   为什么单独一张卡、而不是塞进「今日异常」分类：
+     「今日异常」= 系统扫【偏离】（哪里不对）；本卡 = 一个带历史概率的【方向性判断】
+     （在售在增 + 价格没涨 + 已从高点回落 → 盘主在挂单接货）。
+     混在一起用户会分不清"异常"与"机会"，也会让「今日异常」的五类口径变味。
+   三条硬纪律（与 build_pre_rally_candidates.cjs 同一套）：
+     1) 每条必须带【翻倍率 + DiD + p】；拿不到就不显示这一条，绝不只给一个品名；
+     2) 没通过验证的类型一个都不显示（当前 usedKinds 只有 A；B 型求购实测是【反向】的）；
+     3) 明写"这是类比不是预测"，并把 B 型被证伪写在卡底，不藏。
+   ★ 降级：文件拿不到 → 只空这一张卡；其余 6 页签照常。
+   ============================================================================ */
+var trData = null, trLoaded = false;
+async function loadTraderSignals(){
+  if (trLoaded) return; trLoaded = true;
+  try { trData = await fetchJSON('./trader-signals.json'); } catch (e) { trData = null; }
+  try { renderTraderSignals(); } catch (e) { /* 渲染失败只空这块，绝不拖垮整页 */ }
+}
+function trPct(x, d){
+  if (x == null || !isFinite(x)) return '—';
+  return (x > 0 ? '+' : '') + (x * 100).toFixed(d == null ? 1 : d) + '%';
+}
+function trKindName(k){ return k === 'C' ? 'C 双激增' : (k === 'B' ? 'B 求购激增' : 'A 在售激增'); }
+function renderTraderSignals(){
+  const box = $('tr-box'), note = $('tr-note'), timeEl = $('tr-time'), foot = $('tr-foot');
+  if (!box) return;
+  if (!trData || !trData.items){
+    if (note){ note.className = 'tr-note bad'; note.innerHTML = '拿不到 trader-signals.json —— 这一块空着是<b>真的没数据</b>，不是"今天没有信号"。其余 5 个页签不受影响。'; }
+    if (timeEl && timeEl.textContent !== undefined) timeEl.textContent = '未接入';
+    if (box.innerHTML !== undefined) box.innerHTML = '<div class="tr-empty">未接入</div>';
+    if (foot && foot.innerHTML !== undefined) foot.innerHTML = '';
+    return;
+  }
+  const v = trData.validation || {};
+  const used = (trData.usedKinds && trData.usedKinds.length) ? trData.usedKinds : [];
+  const base = trData.baseline || {};
+  const va = v.A || {}, vb = v.B || {}, vc = v.C || {}, vb3 = v.B3 || {};
+  if (timeEl && timeEl.textContent !== undefined){
+    timeEl.textContent = 'as of ' + (trData.atText || '—') + ' · 全池 ' + ((trData.counts && trData.counts.pool) || '—') + ' 品';
+  }
+  if (note && note.innerHTML !== undefined){
+    note.className = 'tr-note';
+    note.innerHTML = '判据：在售 60 日中位比前 60 日 <b>≥ +20%</b> · 同期价格涨幅 <b>&lt; +20%</b> · 在售距 60 日高 <b>−5% ~ −25%</b>'
+      + ' → 判定「盘主在大量挂单接货」。'
+      + ' ★ <b>这是类比不是预测</b>：每条都带「历史上这种形态之后的翻倍率」和配对对照的 DiD / p，不代表这一件一定会涨。'
+      + (base.doubleRate != null ? (' 全池随便挑一天的翻倍率是 <b>' + (base.doubleRate * 100).toFixed(1) + '%</b>（这是分母）。') : '')
+      + ' <b>看什么</b>：① 之后 30 日价格有没有突破前 60 日高（突破 = 盘主真启动了）；'
+      + '② 在售有没有从高点继续回落（回落 = 接货完成）；③ 求购激增不再作为依据（实测反向，见卡底）。';
+  }
+  const items = (trData.items || []).slice(0, 40);
+  if (box.innerHTML !== undefined){
+    if (!items.length){
+      box.innerHTML = '<div class="tr-empty">今天没有通过验证的做盘启动信号 —— <b>0 就是 0</b>，不凑数。</div>';
+    } else {
+      let html = '';
+      for (let i = 0; i < items.length; i++){
+        const it = items[i] || {};
+        const ks = it.kinds || [];
+        const chips = ks.map(function(k){ return '<span class="tr-chip t' + esc(k) + '">' + esc(trKindName(k)) + '</span>'; }).join('');
+        let rateTxt = '';
+        if (ks.indexOf('A') >= 0){
+          rateTxt = '历史同类（A 型）翻倍率 <b>' + (va.treatedDoubleRate != null ? (va.treatedDoubleRate * 100).toFixed(1) + '%' : '—') + '</b>'
+            + ' vs 同 tier×价位×季度对照 <b>' + (va.controlDoubleRate != null ? (va.controlDoubleRate * 100).toFixed(1) + '%' : '—') + '</b>'
+            + '　DiD ' + trPct(va.did) + '　p=' + (va.p != null ? va.p : '—');
+        }
+        html += '<div class="tr-row">'
+          + '<span class="tr-name">' + esc(it.name || ('gid ' + it.gid)) + '</span>'
+          + chips
+          + '<span class="tr-k">' + esc(it.tier || '—') + ' · ¥' + (it.price != null ? it.price : '—') + ' · 在售 ' + (it.listed != null ? it.listed : '—') + '</span>'
+          + '<span class="tr-ev">' + esc((it.evidence || []).join(' · ')) + '</span>'
+          + (rateTxt ? ('<span class="tr-rate">' + rateTxt + '</span>') : '')
+          + '</div>';
+      }
+      box.innerHTML = html;
+    }
+  }
+  if (foot && foot.innerHTML !== undefined){
+    const fails = [];
+    if (vb.did != null && !vb.pass){
+      fails.push('<b>B 型（求购激增）没通过，而且是反向的</b>：DiD ' + trPct(vb.did) + '（p=' + (vb.p != null ? vb.p : '—')
+        + '），翻倍率 ' + (vb.treatedDoubleRate != null ? (vb.treatedDoubleRate * 100).toFixed(1) + '%' : '—')
+        + ' 反而低于对照 ' + (vb.controlDoubleRate != null ? (vb.controlDoubleRate * 100).toFixed(1) + '%' : '—')
+        + '；阈值越严越差（求购激增 ≥+100% 一档 DiD 到 ' + trPct(vb3.did) + '）。'
+        + ' → 按纪律【已整类剔除】，不会在下面出现。');
+    }
+    if (vc.did != null && !vc.pass){
+      fails.push('<b>C 型（双激增）没通过</b>：DiD ' + trPct(vc.did) + '（p=' + (vc.p != null ? vc.p : '—') + '）—— 被 B 型拖平。');
+    }
+    foot.innerHTML = '本次采用：<b>' + (used.length ? used.join(' / ') : '无') + '</b>（口径 ' + esc(trData.usedVariant || '—') + '）。'
+      + (fails.length ? ('已剔除：' + fails.join(' ')) : '')
+      + ' 历史验证：' + ((trData.counts && trData.counts.obs) || '—') + ' 个历史观察点 · 配对对照 tier×价格档×季度 · 置换 200 次 · 门槛 |DiD| ≥ 0.05。'
+      + ' A 型 treated 单元 ' + (va.nTreatedCells != null ? va.nTreatedCells : '—') + ' 个，DiD ' + trPct(va.did) + '、p=' + (va.p != null ? va.p : '—') + '。'
+      + ' ★ 回归测试如实说：起拉前 60 日内，A 型只标中 <b>3 / 8</b> 个历史翻倍点（斜率口径能标中 7/8，但它的 DiD 是 +4.9pp，差 0.1pp 没到门槛）—— 漏报比误报多，别把它当预警器用。';
+  }
 }
 function twStageChip(stage){
   if (stage === 'rallyLate') return '<span class="tw-chip late">拉升末期</span>';
@@ -11042,7 +11268,7 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
      ★ 和 loadTodayWatch 共用同一个定时器（不是另起一个）：_test/_verify_sync.cjs 的 [H] 用例
        会在 120ms 处记录一次"网络请求基线"再断言"没配置同步码时零请求"—— 若本卡单独挂在 120ms，
        它那一次 fetch 会正好落在基线之后，把同步测试打成 1 个假失败。合并到 90ms 就稳定在基线之前。 */
-  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); }, 90);
+  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); loadTraderSignals(); }, 90);
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
