@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1794378552539,
- "atText": "2026/11/11 14:29:12",
+ "at": 1794382329092,
+ "atText": "2026/11/11 15:32:09",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -13,28 +13,28 @@
  },
  "bars": {
   "latest": "2026-11-09",
-  "gidsAtLatest": 316,
+  "gidsAtLatest": 644,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
     "date": "2026-11-08",
-    "gids": 1342
+    "gids": 1014
    },
    {
     "date": "2026-11-09",
-    "gids": 316
+    "gids": 644
    }
   ],
   "byKey": {
    "p": {
     "date": "2026-11-09",
-    "gids": 316,
+    "gids": 644,
     "trueDay": "2026-11-10"
    },
    "n": {
     "date": "2026-11-09",
-    "gids": 316,
+    "gids": 644,
     "trueDay": "2026-11-10"
    },
    "b": {
@@ -576,7 +576,7 @@
  },
  "live": {
   "date": "2026-11-11",
-  "atText": "2026/11/11 14:26:53",
+  "atText": "2026/11/11 15:30:11",
   "n": 2115
  },
  "lagDays": 1,
@@ -612,7 +612,7 @@
    "asOf": "2026-11-10",
    "via": "asOfSeries",
    "asOfDate": "2026-11-10",
-   "generatedAt": "2026/11/11 14:26:24",
+   "generatedAt": "2026/11/11 15:29:43",
    "basedOnBars": "2026-11-10",
    "staleVsBars": false
   },
