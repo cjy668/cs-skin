@@ -4953,7 +4953,8 @@ async function loadPulse(){
     return true;
   } catch (e) { return false; }        // 脉搏缺失：照旧用 market.json，静默
 }
-const PULSE_TTL = 180000;              // 3 分钟：与 cs-quant/fast_refresh.cjs 写脉搏的节奏一致let pulseAt = 0, pulseFetching = false;
+const PULSE_TTL = 180000;              // 3 分钟：与 cs-quant/fast_refresh.cjs 写脉搏的节奏一致
+let pulseAt = 0, pulseFetching = false;
 async function refreshPulseIfDue(){
   if (pulseFetching) return false;
   if (typeof document.visibilityState === 'string' && document.visibilityState !== 'visible') return false;
