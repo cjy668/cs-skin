@@ -1,10 +1,10 @@
 {
  "v": 1,
- "at": 1794389305457,
- "atText": "2026-11-11 17:28:25",
+ "at": 1794390651898,
+ "atText": "2026-11-11 17:50:51",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -12,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1794389322491,
+  "checkedAt": 1794390703738,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1848557880481353",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "694277000588690211",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-11-05",
  "lastSeenAtText": "2026-11-05 08:54:07",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880481353",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/694277000588690211",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-11-05",
@@ -35,52 +35,52 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 88,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 1,
-  "rssItems": 0
+  "rssItems": 10
  },
  "sourceStatus": [
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 178278,
-   "ms": 1168,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 51783,
+   "attempts": 3,
+   "error": "read ECONNRESET"
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": false,
-   "status": 0,
-   "bytes": 0,
-   "ms": 16953,
-   "attempts": 2,
-   "error": "timeout"
+   "ok": true,
+   "status": 200,
+   "bytes": 20967,
+   "ms": 604,
+   "attempts": 1,
+   "error": null
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-11-05",
-  "rssNewestDate": null,
-  "agree": false,
-  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
+  "rssNewestDate": "2026-11-05",
+  "agree": true,
+  "note": "两个源的最新公告日期一致"
  },
  "items": [],
  "recent": [
   {
-   "gid": "1848557880481353",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694277000588690211",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-11-05",
    "dateLocal": "2026-11-05",
    "at": 1793840047000,
    "atText": "2026-11-05 08:54:07",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880481353",
-   "summary": "GAMEPLAY · Bomb defusal in Retakes mode will now instantly finish when there is sufficient time remaining in the round and no active utility remains to prevent the defuse. · Reduced freeze time and round restart delay in Retakes mode. · Pinging pet chickens during freeze time will request a trick from them. · Pet chicken names are no longer displayed when customized item text game option is set to hidden.…",
+   "url": "https://store.steampowered.com/news/app/730/view/694277000588690211",
+   "summary": "游戏 · 在回防模式中，当回合剩余时间充足且场上没有可阻止拆弹的有效投掷物时，炸弹拆除将立即完成。 · 缩短了回防模式中的冻结时间和回合重启延迟。 · 在冻结时间内标记宠物小鸡，可让它们表演一个小把戏。 · 当自定义物品文本游戏选项设置为隐藏时，宠物小鸡的名字将不再显示。 地图脚本 · Instance.Precache现在接受实体进行预缓存 · 新增顶层导出Entities · 新增Entities.Spawn · 新增Instance.OnBotControl · 新增CSPlayerController.IsControllingBot · 新增CSPlayerController.GetControlledBotPawn · 新增CSPlayerPawn.Reset · 将Instance.ConnectOutput移至Entities，并修改为接受配置对象 · 将Instance.DisconnectOutput移至Entities · 将Instance.EntFireAtName重命名为Entities.FireInput · 将Instance.FindEntities…",
    "level": "无关",
    "confidence": "low",
    "matchedKeywords": [
@@ -97,31 +97,31 @@
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2025-07-16",
-     "title": "《反恐精英》更新",
-     "similarity": 0.682,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2025-01-28",
-     "title": "《反恐精英》更新",
-     "similarity": 0.678,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
      "date": "2026-03-18",
      "title": "《反恐精英》更新",
-     "similarity": 0.667,
+     "similarity": 0.364,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2025-10-01",
+     "title": "《反恐精英》更新（武库/观战/地图脚本）",
+     "similarity": 0.35,
+     "eventDate": "2025-10-01",
+     "eventClass": "regime_shift",
+     "eventTitle": "《反恐精英》更新（武库/观战/地图脚本）",
+     "reactionDay": "2025-10-01",
+     "medPct": -0.1,
+     "note": "该事件（2025-10-01 《反恐精英》更新（武库/观战/地图脚本））在事件分类表里是 regime_shift：反应日 2025-10-01 全池中位 -0.1%、下跌占比 54% —— 不是全池级急跌"
+    },
+    {
+     "date": "2026-04-20",
+     "title": "《反恐精英》更新",
+     "similarity": 0.348,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
