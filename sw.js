@@ -50,7 +50,11 @@
        · supply-dead.json / signal-weights.json —— 判据与权重的唯一来源，同样日更。
      CACHE 必须 +1（v27 → v28）：老客户端的 index.html 没有 #sec-lrn / #dia-panel
      这两个节点，配新 CSS 会错位，必须整套换掉。 */
-const CACHE = 'cs-skin-app-v29';
+/*   ★ 2026-11-11 v30：首页「今日异常」卡新增第六类「派发信号」（复合判定 P1~P5），
+     并把 P5 单独成立（仅求购激增）单独成段。老客户端的 index.html 没有 .ano-dist / #ano-dist
+     节点，配新 CSS 会错位，必须整套换掉 → CACHE v29 → v30。
+     （daily-anomalies.json 早已在 NET_FIRST，不需要新增规则。） */
+const CACHE = 'cs-skin-app-v30';
 const ASSETS = [
   './',
   './index.html',
