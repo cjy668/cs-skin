@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-11T09:22:06.912Z",
+ "at": "2026-11-11T12:24:45.836Z",
  "atText": "2026-11-11",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -87,7 +87,7 @@
  "counts": {
   "pool": 1073,
   "series": 1073,
-  "obs": 235811,
+  "obs": 235824,
   "liquidObs": 122060,
   "currentItems": 22,
   "currentLiquid": 696,
@@ -138,7 +138,7 @@
    "passNegative": false,
    "direction": "positive",
    "did": 0.0492,
-   "didMed": 0.0337,
+   "didMed": 0.0338,
    "didRate": 0.0161,
    "p": 0.0249,
    "nTreatedCells": 4884,
@@ -147,7 +147,7 @@
    "treatedDoubleRate": 0.2169,
    "controlDoubleRate": 0.2176,
    "treatedRet120": {
-    "p25": -0.2349,
+    "p25": -0.233,
     "p50": 0.0388,
     "p75": 0.3384
    },
@@ -458,7 +458,7 @@
    "kind": "B",
    "nTreatedCells": 4280,
    "did": -0.0085,
-   "p": 0.6617,
+   "p": 0.6567,
    "didRate": 0.0032,
    "treatedDoubleRate": 0.1928,
    "controlDoubleRate": 0.2338,
@@ -1596,7 +1596,7 @@
    "listedDropFromHigh": -0.0969,
    "buySurge": 0.2222,
    "buyLevel": 11,
-   "buyPctile": 0.0255,
+   "buyPctile": 0.0256,
    "price": 8.25,
    "listed": 205,
    "inTierBuyP90": false,
@@ -1607,7 +1607,7 @@
     "同期价格 -23.6%（没涨）",
     "在售距 60 日高 -9.7%",
     "求购 30 日中位比前段 +22.2%（11.0 单 vs 前段 9.0 单）",
-    "同 tier 求购 p90 = 387.5 单"
+    "同 tier 求购 p90 = 386.8 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-09"
