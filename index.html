@@ -1752,6 +1752,23 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .ano-more summary{cursor:pointer;font-size:11px;color:#7c8aa5}
 .ano-more .ano-dump{font-size:11px;line-height:1.6;color:#8b93a7;margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
 .ano-empty{font-size:12px;color:#8b93a7;padding:8px 0}
+/* ★ 2026-11-11 派发信号（复合判定）—— 今日异常的第六类，独立一块。
+   全部 flex-wrap + min-width:0 + overflow-wrap:anywhere，保证长品名也不撑出横向滚动条。 */
+.ano-hits{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;min-width:0}
+.ano-hit{font-size:10px;line-height:1.5;padding:0 5px;border-radius:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#6c748a;white-space:nowrap}
+.ano-hit.on{color:#ffb020;border-color:rgba(255,176,32,.45);background:rgba(255,176,32,.12)}
+.ano-dist{margin-top:6px;border:1px solid rgba(255,152,69,.26);border-radius:10px;padding:9px 10px;background:rgba(255,152,69,.05);min-width:0}
+.ano-dist-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0;font-size:13px;color:#e8ecf5}
+.ano-dist-h b{color:#ff9845}
+.ano-dist-sub{font-size:11px;line-height:1.6;color:#8b93a7;min-width:0;overflow-wrap:anywhere}
+.ano-dist-sub2{font-size:11px;line-height:1.6;color:#8b93a7;margin:8px 0 5px;overflow-wrap:anywhere}
+.ano-dist-note{font-size:11px;line-height:1.65;color:#8b93a7;margin:4px 0 6px;overflow-wrap:anywhere}
+.ano-row.dist{border-color:rgba(255,152,69,.30);background:rgba(255,152,69,.06)}
+.ano-row.dist.hi{border-color:rgba(255,86,86,.36);background:rgba(255,86,86,.07)}
+.ano-row.p5only{border-color:rgba(124,92,255,.26);background:rgba(124,92,255,.05)}
+.ano-p5sub{margin-top:10px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.14);min-width:0}
+.ano-p5note{font-size:11px;line-height:1.65;color:#b9a8ff;margin-top:3px;overflow-wrap:anywhere}
+.ano-ev{font-size:11px;line-height:1.6;color:#8b93a7;margin-top:3px;overflow-wrap:anywhere;word-break:break-word}
 
 /* ============ 系统在学什么（lrn-*，2026-11-03 新增） ============
    ★ 前缀 lrn- 与既有 ano-/prc-/dsb-/mt-/pt- 零冲突。
@@ -2123,7 +2140,7 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
              数据源：cs-quant/scan_anomalies.cjs → daily-anomalies.json（日频，随 daily 发布）
              降级链：拿不到 → 只空这一块，其他卡 / 6 页签照常。 -->
           <div class="card span-all" id="sec-ano">
-            <div class="sec-head"><h2>今日异常 <span class="ano-live">系统自己扫出来的</span></h2><span class="sec-sub">全池 1,073 品 · 五类异常 · 按「偏离程度 × 能不能操作」排序</span><span class="r" id="ano-time">加载中…</span></div>
+            <div class="sec-head"><h2>今日异常 <span class="ano-live">系统自己扫出来的</span></h2><span class="sec-sub">全池 1,073 品 · 五类异常 + 派发信号（复合判定）· 按「偏离程度 × 能不能操作」排序</span><span class="r" id="ano-time">加载中…</span></div>
             <div class="ano-note" id="ano-note">每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。</div>
             <div class="ano-chips" id="ano-chips"></div>
             <div id="ano-box" class="ano-box"><div class="skel"><i></i>今日异常加载中…（daily-anomalies.json）</div></div>
@@ -6496,6 +6513,74 @@ function anoKindClass(k){
   if (k === 'peer_lagging' || k === 'peer_against') return 'peer';
   return 'supply';
 }
+/* ★ 2026-11-11：派发信号（复合判定）—— 今日异常的第六类，独立一块。
+   用户硬约束：「可以作为一个依据，不能只有这个依据，要结合以前的」。
+   · high / mid 只列 hitCount ≥ 2 的（单条信号太弱，不硬凑）；
+   · P5 求购激增单独成立 → 单独一段「仅求购激增」，只给 note、不给结论，绝不混进 high/mid。 */
+function anoPct(v, d){ if (v == null || !isFinite(v)) return '—'; return (v * 100).toFixed(d == null ? 1 : d) + '%'; }
+function anoNum(v, d){ if (v == null || !isFinite(v)) return '—'; return Number(v).toFixed(d == null ? 2 : d); }
+function anoHits(hits){
+  const on = {};
+  (hits || []).forEach(function(k){ on[k] = true; });
+  return ['P1', 'P2', 'P3', 'P4', 'P5'].map(function(k){
+    return '<span class="ano-hit' + (on[k] ? ' on' : '') + '">' + k + (on[k] ? ' ✓' : ' ✗') + '</span>';
+  }).join('');
+}
+function anoEvLine(x){
+  const e = (x && x.ev) || {};
+  const bits = [];
+  if (e.listedRatio != null) bits.push('在售比 ' + anoNum(e.listedRatio, 2) + '×');
+  if (e.buyRatio != null) bits.push('求购比 ' + anoNum(e.buyRatio, 2) + '×');
+  if (e.amp10 != null) bits.push('10 日振幅 ' + anoPct(e.amp10));
+  if (e.hi10Over60 != null) bits.push('近 10 日高 / 60 日高 ' + anoPct(e.hi10Over60, 0));
+  if (e.buy30 != null || e.buy90 != null) bits.push('求购 ' + (e.buy30 == null ? '—' : e.buy30) + '（30 日）/ ' + (e.buy90 == null ? '—' : e.buy90) + '（90 日）');
+  if (e.tierP95 != null) bits.push('同档 p95 ' + e.tierP95);
+  return bits.length ? '证据：' + bits.join(' · ') : '';
+}
+function anoDistRow(x, p5){
+  const cls = p5 ? 'p5only' : ('dist' + (x.verdict === 'high' ? ' hi' : ''));
+  const badge = p5 ? '仅 P5' : (x.verdict === 'high' ? 'high ≥0.60' : 'mid 0.35~0.60');
+  const hits = x.hitCount == null ? (x.hits || []).length : x.hitCount;
+  return '<div class="ano-row ' + cls + '" data-gid="' + esc(String(x.gid)) + '">'
+    + '<div class="ano-top"><span class="ano-k">' + badge + '</span>'
+    +   '<span class="ano-name">' + esc(x.name || '') + '</span>'
+    +   '<span class="ano-score">score ' + anoNum(x.score, 2) + ' · 命中 ' + hits + '/5</span></div>'
+    + '<div class="ano-hits">' + anoHits(x.hits) + '</div>'
+    + '<div class="ano-detail">命中：' + esc((x.hitText || x.hits || []).join(' · ') || '—') + '</div>'
+    + ((x.notes || []).length ? '<div class="ano-advice">' + esc(x.notes.join('；')) + '</div>' : '')
+    + (p5 ? '<div class="ano-p5note">仅求购激增（历史反向信号，单独不足以判顶）</div>' : '')
+    + '<div class="ano-ev">' + esc(anoEvLine(x)) + '</div>'
+    + '<div class="ano-meta">现价 ¥' + (x.price == null ? '—' : x.price) + ' · asOf ' + esc(x.asOf || '—') + ' · gid ' + esc(String(x.gid)) + '</div>'
+    + '</div>';
+}
+function anoDistHTML(dist){
+  if (!dist || dist.loaded === false) return '';
+  const items = arrOf(dist.items), p5 = arrOf(dist.p5OnlyItems);
+  if (!items.length && !p5.length) return '';
+  const hi = dist.countHigh == null ? items.filter(function(x){ return x.verdict === 'high'; }).length : dist.countHigh;
+  const mid = dist.countMid == null ? items.filter(function(x){ return x.verdict === 'mid'; }).length : dist.countMid;
+  let html = '<div class="ano-dist" id="ano-dist">'
+    + '<div class="ano-dist-h"><b>派发信号</b><span class="ano-dist-sub">复合判定 · 5 条加权投票（P1 0.25 / P2 0.25 / P3 0.20 / P4 0.20 / P5 0.10）</span>'
+    +   '<span class="ano-score">high ' + hi + ' · mid ' + mid + '</span></div>'
+    + '<div class="ano-dist-note">' + esc(dist.rule || '') + '</div>';
+  if (items.length){
+    html += '<div class="ano-dist-sub2">high / mid 档（只列 ≥2 条成立的）· ' + items.length + ' 条</div>';
+    html += items.map(function(x){ return anoDistRow(x, false); }).join('');
+  } else {
+    html += '<div class="ano-empty">今天没有 high / mid 档（≥2 条成立才列，不硬凑）。</div>';
+  }
+  if (p5.length){
+    html += '<div class="ano-p5sub">'
+      + '<div class="ano-dist-h" style="font-size:12px"><b>仅求购激增 · ' + p5.length + ' 个</b>'
+      +   '<span class="ano-dist-sub">历史反向信号，单独不足以判顶；★ 不计入上面的派发信号，也不给结论</span></div>'
+      + p5.map(function(x){ return anoDistRow(x, true); }).join('')
+      + '</div>';
+  }
+  const mono = (dist.validation && dist.validation.summary && dist.validation.summary.monotone) || '';
+  if (mono) html += '<div class="ano-meta" style="margin-top:8px">如实说明：' + esc(mono) + '</div>';
+  html += '</div>';
+  return html;
+}
 function renderAnomalies(){
   const box = $('ano-box'); if (!box) return;
   const t = $('ano-time');
@@ -6510,7 +6595,8 @@ function renderAnomalies(){
   if (note && d.method) {
     note.innerHTML = '每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。'
       + '<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。'
-      + '<span style="color:#6c748a">（排序 = severity z × 可操作性；覆盖 ' + esc(String((d.coverage && d.coverage.scanned) || '—')) + ' 品）</span>';
+      + '<span style="color:#6c748a">（排序 = severity z × 可操作性；覆盖 ' + esc(String((d.coverage && d.coverage.scanned) || '—')) + ' 品）</span>'
+      + '<br>另有一块<b>派发信号</b>：P1~P5 复合判定（P5 求购激增单独成立时只给 note，不给结论）。';
   }
   const chips = $('ano-chips');
   if (chips) {
@@ -6539,6 +6625,8 @@ function renderAnomalies(){
   });
   let html = rows.join('');
   if (!rows.length) html = '<div class="ano-empty">今天没有触发任何异常（这本身是信息：全池没有明显偏离）。</div>';
+  /* ★ 第六类：派发信号（复合判定）—— 独立成块；P5 单独成立另起一段，不和 high/mid 混排 */
+  html += anoDistHTML(d.distribute);
   html += '<details class="ano-more"><summary>看今天的扫描口径 / 分类计数 / 为什么这样排</summary><div class="ano-dump">'
     + esc('覆盖：' + ((d.coverage && d.coverage.scanned) || '—') + ' 品，asOf ' + ((d.coverage && d.coverage.asOf) || '—')
       + '\n排序：score = severity（该品自己 365 日分布的 z）× 可操作性（在售≥50 / 求购≥5 / 可卖>0 → 1.0 / 0.6 / 0.3）'
