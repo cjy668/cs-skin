@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-12T12:26:16.675Z",
+ "at": "2026-11-12T15:27:48.026Z",
  "atText": "2026-11-12",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -91,7 +91,7 @@
   "liquidObs": 122137,
   "currentItems": 24,
   "currentLiquid": 697,
-  "excludedFired": 43,
+  "excludedFired": 42,
   "A": 24,
   "B": 0,
   "C": 0
@@ -1059,13 +1059,6 @@
    ]
   },
   {
-   "gid": "11426",
-   "name": "P250 | 暗之镂刻 (崭新出厂)",
-   "fired": [
-    "B"
-   ]
-  },
-  {
    "gid": "1073",
    "name": "加利尔 AR | 都市瓦砾 (崭新出厂)",
    "fired": [
@@ -1151,9 +1144,9 @@
    "priceChg60": -0.5763,
    "priceChg30": -0.1215,
    "listedDropFromHigh": -0.1538,
-   "buySurge": -0.3333,
-   "buyLevel": 16,
-   "buyPctile": 0.0791,
+   "buySurge": -0.2917,
+   "buyLevel": 17,
+   "buyPctile": 0.0841,
    "price": 15.76,
    "listed": 176,
    "inTierBuyP90": false,
@@ -1163,7 +1156,7 @@
     "在售 60 日中位比前 60 日 +58.3%（对数斜率 +65.7%）",
     "同期价格 -57.6%（没涨）",
     "在售距 60 日高 -15.4%",
-    "求购 30 日中位比前段 -33.3%（16.0 单 vs 前段 24.0 单）",
+    "求购 30 日中位比前段 -29.2%（17.0 单 vs 前段 24.0 单）",
     "同 tier 求购 p90 = 182.0 单"
    ],
    "staleDays": 0,
@@ -1601,9 +1594,9 @@
    "priceChg60": -0.4233,
    "priceChg30": -0.2663,
    "listedDropFromHigh": -0.1558,
-   "buySurge": 0.5714,
-   "buyLevel": 11,
-   "buyPctile": 0.0257,
+   "buySurge": 0.5,
+   "buyLevel": 10.5,
+   "buyPctile": 0.0246,
    "price": 5.98,
    "listed": 65,
    "inTierBuyP90": false,
@@ -1613,7 +1606,7 @@
     "在售 60 日中位比前 60 日 +52.4%（对数斜率 +5.5%）",
     "同期价格 -42.3%（没涨）",
     "在售距 60 日高 -15.6%",
-    "求购 30 日中位比前段 +57.1%（11.0 单 vs 前段 7.0 单）",
+    "求购 30 日中位比前段 +50.0%（10.5 单 vs 前段 7.0 单）",
     "同 tier 求购 p90 = 384.5 单"
    ],
    "staleDays": 0,
