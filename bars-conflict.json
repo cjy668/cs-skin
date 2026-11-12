@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794410375583,
-   "atText": "2026/11/11 23:19:35",
+   "at": 1794450636577,
+   "atText": "2026/11/12 10:30:36",
    "level": "warn",
    "compared": 4962,
    "gids": 1654,
@@ -276,21 +276,22 @@
    "note": "⚠️ 自建日线与 csqaq 官方有 70 个品差异 >5%（可比 4962 个，中位 0%，>5% 占 1.451%），请确认口径"
   },
   "merge_junction": {
-   "at": 1794410350059,
-   "atText": "2026/11/11 23:19:10",
+   "at": 1794450607700,
+   "atText": "2026/11/12 10:30:07",
    "level": "warn",
    "officialLatestLabel": "2026-11-09",
    "officialLatestTrueDay": "2026-11-10",
    "overlapDays": 29,
-   "appendedDays": 1,
+   "appendedDays": 2,
    "compared": 4414,
    "medianPct": 0,
-   "p90Pct": 0.0676,
+   "p90Pct": 0.069,
    "maxPct": 50,
-   "over5PctShare": 0.4078,
-   "conflictGidCount": 15,
-   "conflictShare": 7.2816,
+   "over5PctShare": 0.4304,
+   "conflictGidCount": 16,
+   "conflictShare": 7.767,
    "conflictGids": [
+    807,
     883,
     986,
     1814,
@@ -471,6 +472,15 @@
      "diffPct": 7.6923
     },
     {
+     "gid": 807,
+     "key": "p",
+     "trueDay": "2026-11-05",
+     "officialLabel": "2026-11-04",
+     "official": 3.73,
+     "ours": 4,
+     "diffPct": 7.2386
+    },
+    {
      "gid": 2011,
      "key": "b",
      "trueDay": "2026-10-13",
@@ -478,32 +488,24 @@
      "official": 14,
      "ours": 13,
      "diffPct": 7.1429
-    },
-    {
-     "gid": 1814,
-     "key": "p",
-     "trueDay": "2026-10-22",
-     "officialLabel": "2026-10-21",
-     "official": 42.99,
-     "ours": 39.99,
-     "diffPct": 6.9784
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4078%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4304%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794410343631,
-   "atText": "2026/11/11 23:19:03",
+   "at": 1794450601271,
+   "atText": "2026/11/12 10:30:01",
    "level": "warn",
    "compared": 4414,
    "gids": 206,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.0676,
-   "over5PctShare": 0.4078,
-   "conflictGidCount": 15,
-   "conflictShare": 7.2816,
+   "p90Pct": 0.069,
+   "over5PctShare": 0.4304,
+   "conflictGidCount": 16,
+   "conflictShare": 7.767,
    "conflictGids": [
+    807,
     883,
     986,
     1814,
@@ -633,22 +635,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794410350271,
-   "atText": "2026/11/11 23:19:10",
+   "at": 1794450607905,
+   "atText": "2026/11/12 10:30:07",
    "level": "ok",
-   "compared": 119,
+   "compared": 115,
    "medianPct": 0,
-   "p90Pct": 0.7435,
-   "maxPct": 10.7738,
-   "over5PctShare": 1.6807,
-   "conflictGidCount": 2,
+   "p90Pct": 0.463,
+   "maxPct": 5.1668,
+   "over5PctShare": 0.8696,
+   "conflictGidCount": 1,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1794410375584,
- "atText": "2026/11/11 23:19:35",
+ "at": 1794450636577,
+ "atText": "2026/11/12 10:30:36",
  "conflictGids": [
   {
    "gid": 13,
@@ -672,6 +674,13 @@
    "gid": 749,
    "in": [
     "daily_verify"
+   ]
+  },
+  {
+   "gid": 807,
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
@@ -1171,7 +1180,7 @@
    ]
   }
  ],
- "conflictGidCount": 84,
+ "conflictGidCount": 85,
  "conflictSamples": [
   {
    "gid": 13,
@@ -1199,6 +1208,14 @@
    "name": "法玛斯 | 湖蓝涂装 (崭新出厂)",
    "in": [
     "daily_verify"
+   ]
+  },
+  {
+   "gid": 807,
+   "name": "法玛斯 | 摧枯拉朽 (崭新出厂)",
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
@@ -1307,14 +1324,7 @@
    "in": [
     "daily_verify"
    ]
-  },
-  {
-   "gid": 1733,
-   "name": "P2000 | 乳白象牙 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 84 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 85 个品差异 >5%，请确认口径"
 }
