@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1794451346682,
- "atText": "2026/11/12 10:42:26",
+ "at": 1794461529445,
+ "atText": "2026/11/12 13:32:09",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -12,26 +12,30 @@
   "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数。★ 2026-10-20 实测：官方日线 timestamp 全在 16:00Z（= UTC+8 次日 00:00），项目标签 L 真正代表 UTC+8 交易日 L+1，所以真实滞后 = 1 天"
  },
  "bars": {
-  "latest": "2026-11-09",
-  "gidsAtLatest": 1658,
+  "latest": "2026-11-10",
+  "gidsAtLatest": 960,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
+    "date": "2026-11-10",
+    "gids": 960
+   },
+   {
     "date": "2026-11-09",
-    "gids": 1658
+    "gids": 698
    }
   ],
   "byKey": {
    "p": {
-    "date": "2026-11-09",
-    "gids": 1658,
-    "trueDay": "2026-11-10"
+    "date": "2026-11-10",
+    "gids": 960,
+    "trueDay": "2026-11-11"
    },
    "n": {
-    "date": "2026-11-09",
-    "gids": 1658,
-    "trueDay": "2026-11-10"
+    "date": "2026-11-10",
+    "gids": 960,
+    "trueDay": "2026-11-11"
    },
    "b": {
     "date": "2026-11-09",
@@ -44,7 +48,7 @@
     "trueDay": "2026-10-15"
    }
   },
-  "latestTrueDay": "2026-11-10",
+  "latestTrueDay": "2026-11-11",
   "source": "csqaq 官方日线（_harvest，只读，一个字节都没动）"
  },
  "rt": {
@@ -281,10 +285,6 @@
   },
   "points": 4744,
   "appendedDays": [
-   {
-    "trueDay": "2026-11-11",
-    "label": "2026-11-10"
-   },
    {
     "trueDay": "2026-11-12",
     "label": "2026-11-11"
@@ -583,7 +583,7 @@
    "2026-11-12"
   ],
   "coversLatest": true,
-  "coversDays": 2
+  "coversDays": 1
  },
  "effective": {
   "latestLabel": "2026-11-11",
@@ -592,7 +592,7 @@
  },
  "live": {
   "date": "2026-11-12",
-  "atText": "2026/11/12 10:41:52",
+  "atText": "2026/11/12 13:29:56",
   "n": 2115
  },
  "lagDays": 1,
@@ -628,7 +628,7 @@
    "asOf": "2026-11-11",
    "via": "asOfSeries",
    "asOfDate": "2026-11-11",
-   "generatedAt": "2026/11/12 10:41:25",
+   "generatedAt": "2026/11/12 13:29:28",
    "basedOnBars": "2026-11-11",
    "staleVsBars": false
   },
@@ -639,7 +639,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:39:52",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -649,7 +649,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:39:22",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -659,7 +659,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:36:58",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -669,7 +669,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:35:43",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -679,7 +679,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:31:08",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -699,7 +699,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": null,
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -709,7 +709,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:33:10",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   },
   {
@@ -719,7 +719,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/12 10:38:49",
-   "basedOnBars": "2026-11-09",
+   "basedOnBars": "2026-11-10",
    "staleVsBars": null
   }
  ],
@@ -764,7 +764,7 @@
   ],
   "atText": "2026/11/12 10:30:36"
  },
- "message": "官方日线标签 2026-11-09（= UTC+8 交易日 2026-11-10） → 生效最新 2026-11-11 = UTC+8 交易日 2026-11-12；自建日线覆盖 31 天（已补到 2026-11-12，追加 2 天）",
+ "message": "官方日线标签 2026-11-10（= UTC+8 交易日 2026-11-11） → 生效最新 2026-11-11 = UTC+8 交易日 2026-11-12；自建日线覆盖 31 天（已补到 2026-11-12，追加 1 天）",
  "conflictText": "⚠️ 自建日线与 csqaq 官方有 85 个品差异 >5%，请确认口径",
  "alarm": {
   "level": "warn",
