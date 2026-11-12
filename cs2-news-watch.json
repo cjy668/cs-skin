@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1794464904486,
- "atText": "2026-11-12 14:28:24",
+ "at": 1794466252167,
+ "atText": "2026-11-12 14:50:52",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1794464905107,
+  "checkedAt": 1794466275385,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1849192144180746",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "687522235410284761",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-11-11",
  "lastSeenAtText": "2026-11-12 07:03:20",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144180746",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/687522235410284761",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-11-11",
@@ -36,8 +35,8 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 88,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 1,
   "rssItems": 10
@@ -46,12 +45,12 @@
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 178333,
-   "ms": 559,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 23165,
+   "attempts": 3,
+   "error": "timeout"
   },
   {
    "name": "Steam 中文 RSS",
@@ -59,7 +58,7 @@
    "ok": true,
    "status": 200,
    "bytes": 20792,
-   "ms": 454,
+   "ms": 714,
    "attempts": 1,
    "error": null
   }
@@ -73,50 +72,38 @@
  "items": [],
  "recent": [
   {
-   "gid": "1849192144180746",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "687522235410284761",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-11-11",
    "dateLocal": "2026-11-12",
    "at": 1794438200000,
    "atText": "2026-11-12 07:03:20",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144180746",
-   "summary": "ANIMATION · Fixed some cases of popping and glitching when switching weapons and reloading at extreme angles MISC · Fixed bot pathing issue in Retakes game mode · Fixed a rendering hang on DX11 · Improved avx / avx512 instruction set detection · Miscellaneous stability and performance improvements",
-   "level": "机制级",
-   "confidence": "medium",
+   "url": "https://store.steampowered.com/news/app/730/view/687522235410284761",
+   "summary": "动画 · 修复了在极端角度下切换武器和换弹时出现的一些跳变和闪烁问题 杂项 · 修复了回防模式中机器人的寻路问题 · 修复了DX11下的渲染卡死问题 · 改进了avx/avx512指令集检测 · 多项稳定性与性能优化",
+   "level": "无关",
+   "confidence": "low",
    "matchedKeywords": [
-    "Case",
     "Bug",
+    "Optimize",
     "Misc"
    ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 2 个",
-   "mechanismHits": [
-    "Case"
-   ],
+   "levelBasis": "强机制 0 个（无）· 机制词 0 个 · 供给 0 个 · 赛事 0 个 · 噪声 3 个",
+   "mechanismHits": [],
    "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
    "noiseHits": [
     "Bug",
+    "Optimize",
     "Misc"
    ],
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2023-11-17",
-     "title": "Release Notes for 11/17/2023",
-     "similarity": 0.507,
-     "eventDate": "2023-11-17",
-     "eventClass": "none",
-     "eventTitle": "Release Notes for 11/17/2023",
-     "reactionDay": "2023-11-18",
-     "medPct": -0.3,
-     "note": "该事件（2023-11-17 Release Notes for 11/17/2023）在事件分类表里是 none：反应日 2023-11-18 全池中位 -0.3%、下跌占比 58% —— 不是全池级急跌"
-    },
-    {
-     "date": "2025-11-19",
-     "title": "《反恐精英》更新",
-     "similarity": 0.447,
+     "date": "2025-10-29",
+     "title": "《反恐精英》更新（杂项）",
+     "similarity": 0.517,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -125,15 +112,26 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2024-06-11",
-     "title": "更新日志（2024年6月11日）",
-     "similarity": 0.441,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+     "date": "2025-09-17",
+     "title": "《反恐精英》更新（创世纪收藏品修复）",
+     "similarity": 0.361,
+     "eventDate": "2025-09-16",
+     "eventClass": "regime_shift",
+     "eventTitle": "《反恐精英》更新（创世纪收藏品 + 音效 + 地图脚本）",
+     "reactionDay": "2025-09-17",
+     "medPct": -1.3,
+     "note": "该事件（2025-09-16 《反恐精英》更新（创世纪收藏品 + 音效 + 地图脚本））在事件分类表里是 regime_shift：反应日 2025-09-17 全池中位 -1.3%、下跌占比 68% —— 不是全池级急跌"
+    },
+    {
+     "date": "2026-05-07",
+     "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
+     "similarity": 0.348,
+     "eventDate": "2026-05-07",
+     "eventClass": "regime_shift",
+     "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
+     "reactionDay": "2026-05-09",
+     "medPct": -2.3,
+     "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
     }
    ],
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
