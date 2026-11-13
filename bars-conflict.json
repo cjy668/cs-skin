@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794496805401,
-   "atText": "2026/11/12 23:20:05",
+   "at": 1794552124617,
+   "atText": "2026/11/13 14:42:04",
    "level": "warn",
    "compared": 4962,
    "gids": 1654,
@@ -256,18 +256,18 @@
    "note": "⚠️ 自建日线与 csqaq 官方有 50 个品差异 >5%（可比 4962 个，中位 0%，>5% 占 1.0681%），请确认口径"
   },
   "merge_junction": {
-   "at": 1794496755256,
-   "atText": "2026/11/12 23:19:15",
+   "at": 1794552096799,
+   "atText": "2026/11/13 14:41:36",
    "level": "warn",
    "officialLatestLabel": "2026-11-10",
    "officialLatestTrueDay": "2026-11-11",
    "overlapDays": 30,
-   "appendedDays": 1,
-   "compared": 4560,
+   "appendedDays": 2,
+   "compared": 4563,
    "medianPct": 0,
-   "p90Pct": 0.0536,
+   "p90Pct": 0.0137,
    "maxPct": 50,
-   "over5PctShare": 0.4605,
+   "over5PctShare": 0.4602,
    "conflictGidCount": 17,
    "conflictShare": 8.2126,
    "conflictGids": [
@@ -471,18 +471,18 @@
      "diffPct": 7.6923
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4605%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.4602%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794496743699,
-   "atText": "2026/11/12 23:19:03",
+   "at": 1794552090253,
+   "atText": "2026/11/13 14:41:30",
    "level": "warn",
-   "compared": 4560,
+   "compared": 4563,
    "gids": 207,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.0536,
-   "over5PctShare": 0.4605,
+   "p90Pct": 0.0137,
+   "over5PctShare": 0.4602,
    "conflictGidCount": 17,
    "conflictShare": 8.2126,
    "conflictGids": [
@@ -617,22 +617,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794496755603,
-   "atText": "2026/11/12 23:19:15",
-   "level": "ok",
-   "compared": 121,
+   "at": 1794552096984,
+   "atText": "2026/11/13 14:41:36",
+   "level": "warn",
+   "compared": 114,
    "medianPct": 0,
-   "p90Pct": 0.7895,
-   "maxPct": 7.6923,
-   "over5PctShare": 2.4793,
-   "conflictGidCount": 3,
+   "p90Pct": 3.5598,
+   "maxPct": 8.9069,
+   "over5PctShare": 4.386,
+   "conflictGidCount": 5,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1794496805401,
- "atText": "2026/11/12 23:20:05",
+ "at": 1794552124617,
+ "atText": "2026/11/13 14:42:04",
  "conflictGids": [
   {
    "gid": 13,
