@@ -53,8 +53,11 @@
 /*   ★ 2026-11-11 v30：首页「今日异常」卡新增第六类「派发信号」（复合判定 P1~P5），
      并把 P5 单独成立（仅求购激增）单独成段。老客户端的 index.html 没有 .ano-dist / #ano-dist
      节点，配新 CSS 会错位，必须整套换掉 → CACHE v29 → v30。
-     （daily-anomalies.json 早已在 NET_FIRST，不需要新增规则。） */
-const CACHE = 'cs-skin-app-v30';
+     （daily-anomalies.json 早已在 NET_FIRST，不需要新增规则。）
+     ★ v31（2026-11-13）：派发判据重构 —— 权重/阈值改由数据定（P3 归零），
+     派发块的命中芯片从 5 个变 4 个（P1/P2/P4/P5）、徽章阈值改成动态读 T。
+     老客户端的页面缓存里有旧文案，必须整套换掉 → v30 → v31。 */
+const CACHE = 'cs-skin-app-v31';
 const ASSETS = [
   './',
   './index.html',
