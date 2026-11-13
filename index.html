@@ -6522,7 +6522,7 @@ function anoNum(v, d){ if (v == null || !isFinite(v)) return '—'; return Numbe
 function anoHits(hits){
   const on = {};
   (hits || []).forEach(function(k){ on[k] = true; });
-  return ['P1', 'P2', 'P3', 'P4', 'P5'].map(function(k){
+  return ['P1', 'P2', 'P4', 'P5'].map(function(k){
     return '<span class="ano-hit' + (on[k] ? ' on' : '') + '">' + k + (on[k] ? ' ✓' : ' ✗') + '</span>';
   }).join('');
 }
@@ -6537,14 +6537,15 @@ function anoEvLine(x){
   if (e.tierP95 != null) bits.push('同档 p95 ' + e.tierP95);
   return bits.length ? '证据：' + bits.join(' · ') : '';
 }
-function anoDistRow(x, p5){
+function anoDistRow(x, p5, T){
   const cls = p5 ? 'p5only' : ('dist' + (x.verdict === 'high' ? ' hi' : ''));
-  const badge = p5 ? '仅 P5' : (x.verdict === 'high' ? 'high ≥0.60' : 'mid 0.35~0.60');
+  const th = T || { high: 0.65, mid: 0.45 };
+  const badge = p5 ? '仅 P5' : (x.verdict === 'high' ? 'high ≥' + th.high : 'mid ' + th.mid + '~' + th.high);
   const hits = x.hitCount == null ? (x.hits || []).length : x.hitCount;
   return '<div class="ano-row ' + cls + '" data-gid="' + esc(String(x.gid)) + '">'
     + '<div class="ano-top"><span class="ano-k">' + badge + '</span>'
     +   '<span class="ano-name">' + esc(x.name || '') + '</span>'
-    +   '<span class="ano-score">score ' + anoNum(x.score, 2) + ' · 命中 ' + hits + '/5</span></div>'
+    +   '<span class="ano-score">score ' + anoNum(x.score, 2) + ' · 命中 ' + hits + '/4</span></div>'
     + '<div class="ano-hits">' + anoHits(x.hits) + '</div>'
     + '<div class="ano-detail">命中：' + esc((x.hitText || x.hits || []).join(' · ') || '—') + '</div>'
     + ((x.notes || []).length ? '<div class="ano-advice">' + esc(x.notes.join('；')) + '</div>' : '')
@@ -6557,23 +6558,26 @@ function anoDistHTML(dist){
   if (!dist || dist.loaded === false) return '';
   const items = arrOf(dist.items), p5 = arrOf(dist.p5OnlyItems);
   if (!items.length && !p5.length) return '';
+  const th = dist.thresholds || { high: 0.65, mid: 0.45 };
+  const W = dist.weights || {};
+  const wTxt = ['P1', 'P2', 'P4', 'P5'].map(function(k){ return k + ' ' + (Number(W[k]) || 0).toFixed(2); }).join(' / ');
   const hi = dist.countHigh == null ? items.filter(function(x){ return x.verdict === 'high'; }).length : dist.countHigh;
   const mid = dist.countMid == null ? items.filter(function(x){ return x.verdict === 'mid'; }).length : dist.countMid;
   let html = '<div class="ano-dist" id="ano-dist">'
-    + '<div class="ano-dist-h"><b>派发信号</b><span class="ano-dist-sub">复合判定 · 5 条加权投票（P1 0.25 / P2 0.25 / P3 0.20 / P4 0.20 / P5 0.10）</span>'
+    + '<div class="ano-dist-h"><b>派发信号</b><span class="ano-dist-sub">复合判定 · P1/P2/P4 三票 + P5 佐证（' + wTxt + '）· P3 已证伪不计分</span>'
     +   '<span class="ano-score">high ' + hi + ' · mid ' + mid + '</span></div>'
     + '<div class="ano-dist-note">' + esc(dist.rule || '') + '</div>';
   if (items.length){
-    html += '<div class="ano-dist-sub2">high / mid 档（只列 ≥2 条成立的）· ' + items.length + ' 条</div>';
-    html += items.map(function(x){ return anoDistRow(x, false); }).join('');
+    html += '<div class="ano-dist-sub2">high / mid 档（只列 ≥2 票成立的）· ' + items.length + ' 条</div>';
+    html += items.map(function(x){ return anoDistRow(x, false, th); }).join('');
   } else {
-    html += '<div class="ano-empty">今天没有 high / mid 档（≥2 条成立才列，不硬凑）。</div>';
+    html += '<div class="ano-empty">今天没有 high / mid 档（≥2 票成立才列，不硬凑）。</div>';
   }
   if (p5.length){
     html += '<div class="ano-p5sub">'
       + '<div class="ano-dist-h" style="font-size:12px"><b>仅求购激增 · ' + p5.length + ' 个</b>'
       +   '<span class="ano-dist-sub">历史反向信号，单独不足以判顶；★ 不计入上面的派发信号，也不给结论</span></div>'
-      + p5.map(function(x){ return anoDistRow(x, true); }).join('')
+      + p5.map(function(x){ return anoDistRow(x, true, th); }).join('')
       + '</div>';
   }
   const mono = (dist.validation && dist.validation.summary && dist.validation.summary.monotone) || '';
@@ -6596,7 +6600,7 @@ function renderAnomalies(){
     note.innerHTML = '每天自动扫：供需背离 / 供给异常 / 价格异常 / 阶段转折 / 同类背离。'
       + '<b>不是买卖建议</b> —— 每条只说明「哪里偏离了 + 下一步看什么」，怎么处理由您决定。'
       + '<span style="color:#6c748a">（排序 = severity z × 可操作性；覆盖 ' + esc(String((d.coverage && d.coverage.scanned) || '—')) + ' 品）</span>'
-      + '<br>另有一块<b>派发信号</b>：P1~P5 复合判定（P5 求购激增单独成立时只给 note，不给结论）。';
+      + '<br>另有一块<b>派发信号</b>：P1/P2/P4 + P5 复合判定（P3 已证伪不计分；P5 求购激增单独成立时只给 note，不给结论）。';
   }
   const chips = $('ano-chips');
   if (chips) {
@@ -6607,7 +6611,7 @@ function renderAnomalies(){
     chips.innerHTML = order.filter(function(k){ return bk[k]; }).map(function(k){
       return '<span class="ano-chip">' + esc(names[k] || k) + ' <b>' + bk[k] + '</b></span>';
     }).join('')
-      + (distN ? '<span class="ano-chip">派发信号 <b>' + distN + '</b>（≥2 条成立）</span>' : '')
+      + (distN ? '<span class="ano-chip">派发信号 <b>' + distN + '</b>（≥2 票成立）</span>' : '')
       + '<span class="ano-chip">合计 <b>' + ((d.counts && d.counts.total) || 0) + '</b> 条 · 可操作 <b>' + ((d.counts && d.counts.operable) || 0) + '</b> 条</span>';
   }
   const top = arrOf(d.top);
