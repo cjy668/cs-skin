@@ -3,26 +3,29 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794561597810,
-   "atText": "2026/11/13 17:19:57",
+   "at": 1794572476327,
+   "atText": "2026/11/13 20:21:16",
    "level": "warn",
-   "compared": 3917,
+   "compared": 4556,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.8621,
+   "p90Pct": 0.8287,
    "maxPct": 32.6667,
-   "over5PctShare": 1.4297,
-   "conflictGidCount": 53,
-   "conflictShare": 3.2044,
+   "over5PctShare": 1.4047,
+   "conflictGidCount": 61,
+   "conflictShare": 3.688,
    "conflictGids": [
     144,
     534,
     655,
     660,
     749,
+    754,
     812,
+    967,
     1012,
     1127,
+    1129,
     1156,
     1205,
     1240,
@@ -34,8 +37,10 @@
     1697,
     1733,
     1759,
+    1814,
     1957,
     2071,
+    2192,
     2218,
     6407,
     6441,
@@ -60,14 +65,17 @@
     13406,
     13421,
     13439,
+    13461,
     15566,
+    17544,
     17795,
     18240,
     18361,
     20320,
     20622,
     21705,
-    21735
+    21735,
+    24995
    ],
    "samples": [
     {
@@ -256,11 +264,11 @@
     "2026-11-11",
     "2026-11-12"
    ],
-   "note": "⚠️ 自建日线与 csqaq 官方有 53 个品差异 >5%（可比 3917 个，中位 0%，>5% 占 1.4297%），请确认口径"
+   "note": "⚠️ 自建日线与 csqaq 官方有 61 个品差异 >5%（可比 4556 个，中位 0%，>5% 占 1.4047%），请确认口径"
   },
   "merge_junction": {
-   "at": 1794561568093,
-   "atText": "2026/11/13 17:19:28",
+   "at": 1794572445747,
+   "atText": "2026/11/13 20:20:45",
    "level": "warn",
    "officialLatestLabel": "2026-11-11",
    "officialLatestTrueDay": "2026-11-12",
@@ -479,8 +487,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5115%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794561560773,
-   "atText": "2026/11/13 17:19:20",
+   "at": 1794572437921,
+   "atText": "2026/11/13 20:20:37",
    "level": "warn",
    "compared": 4692,
    "gids": 208,
@@ -624,22 +632,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794561568349,
-   "atText": "2026/11/13 17:19:28",
+   "at": 1794572446022,
+   "atText": "2026/11/13 20:20:46",
    "level": "ok",
    "compared": 117,
    "medianPct": 0,
-   "p90Pct": 0.5602,
-   "maxPct": 5.5684,
-   "over5PctShare": 0.8547,
-   "conflictGidCount": 1,
+   "p90Pct": 0.5319,
+   "maxPct": 12.5,
+   "over5PctShare": 1.7094,
+   "conflictGidCount": 2,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "warn",
- "at": 1794561597810,
- "atText": "2026/11/13 17:19:57",
+ "at": 1794572476327,
+ "atText": "2026/11/13 20:21:16",
  "conflictGids": [
   {
    "gid": 144,
@@ -672,6 +680,12 @@
    ]
   },
   {
+   "gid": 754,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 807,
    "in": [
     "merge_junction",
@@ -692,6 +706,12 @@
    ]
   },
   {
+   "gid": 967,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 986,
    "in": [
     "merge_junction",
@@ -706,6 +726,12 @@
   },
   {
    "gid": 1127,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1129,
    "in": [
     "daily_verify"
    ]
@@ -779,6 +805,7 @@
   {
    "gid": 1814,
    "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -807,6 +834,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 2192,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -996,6 +1029,12 @@
    ]
   },
   {
+   "gid": 13461,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 15566,
    "in": [
     "daily_verify"
@@ -1006,6 +1045,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 17544,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -1056,9 +1101,15 @@
    "in": [
     "daily_verify"
    ]
+  },
+  {
+   "gid": 24995,
+   "in": [
+    "daily_verify"
+   ]
   }
  ],
- "conflictGidCount": 65,
+ "conflictGidCount": 72,
  "conflictSamples": [
   {
    "gid": 144,
@@ -1096,6 +1147,13 @@
    ]
   },
   {
+   "gid": 754,
+   "name": "法玛斯 | 灯神 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 807,
    "name": "法玛斯 | 摧枯拉朽 (崭新出厂)",
    "in": [
@@ -1119,6 +1177,13 @@
    ]
   },
   {
+   "gid": 967,
+   "name": "G3SG1 | 极地迷彩 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 986,
    "name": "G3SG1 | 多变迷彩 (崭新出厂)",
    "in": [
@@ -1136,6 +1201,13 @@
   {
    "gid": 1127,
    "name": "格洛克 18 型 | 铁之作 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1129,
+   "name": "格洛克 18 型 | 铁之作 (略有磨损)",
    "in": [
     "daily_verify"
    ]
@@ -1181,28 +1253,7 @@
    "in": [
     "daily_verify"
    ]
-  },
-  {
-   "gid": 1463,
-   "name": "MAC-10 | 冉吉 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1503,
-   "name": "MP7 | 装甲核心 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1697,
-   "name": "P2000 | 珊瑚树 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 65 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 72 个品差异 >5%，请确认口径"
 }
