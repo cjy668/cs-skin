@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1794658695448,
- "atText": "2026/11/14 20:18:15",
+ "at": 1794669651332,
+ "atText": "2026/11/14 23:20:51",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）",
  "threshold": {
@@ -62,16 +62,16 @@
  },
  "byKey": {
   "p": {
-   "n": 4884,
+   "n": 4962,
    "gids": 1654,
-   "exact": 3281,
-   "exactPct": 67.1785,
+   "exact": 3344,
+   "exactPct": 67.3922,
    "medianPct": 0,
-   "p75Pct": 0.1055,
-   "p90Pct": 0.7602,
-   "p99Pct": 5.6755,
+   "p75Pct": 0.101,
+   "p90Pct": 0.75,
+   "p99Pct": 5.5024,
    "maxPct": 24.1379,
-   "over5Pct": 1.2285,
+   "over5Pct": 1.2092,
    "conflictGidCount": 60,
    "conflictShare": 3.6276,
    "conflictGids": [
@@ -155,8 +155,8 @@
     },
     {
      "day": "2026-11-13",
-     "n": 1576,
-     "exact": 1158,
+     "n": 1654,
+     "exact": 1221,
      "conflict": 13,
      "medianPct": 0,
      "maxPct": 12.9962
@@ -210,16 +210,16 @@
    ]
   },
   "b": {
-   "n": 60,
+   "n": 90,
    "gids": 30,
-   "exact": 1,
-   "exactPct": 1.6667,
-   "medianPct": 21.0526,
+   "exact": 2,
+   "exactPct": 2.2222,
+   "medianPct": 21.7391,
    "p75Pct": 30.4348,
-   "p90Pct": 41.6667,
-   "p99Pct": 85.1852,
-   "maxPct": 85.1852,
-   "over5Pct": 88.3333,
+   "p90Pct": 50,
+   "p99Pct": 102.0202,
+   "maxPct": 102.0202,
+   "over5Pct": 87.7778,
    "conflictGidCount": 29,
    "conflictShare": 96.6667,
    "conflictGids": [
@@ -269,6 +269,14 @@
      "conflict": 27,
      "medianPct": 17.8571,
      "maxPct": 78.5714
+    },
+    {
+     "day": "2026-11-13",
+     "n": 30,
+     "exact": 1,
+     "conflict": 26,
+     "medianPct": 25,
+     "maxPct": 102.0202
     }
    ]
   },
@@ -537,5 +545,5 @@
   }
  ],
  "selfTest": null,
- "message": "⚠️ 自建日线与 csqaq 官方有 60 个品差异 >5%（可比 4884 个，中位 0%，>5% 占 1.2285%），请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 60 个品差异 >5%（可比 4962 个，中位 0%，>5% 占 1.2092%），请确认口径"
 }
