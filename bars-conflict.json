@@ -3,13 +3,13 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794756142597,
-   "atText": "2026/11/15 23:22:22",
+   "at": 1794759510279,
+   "atText": "2026/11/16 00:18:30",
    "level": "ok",
    "compared": 4962,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.7246,
+   "p90Pct": 0.7194,
    "maxPct": 27.8345,
    "over5PctShare": 0.9875,
    "conflictGidCount": 48,
@@ -251,21 +251,21 @@
     "2026-11-13",
     "2026-11-14"
    ],
-   "note": "自建日线 vs 官方：4962 个 (gid×日) 可比，完全相等 67.5534%，中位差异 0%，>5% 的品 48/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：4962 个 (gid×日) 可比，完全相等 67.6542%，中位差异 0%，>5% 的品 48/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1794756108909,
-   "atText": "2026/11/15 23:21:48",
+   "at": 1794759475837,
+   "atText": "2026/11/16 00:17:55",
    "level": "bad",
    "officialLatestLabel": "2026-11-13",
    "officialLatestTrueDay": "2026-11-14",
    "overlapDays": 33,
-   "appendedDays": 1,
-   "compared": 4970,
+   "appendedDays": 2,
+   "compared": 4991,
    "medianPct": 0,
-   "p90Pct": 0.056,
+   "p90Pct": 0.0537,
    "maxPct": 50,
-   "over5PctShare": 0.503,
+   "over5PctShare": 0.5009,
    "conflictGidCount": 21,
    "conflictShare": 10.0962,
    "conflictGids": [
@@ -473,18 +473,18 @@
      "diffPct": 8.67
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.503%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5009%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794756101379,
-   "atText": "2026/11/15 23:21:41",
+   "at": 1794759467694,
+   "atText": "2026/11/16 00:17:47",
    "level": "bad",
-   "compared": 4970,
+   "compared": 4991,
    "gids": 208,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.056,
-   "over5PctShare": 0.503,
+   "p90Pct": 0.0537,
+   "over5PctShare": 0.5009,
    "conflictGidCount": 21,
    "conflictShare": 10.0962,
    "conflictGids": [
@@ -623,22 +623,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794756109105,
-   "atText": "2026/11/15 23:21:49",
+   "at": 1794759476079,
+   "atText": "2026/11/16 00:17:56",
    "level": "ok",
-   "compared": 123,
+   "compared": 103,
    "medianPct": 0,
-   "p90Pct": 0.5594,
-   "maxPct": 9.6774,
-   "over5PctShare": 1.626,
-   "conflictGidCount": 2,
+   "p90Pct": 0.8867,
+   "maxPct": 3.5714,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1794756142597,
- "atText": "2026/11/15 23:22:22",
+ "at": 1794759510279,
+ "atText": "2026/11/16 00:18:30",
  "conflictGids": [
   {
    "gid": 144,
