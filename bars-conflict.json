@@ -3,26 +3,29 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794710141007,
-   "atText": "2026/11/15 10:35:41",
+   "at": 1794723577275,
+   "atText": "2026/11/15 14:19:37",
    "level": "ok",
-   "compared": 3458,
+   "compared": 4564,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.8133,
-   "maxPct": 16.4811,
-   "over5PctShare": 1.1567,
-   "conflictGidCount": 40,
-   "conflictShare": 2.4184,
+   "p90Pct": 0.7525,
+   "maxPct": 27.8345,
+   "over5PctShare": 1.0955,
+   "conflictGidCount": 49,
+   "conflictShare": 2.9625,
    "conflictGids": [
     144,
     154,
     754,
+    874,
     967,
     1012,
+    1044,
     1127,
     1129,
     1243,
+    1393,
     1463,
     1686,
     1759,
@@ -38,21 +41,27 @@
     7366,
     7373,
     8104,
+    8139,
     9521,
     9556,
     9583,
     9612,
+    11646,
+    11683,
     12196,
     12253,
+    12526,
     13421,
     13461,
     14712,
     17491,
     17544,
     18240,
+    18259,
     19252,
     19611,
     20320,
+    20440,
     21732,
     24995
    ],
@@ -243,21 +252,21 @@
     "2026-11-13",
     "2026-11-14"
    ],
-   "note": "自建日线 vs 官方：3458 个 (gid×日) 可比，完全相等 67.0619%，中位差异 0%，>5% 的品 40/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：4564 个 (gid×日) 可比，完全相等 68.0543%，中位差异 0%，>5% 的品 49/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1794710107058,
-   "atText": "2026/11/15 10:35:07",
+   "at": 1794723545317,
+   "atText": "2026/11/15 14:19:05",
    "level": "bad",
    "officialLatestLabel": "2026-11-13",
    "officialLatestTrueDay": "2026-11-14",
    "overlapDays": 33,
    "appendedDays": 1,
-   "compared": 4954,
+   "compared": 4961,
    "medianPct": 0,
-   "p90Pct": 0.0577,
+   "p90Pct": 0.0592,
    "maxPct": 50,
-   "over5PctShare": 0.5046,
+   "over5PctShare": 0.5039,
    "conflictGidCount": 21,
    "conflictShare": 10.0962,
    "conflictGids": [
@@ -465,18 +474,18 @@
      "diffPct": 8.67
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5046%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5039%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794710099016,
-   "atText": "2026/11/15 10:34:59",
+   "at": 1794723537872,
+   "atText": "2026/11/15 14:18:57",
    "level": "bad",
-   "compared": 4954,
+   "compared": 4961,
    "gids": 208,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.0577,
-   "over5PctShare": 0.5046,
+   "p90Pct": 0.0592,
+   "over5PctShare": 0.5039,
    "conflictGidCount": 21,
    "conflictShare": 10.0962,
    "conflictGids": [
@@ -615,22 +624,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794710107265,
-   "atText": "2026/11/15 10:35:07",
+   "at": 1794723545511,
+   "atText": "2026/11/15 14:19:05",
    "level": "ok",
-   "compared": 118,
+   "compared": 119,
    "medianPct": 0,
-   "p90Pct": 1.2097,
-   "maxPct": 7.1429,
-   "over5PctShare": 0.8475,
-   "conflictGidCount": 1,
+   "p90Pct": 0.1577,
+   "maxPct": 11.1429,
+   "over5PctShare": 2.521,
+   "conflictGidCount": 3,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1794710141007,
- "atText": "2026/11/15 10:35:41",
+ "at": 1794723577275,
+ "atText": "2026/11/15 14:19:37",
  "conflictGids": [
   {
    "gid": 144,
@@ -655,6 +664,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 874,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -684,6 +699,12 @@
    ]
   },
   {
+   "gid": 1044,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 1127,
    "in": [
     "daily_verify"
@@ -697,6 +718,12 @@
   },
   {
    "gid": 1243,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1393,
    "in": [
     "daily_verify"
    ]
@@ -826,6 +853,12 @@
    ]
   },
   {
+   "gid": 8139,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 9521,
    "in": [
     "daily_verify",
@@ -872,6 +905,18 @@
    ]
   },
   {
+   "gid": 11646,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 11683,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 12196,
    "in": [
     "daily_verify",
@@ -890,6 +935,12 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 12526,
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -950,6 +1001,12 @@
    ]
   },
   {
+   "gid": 18259,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 19252,
    "in": [
     "daily_verify"
@@ -968,6 +1025,12 @@
    ]
   },
   {
+   "gid": 20440,
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 21732,
    "in": [
     "daily_verify"
@@ -980,7 +1043,7 @@
    ]
   }
  ],
- "conflictGidCount": 53,
+ "conflictGidCount": 62,
  "conflictSamples": [
   {
    "gid": 144,
@@ -1009,6 +1072,13 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 874,
+   "name": "FN57 | 夜影 (崭新出厂)",
+   "in": [
+    "daily_verify"
    ]
   },
   {
@@ -1042,6 +1112,13 @@
    ]
   },
   {
+   "gid": 1044,
+   "name": "加利尔 AR | 贤者涂装 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
    "gid": 1127,
    "name": "格洛克 18 型 | 铁之作 (崭新出厂)",
    "in": [
@@ -1058,6 +1135,13 @@
   {
    "gid": 1243,
    "name": "M4A1消音版 | 金蛇缠绕 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 1393,
+   "name": "MAC-10 | 渐变琥珀 (崭新出厂)",
    "in": [
     "daily_verify"
    ]
@@ -1108,29 +1192,7 @@
    "in": [
     "daily_verify"
    ]
-  },
-  {
-   "gid": 2103,
-   "name": "R8 左轮手枪 | 渐变琥珀 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 2166,
-   "name": "SCAR-20 | 翡翠色调 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 2184,
-   "name": "SCAR-20 | 丛林爆发 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 53 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 62 个品差异 >5%，请确认口径"
 }
