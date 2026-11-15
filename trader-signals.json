@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-15T02:41:01.397Z",
+ "at": "2026-11-15T06:24:45.208Z",
  "atText": "2026-11-15",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -87,22 +87,22 @@
  "counts": {
   "pool": 1073,
   "series": 1073,
-  "obs": 236030,
-  "liquidObs": 122158,
-  "currentItems": 17,
-  "currentLiquid": 705,
-  "excludedFired": 43,
-  "A": 17,
+  "obs": 236847,
+  "liquidObs": 122741,
+  "currentItems": 22,
+  "currentLiquid": 703,
+  "excludedFired": 42,
+  "A": 22,
   "B": 0,
   "C": 0
  },
  "baseline": {
-  "nObs": 107676,
-  "doubleRate": 0.221,
+  "nObs": 107704,
+  "doubleRate": 0.2209,
   "fwd120Gain": {
-   "p25": 0.0991,
-   "p50": 0.2987,
-   "p75": 0.8526
+   "p25": 0.099,
+   "p50": 0.2986,
+   "p75": 0.8523
   },
   "note": "全池所有抽样观察点（不含匹配、不看信号）= 「随便挑一天」的对照"
  },
@@ -112,24 +112,24 @@
    "pass": true,
    "passNegative": false,
    "direction": "positive",
-   "did": 0.0974,
-   "didMed": 0.0862,
-   "didRate": 0.0367,
+   "did": 0.0977,
+   "didMed": 0.0858,
+   "didRate": 0.0368,
    "p": 0.005,
    "nTreatedCells": 3201,
    "nControlCells": 4281,
    "nStrata": 224,
-   "treatedDoubleRate": 0.23,
+   "treatedDoubleRate": 0.2302,
    "controlDoubleRate": 0.2129,
    "treatedRet120": {
-    "p25": -0.3272,
+    "p25": -0.3267,
     "p50": 0.0291,
-    "p75": 0.364
+    "p75": 0.3631
    },
    "fwd120Gain": {
     "p25": 0.1097,
-    "p50": 0.3124,
-    "p75": 0.8922
+    "p50": 0.3125,
+    "p75": 0.8945
    }
   },
   "A2": {
@@ -137,24 +137,24 @@
    "pass": false,
    "passNegative": false,
    "direction": "positive",
-   "did": 0.0492,
-   "didMed": 0.0338,
-   "didRate": 0.0157,
+   "did": 0.049,
+   "didMed": 0.0337,
+   "didRate": 0.0158,
    "p": 0.0199,
    "nTreatedCells": 4919,
    "nControlCells": 2802,
    "nStrata": 239,
-   "treatedDoubleRate": 0.2154,
+   "treatedDoubleRate": 0.2155,
    "controlDoubleRate": 0.2202,
    "treatedRet120": {
-    "p25": -0.2401,
-    "p50": 0.0348,
-    "p75": 0.336
+    "p25": -0.2413,
+    "p50": 0.0351,
+    "p75": 0.3359
    },
    "fwd120Gain": {
-    "p25": 0.0951,
+    "p25": 0.095,
     "p50": 0.3026,
-    "p75": 0.8335
+    "p75": 0.8341
    }
   },
   "A3": {
@@ -162,24 +162,24 @@
    "pass": false,
    "passNegative": false,
    "direction": "positive",
-   "did": 0.0248,
+   "did": 0.0245,
    "didMed": 0.0247,
-   "didRate": 0.0085,
-   "p": 0.1393,
-   "nTreatedCells": 4109,
-   "nControlCells": 3694,
+   "didRate": 0.0084,
+   "p": 0.1542,
+   "nTreatedCells": 4110,
+   "nControlCells": 3693,
    "nStrata": 239,
-   "treatedDoubleRate": 0.2124,
-   "controlDoubleRate": 0.2141,
+   "treatedDoubleRate": 0.2123,
+   "controlDoubleRate": 0.2142,
    "treatedRet120": {
-    "p25": -0.2416,
-    "p50": 0.026,
-    "p75": 0.3144
+    "p25": -0.2441,
+    "p50": 0.0259,
+    "p75": 0.3142
    },
    "fwd120Gain": {
     "p25": 0.092,
-    "p50": 0.2908,
-    "p75": 0.8137
+    "p50": 0.2907,
+    "p75": 0.8136
    }
   },
   "B": {
@@ -187,19 +187,19 @@
    "pass": false,
    "passNegative": false,
    "direction": "negative",
-   "did": -0.022,
-   "didMed": -0.0522,
-   "didRate": 0.0003,
-   "p": 0.2438,
-   "nTreatedCells": 2898,
-   "nControlCells": 4651,
+   "did": -0.023,
+   "didMed": -0.0544,
+   "didRate": 0.0005,
+   "p": 0.1692,
+   "nTreatedCells": 2902,
+   "nControlCells": 4647,
    "nStrata": 230,
-   "treatedDoubleRate": 0.152,
-   "controlDoubleRate": 0.2407,
+   "treatedDoubleRate": 0.1522,
+   "controlDoubleRate": 0.2408,
    "treatedRet120": {
     "p25": -0.1868,
-    "p50": -0.0009,
-    "p75": 0.2112
+    "p50": -0.0006,
+    "p75": 0.2114
    },
    "fwd120Gain": {
     "p25": 0.0809,
@@ -213,21 +213,21 @@
    "passNegative": true,
    "direction": "negative",
    "did": -0.0777,
-   "didMed": -0.0819,
-   "didRate": -0.0203,
+   "didMed": -0.082,
+   "didRate": -0.0196,
    "p": 0.005,
    "nTreatedCells": 1492,
    "nControlCells": 4672,
    "nStrata": 175,
-   "treatedDoubleRate": 0.0801,
+   "treatedDoubleRate": 0.0808,
    "controlDoubleRate": 0.2341,
    "treatedRet120": {
-    "p25": -0.2866,
+    "p25": -0.2881,
     "p50": -0.0821,
-    "p75": 0.1164
+    "p75": 0.1168
    },
    "fwd120Gain": {
-    "p25": 0.0528,
+    "p25": 0.0535,
     "p50": 0.1593,
     "p75": 0.3774
    }
@@ -237,24 +237,24 @@
    "pass": false,
    "passNegative": false,
    "direction": "positive",
-   "did": 0.0057,
-   "didMed": 0.0184,
-   "didRate": 0.0062,
-   "p": 0.7662,
-   "nTreatedCells": 509,
-   "nControlCells": 4571,
+   "did": 0.0079,
+   "didMed": 0.0183,
+   "didRate": 0.0084,
+   "p": 0.7264,
+   "nTreatedCells": 511,
+   "nControlCells": 4569,
    "nStrata": 126,
-   "treatedDoubleRate": 0.1247,
+   "treatedDoubleRate": 0.1281,
    "controlDoubleRate": 0.2123,
    "treatedRet120": {
-    "p25": -0.1397,
-    "p50": 0.0536,
-    "p75": 0.2332
+    "p25": -0.1375,
+    "p50": 0.0616,
+    "p75": 0.2379
    },
    "fwd120Gain": {
-    "p25": 0.1114,
-    "p50": 0.2709,
-    "p75": 0.5531
+    "p25": 0.113,
+    "p50": 0.272,
+    "p75": 0.5636
    }
   },
   "C2": {
@@ -262,24 +262,24 @@
    "pass": false,
    "passNegative": false,
    "direction": "negative",
-   "did": -0.0344,
-   "didMed": -0.0455,
-   "didRate": 0.001,
-   "p": 0.0746,
-   "nTreatedCells": 1022,
-   "nControlCells": 5793,
+   "did": -0.0353,
+   "didMed": -0.0498,
+   "didRate": 0.0021,
+   "p": 0.0697,
+   "nTreatedCells": 1025,
+   "nControlCells": 5790,
    "nStrata": 183,
-   "treatedDoubleRate": 0.1279,
-   "controlDoubleRate": 0.2176,
+   "treatedDoubleRate": 0.1295,
+   "controlDoubleRate": 0.2177,
    "treatedRet120": {
-    "p25": -0.1737,
-    "p50": 0.0085,
-    "p75": 0.2375
+    "p25": -0.1725,
+    "p50": 0.0079,
+    "p75": 0.2377
    },
    "fwd120Gain": {
-    "p25": 0.056,
-    "p50": 0.1977,
-    "p75": 0.5214
+    "p25": 0.0559,
+    "p50": 0.1971,
+    "p75": 0.5252
    }
   },
   "C3": {
@@ -287,9 +287,9 @@
    "pass": false,
    "passNegative": true,
    "direction": "negative",
-   "did": -0.0787,
-   "didMed": -0.0563,
-   "didRate": -0.0139,
+   "did": -0.0792,
+   "didMed": -0.0574,
+   "didRate": -0.014,
    "p": 0.01,
    "nTreatedCells": 351,
    "nControlCells": 3348,
@@ -313,11 +313,11 @@
    "param": "A.listedSurgeMin",
    "value": 0.1,
    "kind": "A",
-   "nTreatedCells": 4227,
-   "did": 0.0809,
+   "nTreatedCells": 4228,
+   "did": 0.0813,
    "p": 0.005,
-   "didRate": 0.0251,
-   "treatedDoubleRate": 0.2112,
+   "didRate": 0.0252,
+   "treatedDoubleRate": 0.2113,
    "controlDoubleRate": 0.2332,
    "pass": true,
    "passNegative": false
@@ -327,10 +327,10 @@
    "value": 0.15,
    "kind": "A",
    "nTreatedCells": 3688,
-   "did": 0.088,
+   "did": 0.0883,
    "p": 0.005,
-   "didRate": 0.0277,
-   "treatedDoubleRate": 0.2184,
+   "didRate": 0.0278,
+   "treatedDoubleRate": 0.2186,
    "controlDoubleRate": 0.2208,
    "pass": true,
    "passNegative": false
@@ -340,10 +340,10 @@
    "value": 0.2,
    "kind": "A",
    "nTreatedCells": 3201,
-   "did": 0.0974,
+   "did": 0.0977,
    "p": 0.005,
-   "didRate": 0.0367,
-   "treatedDoubleRate": 0.23,
+   "didRate": 0.0368,
+   "treatedDoubleRate": 0.2302,
    "controlDoubleRate": 0.2129,
    "pass": true,
    "passNegative": false
@@ -353,10 +353,10 @@
    "value": 0.3,
    "kind": "A",
    "nTreatedCells": 2440,
-   "did": 0.1128,
+   "did": 0.1129,
    "p": 0.005,
-   "didRate": 0.0462,
-   "treatedDoubleRate": 0.2475,
+   "didRate": 0.0464,
+   "treatedDoubleRate": 0.2477,
    "controlDoubleRate": 0.204,
    "pass": true,
    "passNegative": false
@@ -366,10 +366,10 @@
    "value": -0.4,
    "kind": "A",
    "nTreatedCells": 3595,
-   "did": 0.1171,
+   "did": 0.1174,
    "p": 0.005,
-   "didRate": 0.0392,
-   "treatedDoubleRate": 0.2433,
+   "didRate": 0.0393,
+   "treatedDoubleRate": 0.2435,
    "controlDoubleRate": 0.205,
    "pass": true,
    "passNegative": false
@@ -379,10 +379,10 @@
    "value": -0.3,
    "kind": "A",
    "nTreatedCells": 3376,
-   "did": 0.0995,
+   "did": 0.0999,
    "p": 0.005,
-   "didRate": 0.0376,
-   "treatedDoubleRate": 0.234,
+   "didRate": 0.0377,
+   "treatedDoubleRate": 0.2341,
    "controlDoubleRate": 0.21,
    "pass": true,
    "passNegative": false
@@ -392,10 +392,10 @@
    "value": -0.25,
    "kind": "A",
    "nTreatedCells": 3201,
-   "did": 0.0974,
+   "did": 0.0977,
    "p": 0.005,
-   "didRate": 0.0367,
-   "treatedDoubleRate": 0.23,
+   "didRate": 0.0368,
+   "treatedDoubleRate": 0.2302,
    "controlDoubleRate": 0.2129,
    "pass": true,
    "passNegative": false
@@ -404,12 +404,12 @@
    "param": "A2.listedSlopeMin",
    "value": 0.1,
    "kind": "A2",
-   "nTreatedCells": 5284,
-   "did": 0.0637,
+   "nTreatedCells": 5286,
+   "did": 0.0636,
    "p": 0.005,
-   "didRate": 0.0095,
+   "didRate": 0.0096,
    "treatedDoubleRate": 0.2094,
-   "controlDoubleRate": 0.2531,
+   "controlDoubleRate": 0.2534,
    "pass": true,
    "passNegative": false
   },
@@ -418,10 +418,10 @@
    "value": 0.2,
    "kind": "A2",
    "nTreatedCells": 4919,
-   "did": 0.0492,
+   "did": 0.049,
    "p": 0.0199,
-   "didRate": 0.0157,
-   "treatedDoubleRate": 0.2154,
+   "didRate": 0.0158,
+   "treatedDoubleRate": 0.2155,
    "controlDoubleRate": 0.2202,
    "pass": false,
    "passNegative": false
@@ -430,12 +430,12 @@
    "param": "A2.listedSlopeMin",
    "value": 0.3,
    "kind": "A2",
-   "nTreatedCells": 4319,
-   "did": 0.0497,
-   "p": 0.0149,
-   "didRate": 0.0178,
-   "treatedDoubleRate": 0.2211,
-   "controlDoubleRate": 0.2064,
+   "nTreatedCells": 4320,
+   "did": 0.0493,
+   "p": 0.01,
+   "didRate": 0.0177,
+   "treatedDoubleRate": 0.221,
+   "controlDoubleRate": 0.2065,
    "pass": false,
    "passNegative": false
   },
@@ -443,12 +443,12 @@
    "param": "B.buySurgeMin",
    "value": 0.2,
    "kind": "B",
-   "nTreatedCells": 5060,
-   "did": 0,
+   "nTreatedCells": 5062,
+   "did": -0.0001,
    "p": 0.995,
-   "didRate": 0.0036,
-   "treatedDoubleRate": 0.2114,
-   "controlDoubleRate": 0.2158,
+   "didRate": 0.0037,
+   "treatedDoubleRate": 0.2115,
+   "controlDoubleRate": 0.216,
    "pass": false,
    "passNegative": false
   },
@@ -456,12 +456,12 @@
    "param": "B.buySurgeMin",
    "value": 0.3,
    "kind": "B",
-   "nTreatedCells": 4304,
-   "did": -0.0082,
-   "p": 0.6667,
-   "didRate": 0.0034,
-   "treatedDoubleRate": 0.192,
-   "controlDoubleRate": 0.235,
+   "nTreatedCells": 4307,
+   "did": -0.0085,
+   "p": 0.6716,
+   "didRate": 0.0035,
+   "treatedDoubleRate": 0.1921,
+   "controlDoubleRate": 0.2351,
    "pass": false,
    "passNegative": false
   },
@@ -469,12 +469,12 @@
    "param": "B.buySurgeMin",
    "value": 0.5,
    "kind": "B",
-   "nTreatedCells": 2898,
-   "did": -0.022,
-   "p": 0.2438,
-   "didRate": 0.0003,
-   "treatedDoubleRate": 0.152,
-   "controlDoubleRate": 0.2407,
+   "nTreatedCells": 2902,
+   "did": -0.023,
+   "p": 0.1692,
+   "didRate": 0.0005,
+   "treatedDoubleRate": 0.1522,
+   "controlDoubleRate": 0.2408,
    "pass": false,
    "passNegative": false
   },
@@ -482,12 +482,12 @@
    "param": "B.buySurgeMin",
    "value": 1,
    "kind": "B",
-   "nTreatedCells": 1468,
-   "did": -0.0535,
+   "nTreatedCells": 1472,
+   "did": -0.0554,
    "p": 0.0398,
-   "didRate": -0.0181,
+   "didRate": -0.0183,
    "treatedDoubleRate": 0.0491,
-   "controlDoubleRate": 0.2437,
+   "controlDoubleRate": 0.2438,
    "pass": false,
    "passNegative": true
   },
@@ -495,11 +495,11 @@
    "param": "B3.buySurgeMin",
    "value": 0.2,
    "kind": "B3",
-   "nTreatedCells": 2298,
-   "did": -0.11,
+   "nTreatedCells": 2297,
+   "did": -0.1106,
    "p": 0.005,
-   "didRate": -0.0497,
-   "treatedDoubleRate": 0.0885,
+   "didRate": -0.0493,
+   "treatedDoubleRate": 0.0889,
    "controlDoubleRate": 0.2522,
    "pass": false,
    "passNegative": true
@@ -511,8 +511,8 @@
    "nTreatedCells": 1492,
    "did": -0.0777,
    "p": 0.005,
-   "didRate": -0.0203,
-   "treatedDoubleRate": 0.0801,
+   "didRate": -0.0196,
+   "treatedDoubleRate": 0.0808,
    "controlDoubleRate": 0.2341,
    "pass": false,
    "passNegative": true
@@ -522,9 +522,9 @@
    "value": 1,
    "kind": "B3",
    "nTreatedCells": 808,
-   "did": -0.1018,
+   "did": -0.102,
    "p": 0.005,
-   "didRate": -0.0221,
+   "didRate": -0.0222,
    "treatedDoubleRate": 0.0225,
    "controlDoubleRate": 0.2242,
    "pass": false,
@@ -537,7 +537,7 @@
     "gid": "9725",
     "label": "沙漠之鹰|机械工业 (崭新出厂)",
     "tier": "large",
-    "tierBuyP90": 113,
+    "tierBuyP90": 112.5,
     "doublingCount": 3,
     "markedBySpec": 1,
     "markedBySlope": 3,
@@ -645,7 +645,7 @@
     "gid": "11435",
     "label": "MAC-10|冲浪木 (崭新出厂)",
     "tier": "large",
-    "tierBuyP90": 113,
+    "tierBuyP90": 112.5,
     "doublingCount": 5,
     "markedBySpec": 2,
     "markedBySlope": 4,
@@ -895,25 +895,11 @@
    ]
   },
   {
-   "gid": "12851",
-   "name": "FN57 | 童话城堡 (崭新出厂)",
-   "fired": [
-    "A2"
-   ]
-  },
-  {
    "gid": "12626",
    "name": "UMP-45 | 金铋辉煌 (崭新出厂)",
    "fired": [
     "A2",
     "A3"
-   ]
-  },
-  {
-   "gid": "18150",
-   "name": "新星 | 幽灵迷彩 (崭新出厂)",
-   "fired": [
-    "A2"
    ]
   },
   {
@@ -931,13 +917,6 @@
    ]
   },
   {
-   "gid": "12519",
-   "name": "沙漠之鹰 | 古铜密码 (崭新出厂)",
-   "fired": [
-    "A2"
-   ]
-  },
-  {
    "gid": "18251",
    "name": "MAG-7 | 碳素纤维 (崭新出厂)",
    "fired": [
@@ -946,18 +925,11 @@
    ]
   },
   {
-   "gid": "13624",
-   "name": "USP 消音版 | 橙红安乐蜥 (崭新出厂)",
+   "gid": "17513",
+   "name": "XM1014 | 旧宪章 (崭新出厂)",
    "fired": [
-    "A2",
-    "A3"
-   ]
-  },
-  {
-   "gid": "13488",
-   "name": "AUG | 朽木 (崭新出厂)",
-   "fired": [
-    "A2"
+    "B",
+    "B3"
    ]
   },
   {
@@ -982,6 +954,20 @@
    ]
   },
   {
+   "gid": "16506",
+   "name": "MP7 | 赤地 (崭新出厂)",
+   "fired": [
+    "A2"
+   ]
+  },
+  {
+   "gid": "12859",
+   "name": "MAC-10 | 金砖 (崭新出厂)",
+   "fired": [
+    "B"
+   ]
+  },
+  {
    "gid": "18061",
    "name": "新星 | 外表生锈 (崭新出厂)",
    "fired": [
@@ -992,6 +978,13 @@
   {
    "gid": "10353",
    "name": "FN57 | 怒氓 (崭新出厂)",
+   "fired": [
+    "A2"
+   ]
+  },
+  {
+   "gid": "10401",
+   "name": "MAC-10 | 白鲑鱼 (崭新出厂)",
    "fired": [
     "A2"
    ]
@@ -1047,13 +1040,6 @@
    ]
   },
   {
-   "gid": "20574",
-   "name": "新星 | 香肠地狱 (崭新出厂)",
-   "fired": [
-    "B"
-   ]
-  },
-  {
    "gid": "9618",
    "name": "格洛克 18 型 | 核子花园 (崭新出厂)",
    "fired": [
@@ -1065,6 +1051,13 @@
    "name": "P90 | 设施系列·底片图 (崭新出厂)",
    "fired": [
     "A2"
+   ]
+  },
+  {
+   "gid": "11661",
+   "name": "AK-47 | 巴洛克之紫 (崭新出厂)",
+   "fired": [
+    "B"
    ]
   },
   {
@@ -1118,58 +1111,58 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.2096,
-   "listedSlope60": -0.1955,
-   "priceChg60": -0.1182,
-   "priceChg30": 0.3607,
-   "listedDropFromHigh": -0.138,
+   "listedSurge": 0.2069,
+   "listedSlope60": -0.1878,
+   "priceChg60": -0.0959,
+   "priceChg30": 0.2868,
+   "listedDropFromHigh": -0.1503,
    "buySurge": -0.0366,
    "buyLevel": 39.5,
-   "buyPctile": 0.3261,
-   "price": 67.9,
-   "listed": 562,
+   "buyPctile": 0.3321,
+   "price": 66.9,
+   "listed": 554,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +21.0%（对数斜率 -19.5%）",
-    "同期价格 -11.8%（没涨）",
-    "在售距 60 日高 -13.8%",
+    "在售 60 日中位比前 60 日 +20.7%（对数斜率 -18.8%）",
+    "同期价格 -9.6%（没涨）",
+    "在售距 60 日高 -15.0%",
     "求购 30 日中位比前段 -3.7%（39.5 单 vs 前段 41.0 单）",
-    "同 tier 求购 p90 = 109.0 单"
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
-   "gid": "10401",
-   "name": "MAC-10 | 白鲑鱼 (崭新出厂)",
-   "tier": "small",
+   "gid": "1089",
+   "name": "格洛克 18 型 | 蓝色裂纹 (崭新出厂)",
+   "tier": "mid",
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.625,
-   "listedSlope60": 0.632,
-   "priceChg60": -0.7413,
-   "priceChg30": -0.0566,
-   "listedDropFromHigh": -0.1683,
-   "buySurge": -0.2609,
-   "buyLevel": 17,
-   "buyPctile": 0.0841,
-   "price": 15,
-   "listed": 173,
+   "listedSurge": 0.2632,
+   "listedSlope60": -0.0274,
+   "priceChg60": -0.2075,
+   "priceChg30": -0.1792,
+   "listedDropFromHigh": -0.1148,
+   "buySurge": -0.1667,
+   "buyLevel": 5,
+   "buyPctile": 0.042,
+   "price": 175.93,
+   "listed": 54,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +62.5%（对数斜率 +63.2%）",
-    "同期价格 -74.1%（没涨）",
-    "在售距 60 日高 -16.8%",
-    "求购 30 日中位比前段 -26.1%（17.0 单 vs 前段 23.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "在售 60 日中位比前 60 日 +26.3%（对数斜率 -2.7%）",
+    "同期价格 -20.7%（没涨）",
+    "在售距 60 日高 -11.5%",
+    "求购 30 日中位比前段 -16.7%（5.0 单 vs 前段 6.0 单）",
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "11512",
@@ -1179,27 +1172,27 @@
     "A"
    ],
    "listedSurge": 0.4526,
-   "listedSlope60": 0.6889,
-   "priceChg60": -0.4887,
-   "priceChg30": -0.3219,
-   "listedDropFromHigh": -0.1605,
-   "buySurge": -0.125,
-   "buyLevel": 7,
-   "buyPctile": 0.0346,
-   "price": 43.35,
-   "listed": 68,
+   "listedSlope60": 0.6485,
+   "priceChg60": -0.4862,
+   "priceChg30": -0.3145,
+   "listedDropFromHigh": -0.1481,
+   "buySurge": -0.0625,
+   "buyLevel": 7.5,
+   "buyPctile": 0.0374,
+   "price": 43.34,
+   "listed": 69,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +45.3%（对数斜率 +68.9%）",
-    "同期价格 -48.9%（没涨）",
-    "在售距 60 日高 -16.0%",
-    "求购 30 日中位比前段 -12.5%（7.0 单 vs 前段 8.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "在售 60 日中位比前 60 日 +45.3%（对数斜率 +64.9%）",
+    "同期价格 -48.6%（没涨）",
+    "在售距 60 日高 -14.8%",
+    "求购 30 日中位比前段 -6.3%（7.5 单 vs 前段 8.0 单）",
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "1209",
@@ -1208,28 +1201,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.4235,
-   "listedSlope60": -0.1076,
-   "priceChg60": -0.2564,
-   "priceChg30": 0.4691,
-   "listedDropFromHigh": -0.2113,
+   "listedSurge": 0.4217,
+   "listedSlope60": -0.1298,
+   "priceChg60": -0.2455,
+   "priceChg30": 0.4481,
+   "listedDropFromHigh": -0.2145,
    "buySurge": 0.5172,
    "buyLevel": 44,
-   "buyPctile": 0.3633,
-   "price": 69.9,
-   "listed": 489,
+   "buyPctile": 0.3699,
+   "price": 68.58,
+   "listed": 487,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +42.3%（对数斜率 -10.8%）",
-    "同期价格 -25.6%（没涨）",
-    "在售距 60 日高 -21.1%",
+    "在售 60 日中位比前 60 日 +42.2%（对数斜率 -13.0%）",
+    "同期价格 -24.6%（没涨）",
+    "在售距 60 日高 -21.5%",
     "求购 30 日中位比前段 +51.7%（44.0 单 vs 前段 29.0 单）",
-    "同 tier 求购 p90 = 109.0 单"
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "1238",
@@ -1239,27 +1232,57 @@
     "A"
    ],
    "listedSurge": 0.28,
-   "listedSlope60": 0.1342,
-   "priceChg60": -0.4663,
-   "priceChg30": -0.1941,
-   "listedDropFromHigh": -0.0832,
-   "buySurge": -0.1495,
-   "buyLevel": 91,
-   "buyPctile": 0.7837,
-   "price": 515,
-   "listed": 893,
+   "listedSlope60": 0.1499,
+   "priceChg60": -0.4589,
+   "priceChg30": -0.2229,
+   "listedDropFromHigh": -0.1201,
+   "buySurge": -0.1589,
+   "buyLevel": 90,
+   "buyPctile": 0.7788,
+   "price": 530,
+   "listed": 857,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +28.0%（对数斜率 +13.4%）",
-    "同期价格 -46.6%（没涨）",
-    "在售距 60 日高 -8.3%",
-    "求购 30 日中位比前段 -15.0%（91.0 单 vs 前段 107.0 单）",
-    "同 tier 求购 p90 = 104.5 单"
+    "在售 60 日中位比前 60 日 +28.0%（对数斜率 +15.0%）",
+    "同期价格 -45.9%（没涨）",
+    "在售距 60 日高 -12.0%",
+    "求购 30 日中位比前段 -15.9%（90.0 单 vs 前段 107.0 单）",
+    "同 tier 求购 p90 = 104.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
+  },
+  {
+   "gid": "12519",
+   "name": "沙漠之鹰 | 古铜密码 (崭新出厂)",
+   "tier": "large",
+   "kinds": [
+    "A"
+   ],
+   "listedSurge": 0.3399,
+   "listedSlope60": 0.3581,
+   "priceChg60": -0.0581,
+   "priceChg30": 0.3051,
+   "listedDropFromHigh": -0.2373,
+   "buySurge": 0.1127,
+   "buyLevel": 79,
+   "buyPctile": 0.632,
+   "price": 154,
+   "listed": 858,
+   "inTierBuyP90": false,
+   "score": 3.91,
+   "verdict": "在售激增·挂单接货",
+   "evidence": [
+    "在售 60 日中位比前 60 日 +34.0%（对数斜率 +35.8%）",
+    "同期价格 -5.8%（没涨）",
+    "在售距 60 日高 -23.7%",
+    "求购 30 日中位比前段 +11.3%（79.0 单 vs 前段 71.0 单）",
+    "同 tier 求购 p90 = 112.5 单"
+   ],
+   "staleDays": 0,
+   "asOf": "2026-11-13"
   },
   {
    "gid": "12526",
@@ -1268,28 +1291,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.2396,
-   "listedSlope60": 0.2127,
-   "priceChg60": -0.5183,
-   "priceChg30": -0.125,
+   "listedSurge": 0.2461,
+   "listedSlope60": 0.2151,
+   "priceChg60": -0.4464,
+   "priceChg30": -0.1109,
    "listedDropFromHigh": -0.0617,
    "buySurge": 0.1429,
    "buyLevel": 8,
-   "buyPctile": 0.0396,
-   "price": 35,
+   "buyPctile": 0.0399,
+   "price": 40,
    "listed": 152,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +24.0%（对数斜率 +21.3%）",
-    "同期价格 -51.8%（没涨）",
+    "在售 60 日中位比前 60 日 +24.6%（对数斜率 +21.5%）",
+    "同期价格 -44.6%（没涨）",
     "在售距 60 日高 -6.2%",
     "求购 30 日中位比前段 +14.3%（8.0 单 vs 前段 7.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "12545",
@@ -1298,28 +1321,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.2998,
-   "listedSlope60": 0.5359,
-   "priceChg60": -0.1611,
-   "priceChg30": -0.164,
-   "listedDropFromHigh": -0.1165,
+   "listedSurge": 0.3208,
+   "listedSlope60": 0.602,
+   "priceChg60": -0.1965,
+   "priceChg30": -0.5421,
+   "listedDropFromHigh": -0.1012,
    "buySurge": 0,
    "buyLevel": 13,
-   "buyPctile": 0.1073,
-   "price": 48.49,
-   "listed": 637,
+   "buyPctile": 0.1093,
+   "price": 45.8,
+   "listed": 648,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +30.0%（对数斜率 +53.6%）",
-    "同期价格 -16.1%（没涨）",
-    "在售距 60 日高 -11.7%",
+    "在售 60 日中位比前 60 日 +32.1%（对数斜率 +60.2%）",
+    "同期价格 -19.6%（没涨）",
+    "在售距 60 日高 -10.1%",
     "求购 30 日中位比前段 0.0%（13.0 单 vs 前段 13.0 单）",
-    "同 tier 求购 p90 = 109.0 单"
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "13395",
@@ -1329,27 +1352,27 @@
     "A"
    ],
    "listedSurge": 0.2085,
-   "listedSlope60": 0.0008,
-   "priceChg60": -0.3454,
-   "priceChg30": 0.0527,
-   "listedDropFromHigh": -0.086,
-   "buySurge": 0.0625,
-   "buyLevel": 17,
-   "buyPctile": 0.0841,
-   "price": 7.79,
-   "listed": 489,
+   "listedSlope60": -0.0217,
+   "priceChg60": -0.3243,
+   "priceChg30": 0.0688,
+   "listedDropFromHigh": -0.1402,
+   "buySurge": 0.0938,
+   "buyLevel": 17.5,
+   "buyPctile": 0.0873,
+   "price": 7.77,
+   "listed": 460,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +20.8%（对数斜率 +0.1%）",
-    "同期价格 -34.5%（没涨）",
-    "在售距 60 日高 -8.6%",
-    "求购 30 日中位比前段 +6.3%（17.0 单 vs 前段 16.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "在售 60 日中位比前 60 日 +20.8%（对数斜率 -2.2%）",
+    "同期价格 -32.4%（没涨）",
+    "在售距 60 日高 -14.0%",
+    "求购 30 日中位比前段 +9.4%（17.5 单 vs 前段 16.0 单）",
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "13504",
@@ -1358,28 +1381,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.2418,
-   "listedSlope60": -0.0874,
-   "priceChg60": -0.4755,
-   "priceChg30": 0.0531,
-   "listedDropFromHigh": -0.2117,
+   "listedSurge": 0.2348,
+   "listedSlope60": -0.075,
+   "priceChg60": -0.4421,
+   "priceChg30": 0.0841,
+   "listedDropFromHigh": -0.2011,
    "buySurge": -0.0769,
    "buyLevel": 12,
-   "buyPctile": 0.0593,
-   "price": 11.89,
-   "listed": 283,
+   "buyPctile": 0.0598,
+   "price": 11.99,
+   "listed": 282,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +24.2%（对数斜率 -8.7%）",
-    "同期价格 -47.6%（没涨）",
-    "在售距 60 日高 -21.2%",
+    "在售 60 日中位比前 60 日 +23.5%（对数斜率 -7.5%）",
+    "同期价格 -44.2%（没涨）",
+    "在售距 60 日高 -20.1%",
     "求购 30 日中位比前段 -7.7%（12.0 单 vs 前段 13.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "13526",
@@ -1388,28 +1411,58 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.5935,
-   "listedSlope60": 0.2007,
-   "priceChg60": -0.2226,
-   "priceChg30": 0.0466,
-   "listedDropFromHigh": -0.1616,
-   "buySurge": -0.2045,
+   "listedSurge": 0.573,
+   "listedSlope60": 0.2106,
+   "priceChg60": -0.2477,
+   "priceChg30": -0.0439,
+   "listedDropFromHigh": -0.1647,
+   "buySurge": -0.186,
    "buyLevel": 35,
-   "buyPctile": 0.2788,
-   "price": 108.84,
-   "listed": 555,
+   "buyPctile": 0.28,
+   "price": 109,
+   "listed": 553,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +59.3%（对数斜率 +20.1%）",
-    "同期价格 -22.3%（没涨）",
-    "在售距 60 日高 -16.2%",
-    "求购 30 日中位比前段 -20.5%（35.0 单 vs 前段 44.0 单）",
-    "同 tier 求购 p90 = 113.0 单"
+    "在售 60 日中位比前 60 日 +57.3%（对数斜率 +21.1%）",
+    "同期价格 -24.8%（没涨）",
+    "在售距 60 日高 -16.5%",
+    "求购 30 日中位比前段 -18.6%（35.0 单 vs 前段 43.0 单）",
+    "同 tier 求购 p90 = 112.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
+  },
+  {
+   "gid": "13624",
+   "name": "USP 消音版 | 橙红安乐蜥 (崭新出厂)",
+   "tier": "large",
+   "kinds": [
+    "A"
+   ],
+   "listedSurge": 0.4813,
+   "listedSlope60": 0.5234,
+   "priceChg60": -0.2383,
+   "priceChg30": -0.1655,
+   "listedDropFromHigh": -0.2161,
+   "buySurge": -0.1556,
+   "buyLevel": 38,
+   "buyPctile": 0.304,
+   "price": 358,
+   "listed": 301,
+   "inTierBuyP90": false,
+   "score": 3.91,
+   "verdict": "在售激增·挂单接货",
+   "evidence": [
+    "在售 60 日中位比前 60 日 +48.1%（对数斜率 +52.3%）",
+    "同期价格 -23.8%（没涨）",
+    "在售距 60 日高 -21.6%",
+    "求购 30 日中位比前段 -15.6%（38.0 单 vs 前段 45.0 单）",
+    "同 tier 求购 p90 = 112.5 单"
+   ],
+   "staleDays": 0,
+   "asOf": "2026-11-13"
   },
   {
    "gid": "13673",
@@ -1418,28 +1471,58 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.3519,
-   "listedSlope60": 0.5476,
-   "priceChg60": -0.0166,
-   "priceChg30": 0.061,
-   "listedDropFromHigh": -0.2448,
-   "buySurge": 0.1875,
-   "buyLevel": 66.5,
-   "buyPctile": 0.5296,
-   "price": 800,
-   "listed": 256,
+   "listedSurge": 0.3589,
+   "listedSlope60": 0.5847,
+   "priceChg60": -0.0355,
+   "priceChg30": -0.0144,
+   "listedDropFromHigh": -0.233,
+   "buySurge": 0.1518,
+   "buyLevel": 64.5,
+   "buyPctile": 0.516,
+   "price": 788,
+   "listed": 260,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +35.2%（对数斜率 +54.8%）",
-    "同期价格 -1.7%（没涨）",
-    "在售距 60 日高 -24.5%",
-    "求购 30 日中位比前段 +18.8%（66.5 单 vs 前段 56.0 单）",
-    "同 tier 求购 p90 = 113.0 单"
+    "在售 60 日中位比前 60 日 +35.9%（对数斜率 +58.5%）",
+    "同期价格 -3.5%（没涨）",
+    "在售距 60 日高 -23.3%",
+    "求购 30 日中位比前段 +15.2%（64.5 单 vs 前段 56.0 单）",
+    "同 tier 求购 p90 = 112.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
+  },
+  {
+   "gid": "1605",
+   "name": "MP9 | 焦油缠绕 (崭新出厂)",
+   "tier": "mid",
+   "kinds": [
+    "A"
+   ],
+   "listedSurge": 0.2541,
+   "listedSlope60": -0.1194,
+   "priceChg60": -0.3584,
+   "priceChg30": 0.3996,
+   "listedDropFromHigh": -0.2252,
+   "buySurge": 0.0556,
+   "buyLevel": 28.5,
+   "buyPctile": 0.2396,
+   "price": 22.38,
+   "listed": 492,
+   "inTierBuyP90": false,
+   "score": 3.91,
+   "verdict": "在售激增·挂单接货",
+   "evidence": [
+    "在售 60 日中位比前 60 日 +25.4%（对数斜率 -11.9%）",
+    "同期价格 -35.8%（没涨）",
+    "在售距 60 日高 -22.5%",
+    "求购 30 日中位比前段 +5.6%（28.5 单 vs 前段 27.0 单）",
+    "同 tier 求购 p90 = 107.0 单"
+   ],
+   "staleDays": 0,
+   "asOf": "2026-11-13"
   },
   {
    "gid": "17850",
@@ -1448,28 +1531,58 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.5362,
-   "listedSlope60": 0.6013,
-   "priceChg60": -0.4725,
-   "priceChg30": -0.1947,
-   "listedDropFromHigh": -0.2137,
+   "listedSurge": 0.54,
+   "listedSlope60": 0.5389,
+   "priceChg60": -0.4634,
+   "priceChg30": -0.1749,
+   "listedDropFromHigh": -0.2341,
    "buySurge": 0.25,
    "buyLevel": 10,
-   "buyPctile": 0.0495,
-   "price": 6.33,
-   "listed": 309,
+   "buyPctile": 0.0499,
+   "price": 6.37,
+   "listed": 301,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +53.6%（对数斜率 +60.1%）",
-    "同期价格 -47.3%（没涨）",
-    "在售距 60 日高 -21.4%",
+    "在售 60 日中位比前 60 日 +54.0%（对数斜率 +53.9%）",
+    "同期价格 -46.3%（没涨）",
+    "在售距 60 日高 -23.4%",
     "求购 30 日中位比前段 +25.0%（10.0 单 vs 前段 8.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
+  },
+  {
+   "gid": "18150",
+   "name": "新星 | 幽灵迷彩 (崭新出厂)",
+   "tier": "micro",
+   "kinds": [
+    "A"
+   ],
+   "listedSurge": 0.5556,
+   "listedSlope60": 0.2956,
+   "priceChg60": -0.2406,
+   "priceChg30": -0.2425,
+   "listedDropFromHigh": -0.1528,
+   "buySurge": 0.4,
+   "buyLevel": 7,
+   "buyPctile": 0.0166,
+   "price": 18.15,
+   "listed": 61,
+   "inTierBuyP90": false,
+   "score": 3.91,
+   "verdict": "在售激增·挂单接货",
+   "evidence": [
+    "在售 60 日中位比前 60 日 +55.6%（对数斜率 +29.6%）",
+    "同期价格 -24.1%（没涨）",
+    "在售距 60 日高 -15.3%",
+    "求购 30 日中位比前段 +40.0%（7.0 单 vs 前段 5.0 单）",
+    "同 tier 求购 p90 = 379.8 单"
+   ],
+   "staleDays": 0,
+   "asOf": "2026-11-13"
   },
   {
    "gid": "18736",
@@ -1479,27 +1592,27 @@
     "A"
    ],
    "listedSurge": 0.2778,
-   "listedSlope60": 0.6544,
+   "listedSlope60": 0.6527,
    "priceChg60": -0.4902,
-   "priceChg30": -0.2851,
+   "priceChg30": -0.2724,
    "listedDropFromHigh": -0.169,
    "buySurge": 0.6667,
    "buyLevel": 5,
-   "buyPctile": 0.0247,
+   "buyPctile": 0.0249,
    "price": 31.49,
    "listed": 59,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +27.8%（对数斜率 +65.4%）",
+    "在售 60 日中位比前 60 日 +27.8%（对数斜率 +65.3%）",
     "同期价格 -49.0%（没涨）",
     "在售距 60 日高 -16.9%",
     "求购 30 日中位比前段 +66.7%（5.0 单 vs 前段 3.0 单）",
-    "同 tier 求购 p90 = 182.0 单"
+    "同 tier 求购 p90 = 180.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "20400",
@@ -1509,27 +1622,27 @@
     "A"
    ],
    "listedSurge": 0.5238,
-   "listedSlope60": -0.0036,
-   "priceChg60": -0.4172,
-   "priceChg30": -0.2874,
-   "listedDropFromHigh": -0.2208,
-   "buySurge": 0.5,
-   "buyLevel": 10.5,
-   "buyPctile": 0.0246,
-   "price": 5.95,
-   "listed": 60,
+   "listedSlope60": -0.0274,
+   "priceChg60": -0.4119,
+   "priceChg30": -0.2861,
+   "listedDropFromHigh": -0.2468,
+   "buySurge": 0.4286,
+   "buyLevel": 10,
+   "buyPctile": 0.0237,
+   "price": 5.94,
+   "listed": 58,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +52.4%（对数斜率 -0.4%）",
-    "同期价格 -41.7%（没涨）",
-    "在售距 60 日高 -22.1%",
-    "求购 30 日中位比前段 +50.0%（10.5 单 vs 前段 7.0 单）",
-    "同 tier 求购 p90 = 384.0 单"
+    "在售 60 日中位比前 60 日 +52.4%（对数斜率 -2.7%）",
+    "同期价格 -41.2%（没涨）",
+    "在售距 60 日高 -24.7%",
+    "求购 30 日中位比前段 +42.9%（10.0 单 vs 前段 7.0 单）",
+    "同 tier 求购 p90 = 379.8 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "6350",
@@ -1538,28 +1651,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.2472,
-   "listedSlope60": 0.0966,
-   "priceChg60": -0.2235,
-   "priceChg30": 0.1725,
-   "listedDropFromHigh": -0.1044,
-   "buySurge": -0.0857,
+   "listedSurge": 0.25,
+   "listedSlope60": 0.0847,
+   "priceChg60": -0.2015,
+   "priceChg30": 0.1503,
+   "listedDropFromHigh": -0.0904,
+   "buySurge": -0.0588,
    "buyLevel": 32,
-   "buyPctile": 0.2642,
-   "price": 66,
-   "listed": 446,
+   "buyPctile": 0.269,
+   "price": 63,
+   "listed": 453,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +24.7%（对数斜率 +9.7%）",
-    "同期价格 -22.4%（没涨）",
-    "在售距 60 日高 -10.4%",
-    "求购 30 日中位比前段 -8.6%（32.0 单 vs 前段 35.0 单）",
-    "同 tier 求购 p90 = 109.0 单"
+    "在售 60 日中位比前 60 日 +25.0%（对数斜率 +8.5%）",
+    "同期价格 -20.2%（没涨）",
+    "在售距 60 日高 -9.0%",
+    "求购 30 日中位比前段 -5.9%（32.0 单 vs 前段 34.0 单）",
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "643",
@@ -1568,28 +1681,28 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.8018,
-   "listedSlope60": 0.9067,
-   "priceChg60": -0.4296,
-   "priceChg30": -0.1776,
-   "listedDropFromHigh": -0.1908,
-   "buySurge": 0.2083,
-   "buyLevel": 14.5,
-   "buyPctile": 0.1197,
-   "price": 50.99,
-   "listed": 263,
+   "listedSurge": 0.9293,
+   "listedSlope60": 0.7215,
+   "priceChg60": -0.3688,
+   "priceChg30": -0.0867,
+   "listedDropFromHigh": -0.2,
+   "buySurge": 0.25,
+   "buyLevel": 15,
+   "buyPctile": 0.1261,
+   "price": 56.49,
+   "listed": 260,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +80.2%（对数斜率 +90.7%）",
-    "同期价格 -43.0%（没涨）",
-    "在售距 60 日高 -19.1%",
-    "求购 30 日中位比前段 +20.8%（14.5 单 vs 前段 12.0 单）",
-    "同 tier 求购 p90 = 109.0 单"
+    "在售 60 日中位比前 60 日 +92.9%（对数斜率 +72.1%）",
+    "同期价格 -36.9%（没涨）",
+    "在售距 60 日高 -20.0%",
+    "求购 30 日中位比前段 +25.0%（15.0 单 vs 前段 12.0 单）",
+    "同 tier 求购 p90 = 107.0 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
   },
   {
    "gid": "874",
@@ -1598,28 +1711,58 @@
    "kinds": [
     "A"
    ],
-   "listedSurge": 0.8954,
-   "listedSlope60": 0.0474,
-   "priceChg60": -0.2,
-   "priceChg30": 0.2108,
-   "listedDropFromHigh": -0.2237,
+   "listedSurge": 0.8841,
+   "listedSlope60": 0.0212,
+   "priceChg60": -0.1925,
+   "priceChg30": 0.0376,
+   "listedDropFromHigh": -0.2207,
    "buySurge": -0.3158,
    "buyLevel": 13,
-   "buyPctile": 0.1035,
-   "price": 90.4,
-   "listed": 517,
+   "buyPctile": 0.104,
+   "price": 86,
+   "listed": 519,
    "inTierBuyP90": false,
-   "score": 3.9,
+   "score": 3.91,
    "verdict": "在售激增·挂单接货",
    "evidence": [
-    "在售 60 日中位比前 60 日 +89.5%（对数斜率 +4.7%）",
-    "同期价格 -20.0%（没涨）",
-    "在售距 60 日高 -22.4%",
+    "在售 60 日中位比前 60 日 +88.4%（对数斜率 +2.1%）",
+    "同期价格 -19.2%（没涨）",
+    "在售距 60 日高 -22.1%",
     "求购 30 日中位比前段 -31.6%（13.0 单 vs 前段 19.0 单）",
-    "同 tier 求购 p90 = 113.0 单"
+    "同 tier 求购 p90 = 112.5 单"
    ],
    "staleDays": 0,
-   "asOf": "2026-11-12"
+   "asOf": "2026-11-13"
+  },
+  {
+   "gid": "9587",
+   "name": "P250 | 交换机 (崭新出厂)",
+   "tier": "small",
+   "kinds": [
+    "A"
+   ],
+   "listedSurge": 0.4851,
+   "listedSlope60": 0.0504,
+   "priceChg60": -0.0542,
+   "priceChg30": 0.2159,
+   "listedDropFromHigh": -0.0538,
+   "buySurge": 0.25,
+   "buyLevel": 15,
+   "buyPctile": 0.0748,
+   "price": 12.39,
+   "listed": 598,
+   "inTierBuyP90": false,
+   "score": 3.91,
+   "verdict": "在售激增·挂单接货",
+   "evidence": [
+    "在售 60 日中位比前 60 日 +48.5%（对数斜率 +5.0%）",
+    "同期价格 -5.4%（没涨）",
+    "在售距 60 日高 -5.4%",
+    "求购 30 日中位比前段 +25.0%（15.0 单 vs 前段 12.0 单）",
+    "同 tier 求购 p90 = 180.5 单"
+   ],
+   "staleDays": 0,
+   "asOf": "2026-11-13"
   }
  ]
 }
