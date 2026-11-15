@@ -2664,6 +2664,20 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
                mani-traces.counts / exit-price-compare.segTotal / strong-weak-classification.source），
                本卡页面源码里 0 处段数字面量。取不到就照实显示「未取到」。
              ============================================================ -->
+        <div class="card" id="segcal-card">
+          <h2>段集口径 <span>三个「段集」数各是什么</span></h2>
+          <p class="sm" style="margin:6px 0 10px">
+            「强弱盘」用的段集，与 <b>C 主拉升全集</b>、<b>第一版自算段集</b>不是同一个数。下面三个数逐行列出各自的来源与用途；
+            <b>本卡一个数字都不写死</b> —— 全部在渲染时从 <code>pre-rally-candidates.json</code> 的
+            <code>segmentCaliber</code> 现算，取不到就照实显示「未取到」。
+          </p>
+          <table class="tbl">
+            <thead><tr><th>数</th><th>值</th><th>来源</th><th>用途</th></tr></thead>
+            <tbody id="segcal-rows"></tbody>
+          </table>
+          <p class="segcal-why" id="segcal-why"></p>
+          <p class="hint">口径时间：<b id="segcal-time">—</b> · 三个数的定义与出处见 <code>cs-quant/build_pre_rally_candidates.cjs</code> 的 <code>segmentCaliber</code>。</p>
+        </div>
         
         <!-- ============================================================
              做盘痕迹图谱入口（2026-10-16 加）
@@ -4327,8 +4341,8 @@ function clearMkState(){
   try { renderMarketStatus(); } catch (e) {}
 }
 function mkLoadingHTML(){
-  return skelBox('正在加载行情库（3.5 MB，仅首次）…<br><span style="font-size:12px;color:var(--dim)">' +
-    '加载完就能搜索全品类，会自动继续；同一会话只下一次' +
+  return skelBox('正在加载行情库（精简版优先，仅首次）…<br><span style="font-size:12px;color:var(--dim)">' +
+    '加载完就能搜索站内全品类，会自动继续；同一会话只下一次' +
     (mkProgress >= 0 ? ('　<b>已下 ' + mkProgress + '%</b>') : '') + '</span>' +
     '<span class="mk-prog"><i' + (mkProgress >= 0 ? (' style="width:' + Math.max(6, Math.min(100, mkProgress)) + '%"') : '') + '></i></span>');
 }
@@ -4382,38 +4396,59 @@ function writeMarketCache(j){                     // 后台落盘，失败不影
 /* 真的去下载。注意：这是底层实现，不要在打开 App 时直接调用它 ——
    入口一律走 ensureMarket()，只有「选择品种 / 刷新全部现价」才会触发。
    manual=true 表示用户主动点的，失败要弹横幅。 */
-async function loadMarket(manual){
+/* ★ 2026-11-16 问题③：线上 market.json 3.49 MB（22,243 件）在 ~50 KB/s 的边缘链路上要 18 秒
+   （gzip 942 KB）/ 70 秒（未压缩），用户看到的就是「请求超时」。而站内数据只引用 2,015 个 gid（9%）。
+   处理：默认先下 market-lite.json（346 KB / gzip 92 KB ≈ 2 秒），404 或格式不对再回退全量。
+   全量仍然发布、仍然可加载 —— 只有「精简库里搜不到」时才按需点按钮下全量（不改变任何功能）。 */
+const MK_FULL_URL = './market.json';
+const MK_LITE_URL = './market-lite.json';
+let marketIsFull = false;
+
+async function fetchMarketDoc(url){
+  const r = await fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + '_=' + Date.now(), { cache: 'no-store' });
+  if (!r || !r.ok) throw new Error('HTTP ' + ((r && r.status) || '?'));
+  let j;
+  const total = Number((r.headers && r.headers.get && r.headers.get('content-length')) || 0);
+  const enc = String((r.headers && r.headers.get && r.headers.get('content-encoding')) || '');
+  if (r.body && r.body.getReader && total > 0 && !enc){    /* 只有未压缩时才按字节报百分比 */
+    const reader = r.body.getReader();
+    const chunks = []; let got = 0;
+    for (;;){
+      const step = await reader.read();
+      if (step.done) break;
+      chunks.push(step.value); got += step.value.length;
+      mkProgress = Math.min(99, Math.round(got / total * 100));
+      try { renderPickListState(); renderMarketStatus(); } catch (e) {}
+    }
+    const merged = new Uint8Array(got);
+    let off = 0;
+    for (let i = 0; i < chunks.length; i++){ merged.set(chunks[i], off); off += chunks[i].length; }
+    j = JSON.parse(new TextDecoder('utf-8').decode(merged));
+  } else {
+    mkProgress = -1;
+    try { renderMarketStatus(); } catch (e) {}
+    j = await r.json();
+  }
+  if (!j || !j.prices || typeof j.prices !== 'object') throw new Error('不是行情文件格式');
+  return j;
+}
+
+async function loadMarket(manual, full){
   if (marketData) return true;
   if (marketLoadPromise) return marketLoadPromise;
-  const url = String(state.settings.marketUrl || './market.json').trim() || './market.json';
+  const custom = String(state.settings.marketUrl || MK_FULL_URL).trim() || MK_FULL_URL;
+  const urls = (full || custom !== MK_FULL_URL) ? [custom] : [MK_LITE_URL, custom];
   mkProgress = -1;
   setMkState('loading');
   marketLoadPromise = (async function(){
     try {
-      const r = await fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + '_=' + Date.now(), { cache: 'no-store' });
-      if (!r || !r.ok) throw new Error('HTTP ' + ((r && r.status) || '?'));
-      let j;
-      const total = Number((r.headers && r.headers.get && r.headers.get('content-length')) || 0);
-      if (r.body && r.body.getReader && total > 0){            /* 有 content-length 就报百分比 */
-        const reader = r.body.getReader();
-        const chunks = []; let got = 0;
-        for (;;){
-          const step = await reader.read();
-          if (step.done) break;
-          chunks.push(step.value); got += step.value.length;
-          mkProgress = Math.min(99, Math.round(got / total * 100));
-          try { renderPickListState(); renderMarketStatus(); } catch (e) {}
-        }
-        const merged = new Uint8Array(got);
-        let off = 0;
-        for (let i = 0; i < chunks.length; i++){ merged.set(chunks[i], off); off += chunks[i].length; }
-        j = JSON.parse(new TextDecoder('utf-8').decode(merged));
-      } else {
-        mkProgress = -1;
-        try { renderMarketStatus(); } catch (e) {}
-        j = await r.json();
+      let j = null, lastErr = null, used = '';
+      for (const u of urls){
+        try { j = await fetchMarketDoc(u); used = u; break; }
+        catch (e){ lastErr = e; }
       }
-      if (!j || !j.prices || typeof j.prices !== 'object') throw new Error('不是行情文件格式');
+      if (!j) throw lastErr || new Error('打不开行情文件');
+      marketIsFull = !(j.lite && j.lite.liteCount);
       marketData = j;
       state.settings.marketTime = j.updatedAtText || '';
       state.settings.marketCount = marketKeys().length;
@@ -4424,10 +4459,11 @@ async function loadMarket(manual){
       writeMarketCache(j);                          // 后台写 IndexedDB（不阻塞交互）
       if (!signalsData && j.signals && typeof j.signals === 'object'){ signalsData = j.signals; signalsState = 'ok'; }
       renderSignals(); renderWhales(); renderDataTime(); renderSpread();
-      /* ★ M10：market.json 是 3.5 MB 按需加载的，到手后让「数据新鲜度」卡重画一次 */
+      /* ★ M10：行情按需加载，到手后让「数据新鲜度」卡重画一次 */
       try { refreshFreshnessCard(); } catch (e) {}
       if (manual){
-        showBanner('行情已更新：' + marketKeys().length.toLocaleString('zh-CN') + ' 件（' + (j.updatedAtText || '') + '）');
+        showBanner('行情已更新：' + marketKeys().length.toLocaleString('zh-CN') + ' 件' +
+          (marketIsFull ? '' : '（精简库）') + '（' + (j.updatedAtText || '') + '）');
         setTimeout(function(){ $('banner').hidden = true; }, 4000);
       }
       return true;
@@ -4444,6 +4480,21 @@ async function loadMarket(manual){
   try { return await marketLoadPromise; } finally { marketLoadPromise = null; }
 }
 
+/* 精简库里没搜到 → 用户主动点「在全部 N 件里搜」时才下全量（显式、可取消、失败保留精简库） */
+async function requestFullMarket(){
+  if (marketData && marketIsFull) return true;
+  const was = marketData;
+  marketData = null;
+  try {
+    const ok = await loadMarket(true, true);
+    if (!ok && was) marketData = was;
+    if (ok){
+      try { renderPickList(($('pick-q') && $('pick-q').value) || ''); renderSpread(); renderSignals(); renderDataTime(); } catch (e) {}
+    }
+    return ok;
+  } catch (e){ if (was) marketData = was; return false; }
+}
+
 /* 懒加载入口（唯一对外 API）：
    内存 → IndexedDB 旧缓存（本会话已下过才有）→ 网络；同一会话只下第一次。
    opt.manual=true 表示用户主动点的，失败要弹横幅。 */
@@ -4454,6 +4505,7 @@ async function ensureMarket(opt){
   const cached = await readMarketCache();
   if (cached && !o.force){
     marketData = cached;
+    marketIsFull = !(cached.lite && cached.lite.liteCount);
     state.settings.marketTime = cached.updatedAtText || '';
     state.settings.marketCount = marketKeys().length;
     marketErr = '';
@@ -4462,7 +4514,7 @@ async function ensureMarket(opt){
     renderSignals(); renderWhales(); renderDataTime(); renderSpread();
     return true;
   }
-  return loadMarket(!!o.manual);
+  return loadMarket(!!o.manual, !!o.full);
 }
 
 /* ---------- 我的真实持仓（悠悠截图台账：件数/成本是权威；价格每 3 分钟按现价重算） ----------
@@ -5556,14 +5608,23 @@ function renderPickListState(){
     box.innerHTML = '<div class="sheet-retry" data-retry="1">' + mkFailHTML('选择品种') + '</div>';
     return;
   }
-  box.innerHTML = '<div class="sheet-hint">行情库还没加载（3.5 MB，仅首次）。<br>点持仓卡上的「🔍 选择品种」时会自动下载一次。</div>';
+  box.innerHTML = '<div class="sheet-hint">行情库还没加载（先下精简版 ~346 KB，仅首次）。<br>点持仓卡上的「🔍 选择品种」时会自动下载一次。</div>';
 }
 function renderPickList(q){
   const box = $('pick-list'); if (!box) return;
   if (!marketData){ renderPickListState(); return; }
   if (String(q || '').trim().length < 2){ box.innerHTML = '<div class="sheet-hint">输入至少 2 个字符（英文名或中文名）<br>例：Redline / 红线 / Asiimov / Fade</div>'; return; }
   const rows = searchMarket(q, 40);
-  if (!rows.length){ box.innerHTML = '<div class="sheet-hint">没找到匹配的饰品</div>'; return; }
+  if (!rows.length){
+    if (marketData && marketData.lite && marketData.lite.liteCount && !marketIsFull){
+      box.innerHTML = '<div class="sheet-hint">精简行情库（站内 ' + Number(marketData.lite.liteCount).toLocaleString('zh-CN') +
+        ' 件）里没找到。<br><button class="btn sm" type="button" data-full-load="1">在全部 ' +
+        Number(marketData.lite.fullCount || 0).toLocaleString('zh-CN') + ' 件里搜（下全量 3.5 MB）</button></div>';
+    } else {
+      box.innerHTML = '<div class="sheet-hint">没找到匹配的饰品</div>';
+    }
+    return;
+  }
   box.innerHTML = rows.map(function(r){
     return '<div class="sheet-item" data-name="' + esc(r.name) + '">' +
       '<span class="nm">' + esc(r.name) + (r.cn ? ('<br><span style="color:var(--dim);font-size:11.5px">' + esc(r.cn) + '</span>') : '') + '</span>' +
@@ -5648,6 +5709,16 @@ function initMarket(){
   $('pick-list').addEventListener('click', function(e){
     const rt = e.target.closest ? e.target.closest('[data-retry]') : null;
     if (rt){ retryMarketLoad(); return; }                       /* 失败后的「点此重试」 */
+    const fl = e.target.closest ? e.target.closest('[data-full-load]') : null;
+    if (fl){
+      fl.disabled = true; fl.textContent = '正在下载全量行情库（3.5 MB）…';
+      requestFullMarket().then(function(){
+        renderPickList(($('pick-q') && $('pick-q').value) || '');
+      }, function(){
+        renderPickList(($('pick-q') && $('pick-q').value) || '');
+      });
+      return;
+    }
     const it = e.target.closest('.sheet-item');
     if (it && it.dataset.name) applyPick(it.dataset.name);
   });
