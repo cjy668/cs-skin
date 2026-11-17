@@ -3,120 +3,50 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1794831453577,
-   "atText": "2026/11/16 20:17:33",
+   "at": 1794889905474,
+   "atText": "2026/11/17 12:31:45",
    "level": "ok",
-   "compared": 4962,
+   "compared": 3578,
    "gids": 1654,
    "medianPct": 0,
-   "p90Pct": 0.7194,
+   "p90Pct": 0.5427,
    "maxPct": 27.8345,
-   "over5PctShare": 0.9875,
-   "conflictGidCount": 48,
-   "conflictShare": 2.9021,
+   "over5PctShare": 0.6708,
+   "conflictGidCount": 23,
+   "conflictShare": 1.3906,
    "conflictGids": [
-    144,
+    21,
     154,
-    754,
     874,
-    967,
     1012,
     1044,
-    1127,
-    1129,
-    1243,
     1393,
-    1463,
     1686,
-    1759,
-    1814,
-    2071,
     2166,
     2184,
-    2192,
     2295,
     6380,
-    6538,
-    6873,
-    7366,
-    7373,
-    8104,
     8139,
     9521,
-    9556,
-    9583,
-    9612,
     11646,
     11683,
     12196,
-    12253,
+    12366,
     12526,
-    13421,
-    13461,
     17491,
-    17544,
-    18240,
     18259,
-    19252,
     19611,
-    20320,
     20440,
-    21732,
-    24995
+    21732
    ],
    "samples": [
     {
-     "gid": 1686,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 9.12,
-     "official": 9.12,
+     "gid": 21,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 12.98,
+     "official": 12.98,
      "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 2295,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 3.6,
-     "official": 3.6,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9556,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 1.36,
-     "official": 1.5,
-     "diffPct": 9.3333,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9583,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 59,
-     "official": 62.55,
-     "diffPct": 5.6755,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9612,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 68.6,
-     "official": 73,
-     "diffPct": 6.0274,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 12196,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 37.4,
-     "official": 37,
-     "diffPct": 1.0811,
      "src": "intraday_agg"
     },
     {
@@ -138,38 +68,20 @@
      "src": "intraday_agg"
     },
     {
-     "gid": 9556,
-     "trueDay": "2026-11-13",
-     "officialLabel": "2026-11-12",
-     "ours": 1.59,
-     "official": 1.6,
-     "diffPct": 0.625,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9583,
-     "trueDay": "2026-11-13",
-     "officialLabel": "2026-11-12",
-     "ours": 57.9,
-     "official": 57.9,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9612,
-     "trueDay": "2026-11-13",
-     "officialLabel": "2026-11-12",
-     "ours": 67.89,
-     "official": 67.89,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
      "gid": 12196,
      "trueDay": "2026-11-13",
      "officialLabel": "2026-11-12",
      "ours": 34.9,
      "official": 34.9,
+     "diffPct": 0,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 21,
+     "trueDay": "2026-11-14",
+     "officialLabel": "2026-11-13",
+     "ours": 12.5,
+     "official": 12.5,
      "diffPct": 0,
      "src": "intraday_agg"
     },
@@ -192,33 +104,6 @@
      "src": "intraday_agg"
     },
     {
-     "gid": 9556,
-     "trueDay": "2026-11-14",
-     "officialLabel": "2026-11-13",
-     "ours": 1.59,
-     "official": 1.59,
-     "diffPct": 0,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9583,
-     "trueDay": "2026-11-14",
-     "officialLabel": "2026-11-13",
-     "ours": 57.69,
-     "official": 57.59,
-     "diffPct": 0.1736,
-     "src": "intraday_agg"
-    },
-    {
-     "gid": 9612,
-     "trueDay": "2026-11-14",
-     "officialLabel": "2026-11-13",
-     "ours": 65.4,
-     "official": 65,
-     "diffPct": 0.6154,
-     "src": "intraday_agg"
-    },
-    {
      "gid": 12196,
      "trueDay": "2026-11-14",
      "officialLabel": "2026-11-13",
@@ -228,47 +113,138 @@
      "src": "intraday_agg"
     },
     {
-     "gid": 144,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 1230,
-     "official": 1295,
-     "diffPct": 5.0193,
-     "src": "rt_snapshot"
+     "gid": 21,
+     "trueDay": "2026-11-15",
+     "officialLabel": "2026-11-14",
+     "ours": 15,
+     "official": 16.29,
+     "diffPct": 7.919,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 1686,
+     "trueDay": "2026-11-15",
+     "officialLabel": "2026-11-14",
+     "ours": 10.44,
+     "official": 10.44,
+     "diffPct": 0,
+     "src": "intraday_agg"
+    },
+    {
+     "gid": 2295,
+     "trueDay": "2026-11-15",
+     "officialLabel": "2026-11-14",
+     "ours": 3.82,
+     "official": 3.82,
+     "diffPct": 0,
+     "src": "intraday_agg"
     },
     {
      "gid": 154,
-     "trueDay": "2026-11-12",
-     "officialLabel": "2026-11-11",
-     "ours": 2270.91,
-     "official": 2270.87,
-     "diffPct": 0.0018,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 2100,
+     "official": 2257.1,
+     "diffPct": 6.9603,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 874,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 90.4,
+     "official": 90.4,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 1012,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 42.9,
+     "official": 40,
+     "diffPct": 7.25,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 1044,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 11,
+     "official": 11,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 1393,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 132.91,
+     "official": 132.91,
+     "diffPct": 0,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 2166,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 144,
+     "official": 155,
+     "diffPct": 7.0968,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 2184,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 2.64,
+     "official": 2.79,
+     "diffPct": 5.3763,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 6380,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 7.48,
+     "official": 7.99,
+     "diffPct": 6.383,
+     "src": "rt_snapshot"
+    },
+    {
+     "gid": 8139,
+     "trueDay": "2026-11-13",
+     "officialLabel": "2026-11-12",
+     "ours": 4.21,
+     "official": 4.21,
+     "diffPct": 0,
      "src": "rt_snapshot"
     }
    ],
    "window": [
-    "2026-11-12",
     "2026-11-13",
-    "2026-11-14"
+    "2026-11-14",
+    "2026-11-15"
    ],
-   "note": "自建日线 vs 官方：4962 个 (gid×日) 可比，完全相等 67.6542%，中位差异 0%，>5% 的品 48/1654 个 → 口径一致"
+   "note": "自建日线 vs 官方：3578 个 (gid×日) 可比，完全相等 70.8776%，中位差异 0%，>5% 的品 23/1654 个 → 口径一致"
   },
   "merge_junction": {
-   "at": 1794831404260,
-   "atText": "2026/11/16 20:16:44",
+   "at": 1794889862731,
+   "atText": "2026/11/17 12:31:02",
    "level": "bad",
-   "officialLatestLabel": "2026-11-13",
-   "officialLatestTrueDay": "2026-11-14",
-   "overlapDays": 33,
+   "officialLatestLabel": "2026-11-14",
+   "officialLatestTrueDay": "2026-11-15",
+   "overlapDays": 34,
    "appendedDays": 2,
-   "compared": 4991,
+   "compared": 5118,
    "medianPct": 0,
-   "p90Pct": 0.0175,
+   "p90Pct": 0.0536,
    "maxPct": 50,
-   "over5PctShare": 0.5009,
-   "conflictGidCount": 21,
-   "conflictShare": 10.0962,
+   "over5PctShare": 0.508,
+   "conflictGidCount": 22,
+   "conflictShare": 10.5769,
    "conflictGids": [
+    21,
     807,
     883,
     986,
@@ -278,11 +254,11 @@
     2103,
     2218,
     2295,
-    6543,
     9521,
     9556,
     9583,
     9612,
+    9618,
     9655,
     9725,
     12196,
@@ -401,6 +377,15 @@
      "diffPct": 13.7931
     },
     {
+     "gid": 16498,
+     "key": "n",
+     "trueDay": "2026-11-15",
+     "officialLabel": "2026-11-14",
+     "official": 1768,
+     "ours": 1556,
+     "diffPct": 11.991
+    },
+    {
      "gid": 1891,
      "key": "p",
      "trueDay": "2026-10-22",
@@ -462,32 +447,24 @@
      "official": 10.15,
      "ours": 9.27,
      "diffPct": 8.67
-    },
-    {
-     "gid": 2295,
-     "key": "p",
-     "trueDay": "2026-11-13",
-     "officialLabel": "2026-11-12",
-     "official": 3.92,
-     "ours": 3.6,
-     "diffPct": 8.1633
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5009%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.508%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1794831393025,
-   "atText": "2026/11/16 20:16:33",
+   "at": 1794889853529,
+   "atText": "2026/11/17 12:30:53",
    "level": "bad",
-   "compared": 4991,
+   "compared": 5118,
    "gids": 208,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.0175,
-   "over5PctShare": 0.5009,
-   "conflictGidCount": 21,
-   "conflictShare": 10.0962,
+   "p90Pct": 0.0536,
+   "over5PctShare": 0.508,
+   "conflictGidCount": 22,
+   "conflictShare": 10.5769,
    "conflictGids": [
+    21,
     807,
     883,
     986,
@@ -497,11 +474,11 @@
     2103,
     2218,
     2295,
-    6543,
     9521,
     9556,
     9583,
     9612,
+    9618,
     9655,
     9725,
     12196,
@@ -623,37 +600,33 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1794831404540,
-   "atText": "2026/11/16 20:16:44",
-   "level": "warn",
-   "compared": 127,
+   "at": 1794889863003,
+   "atText": "2026/11/17 12:31:03",
+   "level": "ok",
+   "compared": 105,
    "medianPct": 0,
-   "p90Pct": 3.5398,
-   "maxPct": 23.2558,
-   "over5PctShare": 4.7244,
-   "conflictGidCount": 6,
+   "p90Pct": 0.6954,
+   "maxPct": 7.8313,
+   "over5PctShare": 1.9048,
+   "conflictGidCount": 2,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1794831453577,
- "atText": "2026/11/16 20:17:33",
+ "at": 1794889905474,
+ "atText": "2026/11/17 12:31:45",
  "conflictGids": [
   {
-   "gid": 144,
+   "gid": 21,
    "in": [
-    "daily_verify"
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
    "gid": 154,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 754,
    "in": [
     "daily_verify"
    ]
@@ -679,12 +652,6 @@
    ]
   },
   {
-   "gid": 967,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 986,
    "in": [
     "merge_junction",
@@ -704,31 +671,7 @@
    ]
   },
   {
-   "gid": 1127,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1129,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1243,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 1393,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1463,
    "in": [
     "daily_verify"
    ]
@@ -742,15 +685,8 @@
    ]
   },
   {
-   "gid": 1759,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 1814,
    "in": [
-    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -760,12 +696,6 @@
    "in": [
     "merge_junction",
     "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 2071,
-   "in": [
-    "daily_verify"
    ]
   },
   {
@@ -783,12 +713,6 @@
   },
   {
    "gid": 2184,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 2192,
    "in": [
     "daily_verify"
    ]
@@ -815,43 +739,6 @@
    ]
   },
   {
-   "gid": 6538,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 6543,
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 6873,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 7366,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 7373,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 8104,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 8139,
    "in": [
     "daily_verify"
@@ -868,7 +755,6 @@
   {
    "gid": 9556,
    "in": [
-    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -876,7 +762,6 @@
   {
    "gid": 9583,
    "in": [
-    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -884,7 +769,13 @@
   {
    "gid": 9612,
    "in": [
-    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 9618,
+   "in": [
     "merge_junction",
     "intraday_calibration"
    ]
@@ -924,7 +815,7 @@
    ]
   },
   {
-   "gid": 12253,
+   "gid": 12366,
    "in": [
     "daily_verify"
    ]
@@ -950,18 +841,6 @@
    ]
   },
   {
-   "gid": 13421,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 13461,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 17450,
    "in": [
     "merge_junction",
@@ -975,22 +854,10 @@
    ]
   },
   {
-   "gid": 17544,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 18129,
    "in": [
     "merge_junction",
     "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 18240,
-   "in": [
-    "daily_verify"
    ]
   },
   {
@@ -1000,19 +867,7 @@
    ]
   },
   {
-   "gid": 19252,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 19611,
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 20320,
    "in": [
     "daily_verify"
    ]
@@ -1028,33 +883,22 @@
    "in": [
     "daily_verify"
    ]
-  },
-  {
-   "gid": 24995,
-   "in": [
-    "daily_verify"
-   ]
   }
  ],
- "conflictGidCount": 61,
+ "conflictGidCount": 40,
  "conflictSamples": [
   {
-   "gid": 144,
-   "name": "AK-47 | 皇后 (崭新出厂)",
+   "gid": 21,
+   "name": "USP 消音版 | 力矩 (崭新出厂)",
    "in": [
-    "daily_verify"
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
    ]
   },
   {
    "gid": 154,
    "name": "AK-47 | 荒野反叛 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 754,
-   "name": "法玛斯 | 灯神 (崭新出厂)",
    "in": [
     "daily_verify"
    ]
@@ -1083,13 +927,6 @@
    ]
   },
   {
-   "gid": 967,
-   "name": "G3SG1 | 极地迷彩 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 986,
    "name": "G3SG1 | 多变迷彩 (崭新出厂)",
    "in": [
@@ -1112,36 +949,8 @@
    ]
   },
   {
-   "gid": 1127,
-   "name": "格洛克 18 型 | 铁之作 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1129,
-   "name": "格洛克 18 型 | 铁之作 (略有磨损)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1243,
-   "name": "M4A1消音版 | 金蛇缠绕 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 1393,
    "name": "MAC-10 | 渐变琥珀 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
-   "gid": 1463,
-   "name": "MAC-10 | 冉吉 (崭新出厂)",
    "in": [
     "daily_verify"
    ]
@@ -1156,17 +965,9 @@
    ]
   },
   {
-   "gid": 1759,
-   "name": "P2000 | 银质 (崭新出厂)",
-   "in": [
-    "daily_verify"
-   ]
-  },
-  {
    "gid": 1814,
    "name": "P250 | 铠甲 (崭新出厂)",
    "in": [
-    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -1180,12 +981,67 @@
    ]
   },
   {
-   "gid": 2071,
-   "name": "PP-野牛 | 死亡主宰者 (崭新出厂)",
+   "gid": 2103,
+   "name": "R8 左轮手枪 | 渐变琥珀 (崭新出厂)",
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 2166,
+   "name": "SCAR-20 | 翡翠色调 (崭新出厂)",
    "in": [
     "daily_verify"
    ]
+  },
+  {
+   "gid": 2184,
+   "name": "SCAR-20 | 丛林爆发 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 2218,
+   "name": "SG 553 | 军队之辉 (崭新出厂)",
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 2295,
+   "name": "SSG 08 | 渐变强酸 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 6380,
+   "name": "Tec-9 | 地下水 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 8139,
+   "name": "R8 左轮手枪 | 稳 (崭新出厂)",
+   "in": [
+    "daily_verify"
+   ]
+  },
+  {
+   "gid": 9521,
+   "name": "UMP-45 | 设施系列·深色图 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 61 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 40 个品差异 >5%，请确认口径"
 }
