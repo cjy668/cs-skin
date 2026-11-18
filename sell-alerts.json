@@ -1,7 +1,7 @@
 {
  "v": 1,
- "updatedAt": 1794983047052,
- "updatedAtText": "2026/11/18 14:24:07",
+ "updatedAt": 1794993807314,
+ "updatedAtText": "2026/11/18 17:23:27",
  "source": "csqaq 官方 API 日线（platform=2）· 由 sell_alert.cjs 判定",
  "validation": {
   "status": "✅ 已通过样本外检验（845 标的 × 192,437 行）",
@@ -23,8 +23,8 @@
   "nc30_up": 0.1,
   "nc30_dispatch": 0.25
  },
- "livePriceAt": 1794982988005,
- "livePriceUsed": 58,
+ "livePriceAt": 1794993785292,
+ "livePriceUsed": 59,
  "scanned": 1978,
  "seriesRange": [
   {
@@ -90,7 +90,7 @@
  ],
  "counts": {
   "act_派发背离": 10,
-  "state_供给涌入": 32,
+  "state_供给涌入": 31,
   "state_横盘增发": 38
  },
  "types": [
@@ -265,7 +265,7 @@
    "kind": "risk",
    "direction": "exit",
    "desc": "价格 30 日涨 ≥10%（<35%）而在售量同步增加 —— 均衡缓涨档里供给持续涌入，量价开始背离。",
-   "count": 32,
+   "count": 31,
    "verdict": {
     "verdict": "杀掉",
     "verified": false,
@@ -330,19 +330,6 @@
      "listed": 182,
      "buyNum": 5,
      "exterior": "略有磨损"
-    },
-    {
-     "name": "4243",
-     "gid": 4243,
-     "price": 71,
-     "priceFromLive": true,
-     "date": "2026-10-13",
-     "pc30": 0.1025,
-     "nc30": 0.0207,
-     "bc30": 0,
-     "listed": 1037,
-     "buyNum": 15,
-     "exterior": ""
     },
     {
      "name": "FN57 | 暗夜聚合 (略有磨损)",
@@ -746,10 +733,10 @@
     {
      "name": "MP7 | 死亡骷髅 (略有磨损)",
      "gid": 1560,
-     "price": 129.5,
+     "price": 130,
      "priceFromLive": true,
      "date": "2026-10-13",
-     "pc30": 0.0158,
+     "pc30": 0.0198,
      "nc30": 7.6716,
      "bc30": -0.1333,
      "listed": 581,
@@ -1249,8 +1236,8 @@
    "mkt": 2949,
    "value": 8847,
    "pnlRate": -0.20892315368458325,
-   "priceNow": 2200,
-   "gainVsCost": -0.4098,
+   "priceNow": 2242,
+   "gainVsCost": -0.3986,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1258,13 +1245,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3209,
+    "pc30": -0.3079,
     "nc30": -0.1064,
     "bc30": -0.1744,
     "listed": 957,
     "buyNum": 71,
     "date": "2026-10-13",
-    "price": 2200
+    "price": 2242
    },
    "action": null,
    "batches": null,
@@ -1304,8 +1291,8 @@
    "mkt": 1968.88,
    "value": 3937.76,
    "pnlRate": -0.2757476549567776,
-   "priceNow": 1429.5,
-   "gainVsCost": -0.4742,
+   "priceNow": 1470,
+   "gainVsCost": -0.4593,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1313,13 +1300,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3487,
+    "pc30": -0.3303,
     "nc30": -0.2674,
     "bc30": -0.1884,
     "listed": 567,
     "buyNum": 56,
     "date": "2026-10-13",
-    "price": 1429.5
+    "price": 1470
    },
    "action": null,
    "batches": null,
@@ -1331,9 +1318,9 @@
    "sellGate": {
     "stage": "decline",
     "stageName": "回落",
-    "stableDays": 7,
+    "stableDays": 8,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1344,7 +1331,7 @@
    },
    "stage": "decline",
    "stageName": "回落",
-   "stableDays": 7,
+   "stableDays": 8,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1359,8 +1346,8 @@
    "mkt": 3887.5,
    "value": 3887.5,
    "pnlRate": -0.20953639690931272,
-   "priceNow": 2535,
-   "gainVsCost": -0.4845,
+   "priceNow": 2539,
+   "gainVsCost": -0.4837,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1368,13 +1355,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.374,
+    "pc30": -0.373,
     "nc30": -0.0781,
     "bc30": -0.1639,
     "listed": 307,
     "buyNum": 51,
     "date": "2026-10-13",
-    "price": 2535
+    "price": 2539
    },
    "action": null,
    "batches": null,
@@ -1414,8 +1401,8 @@
    "mkt": 884.5,
    "value": 3538,
    "pnlRate": 0.09366306027820712,
-   "priceNow": 693.5,
-   "gainVsCost": -0.1425,
+   "priceNow": 728.38,
+   "gainVsCost": -0.0994,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1423,13 +1410,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1475,
+    "pc30": -0.1046,
     "nc30": 0.1489,
     "bc30": 0.3333,
     "listed": 216,
     "buyNum": 64,
     "date": "2026-10-13",
-    "price": 693.5
+    "price": 728.38
    },
    "action": null,
    "batches": null,
@@ -1441,9 +1428,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 40,
+    "stableDays": 41,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1454,7 +1441,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 40,
+   "stableDays": 41,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1469,8 +1456,8 @@
    "mkt": 1566,
    "value": 3132,
    "pnlRate": -0.14717494894486044,
-   "priceNow": 1232.5,
-   "gainVsCost": -0.3288,
+   "priceNow": 1251.5,
+   "gainVsCost": -0.3184,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1478,13 +1465,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1781,
+    "pc30": -0.1654,
     "nc30": 0.037,
     "bc30": -0.2128,
     "listed": 449,
     "buyNum": 37,
     "date": "2026-10-13",
-    "price": 1232.5
+    "price": 1251.5
    },
    "action": null,
    "batches": null,
@@ -1496,9 +1483,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 4,
+    "stableDays": 5,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1509,7 +1496,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 4,
+   "stableDays": 5,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1551,9 +1538,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 4,
+    "stableDays": 5,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1564,7 +1551,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 4,
+   "stableDays": 5,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1579,8 +1566,8 @@
    "mkt": 687.99,
    "value": 2751.96,
    "pnlRate": -0.020306158775364885,
-   "priceNow": 354.27,
-   "gainVsCost": -0.4955,
+   "priceNow": 350,
+   "gainVsCost": -0.5016,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1588,13 +1575,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4096,
+    "pc30": -0.4167,
     "nc30": 0.9366,
     "bc30": 2.1176,
     "listed": 519,
     "buyNum": 53,
     "date": "2026-10-13",
-    "price": 354.27
+    "price": 350
    },
    "action": null,
    "batches": null,
@@ -1606,9 +1593,9 @@
    "sellGate": {
     "stage": "decline",
     "stageName": "回落",
-    "stableDays": 33,
+    "stableDays": 34,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1619,7 +1606,7 @@
    },
    "stage": "decline",
    "stageName": "回落",
-   "stableDays": 33,
+   "stableDays": 34,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1634,8 +1621,8 @@
    "mkt": 258.5,
    "value": 2068,
    "pnlRate": 0.0465587044534413,
-   "priceNow": 174.5,
-   "gainVsCost": -0.2935,
+   "priceNow": 182,
+   "gainVsCost": -0.2632,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1643,13 +1630,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3939,
+    "pc30": -0.3678,
     "nc30": -0.0182,
     "bc30": 0,
     "listed": 378,
     "buyNum": 38,
     "date": "2026-10-13",
-    "price": 174.5
+    "price": 182
    },
    "action": null,
    "batches": null,
@@ -1661,9 +1648,9 @@
    "sellGate": {
     "stage": "distribute",
     "stageName": "派发",
-    "stableDays": 5,
+    "stableDays": 6,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -1679,11 +1666,11 @@
       "when": "若在售量继续堆积，再减第二个 1/3"
      }
     ],
-    "why": "处在【派发】—— 这是允许给分批比例的阶段区；已持续 5 个交易日。"
+    "why": "处在【派发】—— 这是允许给分批比例的阶段区；已持续 6 个交易日。"
    },
    "stage": "distribute",
    "stageName": "派发",
-   "stableDays": 5,
+   "stableDays": 6,
    "justSwitched": false,
    "strongReminder": true,
    "bands": [
@@ -1707,8 +1694,8 @@
    "mkt": 1244,
    "value": 1244,
    "pnlRate": -0.012698412698412698,
-   "priceNow": 867.88,
-   "gainVsCost": -0.3112,
+   "priceNow": 885.99,
+   "gainVsCost": -0.2968,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1716,13 +1703,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2217,
+    "pc30": -0.2054,
     "nc30": -0.056,
     "bc30": -0.2097,
     "listed": 388,
     "buyNum": 49,
     "date": "2026-10-13",
-    "price": 867.88
+    "price": 885.99
    },
    "action": null,
    "batches": null,
@@ -1734,9 +1721,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 3,
+    "stableDays": 4,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1747,7 +1734,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 3,
+   "stableDays": 4,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1762,8 +1749,8 @@
    "mkt": 621.5,
    "value": 1243,
    "pnlRate": -0.3696754563894523,
-   "priceNow": 830,
-   "gainVsCost": -0.1582,
+   "priceNow": 860,
+   "gainVsCost": -0.1278,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1771,13 +1758,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0252,
+    "pc30": 0.01,
     "nc30": -0.0731,
     "bc30": 0.3023,
     "listed": 596,
     "buyNum": 56,
     "date": "2026-10-13",
-    "price": 830
+    "price": 860
    },
    "action": null,
    "batches": null,
@@ -1817,8 +1804,8 @@
    "mkt": 145.5,
    "value": 1164,
    "pnlRate": -0.2769827072152654,
-   "priceNow": 174,
-   "gainVsCost": -0.1354,
+   "priceNow": 169,
+   "gainVsCost": -0.1602,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1826,13 +1813,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0451,
+    "pc30": 0.0151,
     "nc30": -0.2393,
     "bc30": 0.2258,
     "listed": 531,
     "buyNum": 38,
     "date": "2026-10-13",
-    "price": 174
+    "price": 169
    },
    "action": null,
    "batches": null,
@@ -1844,9 +1831,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 7,
+    "stableDays": 8,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1857,7 +1844,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 7,
+   "stableDays": 8,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -1872,8 +1859,8 @@
    "mkt": 80,
    "value": 800,
    "pnlRate": -0.0196078431372549,
-   "priceNow": 72,
-   "gainVsCost": -0.1176,
+   "priceNow": 84.5,
+   "gainVsCost": 0.0355,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1881,13 +1868,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3628,
+    "pc30": -0.2522,
     "nc30": 0.1033,
     "bc30": -0.5789,
     "listed": 630,
     "buyNum": 8,
     "date": "2026-10-13",
-    "price": 72
+    "price": 84.5
    },
    "action": null,
    "batches": null,
@@ -1899,9 +1886,9 @@
    "sellGate": {
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 6,
+    "stableDays": 7,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -1917,11 +1904,11 @@
       "when": "若已连续滞涨多日，可提到 2/3"
      }
     ],
-    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 6 个交易日。"
+    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 7 个交易日。"
    },
    "stage": "rallyLate",
    "stageName": "拉升末期",
-   "stableDays": 6,
+   "stableDays": 7,
    "justSwitched": false,
    "strongReminder": true,
    "bands": [
@@ -1945,8 +1932,8 @@
    "mkt": 648,
    "value": 648,
    "pnlRate": -0.2331360946745562,
-   "priceNow": 449.82,
-   "gainVsCost": -0.4677,
+   "priceNow": 447.12,
+   "gainVsCost": -0.4709,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -1954,13 +1941,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3286,
+    "pc30": -0.3327,
     "nc30": 0.0812,
     "bc30": -0.2955,
     "listed": 213,
     "buyNum": 31,
     "date": "2026-10-13",
-    "price": 449.82
+    "price": 447.12
    },
    "action": null,
    "batches": null,
@@ -1972,9 +1959,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 3,
+    "stableDays": 4,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -1985,7 +1972,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 3,
+   "stableDays": 4,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2000,8 +1987,8 @@
    "mkt": 124.67,
    "value": 623.35,
    "pnlRate": 0.008656957928802625,
-   "priceNow": 129.5,
-   "gainVsCost": 0.0477,
+   "priceNow": 130,
+   "gainVsCost": 0.0518,
    "typeId": "state_横盘增发",
    "typeLabel": "横盘派发型",
    "phase": "横盘派发型",
@@ -2009,16 +1996,16 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0158,
+    "pc30": 0.0198,
     "nc30": 7.6716,
     "bc30": -0.1333,
     "listed": 581,
     "buyNum": 13,
     "date": "2026-10-13",
-    "price": 129.5
+    "price": 130
    },
-   "action": "浮盈 4.8% → 本类型已出现：不加仓，挂 +20% 止盈单，反弹到成本上方先减 1/3",
-   "batches": 0,
+   "action": "已浮盈 5.2% → 可出第 1 批（先减 1/3）",
+   "batches": 1,
    "exitStat": "历史：首次 +20% 中位 20 天（35% 到过）、+30% 25 天（27%）、+50% 32 天（19%）；到顶中位 17 天，到顶后中位回落 -30.3%，持有 30 天中位 -4.4%。",
    "targetSell": null,
    "stopLoss": null,
@@ -2055,8 +2042,8 @@
    "mkt": 2.33,
    "value": 608.13,
    "pnlRate": -0.36684782608695654,
-   "priceNow": 3,
-   "gainVsCost": -0.1848,
+   "priceNow": 3.09,
+   "gainVsCost": -0.1603,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2064,13 +2051,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0453,
+    "pc30": 0.0767,
     "nc30": 0.3328,
     "bc30": -0.4615,
     "listed": 765,
     "buyNum": 7,
     "date": "2026-10-13",
-    "price": 3
+    "price": 3.09
    },
    "action": null,
    "batches": null,
@@ -2082,9 +2069,9 @@
    "sellGate": {
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 1,
-    "justSwitched": true,
-    "stageAsOf": "2026-11-15",
+    "stableDays": 2,
+    "justSwitched": false,
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -2100,12 +2087,12 @@
       "when": "若已连续滞涨多日，可提到 2/3"
      }
     ],
-    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 1 个交易日。"
+    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 2 个交易日。"
    },
    "stage": "rallyLate",
    "stageName": "拉升末期",
-   "stableDays": 1,
-   "justSwitched": true,
+   "stableDays": 2,
+   "justSwitched": false,
    "strongReminder": true,
    "bands": [
     {
@@ -2128,8 +2115,8 @@
    "mkt": 269.88,
    "value": 269.88,
    "pnlRate": -0.03572959839931399,
-   "priceNow": 233,
-   "gainVsCost": -0.1675,
+   "priceNow": 245,
+   "gainVsCost": -0.1246,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2137,13 +2124,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0567,
+    "pc30": -0.0081,
     "nc30": -0.3604,
     "bc30": 0.6739,
     "listed": 639,
     "buyNum": 77,
     "date": "2026-10-13",
-    "price": 233
+    "price": 245
    },
    "action": null,
    "batches": null,
@@ -2155,9 +2142,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 4,
+    "stableDays": 5,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2168,7 +2155,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 4,
+   "stableDays": 5,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2183,8 +2170,8 @@
    "mkt": 4.6,
    "value": 229.99999999999997,
    "pnlRate": -0.6753705010585744,
-   "priceNow": 3.99,
-   "gainVsCost": -0.7184,
+   "priceNow": 4,
+   "gainVsCost": -0.7177,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2192,13 +2179,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3317,
+    "pc30": -0.33,
     "nc30": -0.1797,
     "bc30": 0.0435,
     "listed": 1187,
     "buyNum": 24,
     "date": "2026-10-13",
-    "price": 3.99
+    "price": 4
    },
    "action": null,
    "batches": null,
@@ -2238,8 +2225,8 @@
    "mkt": 3.98,
    "value": 202.98,
    "pnlRate": -0.002506265664160496,
-   "priceNow": 5.45,
-   "gainVsCost": 0.3659,
+   "priceNow": 5.44,
+   "gainVsCost": 0.3634,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2247,13 +2234,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.1874,
+    "pc30": 0.1852,
     "nc30": 0.14,
     "bc30": 0,
     "listed": 114,
     "buyNum": 5,
     "date": "2026-10-13",
-    "price": 5.45
+    "price": 5.44
    },
    "action": null,
    "batches": null,
@@ -2340,8 +2327,8 @@
    "mkt": 11.98,
    "value": 155.74,
    "pnlRate": -0.34855899945622615,
-   "priceNow": 10.2,
-   "gainVsCost": -0.4454,
+   "priceNow": 11.28,
+   "gainVsCost": -0.3866,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2349,13 +2336,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4014,
+    "pc30": -0.338,
     "nc30": -0.2424,
     "bc30": -0.3529,
     "listed": 300,
     "buyNum": 11,
     "date": "2026-10-13",
-    "price": 10.2
+    "price": 11.28
    },
    "action": null,
    "batches": null,
@@ -2367,9 +2354,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 14,
+    "stableDays": 15,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2380,7 +2367,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 14,
+   "stableDays": 15,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2422,9 +2409,9 @@
    "sellGate": {
     "stage": "decline",
     "stageName": "回落",
-    "stableDays": 7,
+    "stableDays": 8,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2435,7 +2422,7 @@
    },
    "stage": "decline",
    "stageName": "回落",
-   "stableDays": 7,
+   "stableDays": 8,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2450,8 +2437,8 @@
    "mkt": 2.7,
    "value": 132.3,
    "pnlRate": -0.5741324921135645,
-   "priceNow": 2.64,
-   "gainVsCost": -0.5836,
+   "priceNow": 2.62,
+   "gainVsCost": -0.5868,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2459,13 +2446,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3071,
+    "pc30": -0.3123,
     "nc30": -0.0263,
     "bc30": 0.2222,
     "listed": 407,
     "buyNum": 11,
     "date": "2026-10-13",
-    "price": 2.64
+    "price": 2.62
    },
    "action": null,
    "batches": null,
@@ -2477,9 +2464,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 12,
+    "stableDays": 13,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2490,7 +2477,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 12,
+   "stableDays": 13,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2532,9 +2519,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 1,
-    "justSwitched": true,
-    "stageAsOf": "2026-11-15",
+    "stableDays": 3,
+    "justSwitched": false,
+    "stageAsOf": "2026-11-17",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2545,8 +2532,8 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 1,
-   "justSwitched": true,
+   "stableDays": 3,
+   "justSwitched": false,
    "strongReminder": false,
    "bands": [],
    "riskAction": null,
@@ -2560,8 +2547,8 @@
    "mkt": 54.4,
    "value": 108.8,
    "pnlRate": -0.7657696447793326,
-   "priceNow": 66.49,
-   "gainVsCost": -0.7137,
+   "priceNow": 66.38,
+   "gainVsCost": -0.7142,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2569,13 +2556,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2927,
+    "pc30": -0.2938,
     "nc30": 0.2425,
     "bc30": -0.087,
     "listed": 579,
     "buyNum": 21,
     "date": "2026-10-13",
-    "price": 66.49
+    "price": 66.38
    },
    "action": null,
    "batches": null,
@@ -2587,9 +2574,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 5,
+    "stableDays": 6,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2600,7 +2587,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 5,
+   "stableDays": 6,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -2615,8 +2602,8 @@
    "mkt": 2.99,
    "value": 104.65,
    "pnlRate": -0.528391167192429,
-   "priceNow": 3.06,
-   "gainVsCost": -0.5174,
+   "priceNow": 3.3,
+   "gainVsCost": -0.4795,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2624,13 +2611,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2031,
+    "pc30": -0.1406,
     "nc30": -0.1012,
     "bc30": -0.2222,
     "listed": 293,
     "buyNum": 14,
     "date": "2026-10-13",
-    "price": 3.06
+    "price": 3.3
    },
    "action": null,
    "batches": null,
@@ -2642,9 +2629,9 @@
    "sellGate": {
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 4,
+    "stableDays": 5,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -2660,11 +2647,11 @@
       "when": "若已连续滞涨多日，可提到 2/3"
      }
     ],
-    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 4 个交易日。"
+    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 5 个交易日。"
    },
    "stage": "rallyLate",
    "stageName": "拉升末期",
-   "stableDays": 4,
+   "stableDays": 5,
    "justSwitched": false,
    "strongReminder": true,
    "bands": [
@@ -2743,8 +2730,8 @@
    "mkt": 7.27,
    "value": 101.78,
    "pnlRate": -0.4862190812720848,
-   "priceNow": 6.76,
-   "gainVsCost": -0.5223,
+   "priceNow": 6.75,
+   "gainVsCost": -0.523,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -2752,13 +2739,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.155,
+    "pc30": -0.1563,
     "nc30": 0.0281,
     "bc30": -0.1429,
     "listed": 1939,
     "buyNum": 18,
     "date": "2026-10-13",
-    "price": 6.76
+    "price": 6.75
    },
    "action": null,
    "batches": null,
@@ -2825,9 +2812,9 @@
    "sellGate": {
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 3,
+    "stableDays": 4,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -2843,11 +2830,11 @@
       "when": "若已连续滞涨多日，可提到 2/3"
      }
     ],
-    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 3 个交易日。"
+    "why": "处在【拉升末期】—— 这是允许给分批比例的阶段区；已持续 4 个交易日。"
    },
    "stage": "rallyLate",
    "stageName": "拉升末期",
-   "stableDays": 3,
+   "stableDays": 4,
    "justSwitched": false,
    "strongReminder": true,
    "bands": [
@@ -2953,9 +2940,9 @@
    "sellGate": {
     "stage": "decline",
     "stageName": "回落",
-    "stableDays": 7,
+    "stableDays": 8,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -2966,7 +2953,7 @@
    },
    "stage": "decline",
    "stageName": "回落",
-   "stableDays": 7,
+   "stableDays": 8,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -3008,9 +2995,9 @@
    "sellGate": {
     "stage": "accumulate",
     "stageName": "吸筹",
-    "stableDays": 26,
+    "stableDays": 27,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -3021,7 +3008,7 @@
    },
    "stage": "accumulate",
    "stageName": "吸筹",
-   "stableDays": 26,
+   "stableDays": 27,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -3036,8 +3023,8 @@
    "mkt": 3.66,
    "value": 76.86,
    "pnlRate": -0.4504504504504505,
-   "priceNow": 2.85,
-   "gainVsCost": -0.5721,
+   "priceNow": 2.86,
+   "gainVsCost": -0.5706,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -3045,13 +3032,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2893,
+    "pc30": -0.2868,
     "nc30": 0.08,
     "bc30": 0.0769,
     "listed": 1013,
     "buyNum": 14,
     "date": "2026-10-13",
-    "price": 2.85
+    "price": 2.86
    },
    "action": null,
    "batches": null,
@@ -3118,9 +3105,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 18,
+    "stableDays": 19,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -3131,7 +3118,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 18,
+   "stableDays": 19,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -3228,9 +3215,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 1,
-    "justSwitched": true,
-    "stageAsOf": "2026-11-15",
+    "stableDays": 2,
+    "justSwitched": false,
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -3241,8 +3228,8 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 1,
-   "justSwitched": true,
+   "stableDays": 2,
+   "justSwitched": false,
    "strongReminder": false,
    "bands": [],
    "riskAction": null,
@@ -3338,9 +3325,9 @@
    "sellGate": {
     "stage": "distribute",
     "stageName": "派发",
-    "stableDays": 1,
-    "justSwitched": true,
-    "stageAsOf": "2026-11-15",
+    "stableDays": 2,
+    "justSwitched": false,
+    "stageAsOf": "2026-11-16",
     "danger": true,
     "sellAllowed": true,
     "targetSellAllowed": true,
@@ -3356,12 +3343,12 @@
       "when": "若在售量继续堆积，再减第二个 1/3"
      }
     ],
-    "why": "处在【派发】—— 这是允许给分批比例的阶段区；已持续 1 个交易日。"
+    "why": "处在【派发】—— 这是允许给分批比例的阶段区；已持续 2 个交易日。"
    },
    "stage": "distribute",
    "stageName": "派发",
-   "stableDays": 1,
-   "justSwitched": true,
+   "stableDays": 2,
+   "justSwitched": false,
    "strongReminder": true,
    "bands": [
     {
@@ -3411,9 +3398,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 22,
+    "stableDays": 23,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -3424,7 +3411,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 22,
+   "stableDays": 23,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -3439,8 +3426,8 @@
    "mkt": 5.9,
    "value": 23.6,
    "pnlRate": -0.701417004048583,
-   "priceNow": 4.95,
-   "gainVsCost": -0.7495,
+   "priceNow": 4.94,
+   "gainVsCost": -0.75,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -3448,13 +3435,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2867,
+    "pc30": -0.2882,
     "nc30": -0.0725,
     "bc30": -0.3158,
     "listed": 1382,
     "buyNum": 13,
     "date": "2026-10-13",
-    "price": 4.95
+    "price": 4.94
    },
    "action": null,
    "batches": null,
@@ -3549,8 +3536,8 @@
    "mkt": 16.89,
    "value": 16.89,
    "pnlRate": -0.36264150943396223,
-   "priceNow": 17.6,
-   "gainVsCost": -0.3358,
+   "priceNow": 17.4,
+   "gainVsCost": -0.3434,
    "typeId": null,
    "typeLabel": null,
    "phase": "未命中卖出信号",
@@ -3558,13 +3545,13 @@
    "uncoveredWhy": null,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0414,
+    "pc30": -0.0523,
     "nc30": 0.001,
     "bc30": -0.1481,
     "listed": 1028,
     "buyNum": 23,
     "date": "2026-10-13",
-    "price": 17.6
+    "price": 17.4
    },
    "action": null,
    "batches": null,
@@ -3649,9 +3636,9 @@
    "sellGate": {
     "stage": "calm",
     "stageName": "平静",
-    "stableDays": 13,
+    "stableDays": 14,
     "justSwitched": false,
-    "stageAsOf": "2026-11-15",
+    "stageAsOf": "2026-11-16",
     "danger": false,
     "sellAllowed": false,
     "targetSellAllowed": false,
@@ -3662,7 +3649,7 @@
    },
    "stage": "calm",
    "stageName": "平静",
-   "stableDays": 13,
+   "stableDays": 14,
    "justSwitched": false,
    "strongReminder": false,
    "bands": [],
@@ -3801,7 +3788,7 @@
   "atText": "2026-11-18",
   "total": 1073,
   "alertCount": 0,
-  "midCount": 10,
+  "midCount": 9,
   "items": [],
   "p5SelfCheck": {
    "p5Total": 2,
@@ -3814,9 +3801,9 @@
    "method": "单元 = (gid, 自然季度)，一个单元只能站 treated 或 control 一边（避免同季度自己跟自己比）；treated = 单元内任一观察点命中；对照 = 同 tier×价格档×季度 的未命中单元；被解释变量 = 之后 120 日收益（2%/98% 缩尾）+ 120 日内路径最低点 ≤ −20%；置换 200 次；派发方向要求 ret DiD 为负、drop20 DiD 为正。",
    "methodOutOfSample": "时间序列切分：季度排序后前 70%（2023-Q3…2025-Q3）训练、后 30%（2025-Q4…2026-Q3）验证；权重只由训练集选，验证集只评一次。见 data/distribute-ablation.json → grid。",
    "winsor": {
-    "lo": -0.6486,
+    "lo": -0.6497,
     "hi": 3.6196,
-    "sym": 0.6486
+    "sym": 0.6497
    },
    "bands": {
     "high": {
@@ -3830,31 +3817,31 @@
      "doubleRate": 0.2575
     },
     "mid": {
-     "n": 4273,
-     "ret60Med": -0.0285,
-     "ret120Med": -0.0078,
-     "ret120P25": -0.3194,
-     "ret120P75": 0.3864,
+     "n": 4279,
+     "ret60Med": -0.0288,
+     "ret120Med": -0.0081,
+     "ret120P25": -0.3192,
+     "ret120P75": 0.3846,
      "drop20Rate": 0.3283,
-     "dd20Rate": 0.6068,
-     "doubleRate": 0.3099
+     "dd20Rate": 0.6065,
+     "doubleRate": 0.3094
     },
     "low": {
-     "n": 103224,
+     "n": 103220,
      "ret60Med": 0.0148,
-     "ret120Med": 0.039,
-     "ret120P25": -0.2047,
+     "ret120Med": 0.0391,
+     "ret120P25": -0.2048,
      "ret120P75": 0.3152,
-     "drop20Rate": 0.2533,
+     "drop20Rate": 0.2534,
      "dd20Rate": 0.3967,
-     "doubleRate": 0.2167
+     "doubleRate": 0.2168
     }
    },
    "p5Bands": {
     "p5only": {
      "n": 1970,
      "ret60Med": -0.043,
-     "ret120Med": -0.0393,
+     "ret120Med": -0.0391,
      "ret120P25": -0.1858,
      "ret120P75": 0.1086,
      "drop20Rate": 0.2274,
@@ -3864,7 +3851,7 @@
     "p5any": {
      "n": 2599,
      "ret60Med": -0.0503,
-     "ret120Med": -0.0651,
+     "ret120Med": -0.0649,
      "ret120P25": -0.2121,
      "ret120P75": 0.0911,
      "drop20Rate": 0.2663,
@@ -3882,10 +3869,10 @@
      "nStrata": 109,
      "firedObs": 400,
      "didMedianCell": -0.2837,
-     "didSymWinsor": -0.134,
+     "didSymWinsor": -0.1341,
      "didVsQuietCells": -0.3495,
-     "didVsMidBand": -0.2832,
-     "nMidCells": 1574,
+     "didVsMidBand": -0.2829,
+     "nMidCells": 1577,
      "didDrop": 0.1864,
      "pDrop": 0.005,
      "nTreatedCellsDrop": 332,
@@ -3899,18 +3886,18 @@
     },
     "composite_mid": {
      "label": "复合分 0.45~0.65",
-     "did": -0.1351,
+     "did": -0.1354,
      "p": 0.005,
-     "nTreatedCells": 2354,
-     "nControlCells": 5021,
+     "nTreatedCells": 2357,
+     "nControlCells": 5018,
      "nStrata": 229,
-     "firedObs": 4273,
-     "didMedianCell": -0.1279,
-     "didSymWinsor": -0.0958,
-     "didVsQuietCells": -0.2392,
-     "didDrop": 0.1719,
+     "firedObs": 4279,
+     "didMedianCell": -0.1281,
+     "didSymWinsor": -0.0962,
+     "didVsQuietCells": -0.2394,
+     "didDrop": 0.1721,
      "pDrop": 0.005,
-     "nTreatedCellsDrop": 2354,
+     "nTreatedCellsDrop": 2357,
      "direction": "negative",
      "directionDrop": "positive(跌更多=好)",
      "pass": true,
@@ -3921,18 +3908,18 @@
     },
     "legacy_composite": {
      "label": "旧口径复合（P1 .25/P2 .25/P3 .20/P4 .20/P5 .10 ≥0.60）",
-     "did": -0.1553,
+     "did": -0.1558,
      "p": 0.005,
-     "nTreatedCells": 460,
-     "nControlCells": 5248,
+     "nTreatedCells": 461,
+     "nControlCells": 5247,
      "nStrata": 142,
-     "firedObs": 573,
-     "didMedianCell": -0.1849,
-     "didSymWinsor": -0.0833,
-     "didVsQuietCells": -0.2155,
-     "didDrop": 0.1159,
+     "firedObs": 575,
+     "didMedianCell": -0.1853,
+     "didSymWinsor": -0.0839,
+     "didVsQuietCells": -0.216,
+     "didDrop": 0.1156,
      "pDrop": 0.005,
-     "nTreatedCellsDrop": 460,
+     "nTreatedCellsDrop": 461,
      "direction": "negative",
      "directionDrop": "positive(跌更多=好)",
      "pass": true,
@@ -3943,18 +3930,18 @@
     },
     "p1_any": {
      "label": "单条 P1（阶段 = 末期/派发）",
-     "did": -0.1665,
+     "did": -0.1654,
      "p": 0.005,
-     "nTreatedCells": 5278,
-     "nControlCells": 2078,
+     "nTreatedCells": 5283,
+     "nControlCells": 2073,
      "nStrata": 230,
-     "firedObs": 17405,
-     "didMedianCell": -0.2176,
-     "didSymWinsor": -0.1021,
+     "firedObs": 17433,
+     "didMedianCell": -0.2172,
+     "didSymWinsor": -0.1019,
      "didVsQuietCells": -0.1468,
-     "didDrop": 0.1417,
+     "didDrop": 0.1408,
      "pDrop": 0.005,
-     "nTreatedCellsDrop": 5278,
+     "nTreatedCellsDrop": 5283,
      "direction": "negative",
      "directionDrop": "positive(跌更多=好)",
      "pass": true,
@@ -3973,7 +3960,7 @@
      "firedObs": 7226,
      "didMedianCell": -0.1136,
      "didSymWinsor": -0.0746,
-     "didVsQuietCells": -0.1669,
+     "didVsQuietCells": -0.167,
      "didDrop": 0.103,
      "pDrop": 0.005,
      "nTreatedCellsDrop": 3474,
@@ -3987,15 +3974,15 @@
     },
     "p3_any": {
      "label": "单条 P3（横盘增发）★ 方向反",
-     "did": 0.0244,
+     "did": 0.0243,
      "p": 0.0796,
      "nTreatedCells": 1677,
      "nControlCells": 5732,
      "nStrata": 225,
      "firedObs": 2741,
-     "didMedianCell": 0.0585,
+     "didMedianCell": 0.0584,
      "didSymWinsor": 0.0078,
-     "didVsQuietCells": 0.0032,
+     "didVsQuietCells": 0.0028,
      "didDrop": -0.0221,
      "pDrop": 0.0149,
      "nTreatedCellsDrop": 1677,
@@ -4009,15 +3996,15 @@
     },
     "p4_any": {
      "label": "单条 P4（供给涌入）",
-     "did": -0.0238,
-     "p": 0.3085,
+     "did": -0.0239,
+     "p": 0.3035,
      "nTreatedCells": 2179,
      "nControlCells": 4836,
      "nStrata": 206,
      "firedObs": 8330,
-     "didMedianCell": 0.0132,
-     "didSymWinsor": -0.0478,
-     "didVsQuietCells": -0.1261,
+     "didMedianCell": 0.0131,
+     "didSymWinsor": -0.0479,
+     "didVsQuietCells": -0.1262,
      "didDrop": 0.1055,
      "pDrop": 0.005,
      "nTreatedCellsDrop": 2179,
@@ -4031,15 +4018,15 @@
     },
     "p5_any": {
      "label": "单条 P5（任一组合）",
-     "did": -0.0988,
+     "did": -0.0987,
      "p": 0.005,
      "nTreatedCells": 658,
      "nControlCells": 3110,
      "nStrata": 107,
      "firedObs": 2599,
-     "didMedianCell": -0.1164,
-     "didSymWinsor": -0.0767,
-     "didVsQuietCells": -0.1111,
+     "didMedianCell": -0.1162,
+     "didSymWinsor": -0.0766,
+     "didVsQuietCells": -0.111,
      "didDrop": 0.0752,
      "pDrop": 0.005,
      "nTreatedCellsDrop": 658,
@@ -4075,15 +4062,15 @@
     },
     "p5_with_other": {
      "label": "P5 + 至少一条其它（真正\"结合以前的\"）",
-     "did": -0.1664,
+     "did": -0.166,
      "p": 0.005,
      "nTreatedCells": 309,
      "nControlCells": 3038,
      "nStrata": 86,
      "firedObs": 629,
-     "didMedianCell": -0.1842,
-     "didSymWinsor": -0.1263,
-     "didVsQuietCells": -0.2126,
+     "didMedianCell": -0.1839,
+     "didSymWinsor": -0.126,
+     "didVsQuietCells": -0.2124,
      "didDrop": 0.1679,
      "pDrop": 0.005,
      "nTreatedCellsDrop": 309,
@@ -4097,18 +4084,18 @@
     },
     "p1_only": {
      "label": "P1 单独成立（其它全不成立）",
-     "did": -0.1276,
+     "did": -0.1272,
      "p": 0.005,
-     "nTreatedCells": 4881,
-     "nControlCells": 2689,
+     "nTreatedCells": 4886,
+     "nControlCells": 2684,
      "nStrata": 237,
-     "firedObs": 13197,
-     "didMedianCell": -0.1379,
-     "didSymWinsor": -0.0643,
-     "didVsQuietCells": -0.121,
-     "didDrop": 0.1032,
+     "firedObs": 13219,
+     "didMedianCell": -0.1368,
+     "didSymWinsor": -0.0641,
+     "didVsQuietCells": -0.1207,
+     "didDrop": 0.1025,
      "pDrop": 0.005,
-     "nTreatedCellsDrop": 4881,
+     "nTreatedCellsDrop": 4886,
      "direction": "negative",
      "directionDrop": "positive(跌更多=好)",
      "pass": true,
@@ -4119,7 +4106,7 @@
     },
     "high_noP1": {
      "label": "新复合 ≥0.65 且不含 P1",
-     "did": -0.2493,
+     "did": -0.2492,
      "p": 0.0945,
      "nTreatedCells": 14,
      "nControlCells": 593,
@@ -4141,7 +4128,7 @@
     },
     "legacy_noP1": {
      "label": "旧口径 去 P1（不重归一，= 上一轮 +12.1pp 的那个角）",
-     "did": 0.1198,
+     "did": 0.1197,
      "p": 0.0149,
      "nTreatedCells": 38,
      "nControlCells": 1155,
@@ -4164,10 +4151,10 @@
    },
    "p5Compare": {
     "compositeDid": -0.2549,
-    "p5anyDid": -0.0988,
+    "p5anyDid": -0.0987,
     "p5onlyDid": -0.0722,
-    "p5plusDid": -0.1664,
-    "p1anyDid": -0.1665,
+    "p5plusDid": -0.166,
+    "p1anyDid": -0.1654,
     "compositeP": 0.005,
     "p5anyP": 0.005,
     "betterByDid": "composite",
@@ -4683,10 +4670,10 @@
    },
    "summary": {
     "composite": "复合分 ≥0.65：ret120 DiD -25.5pp（p=0.005，treated 332 单元 / 400 观察点）；路径跌≥20% DiD +18.6pp（p=0.005，treated 332 单元）→ 两个方向都成立（收益更差 + 跌得更多）",
-    "vsOld": "与旧口径（P1 .25/P2 .25/P3 .20/P4 .20/P5 .10，阈值 .60/.35）对比：旧 ret120 DiD -15.5pp（treated 460 单元）；新口径 -25.5pp。旧口径三档非单调（mid 比 high 更差），新口径三档单调。",
+    "vsOld": "与旧口径（P1 .25/P2 .25/P3 .20/P4 .20/P5 .10，阈值 .60/.35）对比：旧 ret120 DiD -15.6pp（treated 461 单元）；新口径 -25.5pp。旧口径三档非单调（mid 比 high 更差），新口径三档单调。",
     "vsP5": "复合 -25.5pp 优于单条 P5：P5 任一组合 -9.9pp、P5 单独成立 -7.2pp（同一套单元与对照口径）",
     "p5Binding": "★ 用户「不能只有这个依据」的量化证据：P5 + 至少一条计分条 -16.6pp vs P5 单独 -7.2pp，差 -9.4pp",
-    "p1Why": "★ P1 不是反作用源：单条 P1 ret120 DiD -16.7pp / 路径跌 +14.2pp，是全池最强单条；留一法去掉 P1 后复合 DiD -14.7pp，并不比全 5 条 -15.5pp 更好。上一轮「去掉 P1 后 +12.1pp」= 旧口径下 P2∧P3∧P4 的 38 个小样本单元，真正原因见 p3Why。",
+    "p1Why": "★ P1 不是反作用源：单条 P1 ret120 DiD -16.5pp / 路径跌 +14.2pp，是全池最强单条；留一法去掉 P1 后复合 DiD -14.7pp，并不比全 5 条 -15.5pp 更好。上一轮「去掉 P1 后 +12.1pp」= 旧口径下 P2∧P3∧P4 的 38 个小样本单元，真正原因见 p3Why。",
     "p3Why": "★ 真正拖后腿的是 P3：单条 ret120 DiD +2.4pp（方向为正）、单条跌率差 -2.2pp（更不容易跌）；P2+P4 单独 -18.1pp，加入 P3 后变成 +8.8pp（P1 同时不成立时 +12.1pp，p=0.0249）→ 方向翻转来自 P3。已剔除出计分。",
     "noP1": "新口径下「≥0.65 且不含 P1」= P2+P4+P5，只有 14 个单元、DiD -24.9pp（p=0.0945）→ 离开 P1 后证据很薄，印证 P1 必须留在判据里。",
     "bandSpread": "三档「120 日内路径跌 ≥20%」比例 39.7% / 60.7% / 64.5%（低/中/高，单调升）；「末值跌 ≥20%」 25.3% / 32.8% / 38.3%，也单调升 → 它预测的是「跌得更多」这件事本身，不只是「涨不动」。",
@@ -4703,7 +4690,7 @@
  "sellGate": {
   "stageSource": "data/dealer-stage-board.json",
   "loaded": true,
-  "stageAtText": "2026/11/18 11:22:00",
+  "stageAtText": "2026/11/18 14:26:17",
   "note": "阶段来自上一次 dealer_stage_board.cjs 的产出（daily.cmd 里它在本脚本之后跑）。阶段用日线算、一天内不变，所以与本次同一天口径一致。",
   "dangerStages": [
    "rallyLate",
@@ -4725,7 +4712,7 @@
     "name": "格洛克 18 型 | 钢铁禁锢 (崭新出厂)",
     "stage": "distribute",
     "stageName": "派发",
-    "stableDays": 5,
+    "stableDays": 6,
     "bands": [
      {
       "ratio": "1/3",
@@ -4741,7 +4728,7 @@
     "name": "FN57 | 夜影 (崭新出厂)",
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 6,
+    "stableDays": 7,
     "bands": [
      {
       "ratio": "1/2",
@@ -4757,7 +4744,7 @@
     "name": "Tec-9 | 多变迷彩 (崭新出厂)",
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 1,
+    "stableDays": 2,
     "bands": [
      {
       "ratio": "1/2",
@@ -4773,7 +4760,7 @@
     "name": "MP9 | 中度威胁 (崭新出厂)",
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 4,
+    "stableDays": 5,
     "bands": [
      {
       "ratio": "1/2",
@@ -4789,7 +4776,7 @@
     "name": "MP7 | 主板 (崭新出厂)",
     "stage": "rallyLate",
     "stageName": "拉升末期",
-    "stableDays": 3,
+    "stableDays": 4,
     "bands": [
      {
       "ratio": "1/2",
@@ -4805,7 +4792,7 @@
     "name": "MP7 | 赤地 (崭新出厂)",
     "stage": "distribute",
     "stageName": "派发",
-    "stableDays": 1,
+    "stableDays": 2,
     "bands": [
      {
       "ratio": "1/3",
@@ -4847,10 +4834,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3209,
+    "pc30": -0.3079,
     "nc30": -0.1064,
     "bc30": -0.1744,
-    "price": 2200
+    "price": 2242
    }
   },
   {
@@ -4862,10 +4849,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3487,
+    "pc30": -0.3303,
     "nc30": -0.2674,
     "bc30": -0.1884,
-    "price": 1429.5
+    "price": 1470
    }
   },
   {
@@ -4877,10 +4864,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.374,
+    "pc30": -0.373,
     "nc30": -0.0781,
     "bc30": -0.1639,
-    "price": 2535
+    "price": 2539
    }
   },
   {
@@ -4892,10 +4879,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1475,
+    "pc30": -0.1046,
     "nc30": 0.1489,
     "bc30": 0.3333,
-    "price": 693.5
+    "price": 728.38
    }
   },
   {
@@ -4907,10 +4894,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1781,
+    "pc30": -0.1654,
     "nc30": 0.037,
     "bc30": -0.2128,
-    "price": 1232.5
+    "price": 1251.5
    }
   },
   {
@@ -4937,10 +4924,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4096,
+    "pc30": -0.4167,
     "nc30": 0.9366,
     "bc30": 2.1176,
-    "price": 354.27
+    "price": 350
    }
   },
   {
@@ -4952,10 +4939,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3939,
+    "pc30": -0.3678,
     "nc30": -0.0182,
     "bc30": 0,
-    "price": 174.5
+    "price": 182
    }
   },
   {
@@ -4967,10 +4954,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2217,
+    "pc30": -0.2054,
     "nc30": -0.056,
     "bc30": -0.2097,
-    "price": 867.88
+    "price": 885.99
    }
   },
   {
@@ -4982,10 +4969,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0252,
+    "pc30": 0.01,
     "nc30": -0.0731,
     "bc30": 0.3023,
-    "price": 830
+    "price": 860
    }
   },
   {
@@ -4997,10 +4984,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0451,
+    "pc30": 0.0151,
     "nc30": -0.2393,
     "bc30": 0.2258,
-    "price": 174
+    "price": 169
    }
   },
   {
@@ -5012,10 +4999,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3628,
+    "pc30": -0.2522,
     "nc30": 0.1033,
     "bc30": -0.5789,
-    "price": 72
+    "price": 84.5
    }
   },
   {
@@ -5027,10 +5014,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3286,
+    "pc30": -0.3327,
     "nc30": 0.0812,
     "bc30": -0.2955,
-    "price": 449.82
+    "price": 447.12
    }
   },
   {
@@ -5042,10 +5029,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0158,
+    "pc30": 0.0198,
     "nc30": 7.6716,
     "bc30": -0.1333,
-    "price": 129.5
+    "price": 130
    }
   },
   {
@@ -5057,10 +5044,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.0453,
+    "pc30": 0.0767,
     "nc30": 0.3328,
     "bc30": -0.4615,
-    "price": 3
+    "price": 3.09
    }
   },
   {
@@ -5072,10 +5059,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0567,
+    "pc30": -0.0081,
     "nc30": -0.3604,
     "bc30": 0.6739,
-    "price": 233
+    "price": 245
    }
   },
   {
@@ -5087,10 +5074,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3317,
+    "pc30": -0.33,
     "nc30": -0.1797,
     "bc30": 0.0435,
-    "price": 3.99
+    "price": 4
    }
   },
   {
@@ -5102,10 +5089,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": 0.1874,
+    "pc30": 0.1852,
     "nc30": 0.14,
     "bc30": 0,
-    "price": 5.45
+    "price": 5.44
    }
   },
   {
@@ -5117,10 +5104,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2483,
+    "pc30": -0.1074,
     "nc30": -0.0467,
     "bc30": -0.3871,
-    "price": 27.79
+    "price": 33
    }
   },
   {
@@ -5132,10 +5119,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4014,
+    "pc30": -0.338,
     "nc30": -0.2424,
     "bc30": -0.3529,
-    "price": 10.2
+    "price": 11.28
    }
   },
   {
@@ -5162,10 +5149,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3071,
+    "pc30": -0.3123,
     "nc30": -0.0263,
     "bc30": 0.2222,
-    "price": 2.64
+    "price": 2.62
    }
   },
   {
@@ -5192,10 +5179,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2927,
+    "pc30": -0.2938,
     "nc30": 0.2425,
     "bc30": -0.087,
-    "price": 66.49
+    "price": 66.38
    }
   },
   {
@@ -5207,10 +5194,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2031,
+    "pc30": -0.1406,
     "nc30": -0.1012,
     "bc30": -0.2222,
-    "price": 3.06
+    "price": 3.3
    }
   },
   {
@@ -5237,10 +5224,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.155,
+    "pc30": -0.1563,
     "nc30": 0.0281,
     "bc30": -0.1429,
-    "price": 6.76
+    "price": 6.75
    }
   },
   {
@@ -5312,10 +5299,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2893,
+    "pc30": -0.2868,
     "nc30": 0.08,
     "bc30": 0.0769,
-    "price": 2.85
+    "price": 2.86
    }
   },
   {
@@ -5417,10 +5404,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2867,
+    "pc30": -0.2882,
     "nc30": -0.0725,
     "bc30": -0.3158,
-    "price": 4.95
+    "price": 4.94
    }
   },
   {
@@ -5447,10 +5434,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.0414,
+    "pc30": -0.0523,
     "nc30": 0.001,
     "bc30": -0.1481,
-    "price": 17.6
+    "price": 17.4
    }
   },
   {
@@ -5499,6 +5486,36 @@
    }
   },
   {
+   "name": "M4A4 | 彼岸花 (崭新出厂)",
+   "gid": 13623,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.3168,
+    "nc30": -0.0633,
+    "bc30": -0.593,
+    "price": 317
+   }
+  },
+  {
+   "name": "M4A4 | 黑色魅影 (略有磨损)",
+   "gid": 8204,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.1592,
+    "nc30": 0.0947,
+    "bc30": -0.1923,
+    "price": 264
+   }
+  },
+  {
    "name": "AWP | 狮子之日 (崭新出厂)",
    "gid": 306,
    "typeId": null,
@@ -5507,40 +5524,25 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.4588,
+    "pc30": -0.4367,
     "nc30": 0,
     "bc30": -0.5464,
-    "price": 294.93
+    "price": 306.99
    }
   },
   {
-   "name": "M4A4 | 龙王 (略有磨损)",
-   "gid": 1386,
+   "name": "AK-47 | 混沌点阵 (崭新出厂)",
+   "gid": 120,
    "typeId": null,
    "typeLabel": null,
    "inWatchlist": true,
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1703,
-    "nc30": 0.0059,
-    "bc30": -0.2581,
-    "price": 131.5
-   }
-  },
-  {
-   "name": "手套武器箱",
-   "gid": 1182,
-   "typeId": null,
-   "typeLabel": null,
-   "inWatchlist": true,
-   "covered": true,
-   "uncoveredText": null,
-   "feats": {
-    "pc30": -0.352,
-    "nc30": -0.1175,
-    "bc30": -0.2795,
-    "price": 45.88
+    "pc30": -0.2991,
+    "nc30": -0.0469,
+    "bc30": -0.4655,
+    "price": 307
    }
   },
   {
@@ -5552,10 +5554,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.3547,
+    "pc30": -0.3564,
     "nc30": -0.0616,
     "bc30": 0.1818,
-    "price": 37.1
+    "price": 37
    }
   },
   {
@@ -5567,25 +5569,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2032,
+    "pc30": -0.2006,
     "nc30": -0.0543,
     "bc30": -0.1538,
-    "price": 31.3
-   }
-  },
-  {
-   "name": "“突围大行动”武器箱",
-   "gid": 1681,
-   "typeId": null,
-   "typeLabel": null,
-   "inWatchlist": true,
-   "covered": true,
-   "uncoveredText": null,
-   "feats": {
-    "pc30": -0.1215,
-    "nc30": -0.0393,
-    "bc30": 0.3,
-    "price": 45.5
+    "price": 31.4
    }
   },
   {
@@ -5597,10 +5584,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2222,
+    "pc30": -0.2195,
     "nc30": 0.0437,
     "bc30": 0.3125,
-    "price": 143.5
+    "price": 144
    }
   },
   {
@@ -5612,10 +5599,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1483,
+    "pc30": -0.1464,
     "nc30": 0.0485,
     "bc30": 0.5714,
-    "price": 45.9
+    "price": 46
    }
   },
   {
@@ -5634,6 +5621,66 @@
    }
   },
   {
+   "name": "手套武器箱",
+   "gid": 1182,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.3432,
+    "nc30": -0.1175,
+    "bc30": -0.2795,
+    "price": 46.5
+   }
+  },
+  {
+   "name": "“突围大行动”武器箱",
+   "gid": 1681,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.1216,
+    "nc30": -0.0393,
+    "bc30": 0.3,
+    "price": 45.49
+   }
+  },
+  {
+   "name": "M4A4 | 龙王 (略有磨损)",
+   "gid": 1386,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": -0.1798,
+    "nc30": 0.0059,
+    "bc30": -0.2581,
+    "price": 130
+   }
+  },
+  {
+   "name": "2 号印花胶囊",
+   "gid": 4243,
+   "typeId": null,
+   "typeLabel": null,
+   "inWatchlist": true,
+   "covered": true,
+   "uncoveredText": null,
+   "feats": {
+    "pc30": 0.0994,
+    "nc30": 0.0207,
+    "bc30": 0,
+    "price": 70.8
+   }
+  },
+  {
    "name": "电竞 2013 冬季武器箱",
    "gid": 6620,
    "typeId": null,
@@ -5642,36 +5689,11 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.1811,
+    "pc30": -0.1742,
     "nc30": -0.3106,
     "bc30": -0.3,
-    "price": 66
+    "price": 66.56
    }
-  },
-  {
-   "name": "2 号印花胶囊",
-   "gid": 4243,
-   "typeId": "state_供给涌入",
-   "typeLabel": "供给涌入型",
-   "inWatchlist": true,
-   "covered": true,
-   "uncoveredText": null,
-   "feats": {
-    "pc30": 0.1025,
-    "nc30": 0.0207,
-    "bc30": 0,
-    "price": 71
-   }
-  },
-  {
-   "name": "M4A1消音版 | 女火神之炽焰 (略有磨损)",
-   "gid": 1223,
-   "typeId": null,
-   "typeLabel": null,
-   "inWatchlist": true,
-   "covered": false,
-   "uncoveredText": "本地没有这个品的日线序列（缓存池没覆盖到）",
-   "feats": null
   },
   {
    "name": "电竞 2014 夏季武器箱",
@@ -5682,21 +5704,11 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.215,
+    "pc30": -0.2144,
     "nc30": -0.1457,
     "bc30": 0.0455,
-    "price": 59.5
+    "price": 59.55
    }
-  },
-  {
-   "name": "D 中队军官 | 新西兰特种空勤团",
-   "gid": 13745,
-   "typeId": null,
-   "typeLabel": null,
-   "inWatchlist": true,
-   "covered": false,
-   "uncoveredText": "本地没有这个品的日线序列（缓存池没覆盖到）",
-   "feats": null
   },
   {
    "name": "SSG 08 | 渐变强酸 (崭新出厂)",
@@ -6202,10 +6214,10 @@
    "covered": true,
    "uncoveredText": null,
    "feats": {
-    "pc30": -0.2927,
+    "pc30": -0.2938,
     "nc30": 0.2425,
     "bc30": -0.087,
-    "price": 66.49
+    "price": 66.38
    }
   },
   {
@@ -6380,15 +6392,14 @@
   }
  ],
  "watchHit": [
-  "MP7 | 死亡骷髅 (略有磨损)",
-  "2 号印花胶囊"
+  "MP7 | 死亡骷髅 (略有磨损)"
  ],
  "countsSummary": {
   "holdings": 44,
   "holdingsHit": 1,
-  "watchlist": 58,
+  "watchlist": 59,
   "washout40": 40,
-  "watchHit": 2
+  "watchHit": 1
  },
  "disclaimer": "这三个类型是**风险/回避**信号：出现后 90 天的中位表现明显差于随机日，但个体仍可能是上涨的（prob30 只是从更高降到更低）。本区块只做减仓/止盈提示，不构成买入依据，也不保证一定下跌。"
 }
