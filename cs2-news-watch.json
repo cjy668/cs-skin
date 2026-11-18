@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1794968452432,
- "atText": "2026-11-18 10:20:52",
+ "at": 1794968605034,
+ "atText": "2026-11-18 10:23:25",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
   "RSS(主源)"
@@ -12,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1794968489454,
+  "checkedAt": 1794968628501,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "687522235410286587",
@@ -20,9 +20,9 @@
  "lastSeenDate": "2026-11-17",
  "lastSeenAtText": "2026-11-18 07:40:07",
  "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/687522235410286587",
- "newCount": 2,
+ "newCount": 0,
  "firstRun": false,
- "lastKnownDate": "2026-11-11",
+ "lastKnownDate": "2026-11-17",
  "hist": {
   "updatesTotal": 265,
   "coreEventDates": 27,
@@ -37,7 +37,7 @@
  "checked": {
   "feedItems": 10,
   "officialItems": 10,
-  "newItems": 2,
+  "newItems": 0,
   "recentItems": 3,
   "rssItems": 10
  },
@@ -48,9 +48,9 @@
    "ok": false,
    "status": 0,
    "bytes": 0,
-   "ms": 36847,
+   "ms": 23317,
    "attempts": 3,
-   "error": "read ECONNRESET"
+   "error": "timeout"
   },
   {
    "name": "Steam 中文 RSS",
@@ -58,7 +58,7 @@
    "ok": true,
    "status": 200,
    "bytes": 25285,
-   "ms": 589,
+   "ms": 627,
    "attempts": 1,
    "error": null
   }
@@ -69,171 +69,7 @@
   "agree": true,
   "note": "两个源的最新公告日期一致"
  },
- "items": [
-  {
-   "gid": "687522235410286587",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": "Counter-Strike 2 Update",
-   "date": "2026-11-17",
-   "dateLocal": "2026-11-18",
-   "at": 1794958807000,
-   "atText": "2026-11-18 07:40:07",
-   "url": "https://store.steampowered.com/news/app/730/view/687522235410286587",
-   "summary": "SINGAPORE 2026 MAJOR · The PGL Singapore 2026 Major Hub is now available. Visit the hub to purchase tournament items, play the Pick'Em Challenge, and more. · Purchase a Singapore 2026 Viewer Pass to receive an upgradable Singapore 2026 Coin. With an active pass, you can upgrade your coin and earn rewards by playing the Pick'Em Challenge. Additionally, you will show up on the Active Pass Leaderboard where you can compare your Pick'Em Challenge performance to your friends.…",
-   "level": "供给级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Case",
-    "Pass",
-    "Music Kit",
-    "Major",
-    "Pick'Em",
-    "Tournament",
-    "Map",
-    "Bug",
-    "Misc"
-   ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 2 个 · 赛事 3 个 · 噪声 3 个",
-   "mechanismHits": [
-    "Case"
-   ],
-   "strongMechanismHits": [],
-   "supplyHits": [
-    "Pass",
-    "Music Kit"
-   ],
-   "eventHits": [
-    "Major",
-    "Pick'Em",
-    "Tournament"
-   ],
-   "noiseHits": [
-    "Map",
-    "Bug",
-    "Misc"
-   ],
-   "alreadyKnown": false,
-   "similarEvents": [
-    {
-     "date": "2026-05-07",
-     "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "similarity": 0.533,
-     "eventDate": "2026-05-07",
-     "eventClass": "regime_shift",
-     "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "reactionDay": "2026-05-09",
-     "medPct": -2.3,
-     "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
-    },
-    {
-     "date": "2024-02-17",
-     "title": "更新日志（2024年2月16日）",
-     "similarity": 0.413,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2023-09-29",
-     "title": "更新日志（2023年9月28日）",
-     "similarity": 0.413,
-     "eventDate": "2023-09-27",
-     "eventClass": "regime_shift",
-     "eventTitle": "欢迎回家（CS2 正式发布）",
-     "reactionDay": "2023-09-29",
-     "medPct": -2.9,
-     "note": "该事件（2023-09-27 欢迎回家（CS2 正式发布））在事件分类表里是 regime_shift：反应日 2023-09-29 全池中位 -2.9%、下跌占比 81% —— 不是全池级急跌"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  },
-  {
-   "gid": "687522235410285288",
-   "title": "通往新加坡的古堡之路",
-   "titleZh": "通往新加坡的古堡之路",
-   "date": "2026-11-17",
-   "dateLocal": "2026-11-18",
-   "at": 1794958720000,
-   "atText": "2026-11-18 07:38:40",
-   "url": "https://store.steampowered.com/news/app/730/view/687522235410285288",
-   "summary": "今天的更新带来了一张传奇地图的回归。欢迎回来，古堡激战！ 古堡激战的老兵们在跳台、鸡舍和马厩这些熟悉的地点会有回家的感觉。不过（新玩家）也别吓得软脚，这张地图已有改动，新增了多条路线和点位，等待玩家去掌握。现在天气很冷，所以在雪地中艰难跋涉前往炸弹安放点时，小心你那嘎吱作响的脚步声。 古堡激战可在竞技模式、搭档模式中游玩，同时在休闲模式、死亡竞赛和回防模式中拥有独立的地图组。 2026年PGL新加坡锦标赛物品 2026年新加坡锦标赛即将来临，这意味着是时候推出锦标赛物品了！ Major观众通行证以及战队和选手签名印花现可在Major商店中购买！与以往一样，50%的收益将给予选手、战队和赛事主办方，具体分成将根据战队的初始种子排名和最终名次来确定。 我们听取了大家的反馈，并做出了一些调整。战队和选手签名印花有纸质、闪亮、全息和金色四种款式，以固定价格出售，可直接购买。纪念品同样以固定价格制作，价格取决于你所选武器的稀有度。 购买并激活2026年新加坡观众通行证，即可获得青铜级新加坡挑战币、Steam.tv聊天标识,以及赛事期间无限次使用的战队涂鸦。…",
-   "level": "机制级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Souvenir",
-    "Rarity",
-    "Pass",
-    "Sticker",
-    "Music Kit",
-    "Major",
-    "Pick'Em",
-    "Tournament",
-    "Map"
-   ],
-   "levelBasis": "强机制 2 个（Souvenir/Rarity）· 机制词 2 个 · 供给 3 个 · 赛事 3 个 · 噪声 1 个",
-   "mechanismHits": [
-    "Souvenir",
-    "Rarity"
-   ],
-   "strongMechanismHits": [
-    "Souvenir",
-    "Rarity"
-   ],
-   "supplyHits": [
-    "Pass",
-    "Sticker",
-    "Music Kit"
-   ],
-   "eventHits": [
-    "Major",
-    "Pick'Em",
-    "Tournament"
-   ],
-   "noiseHits": [
-    "Map"
-   ],
-   "alreadyKnown": false,
-   "similarEvents": [
-    {
-     "date": "2025-11-12",
-     "title": "《反恐精英》更新",
-     "similarity": 0.605,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2026-07-01",
-     "title": "《反恐精英》更新",
-     "similarity": 0.462,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2025-12-18",
-     "title": "《反恐精英》更新",
-     "similarity": 0.462,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  }
- ],
+ "items": [],
  "recent": [
   {
    "gid": "687522235410286587",
@@ -277,7 +113,7 @@
     "Bug",
     "Misc"
    ],
-   "alreadyKnown": false,
+   "alreadyKnown": true,
    "similarEvents": [
     {
      "date": "2026-05-07",
@@ -360,7 +196,7 @@
    "noiseHits": [
     "Map"
    ],
-   "alreadyKnown": false,
+   "alreadyKnown": true,
    "similarEvents": [
     {
      "date": "2025-11-12",
