@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-18T09:26:11.039Z",
+ "at": "2026-11-18T12:28:57.315Z",
  "atText": "2026-11-18",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -87,7 +87,7 @@
  "counts": {
   "pool": 1073,
   "series": 1073,
-  "obs": 237081,
+  "obs": 237088,
   "liquidObs": 122860,
   "currentItems": 22,
   "currentLiquid": 699,
@@ -97,7 +97,7 @@
   "C": 0
  },
  "baseline": {
-  "nObs": 107818,
+  "nObs": 107820,
   "doubleRate": 0.2208,
   "fwd120Gain": {
    "p25": 0.0986,
@@ -163,7 +163,7 @@
    "passNegative": false,
    "direction": "positive",
    "did": 0.0228,
-   "didMed": 0.0233,
+   "didMed": 0.0232,
    "didRate": 0.0084,
    "p": 0.2239,
    "nTreatedCells": 4113,
@@ -212,7 +212,7 @@
    "pass": false,
    "passNegative": true,
    "direction": "negative",
-   "did": -0.0782,
+   "did": -0.0783,
    "didMed": -0.0836,
    "didRate": -0.019,
    "p": 0.005,
@@ -509,7 +509,7 @@
    "value": 0.5,
    "kind": "B3",
    "nTreatedCells": 1494,
-   "did": -0.0782,
+   "did": -0.0783,
    "p": 0.005,
    "didRate": -0.019,
    "treatedDoubleRate": 0.0813,
