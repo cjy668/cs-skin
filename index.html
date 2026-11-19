@@ -1937,6 +1937,105 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
 .op-fold>summary{cursor:pointer;font-size:12px;color:#8b93a7;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);overflow-wrap:anywhere}
 .op-fold>summary:hover{color:#cfd6e6;border-color:rgba(75,157,255,.4)}
 .op-fold[open]>summary{margin-bottom:8px}
+
+/* =====================================================================
+   ★ 2026-11-19 资金流（代理）卡 sec-cf
+   纪律：① 顶部红框明写「代理指标 · 无成交量数据」，不许折叠；
+        ② 文案禁止「资金流入/流出」，一律「在售收缩·价涨」这类描述；
+        ③ 所有格 min-width:0，390px 也不许横向溢出。
+   ===================================================================== */
+#sec-cf{min-width:0}
+.cf-caveat{font-size:12px;line-height:1.75;color:#ffc9c9;background:rgba(255,77,79,.10);border:1px solid rgba(255,77,79,.42);border-left:4px solid var(--red);border-radius:9px;padding:9px 11px;margin:2px 0 10px;overflow-wrap:anywhere}
+.cf-caveat b{color:#fff}
+.cf-live{font-size:10.5px;font-weight:700;color:#ffb3b3;background:rgba(255,77,79,.13);border:1px solid rgba(255,77,79,.42);border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.cf-dim{color:var(--dim);font-size:10.5px}
+.cf-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+.cf-num{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 10px;min-width:0}
+.cf-num .k{font-size:11px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+.cf-num .v{font-size:19px;font-weight:800;line-height:1.35;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.cf-num .s{font-size:10.5px;color:var(--dim);line-height:1.5;overflow-wrap:anywhere}
+.cf-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;min-width:0}
+.cf-pane{min-width:0;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:9px 10px}
+.cf-pane h3{margin:0 0 7px;font-size:13px;font-weight:800;color:#dfe7f3;line-height:1.5;overflow-wrap:anywhere}
+.cf-pane h3 span{font-size:10.5px;font-weight:400;color:var(--dim);margin-left:5px}
+.cf-quad{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cf-q{display:grid;grid-template-columns:104px minmax(0,1fr) 78px;gap:7px;align-items:center;min-width:0}
+.cf-q .nm{font-size:11.5px;color:#cfd7e6;line-height:1.45;overflow-wrap:anywhere;min-width:0}
+.cf-q .bar{height:7px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;min-width:0}
+.cf-q .bar i{display:block;height:100%;border-radius:99px;background:var(--blue)}
+.cf-q .n{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cf-q.q-down_up .bar i{background:var(--green)}
+.cf-q.q-down_flat .bar i{background:#6fb7ff}
+.cf-q.q-down_down .bar i{background:var(--yellow)}
+.cf-q.q-up_down .bar i{background:var(--red)}
+.cf-q.q-up_up .bar i{background:#8f7cff}
+.cf-q.q-up_flat .bar i{background:#7d8aa0}
+.cf-flat{font-size:11px;line-height:1.65;color:var(--dim);margin-top:7px;overflow-wrap:anywhere}
+.cf-subh{font-size:11px;font-weight:700;color:#9fb0c8;margin:0 0 6px;padding:0 2px}
+.cf-subh.out{color:#ffb3b3}
+.cf-list{display:flex;flex-direction:column;gap:5px;min-width:0}
+.cf-sec{border:1px solid rgba(255,255,255,.08);border-radius:9px;background:rgba(255,255,255,.025);min-width:0}
+.cf-sec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:7px;padding:7px 9px;min-width:0}
+.cf-sec>summary::before,.cf-sec[open]>summary::before{content:none!important;display:none!important}
+.cf-sec>summary::-webkit-details-marker{display:none}
+.cf-sec>summary::marker{content:'';display:none}
+.cf-sec>summary::after{content:'▸';color:var(--dim);font-size:10px;flex:0 0 auto;margin-left:2px}
+.cf-sec[open]>summary::after{content:'▾'}
+.cf-sec .sn{font-size:12px;font-weight:600;color:#e6ebf5;min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cf-sec .sk{font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.cf-sec .sk b{color:#e6ebf5}
+.cf-sec[open]>summary{border-bottom:1px solid rgba(255,255,255,.08)}
+.cf-sec .cf-rows{padding:5px 6px 7px}
+.cf-sec .cf-hint{font-size:10px;color:var(--dim);padding:0 9px 6px}
+.cf-head,.cf-row{display:grid;grid-template-columns:minmax(0,1.9fr) 76px 92px 84px 112px 118px;gap:6px;align-items:center;min-width:0}
+.cf-head{font-size:10px;color:var(--dim);padding:4px 8px;line-height:1.4}
+.cf-head span{text-align:right;min-width:0}
+.cf-head span:first-child{text-align:left}
+.cf-row{padding:6px 8px;border-radius:7px;background:rgba(255,255,255,.025);margin-top:4px;font-size:12px;min-width:0}
+.cf-name{font-weight:600;color:#e6ebf5;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cf-cell{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;min-width:0;overflow-wrap:anywhere}
+.cf-cell .cf-k{display:none}
+.cf-up{color:var(--green)}
+.cf-down{color:var(--red)}
+.cf-chip{display:inline-block;font-size:10.5px;font-weight:700;border-radius:999px;padding:1px 7px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+.cf-chip.q-down_up{color:#7ff0b4;background:rgba(47,208,122,.12);border:1px solid rgba(47,208,122,.38)}
+.cf-chip.q-down_flat{color:#9fd0ff;background:rgba(75,157,255,.12);border:1px solid rgba(75,157,255,.35)}
+.cf-chip.q-down_down{color:#ffd166;background:rgba(255,197,49,.11);border:1px solid rgba(255,197,49,.35)}
+.cf-chip.q-up_down{color:#ff9c9c;background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.38)}
+.cf-chip.q-up_up{color:#c3b8ff;background:rgba(143,124,255,.13);border:1px solid rgba(143,124,255,.38)}
+.cf-chip.q-up_flat{color:#a9b5c6;background:rgba(125,138,160,.13);border:1px solid rgba(125,138,160,.35)}
+.cf-chip.q-flat_up,.cf-chip.q-flat_down,.cf-chip.q-flat_flat{color:#8b93a7;background:rgba(139,147,167,.10);border:1px solid rgba(139,147,167,.28)}
+.cf-val{font-size:11.5px;line-height:1.7;color:#b9c1d3;overflow-wrap:anywhere}
+.cf-val-row{display:block;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.07);min-width:0}
+.cf-val-row:last-of-type{border-bottom:0}
+.cf-val-row .vk{display:block;color:var(--muted);font-size:10.5px;line-height:1.5;margin-bottom:1px;white-space:normal;overflow-wrap:anywhere}
+.cf-val-row .vv{display:block;min-width:0;line-height:1.65;overflow-wrap:anywhere}
+.cf-val-row .vv b{color:#fff}
+.cf-verdict{margin-top:7px;padding:7px 9px;border-radius:8px;background:rgba(255,197,49,.08);border:1px solid rgba(255,197,49,.30);color:#ffd9a3;font-size:11.5px;line-height:1.7;overflow-wrap:anywhere}
+.cf-verdict.bad{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.32);color:#ffc9c9}
+.cf-foot{font-size:11px;line-height:1.8;color:#6c748a;margin-top:9px;overflow-wrap:anywhere}
+.cf-empty{font-size:12px;color:#8b93a7;padding:8px 0}
+.cf-row.compact{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 8px;font-size:11.5px;padding:6px 7px}
+.cf-row.compact .cf-name{grid-column:1/-1;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.cf-row.compact .cf-cell{text-align:left;white-space:normal}
+.cf-row.compact .cf-cell .cf-k{display:block;font-size:9.5px;color:var(--dim);line-height:1.4}
+.cf-row.compact .cf-chip{grid-column:1/-1;justify-self:start;max-width:100%}
+.cf-row.compact .cf-cell:nth-child(2),.cf-row.compact .cf-cell:nth-child(3){grid-column:auto}
+@media(max-width:780px){
+  .cf-nums{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cf-num .v{font-size:16px}
+  .cf-cols{grid-template-columns:1fr}
+  .cf-q{grid-template-columns:92px minmax(0,1fr) 66px;gap:5px}
+  .cf-q .nm{font-size:11px}
+  .cf-head{display:none}
+  .cf-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 8px;padding:7px 8px}
+  .cf-row .cf-name{grid-column:1/-1;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+  .cf-row .cf-cell{text-align:left;white-space:normal}
+  .cf-row .cf-cell .cf-k{display:block;font-size:9.5px;color:var(--dim);line-height:1.4}
+  .cf-row .cf-chip{grid-column:1/-1;justify-self:start;max-width:100%}
+  .cf-sec .sn{font-size:11.5px}
+  .cf-sec .sk{font-size:10.5px}
+}
 </style>
 </head>
 <body>
@@ -2083,6 +2182,72 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
               <span>分析 <b>—</b></span><span class="sep">·</span>
               <span>价格 <b>—</b></span>
             </div>
+          </div>
+
+          <!-- ============================================================
+               ★★★ 资金流（代理）· 2026-11-19 新建
+               用户原话：「在市场交易中最重要的是资金的流向，你能检测到资金的流向吗，
+                          都流向哪些板块，流向哪些品」
+               ★ 第一件事是如实说数据缺口，不许假装能算真资金流：
+                 · 每品日线只有 p 价格 / n 在售量 / b 求购量 / bp 求购价 四个键；
+                 · data/market.json 22,244 品里带 turnover 的 = 0；
+                 · 成交量序列 2025-10-26 后只剩零星点，源端实际停更。
+                 → 本卡所有金额 = 「在售量变动 × 现价」的【代理】，不是成交额。
+               ★ 页面纪律（写死在 HTML 里，不靠自觉）：
+                 1) 顶部红框明写「代理指标 · 无成交量数据」，永远不折叠；
+                 2) 禁止「资金流入 / 资金流出」这种绝对说法，一律用「在售收缩·价涨」这类描述；
+                 3) 每条必须带：品名 / 价格 / 7日Δ在售 / 7日Δ价 / 代理额 / 象限标签；
+                 4) 历史验证（三档 + DiD + p）直接印在卡上；代理没通过就写「降级为描述性工具」，
+                    不许只给信号不给验证。
+               数据源：cs-quant/capital_flow.cjs → capital-flow.json（daily 发布）
+               降级链：拿不到 → 只空这一张卡，其余 6 页签照常。
+               ============================================================ -->
+          <div class="card span-all" id="sec-cf">
+            <div class="sec-head">
+              <h2>资金流（代理） <span class="cf-live">代理指标 · 无成交量数据</span></h2>
+              <span class="sec-sub">在售量 × 价格 的代理估算 · 六象限 · 板块 / 单品 · 不是成交额</span>
+              <span class="r" id="cf-time">加载中…</span>
+            </div>
+            <div class="cf-caveat" id="cf-caveat"><b>这不是真实资金流。</b>本卡没有成交量数据：每品日线只有价格 / 在售量 / 求购量 / 求购价四个键，<b>market.json 22,244 品里带 turnover 的 = 0</b>，成交量源端在 2025-10-26 后停更。下面所有金额 = <b>「在售量变动 × 现价」</b>，是<b>代理</b>；在售减少可能是成交，也可能是撤单，所以必须结合价格方向（六象限）解读。</div>
+            <div class="cf-nums" id="cf-nums"></div>
+            <div class="cf-cols">
+              <div class="cf-pane">
+                <h3>六象限分布 <span>7 日 · |Δ| ≥ 3% 才算一个方向</span></h3>
+                <div class="cf-quad" id="cf-quad"></div>
+                <div class="cf-flat" id="cf-flat"></div>
+              </div>
+              <div class="cf-pane">
+                <h3>历史验证 <span>三档 · 匹配对照 · 置换 200 次</span></h3>
+                <div class="cf-val" id="cf-val"></div>
+              </div>
+            </div>
+            <div class="cf-pane" style="margin-top:12px">
+              <h3>板块 Top 10 <span>按代理净额 · 点开看板块内单品 Top 5</span></h3>
+              <div class="cf-cols">
+                <div style="min-width:0">
+                  <div class="cf-subh">在售净收缩最多（代理额为正）</div>
+                  <div class="cf-list" id="cf-sec-in"></div>
+                </div>
+                <div style="min-width:0">
+                  <div class="cf-subh out">在售净扩张最多（代理额为负）</div>
+                  <div class="cf-list" id="cf-sec-out"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cf-pane" style="margin-top:12px">
+              <h3>单品 Top 10 <span>按 |代理额| 降序 · 不是成交额</span></h3>
+              <div class="cf-cols">
+                <div style="min-width:0">
+                  <div class="cf-subh">在售净收缩（代理额为正）</div>
+                  <div class="cf-list" id="cf-item-in"></div>
+                </div>
+                <div style="min-width:0">
+                  <div class="cf-subh out">在售净扩张（代理额为负）</div>
+                  <div class="cf-list" id="cf-item-out"></div>
+                </div>
+              </div>
+            </div>
+            <p class="cf-foot" id="cf-foot">加载中…（capital-flow.json）</p>
           </div>
 
           <!-- ============================================================
@@ -5425,6 +5590,153 @@ function renderTraderSignals(){
       + ' 历史验证：' + ((trData.counts && trData.counts.obs) || '—') + ' 个历史观察点 · 配对对照 tier×价格档×季度 · 置换 200 次 · 门槛 |DiD| ≥ 0.05。'
       + ' A 型 treated 单元 ' + (va.nTreatedCells != null ? va.nTreatedCells : '—') + ' 个，DiD ' + trPct(va.did) + '、p=' + (va.p != null ? va.p : '—') + '。'
       + ' ★ 回归测试如实说：起拉前 60 日内，A 型只标中 <b>3 / 8</b> 个历史翻倍点（斜率口径能标中 7/8，但它的 DiD 是 +4.9pp，差 0.1pp 没到门槛）—— 漏报比误报多，别把它当预警器用。';
+  }
+}
+/* ============================================================================
+   ★★★ 2026-11-19 新增：资金流（代理）（cs-quant/capital_flow.cjs → capital-flow.json）
+   ----------------------------------------------------------------------------
+   ★ 这张卡的第一职责是【说清数据缺口】，不是给"资金流入"结论：
+     · 没有成交量：每品只有 p/n/b/bp 四个键，market.json 里 turnover = 0；
+     · 所有金额 = −ΔN × P（在售量变动 × 现价），是代理，不是成交额；
+     · 在售减少无法区分成交 / 撤单 → 页面只写「在售收缩·价涨」这类描述，
+       不写「资金流入 / 流出」；
+     · 历史验证直接印在卡上：三档 + DiD + p；没通过就写"降级为描述性工具"。
+   ★ 降级：capital-flow.json 拿不到 → 只空这张卡，其余 6 页签照常。
+   ============================================================================ */
+var cfData = null, cfLoaded = false;
+async function loadCapitalFlow(){
+  if (cfLoaded) return; cfLoaded = true;
+  try { cfData = await fetchJSON('./capital-flow.json'); } catch (e) { cfData = null; }
+  try { renderCapitalFlow(); } catch (e) { /* 渲染失败只空这块 */ }
+}
+function cfMoney(v){
+  if (v == null || !isFinite(v)) return '—';
+  const s = v > 0 ? '+' : (v < 0 ? '-' : '');
+  return s + '¥' + fmtNum(Math.abs(v), 0);
+}
+function cfMoney2(v){
+  if (v == null || !isFinite(v)) return '—';
+  const s = v > 0 ? '+' : (v < 0 ? '-' : '');
+  return s + '¥' + Math.abs(v).toFixed(2);
+}
+function cfPx(v){ return (v == null || !isFinite(v)) ? '—' : ('¥' + fmtNum(v, 2)); }
+function cfPct(v){ return (v == null || !isFinite(v)) ? '—' : ((v > 0 ? '+' : (v < 0 ? '-' : '')) + Math.abs(v * 100).toFixed(2) + '%'); }
+function cfD(v){ return (v == null || !isFinite(v)) ? '—' : ((v > 0 ? '+' : '') + fmtNum(v, 0)); }
+function cfRate(v){ return (v == null || !isFinite(v)) ? '—' : (Math.abs(v * 100).toFixed(1) + '%'); }
+function cfWan(v){
+  if (v == null || !isFinite(v)) return '—';
+  const s = v > 0 ? '+' : (v < 0 ? '-' : '');
+  const a = Math.abs(v);
+  return s + (a >= 10000 ? (a / 10000).toFixed(1) + '万' : fmtNum(a, 0));
+}
+function cfChip(it){
+  const q = (it && it.quadrant) || 'flat_flat';
+  const lab = (it && it.label) || '—';
+  return '<span class="cf-chip q-' + esc(q) + '">' + esc(lab) + '</span>';
+}
+function cfRow(it){
+  if (!it) return '';
+  const dN = it.dN, dNpct = it.dNpct, dP = it.dP, dPpct = it.dPpct, amt = it.amount;
+  const nCls = dN > 0 ? 'cf-up' : (dN < 0 ? 'cf-down' : '');
+  const pCls = dP > 0 ? 'cf-up' : (dP < 0 ? 'cf-down' : '');
+  const aCls = amt > 0 ? 'cf-up' : (amt < 0 ? 'cf-down' : '');
+  return '<div class="cf-row compact">'
+    + '<div class="cf-name" title="' + esc(it.name || '') + '">' + esc(it.name || ('gid ' + it.gid)) + '</div>'
+    + '<div class="cf-cell"><span class="cf-k">价格</span>' + cfPx(it.price) + '</div>'
+    + '<div class="cf-cell"><span class="cf-k">7日Δ在售</span><span class="' + nCls + '">' + cfD(dN) + '</span> <span class="cf-dim">' + cfPct(dNpct) + '</span></div>'
+    + '<div class="cf-cell"><span class="cf-k">7日Δ价</span><span class="' + pCls + '">' + (dP == null ? '—' : ((dP > 0 ? '+' : (dP < 0 ? '-' : '')) + '¥' + Math.abs(dP).toFixed(2))) + '</span> <span class="cf-dim">' + cfPct(dPpct) + '</span></div>'
+    + '<div class="cf-cell"><span class="cf-k">代理额（−ΔN×P）</span><span class="' + aCls + '">' + cfMoney(amt) + '</span></div>'
+    + cfChip(it)
+    + '</div>';
+}
+function cfSectorRow(s, out){
+  if (!s) return '';
+  const cls = out ? 'out' : '';
+  let html = '<details class="cf-sec">'
+    + '<summary><span class="sn" title="' + esc(s.caseName || '') + '">' + esc(s.caseName || '未分类') + '</span>'
+    + '<span class="sk">' + n2(s.n) + ' 品 · <b class="' + (s.flowAmount > 0 ? 'cf-up' : (s.flowAmount < 0 ? 'cf-down' : '')) + '">' + cfMoney(s.flowAmount) + '</b></span></summary>'
+    + '<div class="cf-rows">';
+  const top = arrOf(s.topItems).slice(0, 5);
+  html += top.length ? top.map(cfRow).join('') : '<div class="cf-empty">这个板块没有可用单品</div>';
+  html += '</div></details>';
+  return html;
+}
+function renderCapitalFlow(){
+  const nums = $('cf-nums'), quad = $('cf-quad'), flat = $('cf-flat'), val = $('cf-val');
+  const secIn = $('cf-sec-in'), secOut = $('cf-sec-out'), itemIn = $('cf-item-in'), itemOut = $('cf-item-out');
+  const timeEl = $('cf-time'), foot = $('cf-foot');
+  if (!nums) return;
+  if (!cfData){
+    if (timeEl) timeEl.textContent = '未接入';
+    nums.innerHTML = '<div class="cf-num"><div class="k">状态</div><div class="v">未接入</div><div class="s">capital-flow.json 拿不到</div></div>';
+    if (quad) quad.innerHTML = '<div class="cf-empty">没有数据 —— 这一块空着是真的没生成，不是"今天没有资金流"。</div>';
+    if (flat) flat.innerHTML = '';
+    if (val) val.innerHTML = '<div class="cf-empty">历史验证也没生成。</div>';
+    if (secIn) secIn.innerHTML = ''; if (secOut) secOut.innerHTML = '';
+    if (itemIn) itemIn.innerHTML = ''; if (itemOut) itemOut.innerHTML = '';
+    if (foot) foot.innerHTML = '★ 拿不到 capital-flow.json：请先跑 node cs-quant/capital_flow.cjs。其他卡片不受影响。';
+    return;
+  }
+  const s = cfData.summary || {}, c = cfData.counts || {}, dg = cfData.dataGap || {};
+  if (timeEl) timeEl.textContent = 'as of ' + (cfData.refDate || '—') + ' · 全池 ' + n2(c.pool) + ' 品';
+  /* ① 全池代理额 */
+  nums.innerHTML =
+    '<div class="cf-num"><div class="k">在售净收缩（代理额）</div><div class="v cf-up">' + cfMoney(s.inflowTotal) + '</div><div class="s">' + n2(s.inflowN) + ' 品 · amount > 0 · 不是成交额</div></div>' +
+    '<div class="cf-num"><div class="k">在售净扩张（代理额）</div><div class="v cf-down">' + cfMoney(s.outflowTotal) + '</div><div class="s">' + n2(s.outflowN) + ' 品 · amount < 0 · 不是成交额</div></div>' +
+    '<div class="cf-num"><div class="k">代理净额</div><div class="v">' + cfMoney(s.netFlow) + '</div><div class="s">净收缩 + 净扩张；正 = 卖盘净减少</div></div>' +
+    '<div class="cf-num"><div class="k">六象限覆盖</div><div class="v">' + n2(c.sixTotal) + ' <span class="cf-dim">/ ' + n2(c.pool) + '</span></div><div class="s">' + n2(c.flatN) + ' 品 |ΔN| &lt; 3% 记「在售平稳」，不归入六象限</div></div>';
+  /* ② 六象限 */
+  if (quad){
+    const six = ['down_up', 'down_flat', 'down_down', 'up_down', 'up_up', 'up_flat'];
+    const arr = six.map(function(k){ return { k: k, v: (c.six && c.six[k]) || { label: '', n: 0, amount: 0 } }; });
+    const mx = Math.max.apply(null, arr.map(function(x){ return x.v.n || 0; }).concat([1]));
+    quad.innerHTML = arr.map(function(x){
+      const pctW = Math.max(2, Math.round((x.v.n || 0) / mx * 100));
+      const amtCls = x.v.amount > 0 ? 'cf-up' : (x.v.amount < 0 ? 'cf-down' : '');
+      return '<div class="cf-q q-' + x.k + '" title="' + esc(x.v.label) + '：' + n2(x.v.n) + ' 品，代理额 ' + cfMoney(x.v.amount) + '">'
+        + '<div class="nm">' + esc(x.v.label) + '</div>'
+        + '<div class="bar"><i style="width:' + pctW + '%"></i></div>'
+        + '<div class="n">' + n2(x.v.n) + ' · <span class="' + amtCls + '">' + cfWan(x.v.amount) + '</span></div>'
+        + '</div>';
+    }).join('');
+  }
+  if (flat) flat.innerHTML = '口径：ΔN / ΔP 都取 7 日变化，|Δ| &lt; 3% 记「→」。在售平稳的 ' + n2(c.flatN) + ' 品不硬塞进六象限；' + n2(c.sixTotal) + ' 品参与六象限。';
+  /* ③ 历史验证（直接印在卡上） */
+  if (val){
+    const v = cfData.validation;
+    if (!v || !v.byBucket){
+      val.innerHTML = '<div class="cf-empty">历史验证没生成（可跑 node cs-quant/capital_flow.cjs 补）。没有验证就不给结论。</div>';
+    } else {
+      const names = { top: '前 10%（在售收缩·价涨）', mid: '中 50%', bottom: '后 10%（在售扩张·价跌）' };
+      const rows = ['top', 'mid', 'bottom'].map(function(b){
+        const x = v.byBucket[b] || {}, r = x.ret60 || {};
+        return '<div class="cf-val-row"><div class="vk">' + names[b] + '</div><div class="vv">n=<b>' + n2(x.n) + '</b> · 60日中位 <b>' + cfPct(r.med) + '</b> · 涨≥20% <b>' + cfRate(r.up20) + '</b> · 跌≥20% <b>' + cfRate(r.down20) + '</b></div></div>';
+      }).join('');
+      const d = v.did || {}, pTxt = d.p == null ? '—' : (d.p < 0.001 ? '<0.001' : Number(d.p).toFixed(3));
+      const verdictCls = v.verdict && v.verdict.hasPower ? '' : ' bad';
+      val.innerHTML = rows
+        + '<div class="cf-val-row"><div class="vk">DiD / p（前 10% vs 匹配对照）</div><div class="vv"><b>' + (d.did == null ? '—' : ((d.did * 100).toFixed(1) + 'pp')) + '</b> · p=<b>' + pTxt + '</b> · 门槛 |DiD|≥5pp 且 p≤0.05 · 置换 200 次</div></div>'
+        + '<div class="cf-verdict' + verdictCls + '">★ 结论：' + (v.verdict && v.verdict.hasPower ? '<b class="cf-up">通过门槛</b>' : '<b class="cf-down">没通过门槛</b>') + ' · ' + esc((v.verdict && v.verdict.textCN) || '没有验证结论。') + '</div>';
+    }
+  }
+  /* ④ 板块 Top10 */
+  const inList = arrOf(cfData.sectorTopIn), outList = arrOf(cfData.sectorTopOut);
+  if (secIn) secIn.innerHTML = inList.length ? inList.map(function(x){ return cfSectorRow(x, false); }).join('') : '<div class="cf-empty">没有</div>';
+  if (secOut) secOut.innerHTML = outList.length ? outList.map(function(x){ return cfSectorRow(x, true); }).join('') : '<div class="cf-empty">没有</div>';
+  /* ⑤ 单品 Top10 */
+  const ti = arrOf(s.topInflow), to = arrOf(s.topOutflow);
+  if (itemIn) itemIn.innerHTML = ti.length ? ti.map(cfRow).join('') : '<div class="cf-empty">没有</div>';
+  if (itemOut) itemOut.innerHTML = to.length ? to.map(cfRow).join('') : '<div class="cf-empty">没有</div>';
+  /* ⑥ 卡底：口径 + 缺口 + 辅助指标陷阱 */
+  if (foot){
+    foot.innerHTML = '口径：代理额 = <b>−ΔN × P(t)</b>（7 日）；flowScore = 归一化代理额 × 价格确认符号。'
+      + ' 数据缺口：market.json ' + n2(dg.marketItems) + ' 品里带 turnover 的 <b>' + n2(dg.marketItemsWithTurnover) + '</b>；'
+      + '全池 ' + n2(dg.poolTotal) + ' 品里 vol 有 <b>' + n2(dg.poolWithVol) + '</b>，名义末端 <b>' + esc(dg.volNominalLast || '—') + '</b>。'
+      + ' ' + esc(dg.stopDateNote || '') + ' '
+      + '★ 求购净变动（F3）只作辅助：<b>求购增加 ≠ 流入</b>（可能是喊单、挂低价、或数据源末端），不单独触发任何结论。'
+      + ' 历史验证样本：' + n2((cfData.validation && cfData.validation.sample && cfData.validation.sample.obsDates) || 0) + ' 个月度观察日 / '
+      + n2((cfData.validation && cfData.validation.sample && cfData.validation.sample.obs) || 0) + ' 个观察点。'
+      + ' ★ 本卡是<b>描述性工具</b>；没有成交量，就不可能算出真实资金流。';
   }
 }
 function twStageChip(stage){
@@ -11435,7 +11747,7 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
      ★ 和 loadTodayWatch 共用同一个定时器（不是另起一个）：_test/_verify_sync.cjs 的 [H] 用例
        会在 120ms 处记录一次"网络请求基线"再断言"没配置同步码时零请求"—— 若本卡单独挂在 120ms，
        它那一次 fetch 会正好落在基线之后，把同步测试打成 1 个假失败。合并到 90ms 就稳定在基线之前。 */
-  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); loadTraderSignals(); }, 90);
+  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); loadTraderSignals(); loadCapitalFlow(); }, 90);
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
