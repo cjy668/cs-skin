@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-19T13:31:33.189Z",
+ "at": "2026-11-19T15:27:36.308Z",
  "atText": "2026-11-19",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -87,7 +87,7 @@
  "counts": {
   "pool": 1073,
   "series": 1073,
-  "obs": 237094,
+  "obs": 237103,
   "liquidObs": 122862,
   "currentItems": 20,
   "currentLiquid": 704,
@@ -97,7 +97,7 @@
   "C": 0
  },
  "baseline": {
-  "nObs": 108447,
+  "nObs": 108449,
   "doubleRate": 0.2196,
   "fwd120Gain": {
    "p25": 0.0975,
@@ -120,7 +120,7 @@
    "nControlCells": 4252,
    "nStrata": 224,
    "treatedDoubleRate": 0.2289,
-   "controlDoubleRate": 0.214,
+   "controlDoubleRate": 0.2139,
    "treatedRet120": {
     "p25": -0.3288,
     "p50": 0.0236,
@@ -145,7 +145,7 @@
    "nControlCells": 2773,
    "nStrata": 239,
    "treatedDoubleRate": 0.2144,
-   "controlDoubleRate": 0.2226,
+   "controlDoubleRate": 0.2225,
    "treatedRet120": {
     "p25": -0.2472,
     "p50": 0.0326,
@@ -170,7 +170,7 @@
    "nControlCells": 3680,
    "nStrata": 240,
    "treatedDoubleRate": 0.2114,
-   "controlDoubleRate": 0.2155,
+   "controlDoubleRate": 0.2154,
    "treatedRet120": {
     "p25": -0.2475,
     "p50": 0.0245,
@@ -220,7 +220,7 @@
    "nControlCells": 4665,
    "nStrata": 175,
    "treatedDoubleRate": 0.0811,
-   "controlDoubleRate": 0.2343,
+   "controlDoubleRate": 0.2342,
    "treatedRet120": {
     "p25": -0.2762,
     "p50": -0.0809,
@@ -270,7 +270,7 @@
    "nControlCells": 5824,
    "nStrata": 184,
    "treatedDoubleRate": 0.1282,
-   "controlDoubleRate": 0.2181,
+   "controlDoubleRate": 0.218,
    "treatedRet120": {
     "p25": -0.1747,
     "p50": 0.0051,
@@ -295,7 +295,7 @@
    "nControlCells": 3345,
    "nStrata": 97,
    "treatedDoubleRate": 0.0719,
-   "controlDoubleRate": 0.2114,
+   "controlDoubleRate": 0.2113,
    "treatedRet120": {
     "p25": -0.2143,
     "p50": -0.0274,
@@ -318,7 +318,7 @@
    "p": 0.005,
    "didRate": 0.0258,
    "treatedDoubleRate": 0.2106,
-   "controlDoubleRate": 0.2346,
+   "controlDoubleRate": 0.2345,
    "pass": true,
    "passNegative": false
   },
@@ -331,7 +331,7 @@
    "p": 0.005,
    "didRate": 0.0284,
    "treatedDoubleRate": 0.2175,
-   "controlDoubleRate": 0.2221,
+   "controlDoubleRate": 0.222,
    "pass": true,
    "passNegative": false
   },
@@ -344,7 +344,7 @@
    "p": 0.005,
    "didRate": 0.0374,
    "treatedDoubleRate": 0.2289,
-   "controlDoubleRate": 0.214,
+   "controlDoubleRate": 0.2139,
    "pass": true,
    "passNegative": false
   },
@@ -357,7 +357,7 @@
    "p": 0.005,
    "didRate": 0.0466,
    "treatedDoubleRate": 0.2464,
-   "controlDoubleRate": 0.2046,
+   "controlDoubleRate": 0.2045,
    "pass": true,
    "passNegative": false
   },
@@ -370,7 +370,7 @@
    "p": 0.005,
    "didRate": 0.0394,
    "treatedDoubleRate": 0.2424,
-   "controlDoubleRate": 0.2059,
+   "controlDoubleRate": 0.2058,
    "pass": true,
    "passNegative": false
   },
@@ -383,7 +383,7 @@
    "p": 0.005,
    "didRate": 0.0378,
    "treatedDoubleRate": 0.2329,
-   "controlDoubleRate": 0.211,
+   "controlDoubleRate": 0.2109,
    "pass": true,
    "passNegative": false
   },
@@ -396,7 +396,7 @@
    "p": 0.005,
    "didRate": 0.0374,
    "treatedDoubleRate": 0.2289,
-   "controlDoubleRate": 0.214,
+   "controlDoubleRate": 0.2139,
    "pass": true,
    "passNegative": false
   },
@@ -409,7 +409,7 @@
    "p": 0.01,
    "didRate": 0.0091,
    "treatedDoubleRate": 0.2083,
-   "controlDoubleRate": 0.2584,
+   "controlDoubleRate": 0.2583,
    "pass": true,
    "passNegative": false
   },
@@ -422,7 +422,7 @@
    "p": 0.0149,
    "didRate": 0.0151,
    "treatedDoubleRate": 0.2144,
-   "controlDoubleRate": 0.2226,
+   "controlDoubleRate": 0.2225,
    "pass": false,
    "passNegative": false
   },
@@ -430,11 +430,11 @@
    "param": "A2.listedSlopeMin",
    "value": 0.3,
    "kind": "A2",
-   "nTreatedCells": 4348,
+   "nTreatedCells": 4349,
    "did": 0.0477,
    "p": 0.01,
    "didRate": 0.0171,
-   "treatedDoubleRate": 0.2199,
+   "treatedDoubleRate": 0.2198,
    "controlDoubleRate": 0.2082,
    "pass": false,
    "passNegative": false
@@ -448,7 +448,7 @@
    "p": 0.9851,
    "didRate": 0.0042,
    "treatedDoubleRate": 0.211,
-   "controlDoubleRate": 0.2173,
+   "controlDoubleRate": 0.2172,
    "pass": false,
    "passNegative": false
   },
@@ -500,7 +500,7 @@
    "p": 0.005,
    "didRate": -0.0485,
    "treatedDoubleRate": 0.0889,
-   "controlDoubleRate": 0.2528,
+   "controlDoubleRate": 0.2527,
    "pass": false,
    "passNegative": true
   },
@@ -513,7 +513,7 @@
    "p": 0.005,
    "didRate": -0.0189,
    "treatedDoubleRate": 0.0811,
-   "controlDoubleRate": 0.2343,
+   "controlDoubleRate": 0.2342,
    "pass": false,
    "passNegative": true
   },
@@ -1186,7 +1186,7 @@
     "同期价格 -22.0%（没涨）",
     "在售距 60 日高 -5.0%",
     "求购 30 日中位比前段 -16.7%（5.0 单 vs 前段 6.0 单）",
-    "同 tier 求购 p90 = 107.0 单"
+    "同 tier 求购 p90 = 106.9 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-17"
@@ -1235,7 +1235,7 @@
    "listedDropFromHigh": -0.2435,
    "buySurge": 0.5714,
    "buyLevel": 44,
-   "buyPctile": 0.3703,
+   "buyPctile": 0.3704,
    "price": 69.9,
    "listed": 469,
    "inTierBuyP90": false,
@@ -1246,7 +1246,7 @@
     "同期价格 -9.6%（没涨）",
     "在售距 60 日高 -24.4%",
     "求购 30 日中位比前段 +57.1%（44.0 单 vs 前段 28.0 单）",
-    "同 tier 求购 p90 = 107.0 单"
+    "同 tier 求购 p90 = 106.9 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-17"
@@ -1396,7 +1396,7 @@
     "同期价格 -8.2%（没涨）",
     "在售距 60 日高 -16.5%",
     "求购 30 日中位比前段 -3.8%（12.5 单 vs 前段 13.0 单）",
-    "同 tier 求购 p90 = 107.0 单"
+    "同 tier 求购 p90 = 106.9 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-17"
@@ -1655,7 +1655,7 @@
    "listedDropFromHigh": -0.0723,
    "buySurge": -0.0294,
    "buyLevel": 33,
-   "buyPctile": 0.2777,
+   "buyPctile": 0.2778,
    "price": 72,
    "listed": 462,
    "inTierBuyP90": false,
@@ -1666,7 +1666,7 @@
     "同期价格 +0.3%（没涨）",
     "在售距 60 日高 -7.2%",
     "求购 30 日中位比前段 -2.9%（33.0 单 vs 前段 34.0 单）",
-    "同 tier 求购 p90 = 107.0 单"
+    "同 tier 求购 p90 = 106.9 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-17"
@@ -1685,7 +1685,7 @@
    "listedDropFromHigh": -0.2154,
    "buySurge": 0.125,
    "buyLevel": 13.5,
-   "buyPctile": 0.1136,
+   "buyPctile": 0.1137,
    "price": 49.9,
    "listed": 255,
    "inTierBuyP90": false,
@@ -1696,7 +1696,7 @@
     "同期价格 -36.8%（没涨）",
     "在售距 60 日高 -21.5%",
     "求购 30 日中位比前段 +12.5%（13.5 单 vs 前段 12.0 单）",
-    "同 tier 求购 p90 = 107.0 单"
+    "同 tier 求购 p90 = 106.9 单"
    ],
    "staleDays": 0,
    "asOf": "2026-11-17"
