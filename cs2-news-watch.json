@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1795013451798,
- "atText": "2026-11-18 22:50:51",
+ "at": 1795064808776,
+ "atText": "2026-11-19 13:06:48",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "ISteamNews"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,15 +12,15 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1795013453796,
+  "checkedAt": 1795064822846,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1849827110421976",
+ "lastSeen": "1849827110426557",
  "lastSeenTitle": "Counter-Strike 2 Update",
- "lastSeenDate": "2026-11-17",
- "lastSeenAtText": "2026-11-18 07:40:07",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110421976",
- "newCount": 0,
+ "lastSeenDate": "2026-11-19",
+ "lastSeenAtText": "2026-11-19 08:57:59",
+ "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
+ "newCount": 1,
  "firstRun": false,
  "lastKnownDate": "2026-11-17",
  "hist": {
@@ -38,9 +37,9 @@
  "checked": {
   "feedItems": 100,
   "officialItems": 87,
-  "newItems": 0,
+  "newItems": 1,
   "recentItems": 3,
-  "rssItems": 10
+  "rssItems": 0
  },
  "sourceStatus": [
   {
@@ -48,34 +47,183 @@
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
    "ok": true,
    "status": 200,
-   "bytes": 182785,
-   "ms": 1898,
+   "bytes": 183015,
+   "ms": 1488,
    "attempts": 1,
    "error": null
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": true,
-   "status": 200,
-   "bytes": 25285,
-   "ms": 810,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 13941,
+   "attempts": 2,
+   "error": "timeout"
   }
  ],
  "crossCheck": {
-  "apiNewestDate": "2026-11-17",
-  "rssNewestDate": "2026-11-17",
-  "agree": true,
-  "note": "两个源的最新公告日期一致"
+  "apiNewestDate": "2026-11-19",
+  "rssNewestDate": null,
+  "agree": false,
+  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
- "items": [],
+ "items": [
+  {
+   "gid": "1849827110426557",
+   "title": "Counter-Strike 2 Update",
+   "titleZh": null,
+   "date": "2026-11-19",
+   "dateLocal": "2026-11-19",
+   "at": 1795049879000,
+   "atText": "2026-11-19 08:57:59",
+   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
+   "summary": "MAPS Cobblestone · Fixed some walkable ledges in long A · Fixed map issue that was loading an empty skybox · Fixed an audio blocker issue by mid/A · Added a grenade clip to assault van bumper · Fixed various gaps in the world Inferno · Fixed grenade and Molotov exploit spot from church to dark on bombsite B.…",
+   "level": "机制级",
+   "confidence": "medium",
+   "matchedKeywords": [
+    "Exclusive",
+    "Map",
+    "Audio",
+    "Bug",
+    "Optimize",
+    "Misc"
+   ],
+   "levelBasis": "强机制 1 个（Exclusive）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 5 个",
+   "mechanismHits": [
+    "Exclusive"
+   ],
+   "strongMechanismHits": [
+    "Exclusive"
+   ],
+   "supplyHits": [],
+   "eventHits": [],
+   "noiseHits": [
+    "Map",
+    "Audio",
+    "Bug",
+    "Optimize",
+    "Misc"
+   ],
+   "alreadyKnown": false,
+   "similarEvents": [
+    {
+     "date": "2026-03-16",
+     "title": "《反恐精英》更新",
+     "similarity": 0.569,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2024-02-13",
+     "title": "更新日志（2024年2月12日）",
+     "similarity": 0.53,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2026-09-09",
+     "title": "《反恐精英》更新",
+     "similarity": 0.528,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    }
+   ],
+   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
+  }
+ ],
  "recent": [
+  {
+   "gid": "1849827110426557",
+   "title": "Counter-Strike 2 Update",
+   "titleZh": null,
+   "date": "2026-11-19",
+   "dateLocal": "2026-11-19",
+   "at": 1795049879000,
+   "atText": "2026-11-19 08:57:59",
+   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
+   "summary": "MAPS Cobblestone · Fixed some walkable ledges in long A · Fixed map issue that was loading an empty skybox · Fixed an audio blocker issue by mid/A · Added a grenade clip to assault van bumper · Fixed various gaps in the world Inferno · Fixed grenade and Molotov exploit spot from church to dark on bombsite B.…",
+   "level": "机制级",
+   "confidence": "medium",
+   "matchedKeywords": [
+    "Exclusive",
+    "Map",
+    "Audio",
+    "Bug",
+    "Optimize",
+    "Misc"
+   ],
+   "levelBasis": "强机制 1 个（Exclusive）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 5 个",
+   "mechanismHits": [
+    "Exclusive"
+   ],
+   "strongMechanismHits": [
+    "Exclusive"
+   ],
+   "supplyHits": [],
+   "eventHits": [],
+   "noiseHits": [
+    "Map",
+    "Audio",
+    "Bug",
+    "Optimize",
+    "Misc"
+   ],
+   "alreadyKnown": false,
+   "similarEvents": [
+    {
+     "date": "2026-03-16",
+     "title": "《反恐精英》更新",
+     "similarity": 0.569,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2024-02-13",
+     "title": "更新日志（2024年2月12日）",
+     "similarity": 0.53,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    },
+    {
+     "date": "2026-09-09",
+     "title": "《反恐精英》更新",
+     "similarity": 0.528,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+    }
+   ],
+   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
+  },
   {
    "gid": "1849827110421976",
    "title": "Counter-Strike 2 Update",
-   "titleZh": "Counter-Strike 2 Update",
+   "titleZh": null,
    "date": "2026-11-17",
    "dateLocal": "2026-11-18",
    "at": 1794958807000,
@@ -235,72 +383,6 @@
      "reactionDay": "2024-11-27",
      "medPct": -0.2,
      "note": "该事件（2024-11-27 《反恐精英》更新）在事件分类表里是 none：反应日 2024-11-27 全池中位 -0.3%、下跌占比 60% —— 不是全池级急跌"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  },
-  {
-   "gid": "1849192144180746",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
-   "date": "2026-11-11",
-   "dateLocal": "2026-11-12",
-   "at": 1794438200000,
-   "atText": "2026-11-12 07:03:20",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144180746",
-   "summary": "ANIMATION · Fixed some cases of popping and glitching when switching weapons and reloading at extreme angles MISC · Fixed bot pathing issue in Retakes game mode · Fixed a rendering hang on DX11 · Improved avx / avx512 instruction set detection · Miscellaneous stability and performance improvements",
-   "level": "机制级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Case",
-    "Bug",
-    "Misc"
-   ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 2 个",
-   "mechanismHits": [
-    "Case"
-   ],
-   "strongMechanismHits": [],
-   "supplyHits": [],
-   "eventHits": [],
-   "noiseHits": [
-    "Bug",
-    "Misc"
-   ],
-   "alreadyKnown": true,
-   "similarEvents": [
-    {
-     "date": "2023-11-17",
-     "title": "Release Notes for 11/17/2023",
-     "similarity": 0.507,
-     "eventDate": "2023-11-17",
-     "eventClass": "none",
-     "eventTitle": "Release Notes for 11/17/2023",
-     "reactionDay": "2023-11-18",
-     "medPct": -0.3,
-     "note": "该事件（2023-11-17 Release Notes for 11/17/2023）在事件分类表里是 none：反应日 2023-11-18 全池中位 -0.3%、下跌占比 58% —— 不是全池级急跌"
-    },
-    {
-     "date": "2025-11-19",
-     "title": "《反恐精英》更新",
-     "similarity": 0.447,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2024-06-11",
-     "title": "更新日志（2024年6月11日）",
-     "similarity": 0.441,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     }
    ],
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
