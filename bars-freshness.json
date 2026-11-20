@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1795144557035,
- "atText": "2026/11/20 11:15:57",
+ "at": 1795153088710,
+ "atText": "2026/11/20 13:38:08",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -13,30 +13,34 @@
   "note": "lagDays 含源端固有滞后；extraLagDays = lagDays − sourceLagDays，才是我们自己漏跑的天数。★ 2026-10-20 实测：官方日线 timestamp 全在 16:00Z（= UTC+8 次日 00:00），项目标签 L 真正代表 UTC+8 交易日 L+1，所以真实滞后 = 1 天。★ 2026-11-17：level 只按 extraLagDays 分级；自建 vs 官方差异超门槛走 conflict 段，不再把 level 降级"
  },
  "bars": {
-  "latest": "2026-11-17",
-  "gidsAtLatest": 1250,
+  "latest": "2026-11-18",
+  "gidsAtLatest": 297,
   "gids": 1658,
   "noSeries": 0,
   "tailDist": [
    {
     "date": "2026-11-17",
-    "gids": 1250
+    "gids": 953
    },
    {
     "date": "2026-11-16",
     "gids": 408
+   },
+   {
+    "date": "2026-11-18",
+    "gids": 297
    }
   ],
   "byKey": {
    "p": {
-    "date": "2026-11-17",
-    "gids": 1250,
-    "trueDay": "2026-11-18"
+    "date": "2026-11-18",
+    "gids": 297,
+    "trueDay": "2026-11-19"
    },
    "n": {
-    "date": "2026-11-17",
-    "gids": 1250,
-    "trueDay": "2026-11-18"
+    "date": "2026-11-18",
+    "gids": 297,
+    "trueDay": "2026-11-19"
    },
    "b": {
     "date": "2026-11-16",
@@ -49,7 +53,7 @@
     "trueDay": "2026-11-16"
    }
   },
-  "latestTrueDay": "2026-11-18",
+  "latestTrueDay": "2026-11-19",
   "source": "csqaq 官方日线（_harvest，只读，一个字节都没动）"
  },
  "rt": {
@@ -342,10 +346,6 @@
   },
   "points": 5929,
   "appendedDays": [
-   {
-    "trueDay": "2026-11-19",
-    "label": "2026-11-18"
-   },
    {
     "trueDay": "2026-11-20",
     "label": "2026-11-19"
@@ -716,7 +716,7 @@
    "2026-11-20"
   ],
   "coversLatest": true,
-  "coversDays": 2
+  "coversDays": 1
  },
  "effective": {
   "latestLabel": "2026-11-19",
@@ -725,7 +725,7 @@
  },
  "live": {
   "date": "2026-11-20",
-  "atText": "2026/11/20 11:14:52",
+  "atText": "2026/11/20 13:35:58",
   "n": 2116
  },
  "lagDays": 1,
@@ -764,7 +764,7 @@
    "asOf": "2026-11-19",
    "via": "asOfSeries",
    "asOfDate": "2026-11-19",
-   "generatedAt": "2026/11/20 11:14:22",
+   "generatedAt": "2026/11/20 13:35:28",
    "basedOnBars": "2026-11-19",
    "staleVsBars": false
   },
@@ -775,7 +775,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:12:00",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -785,7 +785,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:11:22",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -795,7 +795,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:07:27",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -805,7 +805,7 @@
    "via": "atText",
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:05:39",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -815,7 +815,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/20 10:59:49",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -835,7 +835,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": null,
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -845,7 +845,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:02:36",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   },
   {
@@ -855,7 +855,7 @@
    "via": null,
    "asOfDate": null,
    "generatedAt": "2026/11/20 11:10:39",
-   "basedOnBars": "2026-11-17",
+   "basedOnBars": "2026-11-18",
    "staleVsBars": null
   }
  ],
@@ -900,7 +900,7 @@
   ],
   "atText": "2026/11/20 10:59:02"
  },
- "message": "官方日线标签 2026-11-17（= UTC+8 交易日 2026-11-18） → 生效最新 2026-11-19 = UTC+8 交易日 2026-11-20；自建日线覆盖 39 天（已补到 2026-11-20，追加 2 天）；⚠️ 自建日线与官方差异台账 level=bad（27 个品 >5%，这是口径/数据质量维度，不影响时效判定）（见下方红字）",
+ "message": "官方日线标签 2026-11-18（= UTC+8 交易日 2026-11-19） → 生效最新 2026-11-19 = UTC+8 交易日 2026-11-20；自建日线覆盖 39 天（已补到 2026-11-20，追加 1 天）；⚠️ 自建日线与官方差异台账 level=bad（27 个品 >5%，这是口径/数据质量维度，不影响时效判定）（见下方红字）",
  "conflictText": "⚠️ 自建日线与 csqaq 官方有 27 个品差异 >5%，请确认口径",
  "alarm": {
   "level": "bad",
