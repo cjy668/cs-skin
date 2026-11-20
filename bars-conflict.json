@@ -3,29 +3,30 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1795101667831,
-   "atText": "2026/11/19 23:21:07",
+   "at": 1795143542492,
+   "atText": "2026/11/20 10:59:02",
    "level": "ok",
    "caliber": "p × intraday_agg × 可比点（≥20:00）",
    "eveningHour": 20,
-   "compared": 366,
-   "gids": 123,
+   "compared": 402,
+   "gids": 134,
    "medianPct": 0,
-   "p90Pct": 0.3537,
-   "maxPct": 7.8125,
-   "over5PctShare": 0.8197,
-   "conflictGidCount": 3,
-   "conflictShare": 2.439,
+   "p90Pct": 0.4082,
+   "maxPct": 9,
+   "over5PctShare": 0.995,
+   "conflictGidCount": 4,
+   "conflictShare": 2.9851,
    "conflictGids": [
     547,
     1823,
-    9739
+    9739,
+    12285
    ],
    "snapshotLevel": "warn",
-   "snapshotCompared": 4187,
-   "snapshotMedianPct": 0.0271,
-   "snapshotConflictGidCount": 132,
-   "snapshotConflictShare": 8.5993,
+   "snapshotCompared": 4160,
+   "snapshotMedianPct": 0.0265,
+   "snapshotConflictGidCount": 130,
+   "snapshotConflictShare": 8.5302,
    "snapshotConflictGids": [
     13,
     28,
@@ -110,7 +111,6 @@
     10358,
     10381,
     11164,
-    11217,
     11244,
     11289,
     11577,
@@ -124,7 +124,6 @@
     12224,
     12259,
     12261,
-    12285,
     12366,
     12545,
     12588,
@@ -161,14 +160,14 @@
     26051
    ],
    "excluded": {
-    "total": 934,
+    "total": 911,
     "byReason": {
-     "sample_before_20h": 635,
-     "sample_not_same_day": 299
+     "sample_before_20h": 613,
+     "sample_not_same_day": 298
     },
     "gidsByReason": {
-     "sample_before_20h": 588,
-     "sample_not_same_day": 298
+     "sample_before_20h": 577,
+     "sample_not_same_day": 297
     },
     "note": "不可比点（采样时刻/采样日期不满足主口径规则），不计入主指标，但数量全部如实报出"
    },
@@ -204,6 +203,16 @@
      "atText": "2026-11-16 23:44:22"
     },
     {
+     "gid": 12285,
+     "trueDay": "2026-11-16",
+     "officialLabel": "2026-11-15",
+     "ours": 49.5,
+     "official": 49.5,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-16 23:46:07"
+    },
+    {
      "gid": 547,
      "trueDay": "2026-11-17",
      "officialLabel": "2026-11-16",
@@ -234,6 +243,16 @@
      "atText": "2026-11-17 23:34:13"
     },
     {
+     "gid": 12285,
+     "trueDay": "2026-11-17",
+     "officialLabel": "2026-11-16",
+     "ours": 61.88,
+     "official": 68,
+     "diffPct": 9,
+     "src": "intraday_agg",
+     "atText": "2026-11-17 23:36:11"
+    },
+    {
      "gid": 547,
      "trueDay": "2026-11-18",
      "officialLabel": "2026-11-17",
@@ -262,6 +281,16 @@
      "diffPct": 6.2672,
      "src": "intraday_agg",
      "atText": "2026-11-18 23:59:38"
+    },
+    {
+     "gid": 12285,
+     "trueDay": "2026-11-18",
+     "officialLabel": "2026-11-17",
+     "ours": 82.9,
+     "official": 82.8,
+     "diffPct": 0.1208,
+     "src": "intraday_agg",
+     "atText": "2026-11-18 23:30:48"
     }
    ],
    "snapshotSamples": [
@@ -471,23 +500,23 @@
     "2026-11-17",
     "2026-11-18"
    ],
-   "note": "主口径（p × intraday_agg × 可比点）：366 个 (gid×日)、123 个 gid 可比，完全相等 82.5137%，中位 0%，>5% 的品 3/123 个（2.439%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：4187 个 (gid×日)、1535 个 gid，中位 0.0271%，>5% 的品 132/1535 个（8.5993%）；其中同日 ≥20:00 的可比子集 3283 个、>5% 的品 81；不可比点 934 个（sample_before_20h=635、sample_not_same_day=299）已单列"
+   "note": "主口径（p × intraday_agg × 可比点）：402 个 (gid×日)、134 个 gid 可比，完全相等 81.592%，中位 0%，>5% 的品 4/134 个（2.9851%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：4160 个 (gid×日)、1524 个 gid，中位 0.0265%，>5% 的品 130/1524 个（8.5302%）；其中同日 ≥20:00 的可比子集 3261 个、>5% 的品 79；不可比点 911 个（sample_before_20h=613、sample_not_same_day=298）已单列"
   },
   "merge_junction": {
-   "at": 1795101663185,
-   "atText": "2026/11/19 23:21:03",
+   "at": 1795143535202,
+   "atText": "2026/11/20 10:58:55",
    "level": "bad",
    "officialLatestLabel": "2026-11-17",
    "officialLatestTrueDay": "2026-11-18",
    "overlapDays": 37,
-   "appendedDays": 1,
-   "compared": 5527,
+   "appendedDays": 2,
+   "compared": 5569,
    "medianPct": 0,
-   "p90Pct": 0.1129,
+   "p90Pct": 0.1072,
    "maxPct": 50,
-   "over5PctShare": 0.579,
-   "conflictGidCount": 29,
-   "conflictShare": 13.7441,
+   "over5PctShare": 0.5387,
+   "conflictGidCount": 27,
+   "conflictShare": 12.7962,
    "conflictGids": [
     21,
     547,
@@ -495,7 +524,6 @@
     807,
     883,
     986,
-    998,
     1686,
     1814,
     1823,
@@ -514,7 +542,6 @@
     12285,
     12519,
     13181,
-    13364,
     13588,
     17450,
     18129
@@ -564,15 +591,6 @@
      "official": 968,
      "ours": 745,
      "diffPct": 23.0372
-    },
-    {
-     "gid": 998,
-     "key": "n",
-     "trueDay": "2026-11-18",
-     "officialLabel": "2026-11-17",
-     "official": 818,
-     "ours": 993,
-     "diffPct": 21.3936
     },
     {
      "gid": 12196,
@@ -647,15 +665,6 @@
      "diffPct": 13.7931
     },
     {
-     "gid": 12285,
-     "key": "p",
-     "trueDay": "2026-11-16",
-     "officialLabel": "2026-11-15",
-     "official": 49.5,
-     "ours": 43,
-     "diffPct": 13.1313
-    },
-    {
      "gid": 16498,
      "key": "n",
      "trueDay": "2026-11-15",
@@ -699,22 +708,40 @@
      "official": 753,
      "ours": 824,
      "diffPct": 9.429
+    },
+    {
+     "gid": 9556,
+     "key": "p",
+     "trueDay": "2026-11-12",
+     "officialLabel": "2026-11-11",
+     "official": 1.5,
+     "ours": 1.36,
+     "diffPct": 9.3333
+    },
+    {
+     "gid": 12285,
+     "key": "p",
+     "trueDay": "2026-11-17",
+     "officialLabel": "2026-11-16",
+     "official": 68,
+     "ours": 61.88,
+     "diffPct": 9
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.579%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5387%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1795101655019,
-   "atText": "2026/11/19 23:20:55",
+   "at": 1795143521488,
+   "atText": "2026/11/20 10:58:41",
    "level": "bad",
-   "compared": 5527,
+   "compared": 5569,
    "gids": 211,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.1129,
-   "over5PctShare": 0.579,
-   "conflictGidCount": 29,
-   "conflictShare": 13.7441,
+   "p90Pct": 0.1072,
+   "over5PctShare": 0.5387,
+   "conflictGidCount": 27,
+   "conflictShare": 12.7962,
    "conflictGids": [
     21,
     547,
@@ -722,7 +749,6 @@
     807,
     883,
     986,
-    998,
     1686,
     1814,
     1823,
@@ -741,7 +767,6 @@
     12285,
     12519,
     13181,
-    13364,
     13588,
     17450,
     18129
@@ -859,22 +884,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1795101663417,
-   "atText": "2026/11/19 23:21:03",
-   "level": "warn",
-   "compared": 120,
+   "at": 1795143535583,
+   "atText": "2026/11/20 10:58:55",
+   "level": "ok",
+   "compared": 130,
    "medianPct": 0,
-   "p90Pct": 2.2567,
-   "maxPct": 21.1109,
-   "over5PctShare": 6.6667,
-   "conflictGidCount": 8,
+   "p90Pct": 0.7634,
+   "maxPct": 9.2031,
+   "over5PctShare": 1.5385,
+   "conflictGidCount": 2,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1795101667831,
- "atText": "2026/11/19 23:21:07",
+ "at": 1795143542492,
+ "atText": "2026/11/20 10:59:02",
  "conflictGids": [
   {
    "gid": 21,
@@ -914,13 +939,6 @@
   },
   {
    "gid": 986,
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 998,
    "in": [
     "merge_junction",
     "intraday_calibration"
@@ -1036,6 +1054,7 @@
   {
    "gid": 12285,
    "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -1049,13 +1068,6 @@
   },
   {
    "gid": 13181,
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 13364,
    "in": [
     "merge_junction",
     "intraday_calibration"
@@ -1083,7 +1095,7 @@
    ]
   }
  ],
- "conflictGidCount": 29,
+ "conflictGidCount": 27,
  "conflictSamples": [
   {
    "gid": 21,
@@ -1129,14 +1141,6 @@
   {
    "gid": 986,
    "name": "G3SG1 | 多变迷彩 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 998,
-   "name": "加利尔 AR | 黑砂 (崭新出厂)",
    "in": [
     "merge_junction",
     "intraday_calibration"
@@ -1246,7 +1250,16 @@
     "merge_junction",
     "intraday_calibration"
    ]
+  },
+  {
+   "gid": 9739,
+   "name": "加利尔 AR | 信号灯 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 29 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 27 个品差异 >5%，请确认口径"
 }
