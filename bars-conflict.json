@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1795166314816,
-   "atText": "2026/11/20 17:18:34",
+   "at": 1795177258268,
+   "atText": "2026/11/20 20:20:58",
    "level": "ok",
    "caliber": "p × intraday_agg × 可比点（≥20:00）",
    "eveningHour": 20,
@@ -22,10 +22,10 @@
     12285
    ],
    "snapshotLevel": "warn",
-   "snapshotCompared": 3401,
+   "snapshotCompared": 4240,
    "snapshotMedianPct": 0,
-   "snapshotConflictGidCount": 84,
-   "snapshotConflictShare": 5.5263,
+   "snapshotConflictGidCount": 92,
+   "snapshotConflictShare": 6.0526,
    "snapshotConflictGids": [
     13,
     28,
@@ -40,6 +40,7 @@
     590,
     655,
     705,
+    759,
     821,
     839,
     863,
@@ -72,6 +73,7 @@
     6441,
     6445,
     6489,
+    6600,
     7365,
     9540,
     9556,
@@ -88,12 +90,15 @@
     12207,
     12224,
     12261,
+    12408,
     12413,
     12545,
     12732,
+    13179,
     13402,
     13606,
     13672,
+    14237,
     14745,
     14755,
     15528,
@@ -110,15 +115,18 @@
     19492,
     19580,
     20502,
-    23719
+    20556,
+    22127,
+    23719,
+    24904
    ],
    "excluded": {
-    "total": 279,
+    "total": 402,
     "byReason": {
-     "sample_before_20h": 279
+     "sample_before_20h": 402
     },
     "gidsByReason": {
-     "sample_before_20h": 275
+     "sample_before_20h": 398
     },
     "note": "不可比点（采样时刻/采样日期不满足主口径规则），不计入主指标，但数量全部如实报出"
    },
@@ -421,11 +429,11 @@
     "2026-11-18",
     "2026-11-19"
    ],
-   "note": "主口径（p × intraday_agg × 可比点）：410 个 (gid×日)、138 个 gid 可比，完全相等 83.1707%，中位 0%，>5% 的品 3/138 个（2.1739%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：3401 个 (gid×日)、1520 个 gid，中位 0%，>5% 的品 84/1520 个（5.5263%）；其中同日 ≥20:00 的可比子集 3130 个、>5% 的品 73；不可比点 279 个（sample_before_20h=279）已单列"
+   "note": "主口径（p × intraday_agg × 可比点）：410 个 (gid×日)、138 个 gid 可比，完全相等 83.1707%，中位 0%，>5% 的品 3/138 个（2.1739%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：4240 个 (gid×日)、1520 个 gid，中位 0%，>5% 的品 92/1520 个（6.0526%）；其中同日 ≥20:00 的可比子集 3846 个、>5% 的品 78；不可比点 402 个（sample_before_20h=402）已单列"
   },
   "merge_junction": {
-   "at": 1795166306077,
-   "atText": "2026/11/20 17:18:26",
+   "at": 1795177253536,
+   "atText": "2026/11/20 20:20:53",
    "level": "bad",
    "officialLatestLabel": "2026-11-18",
    "officialLatestTrueDay": "2026-11-19",
@@ -655,8 +663,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.5762%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1795166292675,
-   "atText": "2026/11/20 17:18:12",
+   "at": 1795177244981,
+   "atText": "2026/11/20 20:20:44",
    "level": "bad",
    "compared": 5727,
    "gids": 211,
@@ -811,22 +819,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1795166306518,
-   "atText": "2026/11/20 17:18:26",
-   "level": "ok",
+   "at": 1795177253752,
+   "atText": "2026/11/20 20:20:53",
+   "level": "warn",
    "compared": 134,
    "medianPct": 0,
-   "p90Pct": 2.1739,
-   "maxPct": 20,
-   "over5PctShare": 2.9851,
-   "conflictGidCount": 4,
+   "p90Pct": 1.598,
+   "maxPct": 15.5779,
+   "over5PctShare": 4.4776,
+   "conflictGidCount": 6,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1795166314816,
- "atText": "2026/11/20 17:18:34",
+ "at": 1795177258268,
+ "atText": "2026/11/20 20:20:58",
  "conflictGids": [
   {
    "gid": 21,
