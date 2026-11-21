@@ -1,6 +1,6 @@
 {
  "v": 1,
- "at": "2026-11-21T09:27:40.541Z",
+ "at": "2026-11-21T12:30:01.710Z",
  "atText": "2026-11-21",
  "script": "cs-quant/trader_signals.cjs",
  "purpose": "做盘启动信号（在售激增 A / 求购激增 B / 双激增 C）+ 历史翻倍率 + 配对对照 DiD + 置换 p。给不给结论取决于验证有没有过。",
@@ -91,7 +91,7 @@
   "liquidObs": 123466,
   "currentItems": 15,
   "currentLiquid": 705,
-  "excludedFired": 59,
+  "excludedFired": 58,
   "A": 15,
   "B": 0,
   "C": 0
@@ -928,13 +928,6 @@
    ]
   },
   {
-   "gid": "11186",
-   "name": "法玛斯 | 退役 (崭新出厂)",
-   "fired": [
-    "B"
-   ]
-  },
-  {
    "gid": "20410",
    "name": "MP5-SD | 静态学 (崭新出厂)",
    "fired": [
@@ -1360,9 +1353,9 @@
    "priceChg60": 0.0008,
    "priceChg30": -0.1383,
    "listedDropFromHigh": -0.1298,
-   "buySurge": 0.1618,
-   "buyLevel": 79,
-   "buyPctile": 0.6348,
+   "buySurge": 0.1838,
+   "buyLevel": 80.5,
+   "buyPctile": 0.6469,
    "price": 142,
    "listed": 979,
    "inTierBuyP90": false,
@@ -1372,7 +1365,7 @@
     "在售 60 日中位比前 60 日 +28.8%（对数斜率 +58.0%）",
     "同期价格 +0.1%（没涨）",
     "在售距 60 日高 -13.0%",
-    "求购 30 日中位比前段 +16.2%（79.0 单 vs 前段 68.0 单）",
+    "求购 30 日中位比前段 +18.4%（80.5 单 vs 前段 68.0 单）",
     "同 tier 求购 p90 = 112.0 单"
    ],
    "staleDays": 0,
