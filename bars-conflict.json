@@ -3,8 +3,8 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1795349869593,
-   "atText": "2026/11/22 20:17:49",
+   "at": 1795360988443,
+   "atText": "2026/11/22 23:23:08",
    "level": "ok",
    "caliber": "p × intraday_agg × 可比点（≥20:00）",
    "eveningHour": 20,
@@ -354,8 +354,8 @@
    "note": "主口径（p × intraday_agg × 可比点）：379 个 (gid×日)、137 个 gid 可比，完全相等 86.5435%，中位 0%，>5% 的品 2/137 个（1.4599%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：4575 个 (gid×日)、1537 个 gid，中位 0%，>5% 的品 45/1537 个（2.9278%）；其中同日 ≥20:00 的可比子集 4575 个、>5% 的品 45；不可比点 40 个（sample_before_20h=40）已单列"
   },
   "merge_junction": {
-   "at": 1795349864801,
-   "atText": "2026/11/22 20:17:44",
+   "at": 1795360983688,
+   "atText": "2026/11/22 23:23:03",
    "level": "bad",
    "officialLatestLabel": "2026-11-20",
    "officialLatestTrueDay": "2026-11-21",
@@ -589,8 +589,8 @@
    "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.6501%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1795349855685,
-   "atText": "2026/11/22 20:17:35",
+   "at": 1795360975094,
+   "atText": "2026/11/22 23:22:55",
    "level": "bad",
    "compared": 5999,
    "gids": 212,
@@ -749,13 +749,13 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1795349865051,
-   "atText": "2026/11/22 20:17:45",
+   "at": 1795360983915,
+   "atText": "2026/11/22 23:23:03",
    "level": "ok",
-   "compared": 110,
+   "compared": 111,
    "medianPct": 0,
-   "p90Pct": 0.2994,
-   "maxPct": 1.3158,
+   "p90Pct": 0.3717,
+   "maxPct": 4.3057,
    "over5PctShare": 0,
    "conflictGidCount": 0,
    "conflictGids": [],
@@ -763,8 +763,8 @@
   }
  },
  "level": "bad",
- "at": 1795349869593,
- "atText": "2026/11/22 20:17:49",
+ "at": 1795360988443,
+ "atText": "2026/11/22 23:23:08",
  "conflictGids": [
   {
    "gid": 21,
