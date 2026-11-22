@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1795318839789,
- "atText": "2026-11-22 11:40:39",
+ "at": 1795319451601,
+ "atText": "2026-11-22 11:50:51",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1795318840536,
+  "checkedAt": 1795319488260,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1849827110426557",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "694278269818634559",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-11-19",
  "lastSeenAtText": "2026-11-19 08:57:59",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/694278269818634559",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-11-19",
@@ -36,8 +35,8 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 87,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 3,
   "rssItems": 10
@@ -46,12 +45,12 @@
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 183015,
-   "ms": 630,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 36565,
+   "attempts": 3,
+   "error": "read ECONNRESET"
   },
   {
    "name": "Steam 中文 RSS",
@@ -59,7 +58,7 @@
    "ok": true,
    "status": 200,
    "bytes": 26280,
-   "ms": 638,
+   "ms": 490,
    "attempts": 1,
    "error": null
   }
@@ -73,37 +72,33 @@
  "items": [],
  "recent": [
   {
-   "gid": "1849827110426557",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694278269818634559",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-11-19",
    "dateLocal": "2026-11-19",
    "at": 1795049879000,
    "atText": "2026-11-19 08:57:59",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
-   "summary": "MAPS Cobblestone · Fixed some walkable ledges in long A · Fixed map issue that was loading an empty skybox · Fixed an audio blocker issue by mid/A · Added a grenade clip to assault van bumper · Fixed various gaps in the world Inferno · Fixed grenade and Molotov exploit spot from church to dark on bombsite B.…",
+   "url": "https://store.steampowered.com/news/app/730/view/694278269818634559",
+   "summary": "地图 古堡激战 · 修复了A大道中一些可行走的壁架问题 · 修复了地图加载空天空盒的问题 · 修复了中路/A区附近的音频遮挡问题 · 为突击车保险杠添加了投掷物碰撞 · 修复了整张地图的各种间隙 炼狱小镇 · 修复了B点从教堂到死点的手雷和燃烧瓶的卡位漏洞。 杂项 · 更新了AWP的慢速换弹动画 · 优化了极高画质设置下烟雾下方的地面灼烧痕迹的贴花效果 X射线扫描仪 · 瑞士玩家将在其库存栏下看到”X射线扫描仪”选项卡。对于这些玩家，只能通过X射线扫描仪打开容器（武器箱等）。 X射线扫描仪将预装一款一次性、不可交易的“纯正P250|X射线”，必须先领取该物品，才能使用X射线扫描仪揭示其他容器内的物品。",
    "level": "机制级",
    "confidence": "medium",
    "matchedKeywords": [
-    "Exclusive",
+    "Case",
     "Map",
-    "Audio",
     "Bug",
     "Optimize",
     "Misc"
    ],
-   "levelBasis": "强机制 1 个（Exclusive）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 5 个",
+   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 4 个",
    "mechanismHits": [
-    "Exclusive"
+    "Case"
    ],
-   "strongMechanismHits": [
-    "Exclusive"
-   ],
+   "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
    "noiseHits": [
     "Map",
-    "Audio",
     "Bug",
     "Optimize",
     "Misc"
@@ -111,9 +106,9 @@
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2026-03-16",
+     "date": "2026-05-18",
      "title": "《反恐精英》更新",
-     "similarity": 0.569,
+     "similarity": 0.805,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -122,20 +117,20 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2024-02-13",
-     "title": "更新日志（2024年2月12日）",
-     "similarity": 0.53,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+     "date": "2023-11-17",
+     "title": "更新日志（2023年11月17日）",
+     "similarity": 0.805,
+     "eventDate": "2023-11-17",
+     "eventClass": "none",
+     "eventTitle": "Release Notes for 11/17/2023",
+     "reactionDay": "2023-11-18",
+     "medPct": -0.3,
+     "note": "该事件（2023-11-17 Release Notes for 11/17/2023）在事件分类表里是 none：反应日 2023-11-18 全池中位 -0.3%、下跌占比 58% —— 不是全池级急跌"
     },
     {
-     "date": "2026-09-09",
+     "date": "2026-10-08",
      "title": "《反恐精英》更新",
-     "similarity": 0.528,
+     "similarity": 0.804,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -147,14 +142,14 @@
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
   },
   {
-   "gid": "1849827110421976",
+   "gid": "687522235410286587",
    "title": "Counter-Strike 2 Update",
    "titleZh": "Counter-Strike 2 Update",
    "date": "2026-11-17",
    "dateLocal": "2026-11-18",
    "at": 1794958807000,
    "atText": "2026-11-18 07:40:07",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110421976",
+   "url": "https://store.steampowered.com/news/app/730/view/687522235410286587",
    "summary": "SINGAPORE 2026 MAJOR · The PGL Singapore 2026 Major Hub is now available. Visit the hub to purchase tournament items, play the Pick'Em Challenge, and more. · Purchase a Singapore 2026 Viewer Pass to receive an upgradable Singapore 2026 Coin. With an active pass, you can upgrade your coin and earn rewards by playing the Pick'Em Challenge. Additionally, you will show up on the Active Pass Leaderboard where you can compare your Pick'Em Challenge performance to your friends.…",
    "level": "供给级",
    "confidence": "medium",
@@ -227,31 +222,29 @@
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
   },
   {
-   "gid": "1849827110421973",
-   "title": "The Cobbled Road to Singapore",
-   "titleZh": null,
+   "gid": "687522235410285288",
+   "title": "通往新加坡的古堡之路",
+   "titleZh": "通往新加坡的古堡之路",
    "date": "2026-11-17",
    "dateLocal": "2026-11-18",
    "at": 1794958720000,
    "atText": "2026-11-18 07:38:40",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110421973",
-   "summary": "[video webm=\"https://clan.fastly.steamstatic.com/images/3381077/cbaf2e646b6b20b7c1c1c27d30e76732fbe60b26.webm\" mp4=\"https://clan.fastly.steamstatic.com/images/3381077/dec767ae6d99eb5782d0975a4627a51ca7f7931b.mp4\" poster=\"https://clan.fastly.steamstatic.com/images/3381077/8e96d2f497ad35d8e7919ee24cfc3c97ebde0dff.png\" autoplay=\"true\" controls=\"false\"] Today's update features the return of a legendary map.…",
+   "url": "https://store.steampowered.com/news/app/730/view/687522235410285288",
+   "summary": "今天的更新带来了一张传奇地图的回归。欢迎回来，古堡激战！ 古堡激战的老兵们在跳台、鸡舍和马厩这些熟悉的地点会有回家的感觉。不过（新玩家）也别吓得软脚，这张地图已有改动，新增了多条路线和点位，等待玩家去掌握。现在天气很冷，所以在雪地中艰难跋涉前往炸弹安放点时，小心你那嘎吱作响的脚步声。 古堡激战可在竞技模式、搭档模式中游玩，同时在休闲模式、死亡竞赛和回防模式中拥有独立的地图组。 2026年PGL新加坡锦标赛物品 2026年新加坡锦标赛即将来临，这意味着是时候推出锦标赛物品了！ Major观众通行证以及战队和选手签名印花现可在Major商店中购买！与以往一样，50%的收益将给予选手、战队和赛事主办方，具体分成将根据战队的初始种子排名和最终名次来确定。 我们听取了大家的反馈，并做出了一些调整。战队和选手签名印花有纸质、闪亮、全息和金色四种款式，以固定价格出售，可直接购买。纪念品同样以固定价格制作，价格取决于你所选武器的稀有度。 购买并激活2026年新加坡观众通行证，即可获得青铜级新加坡挑战币、Steam.tv聊天标识,以及赛事期间无限次使用的战队涂鸦。…",
    "level": "机制级",
    "confidence": "medium",
    "matchedKeywords": [
     "Souvenir",
     "Rarity",
     "Pass",
-    "Drop",
     "Sticker",
     "Music Kit",
     "Major",
     "Pick'Em",
     "Tournament",
-    "Map",
-    "Bug"
+    "Map"
    ],
-   "levelBasis": "强机制 2 个（Souvenir/Rarity）· 机制词 2 个 · 供给 4 个 · 赛事 3 个 · 噪声 2 个",
+   "levelBasis": "强机制 2 个（Souvenir/Rarity）· 机制词 2 个 · 供给 3 个 · 赛事 3 个 · 噪声 1 个",
    "mechanismHits": [
     "Souvenir",
     "Rarity"
@@ -262,7 +255,6 @@
    ],
    "supplyHits": [
     "Pass",
-    "Drop",
     "Sticker",
     "Music Kit"
    ],
@@ -272,15 +264,14 @@
     "Tournament"
    ],
    "noiseHits": [
-    "Map",
-    "Bug"
+    "Map"
    ],
    "alreadyKnown": true,
    "similarEvents": [
     {
      "date": "2025-11-12",
      "title": "《反恐精英》更新",
-     "similarity": 0.533,
+     "similarity": 0.605,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -289,9 +280,9 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2025-07-02",
+     "date": "2026-07-01",
      "title": "《反恐精英》更新",
-     "similarity": 0.445,
+     "similarity": 0.462,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -300,15 +291,15 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2024-11-27",
+     "date": "2025-12-18",
      "title": "《反恐精英》更新",
-     "similarity": 0.414,
-     "eventDate": "2024-11-27",
-     "eventClass": "none",
-     "eventTitle": "《反恐精英》更新",
-     "reactionDay": "2024-11-27",
-     "medPct": -0.2,
-     "note": "该事件（2024-11-27 《反恐精英》更新）在事件分类表里是 none：反应日 2024-11-27 全池中位 -0.3%、下跌占比 60% —— 不是全池级急跌"
+     "similarity": 0.462,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     }
    ],
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
