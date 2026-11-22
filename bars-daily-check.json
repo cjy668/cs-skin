@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1795349869578,
- "atText": "2026/11/22 20:17:49",
+ "at": 1795360988428,
+ "atText": "2026/11/22 23:23:08",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）；★ 2026-11-17 起 intraday_agg / rt_snapshot 两口径分开统计，主指标只算可比点",
  "caliber": {
@@ -175,11 +175,11 @@
   "n": {
    "n": 399,
    "gids": 141,
-   "exact": 267,
-   "exactPct": 66.9173,
+   "exact": 268,
+   "exactPct": 67.1679,
    "medianPct": 0,
-   "p75Pct": 0.0828,
-   "p90Pct": 0.5196,
+   "p75Pct": 0.082,
+   "p90Pct": 0.4926,
    "p99Pct": 9.2725,
    "maxPct": 16.8803,
    "over5Pct": 1.2531,
@@ -212,24 +212,24 @@
     {
      "day": "2026-11-21",
      "n": 121,
-     "exact": 60,
+     "exact": 61,
      "conflict": 2,
-     "medianPct": 0.0278,
+     "medianPct": 0,
      "maxPct": 16.8803
     }
    ]
   },
   "b": {
-   "n": 84,
+   "n": 90,
    "gids": 30,
    "exact": 3,
-   "exactPct": 3.5714,
+   "exactPct": 3.3333,
    "medianPct": 23.0769,
    "p75Pct": 41.6667,
    "p90Pct": 67.3913,
    "p99Pct": 146.9136,
    "maxPct": 146.9136,
-   "over5Pct": 92.8571,
+   "over5Pct": 93.3333,
    "conflictGidCount": 30,
    "conflictShare": 100,
    "conflictGids": [
@@ -283,9 +283,9 @@
     },
     {
      "day": "2026-11-21",
-     "n": 24,
+     "n": 30,
      "exact": 0,
-     "conflict": 24,
+     "conflict": 30,
      "medianPct": 20.3125,
      "maxPct": 83.4862
     }
@@ -590,11 +590,11 @@
     "raw": {
      "n": 399,
      "gids": 141,
-     "exact": 267,
-     "exactPct": 66.9173,
+     "exact": 268,
+     "exactPct": 67.1679,
      "medianPct": 0,
-     "p75Pct": 0.0828,
-     "p90Pct": 0.5196,
+     "p75Pct": 0.082,
+     "p90Pct": 0.4926,
      "p99Pct": 9.2725,
      "maxPct": 16.8803,
      "over5Pct": 1.2531,
@@ -627,9 +627,9 @@
       {
        "day": "2026-11-21",
        "n": 121,
-       "exact": 60,
+       "exact": 61,
        "conflict": 2,
-       "medianPct": 0.0278,
+       "medianPct": 0,
        "maxPct": 16.8803
       }
      ]
@@ -637,11 +637,11 @@
     "comparable": {
      "n": 379,
      "gids": 137,
-     "exact": 266,
-     "exactPct": 70.1847,
+     "exact": 267,
+     "exactPct": 70.4485,
      "medianPct": 0,
-     "p75Pct": 0.0662,
-     "p90Pct": 0.3587,
+     "p75Pct": 0.0642,
+     "p90Pct": 0.3559,
      "p99Pct": 2.1676,
      "maxPct": 16.8803,
      "over5Pct": 0.2639,
@@ -670,7 +670,7 @@
       {
        "day": "2026-11-21",
        "n": 119,
-       "exact": 60,
+       "exact": 61,
        "conflict": 1,
        "medianPct": 0,
        "maxPct": 16.8803
@@ -750,16 +750,16 @@
    },
    "rt_snapshot": {
     "raw": {
-     "n": 84,
+     "n": 90,
      "gids": 30,
      "exact": 3,
-     "exactPct": 3.5714,
+     "exactPct": 3.3333,
      "medianPct": 23.0769,
      "p75Pct": 41.6667,
      "p90Pct": 67.3913,
      "p99Pct": 146.9136,
      "maxPct": 146.9136,
-     "over5Pct": 92.8571,
+     "over5Pct": 93.3333,
      "conflictGidCount": 30,
      "conflictShare": 100,
      "conflictGids": [
@@ -813,25 +813,25 @@
       },
       {
        "day": "2026-11-21",
-       "n": 24,
+       "n": 30,
        "exact": 0,
-       "conflict": 24,
+       "conflict": 30,
        "medianPct": 20.3125,
        "maxPct": 83.4862
       }
      ]
     },
     "comparable": {
-     "n": 84,
+     "n": 90,
      "gids": 30,
      "exact": 3,
-     "exactPct": 3.5714,
+     "exactPct": 3.3333,
      "medianPct": 23.0769,
      "p75Pct": 41.6667,
      "p90Pct": 67.3913,
      "p99Pct": 146.9136,
      "maxPct": 146.9136,
-     "over5Pct": 92.8571,
+     "over5Pct": 93.3333,
      "conflictGidCount": 30,
      "conflictShare": 100,
      "conflictGids": [
@@ -885,9 +885,9 @@
       },
       {
        "day": "2026-11-21",
-       "n": 24,
+       "n": 30,
        "exact": 0,
-       "conflict": 24,
+       "conflict": 30,
        "medianPct": 20.3125,
        "maxPct": 83.4862
       }
