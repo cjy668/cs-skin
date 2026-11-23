@@ -3,29 +3,29 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1795436640699,
-   "atText": "2026/11/23 20:24:00",
+   "at": 1795447043705,
+   "atText": "2026/11/23 23:17:23",
    "level": "ok",
    "caliber": "p × intraday_agg × 可比点（≥20:00）",
    "eveningHour": 20,
-   "compared": 373,
-   "gids": 128,
+   "compared": 386,
+   "gids": 131,
    "medianPct": 0,
-   "p90Pct": 0.7897,
+   "p90Pct": 0.7813,
    "maxPct": 17.4071,
-   "over5PctShare": 0.8043,
+   "over5PctShare": 0.7772,
    "conflictGidCount": 3,
-   "conflictShare": 2.3438,
+   "conflictShare": 2.2901,
    "conflictGids": [
     21,
     9739,
     12519
    ],
    "snapshotLevel": "ok",
-   "snapshotCompared": 3606,
+   "snapshotCompared": 3595,
    "snapshotMedianPct": 0,
    "snapshotConflictGidCount": 33,
-   "snapshotConflictShare": 2.1456,
+   "snapshotConflictShare": 2.154,
    "snapshotConflictGids": [
     13,
     693,
@@ -62,12 +62,12 @@
     21579
    ],
    "excluded": {
-    "total": 22,
+    "total": 18,
     "byReason": {
-     "sample_before_20h": 22
+     "sample_before_20h": 18
     },
     "gidsByReason": {
-     "sample_before_20h": 11
+     "sample_before_20h": 9
     },
     "note": "不可比点（采样时刻/采样日期不满足主口径规则），不计入主指标，但数量全部如实报出"
    },
@@ -370,23 +370,23 @@
     "2026-11-21",
     "2026-11-22"
    ],
-   "note": "主口径（p × intraday_agg × 可比点）：373 个 (gid×日)、128 个 gid 可比，完全相等 76.6756%，中位 0%，>5% 的品 3/128 个（2.3438%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：3606 个 (gid×日)、1538 个 gid，中位 0%，>5% 的品 33/1538 个（2.1456%）；其中同日 ≥20:00 的可比子集 3606 个、>5% 的品 33；不可比点 22 个（sample_before_20h=22）已单列"
+   "note": "主口径（p × intraday_agg × 可比点）：386 个 (gid×日)、131 个 gid 可比，完全相等 76.6839%，中位 0%，>5% 的品 3/131 个（2.2901%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：3595 个 (gid×日)、1532 个 gid，中位 0%，>5% 的品 33/1532 个（2.154%）；其中同日 ≥20:00 的可比子集 3595 个、>5% 的品 33；不可比点 18 个（sample_before_20h=18）已单列"
   },
   "merge_junction": {
-   "at": 1795436633493,
-   "atText": "2026/11/23 20:23:53",
+   "at": 1795447031600,
+   "atText": "2026/11/23 23:17:11",
    "level": "bad",
    "officialLatestLabel": "2026-11-21",
    "officialLatestTrueDay": "2026-11-22",
    "overlapDays": 41,
    "appendedDays": 1,
-   "compared": 6125,
+   "compared": 6140,
    "medianPct": 0,
    "p90Pct": 0.1258,
    "maxPct": 50,
-   "over5PctShare": 0.6204,
-   "conflictGidCount": 31,
-   "conflictShare": 14.6226,
+   "over5PctShare": 0.6026,
+   "conflictGidCount": 30,
+   "conflictShare": 14.1509,
    "conflictGids": [
     21,
     547,
@@ -401,7 +401,6 @@
     2103,
     2218,
     2295,
-    6573,
     9521,
     9556,
     9583,
@@ -602,20 +601,20 @@
      "diffPct": 11.1111
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.6204%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.6026%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1795436621114,
-   "atText": "2026/11/23 20:23:41",
+   "at": 1795447008893,
+   "atText": "2026/11/23 23:16:48",
    "level": "bad",
-   "compared": 6125,
+   "compared": 6140,
    "gids": 212,
    "medianPct": 0,
    "maxPct": 50,
    "p90Pct": 0.1258,
-   "over5PctShare": 0.6204,
-   "conflictGidCount": 31,
-   "conflictShare": 14.6226,
+   "over5PctShare": 0.6026,
+   "conflictGidCount": 30,
+   "conflictShare": 14.1509,
    "conflictGids": [
     21,
     547,
@@ -630,7 +629,6 @@
     2103,
     2218,
     2295,
-    6573,
     9521,
     9556,
     9583,
@@ -762,22 +760,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1795436633891,
-   "atText": "2026/11/23 20:23:53",
-   "level": "warn",
-   "compared": 120,
+   "at": 1795447032230,
+   "atText": "2026/11/23 23:17:12",
+   "level": "ok",
+   "compared": 126,
    "medianPct": 0,
-   "p90Pct": 1.9465,
-   "maxPct": 16.6667,
-   "over5PctShare": 3.3333,
-   "conflictGidCount": 4,
+   "p90Pct": 1.0101,
+   "maxPct": 9.0909,
+   "over5PctShare": 1.5873,
+   "conflictGidCount": 2,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1795436640699,
- "atText": "2026/11/23 20:24:00",
+ "at": 1795447043705,
+ "atText": "2026/11/23 23:17:23",
  "conflictGids": [
   {
    "gid": 21,
@@ -866,13 +864,6 @@
   },
   {
    "gid": 2295,
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
-   "gid": 6573,
    "in": [
     "merge_junction",
     "intraday_calibration"
@@ -1000,7 +991,7 @@
    ]
   }
  ],
- "conflictGidCount": 31,
+ "conflictGidCount": 30,
  "conflictSamples": [
   {
    "gid": 21,
@@ -1108,14 +1099,6 @@
    ]
   },
   {
-   "gid": 6573,
-   "name": "USP 消音版 | 午夜行动 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
-  },
-  {
    "gid": 9521,
    "name": "UMP-45 | 设施系列·深色图 (崭新出厂)",
    "in": [
@@ -1162,7 +1145,16 @@
     "merge_junction",
     "intraday_calibration"
    ]
+  },
+  {
+   "gid": 9739,
+   "name": "加利尔 AR | 信号灯 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 31 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 30 个品差异 >5%，请确认口径"
 }
