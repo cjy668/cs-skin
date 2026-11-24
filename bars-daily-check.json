@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1795505399158,
- "atText": "2026/11/24 15:29:59",
+ "at": 1795511980966,
+ "atText": "2026/11/24 17:19:40",
  "script": "verify_bars_daily.cjs",
  "purpose": "任务④：每天和 csqaq 官方核对一次自建日线，差异 >5% 记入 conflict 并报警（只报不改）；★ 2026-11-17 起 intraday_agg / rt_snapshot 两口径分开统计，主指标只算可比点",
  "caliber": {
@@ -78,36 +78,38 @@
  },
  "byKey": {
   "p": {
-   "n": 2482,
+   "n": 2842,
    "gids": 1658,
-   "exact": 1639,
-   "exactPct": 66.0355,
+   "exact": 1834,
+   "exactPct": 64.532,
    "medianPct": 0,
-   "p75Pct": 0.1112,
-   "p90Pct": 0.7692,
+   "p75Pct": 0.1408,
+   "p90Pct": 0.8482,
    "p99Pct": 5.4173,
    "maxPct": 21.2068,
-   "over5Pct": 1.0475,
-   "conflictGidCount": 25,
-   "conflictShare": 1.5078,
+   "over5Pct": 1.0556,
+   "conflictGidCount": 29,
+   "conflictShare": 1.7491,
    "conflictGids": [
     13,
     21,
     693,
     764,
+    883,
     1367,
     1400,
     1834,
+    1953,
     2212,
     4200,
     6398,
     8555,
     9525,
+    9540,
     9725,
     9739,
     9768,
     10372,
-    11130,
     11449,
     12196,
     12441,
@@ -115,6 +117,8 @@
     13623,
     17710,
     18129,
+    20420,
+    20502,
     20512
    ],
    "byDay": [
@@ -129,34 +133,34 @@
     {
      "day": "2026-11-22",
      "n": 674,
-     "exact": 400,
+     "exact": 401,
      "conflict": 11,
      "medianPct": 0,
      "maxPct": 13.7826
     },
     {
      "day": "2026-11-23",
-     "n": 150,
-     "exact": 116,
-     "conflict": 3,
+     "n": 510,
+     "exact": 310,
+     "conflict": 7,
      "medianPct": 0,
-     "maxPct": 10
+     "maxPct": 18.75
     }
    ]
   },
   "n": {
-   "n": 385,
-   "gids": 131,
-   "exact": 205,
-   "exactPct": 53.2468,
+   "n": 390,
+   "gids": 132,
+   "exact": 209,
+   "exactPct": 53.5897,
    "medianPct": 0,
-   "p75Pct": 0.1903,
+   "p75Pct": 0.1754,
    "p90Pct": 0.6276,
    "p99Pct": 6.0606,
    "maxPct": 16.8803,
-   "over5Pct": 1.039,
+   "over5Pct": 1.0256,
    "conflictGidCount": 4,
-   "conflictShare": 3.0534,
+   "conflictShare": 3.0303,
    "conflictGids": [
     11,
     32,
@@ -166,7 +170,7 @@
    "byDay": [
     {
      "day": "2026-11-21",
-     "n": 131,
+     "n": 132,
      "exact": 71,
      "conflict": 2,
      "medianPct": 0,
@@ -174,16 +178,16 @@
     },
     {
      "day": "2026-11-22",
-     "n": 127,
-     "exact": 56,
+     "n": 129,
+     "exact": 58,
      "conflict": 2,
-     "medianPct": 0.0658,
+     "medianPct": 0.0646,
      "maxPct": 6.9969
     },
     {
      "day": "2026-11-23",
-     "n": 127,
-     "exact": 78,
+     "n": 129,
+     "exact": 80,
      "conflict": 0,
      "medianPct": 0,
      "maxPct": 3.1048
@@ -267,31 +271,30 @@
   "p": {
    "intraday_agg": {
     "raw": {
-     "n": 385,
-     "gids": 131,
-     "exact": 289,
-     "exactPct": 75.0649,
+     "n": 390,
+     "gids": 132,
+     "exact": 294,
+     "exactPct": 75.3846,
      "medianPct": 0,
      "p75Pct": 0,
      "p90Pct": 1.0471,
-     "p99Pct": 6,
+     "p99Pct": 5.9205,
      "maxPct": 17.4071,
-     "over5Pct": 1.8182,
-     "conflictGidCount": 7,
-     "conflictShare": 5.3435,
+     "over5Pct": 1.5385,
+     "conflictGidCount": 6,
+     "conflictShare": 4.5455,
      "conflictGids": [
       21,
       9525,
       9725,
       9739,
-      11130,
       12519,
       20512
      ],
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 131,
+       "n": 132,
        "exact": 107,
        "conflict": 2,
        "medianPct": 0,
@@ -299,46 +302,45 @@
       },
       {
        "day": "2026-11-22",
-       "n": 127,
-       "exact": 77,
+       "n": 129,
+       "exact": 79,
        "conflict": 2,
        "medianPct": 0,
        "maxPct": 9.375
       },
       {
        "day": "2026-11-23",
-       "n": 127,
-       "exact": 105,
-       "conflict": 3,
+       "n": 129,
+       "exact": 108,
+       "conflict": 2,
        "medianPct": 0,
        "maxPct": 10
       }
      ]
     },
     "comparable": {
-     "n": 381,
-     "gids": 130,
-     "exact": 289,
-     "exactPct": 75.853,
+     "n": 386,
+     "gids": 131,
+     "exact": 294,
+     "exactPct": 76.1658,
      "medianPct": 0,
      "p75Pct": 0,
-     "p90Pct": 0.7982,
-     "p99Pct": 6,
+     "p90Pct": 0.8482,
+     "p99Pct": 5.4173,
      "maxPct": 17.4071,
-     "over5Pct": 1.3123,
-     "conflictGidCount": 5,
-     "conflictShare": 3.8462,
+     "over5Pct": 1.0363,
+     "conflictGidCount": 4,
+     "conflictShare": 3.0534,
      "conflictGids": [
       21,
       9525,
       9739,
-      11130,
       12519
      ],
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 130,
+       "n": 131,
        "exact": 107,
        "conflict": 1,
        "medianPct": 0,
@@ -346,17 +348,17 @@
       },
       {
        "day": "2026-11-22",
-       "n": 127,
-       "exact": 77,
+       "n": 129,
+       "exact": 79,
        "conflict": 2,
        "medianPct": 0,
        "maxPct": 9.375
       },
       {
        "day": "2026-11-23",
-       "n": 124,
-       "exact": 105,
-       "conflict": 2,
+       "n": 126,
+       "exact": 108,
+       "conflict": 1,
        "medianPct": 0,
        "maxPct": 10
       }
@@ -365,29 +367,32 @@
    },
    "rt_snapshot": {
     "raw": {
-     "n": 2097,
-     "gids": 1531,
-     "exact": 1350,
-     "exactPct": 64.3777,
+     "n": 2452,
+     "gids": 1529,
+     "exact": 1540,
+     "exactPct": 62.8059,
      "medianPct": 0,
-     "p75Pct": 0.1266,
-     "p90Pct": 0.7407,
-     "p99Pct": 4.7872,
+     "p75Pct": 0.158,
+     "p90Pct": 0.8274,
+     "p99Pct": 4.8886,
      "maxPct": 21.2068,
-     "over5Pct": 0.9061,
-     "conflictGidCount": 19,
-     "conflictShare": 1.241,
+     "over5Pct": 0.9788,
+     "conflictGidCount": 24,
+     "conflictShare": 1.5697,
      "conflictGids": [
       13,
       693,
       764,
+      883,
       1367,
       1400,
       1834,
+      1953,
       2212,
       4200,
       6398,
       8555,
+      9540,
       9725,
       9768,
       10372,
@@ -396,12 +401,14 @@
       12441,
       13623,
       17710,
-      18129
+      18129,
+      20420,
+      20502
      ],
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 1527,
+       "n": 1526,
        "exact": 1016,
        "conflict": 10,
        "medianPct": 0,
@@ -409,46 +416,49 @@
       },
       {
        "day": "2026-11-22",
-       "n": 547,
-       "exact": 323,
+       "n": 545,
+       "exact": 322,
        "conflict": 9,
        "medianPct": 0,
        "maxPct": 13.7826
       },
       {
        "day": "2026-11-23",
-       "n": 23,
-       "exact": 11,
-       "conflict": 0,
-       "medianPct": 0.1931,
-       "maxPct": 2.9412
+       "n": 381,
+       "exact": 202,
+       "conflict": 5,
+       "medianPct": 0,
+       "maxPct": 18.75
       }
      ]
     },
     "comparable": {
-     "n": 2097,
-     "gids": 1531,
-     "exact": 1350,
-     "exactPct": 64.3777,
+     "n": 2452,
+     "gids": 1529,
+     "exact": 1540,
+     "exactPct": 62.8059,
      "medianPct": 0,
-     "p75Pct": 0.1266,
-     "p90Pct": 0.7407,
-     "p99Pct": 4.7872,
+     "p75Pct": 0.158,
+     "p90Pct": 0.8274,
+     "p99Pct": 4.8886,
      "maxPct": 21.2068,
-     "over5Pct": 0.9061,
-     "conflictGidCount": 19,
-     "conflictShare": 1.241,
+     "over5Pct": 0.9788,
+     "conflictGidCount": 24,
+     "conflictShare": 1.5697,
      "conflictGids": [
       13,
       693,
       764,
+      883,
       1367,
       1400,
       1834,
+      1953,
       2212,
       4200,
       6398,
       8555,
+      9540,
       9725,
       9768,
       10372,
@@ -457,12 +467,14 @@
       12441,
       13623,
       17710,
-      18129
+      18129,
+      20420,
+      20502
      ],
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 1527,
+       "n": 1526,
        "exact": 1016,
        "conflict": 10,
        "medianPct": 0,
@@ -470,19 +482,19 @@
       },
       {
        "day": "2026-11-22",
-       "n": 547,
-       "exact": 323,
+       "n": 545,
+       "exact": 322,
        "conflict": 9,
        "medianPct": 0,
        "maxPct": 13.7826
       },
       {
        "day": "2026-11-23",
-       "n": 23,
-       "exact": 11,
-       "conflict": 0,
-       "medianPct": 0.1931,
-       "maxPct": 2.9412
+       "n": 381,
+       "exact": 202,
+       "conflict": 5,
+       "medianPct": 0,
+       "maxPct": 18.75
       }
      ]
     }
@@ -491,18 +503,18 @@
   "n": {
    "intraday_agg": {
     "raw": {
-     "n": 385,
-     "gids": 131,
-     "exact": 205,
-     "exactPct": 53.2468,
+     "n": 390,
+     "gids": 132,
+     "exact": 209,
+     "exactPct": 53.5897,
      "medianPct": 0,
-     "p75Pct": 0.1903,
+     "p75Pct": 0.1754,
      "p90Pct": 0.6276,
      "p99Pct": 6.0606,
      "maxPct": 16.8803,
-     "over5Pct": 1.039,
+     "over5Pct": 1.0256,
      "conflictGidCount": 4,
-     "conflictShare": 3.0534,
+     "conflictShare": 3.0303,
      "conflictGids": [
       11,
       32,
@@ -512,7 +524,7 @@
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 131,
+       "n": 132,
        "exact": 71,
        "conflict": 2,
        "medianPct": 0,
@@ -520,16 +532,16 @@
       },
       {
        "day": "2026-11-22",
-       "n": 127,
-       "exact": 56,
+       "n": 129,
+       "exact": 58,
        "conflict": 2,
-       "medianPct": 0.0658,
+       "medianPct": 0.0646,
        "maxPct": 6.9969
       },
       {
        "day": "2026-11-23",
-       "n": 127,
-       "exact": 78,
+       "n": 129,
+       "exact": 80,
        "conflict": 0,
        "medianPct": 0,
        "maxPct": 3.1048
@@ -537,18 +549,18 @@
      ]
     },
     "comparable": {
-     "n": 381,
-     "gids": 130,
-     "exact": 205,
-     "exactPct": 53.8058,
+     "n": 386,
+     "gids": 131,
+     "exact": 209,
+     "exactPct": 54.1451,
      "medianPct": 0,
-     "p75Pct": 0.1743,
+     "p75Pct": 0.1699,
      "p90Pct": 0.6205,
      "p99Pct": 3.3684,
      "maxPct": 16.8803,
-     "over5Pct": 0.7874,
+     "over5Pct": 0.7772,
      "conflictGidCount": 3,
-     "conflictShare": 2.3077,
+     "conflictShare": 2.2901,
      "conflictGids": [
       11,
       32,
@@ -557,7 +569,7 @@
      "byDay": [
       {
        "day": "2026-11-21",
-       "n": 130,
+       "n": 131,
        "exact": 71,
        "conflict": 1,
        "medianPct": 0,
@@ -565,16 +577,16 @@
       },
       {
        "day": "2026-11-22",
-       "n": 127,
-       "exact": 56,
+       "n": 129,
+       "exact": 58,
        "conflict": 2,
-       "medianPct": 0.0658,
+       "medianPct": 0.0646,
        "maxPct": 6.9969
       },
       {
        "day": "2026-11-23",
-       "n": 124,
-       "exact": 78,
+       "n": 126,
+       "exact": 80,
        "conflict": 0,
        "medianPct": 0,
        "maxPct": 3.1048
@@ -842,29 +854,28 @@
   "key": "p",
   "src": "intraday_agg",
   "stat": {
-   "n": 381,
-   "gids": 130,
-   "exact": 289,
-   "exactPct": 75.853,
+   "n": 386,
+   "gids": 131,
+   "exact": 294,
+   "exactPct": 76.1658,
    "medianPct": 0,
    "p75Pct": 0,
-   "p90Pct": 0.7982,
-   "p99Pct": 6,
+   "p90Pct": 0.8482,
+   "p99Pct": 5.4173,
    "maxPct": 17.4071,
-   "over5Pct": 1.3123,
-   "conflictGidCount": 5,
-   "conflictShare": 3.8462,
+   "over5Pct": 1.0363,
+   "conflictGidCount": 4,
+   "conflictShare": 3.0534,
    "conflictGids": [
     21,
     9525,
     9739,
-    11130,
     12519
    ],
    "byDay": [
     {
      "day": "2026-11-21",
-     "n": 130,
+     "n": 131,
      "exact": 107,
      "conflict": 1,
      "medianPct": 0,
@@ -872,17 +883,17 @@
     },
     {
      "day": "2026-11-22",
-     "n": 127,
-     "exact": 77,
+     "n": 129,
+     "exact": 79,
      "conflict": 2,
      "medianPct": 0,
      "maxPct": 9.375
     },
     {
      "day": "2026-11-23",
-     "n": 124,
-     "exact": 105,
-     "conflict": 2,
+     "n": 126,
+     "exact": 108,
+     "conflict": 1,
      "medianPct": 0,
      "maxPct": 10
     }
@@ -894,29 +905,32 @@
   "key": "p",
   "src": "rt_snapshot",
   "stat": {
-   "n": 2097,
-   "gids": 1531,
-   "exact": 1350,
-   "exactPct": 64.3777,
+   "n": 2452,
+   "gids": 1529,
+   "exact": 1540,
+   "exactPct": 62.8059,
    "medianPct": 0,
-   "p75Pct": 0.1266,
-   "p90Pct": 0.7407,
-   "p99Pct": 4.7872,
+   "p75Pct": 0.158,
+   "p90Pct": 0.8274,
+   "p99Pct": 4.8886,
    "maxPct": 21.2068,
-   "over5Pct": 0.9061,
-   "conflictGidCount": 19,
-   "conflictShare": 1.241,
+   "over5Pct": 0.9788,
+   "conflictGidCount": 24,
+   "conflictShare": 1.5697,
    "conflictGids": [
     13,
     693,
     764,
+    883,
     1367,
     1400,
     1834,
+    1953,
     2212,
     4200,
     6398,
     8555,
+    9540,
     9725,
     9768,
     10372,
@@ -925,12 +939,14 @@
     12441,
     13623,
     17710,
-    18129
+    18129,
+    20420,
+    20502
    ],
    "byDay": [
     {
      "day": "2026-11-21",
-     "n": 1527,
+     "n": 1526,
      "exact": 1016,
      "conflict": 10,
      "medianPct": 0,
@@ -938,46 +954,49 @@
     },
     {
      "day": "2026-11-22",
-     "n": 547,
-     "exact": 323,
+     "n": 545,
+     "exact": 322,
      "conflict": 9,
      "medianPct": 0,
      "maxPct": 13.7826
     },
     {
      "day": "2026-11-23",
-     "n": 23,
-     "exact": 11,
-     "conflict": 0,
-     "medianPct": 0.1931,
-     "maxPct": 2.9412
+     "n": 381,
+     "exact": 202,
+     "conflict": 5,
+     "medianPct": 0,
+     "maxPct": 18.75
     }
    ]
   },
   "comparableStat": {
-   "n": 2097,
-   "gids": 1531,
-   "exact": 1350,
-   "exactPct": 64.3777,
+   "n": 2452,
+   "gids": 1529,
+   "exact": 1540,
+   "exactPct": 62.8059,
    "medianPct": 0,
-   "p75Pct": 0.1266,
-   "p90Pct": 0.7407,
-   "p99Pct": 4.7872,
+   "p75Pct": 0.158,
+   "p90Pct": 0.8274,
+   "p99Pct": 4.8886,
    "maxPct": 21.2068,
-   "over5Pct": 0.9061,
-   "conflictGidCount": 19,
-   "conflictShare": 1.241,
+   "over5Pct": 0.9788,
+   "conflictGidCount": 24,
+   "conflictShare": 1.5697,
    "conflictGids": [
     13,
     693,
     764,
+    883,
     1367,
     1400,
     1834,
+    1953,
     2212,
     4200,
     6398,
     8555,
+    9540,
     9725,
     9768,
     10372,
@@ -986,12 +1005,14 @@
     12441,
     13623,
     17710,
-    18129
+    18129,
+    20420,
+    20502
    ],
    "byDay": [
     {
      "day": "2026-11-21",
-     "n": 1527,
+     "n": 1526,
      "exact": 1016,
      "conflict": 10,
      "medianPct": 0,
@@ -999,19 +1020,19 @@
     },
     {
      "day": "2026-11-22",
-     "n": 547,
-     "exact": 323,
+     "n": 545,
+     "exact": 322,
      "conflict": 9,
      "medianPct": 0,
      "maxPct": 13.7826
     },
     {
      "day": "2026-11-23",
-     "n": 23,
-     "exact": 11,
-     "conflict": 0,
-     "medianPct": 0.1931,
-     "maxPct": 2.9412
+     "n": 381,
+     "exact": 202,
+     "conflict": 5,
+     "medianPct": 0,
+     "maxPct": 18.75
     }
    ]
   },
@@ -1019,28 +1040,30 @@
  },
  "level": "warn",
  "levelBasis": "p × intraday_agg × 可比点（≥20:00）",
- "conflictGidCount": 5,
- "conflictShare": 3.8462,
+ "conflictGidCount": 4,
+ "conflictShare": 3.0534,
  "conflictGids": [
   21,
   9525,
   9739,
-  11130,
   12519
  ],
- "snapshotConflictGidCount": 19,
- "snapshotConflictShare": 1.241,
+ "snapshotConflictGidCount": 24,
+ "snapshotConflictShare": 1.5697,
  "snapshotConflictGids": [
   13,
   693,
   764,
+  883,
   1367,
   1400,
   1834,
+  1953,
   2212,
   4200,
   6398,
   8555,
+  9540,
   9725,
   9768,
   10372,
@@ -1049,7 +1072,9 @@
   12441,
   13623,
   17710,
-  18129
+  18129,
+  20420,
+  20502
  ],
  "samples": [
   {
@@ -1081,16 +1106,6 @@
    "diffPct": 0,
    "src": "intraday_agg",
    "atText": "2026-11-21 23:27:50"
-  },
-  {
-   "gid": 11130,
-   "trueDay": "2026-11-21",
-   "officialLabel": "2026-11-20",
-   "ours": 4.66,
-   "official": 4.66,
-   "diffPct": 0,
-   "src": "intraday_agg",
-   "atText": "2026-11-21 23:31:32"
   },
   {
    "gid": 12519,
@@ -1133,16 +1148,6 @@
    "atText": "2026-11-22 23:27:49"
   },
   {
-   "gid": 11130,
-   "trueDay": "2026-11-22",
-   "officialLabel": "2026-11-21",
-   "ours": 4.49,
-   "official": 4.49,
-   "diffPct": 0,
-   "src": "intraday_agg",
-   "atText": "2026-11-22 23:32:17"
-  },
-  {
    "gid": 12519,
    "trueDay": "2026-11-22",
    "officialLabel": "2026-11-21",
@@ -1183,16 +1188,6 @@
    "atText": "2026-11-23 23:34:39"
   },
   {
-   "gid": 11130,
-   "trueDay": "2026-11-23",
-   "officialLabel": "2026-11-22",
-   "ours": 4.24,
-   "official": 4,
-   "diffPct": 6,
-   "src": "intraday_agg",
-   "atText": "2026-11-23 23:04:52"
-  },
-  {
    "gid": 12519,
    "trueDay": "2026-11-23",
    "officialLabel": "2026-11-22",
@@ -1213,6 +1208,16 @@
    "diffPct": 21.2068,
    "src": "rt_snapshot",
    "atText": "2026/11/21 22:51:36"
+  },
+  {
+   "gid": 9540,
+   "trueDay": "2026-11-23",
+   "officialLabel": "2026-11-22",
+   "ours": 0.13,
+   "official": 0.16,
+   "diffPct": 18.75,
+   "src": "rt_snapshot",
+   "atText": "2026/11/23 23:15:14"
   },
   {
    "gid": 13,
@@ -1245,6 +1250,16 @@
    "atText": "2026/11/22 23:21:34"
   },
   {
+   "gid": 20502,
+   "trueDay": "2026-11-23",
+   "officialLabel": "2026-11-22",
+   "ours": 11.34,
+   "official": 10,
+   "diffPct": 13.4,
+   "src": "rt_snapshot",
+   "atText": "2026/11/23 23:15:14"
+  },
+  {
    "gid": 6398,
    "trueDay": "2026-11-21",
    "officialLabel": "2026-11-20",
@@ -1253,6 +1268,16 @@
    "diffPct": 11.7858,
    "src": "rt_snapshot",
    "atText": "2026/11/21 23:17:40"
+  },
+  {
+   "gid": 20420,
+   "trueDay": "2026-11-23",
+   "officialLabel": "2026-11-22",
+   "ours": 15.5,
+   "official": 14,
+   "diffPct": 10.7143,
+   "src": "rt_snapshot",
+   "atText": "2026/11/23 23:15:14"
   },
   {
    "gid": 9768,
@@ -1315,6 +1340,16 @@
    "atText": "2026/11/22 23:21:34"
   },
   {
+   "gid": 883,
+   "trueDay": "2026-11-23",
+   "officialLabel": "2026-11-22",
+   "ours": 23.5,
+   "official": 22,
+   "diffPct": 6.8182,
+   "src": "rt_snapshot",
+   "atText": "2026/11/23 22:42:25"
+  },
+  {
    "gid": 12441,
    "trueDay": "2026-11-22",
    "officialLabel": "2026-11-21",
@@ -1363,46 +1398,6 @@
    "diffPct": 6.015,
    "src": "rt_snapshot",
    "atText": "2026/11/22 22:42:26"
-  },
-  {
-   "gid": 9725,
-   "trueDay": "2026-11-22",
-   "officialLabel": "2026-11-21",
-   "ours": 363,
-   "official": 386,
-   "diffPct": 5.9585,
-   "src": "rt_snapshot",
-   "atText": "2026/11/22 23:21:34"
-  },
-  {
-   "gid": 2212,
-   "trueDay": "2026-11-22",
-   "officialLabel": "2026-11-21",
-   "ours": 2.7,
-   "official": 2.55,
-   "diffPct": 5.8824,
-   "src": "rt_snapshot",
-   "atText": "2026/11/22 23:06:39"
-  },
-  {
-   "gid": 8555,
-   "trueDay": "2026-11-21",
-   "officialLabel": "2026-11-20",
-   "ours": 79,
-   "official": 75,
-   "diffPct": 5.3333,
-   "src": "rt_snapshot",
-   "atText": "2026/11/21 23:17:40"
-  },
-  {
-   "gid": 12196,
-   "trueDay": "2026-11-21",
-   "officialLabel": "2026-11-20",
-   "ours": 90,
-   "official": 86,
-   "diffPct": 4.6512,
-   "src": "rt_snapshot",
-   "atText": "2026/11/21 23:17:40"
   }
  ],
  "excluded": {
@@ -1416,5 +1411,5 @@
   "note": "不可比点（采样时刻/采样日期不满足主口径规则），不计入主指标，但数量全部如实报出"
  },
  "selfTest": null,
- "message": "⚠️ 自建日线与 csqaq 官方有 5 个品差异 >5%（主口径（p × intraday_agg × 可比点）：381 个 (gid×日)、130 个 gid 可比，完全相等 75.853%，中位 0%，>5% 的品 5/130 个（3.8462%）），请确认口径；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：2097 个 (gid×日)、1531 个 gid，中位 0%，>5% 的品 19/1531 个（1.241%）；其中同日 ≥20:00 的可比子集 2097 个、>5% 的品 19；不可比点 8 个（sample_before_20h=8）已单列"
+ "message": "⚠️ 自建日线与 csqaq 官方有 4 个品差异 >5%（主口径（p × intraday_agg × 可比点）：386 个 (gid×日)、131 个 gid 可比，完全相等 76.1658%，中位 0%，>5% 的品 4/131 个（3.0534%）），请确认口径；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：2452 个 (gid×日)、1529 个 gid，中位 0%，>5% 的品 24/1529 个（1.5697%）；其中同日 ≥20:00 的可比子集 2452 个、>5% 的品 24；不可比点 8 个（sample_before_20h=8）已单列"
 }
