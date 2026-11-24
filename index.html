@@ -2329,6 +2329,24 @@ details.tcard>summary.tsum .tr{margin-left:auto;font-size:12px;color:var(--dim);
           </div>
 
           <!-- ============================================================
+               ★★★ 资金轮动建议（2026-11-24 · cs-quant/rotation_run.cjs → rotation-plan.json）
+               用户原话：「用一笔资金，以短期交易为主线，能否精准踩住大部分的主升」
+               「资金在不同品或板块流动赚更多的钱，是资金流向的意思，不是一个绝对的量」
+               本卡只读 rotation-plan.json：
+                 · 行情判定（宽度 / 中位 7 日）+ 推荐策略 + 仓位 / 现金 + 具体标的
+                 · ★ 顶部永远写「历史回测，不是预测」；没有全时期盈利策略就写「空仓等待」
+                 · 数据拿不到 → 只空这张卡，其余页面不受影响
+               ============================================================ -->
+          <div class="card span-all" id="sec-rot" style="min-width:0">
+            <div class="sec-head">
+              <h2>资金轮动建议 <span style="font-size:10.5px;font-weight:700;color:#ffb3b3;background:rgba(255,77,79,.13);border:1px solid rgba(255,77,79,.42);border-radius:999px;padding:1px 8px">历史回测 · 不是预测</span></h2>
+              <span class="sec-sub">相对指标 R1~R5 · 10 策略 × 8 时期 · 7 天冷却 / 1% 卖出费</span>
+              <span class="r" id="rot-time">加载中…</span>
+            </div>
+            <div id="rot-body" style="font-size:13px;line-height:1.8;color:var(--text)">加载中…（rotation-plan.json）</div>
+          </div>
+
+          <!-- ============================================================
                ★★★ 做盘启动（2026-11-11 新建 · cs-quant/trader_signals.cjs → trader-signals.json）
                这是用户 2026-11-11 那条洞察的可验证版本：
                  「求购激增也有可能也是，因为这些都是有盘主做盘并且有会员圈子的，
@@ -5669,6 +5687,64 @@ function renderTraderSignals(){
       + ' A 型 treated 单元 ' + (va.nTreatedCells != null ? va.nTreatedCells : '—') + ' 个，DiD ' + trPct(va.did) + '、p=' + (va.p != null ? va.p : '—') + '。'
       + ' ★ 回归测试如实说：起拉前 60 日内，A 型只标中 <b>3 / 8</b> 个历史翻倍点（斜率口径能标中 7/8，但它的 DiD 是 +4.9pp，差 0.1pp 没到门槛）—— 漏报比误报多，别把它当预警器用。';
   }
+}
+/* ============================================================================
+   ★★★ 2026-11-24 新增：资金轮动建议（cs-quant/rotation_run.cjs → rotation-plan.json）
+   ----------------------------------------------------------------------------
+   · 只读 rotation-plan.json，不在这里重算任何指标；
+   · 顶部永远写「历史回测，不是预测」；没有全时期盈利策略就写「空仓等待」；
+   · 拿不到文件 → 只空这张卡，其余页面不受影响。
+   ============================================================================ */
+var rotData = null, rotLoaded = false;
+async function loadRotationPlan(){
+  if (rotLoaded) return; rotLoaded = true;
+  try { rotData = await fetchJSON('./rotation-plan.json'); } catch (e) { rotData = null; }
+  try { renderRotationPlan(); } catch (e) { /* 渲染失败只空这块 */ }
+}
+function rotPct(v){ return (v == null || !isFinite(v)) ? '—' : ((v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%'); }
+function rotPx(v){ return (v == null || !isFinite(v)) ? '—' : ('¥' + fmtNum(v, 2)); }
+function rotChip(k, v, cls){
+  return '<span style="display:inline-block;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:8px;padding:4px 9px;font-size:12px;line-height:1.5;min-width:0"><span style="color:var(--dim)">' + esc(k) + '</span> <b class="' + (cls || '') + '">' + esc(v == null ? '—' : v) + '</b></span>';
+}
+function renderRotationPlan(){
+  const body = $('rot-body'), timeEl = $('rot-time');
+  if (!body) return;
+  if (!rotData){
+    if (timeEl) timeEl.textContent = '未接入';
+    body.innerHTML = '<div style="font-size:12px;color:#ffc9c9;line-height:1.7">★ 拿不到 rotation-plan.json：请先跑 <b>node cs-quant/rotation_run.cjs</b>。其他卡片不受影响。</div>';
+    return;
+  }
+  const d = rotData, bs = d.backtestSummary || {}, picks = d.picks || [], wl = d.watchlist || [], rg = d.regime || {};
+  if (timeEl) timeEl.textContent = 'as of ' + (d.asOf || '—');
+  let h = '<div style="font-size:12px;line-height:1.7;color:#ffc9c9;background:rgba(255,77,79,.10);border:1px solid rgba(255,77,79,.42);border-left:4px solid var(--red);border-radius:8px;padding:8px 10px;margin-bottom:10px"><b>历史回测，不是预测。</b>回测 ≠ 实盘；样本是 1,658 个用户确认做盘品（有选择偏差），成交价按最低在售价、封顶求购价×1.2，卖出另计 1.000% 提现费，7 天冷却已计入。</div>';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">'
+    + rotChip('行情', rg.label || rg.key || '—')
+    + rotChip('建议', d.strategyLabel || d.recommendedStrategy || '—', d.recommendedStrategy === 'CASH' ? 'cf-down' : '')
+    + rotChip('仓位上限', ((d.deployTarget || 0) * 100).toFixed(0) + '%')
+    + rotChip('现金', ((d.cashRatio || 0) * 100).toFixed(0) + '%')
+    + '</div>';
+  if (picks.length){
+    h += '<div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;margin-bottom:10px">'
+      + '<div style="display:grid;grid-template-columns:minmax(0,1.6fr) 76px 62px minmax(0,1.4fr);gap:6px;padding:6px 10px;background:rgba(255,255,255,.03);font-size:11px;color:var(--dim)"><div>标的</div><div style="text-align:right">现价</div><div style="text-align:right">权重</div><div>入选理由</div></div>'
+      + picks.map(function(p){ return '<div style="display:grid;grid-template-columns:minmax(0,1.6fr) 76px 62px minmax(0,1.4fr);gap:6px;padding:7px 10px;border-top:1px solid rgba(255,255,255,.05);font-size:12px;align-items:start">'
+          + '<div style="min-width:0;overflow-wrap:anywhere">' + esc(p.name) + '</div>'
+          + '<div style="text-align:right;font-variant-numeric:tabular-nums">' + rotPx(p.price) + '</div>'
+          + '<div style="text-align:right;font-variant-numeric:tabular-nums">' + ((p.weight || 0) * 100).toFixed(1) + '%</div>'
+          + '<div style="color:var(--muted);line-height:1.55;overflow-wrap:anywhere">' + esc(p.reason || '') + '</div></div>'; }).join('')
+      + '</div>';
+  } else {
+    h += '<div style="font-size:13px;line-height:1.8;color:var(--yellow);background:rgba(255,197,49,.08);border:1px solid rgba(255,197,49,.30);border-radius:9px;padding:9px 11px;margin-bottom:10px"><b>本期建议：100% 现金，0 只。</b>当前行情档位下，历史上 10 个策略 + 随机基线全部亏损；负期望行情里最优仓位就是 0。观察名单只是"等"，<b>不是买入信号</b>。</div>';
+  }
+  if (wl.length){
+    h += '<div style="font-size:11.5px;color:var(--muted);margin-bottom:4px">观察名单（不是买入信号）：</div>'
+      + '<div style="font-size:12px;line-height:1.8;color:var(--text)">' + wl.map(function(p){ return '· ' + esc(p.name) + ' ' + rotPx(p.price) + ' <span style="color:var(--dim)">' + esc(p.reason || '') + '</span>'; }).join('<br>') + '</div>';
+  }
+  h += '<div style="font-size:11.5px;color:var(--dim);line-height:1.75;margin-top:9px">'
+    + '回测：' + (bs.periods || 8) + ' 个时期 × 10 策略，'
+    + (bs.allWeather ? '存在全时期盈利策略。' : '没有任何策略在全部时期盈利。')
+    + '全期最好 <b>' + esc(bs.bestStrategy || '—') + '</b> ' + rotPct(bs.bestRet) + '（' + (bs.bestWinPeriods || 0) + '/' + (bs.bestOf || 0) + ' 段盈利），买入持有 ' + rotPct(bs.bhRet) + '，随机基线 ' + rotPct(bs.randomRet) + '。'
+    + '<br>' + esc(d.note || '') + '</div>';
+  body.innerHTML = h;
 }
 /* ============================================================================
    ★★★ 2026-11-19 新增：资金流（代理）（cs-quant/capital_flow.cjs → capital-flow.json）
@@ -12018,7 +12094,7 @@ initHealthBadge();                /* 数据新鲜度徽标：读 health.json，�
      ★ 和 loadTodayWatch 共用同一个定时器（不是另起一个）：_test/_verify_sync.cjs 的 [H] 用例
        会在 120ms 处记录一次"网络请求基线"再断言"没配置同步码时零请求"—— 若本卡单独挂在 120ms，
        它那一次 fetch 会正好落在基线之后，把同步测试打成 1 个假失败。合并到 90ms 就稳定在基线之前。 */
-  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); loadTraderSignals(); loadCapitalFlow(); }, 90);
+  setTimeout(function(){ loadTodayWatch(); loadCrashBuy(); loadTraderSignals(); loadCapitalFlow(); loadRotationPlan(); }, 90);
 
   /* 保存时机：切换后台 / 关闭页面时立刻落盘 */
   document.addEventListener('visibilitychange', function(){
