@@ -3,47 +3,41 @@
  "thresholdPct": 5,
  "sections": {
   "daily_verify": {
-   "at": 1795487495396,
-   "atText": "2026/11/24 10:31:35",
-   "level": "ok",
+   "at": 1795505399197,
+   "atText": "2026/11/24 15:29:59",
+   "level": "warn",
    "caliber": "p × intraday_agg × 可比点（≥20:00）",
    "eveningHour": 20,
-   "compared": 386,
-   "gids": 131,
+   "compared": 381,
+   "gids": 130,
    "medianPct": 0,
-   "p90Pct": 0.7897,
+   "p90Pct": 0.7982,
    "maxPct": 17.4071,
-   "over5PctShare": 0.7772,
-   "conflictGidCount": 3,
-   "conflictShare": 2.2901,
+   "over5PctShare": 1.3123,
+   "conflictGidCount": 5,
+   "conflictShare": 3.8462,
    "conflictGids": [
     21,
+    9525,
     9739,
+    11130,
     12519
    ],
    "snapshotLevel": "ok",
-   "snapshotCompared": 3595,
+   "snapshotCompared": 2097,
    "snapshotMedianPct": 0,
-   "snapshotConflictGidCount": 33,
-   "snapshotConflictShare": 2.154,
+   "snapshotConflictGidCount": 19,
+   "snapshotConflictShare": 1.241,
    "snapshotConflictGids": [
     13,
     693,
     764,
-    1021,
     1367,
     1400,
-    1588,
     1834,
-    1866,
-    2037,
     2212,
-    2291,
     4200,
     6398,
-    6522,
-    6558,
-    6864,
     8555,
     9725,
     9768,
@@ -51,57 +45,21 @@
     11449,
     12196,
     12441,
-    12526,
-    12590,
-    13416,
     13623,
     17710,
-    17767,
-    18129,
-    19501,
-    21579
+    18129
    ],
    "excluded": {
-    "total": 18,
+    "total": 8,
     "byReason": {
-     "sample_before_20h": 18
+     "sample_before_20h": 8
     },
     "gidsByReason": {
-     "sample_before_20h": 9
+     "sample_before_20h": 4
     },
     "note": "不可比点（采样时刻/采样日期不满足主口径规则），不计入主指标，但数量全部如实报出"
    },
    "samples": [
-    {
-     "gid": 21,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 11.03,
-     "official": 11.03,
-     "diffPct": 0,
-     "src": "intraday_agg",
-     "atText": "2026-11-20 23:56:29"
-    },
-    {
-     "gid": 9739,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 22.6,
-     "official": 22.7,
-     "diffPct": 0.4405,
-     "src": "intraday_agg",
-     "atText": "2026-11-20 23:57:41"
-    },
-    {
-     "gid": 12519,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 142,
-     "official": 142,
-     "diffPct": 0,
-     "src": "intraday_agg",
-     "atText": "2026-11-20 23:47:19"
-    },
     {
      "gid": 21,
      "trueDay": "2026-11-21",
@@ -113,6 +71,16 @@
      "atText": "2026-11-21 23:58:56"
     },
     {
+     "gid": 9525,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 0.25,
+     "official": 0.25,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-21 23:34:33"
+    },
+    {
      "gid": 9739,
      "trueDay": "2026-11-21",
      "officialLabel": "2026-11-20",
@@ -121,6 +89,16 @@
      "diffPct": 0,
      "src": "intraday_agg",
      "atText": "2026-11-21 23:27:50"
+    },
+    {
+     "gid": 11130,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 4.66,
+     "official": 4.66,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-21 23:31:32"
     },
     {
      "gid": 12519,
@@ -143,6 +121,16 @@
      "atText": "2026-11-22 23:42:11"
     },
     {
+     "gid": 9525,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 0.24,
+     "official": 0.24,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-22 23:28:53"
+    },
+    {
      "gid": 9739,
      "trueDay": "2026-11-22",
      "officialLabel": "2026-11-21",
@@ -153,6 +141,16 @@
      "atText": "2026-11-22 23:27:49"
     },
     {
+     "gid": 11130,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 4.49,
+     "official": 4.49,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-22 23:32:17"
+    },
+    {
      "gid": 12519,
      "trueDay": "2026-11-22",
      "officialLabel": "2026-11-21",
@@ -161,6 +159,56 @@
      "diffPct": 5.4173,
      "src": "intraday_agg",
      "atText": "2026-11-22 23:34:20"
+    },
+    {
+     "gid": 21,
+     "trueDay": "2026-11-23",
+     "officialLabel": "2026-11-22",
+     "ours": 10.3,
+     "official": 10.3,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-23 23:41:34"
+    },
+    {
+     "gid": 9525,
+     "trueDay": "2026-11-23",
+     "officialLabel": "2026-11-22",
+     "ours": 0.22,
+     "official": 0.2,
+     "diffPct": 10,
+     "src": "intraday_agg",
+     "atText": "2026-11-23 23:34:31"
+    },
+    {
+     "gid": 9739,
+     "trueDay": "2026-11-23",
+     "officialLabel": "2026-11-22",
+     "ours": 23.23,
+     "official": 23.23,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-23 23:34:39"
+    },
+    {
+     "gid": 11130,
+     "trueDay": "2026-11-23",
+     "officialLabel": "2026-11-22",
+     "ours": 4.24,
+     "official": 4,
+     "diffPct": 6,
+     "src": "intraday_agg",
+     "atText": "2026-11-23 23:04:52"
+    },
+    {
+     "gid": 12519,
+     "trueDay": "2026-11-23",
+     "officialLabel": "2026-11-22",
+     "ours": 141.66,
+     "official": 141.66,
+     "diffPct": 0,
+     "src": "intraday_agg",
+     "atText": "2026-11-23 23:39:10"
     }
    ],
    "snapshotSamples": [
@@ -175,16 +223,6 @@
      "atText": "2026/11/21 22:51:36"
     },
     {
-     "gid": 17767,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 7,
-     "official": 8.77,
-     "diffPct": 20.1824,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 22:27:27"
-    },
-    {
      "gid": 13,
      "trueDay": "2026-11-21",
      "officialLabel": "2026-11-20",
@@ -193,16 +231,6 @@
      "diffPct": 18.7291,
      "src": "rt_snapshot",
      "atText": "2026/11/21 23:15:28"
-    },
-    {
-     "gid": 19501,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 1.66,
-     "official": 1.42,
-     "diffPct": 16.9014,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 23:03:22"
     },
     {
      "gid": 11449,
@@ -255,36 +283,6 @@
      "atText": "2026/11/22 22:24:35"
     },
     {
-     "gid": 21579,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 29.89,
-     "official": 33,
-     "diffPct": 9.4242,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 22:00:40"
-    },
-    {
-     "gid": 1588,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 444.4,
-     "official": 487.4,
-     "diffPct": 8.8223,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 22:50:42"
-    },
-    {
-     "gid": 13416,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 6.49,
-     "official": 6,
-     "diffPct": 8.1667,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 23:12:27"
-    },
-    {
      "gid": 1367,
      "trueDay": "2026-11-21",
      "officialLabel": "2026-11-20",
@@ -293,16 +291,6 @@
      "diffPct": 7.9812,
      "src": "rt_snapshot",
      "atText": "2026/11/21 22:45:29"
-    },
-    {
-     "gid": 6864,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 2029,
-     "official": 2188,
-     "diffPct": 7.2669,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 23:06:26"
     },
     {
      "gid": 18129,
@@ -335,26 +323,6 @@
      "atText": "2026/11/22 23:21:34"
     },
     {
-     "gid": 12526,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 26.99,
-     "official": 29,
-     "diffPct": 6.931,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 23:18:28"
-    },
-    {
-     "gid": 6522,
-     "trueDay": "2026-11-20",
-     "officialLabel": "2026-11-19",
-     "ours": 6.22,
-     "official": 6.67,
-     "diffPct": 6.7466,
-     "src": "rt_snapshot",
-     "atText": "2026/11/20 23:18:28"
-    },
-    {
      "gid": 12441,
      "trueDay": "2026-11-22",
      "officialLabel": "2026-11-21",
@@ -363,30 +331,110 @@
      "diffPct": 6.5217,
      "src": "rt_snapshot",
      "atText": "2026/11/22 23:21:34"
+    },
+    {
+     "gid": 10372,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 17.68,
+     "official": 16.66,
+     "diffPct": 6.1224,
+     "src": "rt_snapshot",
+     "atText": "2026/11/21 23:15:28"
+    },
+    {
+     "gid": 13623,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 263,
+     "official": 280,
+     "diffPct": 6.0714,
+     "src": "rt_snapshot",
+     "atText": "2026/11/22 23:21:34"
+    },
+    {
+     "gid": 4200,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 19.32,
+     "official": 20.56,
+     "diffPct": 6.0311,
+     "src": "rt_snapshot",
+     "atText": "2026/11/21 22:48:26"
+    },
+    {
+     "gid": 693,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 125,
+     "official": 133,
+     "diffPct": 6.015,
+     "src": "rt_snapshot",
+     "atText": "2026/11/22 22:42:26"
+    },
+    {
+     "gid": 9725,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 363,
+     "official": 386,
+     "diffPct": 5.9585,
+     "src": "rt_snapshot",
+     "atText": "2026/11/22 23:21:34"
+    },
+    {
+     "gid": 2212,
+     "trueDay": "2026-11-22",
+     "officialLabel": "2026-11-21",
+     "ours": 2.7,
+     "official": 2.55,
+     "diffPct": 5.8824,
+     "src": "rt_snapshot",
+     "atText": "2026/11/22 23:06:39"
+    },
+    {
+     "gid": 8555,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 79,
+     "official": 75,
+     "diffPct": 5.3333,
+     "src": "rt_snapshot",
+     "atText": "2026/11/21 23:17:40"
+    },
+    {
+     "gid": 12196,
+     "trueDay": "2026-11-21",
+     "officialLabel": "2026-11-20",
+     "ours": 90,
+     "official": 86,
+     "diffPct": 4.6512,
+     "src": "rt_snapshot",
+     "atText": "2026/11/21 23:17:40"
     }
    ],
    "window": [
-    "2026-11-20",
     "2026-11-21",
-    "2026-11-22"
+    "2026-11-22",
+    "2026-11-23"
    ],
-   "note": "主口径（p × intraday_agg × 可比点）：386 个 (gid×日)、131 个 gid 可比，完全相等 76.6839%，中位 0%，>5% 的品 3/131 个（2.2901%） → 口径一致；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：3595 个 (gid×日)、1532 个 gid，中位 0%，>5% 的品 33/1532 个（2.154%）；其中同日 ≥20:00 的可比子集 3595 个、>5% 的品 33；不可比点 18 个（sample_before_20h=18）已单列"
+   "note": "⚠️ 自建日线与 csqaq 官方有 5 个品差异 >5%（主口径（p × intraday_agg × 可比点）：381 个 (gid×日)、130 个 gid 可比，完全相等 75.853%，中位 0%，>5% 的品 5/130 个（3.8462%）），请确认口径；另报 rt_snapshot 口径（采样时刻与官方收盘不同，不计入主指标）：2097 个 (gid×日)、1531 个 gid，中位 0%，>5% 的品 19/1531 个（1.241%）；其中同日 ≥20:00 的可比子集 2097 个、>5% 的品 19；不可比点 8 个（sample_before_20h=8）已单列"
   },
   "merge_junction": {
-   "at": 1795487482263,
-   "atText": "2026/11/24 10:31:22",
+   "at": 1795505387184,
+   "atText": "2026/11/24 15:29:47",
    "level": "bad",
-   "officialLatestLabel": "2026-11-21",
-   "officialLatestTrueDay": "2026-11-22",
-   "overlapDays": 41,
-   "appendedDays": 2,
-   "compared": 6140,
+   "officialLatestLabel": "2026-11-22",
+   "officialLatestTrueDay": "2026-11-23",
+   "overlapDays": 42,
+   "appendedDays": 1,
+   "compared": 6273,
    "medianPct": 0,
-   "p90Pct": 0.1337,
+   "p90Pct": 0.1359,
    "maxPct": 50,
-   "over5PctShare": 0.6189,
-   "conflictGidCount": 31,
-   "conflictShare": 14.6226,
+   "over5PctShare": 0.6536,
+   "conflictGidCount": 34,
+   "conflictShare": 15.9624,
    "conflictGids": [
     21,
     547,
@@ -402,6 +450,7 @@
     2218,
     2295,
     9521,
+    9525,
     9556,
     9583,
     9618,
@@ -410,6 +459,7 @@
     9736,
     9739,
     10359,
+    11130,
     11217,
     12196,
     12285,
@@ -418,7 +468,8 @@
     13198,
     13588,
     17450,
-    18129
+    18129,
+    20512
    ],
    "samples": [
     {
@@ -602,20 +653,20 @@
      "diffPct": 11.1111
     }
    ],
-   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.6189%），请确认口径"
+   "note": "⚠️ 交界处差异超过 5%（p 中位 0%，>5% 占 0.6536%），请确认口径"
   },
   "intraday_calibration": {
-   "at": 1795487459238,
-   "atText": "2026/11/24 10:30:59",
+   "at": 1795505364153,
+   "atText": "2026/11/24 15:29:24",
    "level": "bad",
-   "compared": 6140,
-   "gids": 212,
+   "compared": 6273,
+   "gids": 213,
    "medianPct": 0,
    "maxPct": 50,
-   "p90Pct": 0.1337,
-   "over5PctShare": 0.6189,
-   "conflictGidCount": 31,
-   "conflictShare": 14.6226,
+   "p90Pct": 0.1359,
+   "over5PctShare": 0.6536,
+   "conflictGidCount": 34,
+   "conflictShare": 15.9624,
    "conflictGids": [
     21,
     547,
@@ -631,6 +682,7 @@
     2218,
     2295,
     9521,
+    9525,
     9556,
     9583,
     9618,
@@ -639,6 +691,7 @@
     9736,
     9739,
     10359,
+    11130,
     11217,
     12196,
     12285,
@@ -647,7 +700,8 @@
     13198,
     13588,
     17450,
-    18129
+    18129,
+    20512
    ],
    "samples": [
     {
@@ -762,22 +816,22 @@
    "note": "⚠️ 分时聚合与官方日线中位差异 0%，超过 5% 门槛，请人工确认口径后再用"
   },
   "rt_snapshot_vs_intraday": {
-   "at": 1795487482832,
-   "atText": "2026/11/24 10:31:22",
+   "at": 1795505387724,
+   "atText": "2026/11/24 15:29:47",
    "level": "ok",
-   "compared": 111,
+   "compared": 114,
    "medianPct": 0,
-   "p90Pct": 1.3974,
-   "maxPct": 8.7097,
-   "over5PctShare": 2.7027,
-   "conflictGidCount": 3,
+   "p90Pct": 0.5405,
+   "maxPct": 3.3333,
+   "over5PctShare": 0,
+   "conflictGidCount": 0,
    "conflictGids": [],
    "note": "同一天实时快照 vs 分时聚合（两边都是自建，用于判断快照时刻是否偏早/偏晚）"
   }
  },
  "level": "bad",
- "at": 1795487495396,
- "atText": "2026/11/24 10:31:35",
+ "at": 1795505399198,
+ "atText": "2026/11/24 15:29:59",
  "conflictGids": [
   {
    "gid": 21,
@@ -879,6 +933,14 @@
    ]
   },
   {
+   "gid": 9525,
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 9556,
    "in": [
     "merge_junction",
@@ -931,6 +993,14 @@
   {
    "gid": 10359,
    "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
+   "gid": 11130,
+   "in": [
+    "daily_verify",
     "merge_junction",
     "intraday_calibration"
    ]
@@ -998,9 +1068,16 @@
     "merge_junction",
     "intraday_calibration"
    ]
+  },
+  {
+   "gid": 20512,
+   "in": [
+    "merge_junction",
+    "intraday_calibration"
+   ]
   }
  ],
- "conflictGidCount": 31,
+ "conflictGidCount": 34,
  "conflictSamples": [
   {
    "gid": 21,
@@ -1116,6 +1193,15 @@
    ]
   },
   {
+   "gid": 9525,
+   "name": "FN57 | 冷却剂 (崭新出厂)",
+   "in": [
+    "daily_verify",
+    "merge_junction",
+    "intraday_calibration"
+   ]
+  },
+  {
    "gid": 9556,
    "name": "MP7 | 主板 (崭新出厂)",
    "in": [
@@ -1154,15 +1240,7 @@
     "merge_junction",
     "intraday_calibration"
    ]
-  },
-  {
-   "gid": 9736,
-   "name": "P250 | 影魔 (崭新出厂)",
-   "in": [
-    "merge_junction",
-    "intraday_calibration"
-   ]
   }
  ],
- "message": "⚠️ 自建日线与 csqaq 官方有 31 个品差异 >5%，请确认口径"
+ "message": "⚠️ 自建日线与 csqaq 官方有 34 个品差异 >5%，请确认口径"
 }
