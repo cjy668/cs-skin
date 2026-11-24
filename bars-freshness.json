@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1795449377716,
- "atText": "2026/11/23 23:56:17",
+ "at": 1795452312459,
+ "atText": "2026/11/24 00:45:12",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -759,7 +759,7 @@
    "2026-11-22",
    "2026-11-23"
   ],
-  "coversLatest": true,
+  "coversLatest": false,
   "coversDays": 1
  },
  "effective": {
@@ -774,7 +774,7 @@
  },
  "lagDays": 1,
  "extraLagDays": 0,
- "lagDaysTrue": 0,
+ "lagDaysTrue": 1,
  "extraLagTrue": 0,
  "level": "ok",
  "timeLevel": "ok",
@@ -782,7 +782,7 @@
  "levelBasis": "extraLagDays",
  "levelNote": "自建日线与官方差异台账 level=bad（30 个品 >5%，这是口径/数据质量维度，不影响时效判定）",
  "expectedBarsLatest": "2026-11-21",
- "expectedBarsTrueDay": "2026-11-22",
+ "expectedBarsTrueDay": "2026-11-23",
  "downstreamStale": true,
  "staleFiles": [
   {
