@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1795534985992,
- "atText": "2026-11-24 23:43:05",
+ "at": 1795575976003,
+ "atText": "2026-11-25 11:06:16",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "ISteamNews"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,7 +12,7 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1795534986883,
+  "checkedAt": 1795575986776,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
  "lastSeen": "1849827110444052",
@@ -39,8 +38,8 @@
   "feedItems": 100,
   "officialItems": 87,
   "newItems": 0,
-  "recentItems": 4,
-  "rssItems": 10
+  "recentItems": 2,
+  "rssItems": 0
  },
  "sourceStatus": [
   {
@@ -49,33 +48,33 @@
    "ok": true,
    "status": 200,
    "bytes": 181750,
-   "ms": 804,
+   "ms": 1609,
    "attempts": 1,
    "error": null
   },
   {
    "name": "Steam 中文 RSS",
    "url": "https://store.steampowered.com/feeds/news/app/730/?cc=CN&l=schinese",
-   "ok": true,
-   "status": 200,
-   "bytes": 27020,
-   "ms": 775,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 10613,
+   "attempts": 2,
+   "error": "timeout"
   }
  ],
  "crossCheck": {
   "apiNewestDate": "2026-11-23",
-  "rssNewestDate": "2026-11-23",
-  "agree": true,
-  "note": "两个源的最新公告日期一致"
+  "rssNewestDate": null,
+  "agree": false,
+  "note": "RSS 本轮不可用（只用 API 的结果；不影响判断）"
  },
  "items": [],
  "recent": [
   {
    "gid": "1849827110444052",
    "title": "Counter-Strike 2 Update",
-   "titleZh": "Counter-Strike 2 Update",
+   "titleZh": null,
    "date": "2026-11-23",
    "dateLocal": "2026-11-24",
    "at": 1795474927000,
@@ -207,173 +206,6 @@
      "reactionDay": null,
      "medPct": null,
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  },
-  {
-   "gid": "1849827110421976",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": "Counter-Strike 2 Update",
-   "date": "2026-11-17",
-   "dateLocal": "2026-11-18",
-   "at": 1794958807000,
-   "atText": "2026-11-18 07:40:07",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110421976",
-   "summary": "SINGAPORE 2026 MAJOR · The PGL Singapore 2026 Major Hub is now available. Visit the hub to purchase tournament items, play the Pick'Em Challenge, and more. · Purchase a Singapore 2026 Viewer Pass to receive an upgradable Singapore 2026 Coin. With an active pass, you can upgrade your coin and earn rewards by playing the Pick'Em Challenge. Additionally, you will show up on the Active Pass Leaderboard where you can compare your Pick'Em Challenge performance to your friends.…",
-   "level": "供给级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Case",
-    "Pass",
-    "Music Kit",
-    "Major",
-    "Pick'Em",
-    "Tournament",
-    "Map",
-    "Bug",
-    "Misc"
-   ],
-   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 2 个 · 赛事 3 个 · 噪声 3 个",
-   "mechanismHits": [
-    "Case"
-   ],
-   "strongMechanismHits": [],
-   "supplyHits": [
-    "Pass",
-    "Music Kit"
-   ],
-   "eventHits": [
-    "Major",
-    "Pick'Em",
-    "Tournament"
-   ],
-   "noiseHits": [
-    "Map",
-    "Bug",
-    "Misc"
-   ],
-   "alreadyKnown": true,
-   "similarEvents": [
-    {
-     "date": "2026-05-07",
-     "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "similarity": 0.533,
-     "eventDate": "2026-05-07",
-     "eventClass": "regime_shift",
-     "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "reactionDay": "2026-05-09",
-     "medPct": -2.3,
-     "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
-    },
-    {
-     "date": "2024-02-17",
-     "title": "更新日志（2024年2月16日）",
-     "similarity": 0.413,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2023-09-29",
-     "title": "更新日志（2023年9月28日）",
-     "similarity": 0.413,
-     "eventDate": "2023-09-27",
-     "eventClass": "regime_shift",
-     "eventTitle": "欢迎回家（CS2 正式发布）",
-     "reactionDay": "2023-09-29",
-     "medPct": -2.9,
-     "note": "该事件（2023-09-27 欢迎回家（CS2 正式发布））在事件分类表里是 regime_shift：反应日 2023-09-29 全池中位 -2.9%、下跌占比 81% —— 不是全池级急跌"
-    }
-   ],
-   "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
-  },
-  {
-   "gid": "1849827110421973",
-   "title": "The Cobbled Road to Singapore",
-   "titleZh": null,
-   "date": "2026-11-17",
-   "dateLocal": "2026-11-18",
-   "at": 1794958720000,
-   "atText": "2026-11-18 07:38:40",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110421973",
-   "summary": "[video webm=\"https://clan.fastly.steamstatic.com/images/3381077/cbaf2e646b6b20b7c1c1c27d30e76732fbe60b26.webm\" mp4=\"https://clan.fastly.steamstatic.com/images/3381077/dec767ae6d99eb5782d0975a4627a51ca7f7931b.mp4\" poster=\"https://clan.fastly.steamstatic.com/images/3381077/8e96d2f497ad35d8e7919ee24cfc3c97ebde0dff.png\" autoplay=\"true\" controls=\"false\"] Today's update features the return of a legendary map.…",
-   "level": "机制级",
-   "confidence": "medium",
-   "matchedKeywords": [
-    "Souvenir",
-    "Rarity",
-    "Pass",
-    "Drop",
-    "Sticker",
-    "Music Kit",
-    "Major",
-    "Pick'Em",
-    "Tournament",
-    "Map",
-    "Bug"
-   ],
-   "levelBasis": "强机制 2 个（Souvenir/Rarity）· 机制词 2 个 · 供给 4 个 · 赛事 3 个 · 噪声 2 个",
-   "mechanismHits": [
-    "Souvenir",
-    "Rarity"
-   ],
-   "strongMechanismHits": [
-    "Souvenir",
-    "Rarity"
-   ],
-   "supplyHits": [
-    "Pass",
-    "Drop",
-    "Sticker",
-    "Music Kit"
-   ],
-   "eventHits": [
-    "Major",
-    "Pick'Em",
-    "Tournament"
-   ],
-   "noiseHits": [
-    "Map",
-    "Bug"
-   ],
-   "alreadyKnown": true,
-   "similarEvents": [
-    {
-     "date": "2025-11-12",
-     "title": "《反恐精英》更新",
-     "similarity": 0.533,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2025-07-02",
-     "title": "《反恐精英》更新",
-     "similarity": 0.445,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
-    },
-    {
-     "date": "2024-11-27",
-     "title": "《反恐精英》更新",
-     "similarity": 0.414,
-     "eventDate": "2024-11-27",
-     "eventClass": "none",
-     "eventTitle": "《反恐精英》更新",
-     "reactionDay": "2024-11-27",
-     "medPct": -0.2,
-     "note": "该事件（2024-11-27 《反恐精英》更新）在事件分类表里是 none：反应日 2024-11-27 全池中位 -0.3%、下跌占比 60% —— 不是全池级急跌"
     }
    ],
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
