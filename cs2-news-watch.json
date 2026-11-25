@@ -1,11 +1,10 @@
 {
  "v": 1,
- "at": 1795594852075,
- "atText": "2026-11-25 16:20:52",
+ "at": 1795607452008,
+ "atText": "2026-11-25 19:50:52",
  "src": "Steam ISteamNews API + RSS",
  "usedSources": [
-  "ISteamNews",
-  "RSS(对账)"
+  "RSS(主源)"
  ],
  "cadenceMin": 30,
  "staleAfterMin": 90,
@@ -13,14 +12,14 @@
  "task": {
   "name": "CSQuant_UpdateWatch",
   "registered": true,
-  "checkedAt": 1795594858318,
+  "checkedAt": 1795607489975,
   "note": "计划任务已注册（每 30 分钟巡检）"
  },
- "lastSeen": "1849827110444052",
- "lastSeenTitle": "Counter-Strike 2 Update",
+ "lastSeen": "694278269818635488",
+ "lastSeenTitle": "《反恐精英》更新",
  "lastSeenDate": "2026-11-23",
  "lastSeenAtText": "2026-11-24 07:02:07",
- "lastSeenUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110444052",
+ "lastSeenUrl": "https://store.steampowered.com/news/app/730/view/694278269818635488",
  "newCount": 0,
  "firstRun": false,
  "lastKnownDate": "2026-11-23",
@@ -36,8 +35,8 @@
  "caveat": "本机只能检测到【有更新】（标题/时间/链接/关键词），无法预测这次更新会让哪些品涨跌。历史 27 个「结构性改变/供给冲击」更新里，只有 1 个（2025-10-22 五合一）造成全池级急跌（反应日 2025-10-23 全池中位 -29.4%）。",
  "itemCaveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。",
  "checked": {
-  "feedItems": 100,
-  "officialItems": 87,
+  "feedItems": 10,
+  "officialItems": 10,
   "newItems": 0,
   "recentItems": 2,
   "rssItems": 10
@@ -46,12 +45,12 @@
   {
    "name": "Steam ISteamNews API",
    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=730&maxlength=0&count=100",
-   "ok": true,
-   "status": 200,
-   "bytes": 181750,
-   "ms": 654,
-   "attempts": 1,
-   "error": null
+   "ok": false,
+   "status": 0,
+   "bytes": 0,
+   "ms": 37899,
+   "attempts": 3,
+   "error": "read ECONNRESET"
   },
   {
    "name": "Steam 中文 RSS",
@@ -59,8 +58,8 @@
    "ok": true,
    "status": 200,
    "bytes": 27047,
-   "ms": 6119,
-   "attempts": 2,
+   "ms": 6158,
+   "attempts": 1,
    "error": null
   }
  ],
@@ -73,15 +72,15 @@
  "items": [],
  "recent": [
   {
-   "gid": "1849827110444052",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694278269818635488",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-11-23",
    "dateLocal": "2026-11-24",
    "at": 1795474927000,
    "atText": "2026-11-24 07:02:07",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110444052",
-   "summary": "MAPS Cobblestone · Fixed a spot in princess tower where the bomb could be thrown out of reach · Fixed some bad wall bang locations · Fixes for smoother player movement throughout the level · Fixed some bad boosts and walkable ledges · Fixed a location at B where grenades could fall through the world · Fixed various gaps in the world MISC · Fixed third-person silent reload animations to play at correct speed · Various stability improvements",
+   "url": "https://store.steampowered.com/news/app/730/view/694278269818635488",
+   "summary": "地图 古堡激战 · 修复了公主塔中一处炸弹会被扔到无法拾取的点位 · 修复了一些不合理的穿墙射击点位 · 修复了相关问题，使玩家在全地图移动更加流畅 · 修复了一些不合理的双架点位和可行走的边缘 · 修复了B点一个投掷物可能掉出地图外的位置 · 修复了整张地图的各种间隙 杂项 · 修复了第三人称静默音换弹动画播放速度不正确的问题 · 各种稳定性改善",
    "level": "无关",
    "confidence": "low",
    "matchedKeywords": [
@@ -104,7 +103,7 @@
     {
      "date": "2026-05-07",
      "title": "《反恐精英》更新（地图/音乐盒/创意工坊）",
-     "similarity": 0.681,
+     "similarity": 0.674,
      "eventDate": "2026-05-07",
      "eventClass": "regime_shift",
      "eventTitle": "《反恐精英》更新（地图/音乐盒/创意工坊）",
@@ -113,20 +112,20 @@
      "note": "该事件（2026-05-07 《反恐精英》更新（地图/音乐盒/创意工坊））在事件分类表里是 regime_shift：反应日 2026-05-09 全池中位 -2.3%、下跌占比 86% —— 不是全池级急跌"
     },
     {
-     "date": "2025-10-02",
+     "date": "2025-09-24",
      "title": "《反恐精英》更新",
-     "similarity": 0.538,
-     "eventDate": "2025-10-01",
-     "eventClass": "regime_shift",
-     "eventTitle": "《反恐精英》更新（武库/观战/地图脚本）",
-     "reactionDay": "2025-10-01",
-     "medPct": -0.1,
-     "note": "该事件（2025-10-01 《反恐精英》更新（武库/观战/地图脚本））在事件分类表里是 regime_shift：反应日 2025-10-01 全池中位 -0.1%、下跌占比 54% —— 不是全池级急跌"
+     "similarity": 0.552,
+     "eventDate": null,
+     "eventClass": null,
+     "eventTitle": null,
+     "reactionDay": null,
+     "medPct": null,
+     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2026-04-30",
-     "title": "《反恐精英》更新",
-     "similarity": 0.535,
+     "date": "2023-12-07",
+     "title": "更新日志（2023年12月7日）",
+     "similarity": 0.54,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -138,37 +137,33 @@
    "caveat": "这是【类比】不是预测；历史 27 个「结构性改变/供给冲击」更新里，只有 1 个造成全池急跌。"
   },
   {
-   "gid": "1849827110426557",
-   "title": "Counter-Strike 2 Update",
-   "titleZh": null,
+   "gid": "694278269818634559",
+   "title": "《反恐精英》更新",
+   "titleZh": "《反恐精英》更新",
    "date": "2026-11-19",
    "dateLocal": "2026-11-19",
    "at": 1795049879000,
    "atText": "2026-11-19 08:57:59",
-   "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110426557",
-   "summary": "MAPS Cobblestone · Fixed some walkable ledges in long A · Fixed map issue that was loading an empty skybox · Fixed an audio blocker issue by mid/A · Added a grenade clip to assault van bumper · Fixed various gaps in the world Inferno · Fixed grenade and Molotov exploit spot from church to dark on bombsite B.…",
+   "url": "https://store.steampowered.com/news/app/730/view/694278269818634559",
+   "summary": "地图 古堡激战 · 修复了A大道中一些可行走的边缘问题 · 修复了地图加载空天空盒的问题 · 修复了中路/A区附近的音频遮挡问题 · 为突击车保险杠添加了投掷物碰撞 · 修复了整张地图的各种间隙 炼狱小镇 · 修复了B点从教堂到死点的手雷和燃烧瓶的卡位漏洞。 杂项 · 更新了AWP的慢速换弹动画 · 优化了极高画质设置下烟雾下方的地面灼烧痕迹的贴花效果 X射线扫描仪 · 瑞士玩家将在其库存栏下看到”X射线扫描仪”选项卡。对于这些玩家，只能通过X射线扫描仪打开容器（武器箱等）。 X射线扫描仪将预装一款一次性、不可交易的“纯正P250|X射线”，必须先领取该物品，才能使用X射线扫描仪揭示其他容器内的物品。",
    "level": "机制级",
    "confidence": "medium",
    "matchedKeywords": [
-    "Exclusive",
+    "Case",
     "Map",
-    "Audio",
     "Bug",
     "Optimize",
     "Misc"
    ],
-   "levelBasis": "强机制 1 个（Exclusive）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 5 个",
+   "levelBasis": "强机制 0 个（无）· 机制词 1 个 · 供给 0 个 · 赛事 0 个 · 噪声 4 个",
    "mechanismHits": [
-    "Exclusive"
+    "Case"
    ],
-   "strongMechanismHits": [
-    "Exclusive"
-   ],
+   "strongMechanismHits": [],
    "supplyHits": [],
    "eventHits": [],
    "noiseHits": [
     "Map",
-    "Audio",
     "Bug",
     "Optimize",
     "Misc"
@@ -176,9 +171,9 @@
    "alreadyKnown": true,
    "similarEvents": [
     {
-     "date": "2026-03-16",
+     "date": "2026-05-18",
      "title": "《反恐精英》更新",
-     "similarity": 0.569,
+     "similarity": 0.805,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
@@ -187,20 +182,20 @@
      "note": "该事件不在事件分类表里（没有全池价格效应记录）"
     },
     {
-     "date": "2024-02-13",
-     "title": "更新日志（2024年2月12日）",
-     "similarity": 0.53,
-     "eventDate": null,
-     "eventClass": null,
-     "eventTitle": null,
-     "reactionDay": null,
-     "medPct": null,
-     "note": "该事件不在事件分类表里（没有全池价格效应记录）"
+     "date": "2023-11-17",
+     "title": "更新日志（2023年11月17日）",
+     "similarity": 0.805,
+     "eventDate": "2023-11-17",
+     "eventClass": "none",
+     "eventTitle": "Release Notes for 11/17/2023",
+     "reactionDay": "2023-11-18",
+     "medPct": -0.3,
+     "note": "该事件（2023-11-17 Release Notes for 11/17/2023）在事件分类表里是 none：反应日 2023-11-18 全池中位 -0.3%、下跌占比 58% —— 不是全池级急跌"
     },
     {
-     "date": "2026-09-09",
+     "date": "2026-10-08",
      "title": "《反恐精英》更新",
-     "similarity": 0.528,
+     "similarity": 0.804,
      "eventDate": null,
      "eventClass": null,
      "eventTitle": null,
