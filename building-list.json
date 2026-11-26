@@ -1,8 +1,8 @@
 {
  "v": 1,
- "at": 1795620704885,
- "atText": "2026-11-25 23:31:44",
- "refDate": "2026-11-23",
+ "at": 1795662091361,
+ "atText": "2026-11-26 11:01:31",
+ "refDate": "2026-11-24",
  "script": "cs-quant/building_list.cjs",
  "purpose": "「正在建的」统一列表：只收通过历史验证的类型（|DiD| ≥ 5pp 且 p ≤ 0.05 且方向为正）；没通过的如实排除并写明原因。",
  "disclaimer": "★ 这是统计信号，不是预测。每条只说明「历史上出现同类形态之后怎么走」，不保证这次也这样走；在售量减少无法区分「成交」与「撤单」。不构成买卖建议，仓位与是否下单由您决定。",
@@ -17,7 +17,7 @@
    "definition": "A60：在售 60 日中位比前 60 日 ≥ +20%，价格 60 日 < +20%，且已从 60 日高回落 5~25%；A7：在售 7 日 ≥ +20% 且价格 7 日 < +20%",
    "did60": 0.0579,
    "p60": 0.005,
-   "did120": 0.1105,
+   "did120": 0.1106,
    "p120": 0.005,
    "treatedRate120": 0.2281,
    "controlRate120": 0.2144,
@@ -35,7 +35,7 @@
    "label": "B 型 · 真吸筹（在售下降 + 价格不动）",
    "reason": "中心组合 ret60 DiD +2.0pp（p=0.0796）未过门槛 |DiD| ≥ 5pp 且 p ≤ 0.05：不显著",
    "did60": 0.02,
-   "did120": 0.0262,
+   "did120": 0.0263,
    "p60": 0.0796,
    "direction": "positive",
    "primaryParams": {
@@ -46,15 +46,15 @@
    },
    "nCombos": 48,
    "nCombosPass": 21,
-   "currentFired": 0
+   "currentFired": 3
   },
   {
    "type": "C",
    "label": "C 型 · 挂货未成交（在售上升 + 价格不动）",
-   "reason": "中心组合 ret60 DiD -0.1pp（p=0.9353）未过门槛 |DiD| ≥ 5pp 且 p ≤ 0.05：不显著",
+   "reason": "中心组合 ret60 DiD -0.1pp（p=0.9303）未过门槛 |DiD| ≥ 5pp 且 p ≤ 0.05：不显著",
    "did60": -0.001,
-   "did120": 0.0079,
-   "p60": 0.9353,
+   "did120": 0.0078,
+   "p60": 0.9303,
    "direction": "negative",
    "primaryParams": {
     "X": 0.1,
@@ -63,7 +63,7 @@
    },
    "nCombos": 12,
    "nCombosPass": 1,
-   "currentFired": 30
+   "currentFired": 38
   }
  ],
  "validationSource": "data/building-signals.json",
@@ -94,6 +94,90 @@
  "scoreFormula": "score = 100 × 信号强度^0.45 × 流动性^0.30 × 剩余空间^0.25；dying ×0.6。信号强度 = 在售超出 +20% 阈值的幅度（封顶 2 倍阈值）；流动性 = log 在售量分位与 log 求购量分位各半；剩余空间 = rally-room 的下一段拉升涨幅中位（封顶 +200%，缺失取中性 0.5）。",
  "items": [
   {
+   "gid": 20369,
+   "name": "P90 | 兰迪快冲 (崭新出厂)",
+   "caseName": "画廊武器箱",
+   "tier": "small",
+   "price": 15.98,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.4619,
+   "dP7": -0.1362,
+   "listedNow": 326,
+   "buyNow": 13.5,
+   "listedSurge": 0.0714,
+   "priceChg60": -0.022,
+   "listedDropFromHigh": -0.133,
+   "concDecline": 2,
+   "buy7Chg": 0.1429,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "alive",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 3.1563,
+   "roomPairs": 1,
+   "dying": false,
+   "score": 85.38,
+   "scoreParts": {
+    "strength": 0.8619,
+    "liquidity": 0.738,
+    "room": 1,
+    "dyingPenalty": 1
+   },
+   "verdict": "在售 7 日激增 · 价格未涨",
+   "why": "在售 7 日 +46.2%（价格 7 日 -13.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 40,
+    "events": [
+     {
+      "date": "2026-08-06",
+      "variant": "A60",
+      "ret120": -0.4403,
+      "max120": -0.0039,
+      "dN7": 0.1322,
+      "listedSurge": 0.2777
+     },
+     {
+      "date": "2026-08-01",
+      "variant": "A60",
+      "ret120": -0.443,
+      "max120": 0.0003,
+      "dN7": 0.0485,
+      "listedSurge": 0.3077
+     },
+     {
+      "date": "2026-07-27",
+      "variant": "A60",
+      "ret120": -0.4493,
+      "max120": -0.0007,
+      "dN7": -0.0372,
+      "listedSurge": 0.306
+     }
+    ],
+    "ret120Med": -0.0846,
+    "max120Med": 0.5385,
+    "doubleRate": 0.125,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +7.1%",
+    "在售距 60 日高 -13.3%",
+    "在售 7 日 +46.2%（连续下降 2 天）",
+    "价格 7 日 -13.6%，60 日 -2.2%",
+    "求购 7 日 +14.3%（16.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 1
+  },
+  {
    "gid": 13526,
    "name": "加利尔 AR | 渐变琥珀 (崭新出厂)",
    "caseName": "2021 炙热沙城 II 收藏品",
@@ -106,15 +190,15 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": 0.0444,
-   "dP7": -0.089,
-   "listedNow": 588,
-   "buyNow": 36,
-   "listedSurge": 0.3782,
-   "priceChg60": -0.2087,
-   "listedDropFromHigh": -0.1118,
-   "concDecline": 3,
-   "buy7Chg": -0.0476,
+   "dN7": 0.0692,
+   "dP7": -0.1078,
+   "listedNow": 618,
+   "buyNow": 37.5,
+   "listedSurge": 0.311,
+   "priceChg60": -0.2188,
+   "listedDropFromHigh": -0.0665,
+   "concDecline": 0,
+   "buy7Chg": -0.1111,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "alive",
@@ -123,15 +207,15 @@
    "roomGainMed": 3.5501,
    "roomPairs": 0,
    "dying": false,
-   "score": 86.23,
+   "score": 83.03,
    "scoreParts": {
-    "strength": 0.7782,
-    "liquidity": 0.889,
+    "strength": 0.711,
+    "liquidity": 0.8972,
     "room": 1,
     "dyingPenalty": 1
    },
    "verdict": "在售 60 日建仓 · 价格未涨",
-   "why": "在售 60 日中位比前 60 日 +37.8%（价格 60 日 -20.9%，在售距 60 日高 -11.2%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +31.1%（价格 60 日 -21.9%，在售距 60 日高 -6.6%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 37,
     "events": [
@@ -166,99 +250,14 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +37.8%",
-    "在售距 60 日高 -11.2%",
-    "在售 7 日 +4.4%（连续下降 3 天）",
-    "价格 7 日 -8.9%，60 日 -20.9%",
-    "求购 7 日 -4.8%（40.0 单）",
+    "在售 60 日中位比前段 +31.1%",
+    "在售距 60 日高 -6.6%",
+    "在售 7 日 +6.9%",
+    "价格 7 日 -10.8%，60 日 -21.9%",
+    "求购 7 日 -11.1%（40.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 1
-  },
-  {
-   "gid": 1619,
-   "name": "MP9 | 橘皮涂装 (崭新出厂)",
-   "caseName": "安全处所收藏品",
-   "tier": "mid",
-   "price": 21.69,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A60",
-    "A7"
-   ],
-   "variant": "A60+A7",
-   "dN7": 0.3861,
-   "dP7": -0.1967,
-   "listedNow": 797,
-   "buyNow": 21,
-   "listedSurge": 0.2769,
-   "priceChg60": -0.0871,
-   "listedDropFromHigh": -0.0839,
-   "concDecline": 1,
-   "buy7Chg": 0,
-   "stage": "decline",
-   "stageName": "回落",
-   "deadVerdict": "alive",
-   "stockType": "倒货型",
-   "distribute": "low",
-   "roomGainMed": 3.9717,
-   "roomPairs": 3,
-   "dying": false,
-   "score": 85.54,
-   "scoreParts": {
-    "strength": 0.7861,
-    "liquidity": 0.8524,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "双口径命中 · 挂单接货",
-   "why": "在售 60 日中位比前 60 日 +27.7%（价格 60 日 -8.7%，在售距 60 日高 -8.4%）；在售 7 日 +38.6%（价格 7 日 -19.7%） → 挂单接货形态（并集口径（60日 | 7日≥+20%）），历史同类之后 120 日翻倍率 23.2% vs 对照 8.0%（DiD60 +8.0pp，p=0.005；DiD120 +10.3pp，p=0.005）",
-   "history": {
-    "n": 22,
-    "events": [
-     {
-      "date": "2026-07-25",
-      "variant": "A7",
-      "ret120": -0.6615,
-      "max120": 0.0846,
-      "dN7": 0.6233,
-      "listedSurge": 0.2
-     },
-     {
-      "date": "2026-07-15",
-      "variant": "A7",
-      "ret120": -0.6268,
-      "max120": -0.0129,
-      "dN7": 0.325,
-      "listedSurge": 0.2788
-     },
-     {
-      "date": "2026-06-25",
-      "variant": "A60",
-      "ret120": -0.202,
-      "max120": 1.636,
-      "dN7": -0.0673,
-      "listedSurge": 0.8282
-     }
-    ],
-    "ret120Med": -0.1357,
-    "max120Med": 1.5747,
-    "doubleRate": 0.6818,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +27.7%",
-    "在售距 60 日高 -8.4%",
-    "在售 7 日 +38.6%",
-    "价格 7 日 -19.7%，60 日 -8.7%",
-    "求购 7 日 0.0%（15.0 单）",
-    "阶段：回落"
-   ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
    "rank": 2
   },
@@ -267,7 +266,7 @@
    "name": "SSG 08 | 浮生如梦 (崭新出厂)",
    "caseName": "棱彩2号武器箱",
    "tier": "mid",
-   "price": 23.65,
+   "price": 23.9,
    "kinds": [
     "A"
    ],
@@ -275,15 +274,15 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.3542,
-   "dP7": -0.1831,
-   "listedNow": 562,
-   "buyNow": 34,
-   "listedSurge": -0.2631,
-   "priceChg60": 0.1062,
+   "dN7": 0.3179,
+   "dP7": -0.3707,
+   "listedNow": 568,
+   "buyNow": 34.5,
+   "listedSurge": -0.256,
+   "priceChg60": 0.1168,
    "listedDropFromHigh": 0,
    "concDecline": 0,
-   "buy7Chg": 0.0588,
+   "buy7Chg": 0.0286,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "alive",
@@ -292,15 +291,15 @@
    "roomGainMed": 2.2891,
    "roomPairs": 2,
    "dying": false,
-   "score": 84.74,
+   "score": 82.95,
    "scoreParts": {
-    "strength": 0.7542,
-    "liquidity": 0.8793,
+    "strength": 0.7179,
+    "liquidity": 0.8817,
     "room": 1,
     "dyingPenalty": 1
    },
    "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +35.4%（价格 7 日 -18.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +31.8%（价格 7 日 -37.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
     "n": 56,
     "events": [
@@ -335,23 +334,23 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -26.3%",
+    "在售 60 日中位比前段 -25.6%",
     "在售距 60 日高 0.0%",
-    "在售 7 日 +35.4%",
-    "价格 7 日 -18.3%，60 日 +10.6%",
-    "求购 7 日 +5.9%（36.0 单）",
+    "在售 7 日 +31.8%",
+    "价格 7 日 -37.1%，60 日 +11.7%",
+    "求购 7 日 +2.9%（36.0 单）",
     "近30日在售较峰后 −26.5%",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
    "rank": 3
   },
   {
-   "gid": 19367,
-   "name": "AUG | 三角战术 (崭新出厂)",
-   "caseName": "光谱 2 号武器箱",
-   "tier": "micro",
+   "gid": 6380,
+   "name": "Tec-9 | 地下水 (崭新出厂)",
+   "caseName": "意大利小镇收藏品",
+   "tier": "small",
    "price": 7.37,
    "kinds": [
     "A"
@@ -360,436 +359,14 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.4211,
-   "dP7": -0.0694,
-   "listedNow": 324,
-   "buyNow": 18,
-   "listedSurge": -0.1367,
-   "priceChg60": -0.0563,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
-   "buy7Chg": 0.2,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 2.1754,
-   "roomPairs": 2,
-   "dying": false,
-   "score": 84.55,
-   "scoreParts": {
-    "strength": 0.8211,
-    "liquidity": 0.7684,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +42.1%（价格 7 日 -6.9%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 23,
-    "events": [
-     {
-      "date": "2026-07-21",
-      "variant": "A7",
-      "ret120": -0.5598,
-      "max120": 0.2458,
-      "dN7": 0.3166,
-      "listedSurge": 0.9265
-     },
-     {
-      "date": "2026-07-06",
-      "variant": "A60",
-      "ret120": -0.599,
-      "max120": 0.2232,
-      "dN7": -0.1111,
-      "listedSurge": 1.1971
-     },
-     {
-      "date": "2026-07-01",
-      "variant": "A60",
-      "ret120": -0.6391,
-      "max120": 0.5309,
-      "dN7": -0.109,
-      "listedSurge": 1.0611
-     }
-    ],
-    "ret120Med": -0.5165,
-    "max120Med": 0.8108,
-    "doubleRate": 0.4348,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -13.7%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +42.1%",
-    "价格 7 日 -6.9%，60 日 -5.6%",
-    "求购 7 日 +20.0%（18.0 单）",
-    "近30日在售较峰后 −41.6%",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 4
-  },
-  {
-   "gid": 20369,
-   "name": "P90 | 兰迪快冲 (崭新出厂)",
-   "caseName": "画廊武器箱",
-   "tier": "small",
-   "price": 16.18,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.431,
-   "dP7": -0.0961,
-   "listedNow": 332,
-   "buyNow": 13,
-   "listedSurge": 0.0714,
-   "priceChg60": 0.0176,
-   "listedDropFromHigh": -0.117,
-   "concDecline": 1,
-   "buy7Chg": 0.2308,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 3.1563,
-   "roomPairs": 1,
-   "dying": false,
-   "score": 83.9,
-   "scoreParts": {
-    "strength": 0.831,
-    "liquidity": 0.7353,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +43.1%（价格 7 日 -9.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 40,
-    "events": [
-     {
-      "date": "2026-08-06",
-      "variant": "A60",
-      "ret120": -0.4333,
-      "max120": -0.0039,
-      "dN7": 0.1322,
-      "listedSurge": 0.2777
-     },
-     {
-      "date": "2026-08-01",
-      "variant": "A60",
-      "ret120": -0.436,
-      "max120": 0.0003,
-      "dN7": 0.0485,
-      "listedSurge": 0.3077
-     },
-     {
-      "date": "2026-07-27",
-      "variant": "A60",
-      "ret120": -0.4425,
-      "max120": -0.0007,
-      "dN7": -0.0372,
-      "listedSurge": 0.306
-     }
-    ],
-    "ret120Med": -0.0846,
-    "max120Med": 0.5385,
-    "doubleRate": 0.125,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +7.1%",
-    "在售距 60 日高 -11.7%",
-    "在售 7 日 +43.1%",
-    "价格 7 日 -9.6%，60 日 +1.8%",
-    "求购 7 日 +23.1%（16.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 5
-  },
-  {
-   "gid": 1099,
-   "name": "格洛克 18 型 | 本生灯 (崭新出厂)",
-   "caseName": "弯曲猎手武器箱",
-   "tier": "mid",
-   "price": 38.89,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.4533,
-   "dP7": 0.1785,
-   "listedNow": 513,
-   "buyNow": 41,
-   "listedSurge": -0.1103,
-   "priceChg60": 0.2668,
-   "listedDropFromHigh": -0.0656,
-   "concDecline": 0,
-   "buy7Chg": 0.8,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 1.4982,
-   "roomPairs": 3,
-   "dying": false,
-   "score": 83.74,
-   "scoreParts": {
-    "strength": 0.8533,
-    "liquidity": 0.8932,
-    "room": 0.7491,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +45.3%（价格 7 日 +17.8%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 58,
-    "events": [
-     {
-      "date": "2026-08-04",
-      "variant": "A60",
-      "ret120": -0.1795,
-      "max120": 0.1181,
-      "dN7": 0.0334,
-      "listedSurge": 0.4409
-     },
-     {
-      "date": "2026-07-20",
-      "variant": "A7",
-      "ret120": -0.3578,
-      "max120": 0.2315,
-      "dN7": 0.4703,
-      "listedSurge": 0.4519
-     },
-     {
-      "date": "2026-07-15",
-      "variant": "A7",
-      "ret120": -0.5628,
-      "max120": -0.0356,
-      "dN7": 0.4704,
-      "listedSurge": 0.3207
-     }
-    ],
-    "ret120Med": 0.1088,
-    "max120Med": 0.7493,
-    "doubleRate": 0.4655,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -11.0%",
-    "在售距 60 日高 -6.6%",
-    "在售 7 日 +45.3%",
-    "价格 7 日 +17.8%，60 日 +26.7%",
-    "求购 7 日 +80.0%（72.0 单）",
-    "阶段：拉升早期"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 6
-  },
-  {
-   "gid": 12248,
-   "name": "AK-47 | 幻影破坏者 (崭新出厂)",
-   "caseName": "棱彩2号武器箱",
-   "tier": "large",
-   "price": 330.5,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.2234,
-   "dP7": -0.1436,
-   "listedNow": 1161,
-   "buyNow": 105,
-   "listedSurge": -0.1005,
-   "priceChg60": 1.3276,
-   "listedDropFromHigh": -0.2855,
-   "concDecline": 0,
-   "buy7Chg": 0.1727,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 4.0391,
-   "roomPairs": 1,
-   "dying": false,
-   "score": 80.84,
-   "scoreParts": {
-    "strength": 0.6234,
-    "liquidity": 1,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +22.3%（价格 7 日 -14.4%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 36,
-    "events": [
-     {
-      "date": "2026-08-09",
-      "variant": "A60",
-      "ret120": 0.8159,
-      "max120": 1.1203,
-      "dN7": 0.0234,
-      "listedSurge": 0.2813
-     },
-     {
-      "date": "2026-08-04",
-      "variant": "A60",
-      "ret120": 0.7081,
-      "max120": 0.9944,
-      "dN7": 0.0617,
-      "listedSurge": 0.2771
-     },
-     {
-      "date": "2026-07-30",
-      "variant": "A60",
-      "ret120": 0.5668,
-      "max120": 0.8294,
-      "dN7": 0.0343,
-      "listedSurge": 0.2707
-     }
-    ],
-    "ret120Med": 0.2159,
-    "max120Med": 0.5267,
-    "doubleRate": 0.3333,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -10.0%",
-    "在售距 60 日高 -28.6%",
-    "在售 7 日 +22.3%",
-    "价格 7 日 -14.4%，60 日 +132.8%",
-    "求购 7 日 +17.3%（129.0 单）",
-    "阶段：拉升早期"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 7
-  },
-  {
-   "gid": 1503,
-   "name": "MP7 | 装甲核心 (崭新出厂)",
-   "caseName": "幻彩 2 号武器箱",
-   "tier": "small",
-   "price": 5.96,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.3244,
-   "dP7": -0.1412,
-   "listedNow": 445,
-   "buyNow": 19,
-   "listedSurge": -0.0775,
-   "priceChg60": -0.2819,
-   "listedDropFromHigh": -0.1426,
-   "concDecline": 0,
-   "buy7Chg": 0.3684,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 2.6202,
-   "roomPairs": 2,
-   "dying": false,
-   "score": 80.83,
-   "scoreParts": {
-    "strength": 0.7244,
-    "liquidity": 0.7979,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +32.4%（价格 7 日 -14.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 9,
-    "events": [
-     {
-      "date": "2026-07-20",
-      "variant": "A60+A7",
-      "ret120": -0.3362,
-      "max120": 0.2591,
-      "dN7": 0.6127,
-      "listedSurge": 0.2226
-     },
-     {
-      "date": "2026-07-15",
-      "variant": "A7",
-      "ret120": -0.5985,
-      "max120": -0.0642,
-      "dN7": 0.3731,
-      "listedSurge": 0.3781
-     },
-     {
-      "date": "2026-06-20",
-      "variant": "A7",
-      "ret120": -0.3663,
-      "max120": 1.3389,
-      "dN7": 0.3097,
-      "listedSurge": 2.4025
-     }
-    ],
-    "ret120Med": -0.3362,
-    "max120Med": 1.3389,
-    "doubleRate": 0.5556,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -7.8%",
-    "在售距 60 日高 -14.3%",
-    "在售 7 日 +32.4%",
-    "价格 7 日 -14.1%，60 日 -28.2%",
-    "求购 7 日 +36.8%（26.0 单）",
-    "近30日在售较峰后 −17.2%",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 8
-  },
-  {
-   "gid": 6380,
-   "name": "Tec-9 | 地下水 (崭新出厂)",
-   "caseName": "意大利小镇收藏品",
-   "tier": "small",
-   "price": 6.99,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.2506,
-   "dP7": 0.0029,
-   "listedNow": 499,
+   "dN7": 0.314,
+   "dP7": -0.0935,
+   "listedNow": 498,
    "buyNow": 28.5,
-   "listedSurge": -0.0556,
-   "priceChg60": -0.068,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
+   "listedSurge": -0.0543,
+   "priceChg60": -0.0173,
+   "listedDropFromHigh": -0.002,
+   "concDecline": 1,
    "buy7Chg": 0.1429,
    "stage": "calm",
    "stageName": "平静",
@@ -799,15 +376,15 @@
    "roomGainMed": 8.9338,
    "roomPairs": 2,
    "dying": false,
-   "score": 78.52,
+   "score": 81.86,
    "scoreParts": {
-    "strength": 0.6506,
-    "liquidity": 0.8509,
+    "strength": 0.714,
+    "liquidity": 0.8507,
     "room": 1,
     "dyingPenalty": 1
    },
    "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +25.1%（价格 7 日 +0.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +31.4%（价格 7 日 -9.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
     "n": 15,
     "events": [
@@ -842,23 +419,108 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -5.6%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +25.1%",
-    "价格 7 日 +0.3%，60 日 -6.8%",
+    "在售 60 日中位比前段 -5.4%",
+    "在售距 60 日高 -0.2%",
+    "在售 7 日 +31.4%",
+    "价格 7 日 -9.3%，60 日 -1.7%",
     "求购 7 日 +14.3%（32.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 9
+   "rank": 4
   },
   {
-   "gid": 8124,
-   "name": "MP9 | 黑砂 (崭新出厂)",
-   "caseName": "命悬一线武器箱",
-   "tier": "micro",
-   "price": 5.49,
+   "gid": 1619,
+   "name": "MP9 | 橘皮涂装 (崭新出厂)",
+   "caseName": "安全处所收藏品",
+   "tier": "mid",
+   "price": 20.98,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A60",
+    "A7"
+   ],
+   "variant": "A60+A7",
+   "dN7": 0.2009,
+   "dP7": -0.2113,
+   "listedNow": 783,
+   "buyNow": 21,
+   "listedSurge": 0.3091,
+   "priceChg60": -0.1133,
+   "listedDropFromHigh": -0.1,
+   "concDecline": 2,
+   "buy7Chg": 0,
+   "stage": "decline",
+   "stageName": "回落",
+   "deadVerdict": "alive",
+   "stockType": "倒货型",
+   "distribute": "low",
+   "roomGainMed": 3.9717,
+   "roomPairs": 3,
+   "dying": false,
+   "score": 81.62,
+   "scoreParts": {
+    "strength": 0.7091,
+    "liquidity": 0.8511,
+    "room": 1,
+    "dyingPenalty": 1
+   },
+   "verdict": "双口径命中 · 挂单接货",
+   "why": "在售 60 日中位比前 60 日 +30.9%（价格 60 日 -11.3%，在售距 60 日高 -10.0%）；在售 7 日 +20.1%（价格 7 日 -21.1%） → 挂单接货形态（并集口径（60日 | 7日≥+20%）），历史同类之后 120 日翻倍率 23.2% vs 对照 8.0%（DiD60 +8.0pp，p=0.005；DiD120 +10.3pp，p=0.005）",
+   "history": {
+    "n": 22,
+    "events": [
+     {
+      "date": "2026-07-25",
+      "variant": "A7",
+      "ret120": -0.6615,
+      "max120": 0.0846,
+      "dN7": 0.6233,
+      "listedSurge": 0.2
+     },
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.6268,
+      "max120": -0.0129,
+      "dN7": 0.325,
+      "listedSurge": 0.2788
+     },
+     {
+      "date": "2026-06-25",
+      "variant": "A60",
+      "ret120": -0.202,
+      "max120": 1.636,
+      "dN7": -0.0673,
+      "listedSurge": 0.8282
+     }
+    ],
+    "ret120Med": -0.1357,
+    "max120Med": 1.5747,
+    "doubleRate": 0.6818,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +30.9%",
+    "在售距 60 日高 -10.0%",
+    "在售 7 日 +20.1%（连续下降 2 天）",
+    "价格 7 日 -21.1%，60 日 -11.3%",
+    "求购 7 日 0.0%（15.0 单）",
+    "阶段：回落"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 5
+  },
+  {
+   "gid": 6407,
+   "name": "Tec-9 | 骨化之色 (崭新出厂)",
+   "caseName": "雨林遗迹收藏品",
+   "tier": "mid",
+   "price": 61.8,
    "kinds": [
     "A"
    ],
@@ -866,76 +528,160 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.6304,
-   "dP7": -0.1145,
-   "listedNow": 525,
-   "buyNow": 22,
-   "listedSurge": 0.1679,
-   "priceChg60": -0.2591,
-   "listedDropFromHigh": -0.3083,
+   "dN7": 0.2611,
+   "dP7": -0.0762,
+   "listedNow": 541,
+   "buyNow": 37,
+   "listedSurge": -0.1653,
+   "priceChg60": -0.1679,
+   "listedDropFromHigh": -0.0908,
    "concDecline": 0,
-   "buy7Chg": -0.0476,
-   "stage": "accumulate",
-   "stageName": "吸筹",
+   "buy7Chg": 0.0217,
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "alive",
    "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 0.9182,
+   "roomGainMed": 2.2061,
    "roomPairs": 2,
    "dying": false,
-   "score": 77.73,
+   "score": 80.04,
    "scoreParts": {
-    "strength": 1,
-    "liquidity": 0.8263,
-    "room": 0.4591,
+    "strength": 0.6611,
+    "liquidity": 0.8858,
+    "room": 1,
     "dyingPenalty": 1
    },
    "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +63.0%（价格 7 日 -11.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +26.1%（价格 7 日 -7.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 20,
+    "n": 50,
     "events": [
      {
+      "date": "2026-07-25",
+      "variant": "A60",
+      "ret120": -0.558,
+      "max120": 0.34,
+      "dN7": 0.0884,
+      "listedSurge": 0.2747
+     },
+     {
       "date": "2026-07-20",
-      "variant": "A60+A7",
-      "ret120": -0.5,
-      "max120": 0.5599,
-      "dN7": 0.3512,
-      "listedSurge": 0.2046
+      "variant": "A60",
+      "ret120": -0.4773,
+      "max120": 0.3975,
+      "dN7": 0.0957,
+      "listedSurge": 0.2752
      },
      {
-      "date": "2026-07-05",
+      "date": "2026-07-15",
       "variant": "A60",
-      "ret120": -0.5764,
-      "max120": 0.4961,
-      "dN7": -0.1321,
-      "listedSurge": 0.6436
-     },
-     {
-      "date": "2026-06-30",
-      "variant": "A60",
-      "ret120": -0.5521,
-      "max120": 0.9608,
-      "dN7": -0.0801,
-      "listedSurge": 0.7761
+      "ret120": -0.5467,
+      "max120": 0.1768,
+      "dN7": 0.0944,
+      "listedSurge": 0.2741
      }
     ],
-    "ret120Med": -0.4078,
-    "max120Med": 0.5663,
-    "doubleRate": 0.3,
+    "ret120Med": 0.1044,
+    "max120Med": 0.4376,
+    "doubleRate": 0.38,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +16.8%",
-    "在售距 60 日高 -30.8%",
-    "在售 7 日 +63.0%",
-    "价格 7 日 -11.5%，60 日 -25.9%",
-    "求购 7 日 -4.8%（20.0 单）",
-    "阶段：吸筹"
+    "在售 60 日中位比前段 -16.5%",
+    "在售距 60 日高 -9.1%",
+    "在售 7 日 +26.1%",
+    "价格 7 日 -7.6%，60 日 -16.8%",
+    "求购 7 日 +2.2%（47.0 单）",
+    "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 10
+   "rank": 6
+  },
+  {
+   "gid": 13588,
+   "name": "MP9 | 富士山 (崭新出厂)",
+   "caseName": "“激流大行动”武器箱",
+   "tier": "large",
+   "price": 77.7,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2595,
+   "dP7": -0.0728,
+   "listedNow": 1296,
+   "buyNow": 45.5,
+   "listedSurge": 0.0275,
+   "priceChg60": -0.1734,
+   "listedDropFromHigh": -0.0092,
+   "concDecline": 0,
+   "buy7Chg": 0.1087,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "alive",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.6245,
+   "roomPairs": 1,
+   "dying": false,
+   "score": 77.22,
+   "scoreParts": {
+    "strength": 0.6595,
+    "liquidity": 0.9381,
+    "room": 0.8123,
+    "dyingPenalty": 1
+   },
+   "verdict": "在售 7 日激增 · 价格未涨",
+   "why": "在售 7 日 +25.9%（价格 7 日 -7.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 37,
+    "events": [
+     {
+      "date": "2026-06-15",
+      "variant": "A7",
+      "ret120": -0.4764,
+      "max120": 0.181,
+      "dN7": 0.3145,
+      "listedSurge": 0.0161
+     },
+     {
+      "date": "2026-03-12",
+      "variant": "A60",
+      "ret120": 0.1728,
+      "max120": 0.1944,
+      "dN7": 0.0327,
+      "listedSurge": 0.2147
+     },
+     {
+      "date": "2026-03-07",
+      "variant": "A60",
+      "ret120": -0.013,
+      "max120": 0.1169,
+      "dN7": -0.1419,
+      "listedSurge": 0.2147
+     }
+    ],
+    "ret120Med": 0.1048,
+    "max120Med": 0.2336,
+    "doubleRate": 0.2432,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +2.8%",
+    "在售距 60 日高 -0.9%",
+    "在售 7 日 +25.9%",
+    "价格 7 日 -7.3%，60 日 -17.3%",
+    "求购 7 日 +10.9%（51.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 7
   },
   {
    "gid": 686,
@@ -1018,8 +764,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 11
+   "staleDays": 1,
+   "rank": 8
   },
   {
    "gid": 20494,
@@ -1102,8 +848,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 12
+   "staleDays": 1,
+   "rank": 9
   },
   {
    "gid": 498,
@@ -1187,8 +933,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 13
+   "staleDays": 1,
+   "rank": 10
   },
   {
    "gid": 1810,
@@ -1271,8 +1017,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 14
+   "staleDays": 1,
+   "rank": 11
   },
   {
    "gid": 12732,
@@ -1355,8 +1101,92 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
+   "staleDays": 1,
+   "rank": 12
+  },
+  {
+   "gid": 11244,
+   "name": "格洛克 18 型 | 烈焰天使 (崭新出厂)",
+   "caseName": "反恐精英20周年武器箱",
+   "tier": "mid",
+   "price": 53.3,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.3242,
+   "dP7": -0.0448,
+   "listedNow": 482,
+   "buyNow": 43,
+   "listedSurge": -0.0402,
+   "priceChg60": 0.0878,
+   "listedDropFromHigh": -0.1632,
+   "concDecline": 0,
+   "buy7Chg": 0.2571,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "alive",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.0427,
+   "roomPairs": 3,
+   "dying": false,
+   "score": 71.06,
+   "scoreParts": {
+    "strength": 0.7242,
+    "liquidity": 0.8939,
+    "room": 0.5214,
+    "dyingPenalty": 1
+   },
+   "verdict": "在售 7 日激增 · 价格未涨",
+   "why": "在售 7 日 +32.4%（价格 7 日 -4.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 56,
+    "events": [
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.5705,
+      "max120": -0.0178,
+      "dN7": 0.607,
+      "listedSurge": 0.0117
+     },
+     {
+      "date": "2026-06-15",
+      "variant": "A60",
+      "ret120": -0.739,
+      "max120": 0.4543,
+      "dN7": 0.0414,
+      "listedSurge": 0.2615
+     },
+     {
+      "date": "2026-06-10",
+      "variant": "A60",
+      "ret120": -0.5879,
+      "max120": 1.0132,
+      "dN7": 0.0716,
+      "listedSurge": 0.2789
+     }
+    ],
+    "ret120Med": 0.1494,
+    "max120Med": 0.4028,
+    "doubleRate": 0.3571,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -4.0%",
+    "在售距 60 日高 -16.3%",
+    "在售 7 日 +32.4%",
+    "价格 7 日 -4.5%，60 日 +8.8%",
+    "求购 7 日 +25.7%（44.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 15
+   "rank": 13
   },
   {
    "gid": 11237,
@@ -1439,8 +1269,8 @@
     "阶段：吸筹"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 16
+   "staleDays": 1,
+   "rank": 14
   },
   {
    "gid": 12230,
@@ -1524,8 +1354,8 @@
     "阶段：拉升末期"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 17
+   "staleDays": 1,
+   "rank": 15
   },
   {
    "gid": 18251,
@@ -1608,8 +1438,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 18
+   "staleDays": 1,
+   "rank": 16
   },
   {
    "gid": 17725,
@@ -1692,8 +1522,8 @@
     "阶段：拉升早期"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 19
+   "staleDays": 1,
+   "rank": 17
   },
   {
    "gid": 11420,
@@ -1777,8 +1607,93 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
+   "staleDays": 1,
+   "rank": 18
+  },
+  {
+   "gid": 18502,
+   "name": "M249 | 闹市区 (崭新出厂)",
+   "caseName": "反冲武器箱",
+   "tier": "small",
+   "price": 6.94,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2078,
+   "dP7": -0.0374,
+   "listedNow": 401,
+   "buyNow": 19.5,
+   "listedSurge": -0.1605,
+   "priceChg60": -0.1608,
+   "listedDropFromHigh": -0.1148,
+   "concDecline": 0,
+   "buy7Chg": 0.1053,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "alive",
+   "stockType": "控盘型",
+   "distribute": "low",
+   "roomGainMed": 0.8693,
+   "roomPairs": 2,
+   "dying": false,
+   "score": 60.54,
+   "scoreParts": {
+    "strength": 0.6078,
+    "liquidity": 0.793,
+    "room": 0.4347,
+    "dyingPenalty": 1
+   },
+   "verdict": "在售 7 日激增 · 价格未涨",
+   "why": "在售 7 日 +20.8%（价格 7 日 -3.7%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 54,
+    "events": [
+     {
+      "date": "2026-07-02",
+      "variant": "A7",
+      "ret120": -0.3434,
+      "max120": 0.0401,
+      "dN7": 0.4122,
+      "listedSurge": -0.1321
+     },
+     {
+      "date": "2026-06-27",
+      "variant": "A7",
+      "ret120": -0.3175,
+      "max120": 0.0078,
+      "dN7": 0.9476,
+      "listedSurge": -0.1353
+     },
+     {
+      "date": "2026-06-17",
+      "variant": "A7",
+      "ret120": -0.3194,
+      "max120": 0.061,
+      "dN7": 0.3819,
+      "listedSurge": 0.2905
+     }
+    ],
+    "ret120Med": -0.0184,
+    "max120Med": 0.2222,
+    "doubleRate": 0.0185,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -16.0%",
+    "在售距 60 日高 -11.5%",
+    "在售 7 日 +20.8%",
+    "价格 7 日 -3.7%，60 日 -16.1%",
+    "求购 7 日 +10.5%（21.0 单）",
+    "近30日在售较峰后 −33.1%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 20
+   "rank": 19
   },
   {
    "gid": 12518,
@@ -1861,15 +1776,15 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 21
+   "staleDays": 1,
+   "rank": 20
   },
   {
    "gid": 12196,
    "name": "沙漠之鹰 | 蓝色层压板 (崭新出厂)",
    "caseName": "棱彩2号武器箱",
    "tier": "mid",
-   "price": 57,
+   "price": 37.3,
    "kinds": [
     "A"
    ],
@@ -1877,15 +1792,15 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.9711,
-   "dP7": -0.4196,
-   "listedNow": 546,
-   "buyNow": 43.5,
-   "listedSurge": -0.0431,
-   "priceChg60": 1.4266,
-   "listedDropFromHigh": -0.4301,
+   "dN7": 1.4757,
+   "dP7": -0.737,
+   "listedNow": 661,
+   "buyNow": 46,
+   "listedSurge": -0.0406,
+   "priceChg60": 0.6417,
+   "listedDropFromHigh": -0.31,
    "concDecline": 0,
-   "buy7Chg": 0.4237,
+   "buy7Chg": 0.12,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "dying",
@@ -1894,22 +1809,22 @@
    "roomGainMed": 3.224,
    "roomPairs": 2,
    "dying": true,
-   "score": 58.22,
+   "score": 58.61,
    "scoreParts": {
     "strength": 1,
-    "liquidity": 0.9045,
+    "liquidity": 0.925,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +97.1%（价格 7 日 -42.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +147.6%（价格 7 日 -73.7%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
     "n": 57,
     "events": [
      {
       "date": "2026-08-09",
       "variant": "A60",
-      "ret120": 0.5634,
+      "ret120": 0.023,
       "max120": 2.8906,
       "dN7": -0.117,
       "listedSurge": 0.2126
@@ -1917,7 +1832,7 @@
      {
       "date": "2026-08-04",
       "variant": "A60",
-      "ret120": 0.5811,
+      "ret120": 0.0347,
       "max120": 2.9348,
       "dN7": -0.0216,
       "listedSurge": 0.2138
@@ -1925,26 +1840,110 @@
      {
       "date": "2026-07-30",
       "variant": "A60",
-      "ret120": 0.3936,
+      "ret120": -0.088,
       "max120": 2.4682,
       "dN7": 0.0361,
       "listedSurge": 0.22
      }
     ],
-    "ret120Med": 0.1246,
+    "ret120Med": 0.1135,
     "max120Med": 0.9078,
     "doubleRate": 0.4561,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -4.3%",
-    "在售距 60 日高 -43.0%",
-    "在售 7 日 +97.1%",
-    "价格 7 日 -42.0%，60 日 +142.7%",
-    "求购 7 日 +42.4%（84.0 单）",
+    "在售 60 日中位比前段 -4.1%",
+    "在售距 60 日高 -31.0%",
+    "在售 7 日 +147.6%",
+    "价格 7 日 -73.7%，60 日 +64.2%",
+    "求购 7 日 +12.0%（84.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 21
+  },
+  {
+   "gid": 13198,
+   "name": "沙漠之鹰 | 后发制人 (崭新出厂)",
+   "caseName": "蛇噬武器箱",
+   "tier": "mid",
+   "price": 41.66,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.9435,
+   "dP7": -0.2199,
+   "listedNow": 1308,
+   "buyNow": 56,
+   "listedSurge": 0.0184,
+   "priceChg60": 0.0415,
+   "listedDropFromHigh": 0,
+   "concDecline": 0,
+   "buy7Chg": 0.1148,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "控盘型",
+   "distribute": "low",
+   "roomGainMed": 1.6752,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 56.72,
+   "scoreParts": {
+    "strength": 1,
+    "liquidity": 0.9613,
+    "room": 0.8376,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +94.4%（价格 7 日 -22.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 30,
+    "events": [
+     {
+      "date": "2026-07-05",
+      "variant": "A7",
+      "ret120": -0.6667,
+      "max120": 0.2381,
+      "dN7": 0.9786,
+      "listedSurge": 0.2378
+     },
+     {
+      "date": "2026-06-25",
+      "variant": "A60",
+      "ret120": -0.3951,
+      "max120": 0.9048,
+      "dN7": -0.1459,
+      "listedSurge": 0.2532
+     },
+     {
+      "date": "2026-06-15",
+      "variant": "A60+A7",
+      "ret120": -0.4571,
+      "max120": 0.9286,
+      "dN7": 0.2118,
+      "listedSurge": 0.2023
+     }
+    ],
+    "ret120Med": 0.2772,
+    "max120Med": 0.6868,
+    "doubleRate": 0.2667,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +1.8%",
+    "在售距 60 日高 0.0%",
+    "在售 7 日 +94.4%",
+    "价格 7 日 -22.0%，60 日 +4.1%",
+    "求购 7 日 +11.5%（68.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
    "staleDays": 0,
    "rank": 22
   },
@@ -2029,8 +2028,93 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
+   "staleDays": 1,
    "rank": 23
+  },
+  {
+   "gid": 9739,
+   "name": "加利尔 AR | 信号灯 (崭新出厂)",
+   "caseName": "“头号特训”武器箱",
+   "tier": "mid",
+   "price": 19.5,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.4565,
+   "dP7": -0.108,
+   "listedNow": 1104,
+   "buyNow": 32,
+   "listedSurge": -0.2153,
+   "priceChg60": 0.4213,
+   "listedDropFromHigh": -0.1724,
+   "concDecline": 0,
+   "buy7Chg": 0.4,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "控盘型",
+   "distribute": "low",
+   "roomGainMed": 2.0989,
+   "roomPairs": 3,
+   "dying": true,
+   "score": 54.2,
+   "scoreParts": {
+    "strength": 0.8565,
+    "liquidity": 0.899,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +45.6%（价格 7 日 -10.8%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 55,
+    "events": [
+     {
+      "date": "2026-07-25",
+      "variant": "A7",
+      "ret120": -0.2055,
+      "max120": -0.0205,
+      "dN7": 0.3303,
+      "listedSurge": 0.278
+     },
+     {
+      "date": "2026-07-20",
+      "variant": "A7",
+      "ret120": -0.2662,
+      "max120": 0.141,
+      "dN7": 0.2178,
+      "listedSurge": 0.2639
+     },
+     {
+      "date": "2026-07-05",
+      "variant": "A7",
+      "ret120": -0.6374,
+      "max120": 0.7029,
+      "dN7": 0.2955,
+      "listedSurge": 0.3037
+     }
+    ],
+    "ret120Med": 0.0697,
+    "max120Med": 0.3485,
+    "doubleRate": 0.3091,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -21.5%",
+    "在售距 60 日高 -17.2%",
+    "在售 7 日 +45.6%",
+    "价格 7 日 -10.8%，60 日 +42.1%",
+    "求购 7 日 +40.0%（49.0 单）",
+    "近10日 +60.4%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 24
   },
   {
    "gid": 11173,
@@ -2113,8 +2197,92 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
+   "staleDays": 1,
+   "rank": 25
+  },
+  {
+   "gid": 1516,
+   "name": "MP7 | 卷云 (崭新出厂)",
+   "caseName": "手套武器箱",
+   "tier": "large",
+   "price": 66.7,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.3848,
+   "dP7": 0.0021,
+   "listedNow": 1713,
+   "buyNow": 93,
+   "listedSurge": -0.004,
+   "priceChg60": 0.0123,
+   "listedDropFromHigh": 0,
+   "concDecline": 0,
+   "buy7Chg": 0.0349,
+   "stage": "distribute",
+   "stageName": "派发",
+   "deadVerdict": "dying",
+   "stockType": "倒货型",
+   "distribute": "low",
+   "roomGainMed": 3.5777,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 53.8,
+   "scoreParts": {
+    "strength": 0.7848,
+    "liquidity": 1,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +38.5%（价格 7 日 +0.2%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 24,
+    "events": [
+     {
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": -0.271,
+      "max120": 0.082,
+      "dN7": -0.0061,
+      "listedSurge": 1.9397
+     },
+     {
+      "date": "2026-07-15",
+      "variant": "A60",
+      "ret120": -0.3975,
+      "max120": -0.0171,
+      "dN7": -0.0342,
+      "listedSurge": 1.6742
+     },
+     {
+      "date": "2026-07-10",
+      "variant": "A60",
+      "ret120": -0.5337,
+      "max120": -0.085,
+      "dN7": -0.1176,
+      "listedSurge": 1.471
+     }
+    ],
+    "ret120Med": -0.2138,
+    "max120Med": 0.9934,
+    "doubleRate": 0.5,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -0.4%",
+    "在售距 60 日高 0.0%",
+    "在售 7 日 +38.5%",
+    "价格 7 日 +0.2%，60 日 +1.2%",
+    "求购 7 日 +3.5%（89.0 单）",
+    "阶段：派发"
+   ],
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 24
+   "rank": 26
   },
   {
    "gid": 13405,
@@ -2197,176 +2365,7 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 25
-  },
-  {
-   "gid": 17850,
-   "name": "截短霰弹枪 | 伏击者 (崭新出厂)",
-   "caseName": "浩劫收藏品",
-   "tier": "small",
-   "price": 8.86,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A60"
-   ],
-   "variant": "A60",
-   "dN7": -0.0525,
-   "dP7": 0.4176,
-   "listedNow": 307,
-   "buyNow": 10,
-   "listedSurge": 0.5833,
-   "priceChg60": -0.0894,
-   "listedDropFromHigh": -0.2188,
-   "concDecline": 0,
-   "buy7Chg": -0.1667,
-   "stage": "rallyLate",
-   "stageName": "拉升末期",
-   "deadVerdict": "dying",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 2.6182,
-   "roomPairs": 1,
-   "dying": true,
-   "score": 53.55,
-   "scoreParts": {
-    "strength": 0.9833,
-    "liquidity": 0.702,
-    "room": 1,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +58.3%（价格 60 日 -8.9%，在售距 60 日高 -21.9%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
-   "history": {
-    "n": 20,
-    "events": [
-     {
-      "date": "2026-08-06",
-      "variant": "A60",
-      "ret120": -0.3378,
-      "max120": 0.0389,
-      "dN7": -0.0146,
-      "listedSurge": 0.3081
-     },
-     {
-      "date": "2026-08-01",
-      "variant": "A60",
-      "ret120": -0.3603,
-      "max120": 0.0036,
-      "dN7": 0.0821,
-      "listedSurge": 0.4744
-     },
-     {
-      "date": "2026-07-22",
-      "variant": "A60",
-      "ret120": -0.4672,
-      "max120": 0.4125,
-      "dN7": 0.063,
-      "listedSurge": 0.646
-     }
-    ],
-    "ret120Med": -0.349,
-    "max120Med": 0.2441,
-    "doubleRate": 0.2,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +58.3%",
-    "在售距 60 日高 -21.9%",
-    "在售 7 日 -5.2%",
-    "价格 7 日 +41.8%，60 日 -8.9%",
-    "求购 7 日 -16.7%（10.0 单）",
-    "近10日 +40.7%",
-    "阶段：拉升末期"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 26
-  },
-  {
-   "gid": 11164,
-   "name": "FN57 | 好兄弟 (崭新出厂)",
-   "caseName": "反恐精英20周年武器箱",
-   "tier": "mid",
-   "price": 26.8,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.4239,
-   "dP7": 0.1313,
-   "listedNow": 571,
-   "buyNow": 31,
-   "listedSurge": -0.1451,
-   "priceChg60": 0.0639,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
-   "buy7Chg": 0.8214,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
-   "deadVerdict": "dying",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 2.5981,
-   "roomPairs": 1,
-   "dying": true,
-   "score": 52.75,
-   "scoreParts": {
-    "strength": 0.8239,
-    "liquidity": 0.8702,
-    "room": 1,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +42.4%（价格 7 日 +13.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 64,
-    "events": [
-     {
-      "date": "2026-08-04",
-      "variant": "A60",
-      "ret120": -0.4451,
-      "max120": 0.1118,
-      "dN7": 0.0261,
-      "listedSurge": 0.3838
-     },
-     {
-      "date": "2026-07-30",
-      "variant": "A60",
-      "ret120": -0.5379,
-      "max120": -0.0362,
-      "dN7": 0.0022,
-      "listedSurge": 0.4202
-     },
-     {
-      "date": "2026-07-20",
-      "variant": "A7",
-      "ret120": -0.5449,
-      "max120": 0.1108,
-      "dN7": 0.2366,
-      "listedSurge": 0.6752
-     }
-    ],
-    "ret120Med": 0.1234,
-    "max120Med": 0.4138,
-    "doubleRate": 0.2969,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -14.5%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +42.4%",
-    "价格 7 日 +13.1%，60 日 +6.4%",
-    "求购 7 日 +82.1%（51.0 单）",
-    "阶段：拉升早期"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
+   "staleDays": 1,
    "rank": 27
   },
   {
@@ -2374,7 +2373,7 @@
    "name": "双持贝瑞塔 | 小甜使 (崭新出厂)",
    "caseName": "死亡游乐园2024收藏品",
    "tier": "mid",
-   "price": 32.9,
+   "price": 30.99,
    "kinds": [
     "A"
    ],
@@ -2382,14 +2381,14 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.4777,
-   "dP7": -0.1581,
-   "listedNow": 761,
+   "dN7": 0.5386,
+   "dP7": -0.2054,
+   "listedNow": 757,
    "buyNow": 30,
-   "listedSurge": -0.0789,
-   "priceChg60": -0.3441,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
+   "listedSurge": -0.0762,
+   "priceChg60": -0.3802,
+   "listedDropFromHigh": -0.0053,
+   "concDecline": 1,
    "buy7Chg": -0.1714,
    "stage": "accumulate",
    "stageName": "吸筹",
@@ -2399,15 +2398,15 @@
    "roomGainMed": 1.6547,
    "roomPairs": 1,
    "dying": true,
-   "score": 52.07,
+   "score": 53.66,
    "scoreParts": {
-    "strength": 0.8777,
-    "liquidity": 0.8881,
+    "strength": 0.9386,
+    "liquidity": 0.8877,
     "room": 0.8274,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +47.8%（价格 7 日 -15.8%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +53.9%（价格 7 日 -20.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
     "n": 31,
     "events": [
@@ -2442,23 +2441,23 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -7.9%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +47.8%",
-    "价格 7 日 -15.8%，60 日 -34.4%",
+    "在售 60 日中位比前段 -7.6%",
+    "在售距 60 日高 -0.5%",
+    "在售 7 日 +53.9%",
+    "价格 7 日 -20.5%，60 日 -38.0%",
     "求购 7 日 -17.1%（29.0 单）",
     "阶段：吸筹"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
    "rank": 28
   },
   {
-   "gid": 12519,
-   "name": "沙漠之鹰 | 古铜密码 (崭新出厂)",
-   "caseName": "控制收藏品",
-   "tier": "large",
-   "price": 153.37,
+   "gid": 17850,
+   "name": "截短霰弹枪 | 伏击者 (崭新出厂)",
+   "caseName": "浩劫收藏品",
+   "tier": "small",
+   "price": 8.78,
    "kinds": [
     "A"
    ],
@@ -2466,83 +2465,169 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": 0.0023,
-   "dP7": 0.0398,
-   "listedNow": 863,
-   "buyNow": 84.5,
-   "listedSurge": 0.298,
-   "priceChg60": 0.0097,
-   "listedDropFromHigh": -0.2329,
-   "concDecline": 3,
-   "buy7Chg": 0.1064,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
+   "dN7": -0.0095,
+   "dP7": 0.4093,
+   "listedNow": 314,
+   "buyNow": 10,
+   "listedSurge": 0.5833,
+   "priceChg60": -0.092,
+   "listedDropFromHigh": -0.201,
+   "concDecline": 0,
+   "buy7Chg": -0.0909,
+   "stage": "rallyLate",
+   "stageName": "拉升末期",
    "deadVerdict": "dying",
-   "stockType": "倒货型",
+   "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 7.8443,
+   "roomGainMed": 2.6182,
    "roomPairs": 1,
    "dying": true,
-   "score": 51.04,
+   "score": 53.59,
    "scoreParts": {
-    "strength": 0.698,
-    "liquidity": 1,
+    "strength": 0.9833,
+    "liquidity": 0.7037,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +29.8%（价格 60 日 +1.0%，在售距 60 日高 -23.3%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +58.3%（价格 60 日 -9.2%，在售距 60 日高 -20.1%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
-    "n": 69,
+    "n": 20,
     "events": [
      {
-      "date": "2026-08-04",
-      "variant": "A7",
-      "ret120": -0.5401,
-      "max120": 0.0675,
-      "dN7": 0.5718,
-      "listedSurge": -0.4194
+      "date": "2026-08-06",
+      "variant": "A60",
+      "ret120": -0.3438,
+      "max120": 0.0389,
+      "dN7": -0.0146,
+      "listedSurge": 0.3081
      },
      {
-      "date": "2026-07-30",
-      "variant": "A7",
-      "ret120": -0.5932,
-      "max120": -0.0087,
-      "dN7": 0.4444,
-      "listedSurge": -0.4452
+      "date": "2026-08-01",
+      "variant": "A60",
+      "ret120": -0.3661,
+      "max120": 0.0036,
+      "dN7": 0.0821,
+      "listedSurge": 0.4744
      },
      {
-      "date": "2026-07-05",
-      "variant": "A7",
-      "ret120": -0.6211,
-      "max120": 0.3166,
-      "dN7": 0.3144,
-      "listedSurge": -0.2029
+      "date": "2026-07-22",
+      "variant": "A60",
+      "ret120": -0.4672,
+      "max120": 0.4125,
+      "dN7": 0.063,
+      "listedSurge": 0.646
      }
     ],
-    "ret120Med": 0.1404,
-    "max120Med": 0.6744,
-    "doubleRate": 0.3768,
+    "ret120Med": -0.3527,
+    "max120Med": 0.2441,
+    "doubleRate": 0.2,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +29.8%",
-    "在售距 60 日高 -23.3%",
-    "在售 7 日 +0.2%（连续下降 3 天）",
-    "价格 7 日 +4.0%，60 日 +1.0%",
-    "求购 7 日 +10.6%（104.0 单）",
-    "阶段：拉升早期"
+    "在售 60 日中位比前段 +58.3%",
+    "在售距 60 日高 -20.1%",
+    "在售 7 日 -0.9%",
+    "价格 7 日 +40.9%，60 日 -9.2%",
+    "求购 7 日 -9.1%（10.0 单）",
+    "近10日 +40.0%",
+    "阶段：拉升末期"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
    "rank": 29
+  },
+  {
+   "gid": 28,
+   "name": "FN57 | 霸意大名 (崭新出厂)",
+   "caseName": "伽玛武器箱",
+   "tier": "mid",
+   "price": 18.08,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.4718,
+   "dP7": -0.207,
+   "listedNow": 521,
+   "buyNow": 27,
+   "listedSurge": -0.0075,
+   "priceChg60": 0.1531,
+   "listedDropFromHigh": -0.1664,
+   "concDecline": 0,
+   "buy7Chg": 0.5,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "控盘型",
+   "distribute": "low",
+   "roomGainMed": 1.8867,
+   "roomPairs": 4,
+   "dying": true,
+   "score": 52.91,
+   "scoreParts": {
+    "strength": 0.8718,
+    "liquidity": 0.8481,
+    "room": 0.9434,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +47.2%（价格 7 日 -20.7%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 40,
+    "events": [
+     {
+      "date": "2026-07-20",
+      "variant": "A7",
+      "ret120": -0.1231,
+      "max120": 0.2654,
+      "dN7": 0.4315,
+      "listedSurge": 0.0127
+     },
+     {
+      "date": "2026-06-20",
+      "variant": "A60",
+      "ret120": -0.1568,
+      "max120": 1.6187,
+      "dN7": 0.1934,
+      "listedSurge": 0.5395
+     },
+     {
+      "date": "2026-06-15",
+      "variant": "A60+A7",
+      "ret120": -0.2789,
+      "max120": 1.1941,
+      "dN7": 0.3168,
+      "listedSurge": 0.5992
+     }
+    ],
+    "ret120Med": 0.2954,
+    "max120Med": 1.3444,
+    "doubleRate": 0.625,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -0.8%",
+    "在售距 60 日高 -16.6%",
+    "在售 7 日 +47.2%",
+    "价格 7 日 -20.7%，60 日 +15.3%",
+    "求购 7 日 +50.0%（42.0 单）",
+    "近10日 +34.5%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 30
   },
   {
    "gid": 1209,
    "name": "M4A1消音版 | 北方森林 (崭新出厂)",
    "caseName": "意大利小镇收藏品",
    "tier": "mid",
-   "price": 63,
+   "price": 71.3,
    "kinds": [
     "A"
    ],
@@ -2550,39 +2635,39 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": -0.037,
-   "dP7": -0.0293,
-   "listedNow": 468,
+   "dN7": 0.0043,
+   "dP7": 0.02,
+   "listedNow": 471,
    "buyNow": 43,
-   "listedSurge": 0.3522,
-   "priceChg60": -0.1127,
-   "listedDropFromHigh": -0.2452,
-   "concDecline": 3,
-   "buy7Chg": -0.075,
-   "stage": "decline",
-   "stageName": "回落",
+   "listedSurge": 0.344,
+   "priceChg60": 0.0219,
+   "listedDropFromHigh": -0.2403,
+   "concDecline": 0,
+   "buy7Chg": -0.0263,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
    "roomGainMed": 5.5313,
    "roomPairs": 1,
    "dying": true,
-   "score": 51,
+   "score": 50.76,
    "scoreParts": {
-    "strength": 0.7522,
-    "liquidity": 0.8917,
+    "strength": 0.744,
+    "liquidity": 0.8922,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +35.2%（价格 60 日 -11.3%，在售距 60 日高 -24.5%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +34.4%（价格 60 日 +2.2%，在售距 60 日高 -24.0%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 63,
     "events": [
      {
       "date": "2026-08-09",
       "variant": "A60",
-      "ret120": -0.487,
+      "ret120": -0.4194,
       "max120": -0.0391,
       "dN7": -0.1154,
       "listedSurge": 0.3036
@@ -2590,7 +2675,7 @@
      {
       "date": "2026-08-04",
       "variant": "A60",
-      "ret120": -0.4569,
+      "ret120": -0.3853,
       "max120": 0.1214,
       "dN7": 0.1114,
       "listedSurge": 0.2447
@@ -2598,7 +2683,7 @@
      {
       "date": "2026-07-30",
       "variant": "A60",
-      "ret120": -0.5135,
+      "ret120": -0.4494,
       "max120": 0.0424,
       "dN7": -0.0775,
       "listedSurge": 0.2463
@@ -2610,16 +2695,16 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +35.2%",
-    "在售距 60 日高 -24.5%",
-    "在售 7 日 -3.7%（连续下降 3 天）",
-    "价格 7 日 -2.9%，60 日 -11.3%",
-    "求购 7 日 -7.5%（37.0 单）",
-    "阶段：回落"
+    "在售 60 日中位比前段 +34.4%",
+    "在售距 60 日高 -24.0%",
+    "在售 7 日 +0.4%",
+    "价格 7 日 +2.0%，60 日 +2.2%",
+    "求购 7 日 -2.6%（37.0 单）",
+    "阶段：拉升早期"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 30
+   "rank": 31
   },
   {
    "gid": 643,
@@ -2702,15 +2787,15 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 31
+   "staleDays": 1,
+   "rank": 32
   },
   {
-   "gid": 13198,
-   "name": "沙漠之鹰 | 后发制人 (崭新出厂)",
-   "caseName": "蛇噬武器箱",
+   "gid": 9729,
+   "name": "USP 消音版 | 闪回 (崭新出厂)",
+   "caseName": "“头号特训”武器箱",
    "tier": "mid",
-   "price": 44.9,
+   "price": 33,
    "kinds": [
     "A"
    ],
@@ -2718,76 +2803,331 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.3415,
-   "dP7": 0.1338,
-   "listedNow": 931,
-   "buyNow": 54,
-   "listedSurge": 0.0221,
-   "priceChg60": 0.0822,
-   "listedDropFromHigh": -0.0791,
+   "dN7": 0.3597,
+   "dP7": -0.1624,
+   "listedNow": 911,
+   "buyNow": 33,
+   "listedSurge": 0.0437,
+   "priceChg60": 0.66,
+   "listedDropFromHigh": -0.1446,
    "concDecline": 1,
-   "buy7Chg": 0.1148,
+   "buy7Chg": 0.425,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "dying",
-   "stockType": "控盘型",
+   "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 1.6752,
-   "roomPairs": 2,
+   "roomGainMed": 1.8466,
+   "roomPairs": 3,
    "dying": true,
-   "score": 49.52,
+   "score": 50.4,
    "scoreParts": {
-    "strength": 0.7415,
-    "liquidity": 0.9572,
-    "room": 0.8376,
+    "strength": 0.7597,
+    "liquidity": 0.9024,
+    "room": 0.9233,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +34.1%（价格 7 日 +13.4%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +36.0%（价格 7 日 -16.2%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 30,
+    "n": 54,
     "events": [
      {
       "date": "2026-07-05",
-      "variant": "A7",
-      "ret120": -0.6667,
-      "max120": 0.2381,
-      "dN7": 0.9786,
-      "listedSurge": 0.2378
+      "variant": "A60",
+      "ret120": -0.571,
+      "max120": 0.8891,
+      "dN7": -0.1098,
+      "listedSurge": 0.3469
+     },
+     {
+      "date": "2026-06-30",
+      "variant": "A60",
+      "ret120": -0.4174,
+      "max120": 1.2355,
+      "dN7": -0.0829,
+      "listedSurge": 0.2821
      },
      {
       "date": "2026-06-25",
       "variant": "A60",
-      "ret120": -0.3951,
-      "max120": 0.9048,
-      "dN7": -0.1459,
-      "listedSurge": 0.2532
-     },
-     {
-      "date": "2026-06-15",
-      "variant": "A60+A7",
-      "ret120": -0.4571,
-      "max120": 0.9286,
-      "dN7": 0.2118,
-      "listedSurge": 0.2023
+      "ret120": -0.5,
+      "max120": 0.9966,
+      "dN7": -0.0826,
+      "listedSurge": 0.2504
      }
     ],
-    "ret120Med": 0.2772,
-    "max120Med": 0.6868,
-    "doubleRate": 0.2667,
+    "ret120Med": 0.1668,
+    "max120Med": 0.547,
+    "doubleRate": 0.2963,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +2.2%",
-    "在售距 60 日高 -7.9%",
-    "在售 7 日 +34.1%",
-    "价格 7 日 +13.4%，60 日 +8.2%",
-    "求购 7 日 +11.5%（68.0 单）",
+    "在售 60 日中位比前段 +4.4%",
+    "在售距 60 日高 -14.5%",
+    "在售 7 日 +36.0%",
+    "价格 7 日 -16.2%，60 日 +66.0%",
+    "求购 7 日 +42.5%（57.0 单）",
+    "近10日 +30.8%",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 32
+   "rank": 33
+  },
+  {
+   "gid": 12519,
+   "name": "沙漠之鹰 | 古铜密码 (崭新出厂)",
+   "caseName": "控制收藏品",
+   "tier": "large",
+   "price": 164.5,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A60"
+   ],
+   "variant": "A60",
+   "dN7": 0.1207,
+   "dP7": 0.0498,
+   "listedNow": 1021,
+   "buyNow": 84.5,
+   "listedSurge": 0.277,
+   "priceChg60": 0.0967,
+   "listedDropFromHigh": -0.0924,
+   "concDecline": 0,
+   "buy7Chg": 0.2381,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "倒货型",
+   "distribute": "low",
+   "roomGainMed": 7.8443,
+   "roomPairs": 1,
+   "dying": true,
+   "score": 50.34,
+   "scoreParts": {
+    "strength": 0.677,
+    "liquidity": 1,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 60 日中位比前 60 日 +27.7%（价格 60 日 +9.7%，在售距 60 日高 -9.2%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "history": {
+    "n": 69,
+    "events": [
+     {
+      "date": "2026-08-04",
+      "variant": "A7",
+      "ret120": -0.5067,
+      "max120": 0.0675,
+      "dN7": 0.5718,
+      "listedSurge": -0.4194
+     },
+     {
+      "date": "2026-07-30",
+      "variant": "A7",
+      "ret120": -0.5637,
+      "max120": -0.0087,
+      "dN7": 0.4444,
+      "listedSurge": -0.4452
+     },
+     {
+      "date": "2026-07-05",
+      "variant": "A7",
+      "ret120": -0.6211,
+      "max120": 0.3166,
+      "dN7": 0.3144,
+      "listedSurge": -0.2029
+     }
+    ],
+    "ret120Med": 0.1404,
+    "max120Med": 0.6744,
+    "doubleRate": 0.3768,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +27.7%",
+    "在售距 60 日高 -9.2%",
+    "在售 7 日 +12.1%",
+    "价格 7 日 +5.0%，60 日 +9.7%",
+    "求购 7 日 +23.8%（104.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 34
+  },
+  {
+   "gid": 547,
+   "name": "沙漠之鹰 | 科林斯遗产 (崭新出厂)",
+   "caseName": "左轮武器箱",
+   "tier": "small",
+   "price": 8.85,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.321,
+   "dP7": -0.2168,
+   "listedNow": 1140,
+   "buyNow": 29.5,
+   "listedSurge": -0.1537,
+   "priceChg60": 0.2977,
+   "listedDropFromHigh": -0.0887,
+   "concDecline": 0,
+   "buy7Chg": 0.4231,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 2.0972,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 50.01,
+   "scoreParts": {
+    "strength": 0.721,
+    "liquidity": 0.89,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +32.1%（价格 7 日 -21.7%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 24,
+    "events": [
+     {
+      "date": "2026-07-05",
+      "variant": "A7",
+      "ret120": -0.5505,
+      "max120": 0.5823,
+      "dN7": 0.2537,
+      "listedSurge": 0.147
+     },
+     {
+      "date": "2026-06-15",
+      "variant": "A7",
+      "ret120": -0.4804,
+      "max120": 0.9047,
+      "dN7": 0.2624,
+      "listedSurge": 0.1442
+     },
+     {
+      "date": "2026-01-16",
+      "variant": "A60",
+      "ret120": 0.2123,
+      "max120": 1.4932,
+      "dN7": -0.0216,
+      "listedSurge": 0.2161
+     }
+    ],
+    "ret120Med": 0.3051,
+    "max120Med": 1.3967,
+    "doubleRate": 0.5417,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -15.4%",
+    "在售距 60 日高 -8.9%",
+    "在售 7 日 +32.1%",
+    "价格 7 日 -21.7%，60 日 +29.8%",
+    "求购 7 日 +42.3%（37.0 单）",
+    "近10日 +21.9%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 35
+  },
+  {
+   "gid": 9725,
+   "name": "沙漠之鹰 | 机械工业 (崭新出厂)",
+   "caseName": "“头号特训”武器箱",
+   "tier": "large",
+   "price": 375,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2492,
+   "dP7": 0.0813,
+   "listedNow": 787,
+   "buyNow": 141,
+   "listedSurge": 0.1204,
+   "priceChg60": 1.2631,
+   "listedDropFromHigh": -0.4192,
+   "concDecline": 1,
+   "buy7Chg": 0.0795,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 2.5702,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 49.38,
+   "scoreParts": {
+    "strength": 0.6492,
+    "liquidity": 0.9988,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +24.9%（价格 7 日 +8.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 23,
+    "events": [
+     {
+      "date": "2026-04-06",
+      "variant": "A7",
+      "ret120": 0.5011,
+      "max120": 0.5011,
+      "dN7": 0.3874,
+      "listedSurge": -0.0973
+     },
+     {
+      "date": "2026-02-05",
+      "variant": "A60",
+      "ret120": -0.0183,
+      "max120": 0.3653,
+      "dN7": 0.0056,
+      "listedSurge": 0.2201
+     },
+     {
+      "date": "2026-01-31",
+      "variant": "A60",
+      "ret120": -0.1842,
+      "max120": 0.3114,
+      "dN7": -0.0517,
+      "listedSurge": 0.333
+     }
+    ],
+    "ret120Med": 0.0555,
+    "max120Med": 0.3843,
+    "doubleRate": 0.2174,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +12.0%",
+    "在售距 60 日高 -41.9%",
+    "在售 7 日 +24.9%",
+    "价格 7 日 +8.1%，60 日 +126.3%",
+    "求购 7 日 +7.9%（163.0 单）",
+    "近10日 +21.7%",
+    "阶段：拉升早期"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 36
   },
   {
    "gid": 6365,
@@ -2870,99 +3210,15 @@
     "阶段：拉升早期"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 33
-  },
-  {
-   "gid": 21,
-   "name": "USP 消音版 | 力矩 (崭新出厂)",
-   "caseName": "弯曲猎手武器箱",
-   "tier": "mid",
-   "price": 10.59,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.513,
-   "dP7": -0.2883,
-   "listedNow": 1221,
-   "buyNow": 22.5,
-   "listedSurge": 0.002,
-   "priceChg60": 0.0719,
-   "listedDropFromHigh": -0.0348,
-   "concDecline": 1,
-   "buy7Chg": 0,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "dying",
-   "stockType": "控盘型",
-   "distribute": "low",
-   "roomGainMed": 1.2818,
-   "roomPairs": 4,
-   "dying": true,
-   "score": 49.25,
-   "scoreParts": {
-    "strength": 0.913,
-    "liquidity": 0.8602,
-    "room": 0.6409,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +51.3%（价格 7 日 -28.8%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 42,
-    "events": [
-     {
-      "date": "2026-06-30",
-      "variant": "A7",
-      "ret120": -0.426,
-      "max120": 0.6716,
-      "dN7": 0.2502,
-      "listedSurge": 0.0936
-     },
-     {
-      "date": "2026-06-15",
-      "variant": "A7",
-      "ret120": -0.4165,
-      "max120": 0.6371,
-      "dN7": 0.3051,
-      "listedSurge": 0.1171
-     },
-     {
-      "date": "2026-05-21",
-      "variant": "A7",
-      "ret120": -0.2016,
-      "max120": 0.921,
-      "dN7": 0.2002,
-      "listedSurge": 0.0824
-     }
-    ],
-    "ret120Med": 0.216,
-    "max120Med": 0.6004,
-    "doubleRate": 0.3333,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +0.2%",
-    "在售距 60 日高 -3.5%",
-    "在售 7 日 +51.3%",
-    "价格 7 日 -28.8%，60 日 +7.2%",
-    "求购 7 日 0.0%（26.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 34
+   "staleDays": 1,
+   "rank": 37
   },
   {
    "gid": 1238,
    "name": "M4A1消音版 | 闪回 (崭新出厂)",
    "caseName": "手套武器箱",
    "tier": "huge",
-   "price": 458,
+   "price": 509,
    "kinds": [
     "A"
    ],
@@ -2970,14 +3226,14 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": 0.0581,
-   "dP7": -0.0643,
-   "listedNow": 838,
+   "dN7": -0.0498,
+   "dP7": 0.0283,
+   "listedNow": 839,
    "buyNow": 88.5,
-   "listedSurge": 0.2393,
-   "priceChg60": -0.4787,
-   "listedDropFromHigh": -0.2291,
-   "concDecline": 3,
+   "listedSurge": 0.2319,
+   "priceChg60": -0.4159,
+   "listedDropFromHigh": -0.2282,
+   "concDecline": 0,
    "buy7Chg": 0.0723,
    "stage": "decline",
    "stageName": "回落",
@@ -2987,22 +3243,22 @@
    "roomGainMed": 2.391,
    "roomPairs": 2,
    "dying": true,
-   "score": 49.06,
+   "score": 48.8,
    "scoreParts": {
-    "strength": 0.6393,
+    "strength": 0.6319,
     "liquidity": 1,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +23.9%（价格 60 日 -47.9%，在售距 60 日高 -22.9%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +23.2%（价格 60 日 -41.6%，在售距 60 日高 -22.8%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 50,
     "events": [
      {
       "date": "2026-07-30",
       "variant": "A60+A7",
-      "ret120": -0.5264,
+      "ret120": -0.4736,
       "max120": 0.1489,
       "dN7": 0.3822,
       "listedSurge": 0.4204
@@ -3030,101 +3286,16 @@
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +23.9%",
-    "在售距 60 日高 -22.9%",
-    "在售 7 日 +5.8%（连续下降 3 天）",
-    "价格 7 日 -6.4%，60 日 -47.9%",
+    "在售 60 日中位比前段 +23.2%",
+    "在售距 60 日高 -22.8%",
+    "在售 7 日 -5.0%",
+    "价格 7 日 +2.8%，60 日 -41.6%",
     "求购 7 日 +7.2%（89.0 单）",
     "阶段：回落"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 35
-  },
-  {
-   "gid": 12285,
-   "name": "AWP | 毛细血管 (崭新出厂)",
-   "caseName": "棱彩2号武器箱",
-   "tier": "mid",
-   "price": 54,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.2488,
-   "dP7": -0.2059,
-   "listedNow": 793,
-   "buyNow": 48.5,
-   "listedSurge": -0.0828,
-   "priceChg60": 0.3171,
-   "listedDropFromHigh": -0.0843,
-   "concDecline": 2,
-   "buy7Chg": 0.1364,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "dying",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 2.8524,
-   "roomPairs": 3,
-   "dying": true,
-   "score": 48.55,
-   "scoreParts": {
-    "strength": 0.6488,
-    "liquidity": 0.9446,
-    "room": 1,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +24.9%（价格 7 日 -20.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 39,
-    "events": [
-     {
-      "date": "2026-07-20",
-      "variant": "A60",
-      "ret120": -0.0143,
-      "max120": 0.1071,
-      "dN7": 0.0409,
-      "listedSurge": 0.2246
-     },
-     {
-      "date": "2026-07-05",
-      "variant": "A60",
-      "ret120": -0.6539,
-      "max120": 0.2506,
-      "dN7": 0.0862,
-      "listedSurge": 0.4431
-     },
-     {
-      "date": "2026-06-30",
-      "variant": "A60",
-      "ret120": -0.6306,
-      "max120": 0.3187,
-      "dN7": -0.0317,
-      "listedSurge": 0.6339
-     }
-    ],
-    "ret120Med": -0.0143,
-    "max120Med": 0.7073,
-    "doubleRate": 0.4615,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -8.3%",
-    "在售距 60 日高 -8.4%",
-    "在售 7 日 +24.9%（连续下降 2 天）",
-    "价格 7 日 -20.6%，60 日 +31.7%",
-    "求购 7 日 +13.6%（50.0 单）",
-    "近10日 +20.8%",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 36
+   "rank": 38
   },
   {
    "gid": 20420,
@@ -3207,15 +3378,15 @@
     "阶段：派发"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 37
+   "staleDays": 1,
+   "rank": 39
   },
   {
-   "gid": 13379,
-   "name": "法玛斯 | 线路故障 (崭新出厂)",
-   "caseName": "2021 殒命大厦收藏品",
-   "tier": "small",
-   "price": 20,
+   "gid": 12424,
+   "name": "格洛克 18 型 | 摩登时代 (崭新出厂)",
+   "caseName": "裂空武器箱",
+   "tier": "large",
+   "price": 63,
    "kinds": [
     "A"
    ],
@@ -3223,76 +3394,160 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.2853,
-   "dP7": -0.0431,
-   "listedNow": 455,
-   "buyNow": 23.5,
-   "listedSurge": -0.0446,
-   "priceChg60": -0.0863,
-   "listedDropFromHigh": -0.1415,
-   "concDecline": 1,
-   "buy7Chg": -0.2308,
+   "dN7": 0.5006,
+   "dP7": -0.1213,
+   "listedNow": 1247,
+   "buyNow": 39.5,
+   "listedSurge": -0.0501,
+   "priceChg60": -0.1485,
+   "listedDropFromHigh": -0.0087,
+   "concDecline": 0,
+   "buy7Chg": 0.2727,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "dying",
-   "stockType": "倒货型",
+   "stockType": "控盘型",
    "distribute": "low",
-   "roomGainMed": 3.7441,
+   "roomGainMed": 1.1089,
+   "roomPairs": 3,
+   "dying": true,
+   "score": 48.21,
+   "scoreParts": {
+    "strength": 0.9006,
+    "liquidity": 0.9223,
+    "room": 0.5545,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +50.1%（价格 7 日 -12.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 50,
+    "events": [
+     {
+      "date": "2026-07-05",
+      "variant": "A7",
+      "ret120": -0.5269,
+      "max120": 0.2598,
+      "dN7": 0.2534,
+      "listedSurge": 0.0221
+     },
+     {
+      "date": "2026-04-06",
+      "variant": "A7",
+      "ret120": -0.1029,
+      "max120": 0.2437,
+      "dN7": 0.2323,
+      "listedSurge": -0.1239
+     },
+     {
+      "date": "2026-02-05",
+      "variant": "A60",
+      "ret120": 0.0481,
+      "max120": 0.4972,
+      "dN7": -0.0318,
+      "listedSurge": 0.2023
+     }
+    ],
+    "ret120Med": 0.1221,
+    "max120Med": 0.3292,
+    "doubleRate": 0.1,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -5.0%",
+    "在售距 60 日高 -0.9%",
+    "在售 7 日 +50.1%",
+    "价格 7 日 -12.1%，60 日 -14.9%",
+    "求购 7 日 +27.3%（56.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 40
+  },
+  {
+   "gid": 1127,
+   "name": "格洛克 18 型 | 铁之作 (崭新出厂)",
+   "caseName": "手套武器箱",
+   "tier": "large",
+   "price": 232.9,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2057,
+   "dP7": -0.0214,
+   "listedNow": 756,
+   "buyNow": 74,
+   "listedSurge": -0.1767,
+   "priceChg60": 0.0986,
+   "listedDropFromHigh": -0.0632,
+   "concDecline": 0,
+   "buy7Chg": 0.1286,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 9.8838,
    "roomPairs": 2,
    "dying": true,
-   "score": 47.74,
+   "score": 47.72,
    "scoreParts": {
-    "strength": 0.6853,
-    "liquidity": 0.8228,
+    "strength": 0.6057,
+    "liquidity": 0.9884,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +28.5%（价格 7 日 -4.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +20.6%（价格 7 日 -2.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 42,
+    "n": 46,
     "events": [
-     {
-      "date": "2026-08-09",
-      "variant": "A60",
-      "ret120": -0.6226,
-      "max120": -0.0755,
-      "dN7": -0.0379,
-      "listedSurge": 0.5502
-     },
      {
       "date": "2026-08-04",
       "variant": "A60",
-      "ret120": -0.6276,
-      "max120": 0.0948,
-      "dN7": -0.0925,
-      "listedSurge": 0.6625
+      "ret120": -0.323,
+      "max120": 0.1395,
+      "dN7": 0.0117,
+      "listedSurge": 0.4889
      },
      {
       "date": "2026-07-30",
-      "variant": "A60",
-      "ret120": -0.6491,
-      "max120": 0.1104,
-      "dN7": 0.034,
-      "listedSurge": 0.6691
+      "variant": "A7",
+      "ret120": -0.4104,
+      "max120": 0.0089,
+      "dN7": 0.2015,
+      "listedSurge": 0.4281
+     },
+     {
+      "date": "2026-07-10",
+      "variant": "A7",
+      "ret120": -0.607,
+      "max120": -0.0535,
+      "dN7": 0.2058,
+      "listedSurge": 0.1486
      }
     ],
-    "ret120Med": -0.2443,
-    "max120Med": 0.2154,
-    "doubleRate": 0.3333,
+    "ret120Med": 0.3144,
+    "max120Med": 0.4822,
+    "doubleRate": 0.4565,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -4.5%",
-    "在售距 60 日高 -14.2%",
-    "在售 7 日 +28.5%",
-    "价格 7 日 -4.3%，60 日 -8.6%",
-    "求购 7 日 -23.1%（20.0 单）",
+    "在售 60 日中位比前段 -17.7%",
+    "在售距 60 日高 -6.3%",
+    "在售 7 日 +20.6%",
+    "价格 7 日 -2.1%，60 日 +9.9%",
+    "求购 7 日 +12.9%（79.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 38
+   "rank": 41
   },
   {
    "gid": 2310,
@@ -3375,8 +3630,93 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
+   "staleDays": 1,
+   "rank": 42
+  },
+  {
+   "gid": 10359,
+   "name": "法玛斯 | 保护色 (崭新出厂)",
+   "caseName": "棱彩武器箱",
+   "tier": "small",
+   "price": 10.7,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2754,
+   "dP7": -0.1364,
+   "listedNow": 690,
+   "buyNow": 27,
+   "listedSurge": 0.0269,
+   "priceChg60": 0.1902,
+   "listedDropFromHigh": -0.3127,
+   "concDecline": 0,
+   "buy7Chg": 1,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.7848,
+   "roomPairs": 3,
+   "dying": true,
+   "score": 46.86,
+   "scoreParts": {
+    "strength": 0.6754,
+    "liquidity": 0.8691,
+    "room": 0.8924,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +27.5%（价格 7 日 -13.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 24,
+    "events": [
+     {
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": -0.4535,
+      "max120": 0.1328,
+      "dN7": 0.0084,
+      "listedSurge": 1.0093
+     },
+     {
+      "date": "2026-07-30",
+      "variant": "A60",
+      "ret120": -0.5523,
+      "max120": -0.0209,
+      "dN7": -0.0669,
+      "listedSurge": 1.0173
+     },
+     {
+      "date": "2026-07-20",
+      "variant": "A60",
+      "ret120": -0.4728,
+      "max120": 0.1443,
+      "dN7": 0.0544,
+      "listedSurge": 1.0103
+     }
+    ],
+    "ret120Med": -0.4345,
+    "max120Med": 0.6017,
+    "doubleRate": 0.25,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +2.7%",
+    "在售距 60 日高 -31.3%",
+    "在售 7 日 +27.5%",
+    "价格 7 日 -13.6%，60 日 +19.0%",
+    "求购 7 日 +100.0%（50.0 单）",
+    "近10日 +34.6%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 39
+   "rank": 43
   },
   {
    "gid": 19265,
@@ -3459,99 +3799,15 @@
     "阶段：吸筹"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 40
-  },
-  {
-   "gid": 1434,
-   "name": "MAC-10 | 绝界之行 (崭新出厂)",
-   "caseName": "光谱武器箱",
-   "tier": "small",
-   "price": 17.71,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.2993,
-   "dP7": 0.012,
-   "listedNow": 395,
-   "buyNow": 23,
-   "listedSurge": 0.0932,
-   "priceChg60": -0.1254,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
-   "buy7Chg": 0.0833,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "dying",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 1.7632,
-   "roomPairs": 2,
-   "dying": true,
-   "score": 46.46,
-   "scoreParts": {
-    "strength": 0.6993,
-    "liquidity": 0.8098,
-    "room": 0.8816,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +29.9%（价格 7 日 +1.2%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 61,
-    "events": [
-     {
-      "date": "2026-06-25",
-      "variant": "A60",
-      "ret120": -0.5798,
-      "max120": 0.3827,
-      "dN7": -0.101,
-      "listedSurge": 0.222
-     },
-     {
-      "date": "2026-06-05",
-      "variant": "A7",
-      "ret120": -0.6115,
-      "max120": 0.1431,
-      "dN7": 0.2158,
-      "listedSurge": 0.5636
-     },
-     {
-      "date": "2026-05-31",
-      "variant": "A60",
-      "ret120": -0.5601,
-      "max120": 0.3478,
-      "dN7": -0.1694,
-      "listedSurge": 0.5152
-     }
-    ],
-    "ret120Med": 0.3152,
-    "max120Med": 0.5176,
-    "doubleRate": 0.2951,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +9.3%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +29.9%",
-    "价格 7 日 +1.2%，60 日 -12.5%",
-    "求购 7 日 +8.3%（26.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 41
+   "staleDays": 1,
+   "rank": 44
   },
   {
    "gid": 693,
    "name": "双持贝瑞塔 | 皇室伴侣 (崭新出厂)",
    "caseName": "手套武器箱",
    "tier": "large",
-   "price": 145,
+   "price": 153.2,
    "kinds": [
     "A"
    ],
@@ -3559,14 +3815,14 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": -0.0364,
-   "dP7": 0.0469,
-   "listedNow": 530,
-   "buyNow": 43,
+   "dN7": -0.1963,
+   "dP7": 0.0713,
+   "listedNow": 483,
+   "buyNow": 43.5,
    "listedSurge": 0.2033,
-   "priceChg60": -0.0614,
-   "listedDropFromHigh": -0.1534,
-   "concDecline": 2,
+   "priceChg60": -0.0325,
+   "listedDropFromHigh": -0.2284,
+   "concDecline": 3,
    "buy7Chg": 0.0465,
    "stage": "calm",
    "stageName": "平静",
@@ -3576,22 +3832,22 @@
    "roomGainMed": 2.0526,
    "roomPairs": 2,
    "dying": true,
-   "score": 46.32,
+   "score": 46.24,
    "scoreParts": {
     "strength": 0.6033,
-    "liquidity": 0.901,
+    "liquidity": 0.8953,
     "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +20.3%（价格 60 日 -6.1%，在售距 60 日高 -15.3%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +20.3%（价格 60 日 -3.3%，在售距 60 日高 -22.8%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 35,
     "events": [
      {
       "date": "2026-08-09",
       "variant": "A60",
-      "ret120": -0.441,
+      "ret120": -0.4094,
       "max120": 0.0524,
       "dN7": -0.0123,
       "listedSurge": 1.6145
@@ -3599,7 +3855,7 @@
      {
       "date": "2026-07-30",
       "variant": "A60",
-      "ret120": -0.5175,
+      "ret120": -0.4902,
       "max120": 0.0416,
       "dN7": 0.1404,
       "listedSurge": 1.4319
@@ -3620,22 +3876,22 @@
    },
    "活迹象": [
     "在售 60 日中位比前段 +20.3%",
-    "在售距 60 日高 -15.3%",
-    "在售 7 日 -3.6%（连续下降 2 天）",
-    "价格 7 日 +4.7%，60 日 -6.1%",
+    "在售距 60 日高 -22.8%",
+    "在售 7 日 -19.6%（连续下降 3 天）",
+    "价格 7 日 +7.1%，60 日 -3.3%",
     "求购 7 日 +4.7%（45.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 42
+   "rank": 45
   },
   {
    "gid": 9587,
    "name": "P250 | 交换机 (崭新出厂)",
    "caseName": "2018 核子危机收藏品",
    "tier": "small",
-   "price": 10.55,
+   "price": 11.99,
    "kinds": [
     "A"
    ],
@@ -3643,14 +3899,14 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": -0.0746,
-   "dP7": -0.0897,
-   "listedNow": 732,
+   "dN7": 0.0388,
+   "dP7": 0.0265,
+   "listedNow": 750,
    "buyNow": 15,
-   "listedSurge": 0.3578,
-   "priceChg60": -0.0356,
-   "listedDropFromHigh": -0.0746,
-   "concDecline": 1,
+   "listedSurge": 0.3613,
+   "priceChg60": 0.102,
+   "listedDropFromHigh": -0.0518,
+   "concDecline": 0,
    "buy7Chg": -0.125,
    "stage": "calm",
    "stageName": "平静",
@@ -3660,22 +3916,22 @@
    "roomGainMed": 1.4694,
    "roomPairs": 3,
    "dying": true,
-   "score": 46.02,
+   "score": 46.15,
    "scoreParts": {
-    "strength": 0.7578,
-    "liquidity": 0.8097,
+    "strength": 0.7613,
+    "liquidity": 0.8115,
     "room": 0.7347,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +35.8%（价格 60 日 -3.6%，在售距 60 日高 -7.5%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +36.1%（价格 60 日 +10.2%，在售距 60 日高 -5.2%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 22,
     "events": [
      {
       "date": "2026-08-09",
       "variant": "A60",
-      "ret120": -0.2265,
+      "ret120": -0.121,
       "max120": 0.1774,
       "dN7": 0.0111,
       "listedSurge": 0.2585
@@ -3697,22 +3953,277 @@
       "listedSurge": 0.1012
      }
     ],
-    "ret120Med": -0.2414,
+    "ret120Med": -0.2411,
     "max120Med": 0.8507,
     "doubleRate": 0.4545,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +35.8%",
-    "在售距 60 日高 -7.5%",
-    "在售 7 日 -7.5%",
-    "价格 7 日 -9.0%，60 日 -3.6%",
+    "在售 60 日中位比前段 +36.1%",
+    "在售距 60 日高 -5.2%",
+    "在售 7 日 +3.9%",
+    "价格 7 日 +2.7%，60 日 +10.2%",
     "求购 7 日 -12.5%（14.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 43
+   "rank": 46
+  },
+  {
+   "gid": 537,
+   "name": "沙漠之鹰 | 青铜装饰 (崭新出厂)",
+   "caseName": "幻彩 2 号武器箱",
+   "tier": "mid",
+   "price": 5.19,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2585,
+   "dP7": -0.1602,
+   "listedNow": 2035,
+   "buyNow": 27,
+   "listedSurge": 0.1319,
+   "priceChg60": 0.0058,
+   "listedDropFromHigh": -0.1514,
+   "concDecline": 0,
+   "buy7Chg": 0.3462,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.6648,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 45.7,
+   "scoreParts": {
+    "strength": 0.6585,
+    "liquidity": 0.8802,
+    "room": 0.8324,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +25.9%（价格 7 日 -16.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 11,
+    "events": [
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.6062,
+      "max120": -0.0884,
+      "dN7": 0.2891,
+      "listedSurge": 0.0172
+     },
+     {
+      "date": "2026-04-21",
+      "variant": "A7",
+      "ret120": -0.292,
+      "max120": 0.6995,
+      "dN7": 0.2074,
+      "listedSurge": -0.1331
+     },
+     {
+      "date": "2025-10-18",
+      "variant": "A7",
+      "ret120": -0.3415,
+      "max120": 0.1578,
+      "dN7": 0.4515,
+      "listedSurge": -0.2328
+     }
+    ],
+    "ret120Med": -0.292,
+    "max120Med": 0.0137,
+    "doubleRate": 0,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +13.2%",
+    "在售距 60 日高 -15.1%",
+    "在售 7 日 +25.9%",
+    "价格 7 日 -16.0%，60 日 +0.6%",
+    "求购 7 日 +34.6%（35.0 单）",
+    "近10日 +22.2%",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 47
+  },
+  {
+   "gid": 8503,
+   "name": "格洛克 18 型 | 战鹰 (崭新出厂)",
+   "caseName": "地平线武器箱",
+   "tier": "mid",
+   "price": 51.9,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2879,
+   "dP7": 0.0754,
+   "listedNow": 425,
+   "buyNow": 31.5,
+   "listedSurge": -0.057,
+   "priceChg60": 0.2334,
+   "listedDropFromHigh": -0.1183,
+   "concDecline": 0,
+   "buy7Chg": 0.8438,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.6014,
+   "roomPairs": 3,
+   "dying": true,
+   "score": 45.68,
+   "scoreParts": {
+    "strength": 0.6879,
+    "liquidity": 0.8499,
+    "room": 0.8007,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +28.8%（价格 7 日 +7.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 35,
+    "events": [
+     {
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": -0.2638,
+      "max120": 0.0495,
+      "dN7": -0.1621,
+      "listedSurge": 0.6031
+     },
+     {
+      "date": "2026-07-25",
+      "variant": "A7",
+      "ret120": -0.4792,
+      "max120": -0.0444,
+      "dN7": 0.2565,
+      "listedSurge": 0.5653
+     },
+     {
+      "date": "2026-07-20",
+      "variant": "A60+A7",
+      "ret120": -0.4453,
+      "max120": 0.1494,
+      "dN7": 0.415,
+      "listedSurge": 0.5093
+     }
+    ],
+    "ret120Med": 0.2762,
+    "max120Med": 1.2606,
+    "doubleRate": 0.5714,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -5.7%",
+    "在售距 60 日高 -11.8%",
+    "在售 7 日 +28.8%",
+    "价格 7 日 +7.5%，60 日 +23.3%",
+    "求购 7 日 +84.4%（59.0 单）",
+    "近10日 +30.1%",
+    "阶段：拉升早期"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 48
+  },
+  {
+   "gid": 1740,
+   "name": "P2000 | 海洋 (崭新出厂)",
+   "caseName": "幻彩 3 号武器箱",
+   "tier": "small",
+   "price": 14.56,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2297,
+   "dP7": 0.04,
+   "listedNow": 514,
+   "buyNow": 16,
+   "listedSurge": -0.0323,
+   "priceChg60": 0.0972,
+   "listedDropFromHigh": -0.2452,
+   "concDecline": 0,
+   "buy7Chg": 0.5625,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
+   "deadVerdict": "dying",
+   "stockType": "倒货型",
+   "distribute": "low",
+   "roomGainMed": 6.6064,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 45.4,
+   "scoreParts": {
+    "strength": 0.6297,
+    "liquidity": 0.7902,
+    "room": 1,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +23.0%（价格 7 日 +4.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 14,
+    "events": [
+     {
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": -0.1713,
+      "max120": 0.1662,
+      "dN7": 0.0723,
+      "listedSurge": 0.6425
+     },
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.6526,
+      "max120": 0.004,
+      "dN7": 0.4409,
+      "listedSurge": 0.5784
+     },
+     {
+      "date": "2026-06-20",
+      "variant": "A60",
+      "ret120": -0.3872,
+      "max120": 1.5489,
+      "dN7": -0.0983,
+      "listedSurge": 0.5033
+     }
+    ],
+    "ret120Med": -0.2902,
+    "max120Med": 1.0453,
+    "doubleRate": 0.5,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -3.2%",
+    "在售距 60 日高 -24.5%",
+    "在售 7 日 +23.0%",
+    "价格 7 日 +4.0%，60 日 +9.7%",
+    "求购 7 日 +56.3%（25.0 单）",
+    "近10日 +43.3%",
+    "阶段：拉升早期"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 49
   },
   {
    "gid": 18150,
@@ -3770,8 +4281,8 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 44
+   "staleDays": 1,
+   "rank": 50
   },
   {
    "gid": 6502,
@@ -3854,92 +4365,8 @@
     "阶段：派发"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 45
-  },
-  {
-   "gid": 279,
-   "name": "AWP | 火卫一 (崭新出厂)",
-   "caseName": "伽玛武器箱",
-   "tier": "large",
-   "price": 37,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.369,
-   "dP7": -0.075,
-   "listedNow": 1447,
-   "buyNow": 60,
-   "listedSurge": -0.0719,
-   "priceChg60": -0.0657,
-   "listedDropFromHigh": -0.1708,
-   "concDecline": 0,
-   "buy7Chg": 0.2432,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "dying",
-   "stockType": "倒货型",
-   "distribute": "low",
-   "roomGainMed": 1.0606,
-   "roomPairs": 2,
-   "dying": true,
-   "score": 45.07,
-   "scoreParts": {
-    "strength": 0.769,
-    "liquidity": 0.9691,
-    "room": 0.5303,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +36.9%（价格 7 日 -7.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 31,
-    "events": [
-     {
-      "date": "2026-07-10",
-      "variant": "A7",
-      "ret120": -0.6965,
-      "max120": -0.0185,
-      "dN7": 0.4777,
-      "listedSurge": 0.0472
-     },
-     {
-      "date": "2026-06-20",
-      "variant": "A7",
-      "ret120": -0.4797,
-      "max120": 0.8397,
-      "dN7": 0.3112,
-      "listedSurge": 0.0593
-     },
-     {
-      "date": "2026-06-15",
-      "variant": "A7",
-      "ret120": -0.5766,
-      "max120": 0.5908,
-      "dN7": 1.0449,
-      "listedSurge": 0.0243
-     }
-    ],
-    "ret120Med": 0.0831,
-    "max120Med": 0.5908,
-    "doubleRate": 0.2581,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -7.2%",
-    "在售距 60 日高 -17.1%",
-    "在售 7 日 +36.9%",
-    "价格 7 日 -7.5%，60 日 -6.6%",
-    "求购 7 日 +24.3%（92.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 46
+   "staleDays": 1,
+   "rank": 51
   },
   {
    "gid": 12786,
@@ -4022,15 +4449,15 @@
     "阶段：派发"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 47
+   "staleDays": 1,
+   "rank": 52
   },
   {
    "gid": 874,
    "name": "FN57 | 夜影 (崭新出厂)",
    "caseName": "电竞 2013 冬季武器箱",
    "tier": "large",
-   "price": 71.3,
+   "price": 71.9,
    "kinds": [
     "A"
    ],
@@ -4038,14 +4465,14 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": 0.0172,
-   "dP7": 0.0056,
-   "listedNow": 531,
+   "dN7": -0.0134,
+   "dP7": -0.0899,
+   "listedNow": 515,
    "buyNow": 20,
    "listedSurge": 0.7486,
-   "priceChg60": -0.2903,
-   "listedDropFromHigh": -0.2027,
-   "concDecline": 1,
+   "priceChg60": -0.2867,
+   "listedDropFromHigh": -0.2267,
+   "concDecline": 2,
    "buy7Chg": -0.0476,
    "stage": "calm",
    "stageName": "平静",
@@ -4055,22 +4482,22 @@
    "roomGainMed": 0.7901,
    "roomPairs": 2,
    "dying": true,
-   "score": 44.76,
+   "score": 44.73,
    "scoreParts": {
     "strength": 1,
-    "liquidity": 0.8167,
+    "liquidity": 0.8144,
     "room": 0.3951,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +74.9%（价格 60 日 -29.0%，在售距 60 日高 -20.3%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +74.9%（价格 60 日 -28.7%，在售距 60 日高 -22.7%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 29,
     "events": [
      {
       "date": "2026-08-09",
       "variant": "A7",
-      "ret120": -0.5724,
+      "ret120": -0.5688,
       "max120": 0.061,
       "dN7": 0.3917,
       "listedSurge": 0.7581
@@ -4078,7 +4505,7 @@
      {
       "date": "2026-08-04",
       "variant": "A7",
-      "ret120": -0.5665,
+      "ret120": -0.5628,
       "max120": 0.0884,
       "dN7": 0.2523,
       "listedSurge": 0.7023
@@ -4086,7 +4513,7 @@
      {
       "date": "2026-07-30",
       "variant": "A7",
-      "ret120": -0.5781,
+      "ret120": -0.5746,
       "max120": 0.1065,
       "dN7": 0.3231,
       "listedSurge": 0.5505
@@ -4099,22 +4526,22 @@
    },
    "活迹象": [
     "在售 60 日中位比前段 +74.9%",
-    "在售距 60 日高 -20.3%",
-    "在售 7 日 +1.7%",
-    "价格 7 日 +0.6%，60 日 -29.0%",
+    "在售距 60 日高 -22.7%",
+    "在售 7 日 -1.3%（连续下降 2 天）",
+    "价格 7 日 -9.0%，60 日 -28.7%",
     "求购 7 日 -4.8%（20.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 48
+   "rank": 53
   },
   {
    "gid": 6350,
    "name": "Tec-9 | 坍雪寒裘 (崭新出厂)",
    "caseName": "左轮武器箱",
    "tier": "mid",
-   "price": 71.29,
+   "price": 70.57,
    "kinds": [
     "A"
    ],
@@ -4122,14 +4549,14 @@
     "A60"
    ],
    "variant": "A60",
-   "dN7": -0.0045,
-   "dP7": 0.2334,
-   "listedNow": 443,
+   "dN7": -0.0476,
+   "dP7": -0.0199,
+   "listedNow": 440,
    "buyNow": 32.5,
    "listedSurge": 0.2331,
-   "priceChg60": -0.0082,
-   "listedDropFromHigh": -0.1104,
-   "concDecline": 2,
+   "priceChg60": -0.0181,
+   "listedDropFromHigh": -0.1165,
+   "concDecline": 3,
    "buy7Chg": 0.3438,
    "stage": "calm",
    "stageName": "平静",
@@ -4139,15 +4566,15 @@
    "roomGainMed": 1.6615,
    "roomPairs": 2,
    "dying": true,
-   "score": 44.51,
+   "score": 44.5,
    "scoreParts": {
     "strength": 0.6331,
-    "liquidity": 0.8565,
+    "liquidity": 0.856,
     "room": 0.8308,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 60 日建仓 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 60 日中位比前 60 日 +23.3%（价格 60 日 -0.8%，在售距 60 日高 -11.0%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
+   "why": "在售 60 日中位比前 60 日 +23.3%（价格 60 日 -1.8%，在售距 60 日高 -11.6%） → 挂单接货形态（A60 口径（60 日中位）），历史同类之后 120 日翻倍率 22.8% vs 对照 21.4%（DiD60 +5.8pp，p=0.005；DiD120 +11.1pp，p=0.005）",
    "history": {
     "n": 68,
     "events": [
@@ -4183,15 +4610,15 @@
    },
    "活迹象": [
     "在售 60 日中位比前段 +23.3%",
-    "在售距 60 日高 -11.0%",
-    "在售 7 日 -0.4%（连续下降 2 天）",
-    "价格 7 日 +23.3%，60 日 -0.8%",
+    "在售距 60 日高 -11.6%",
+    "在售 7 日 -4.8%（连续下降 3 天）",
+    "价格 7 日 -2.0%，60 日 -1.8%",
     "求购 7 日 +34.4%（43.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 49
+   "rank": 54
   },
   {
    "gid": 13624,
@@ -4274,15 +4701,15 @@
     "阶段：回落"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 50
+   "staleDays": 1,
+   "rank": 55
   },
   {
-   "gid": 18286,
-   "name": "MAG-7 | 铋晶体 (崭新出厂)",
-   "caseName": "“激流大行动”武器箱",
+   "gid": 8,
+   "name": "Tec-9 | 冰冠 (崭新出厂)",
+   "caseName": "伽玛武器箱",
    "tier": "mid",
-   "price": 23.9,
+   "price": 7.7,
    "kinds": [
     "A"
    ],
@@ -4290,76 +4717,161 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.368,
-   "dP7": -0.1397,
-   "listedNow": 316,
-   "buyNow": 17,
-   "listedSurge": -0.085,
-   "priceChg60": -0.3343,
-   "listedDropFromHigh": -0.0971,
+   "dN7": 0.2244,
+   "dP7": -0.2399,
+   "listedNow": 1162,
+   "buyNow": 25.5,
+   "listedSurge": -0.079,
+   "priceChg60": 0.0462,
+   "listedDropFromHigh": -0.0085,
    "concDecline": 0,
-   "buy7Chg": -0.1111,
-   "stage": "decline",
-   "stageName": "回落",
+   "buy7Chg": 0.1923,
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 1.215,
-   "roomPairs": 1,
+   "roomGainMed": 1.4962,
+   "roomPairs": 3,
    "dying": true,
-   "score": 43.33,
+   "score": 43.36,
    "scoreParts": {
-    "strength": 0.768,
-    "liquidity": 0.7603,
-    "room": 0.6075,
+    "strength": 0.6244,
+    "liquidity": 0.8739,
+    "room": 0.7481,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +36.8%（价格 7 日 -14.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +22.4%（价格 7 日 -24.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 17,
+    "n": 13,
     "events": [
      {
-      "date": "2026-07-17",
+      "date": "2026-07-25",
       "variant": "A7",
-      "ret120": -0.4769,
-      "max120": 0.223,
-      "dN7": 0.216,
-      "listedSurge": 0.1332
+      "ret120": -0.4907,
+      "max120": -0.0321,
+      "dN7": 0.2158,
+      "listedSurge": -0.0386
      },
      {
-      "date": "2026-01-18",
-      "variant": "A60",
-      "ret120": 0.0518,
-      "max120": 0.6528,
-      "dN7": -0.055,
-      "listedSurge": 0.7563
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.644,
+      "max120": -0.0375,
+      "dN7": 0.3782,
+      "listedSurge": 0.0123
      },
      {
-      "date": "2026-01-13",
+      "date": "2026-06-20",
       "variant": "A60",
-      "ret120": -0.0278,
-      "max120": 0.5542,
-      "dN7": -0.0198,
-      "listedSurge": 0.8119
+      "ret120": -0.4059,
+      "max120": 1.316,
+      "dN7": 0.0114,
+      "listedSurge": 0.217
      }
     ],
-    "ret120Med": 0.2724,
-    "max120Med": 0.6528,
-    "doubleRate": 0.4118,
+    "ret120Med": -0.1232,
+    "max120Med": 1.07,
+    "doubleRate": 0.5385,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -8.5%",
-    "在售距 60 日高 -9.7%",
-    "在售 7 日 +36.8%",
-    "价格 7 日 -14.0%，60 日 -33.4%",
-    "求购 7 日 -11.1%（16.0 单）",
-    "阶段：回落"
+    "在售 60 日中位比前段 -7.9%",
+    "在售距 60 日高 -0.9%",
+    "在售 7 日 +22.4%",
+    "价格 7 日 -24.0%，60 日 +4.6%",
+    "求购 7 日 +19.2%（31.0 单）",
+    "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 51
+   "rank": 56
+  },
+  {
+   "gid": 863,
+   "name": "FN57 | 神祗 (崭新出厂)",
+   "caseName": "冬季攻势武器箱",
+   "tier": "mid",
+   "price": 34.44,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2545,
+   "dP7": -0.0689,
+   "listedNow": 695,
+   "buyNow": 32,
+   "listedSurge": -0.1189,
+   "priceChg60": 0.111,
+   "listedDropFromHigh": -0.1472,
+   "concDecline": 0,
+   "buy7Chg": 0.5862,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
+   "deadVerdict": "dying",
+   "stockType": "控盘型",
+   "distribute": "low",
+   "roomGainMed": 1.3464,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 43.34,
+   "scoreParts": {
+    "strength": 0.6545,
+    "liquidity": 0.8884,
+    "room": 0.6732,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +25.5%（价格 7 日 -6.9%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 23,
+    "events": [
+     {
+      "date": "2026-07-05",
+      "variant": "A60",
+      "ret120": -0.5724,
+      "max120": 0.3796,
+      "dN7": -0.0716,
+      "listedSurge": 0.3124
+     },
+     {
+      "date": "2026-06-25",
+      "variant": "A60",
+      "ret120": -0.5289,
+      "max120": 0.4699,
+      "dN7": -0.0335,
+      "listedSurge": 0.3109
+     },
+     {
+      "date": "2026-06-15",
+      "variant": "A60",
+      "ret120": -0.4571,
+      "max120": 0.7063,
+      "dN7": 0.0608,
+      "listedSurge": 0.6662
+     }
+    ],
+    "ret120Med": -0.3314,
+    "max120Med": 0.3616,
+    "doubleRate": 0.087,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -11.9%",
+    "在售距 60 日高 -14.7%",
+    "在售 7 日 +25.5%",
+    "价格 7 日 -6.9%，60 日 +11.1%",
+    "求购 7 日 +58.6%（46.0 单）",
+    "近10日 +23.9%",
+    "阶段：拉升早期"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 57
   },
   {
    "gid": 17491,
@@ -4442,15 +4954,15 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 52
+   "staleDays": 1,
+   "rank": 58
   },
   {
-   "gid": 16518,
-   "name": "USP 消音版 | 沙漠战术 (崭新出厂)",
-   "caseName": "阿努比斯收藏包",
+   "gid": 18286,
+   "name": "MAG-7 | 铋晶体 (崭新出厂)",
+   "caseName": "“激流大行动”武器箱",
    "tier": "mid",
-   "price": 18.19,
+   "price": 23.7,
    "kinds": [
     "A"
    ],
@@ -4458,76 +4970,76 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.282,
-   "dP7": 0.1601,
-   "listedNow": 982,
-   "buyNow": 23,
-   "listedSurge": 0.0595,
-   "priceChg60": -0.079,
-   "listedDropFromHigh": -0.042,
+   "dN7": 0.3077,
+   "dP7": -0.141,
+   "listedNow": 306,
+   "buyNow": 17,
+   "listedSurge": -0.0879,
+   "priceChg60": -0.3371,
+   "listedDropFromHigh": -0.1257,
    "concDecline": 1,
-   "buy7Chg": 0.9167,
-   "stage": "calm",
-   "stageName": "平静",
+   "buy7Chg": -0.1111,
+   "stage": "decline",
+   "stageName": "回落",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 1.1075,
-   "roomPairs": 2,
+   "roomGainMed": 1.215,
+   "roomPairs": 1,
    "dying": true,
-   "score": 41.68,
+   "score": 41.72,
    "scoreParts": {
-    "strength": 0.682,
-    "liquidity": 0.8626,
-    "room": 0.5538,
+    "strength": 0.7077,
+    "liquidity": 0.7579,
+    "room": 0.6075,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +28.2%（价格 7 日 +16.0%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +30.8%（价格 7 日 -14.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 23,
+    "n": 17,
     "events": [
      {
-      "date": "2026-08-09",
-      "variant": "A60+A7",
-      "ret120": -0.601,
-      "max120": -0.0393,
-      "dN7": 0.2668,
-      "listedSurge": 0.8338
-     },
-     {
-      "date": "2026-07-25",
-      "variant": "A60",
-      "ret120": -0.6074,
-      "max120": 0.1719,
-      "dN7": -0.0535,
-      "listedSurge": 0.8106
-     },
-     {
-      "date": "2026-07-15",
+      "date": "2026-07-17",
       "variant": "A7",
-      "ret120": -0.5863,
-      "max120": 0.1765,
-      "dN7": 0.3046,
-      "listedSurge": 0.6423
+      "ret120": -0.4769,
+      "max120": 0.223,
+      "dN7": 0.216,
+      "listedSurge": 0.1332
+     },
+     {
+      "date": "2026-01-18",
+      "variant": "A60",
+      "ret120": 0.0518,
+      "max120": 0.6528,
+      "dN7": -0.055,
+      "listedSurge": 0.7563
+     },
+     {
+      "date": "2026-01-13",
+      "variant": "A60",
+      "ret120": -0.0278,
+      "max120": 0.5542,
+      "dN7": -0.0198,
+      "listedSurge": 0.8119
      }
     ],
-    "ret120Med": -0.4327,
-    "max120Med": 0.4323,
-    "doubleRate": 0.3913,
+    "ret120Med": 0.2724,
+    "max120Med": 0.6528,
+    "doubleRate": 0.4118,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +5.9%",
-    "在售距 60 日高 -4.2%",
-    "在售 7 日 +28.2%",
-    "价格 7 日 +16.0%，60 日 -7.9%",
-    "求购 7 日 +91.7%（46.0 单）",
-    "阶段：平静"
+    "在售 60 日中位比前段 -8.8%",
+    "在售距 60 日高 -12.6%",
+    "在售 7 日 +30.8%",
+    "价格 7 日 -14.1%，60 日 -33.7%",
+    "求购 7 日 -11.1%（16.0 单）",
+    "阶段：回落"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 53
+   "rank": 59
   },
   {
    "gid": 11433,
@@ -4610,15 +5122,15 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 54
+   "staleDays": 1,
+   "rank": 60
   },
   {
-   "gid": 10365,
-   "name": "AK-47 | 迷踪秘境 (崭新出厂)",
-   "caseName": "棱彩武器箱",
-   "tier": "mid",
-   "price": 13.08,
+   "gid": 17424,
+   "name": "XM1014 | 行尸攻势 (崭新出厂)",
+   "caseName": "梦魇武器箱",
+   "tier": "small",
+   "price": 5,
    "kinds": [
     "A"
    ],
@@ -4626,76 +5138,244 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.2193,
-   "dP7": 0.1575,
-   "listedNow": 1301,
-   "buyNow": 32,
-   "listedSurge": 0.01,
-   "priceChg60": -0.0165,
-   "listedDropFromHigh": -0.0579,
-   "concDecline": 2,
-   "buy7Chg": 0.5938,
+   "dN7": 0.3838,
+   "dP7": -0.2063,
+   "listedNow": 1316,
+   "buyNow": 14,
+   "listedSurge": 0.0799,
+   "priceChg60": -0.3261,
+   "listedDropFromHigh": -0.0693,
+   "concDecline": 1,
+   "buy7Chg": -0.1333,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 1.0923,
-   "roomPairs": 3,
+   "roomGainMed": 0.8963,
+   "roomPairs": 2,
    "dying": true,
-   "score": 40.27,
+   "score": 41.28,
    "scoreParts": {
-    "strength": 0.6193,
-    "liquidity": 0.899,
-    "room": 0.5462,
+    "strength": 0.7838,
+    "liquidity": 0.809,
+    "room": 0.4482,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +21.9%（价格 7 日 +15.8%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +38.4%（价格 7 日 -20.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 53,
+    "n": 66,
     "events": [
      {
-      "date": "2026-08-04",
-      "variant": "A7",
-      "ret120": -0.3285,
-      "max120": 0.1345,
-      "dN7": 0.2267,
-      "listedSurge": -0.1096
+      "date": "2026-07-12",
+      "variant": "A60",
+      "ret120": -0.307,
+      "max120": 0.0395,
+      "dN7": -0.0495,
+      "listedSurge": 0.2859
      },
      {
-      "date": "2026-04-26",
-      "variant": "A7",
-      "ret120": -0.2708,
-      "max120": 0.3963,
-      "dN7": 0.2299,
-      "listedSurge": -0.2289
+      "date": "2026-07-07",
+      "variant": "A60",
+      "ret120": -0.3553,
+      "max120": 0.0518,
+      "dN7": -0.153,
+      "listedSurge": 0.3632
      },
      {
-      "date": "2026-04-21",
-      "variant": "A7",
-      "ret120": -0.3614,
-      "max120": 0.2619,
-      "dN7": 0.2908,
-      "listedSurge": -0.2226
+      "date": "2026-07-02",
+      "variant": "A60",
+      "ret120": -0.3131,
+      "max120": 0.0444,
+      "dN7": -0.0118,
+      "listedSurge": 0.3734
      }
     ],
-    "ret120Med": 0.2738,
-    "max120Med": 1.053,
-    "doubleRate": 0.5094,
+    "ret120Med": 0.0484,
+    "max120Med": 0.2069,
+    "doubleRate": 0.0455,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 +1.0%",
-    "在售距 60 日高 -5.8%",
-    "在售 7 日 +21.9%（连续下降 2 天）",
-    "价格 7 日 +15.8%，60 日 -1.7%",
-    "求购 7 日 +59.4%（51.0 单）",
+    "在售 60 日中位比前段 +8.0%",
+    "在售距 60 日高 -6.9%",
+    "在售 7 日 +38.4%",
+    "价格 7 日 -20.6%，60 日 -32.6%",
+    "求购 7 日 -13.3%（13.0 单）",
     "阶段：平静"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 55
+   "rank": 61
+  },
+  {
+   "gid": 8114,
+   "name": "格洛克 18 型 | 城里的月光 (崭新出厂)",
+   "caseName": "命悬一线武器箱",
+   "tier": "mid",
+   "price": 15.1,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2293,
+   "dP7": -0.1464,
+   "listedNow": 1496,
+   "buyNow": 23.5,
+   "listedSurge": -0.0273,
+   "priceChg60": -0.0479,
+   "listedDropFromHigh": -0.1821,
+   "concDecline": 0,
+   "buy7Chg": 0.037,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.1446,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 40.56,
+   "scoreParts": {
+    "strength": 0.6293,
+    "liquidity": 0.865,
+    "room": 0.5723,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +22.9%（价格 7 日 -14.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 28,
+    "events": [
+     {
+      "date": "2026-08-09",
+      "variant": "A60+A7",
+      "ret120": -0.3953,
+      "max120": -0.0384,
+      "dN7": 0.3975,
+      "listedSurge": 0.3854
+     },
+     {
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": -0.4125,
+      "max120": 0.0506,
+      "dN7": 0.1078,
+      "listedSurge": 0.2959
+     },
+     {
+      "date": "2026-07-30",
+      "variant": "A60",
+      "ret120": -0.3599,
+      "max120": 0.1446,
+      "dN7": 0.0398,
+      "listedSurge": 0.2819
+     }
+    ],
+    "ret120Med": 0.1183,
+    "max120Med": 0.2231,
+    "doubleRate": 0.1429,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -2.7%",
+    "在售距 60 日高 -18.2%",
+    "在售 7 日 +22.9%",
+    "价格 7 日 -14.6%，60 日 -4.8%",
+    "求购 7 日 +3.7%（28.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 62
+  },
+  {
+   "gid": 16518,
+   "name": "USP 消音版 | 沙漠战术 (崭新出厂)",
+   "caseName": "阿努比斯收藏包",
+   "tier": "mid",
+   "price": 19,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2249,
+   "dP7": -0.014,
+   "listedNow": 866,
+   "buyNow": 23.5,
+   "listedSurge": 0.0503,
+   "priceChg60": -0.0145,
+   "listedDropFromHigh": -0.1551,
+   "concDecline": 2,
+   "buy7Chg": 0.9167,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.1075,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 40.1,
+   "scoreParts": {
+    "strength": 0.6249,
+    "liquidity": 0.865,
+    "room": 0.5538,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +22.5%（价格 7 日 -1.4%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 23,
+    "events": [
+     {
+      "date": "2026-08-09",
+      "variant": "A60+A7",
+      "ret120": -0.5832,
+      "max120": -0.0393,
+      "dN7": 0.2668,
+      "listedSurge": 0.8338
+     },
+     {
+      "date": "2026-07-25",
+      "variant": "A60",
+      "ret120": -0.6074,
+      "max120": 0.1719,
+      "dN7": -0.0535,
+      "listedSurge": 0.8106
+     },
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.5863,
+      "max120": 0.1765,
+      "dN7": 0.3046,
+      "listedSurge": 0.6423
+     }
+    ],
+    "ret120Med": -0.4327,
+    "max120Med": 0.4323,
+    "doubleRate": 0.3913,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 +5.0%",
+    "在售距 60 日高 -15.5%",
+    "在售 7 日 +22.5%（连续下降 2 天）",
+    "价格 7 日 -1.4%，60 日 -1.5%",
+    "求购 7 日 +91.7%（46.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 63
   },
   {
    "gid": 18548,
@@ -4778,15 +5458,15 @@
     "阶段：派发"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 56
+   "staleDays": 1,
+   "rank": 64
   },
   {
-   "gid": 17424,
-   "name": "XM1014 | 行尸攻势 (崭新出厂)",
-   "caseName": "梦魇武器箱",
+   "gid": 10381,
+   "name": "P250 | 铜绿 (崭新出厂)",
+   "caseName": "棱彩武器箱",
    "tier": "small",
-   "price": 5.66,
+   "price": 8.85,
    "kinds": [
     "A"
    ],
@@ -4794,167 +5474,83 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.2843,
-   "dP7": -0.0929,
-   "listedNow": 1328,
-   "buyNow": 14,
-   "listedSurge": 0.0799,
-   "priceChg60": -0.2687,
-   "listedDropFromHigh": -0.0608,
+   "dN7": 0.2022,
+   "dP7": -0.0112,
+   "listedNow": 333,
+   "buyNow": 19,
+   "listedSurge": 0.0875,
+   "priceChg60": -0.0848,
+   "listedDropFromHigh": -0.1072,
    "concDecline": 0,
-   "buy7Chg": -0.1875,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "dying",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 0.8963,
-   "roomPairs": 2,
-   "dying": true,
-   "score": 38.84,
-   "scoreParts": {
-    "strength": 0.6843,
-    "liquidity": 0.809,
-    "room": 0.4482,
-    "dyingPenalty": 0.6
-   },
-   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +28.4%（价格 7 日 -9.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 66,
-    "events": [
-     {
-      "date": "2026-07-12",
-      "variant": "A60",
-      "ret120": -0.307,
-      "max120": 0.0395,
-      "dN7": -0.0495,
-      "listedSurge": 0.2859
-     },
-     {
-      "date": "2026-07-07",
-      "variant": "A60",
-      "ret120": -0.3553,
-      "max120": 0.0518,
-      "dN7": -0.153,
-      "listedSurge": 0.3632
-     },
-     {
-      "date": "2026-07-02",
-      "variant": "A60",
-      "ret120": -0.3131,
-      "max120": 0.0444,
-      "dN7": -0.0118,
-      "listedSurge": 0.3734
-     }
-    ],
-    "ret120Med": 0.0484,
-    "max120Med": 0.2069,
-    "doubleRate": 0.0455,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 +8.0%",
-    "在售距 60 日高 -6.1%",
-    "在售 7 日 +28.4%",
-    "价格 7 日 -9.3%，60 日 -26.9%",
-    "求购 7 日 -18.8%（13.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 57
-  },
-  {
-   "gid": 9649,
-   "name": "R8 左轮手枪 | 氮化处理 (崭新出厂)",
-   "caseName": "2018 炼狱小镇收藏品",
-   "tier": "small",
-   "price": 17.5,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.3012,
-   "dP7": 0.0355,
-   "listedNow": 432,
-   "buyNow": 12.5,
-   "listedSurge": -0.5234,
-   "priceChg60": -0.2156,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
-   "buy7Chg": -0.1875,
-   "stage": "distribute",
-   "stageName": "派发",
+   "buy7Chg": 0.65,
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
    "deadVerdict": "dying",
    "stockType": "倒货型",
    "distribute": "low",
-   "roomGainMed": 0.8905,
-   "roomPairs": 0,
+   "roomGainMed": 1.3214,
+   "roomPairs": 2,
    "dying": true,
-   "score": 38.34,
+   "score": 39.9,
    "scoreParts": {
-    "strength": 0.7012,
-    "liquidity": 0.7509,
-    "room": 0.4453,
+    "strength": 0.6022,
+    "liquidity": 0.7763,
+    "room": 0.6607,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +30.1%（价格 7 日 +3.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +20.2%（价格 7 日 -1.1%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 22,
+    "n": 21,
     "events": [
-     {
-      "date": "2026-08-04",
-      "variant": "A60",
-      "ret120": -0.3039,
-      "max120": 0.3592,
-      "dN7": -0.1263,
-      "listedSurge": 1.2276
-     },
      {
       "date": "2026-07-20",
       "variant": "A7",
-      "ret120": -0.4777,
-      "max120": 0.0498,
-      "dN7": 0.8887,
-      "listedSurge": 1.1438
+      "ret120": -0.5355,
+      "max120": 0.2029,
+      "dN7": 0.3527,
+      "listedSurge": 0.6697
      },
      {
-      "date": "2026-07-10",
-      "variant": "A60",
-      "ret120": -0.4767,
-      "max120": 0.0556,
-      "dN7": -0.081,
-      "listedSurge": 1.1701
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.7039,
+      "max120": -0.0893,
+      "dN7": 0.6074,
+      "listedSurge": 0.6614
+     },
+     {
+      "date": "2026-07-05",
+      "variant": "A60+A7",
+      "ret120": -0.6881,
+      "max120": 0.7203,
+      "dN7": 0.3506,
+      "listedSurge": 1.1158
      }
     ],
-    "ret120Med": -0.4355,
-    "max120Med": 0.3515,
-    "doubleRate": 0.3182,
+    "ret120Med": -0.413,
+    "max120Med": 0.5696,
+    "doubleRate": 0.2857,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -52.3%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +30.1%",
-    "价格 7 日 +3.6%，60 日 -21.6%",
-    "求购 7 日 -18.8%（13.0 单）",
-    "阶段：派发"
+    "在售 60 日中位比前段 +8.8%",
+    "在售距 60 日高 -10.7%",
+    "在售 7 日 +20.2%",
+    "价格 7 日 -1.1%，60 日 -8.5%",
+    "求购 7 日 +65.0%（33.0 单）",
+    "阶段：拉升早期"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 58
+   "rank": 65
   },
   {
    "gid": 16356,
    "name": "P90 | 元女王 (崭新出厂)",
    "caseName": "变革武器箱",
    "tier": "small",
-   "price": 6.59,
+   "price": 6.47,
    "kinds": [
     "A"
    ],
@@ -4962,15 +5558,15 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 0.2264,
-   "dP7": -0.0586,
-   "listedNow": 623,
-   "buyNow": 17,
+   "dN7": 0.2808,
+   "dP7": -0.0623,
+   "listedNow": 675,
+   "buyNow": 16.5,
    "listedSurge": -0.1727,
-   "priceChg60": -0.2319,
-   "listedDropFromHigh": -0.0688,
+   "priceChg60": -0.2787,
+   "listedDropFromHigh": 0,
    "concDecline": 0,
-   "buy7Chg": 0,
+   "buy7Chg": -0.0588,
    "stage": "accumulate",
    "stageName": "吸筹",
    "deadVerdict": "dying",
@@ -4979,15 +5575,15 @@
    "roomGainMed": 0.9537,
    "roomPairs": 1,
    "dying": true,
-   "score": 37.94,
+   "score": 39.43,
    "scoreParts": {
-    "strength": 0.6264,
-    "liquidity": 0.8111,
+    "strength": 0.6808,
+    "liquidity": 0.8139,
     "room": 0.4769,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +22.6%（价格 7 日 -5.9%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +28.1%（价格 7 日 -6.2%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
     "n": 74,
     "events": [
@@ -5023,15 +5619,15 @@
    },
    "活迹象": [
     "在售 60 日中位比前段 -17.3%",
-    "在售距 60 日高 -6.9%",
-    "在售 7 日 +22.6%",
-    "价格 7 日 -5.9%，60 日 -23.2%",
-    "求购 7 日 0.0%（16.0 单）",
+    "在售距 60 日高 0.0%",
+    "在售 7 日 +28.1%",
+    "价格 7 日 -6.2%，60 日 -27.9%",
+    "求购 7 日 -5.9%（16.0 单）",
     "阶段：吸筹"
    ],
-   "asOf": "2026-11-23",
+   "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 59
+   "rank": 66
   },
   {
    "gid": 9740,
@@ -5114,8 +5710,8 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 60
+   "staleDays": 1,
+   "rank": 67
   },
   {
    "gid": 8515,
@@ -5198,40 +5794,40 @@
     "阶段：平静"
    ],
    "asOf": "2026-11-23",
-   "staleDays": 0,
-   "rank": 61
+   "staleDays": 1,
+   "rank": 68
   }
  ],
  "counts": {
-  "total": 61,
+  "total": 68,
   "byKind": {
-   "A": 61
+   "A": 68
   },
   "byTier": {
-   "large": 8,
-   "mid": 20,
-   "micro": 7,
-   "small": 24,
+   "small": 25,
+   "large": 11,
+   "mid": 25,
+   "micro": 5,
    "huge": 2
   },
   "byVariant": {
    "A60": 12,
-   "A7": 48,
+   "A7": 55,
    "A60+A7": 1
   },
   "pool": 1073,
   "series": 1073,
-  "dyingKept": 39,
+  "dyingKept": 47,
   "firedButExcluded": {
-   "B": 0,
-   "C": 30
+   "B": 3,
+   "C": 38
   },
   "filtered": {
-   "dead": 5,
-   "distributeHigh": 0,
-   "distributeMid": 1,
-   "illiquid": 372,
-   "noSignal": 634,
+   "dead": 3,
+   "distributeHigh": 1,
+   "distributeMid": 5,
+   "illiquid": 371,
+   "noSignal": 625,
    "noFeature": 0
   },
   "overlapWithExistingA": {
