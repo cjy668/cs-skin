@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1795756722957,
- "atText": "2026-11-27 13:18:42",
+ "at": 1795761223196,
+ "atText": "2026-11-27 14:33:43",
  "refDate": "2026-11-24",
  "script": "cs-quant/building_list.cjs",
  "purpose": "「正在建的」统一列表：只收通过历史验证的类型（|DiD| ≥ 5pp 且 p ≤ 0.05 且方向为正）；没通过的如实排除并写明原因。",
@@ -2815,8 +2815,8 @@
    "listedDropFromHigh": -0.0924,
    "concDecline": 0,
    "buy7Chg": 0.2381,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "倒货型",
    "distribute": "low",
@@ -2871,7 +2871,7 @@
     "在售 7 日 +12.1%",
     "价格 7 日 +5.0%，60 日 +9.7%",
     "求购 7 日 +23.8%（104.0 单）",
-    "阶段：拉升早期"
+    "阶段：平静"
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
@@ -3321,8 +3321,8 @@
    "listedDropFromHigh": -0.0087,
    "concDecline": 0,
    "buy7Chg": 0.2727,
-   "stage": "calm",
-   "stageName": "平静",
+   "stage": "distribute",
+   "stageName": "派发",
    "deadVerdict": "dying",
    "stockType": "控盘型",
    "distribute": "low",
@@ -3377,7 +3377,7 @@
     "在售 7 日 +50.1%",
     "价格 7 日 -12.1%，60 日 -14.9%",
     "求购 7 日 +27.3%（56.0 单）",
-    "阶段：平静"
+    "阶段：派发"
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
@@ -4875,6 +4875,90 @@
    "rank": 57
   },
   {
+   "gid": 15537,
+   "name": "格洛克 18 型 | 冬季战术 (崭新出厂)",
+   "caseName": "反冲武器箱",
+   "tier": "small",
+   "price": 6.8,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.2615,
+   "dP7": -0.0258,
+   "listedNow": 931,
+   "buyNow": 19,
+   "listedSurge": -0.1542,
+   "priceChg60": 0.0742,
+   "listedDropFromHigh": -0.05,
+   "concDecline": 2,
+   "buy7Chg": 0.3158,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "中间型",
+   "distribute": "low",
+   "roomGainMed": 1.4807,
+   "roomPairs": 3,
+   "dying": true,
+   "score": 43.89,
+   "scoreParts": {
+    "strength": 0.6615,
+    "liquidity": 0.8418,
+    "room": 0.7403,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +26.2%（价格 7 日 -2.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 18,
+    "events": [
+     {
+      "date": "2026-08-09",
+      "variant": "A60",
+      "ret120": -0.4237,
+      "max120": -0.0085,
+      "dN7": 0.0164,
+      "listedSurge": 0.6193
+     },
+     {
+      "date": "2026-07-30",
+      "variant": "A60",
+      "ret120": -0.4883,
+      "max120": -0.0083,
+      "dN7": -0.124,
+      "listedSurge": 0.2727
+     },
+     {
+      "date": "2026-07-15",
+      "variant": "A7",
+      "ret120": -0.6802,
+      "max120": -0.0518,
+      "dN7": 1.2044,
+      "listedSurge": 0.3852
+     }
+    ],
+    "ret120Med": -0.496,
+    "max120Med": 0.4364,
+    "doubleRate": 0.1667,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -15.4%",
+    "在售距 60 日高 -5.0%",
+    "在售 7 日 +26.2%（连续下降 2 天）",
+    "价格 7 日 -2.6%，60 日 +7.4%",
+    "求购 7 日 +31.6%（25.0 单）",
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-24",
+   "staleDays": 0,
+   "rank": 58
+  },
+  {
    "gid": 17544,
    "name": "XM1014 | 蓝色轮胎 (崭新出厂)",
    "caseName": "2021 殒命大厦收藏品",
@@ -4957,7 +5041,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 58
+   "rank": 59
   },
   {
    "gid": 8,
@@ -5041,7 +5125,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 59
+   "rank": 60
   },
   {
    "gid": 863,
@@ -5126,7 +5210,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 60
+   "rank": 61
   },
   {
    "gid": 682,
@@ -5210,7 +5294,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 61
+   "rank": 62
   },
   {
    "gid": 8452,
@@ -5294,7 +5378,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 62
+   "rank": 63
   },
   {
    "gid": 18286,
@@ -5378,7 +5462,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 63
+   "rank": 64
   },
   {
    "gid": 11433,
@@ -5462,7 +5546,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 64
+   "rank": 65
   },
   {
    "gid": 17424,
@@ -5546,7 +5630,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 65
+   "rank": 66
   },
   {
    "gid": 8114,
@@ -5630,7 +5714,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 66
+   "rank": 67
   },
   {
    "gid": 2018,
@@ -5714,7 +5798,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 67
+   "rank": 68
   },
   {
    "gid": 16518,
@@ -5738,8 +5822,8 @@
    "listedDropFromHigh": -0.1551,
    "concDecline": 2,
    "buy7Chg": 0.9167,
-   "stage": "calm",
-   "stageName": "平静",
+   "stage": "rallyEarly",
+   "stageName": "拉升早期",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
@@ -5794,11 +5878,11 @@
     "在售 7 日 +22.5%（连续下降 2 天）",
     "价格 7 日 -1.4%，60 日 -1.5%",
     "求购 7 日 +91.7%（46.0 单）",
-    "阶段：平静"
+    "阶段：拉升早期"
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 68
+   "rank": 69
   },
   {
    "gid": 10381,
@@ -5882,7 +5966,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 69
+   "rank": 70
   },
   {
    "gid": 1562,
@@ -5966,7 +6050,7 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 70
+   "rank": 71
   },
   {
    "gid": 16356,
@@ -6050,16 +6134,16 @@
    ],
    "asOf": "2026-11-24",
    "staleDays": 0,
-   "rank": 71
+   "rank": 72
   }
  ],
  "counts": {
-  "total": 71,
+  "total": 72,
   "byKind": {
-   "A": 71
+   "A": 72
   },
   "byTier": {
-   "small": 26,
+   "small": 27,
    "large": 12,
    "micro": 7,
    "mid": 24,
@@ -6067,12 +6151,12 @@
   },
   "byVariant": {
    "A60": 11,
-   "A7": 59,
+   "A7": 60,
    "A60+A7": 1
   },
   "pool": 1073,
   "series": 1073,
-  "dyingKept": 51,
+  "dyingKept": 52,
   "firedButExcluded": {
    "B": 4,
    "C": 40
@@ -6080,7 +6164,7 @@
   "filtered": {
    "dead": 2,
    "distributeHigh": 1,
-   "distributeMid": 6,
+   "distributeMid": 5,
    "illiquid": 374,
    "noSignal": 619,
    "noFeature": 0
