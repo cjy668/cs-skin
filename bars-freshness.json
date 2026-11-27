@@ -1,7 +1,7 @@
 {
  "v": 2,
- "at": 1795756901185,
- "atText": "2026/11/27 13:21:41",
+ "at": 1795761421883,
+ "atText": "2026/11/27 14:37:01",
  "script": "build_bars_freshness.cjs",
  "purpose": "S5 时效闸门：把「结论基于哪一天的日线 / 数据实际截止到哪天」写成显式文件，落后或口径有差异时页面告警 + watchdog 检查",
  "spec": {
@@ -367,33 +367,33 @@
     "bp": 0
    },
    "2026-11-25": {
-    "p": 125,
-    "n": 125,
+    "p": 126,
+    "n": 126,
     "b": 0,
     "bp": 0
    },
    "2026-11-26": {
-    "p": 115,
-    "n": 115,
+    "p": 121,
+    "n": 121,
     "b": 0,
     "bp": 0
    },
    "2026-11-27": {
-    "p": 29,
-    "n": 29,
+    "p": 121,
+    "n": 121,
     "b": 0,
     "bp": 0
    }
   },
-  "latestDayGids": 29,
+  "latestDayGids": 121,
   "latestPartial": false,
   "byKey": {
-   "p": 6700,
-   "n": 6324,
+   "p": 6799,
+   "n": 6423,
    "b": 96,
    "bp": 96
   },
-  "points": 6796,
+  "points": 6895,
   "appendedDays": [
    {
     "trueDay": "2026-11-26",
@@ -443,12 +443,12 @@
    "2026-11-27"
   ],
   "snapshotByKey": {
-   "p": 76946,
+   "p": 76958,
    "n": 0,
    "b": 1190,
    "bp": 1190
   },
-  "snapshotPoints": 76946,
+  "snapshotPoints": 76958,
   "buyLive": {
    "atText": "2026/10/21 00:09:26",
    "b": 34,
@@ -506,7 +506,7 @@
    "2026-11-27"
   ],
   "latestTrueDay": "2026-11-27",
-  "latestDayGids": 29,
+  "latestDayGids": 121,
   "latestPartial": false,
   "coverByDay": {
    "2026-10-13": {
@@ -768,31 +768,31 @@
     "bp": 0
    },
    "2026-11-25": {
-    "p": 125,
-    "n": 125,
+    "p": 126,
+    "n": 126,
     "b": 0,
     "bp": 0
    },
    "2026-11-26": {
-    "p": 115,
-    "n": 115,
+    "p": 121,
+    "n": 121,
     "b": 0,
     "bp": 0
    },
    "2026-11-27": {
-    "p": 29,
-    "n": 29,
+    "p": 121,
+    "n": 121,
     "b": 0,
     "bp": 0
    }
   },
   "byKey": {
-   "p": 6700,
-   "n": 6324,
+   "p": 6799,
+   "n": 6423,
    "b": 96,
    "bp": 96
   },
-  "points": 6796,
+  "points": 6895,
   "snapshotDays": [
    "2026-10-20",
    "2026-10-21",
@@ -841,8 +841,8 @@
  },
  "live": {
   "date": "2026-11-27",
-  "atText": "2026/11/27 13:20:40",
-  "n": 2111
+  "atText": "2026/11/27 14:35:54",
+  "n": 2121
  },
  "lagDays": 1,
  "extraLagDays": 0,
@@ -852,7 +852,7 @@
  "timeLevel": "ok",
  "conflictLevel": "bad",
  "levelBasis": "extraLagDays",
- "levelNote": "自建日线与官方差异台账 level=bad（38 个品 >5%，这是口径/数据质量维度，不影响时效判定）",
+ "levelNote": "自建日线与官方差异台账 level=bad（37 个品 >5%，这是口径/数据质量维度，不影响时效判定）",
  "expectedBarsLatest": "2026-11-25",
  "expectedBarsTrueDay": "2026-11-26",
  "downstreamStale": true,
@@ -870,7 +870,7 @@
    "asOf": "2026-11-26",
    "via": "asOf",
    "asOfDate": "2026-11-26",
-   "generatedAt": "2026/11/27 13:18:04",
+   "generatedAt": "2026/11/27 14:33:00",
    "basedOnBars": "2026-11-26",
    "staleVsBars": false
   },
@@ -880,7 +880,7 @@
    "asOf": "2026-11-26",
    "via": "asOfSeries",
    "asOfDate": "2026-11-26",
-   "generatedAt": "2026/11/27 13:20:12",
+   "generatedAt": "2026/11/27 14:35:25",
    "basedOnBars": "2026-11-26",
    "staleVsBars": false
   },
@@ -890,7 +890,7 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:18:04",
+   "generatedAt": "2026/11/27 14:33:01",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
@@ -900,27 +900,27 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:17:33",
+   "generatedAt": "2026/11/27 14:32:31",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
   {
    "file": "unified-stage.json",
    "label": "统一阶段层",
-   "asOf": "2026/11/27 13:14:11",
+   "asOf": "2026/11/27 14:29:30",
    "via": "atText",
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:14:11",
+   "generatedAt": "2026/11/27 14:29:30",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
   {
    "file": "dealer-stage-board.json",
    "label": "做盘阶段看板",
-   "asOf": "2026/11/27 13:12:04",
+   "asOf": "2026/11/27 14:27:26",
    "via": "atText",
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:12:04",
+   "generatedAt": "2026/11/27 14:27:26",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
@@ -930,7 +930,7 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:07:36",
+   "generatedAt": "2026/11/27 14:22:27",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
@@ -960,7 +960,7 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:09:29",
+   "generatedAt": "2026/11/27 14:24:42",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   },
@@ -970,7 +970,7 @@
    "asOf": null,
    "via": null,
    "asOfDate": null,
-   "generatedAt": "2026/11/27 13:16:58",
+   "generatedAt": "2026/11/27 14:31:53",
    "basedOnBars": "2026-11-24",
    "staleVsBars": null
   }
@@ -978,50 +978,50 @@
  "conflict": {
   "level": "bad",
   "thresholdPct": 5,
-  "conflictGidCount": 38,
-  "message": "⚠️ 自建日线与 csqaq 官方有 38 个品差异 >5%，请确认口径",
+  "conflictGidCount": 37,
+  "message": "⚠️ 自建日线与 csqaq 官方有 37 个品差异 >5%，请确认口径",
   "sections": [
    {
     "section": "daily_verify",
     "level": "warn",
-    "compared": 383,
+    "compared": 385,
     "medianPct": 0,
     "conflictGidCount": 5,
-    "atText": "2026/11/27 13:06:56"
+    "atText": "2026/11/27 14:21:46"
    },
    {
     "section": "merge_junction",
     "level": "bad",
-    "compared": 6556,
+    "compared": 6557,
     "medianPct": 0,
-    "conflictGidCount": 38,
-    "atText": "2026/11/27 13:06:52"
+    "conflictGidCount": 37,
+    "atText": "2026/11/27 14:21:40"
    },
    {
     "section": "intraday_calibration",
     "level": "bad",
-    "compared": 6556,
+    "compared": 6557,
     "medianPct": 0,
-    "conflictGidCount": 38,
-    "atText": "2026/11/27 13:06:42"
+    "conflictGidCount": 37,
+    "atText": "2026/11/27 14:21:27"
    },
    {
     "section": "rt_snapshot_vs_intraday",
     "level": "ok",
-    "compared": 29,
+    "compared": 121,
     "medianPct": 0,
     "conflictGidCount": 0,
-    "atText": "2026/11/27 13:06:52"
+    "atText": "2026/11/27 14:21:40"
    }
   ],
-  "atText": "2026/11/27 13:06:56"
+  "atText": "2026/11/27 14:21:46"
  },
- "message": "官方日线标签 2026-11-24（= UTC+8 交易日 2026-11-25） → 生效最新 2026-11-26 = UTC+8 交易日 2026-11-27；自建日线覆盖 46 天（已补到 2026-11-27，追加 2 天）；⚠️ 自建日线与官方差异台账 level=bad（38 个品 >5%，这是口径/数据质量维度，不影响时效判定）（见下方红字）",
- "conflictText": "⚠️ 自建日线与 csqaq 官方有 38 个品差异 >5%，请确认口径",
+ "message": "官方日线标签 2026-11-24（= UTC+8 交易日 2026-11-25） → 生效最新 2026-11-26 = UTC+8 交易日 2026-11-27；自建日线覆盖 46 天（已补到 2026-11-27，追加 2 天）；⚠️ 自建日线与官方差异台账 level=bad（37 个品 >5%，这是口径/数据质量维度，不影响时效判定）（见下方红字）",
+ "conflictText": "⚠️ 自建日线与 csqaq 官方有 37 个品差异 >5%，请确认口径",
  "alarm": {
   "level": "bad",
-  "text": "⚠️ 自建日线与 csqaq 官方有 38 个品差异 >5%，请确认口径",
-  "detail": "⚠️ 自建日线与 csqaq 官方有 38 个品差异 >5%，请确认口径",
-  "since": "2026/11/27 13:06:56"
+  "text": "⚠️ 自建日线与 csqaq 官方有 37 个品差异 >5%，请确认口径",
+  "detail": "⚠️ 自建日线与 csqaq 官方有 37 个品差异 >5%，请确认口径",
+  "since": "2026/11/27 14:21:46"
  }
 }
