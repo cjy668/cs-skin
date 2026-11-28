@@ -1,7 +1,7 @@
 {
  "v": 1,
- "at": 1795832744893,
- "atText": "2026-11-28 10:25:44",
+ "at": 1795874375379,
+ "atText": "2026-11-28 21:59:35",
  "refDate": "2026-11-25",
  "script": "cs-quant/building_list.cjs",
  "purpose": "「正在建的」统一列表：只收通过历史验证的类型（|DiD| ≥ 5pp 且 p ≤ 0.05 且方向为正）；没通过的如实排除并写明原因。",
@@ -94,90 +94,6 @@
  "scoreFormula": "score = 100 × 信号强度^0.45 × 流动性^0.30 × 剩余空间^0.25；dying ×0.6。信号强度 = 在售超出 +20% 阈值的幅度（封顶 2 倍阈值）；流动性 = log 在售量分位与 log 求购量分位各半；剩余空间 = rally-room 的下一段拉升涨幅中位（封顶 +200%，缺失取中性 0.5）。",
  "items": [
   {
-   "gid": 12248,
-   "name": "AK-47 | 幻影破坏者 (崭新出厂)",
-   "caseName": "棱彩2号武器箱",
-   "tier": "large",
-   "price": 310,
-   "kinds": [
-    "A"
-   ],
-   "variants": [
-    "A7"
-   ],
-   "variant": "A7",
-   "dN7": 0.7633,
-   "dP7": -0.1063,
-   "listedNow": 1862,
-   "buyNow": 108,
-   "listedSurge": -0.1182,
-   "priceChg60": 1.2162,
-   "listedDropFromHigh": 0,
-   "concDecline": 0,
-   "buy7Chg": 0.0661,
-   "stage": "calm",
-   "stageName": "平静",
-   "deadVerdict": "alive",
-   "stockType": "中间型",
-   "distribute": "low",
-   "roomGainMed": 4.0391,
-   "roomPairs": 1,
-   "dying": false,
-   "score": 100,
-   "scoreParts": {
-    "strength": 1,
-    "liquidity": 1,
-    "room": 1,
-    "dyingPenalty": 1
-   },
-   "verdict": "在售 7 日激增 · 价格未涨",
-   "why": "在售 7 日 +76.3%（价格 7 日 -10.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
-   "history": {
-    "n": 36,
-    "events": [
-     {
-      "date": "2026-08-09",
-      "variant": "A60",
-      "ret120": 0.7033,
-      "max120": 1.1203,
-      "dN7": 0.0234,
-      "listedSurge": 0.2813
-     },
-     {
-      "date": "2026-08-04",
-      "variant": "A60",
-      "ret120": 0.6021,
-      "max120": 0.9944,
-      "dN7": 0.0617,
-      "listedSurge": 0.2771
-     },
-     {
-      "date": "2026-07-30",
-      "variant": "A60",
-      "ret120": 0.4696,
-      "max120": 0.8294,
-      "dN7": 0.0343,
-      "listedSurge": 0.2707
-     }
-    ],
-    "ret120Med": 0.2159,
-    "max120Med": 0.5267,
-    "doubleRate": 0.3333,
-    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
-   },
-   "活迹象": [
-    "在售 60 日中位比前段 -11.8%",
-    "在售距 60 日高 0.0%",
-    "在售 7 日 +76.3%",
-    "价格 7 日 -10.6%，60 日 +121.6%",
-    "求购 7 日 +6.6%（129.0 单）",
-    "阶段：平静"
-   ],
-   "asOf": "2026-11-25",
-   "staleDays": 0,
-   "rank": 1
-  },
-  {
    "gid": 1849,
    "name": "P250 | 涟漪 (崭新出厂)",
    "caseName": "光谱武器箱",
@@ -260,7 +176,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 2
+   "rank": 1
   },
   {
    "gid": 1619,
@@ -345,7 +261,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 3
+   "rank": 2
   },
   {
    "gid": 13526,
@@ -429,7 +345,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 4
+   "rank": 3
   },
   {
    "gid": 667,
@@ -513,7 +429,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 5
+   "rank": 4
   },
   {
    "gid": 6380,
@@ -597,7 +513,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 6
+   "rank": 5
   },
   {
    "gid": 8124,
@@ -681,7 +597,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 7
+   "rank": 6
   },
   {
    "gid": 11578,
@@ -765,7 +681,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 8
+   "rank": 7
   },
   {
    "gid": 18042,
@@ -850,7 +766,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 9
+   "rank": 8
   },
   {
    "gid": 13524,
@@ -934,7 +850,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 10
+   "rank": 9
   },
   {
    "gid": 18502,
@@ -1019,7 +935,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 11
+   "rank": 10
   },
   {
    "gid": 18251,
@@ -1103,7 +1019,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 12
+   "rank": 11
   },
   {
    "gid": 12518,
@@ -1187,14 +1103,14 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 13
+   "rank": 12
   },
   {
-   "gid": 10360,
-   "name": "沙漠之鹰 | 轻轨 (崭新出厂)",
-   "caseName": "棱彩武器箱",
-   "tier": "mid",
-   "price": 82,
+   "gid": 12248,
+   "name": "AK-47 | 幻影破坏者 (崭新出厂)",
+   "caseName": "棱彩2号武器箱",
+   "tier": "large",
+   "price": 310,
    "kinds": [
     "A"
    ],
@@ -1202,76 +1118,76 @@
     "A7"
    ],
    "variant": "A7",
-   "dN7": 1.0543,
-   "dP7": -0.1633,
-   "listedNow": 908,
-   "buyNow": 50.5,
-   "listedSurge": -0.1186,
-   "priceChg60": 0.1251,
+   "dN7": 0.7633,
+   "dP7": -0.1063,
+   "listedNow": 1862,
+   "buyNow": 108,
+   "listedSurge": -0.1182,
+   "priceChg60": 1.2162,
    "listedDropFromHigh": 0,
    "concDecline": 0,
-   "buy7Chg": 0.6667,
+   "buy7Chg": 0.0661,
    "stage": "calm",
    "stageName": "平静",
    "deadVerdict": "dying",
-   "stockType": "控盘型",
+   "stockType": "中间型",
    "distribute": "low",
-   "roomGainMed": 1.9402,
-   "roomPairs": 2,
+   "roomGainMed": 4.0391,
+   "roomPairs": 1,
    "dying": true,
-   "score": 58.63,
+   "score": 60,
    "scoreParts": {
     "strength": 1,
-    "liquidity": 0.9497,
-    "room": 0.9701,
+    "liquidity": 1,
+    "room": 1,
     "dyingPenalty": 0.6
    },
    "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
-   "why": "在售 7 日 +105.4%（价格 7 日 -16.3%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "why": "在售 7 日 +76.3%（价格 7 日 -10.6%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
    "history": {
-    "n": 29,
+    "n": 36,
     "events": [
      {
-      "date": "2026-07-05",
-      "variant": "A7",
-      "ret120": -0.4822,
-      "max120": 0.165,
-      "dN7": 0.3633,
-      "listedSurge": 0.2729
+      "date": "2026-08-09",
+      "variant": "A60",
+      "ret120": 0.7033,
+      "max120": 1.1203,
+      "dN7": 0.0234,
+      "listedSurge": 0.2813
      },
      {
-      "date": "2026-06-15",
-      "variant": "A7",
-      "ret120": -0.2868,
-      "max120": 0.5361,
-      "dN7": 0.2629,
-      "listedSurge": 0.1823
+      "date": "2026-08-04",
+      "variant": "A60",
+      "ret120": 0.6021,
+      "max120": 0.9944,
+      "dN7": 0.0617,
+      "listedSurge": 0.2771
      },
      {
-      "date": "2026-05-21",
-      "variant": "A7",
-      "ret120": -0.0932,
-      "max120": 1.2279,
-      "dN7": 0.457,
-      "listedSurge": -0.2585
+      "date": "2026-07-30",
+      "variant": "A60",
+      "ret120": 0.4696,
+      "max120": 0.8294,
+      "dN7": 0.0343,
+      "listedSurge": 0.2707
      }
     ],
-    "ret120Med": 0.0602,
-    "max120Med": 0.6074,
-    "doubleRate": 0.3793,
+    "ret120Med": 0.2159,
+    "max120Med": 0.5267,
+    "doubleRate": 0.3333,
     "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
    },
    "活迹象": [
-    "在售 60 日中位比前段 -11.9%",
+    "在售 60 日中位比前段 -11.8%",
     "在售距 60 日高 0.0%",
-    "在售 7 日 +105.4%",
-    "价格 7 日 -16.3%，60 日 +12.5%",
-    "求购 7 日 +66.7%（80.0 单）",
+    "在售 7 日 +76.3%",
+    "价格 7 日 -10.6%，60 日 +121.6%",
+    "求购 7 日 +6.6%（129.0 单）",
     "阶段：平静"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 14
+   "rank": 13
   },
   {
    "gid": 12196,
@@ -1355,7 +1271,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 15
+   "rank": 14
   },
   {
    "gid": 17725,
@@ -1439,7 +1355,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 16
+   "rank": 15
   },
   {
    "gid": 11173,
@@ -1523,7 +1439,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 17
+   "rank": 16
   },
   {
    "gid": 6424,
@@ -1607,7 +1523,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 18
+   "rank": 17
   },
   {
    "gid": 6365,
@@ -1691,7 +1607,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 19
+   "rank": 18
   },
   {
    "gid": 10401,
@@ -1775,7 +1691,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 20
+   "rank": 19
   },
   {
    "gid": 472,
@@ -1859,7 +1775,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 21
+   "rank": 20
   },
   {
    "gid": 11435,
@@ -1943,7 +1859,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 22
+   "rank": 21
   },
   {
    "gid": 15537,
@@ -2027,7 +1943,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 23
+   "rank": 22
   },
   {
    "gid": 12519,
@@ -2051,8 +1967,8 @@
    "listedDropFromHigh": -0.1111,
    "concDecline": 1,
    "buy7Chg": 0.2381,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "倒货型",
    "distribute": "low",
@@ -2107,11 +2023,11 @@
     "在售 7 日 +9.3%",
     "价格 7 日 +15.8%，60 日 +17.6%",
     "求购 7 日 +23.8%（104.0 单）",
-    "阶段：拉升早期"
+    "阶段：平静"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 24
+   "rank": 23
   },
   {
    "gid": 1209,
@@ -2195,7 +2111,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 25
+   "rank": 24
   },
   {
    "gid": 9750,
@@ -2219,8 +2135,8 @@
    "listedDropFromHigh": -0.1132,
    "concDecline": 0,
    "buy7Chg": 0.1395,
-   "stage": "rallyLate",
-   "stageName": "拉升末期",
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
@@ -2275,12 +2191,12 @@
     "在售 7 日 +32.9%",
     "价格 7 日 -30.8%，60 日 +31.1%",
     "求购 7 日 +14.0%（49.0 单）",
-    "近10日 +41.7%",
-    "阶段：拉升末期"
+    "近10日 +28.2%",
+    "阶段：平静"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 26
+   "rank": 25
   },
   {
    "gid": 1106,
@@ -2364,7 +2280,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 27
+   "rank": 26
   },
   {
    "gid": 18377,
@@ -2448,7 +2364,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 28
+   "rank": 27
   },
   {
    "gid": 1516,
@@ -2532,7 +2448,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 29
+   "rank": 28
   },
   {
    "gid": 1458,
@@ -2616,7 +2532,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 30
+   "rank": 29
   },
   {
    "gid": 1238,
@@ -2700,7 +2616,7 @@
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
-   "rank": 31
+   "rank": 30
   },
   {
    "gid": 10372,
@@ -2724,8 +2640,8 @@
    "listedDropFromHigh": -0.0149,
    "concDecline": 0,
    "buy7Chg": 1.1176,
-   "stage": "rallyEarly",
-   "stageName": "拉升早期",
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
@@ -2781,7 +2697,91 @@
     "价格 7 日 +7.9%，60 日 +21.8%",
     "求购 7 日 +111.8%（36.0 单）",
     "近10日 +27.3%",
-    "阶段：拉升早期"
+    "阶段：平静"
+   ],
+   "asOf": "2026-11-25",
+   "staleDays": 0,
+   "rank": 31
+  },
+  {
+   "gid": 1137,
+   "name": "格洛克 18 型 | 异星世界 (崭新出厂)",
+   "caseName": "光谱 2 号武器箱",
+   "tier": "mid",
+   "price": 48.34,
+   "kinds": [
+    "A"
+   ],
+   "variants": [
+    "A7"
+   ],
+   "variant": "A7",
+   "dN7": 0.3739,
+   "dP7": -0.1046,
+   "listedNow": 790,
+   "buyNow": 63,
+   "listedSurge": -0.1001,
+   "priceChg60": 0.2272,
+   "listedDropFromHigh": -0.0199,
+   "concDecline": 1,
+   "buy7Chg": 0.127,
+   "stage": "calm",
+   "stageName": "平静",
+   "deadVerdict": "dying",
+   "stockType": "倒货型",
+   "distribute": "low",
+   "roomGainMed": 1.3333,
+   "roomPairs": 2,
+   "dying": true,
+   "score": 47.92,
+   "scoreParts": {
+    "strength": 0.7739,
+    "liquidity": 0.9736,
+    "room": 0.6667,
+    "dyingPenalty": 0.6
+   },
+   "verdict": "在售 7 日激增 · 价格未涨（供给端 dying，已降权）",
+   "why": "在售 7 日 +37.4%（价格 7 日 -10.5%） → 挂单接货形态（A7 口径（7 日激增 ≥+20%）），历史同类之后 120 日翻倍率 23.5% vs 对照 8.0%（DiD60 +5.5pp，p=0.005；DiD120 +6.4pp，p=0.0149）",
+   "history": {
+    "n": 31,
+    "events": [
+     {
+      "date": "2026-06-10",
+      "variant": "A60+A7",
+      "ret120": -0.2924,
+      "max120": 0.8453,
+      "dN7": 0.2869,
+      "listedSurge": 1.0281
+     },
+     {
+      "date": "2026-05-26",
+      "variant": "A60",
+      "ret120": 0.0876,
+      "max120": 1.9661,
+      "dN7": -0.0534,
+      "listedSurge": 1.4622
+     },
+     {
+      "date": "2026-05-16",
+      "variant": "A60",
+      "ret120": -0.3065,
+      "max120": 0.6938,
+      "dN7": -0.0746,
+      "listedSurge": 1.1926
+     }
+    ],
+    "ret120Med": 0.0277,
+    "max120Med": 0.998,
+    "doubleRate": 0.4839,
+    "note": "该品自己历史上命中同一口径、且之后满 120 日的例子（每 5 个自然日采一个观察点，最多列 3 条）"
+   },
+   "活迹象": [
+    "在售 60 日中位比前段 -10.0%",
+    "在售距 60 日高 -2.0%",
+    "在售 7 日 +37.4%",
+    "价格 7 日 -10.5%，60 日 +22.7%",
+    "求购 7 日 +12.7%（71.0 单）",
+    "阶段：平静"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
@@ -2809,8 +2809,8 @@
    "listedDropFromHigh": -0.1445,
    "concDecline": 2,
    "buy7Chg": -0.1714,
-   "stage": "accumulate",
-   "stageName": "吸筹",
+   "stage": "calm",
+   "stageName": "平静",
    "deadVerdict": "dying",
    "stockType": "中间型",
    "distribute": "low",
@@ -2865,7 +2865,7 @@
     "在售 7 日 +33.4%（连续下降 2 天）",
     "价格 7 日 -16.2%，60 日 -38.4%",
     "求购 7 日 -17.1%（29.0 单）",
-    "阶段：吸筹"
+    "阶段：平静"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
@@ -3202,7 +3202,6 @@
     "在售 7 日 +23.2%",
     "价格 7 日 -26.4%，60 日 +24.4%",
     "求购 7 日 +42.3%（37.0 单）",
-    "近10日 +21.9%",
     "阶段：平静"
    ],
    "asOf": "2026-11-25",
@@ -3539,7 +3538,7 @@
     "在售 7 日 +24.0%",
     "价格 7 日 -26.2%，60 日 -3.9%",
     "求购 7 日 +56.3%（25.0 单）",
-    "近10日 +31.9%",
+    "近10日 +36.4%",
     "阶段：平静"
    ],
    "asOf": "2026-11-25",
@@ -4805,8 +4804,8 @@
    "listedDropFromHigh": -0.0024,
    "concDecline": 0,
    "buy7Chg": 0.2727,
-   "stage": "calm",
-   "stageName": "平静",
+   "stage": "distribute",
+   "stageName": "派发",
    "deadVerdict": "dying",
    "stockType": "控盘型",
    "distribute": "low",
@@ -4861,7 +4860,7 @@
     "在售 7 日 +25.5%",
     "价格 7 日 -7.1%，60 日 -15.3%",
     "求购 7 日 +27.3%（56.0 单）",
-    "阶段：平静"
+    "阶段：派发"
    ],
    "asOf": "2026-11-25",
    "staleDays": 0,
@@ -5210,9 +5209,9 @@
    "A": 61
   },
   "byTier": {
-   "large": 9,
    "micro": 5,
    "mid": 19,
+   "large": 9,
    "small": 26,
    "huge": 2
   },
@@ -5223,15 +5222,15 @@
   },
   "pool": 1073,
   "series": 1073,
-  "dyingKept": 45,
+  "dyingKept": 46,
   "firedButExcluded": {
    "B": 4,
    "C": 31
   },
   "filtered": {
-   "dead": 3,
+   "dead": 5,
    "distributeHigh": 0,
-   "distributeMid": 5,
+   "distributeMid": 3,
    "illiquid": 375,
    "noSignal": 629,
    "noFeature": 0
